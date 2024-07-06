@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import { logger } from "../logging/index.js";
 
 /**
  * Bootstraps a web server using ExpressJS to route incoming HTTP requests to
@@ -34,7 +35,7 @@ export function bootstrapHttpServer() {
     });
 
   app.listen(3000, () => {
-    console.log(
+    logger.info(
       bootstrapHttpServer.name,
       `Web Server now listening on port: ${3000}`
     );
