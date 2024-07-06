@@ -2,4 +2,4 @@
  * Barrel file
  */
 
-export * from "./bootstrapHttpServer";
+export * from "./bootstrapHttpServer.js";
