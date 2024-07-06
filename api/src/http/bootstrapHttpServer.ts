@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import { config } from "../config/index.js";
 import { logger } from "../logging/index.js";
 
 /**
@@ -34,10 +35,10 @@ export function bootstrapHttpServer() {
       res.type("txt").send("Not found");
     });
 
-  app.listen(3000, () => {
+  app.listen(config.port, () => {
     logger.info(
       bootstrapHttpServer.name,
-      `Web Server now listening on port: ${3000}`
+      `Web Server now listening on port: ${config.port}`
     );
   });
 }
