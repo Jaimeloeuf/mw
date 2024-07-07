@@ -6,10 +6,9 @@
  */
 
 /**
- * Default JSend usable data type is mostly just any datatype that is JSON
- * serializable.
+ * Valid JSend data type is mostly just any datatype that is JSON serializable.
  */
-export type DefaultJsendDatatype =
+export type ValidJsendDatatype =
   | null
   | string
   | number
@@ -19,7 +18,7 @@ export type DefaultJsendDatatype =
 /**
  * On successful execution of an action.
  */
-export type JSendSuccess<T = DefaultJsendDatatype> = {
+export type JSendSuccess<T = ValidJsendDatatype> = {
   status: "success";
   data: T;
 };
@@ -29,7 +28,7 @@ export type JSendSuccess<T = DefaultJsendDatatype> = {
  * recoverable failure modes, e.g. user tried to delete a piece of data that is
  * already deleted.
  */
-export type JSendFail<T = DefaultJsendDatatype> = {
+export type JSendFail<T = ValidJsendDatatype> = {
   status: "fail";
   data: T;
 };
@@ -38,7 +37,7 @@ export type JSendFail<T = DefaultJsendDatatype> = {
  * On action execution error. Used to represent errors, i.e. something that went
  * wrong when it should not have happened, e.g. DB connection error.
  */
-export type JSendError<T = DefaultJsendDatatype> = {
+export type JSendError<T = ValidJsendDatatype> = {
   status: "error";
   message: string;
   code?: number;

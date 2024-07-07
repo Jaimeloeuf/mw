@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { HttpTransformerableException } from "../exceptions/index.js";
 import type {
-  DefaultJsendDatatype,
+  ValidJsendDatatype,
   JSendSuccess,
   JSendFail,
   JSendError,
@@ -18,7 +18,7 @@ import type {
  * status code.
  */
 export const expressWrapper =
-  <T = DefaultJsendDatatype>(
+  <T = ValidJsendDatatype>(
     httpRequestHandler: (
       req: Request,
       setHttpStatusCode: (statusCode: number) => void
