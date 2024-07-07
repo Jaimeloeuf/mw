@@ -1,4 +1,3 @@
-import type { JSendFail } from "../http/JSend.js";
 import { HttpTransformerableException } from "./HttpTransformerableException.js";
 
 /**
@@ -14,10 +13,10 @@ export class ForbiddenException extends HttpTransformerableException {
     super(optionalMessage ?? `Forbidden Exception`);
   }
 
-  transformToJSendFail(): JSendFail<string> {
+  transformToHttpResponseData() {
     return {
-      status: "fail",
-      data: this.message,
+      httpStatusCode: 403,
+      jsendData: [ForbiddenException.name, this.message],
     };
   }
 }

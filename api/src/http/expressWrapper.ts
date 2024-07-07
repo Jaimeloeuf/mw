@@ -40,7 +40,14 @@ export const expressWrapper =
       // If it is an exception that can be transformed into a HTTP response
       // transform it and use that as the response.
       if (error instanceof HttpTransformerableException) {
-        res.json(error.transformToJSendFail() satisfies JSendFail);
+        const { httpStatusCode, jsendData } =
+          error.transformToHttpResponseData();
+
+        res.status(httpStatusCode).json({
+          status: "fail",
+          data: jsendData,
+        } satisfies JSendFail);
+
         return;
       }
 
