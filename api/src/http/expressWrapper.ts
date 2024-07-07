@@ -1,5 +1,8 @@
 import type { Request, Response } from "express";
-import { HttpTransformerableException } from "../exceptions/index.js";
+import {
+  HttpTransformerableException,
+  Exception,
+} from "../exceptions/index.js";
 import type {
   ValidJsendDatatype,
   JSendSuccess,
@@ -51,9 +54,27 @@ export const expressWrapper =
         return;
       }
 
+      // This is like if there is an exception, but somehow that exception does
+      // not implement the `HttpTransformerableException` class, then we will
+      // generate a default message for it.
+      if (error instanceof Exception) {
+        res
+          // Using 400 to indicate that it is an exception rather than error
+          // since a retry without modification will probably not work assuming
+          // it is not a server error.
+          .status(400)
+          .json({
+            status: "fail",
+            data: ["Exception without HTTP transformer", error.message],
+          } satisfies JSendFail);
+
+        return;
+      }
+
       res.json({
         status: "error",
-        message: "Something went wrong!",
-      } satisfies JSendError<string>);
+        message: "Internal Server Error!",
+        data: [error instanceof Error ? error.message : "unknown error"],
+      } satisfies JSendError);
     }
   };
