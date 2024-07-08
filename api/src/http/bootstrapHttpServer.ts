@@ -4,6 +4,7 @@ import { config } from "../config/index.js";
 import { logger } from "../logging/index.js";
 
 import { routeNotFound } from "./routeNotFound.js";
+import { loggingMiddleware } from "./loggingMiddleware.js";
 
 /**
  * Bootstraps a web server using ExpressJS to route incoming HTTP requests to
@@ -12,9 +13,11 @@ import { routeNotFound } from "./routeNotFound.js";
 export function bootstrapHttpServer() {
   const app = express();
 
-  app.use(cors());
-
   app
+    /* Register all the middlewares */
+    .use(cors())
+    .use(loggingMiddleware)
+
     /* Routes table */
     .get("/", (req, res) => {
       res.status(200).send("ok");
