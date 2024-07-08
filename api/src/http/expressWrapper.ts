@@ -21,14 +21,18 @@ import type {
  * Only things it actually require are passed in such as a function to set HTTP
  * status code.
  */
-export const expressWrapper =
-  <T = ValidJsendDatatype>(
-    httpRequestHandler: (
-      req: Request,
-      setHttpStatusCode: (statusCode: number) => void
-    ) => T
-  ) =>
-  (req: Request, res: Response) => {
+export const expressWrapper = <
+  PathStringLiteralType extends string,
+  T = ValidJsendDatatype
+>(
+  path: PathStringLiteralType,
+  httpRequestHandler: (
+    req: Request,
+    setHttpStatusCode: (statusCode: number) => void
+  ) => T
+) => ({
+  path,
+  routeHandler: (req: Request, res: Response) => {
     try {
       const data = httpRequestHandler(
         req,
@@ -81,4 +85,5 @@ export const expressWrapper =
         data: [error instanceof Error ? error.message : "unknown error"],
       } satisfies JSendError);
     }
-  };
+  },
+});

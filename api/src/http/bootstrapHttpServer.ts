@@ -20,14 +20,14 @@ export function bootstrapHttpServer() {
     .use(loggingMiddleware)
 
     /* Routes table */
-    .get("/", healthCheck)
+    .get("/" satisfies typeof healthCheck.path, healthCheck.routeHandler)
     .get("/version", (req, res) => {
       res.status(200).send("-");
     })
 
     // Since this is the last non-error-handling route handler used, assume 404
     // as no other route handler responded.
-    .use(routeNotFound);
+    .use(routeNotFound.routeHandler);
 
   app.listen(config.port, () => {
     logger.info(
