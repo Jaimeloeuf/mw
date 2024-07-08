@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import { logger } from "../logging/index.js";
 import {
   HttpTransformerableException,
   Exception,
@@ -40,6 +41,9 @@ export const expressWrapper =
         data,
       } satisfies JSendSuccess<T>);
     } catch (error) {
+      // Simple error logging
+      logger.error(expressWrapper.name, (error as Error)?.stack);
+
       // If it is an exception that can be transformed into a HTTP response
       // transform it and use that as the response.
       if (error instanceof HttpTransformerableException) {
