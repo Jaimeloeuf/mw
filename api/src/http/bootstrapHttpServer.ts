@@ -17,10 +17,13 @@ export function bootstrapHttpServer() {
   app
     /* Register all the middlewares */
     .use(cors())
-    .use(loggingMiddleware)
+    .use(loggingMiddleware);
 
-    /* Routes table */
-    .get("/" satisfies typeof healthCheck.path, healthCheck.routeHandler)
+  app["get" satisfies typeof healthCheck.method](
+    "/" satisfies typeof healthCheck.path,
+    healthCheck.routeHandler
+  )
+
     .get("/version", (req, res) => {
       res.status(200).send("-");
     })

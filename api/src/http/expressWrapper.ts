@@ -25,12 +25,14 @@ export const expressWrapper = <
   PathStringLiteralType extends string,
   T = ValidJsendDatatype
 >(
+  method: "get" | "post" | "put" | "patch" | "delete" | "all",
   path: PathStringLiteralType,
   httpRequestHandler: (
     req: Request,
     setHttpStatusCode: (statusCode: number) => void
   ) => T
 ) => ({
+  method,
   path,
   routeHandler: (req: Request, res: Response) => {
     try {
