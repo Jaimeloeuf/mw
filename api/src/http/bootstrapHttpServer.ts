@@ -3,6 +3,7 @@ import cors from "cors";
 import { config } from "../config/index.js";
 import { logger } from "../logging/index.js";
 
+import { healthCheck } from "../controllers/healthCheck.js";
 import { routeNotFound } from "./routeNotFound.js";
 import { loggingMiddleware } from "./loggingMiddleware.js";
 
@@ -19,9 +20,7 @@ export function bootstrapHttpServer() {
     .use(loggingMiddleware)
 
     /* Routes table */
-    .get("/", (req, res) => {
-      res.status(200).send("ok");
-    })
+    .get("/", healthCheck)
     .get("/version", (req, res) => {
       res.status(200).send("-");
     })
