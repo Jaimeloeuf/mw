@@ -3,10 +3,8 @@ import cors from "cors";
 import { config } from "../config/index.js";
 import { logger } from "../logging/index.js";
 
-import { healthCheck } from "../controllers/healthCheck.js";
-import { version } from "../controllers/version.js";
-import { routeNotFound } from "./routeNotFound.js";
 import { loggingMiddleware } from "./loggingMiddleware.js";
+import { registerRoutesAndControllers } from "./registerRoutesAndControllers.js";
 
 /**
  * Bootstraps a web server using ExpressJS to route incoming HTTP requests to
@@ -20,19 +18,7 @@ export function bootstrapHttpServer() {
     .use(cors())
     .use(loggingMiddleware);
 
-  app["get" satisfies typeof healthCheck.method](
-    "/" satisfies typeof healthCheck.path,
-    healthCheck.routeHandler
-  )
-
-    ["get" satisfies typeof version.method](
-      "/version" satisfies typeof version.path,
-      version.routeHandler
-    )
-
-    // Since this is the last non-error-handling route handler used, assume 404
-    // as no other route handler responded.
-    .use(routeNotFound.routeHandler);
+  registerRoutesAndControllers(app);
 
   app.listen(config.port, () => {
     logger.info(
