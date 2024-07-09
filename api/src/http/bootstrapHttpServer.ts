@@ -4,6 +4,7 @@ import { config } from "../config/index.js";
 import { logger } from "../logging/index.js";
 
 import { healthCheck } from "../controllers/healthCheck.js";
+import { version } from "../controllers/version.js";
 import { routeNotFound } from "./routeNotFound.js";
 import { loggingMiddleware } from "./loggingMiddleware.js";
 
@@ -24,9 +25,10 @@ export function bootstrapHttpServer() {
     healthCheck.routeHandler
   )
 
-    .get("/version", (req, res) => {
-      res.status(200).send("-");
-    })
+    ["get" satisfies typeof version.method](
+      "/version" satisfies typeof version.path,
+      version.routeHandler
+    )
 
     // Since this is the last non-error-handling route handler used, assume 404
     // as no other route handler responded.
