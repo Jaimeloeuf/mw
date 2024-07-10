@@ -22,10 +22,17 @@ import type {
  * status code.
  */
 export const expressWrapper = <
+  HttpMethodStringLiteralType extends
+    | "get"
+    | "post"
+    | "put"
+    | "patch"
+    | "delete"
+    | "all",
   PathStringLiteralType extends string,
   T = ValidJsendDatatype
 >(
-  method: "get" | "post" | "put" | "patch" | "delete" | "all",
+  method: HttpMethodStringLiteralType,
   path: PathStringLiteralType,
   httpRequestHandler: (
     req: Request,
