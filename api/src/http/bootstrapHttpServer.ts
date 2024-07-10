@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+
 import { config } from "../config/index.js";
 import { logger } from "../logging/index.js";
 
@@ -16,7 +17,9 @@ export function bootstrapHttpServer() {
   app
     /* Register all the middlewares */
     .use(cors())
-    .use(loggingMiddleware);
+    .use(loggingMiddleware)
+    .use(express.json())
+    .use(express.urlencoded({ extended: true }));
 
   registerRoutesAndControllers(app);
 
