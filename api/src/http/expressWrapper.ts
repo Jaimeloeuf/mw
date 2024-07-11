@@ -34,8 +34,7 @@ export const expressWrapper = <
   NullableZodParserType extends ZodType | null,
   RequestDataType = NullableZodParserType extends null
     ? null
-    : zodInfer<Exclude<NullableZodParserType, null>>,
-  T = ValidJsendDatatype
+    : zodInfer<Exclude<NullableZodParserType, null>>
 >(
   method: HttpMethodStringLiteralType,
   path: PathStringLiteralType,
@@ -43,7 +42,7 @@ export const expressWrapper = <
   httpRequestHandler: (
     requestData: RequestDataType,
     setHttpStatusCode: (statusCode: number) => void
-  ) => T
+  ) => ValidJsendDatatype
 ) => ({
   method,
   path,
@@ -66,7 +65,7 @@ export const expressWrapper = <
       res.json({
         status: "success",
         data,
-      } satisfies JSendSuccess<T>);
+      } satisfies JSendSuccess);
     } catch (error) {
       // Simple error logging
       logger.error(expressWrapper.name, (error as Error)?.stack);
