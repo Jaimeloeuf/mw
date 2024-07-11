@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import type { ZodType, infer as zodInfer } from "zod";
 import { logger } from "../logging/index.js";
 import {
   HttpTransformerableException,
@@ -30,12 +31,17 @@ export const expressWrapper = <
     | "delete"
     | "all",
   PathStringLiteralType extends string,
+  NullableZodParserType extends ZodType | null,
+  RequestDataType = NullableZodParserType extends null
+    ? null
+    : zodInfer<Exclude<NullableZodParserType, null>>,
   T = ValidJsendDatatype
 >(
   method: HttpMethodStringLiteralType,
   path: PathStringLiteralType,
+  requestDataValidator: NullableZodParserType,
   httpRequestHandler: (
-    req: Request,
+    requestData: RequestDataType,
     setHttpStatusCode: (statusCode: number) => void
   ) => T
 ) => ({
@@ -43,10 +49,18 @@ export const expressWrapper = <
   path,
   routeHandler: (req: Request, res: Response) => {
     try {
+      const requestData =
+        requestDataValidator === null
+          ? null
+          : requestDataValidator.parse({
+              ...req.params,
+              ...req.query,
+              ...req.body,
+            });
+
       const data = httpRequestHandler(
-        req,
-        // Wrapped to keep its 'this' binding
-        (statusCode: number) => res.status(statusCode)
+        requestData,
+        (statusCode: number) => res.status(statusCode) // Wrap to preserve 'this' binding
       );
 
       res.json({
