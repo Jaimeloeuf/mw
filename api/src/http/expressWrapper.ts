@@ -43,11 +43,11 @@ export const expressWrapper = <
   httpRequestHandler: (
     requestData: RequestDataType,
     setHttpStatusCode: (statusCode: number) => void
-  ) => ValidJsendDatatype
+  ) => ValidJsendDatatype | Promise<ValidJsendDatatype>
 ) => ({
   method,
   path,
-  routeHandler: (req: Request, res: Response) => {
+  routeHandler: async (req: Request, res: Response) => {
     try {
       const requestData =
         requestDataValidator === null
@@ -58,7 +58,7 @@ export const expressWrapper = <
               ...req.body,
             });
 
-      const data = httpRequestHandler(
+      const data = await httpRequestHandler(
         requestData,
         (statusCode: number) => res.status(statusCode) // Wrap to preserve 'this' binding
       );
