@@ -9,6 +9,7 @@
  * Valid JSend data type is mostly just any datatype that is JSON serializable.
  */
 export type ValidJsendDatatype =
+  | void
   | null
   | string
   | number
