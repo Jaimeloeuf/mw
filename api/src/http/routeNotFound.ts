@@ -6,6 +6,7 @@ export const routeNotFound = expressWrapper(
   "all",
   "*",
   null,
+  null,
   () => {
     throw new NotFoundException("API Route not found");
   }
