@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import type { ZodType, infer as zodInfer } from "zod";
+import { ZodError } from "zod";
 import { logger } from "../logging/index.js";
 import {
   HttpTransformerableException,
@@ -101,6 +102,18 @@ export const expressWrapper = <
         return;
       }
 
+      // Treat Zod input validation/parsing errors as exceptions
+      if (error instanceof ZodError) {
+        res.status(400).json({
+          status: "fail",
+          data: ["Invalid input data", ...error.issues],
+        } satisfies JSendFail);
+
+        return;
+      }
+
+      // If instance thrown is none of the above exception types, then it is an
+      // error of unknown nature, respond with the appropriate JSend error type.
       res.json({
         status: "error",
         message: "Internal Server Error!",
