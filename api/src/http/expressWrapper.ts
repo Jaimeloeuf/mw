@@ -48,10 +48,11 @@ export const expressWrapper = <
   path: PathStringLiteralType;
   guards: Array<HttpRequestGuard> | null;
   requestDataValidator: NullableZodParserType;
-  httpRequestHandler: (
-    requestData: RequestDataType,
-    setHttpStatusCode: (statusCode: number) => void
-  ) => ValidJsendDatatype | Promise<ValidJsendDatatype>;
+  httpRequestHandler: (context: {
+    req: Request;
+    requestData: RequestDataType;
+    setHttpStatusCode: (statusCode: number) => void;
+  }) => ValidJsendDatatype | Promise<ValidJsendDatatype>;
 }) => ({
   method,
   path,
@@ -74,10 +75,12 @@ export const expressWrapper = <
               ...req.body,
             });
 
-      const data = await httpRequestHandler(
+      const data = await httpRequestHandler({
+        req,
         requestData,
-        (statusCode: number) => res.status(statusCode) // Wrap to preserve 'this' binding
-      );
+        // Wrap to preserve 'this' binding
+        setHttpStatusCode: (statusCode: number) => res.status(statusCode),
+      });
 
       res.json({
         status: "success",
