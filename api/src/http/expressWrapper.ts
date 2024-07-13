@@ -37,16 +37,22 @@ export const expressWrapper = <
   RequestDataType = NullableZodParserType extends null
     ? null
     : zodInfer<Exclude<NullableZodParserType, null>>
->(
-  method: HttpMethodStringLiteralType,
-  path: PathStringLiteralType,
-  guards: Array<HttpRequestGuard> | null,
-  requestDataValidator: NullableZodParserType,
+>({
+  method,
+  path,
+  guards,
+  requestDataValidator,
+  httpRequestHandler,
+}: {
+  method: HttpMethodStringLiteralType;
+  path: PathStringLiteralType;
+  guards: Array<HttpRequestGuard> | null;
+  requestDataValidator: NullableZodParserType;
   httpRequestHandler: (
     requestData: RequestDataType,
     setHttpStatusCode: (statusCode: number) => void
-  ) => ValidJsendDatatype | Promise<ValidJsendDatatype>
-) => ({
+  ) => ValidJsendDatatype | Promise<ValidJsendDatatype>;
+}) => ({
   method,
   path,
   routeHandler: async (req: Request, res: Response) => {

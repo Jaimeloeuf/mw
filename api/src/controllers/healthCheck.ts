@@ -1,5 +1,11 @@
 import { expressWrapper } from "../http/expressWrapper.js";
 
-export const healthCheck = expressWrapper("get", "/", null, null, function () {
-  return "ok";
+export const healthCheck = expressWrapper({
+  method: "get",
+  path: "/",
+  guards: null,
+  requestDataValidator: null,
+  httpRequestHandler() {
+    return "ok";
+  },
 });

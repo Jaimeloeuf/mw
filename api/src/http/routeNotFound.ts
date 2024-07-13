@@ -1,13 +1,13 @@
 import { expressWrapper } from "./expressWrapper.js";
 import { NotFoundException } from "../exceptions/index.js";
 
-export const routeNotFound = expressWrapper(
-  // Method does not matter here since this controller should be a catch all.
-  "all",
-  "*",
-  null,
-  null,
-  () => {
+export const routeNotFound = expressWrapper({
+  // Method does not matter since this should be a catch all.
+  method: "all",
+  path: "*",
+  guards: null,
+  requestDataValidator: null,
+  httpRequestHandler() {
     throw new NotFoundException("API Route not found");
-  }
-);
+  },
+});
