@@ -5,7 +5,11 @@ import type { LogLevel } from "./LogLevel.js";
  * Super simple custom logger, might change to use pino/winston in the future.
  */
 class Logger {
-  log(level: LogLevel, label: string, ...args: Parameters<typeof console.log>) {
+  private log(
+    level: LogLevel,
+    label: string,
+    ...args: Parameters<typeof console.log>
+  ) {
     const formattedLogOutput =
       `${new Date().toISOString()} ${level}: [${label}] ` +
       args.flat().join(" ");
