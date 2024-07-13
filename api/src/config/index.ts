@@ -2,4 +2,4 @@
  * Barrel file
  */
 
-export * from "./config.js";
+export { config } from "./configBootstrap.js";
