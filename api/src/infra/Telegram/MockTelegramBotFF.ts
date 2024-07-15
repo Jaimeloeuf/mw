@@ -11,6 +11,4 @@ export const MockTelegramBotFF = (() =>
       `Messaging ${recipientTelegramChatID}\n`,
       message
     );
-
-    return true;
   }) satisfies typeof ProdTelegramBotFF;
