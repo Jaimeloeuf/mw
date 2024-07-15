@@ -87,8 +87,12 @@ export const expressWrapper = <
         data,
       } satisfies JSendSuccess);
     } catch (error) {
+      // Create a err/err-log ID, to log it together with the error and send it
+      // back to the client to improve debugging.
+      const logID = crypto.randomUUID();
+
       // Simple error logging
-      logger.error(expressWrapper.name, (error as Error)?.stack);
+      logger.error(`${expressWrapper.name}:${logID}`, (error as Error)?.stack);
 
       // If it is an exception that can be transformed into a HTTP response
       // transform it and use that as the response.
@@ -98,7 +102,8 @@ export const expressWrapper = <
 
         res.status(httpStatusCode).json({
           status: "fail",
-          data: jsendData,
+          // Use flatten data as it can be an array
+          data: [`ID: ${logID}`, jsendData].flat(),
         } satisfies JSendFail);
 
         return;
@@ -115,7 +120,11 @@ export const expressWrapper = <
           .status(400)
           .json({
             status: "fail",
-            data: ["Exception without HTTP transformer", error.message],
+            data: [
+              `ID: ${logID}`,
+              "Exception without HTTP transformer",
+              error.message,
+            ],
           } satisfies JSendFail);
 
         return;
@@ -125,7 +134,7 @@ export const expressWrapper = <
       if (error instanceof ZodError) {
         res.status(400).json({
           status: "fail",
-          data: ["Invalid input data", ...error.issues],
+          data: [`ID: ${logID}`, "Invalid input data", ...error.issues],
         } satisfies JSendFail);
 
         return;
@@ -136,7 +145,10 @@ export const expressWrapper = <
       res.json({
         status: "error",
         message: "Internal Server Error!",
-        data: [error instanceof Error ? error.message : "unknown error"],
+        data: [
+          `ID: ${logID}`,
+          error instanceof Error ? error.message : "unknown error",
+        ],
       } satisfies JSendError);
     }
   },
