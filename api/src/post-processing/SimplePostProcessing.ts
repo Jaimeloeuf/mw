@@ -1,0 +1,107 @@
+import { logger } from "../logging/index.js";
+import { runInParallel } from "./runInParallel.js";
+import { runSequentially } from "./runSequentially.js";
+import type { WrappedFunction } from "./WrappedFunction.js";
+
+/**
+ * Simple Post Processing mechanism that runs your job functions in web tier
+ * without blocking service function execution.
+ */
+export class SimplePostProcessing {
+  constructor(
+    private callerName: string,
+    private runType: "sequentially" | "parallelly",
+
+    /**
+     * Optionally required only for sequential executions
+     */
+    private continueOnFailure?: boolean
+  ) {
+    if (runType === "sequentially" && continueOnFailure === undefined) {
+      throw new Error(
+        `${SimplePostProcessing.name} requires continue option to be set for Sequential executions`
+      );
+    }
+  }
+
+  #fns: Array<WrappedFunction> = [];
+
+  /**
+   * Functions added will be ran sequentially based on the sequence of addition
+   *
+   * ## Functions should be NAMED
+   * Used for logging, especially if there are any errors.
+   */
+  addJob(fn: Function) {
+    // @todo This could be a compile time check with ESLint
+    if (fn.name === "") {
+      throw new Error(
+        `Functions passed to ${SimplePostProcessing.name} must be named`
+      );
+    }
+
+    const wrappedFunction = async () => {
+      try {
+        logger.verbose(
+          `${this.callerName}:${SimplePostProcessing.name}`,
+          `Executing: ${fn.name}`
+        );
+
+        await fn();
+
+        logger.verbose(
+          `${this.callerName}:${SimplePostProcessing.name}`,
+          `Successfully executed: ${fn.name}`
+        );
+
+        return true;
+      } catch (error) {
+        logger.verbose(
+          `${this.callerName}:${SimplePostProcessing.name}`,
+          `Failed while executing: ${fn.name}`
+        );
+
+        // @todo Create and log an error ID
+        // @todo Notify devs about this error
+        logger.error(
+          `${this.callerName}:${SimplePostProcessing.name}:${fn.name}`,
+          error instanceof Error ? error.stack : error
+        );
+
+        return false;
+      }
+    };
+
+    Object.defineProperty(wrappedFunction, "name", { value: fn.name });
+
+    this.#fns.push(wrappedFunction);
+
+    return this;
+  }
+
+  /**
+   * Run all the functions
+   */
+  async run() {
+    const functionNames = this.#fns.map((fn) => fn.name).join(", ");
+
+    logger.info(
+      `${this.callerName}:${SimplePostProcessing.name}`,
+      `Executing these functions ${this.runType}: ${functionNames}`
+    );
+
+    if (this.runType === "sequentially") {
+      return runSequentially(
+        SimplePostProcessing.name,
+        this.#fns,
+        !!this.continueOnFailure
+      );
+    }
+
+    if (this.runType === "parallelly") {
+      return runInParallel(SimplePostProcessing.name, this.#fns);
+    }
+
+    throw new Error(`Unknown run type: ${this.runType}`);
+  }
+}
