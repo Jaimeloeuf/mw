@@ -72,6 +72,7 @@ export class SimplePostProcessing {
       }
     };
 
+    // Reuse fn.name so that logging uses the real name
     Object.defineProperty(wrappedFunction, "name", { value: fn.name });
 
     this.#fns.push(wrappedFunction);
@@ -80,28 +81,30 @@ export class SimplePostProcessing {
   }
 
   /**
-   * Run all the functions
+   * Complete setting of Jobs and run them in the next event loop.
    */
   async run() {
-    const functionNames = this.#fns.map((fn) => fn.name).join(", ");
+    setImmediate(async () => {
+      const functionNames = this.#fns.map((fn) => fn.name).join(", ");
 
-    logger.info(
-      `${this.callerName}:${SimplePostProcessing.name}`,
-      `Executing these functions ${this.runType}: ${functionNames}`
-    );
-
-    if (this.runType === "sequentially") {
-      return runSequentially(
-        SimplePostProcessing.name,
-        this.#fns,
-        !!this.continueOnFailure
+      logger.info(
+        `${this.callerName}:${SimplePostProcessing.name}`,
+        `Executing these functions ${this.runType}: ${functionNames}`
       );
-    }
 
-    if (this.runType === "parallelly") {
-      return runInParallel(SimplePostProcessing.name, this.#fns);
-    }
+      if (this.runType === "sequentially") {
+        return runSequentially(
+          SimplePostProcessing.name,
+          this.#fns,
+          !!this.continueOnFailure
+        );
+      }
 
-    throw new Error(`Unknown run type: ${this.runType}`);
+      if (this.runType === "parallelly") {
+        return runInParallel(SimplePostProcessing.name, this.#fns);
+      }
+
+      throw new Error(`Unknown run type: ${this.runType}`);
+    });
   }
 }
