@@ -48,6 +48,8 @@ async function kyselyMigrateToLatest() {
   }
 
   await dbCleanup();
+
+  logger.info(kyselyMigrateToLatest.name, `Migration(s) completed`);
 }
 
 kyselyMigrateToLatest();

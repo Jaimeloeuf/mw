@@ -10,7 +10,8 @@
     "start:watch": "npx nodemon ./dist/index.js",
     "build": "npx tsc",
     "build:watch": "npx tsc -w",
-    "serve": "npm run build:watch & npm run start:watch"
+    "serve": "npm run build:watch & npm run start:watch",
+    "db:run-migrations": "npx tsx ./src/dal/kysely/migration-script.ts"
   },
   "engines": {
     "node": ">=20.0.0"
@@ -31,7 +32,7 @@
     "@types/pg": "^8.11.6",
     "nodemon": "^3.1.4",
     "rimraf": "^5.0.8",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.16.2",
     "typescript": "^5.5.3"
   }
 }
