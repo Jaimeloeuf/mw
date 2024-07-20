@@ -1,10 +1,10 @@
 import { db } from "../../kysely/index.js";
 import type { NewBlogSubscriber } from "../../kysely/index.js";
 
-export async function createBlogSubscriber(blogSubscriber: NewBlogSubscriber) {
-  return await db
+export function createBlogSubscriber(blogSubscriber: NewBlogSubscriber) {
+  return db
     .insertInto("blog_subscriber")
     .values(blogSubscriber)
     .returningAll()
-    .executeTakeFirst();
+    .executeTakeFirstOrThrow();
 }
