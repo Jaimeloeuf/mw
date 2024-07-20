@@ -3,3 +3,4 @@
  */
 
 export * from "./prettyPrintJson.js";
+export * from "./toError.js";
