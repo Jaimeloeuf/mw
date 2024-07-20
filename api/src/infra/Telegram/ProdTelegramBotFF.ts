@@ -1,4 +1,5 @@
 import { sf } from "simpler-fetch";
+import { prettyPrintJson } from "../../utils/index.js";
 
 export const ProdTelegramBotFF = (telegramBotToken: string) =>
   async function (
@@ -34,7 +35,7 @@ export const ProdTelegramBotFF = (telegramBotToken: string) =>
 
     if (!res.ok) {
       return new Error(
-        `Telegram message failed to send: ${JSON.stringify(res.data, null, 2)}`
+        `Telegram message failed to send: ${prettyPrintJson(res.data)}`
       );
     }
   };

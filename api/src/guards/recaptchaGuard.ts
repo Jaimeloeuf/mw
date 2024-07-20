@@ -2,6 +2,7 @@ import { sf } from "simpler-fetch";
 import type { Request } from "express";
 import { ForbiddenException } from "../exceptions/index.js";
 import type { HttpRequestGuard } from "../http/HttpRequestGuard.js";
+import { prettyPrintJson } from "../utils/index.js";
 
 /**
  * Guard function that validates recaptcha token found in a HTTP request header
@@ -51,7 +52,7 @@ export const recaptchaGuardFF = (
     }
 
     if (!res.data.success) {
-      throw new ForbiddenException(JSON.stringify(res.data["error-codes"]));
+      throw new ForbiddenException(prettyPrintJson(res.data["error-codes"]));
     }
 
     if (res.data.score < scoreRequirement) {

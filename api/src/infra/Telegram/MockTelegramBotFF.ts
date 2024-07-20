@@ -1,5 +1,6 @@
 import type { ProdTelegramBotFF } from "./ProdTelegramBotFF.js";
 import { logger } from "../../logging/index.js";
+import { prettyPrintJson } from "../../utils/index.js";
 
 export const MockTelegramBotFF = (() =>
   async function MockTelegramBotService(
@@ -8,7 +9,9 @@ export const MockTelegramBotFF = (() =>
   ) {
     logger.info(
       MockTelegramBotService.name,
-      `Messaging ${recipientTelegramChatID}\n`,
-      message
+      prettyPrintJson({
+        recipientTelegramChatID,
+        message,
+      })
     );
   }) satisfies typeof ProdTelegramBotFF;
