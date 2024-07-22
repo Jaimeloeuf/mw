@@ -5,13 +5,8 @@ import { HttpTransformerableException } from "./HttpTransformerableException.js"
  * found.
  */
 export class NotFoundException extends HttpTransformerableException {
-  constructor(
-    /**
-     * Accepts an `optionalMessage` to override the default exception message.
-     */
-    optionalMessage?: string
-  ) {
-    super(optionalMessage ?? `Not Found Exception`);
+  constructor(optionalMessage: string = "Not Found Exception") {
+    super(optionalMessage);
   }
 
   transformToHttpResponseData() {

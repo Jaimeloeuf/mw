@@ -1,5 +1,5 @@
 export abstract class Exception extends Error {
-  constructor(message: string) {
+  constructor(message: string = "Exception") {
     super(message);
   }
 }
