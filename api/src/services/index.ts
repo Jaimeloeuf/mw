@@ -2,4 +2,4 @@
  * Barrel file
  */
 
-export {};
+export * from "./blog/index.js";
