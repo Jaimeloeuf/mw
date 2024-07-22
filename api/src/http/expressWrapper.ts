@@ -12,7 +12,7 @@ import type {
   JSendFail,
   JSendError,
 } from "./JSend.js";
-import type { HttpRequestGuard } from "./HttpRequestGuard.js";
+import type { HttpRequestGuardClass } from "./HttpRequestGuardClass.js";
 
 /**
  * Use this function to wrap httpRequestHandlers/controllers to interface with
@@ -46,7 +46,7 @@ export const expressWrapper = <
 }: {
   method: HttpMethodStringLiteralType;
   path: PathStringLiteralType;
-  guards: Array<HttpRequestGuard> | null;
+  guards: Array<HttpRequestGuardClass> | null;
   requestDataValidator: NullableZodParserType;
   httpRequestHandler: (context: {
     req: Request;
@@ -62,7 +62,7 @@ export const expressWrapper = <
       // validation step. If a guard throws, all subsequent guards are skipped.
       if (guards !== null) {
         for (const guard of guards) {
-          await guard(req);
+          await guard.check(req);
         }
       }
 
