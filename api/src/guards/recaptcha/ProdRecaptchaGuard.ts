@@ -1,10 +1,10 @@
 import { sf } from "simpler-fetch";
 import type { Request } from "express";
-import { HttpRequestGuardClass } from "../../http/index.js";
+import { HttpRequestGuard } from "../../http/index.js";
 import { ForbiddenException } from "../../exceptions/index.js";
 import { prettyPrintJson } from "../../utils/index.js";
 
-export class ProdRecaptchaGuard implements HttpRequestGuardClass {
+export class ProdRecaptchaGuard implements HttpRequestGuard {
   constructor(
     /**
      * The recaptcha secret token
