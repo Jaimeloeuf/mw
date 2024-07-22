@@ -1,7 +1,11 @@
 import type { Express } from "express";
 import { routeNotFound } from "./routeNotFound.js";
 
-import { healthCheck, version } from "../controllers/index.js";
+import {
+  healthCheck,
+  version,
+  blogNewSubscriberController,
+} from "../controllers/index.js";
 
 /**
  * A route tables sort of file, where all HTTP API routes are defined here along
@@ -33,6 +37,11 @@ export function registerRoutesAndControllers(app: Express) {
     ["get" satisfies typeof version.method](
       "/version" satisfies typeof version.path,
       version.routeHandler
+    )
+
+    ["post" satisfies typeof blogNewSubscriberController.method](
+      "/blog/subscribe" satisfies typeof blogNewSubscriberController.path,
+      blogNewSubscriberController.routeHandler
     )
 
     // Since this is the last non-error-handling route handler used, assume 404
