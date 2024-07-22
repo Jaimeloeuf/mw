@@ -142,7 +142,7 @@ export const expressWrapper = <
 
       // If instance thrown is none of the above exception types, then it is an
       // error of unknown nature, respond with the appropriate JSend error type.
-      res.json({
+      res.status(500).json({
         status: "error",
         message: "Internal Server Error!",
         data: [
