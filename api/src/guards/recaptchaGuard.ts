@@ -44,7 +44,7 @@ export const recaptchaGuardFF = (
 
         const { err, res } = await sf
           .useOnce(
-            `httpss://www.recaptcha.net/recaptcha/api/siteverify?secret=${recaptchaSecret}&response=${token}&remoteip=${remoteIP}`
+            `https://www.recaptcha.net/recaptcha/api/siteverify?secret=${recaptchaSecret}&response=${token}&remoteip=${remoteIP}`
           )
           .POST()
           .runJSON<{ success: string; score: number; ["error-codes"]: any }>();
