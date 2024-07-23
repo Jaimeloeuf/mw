@@ -32,7 +32,7 @@ import type { HttpRequestGuard } from "./HttpRequestGuard.js";
  * succeeded, or return an exception/error to the client if anything threw in
  * this execution flow.
  */
-export const expressWrapper = <
+export const httpController = <
   HttpMethodStringLiteralType extends
     | "get"
     | "post"
@@ -122,7 +122,7 @@ export const expressWrapper = <
       const logID = crypto.randomUUID();
 
       // Simple error logging
-      logger.error(`${expressWrapper.name}:${logID}`, (error as Error)?.stack);
+      logger.error(`${httpController.name}:${logID}`, (error as Error)?.stack);
 
       // If it is an exception that can be transformed into a HTTP response
       // transform it and use that as the response.

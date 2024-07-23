@@ -1,6 +1,6 @@
-import { expressWrapper } from "../http/expressWrapper.js";
+import { httpController } from "../http/httpController.js";
 
-export const healthCheck = expressWrapper({
+export const healthCheck = httpController({
   method: "get",
   path: "/",
   guards: null,

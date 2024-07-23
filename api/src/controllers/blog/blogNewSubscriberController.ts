@@ -1,9 +1,9 @@
 import { z } from "zod";
-import { expressWrapper } from "../../http/expressWrapper.js";
+import { httpController } from "../../http/httpController.js";
 import { blogRecaptchaGuard } from "./blogRecaptchaGuard.js";
 import { blogService } from "../../services/index.js";
 
-export const blogNewSubscriberController = expressWrapper({
+export const blogNewSubscriberController = httpController({
   method: "post",
   path: "/blog/subscribe",
   guards: [blogRecaptchaGuard],

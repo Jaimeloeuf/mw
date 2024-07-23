@@ -4,5 +4,5 @@
 
 export * from "./bootstrapHttpServer.js";
 export * from "./JSend.js";
-export * from "./expressWrapper.js";
+export * from "./httpController.js";
 export * from "./HttpRequestGuard.js";
