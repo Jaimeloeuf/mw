@@ -23,6 +23,14 @@ import type { HttpRequestGuard } from "./HttpRequestGuard.js";
  * underlying web server as possible since it can be switched out in the future.
  * Only things it actually require are passed in such as a function to set HTTP
  * status code.
+ *
+ * Execution flow:
+ * 1. Run all guard functions sequentially, stop if any of it fails by throwing.
+ * 1. Create and validate request data if `requestDataValidator` is provided.
+ * 1. Call the provided `httpRequestHandler` with request data.
+ * 1. Respond to client with data returned from `httpRequestHandler` if it
+ * succeeded, or return an exception/error to the client if anything threw in
+ * this execution flow.
  */
 export const expressWrapper = <
   HttpMethodStringLiteralType extends
