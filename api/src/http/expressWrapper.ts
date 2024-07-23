@@ -52,10 +52,32 @@ export const expressWrapper = <
   requestDataValidator,
   httpRequestHandler,
 }: {
+  /**
+   * HTTP method.
+   */
   method: HttpMethodStringLiteralType;
+  /**
+   * HTTP API request path. Same as what will be used for express JS.
+   */
   path: PathStringLiteralType;
+  /**
+   * Optional Guard objects, which will run sequentially till completion. Stops
+   * API request if any of these throws, else run request data validator if any
+   * once guard checks complete.
+   */
   guards: Array<HttpRequestGuard> | null;
+  /**
+   * Optional request data validator, this ZodType will be used to parse and
+   * validate all request data coming in, which includes
+   * 1. URL params
+   * 1. URL query params
+   * 1. request body.
+   */
   requestDataValidator: NullableZodParserType;
+  /**
+   * User defined function that is called to handle the API request once guard
+   * functions finish running and request data is validated.
+   */
   httpRequestHandler: (context: {
     req: Request;
     requestData: RequestDataType;
