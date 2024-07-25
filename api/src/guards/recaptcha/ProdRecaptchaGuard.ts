@@ -1,7 +1,10 @@
 import { sf } from "simpler-fetch";
 import type { Request } from "express";
 import { HttpRequestGuard } from "../../http/index.js";
-import { ForbiddenException } from "../../exceptions/index.js";
+import {
+  UnauthorizedException,
+  ForbiddenException,
+} from "../../exceptions/index.js";
 import { prettyPrintJson } from "../../utils/index.js";
 
 export class ProdRecaptchaGuard implements HttpRequestGuard {
@@ -28,7 +31,7 @@ export class ProdRecaptchaGuard implements HttpRequestGuard {
     const token = req.headers["x-recaptcha-token"];
 
     if (token === undefined || token === "") {
-      throw new ForbiddenException("Missing recaptcha token");
+      throw new UnauthorizedException("Missing recaptcha token");
     }
 
     const { err, res } = await sf
