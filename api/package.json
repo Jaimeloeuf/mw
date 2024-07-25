@@ -11,6 +11,7 @@
     "build": "npx tsc",
     "build:watch": "npx tsc -w",
     "serve": "npm run build:watch & npm run start:watch",
+    "lint": "npx eslint",
     "db:run-migrations": "npx tsx ./src/dal/kysely/migration-script.ts"
   },
   "engines": {
@@ -27,12 +28,16 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@eslint/js": "^9.7.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/pg": "^8.11.6",
+    "eslint": "^9.7.0",
+    "globals": "^15.8.0",
     "nodemon": "^3.1.4",
     "rimraf": "^5.0.8",
     "tsx": "^4.16.2",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^7.17.0"
   }
 }
