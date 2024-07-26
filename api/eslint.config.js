@@ -9,6 +9,9 @@ export default [
     languageOptions: {
       globals: globals.node,
     },
+    rules: {
+      "no-console": "warn",
+    },
   },
   // pluginJs.configs.recommended,
   // ...tseslint.configs.recommended,
