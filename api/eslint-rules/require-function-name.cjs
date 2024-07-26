@@ -10,6 +10,25 @@ module.exports = {
   },
   create(context) {
     return {
+      CallExpression(node) {
+        if (node.callee.property?.name !== "addJob") {
+          return;
+        }
+
+        for (const item of node.arguments) {
+          if (item.id?.name !== undefined) {
+            continue;
+          }
+
+          context.report({
+            message: `Functions passed to SimplePostProcessing must be named`,
+            loc: {
+              start: node.callee.loc.end,
+              end: node.callee.loc.end,
+            },
+          });
+        }
+      },
     };
   },
 };
