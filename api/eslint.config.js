@@ -2,6 +2,8 @@ import globals from "globals";
 // import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 
+import mwEslintPlugin from "./eslint-rules/eslint-plugin-mw.cjs";
+
 export default [
   {
     files: ["src/**/*.ts"],
@@ -11,6 +13,10 @@ export default [
     },
     rules: {
       "no-console": "warn",
+      "mwEslintPlugin/require-function-name": "error",
+    },
+    plugins: {
+      mwEslintPlugin,
     },
   },
   // pluginJs.configs.recommended,
