@@ -6,8 +6,6 @@ export default [
   {
     files: ["src/**/*.ts"],
     ignores: ["dist/**"],
-  },
-  {
     languageOptions: {
       globals: globals.node,
     },
