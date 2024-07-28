@@ -21,7 +21,7 @@ module.exports = {
           }
 
           context.report({
-            message: `Functions passed to SimplePostProcessing must be named`,
+            message: `Functions passed to SimplePostProcessing.addJob method must be named`,
             loc: {
               start: node.callee.loc.end,
               end: node.callee.loc.end,
