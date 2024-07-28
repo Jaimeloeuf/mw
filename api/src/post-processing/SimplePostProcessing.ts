@@ -33,7 +33,8 @@ export class SimplePostProcessing {
    * Used for logging, especially if there are any errors.
    */
   addJob(fn: Function) {
-    // @todo This could be a compile time check with ESLint
+    // Extra runtime check alongside compile time check with ESLint rule
+    // 'mwEslintPlugin/require-function-name'
     if (fn.name === "") {
       throw new Error(
         `Functions passed to ${SimplePostProcessing.name} must be named`
