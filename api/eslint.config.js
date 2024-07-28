@@ -12,6 +12,7 @@ export default [
       globals: globals.node,
     },
     rules: {
+      "prefer-const": "error",
       "no-console": "warn",
       "mwEslintPlugin/require-function-name-for-addJob": "error",
       "mwEslintPlugin/require-function-name-for-dalNoThrow": "error",
