@@ -27,6 +27,11 @@ async function kyselyMigrateToLatest() {
 
   const { error, results } = await migrator.migrateToLatest();
 
+  if (error) {
+    logger.error(kyselyMigrateToLatest.name, `Migration failed: ${error}`);
+  }
+
+  // `results` could be undefined if Kysely is unable to even run migrations
   results?.forEach((migrationResult) => {
     if (migrationResult.status === "Success") {
       logger.info(
@@ -45,10 +50,6 @@ async function kyselyMigrateToLatest() {
       );
     }
   });
-
-  if (error) {
-    logger.error(kyselyMigrateToLatest.name, `Migration failed: ${error}`);
-  }
 
   await dbCleanup();
 
