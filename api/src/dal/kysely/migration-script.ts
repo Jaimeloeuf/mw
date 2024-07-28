@@ -1,5 +1,6 @@
 import path from "path";
 import fs from "fs/promises";
+import { performance } from "perf_hooks";
 import { Migrator, FileMigrationProvider } from "kysely";
 import { db, dbCleanup } from "./db.js";
 import { logger } from "../../logging/index.js";
@@ -9,6 +10,8 @@ import { logger } from "../../logging/index.js";
  * migration files.
  */
 async function kyselyMigrateToLatest() {
+  const startTime = performance.now();
+
   /** This needs to be an absolute path */
   const migrationFolder = path.join(import.meta.dirname, "./migrations");
 
@@ -49,7 +52,10 @@ async function kyselyMigrateToLatest() {
 
   await dbCleanup();
 
-  logger.info(kyselyMigrateToLatest.name, `Migration(s) completed`);
+  const endTime = performance.now();
+  const time = Math.round(endTime - startTime);
+
+  logger.info(kyselyMigrateToLatest.name, `Migration completed in ${time} ms`);
 }
 
 kyselyMigrateToLatest();
