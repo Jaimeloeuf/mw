@@ -6,7 +6,8 @@ import { toError } from "../../utils/index.js";
  * instead have a return type of its original value unioned with `Error`.
  */
 export function dalNoThrow<T extends (...args: any) => Promise<any>>(fn: T) {
-  // @todo This could be a compile time check with ESLint
+  // Extra runtime check alongside compile time check with ESLint rule
+  // 'mwEslintPlugin/require-function-name-for-dalNoThrow'
   if (fn.name === "") {
     throw new Error(`Functions passed to ${dalNoThrow.name} must be named`);
   }
