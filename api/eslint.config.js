@@ -13,7 +13,7 @@ export default [
     },
     rules: {
       "no-console": "warn",
-      "mwEslintPlugin/require-function-name": "error",
+      "mwEslintPlugin/require-function-name-for-addJob": "error",
       "mwEslintPlugin/require-function-name-for-dalNoThrow": "error",
     },
     plugins: {
