@@ -132,7 +132,7 @@ export const httpController = <
 
         res.status(httpStatusCode).json({
           status: "fail",
-          // Use flatten data as it can be an array
+          // Use flatten as jsendData could be an array
           data: [`ID: ${logID}`, jsendData].flat(),
         } satisfies JSendFail);
 
