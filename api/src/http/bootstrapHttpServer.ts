@@ -30,6 +30,9 @@ export function bootstrapHttpServer() {
     );
   });
 
-  // Server wide 60 seconds timeout hard limit
-  server.setTimeout(60_000);
+  server.setTimeout(config.server_timeout);
+  logger.info(
+    bootstrapHttpServer.name,
+    `Web Server global timeout set to: ${config.server_timeout} ms`
+  );
 }

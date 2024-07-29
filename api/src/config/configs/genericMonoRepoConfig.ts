@@ -21,6 +21,13 @@ export const genericMonoRepoConfigSchema = {
    * Port for the HTTP webserver
    */
   port: z.number().positive().default(3000),
+
+  /**
+   * Server wide 60 seconds timeout hard limit, should not change this unless
+   * absolutely necessary like running the web server in a background job tier
+   * or something similar. Web tier should always follow the 60s limit.
+   */
+  server_timeout: z.number().positive().default(60_000),
 } satisfies ZodRawShape;
 
 export const genericMonoRepoConfigData = {
@@ -30,4 +37,8 @@ export const genericMonoRepoConfigData = {
     process.env["PORT"] === undefined
       ? undefined
       : parseInt(process.env["PORT"]),
+  server_timeout:
+    process.env["SERVER_TIMEOUT"] === undefined
+      ? undefined
+      : parseInt(process.env["SERVER_TIMEOUT"]),
 } satisfies Record<keyof typeof genericMonoRepoConfigSchema, unknown>;
