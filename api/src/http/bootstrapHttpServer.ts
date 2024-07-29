@@ -23,10 +23,13 @@ export function bootstrapHttpServer() {
 
   registerRoutesAndControllers(app);
 
-  app.listen(config.port, () => {
+  const server = app.listen(config.port, () => {
     logger.info(
       bootstrapHttpServer.name,
       `Web Server now listening on port: ${config.port}`
     );
   });
+
+  // Server wide 60 seconds timeout hard limit
+  server.setTimeout(60_000);
 }
