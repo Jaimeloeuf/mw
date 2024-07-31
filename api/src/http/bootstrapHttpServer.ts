@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import type { Socket } from "node:net";
 
 import { config } from "../config/index.js";
 import { logger } from "../logging/index.js";
@@ -30,7 +31,22 @@ export function bootstrapHttpServer() {
     );
   });
 
+  // Note that setting timeout does not stop any in progress controller/service/
+  // post-processing execution. All it does is hangup on the socket connected to
+  // the client and logs it as an error.
   server.setTimeout(config.server_timeout);
+  server.on("timeout", (socket: Socket) => {
+    socket.destroy();
+
+    // This is an internal API that may or may not work.
+    const originalRequestUrl = (socket as any)?.parser?.incoming?.originalUrl;
+
+    logger.error(
+      bootstrapHttpServer.name,
+      `Request to '${originalRequestUrl}' exceeded global timeout of ${config.server_timeout} ms`
+    );
+  });
+
   logger.info(
     bootstrapHttpServer.name,
     `Web Server global timeout set to: ${config.server_timeout} ms`
