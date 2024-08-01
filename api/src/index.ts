@@ -1,3 +1,4 @@
+import { logger } from "./logging/index.js";
 import { registerGlobalUncaughtIssueHandlers } from "./registerGlobalUncaughtIssueHandlers.js";
 import { config } from "./config/index.js";
 import { bootstrapHttpServer } from "./http/index.js";
@@ -11,7 +12,7 @@ async function main() {
 
   // config bootstrapper is ran as part of import process, it is used here to
   // prevent unused variable linting issue.
-  config;
+  logger.info(main.name, `Env: ${config.env}`);
 
   bootstrapHttpServer();
 }
