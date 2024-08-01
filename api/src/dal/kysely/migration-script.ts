@@ -2,6 +2,7 @@ import path from "path";
 import fs from "fs/promises";
 import { performance } from "perf_hooks";
 import { Migrator, FileMigrationProvider } from "kysely";
+import { dbConnectionCheck } from "./dbConnectionCheck.js";
 import { db, dbCleanup } from "./db.js";
 import { logger } from "../../logging/index.js";
 
@@ -14,6 +15,12 @@ async function kyselyMigrateToLatest() {
 
   /** This needs to be an absolute path */
   const migrationFolder = path.join(import.meta.dirname, "./migrations");
+
+  const dbConnectionOk = await dbConnectionCheck();
+  if (!dbConnectionOk) {
+    // Stop running migration immediately
+    process.exit(1);
+  }
 
   logger.info(
     kyselyMigrateToLatest.name,
