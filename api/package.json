@@ -10,6 +10,7 @@
     "start:watch": "npx nodemon ./dist/index.js",
     "build": "npx tsc",
     "build:watch": "npx tsc -w",
+    "build:full": "npm run delete-build-cache && npx tsc",
     "serve": "npm run build:watch & npm run start:watch",
     "lint": "npx eslint",
     "db:run-migrations": "npx tsx ./src/dal/kysely/migration-script.ts"
