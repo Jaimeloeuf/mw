@@ -32,19 +32,19 @@ export function registerRoutesAndControllers(app: Express) {
   app["get" satisfies typeof healthCheck.method](
     "/" satisfies typeof healthCheck.path,
     healthCheck.routeHandler
-  )
+  );
 
-    ["get" satisfies typeof version.method](
-      "/version" satisfies typeof version.path,
-      version.routeHandler
-    )
+  app["get" satisfies typeof version.method](
+    "/version" satisfies typeof version.path,
+    version.routeHandler
+  );
 
-    ["post" satisfies typeof blogNewSubscriberController.method](
-      "/blog/subscribe" satisfies typeof blogNewSubscriberController.path,
-      blogNewSubscriberController.routeHandler
-    )
+  app["post" satisfies typeof blogNewSubscriberController.method](
+    "/blog/subscribe" satisfies typeof blogNewSubscriberController.path,
+    blogNewSubscriberController.routeHandler
+  );
 
-    // Since this is the last non-error-handling route handler used, assume 404
-    // as no other route handler responded.
-    .use(routeNotFound.routeHandler);
+  // Since this is the last non-error-handling route handler used, assume 404
+  // as no other route handler responded.
+  app.use(routeNotFound.routeHandler);
 }
