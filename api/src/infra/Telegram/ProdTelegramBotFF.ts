@@ -2,6 +2,25 @@ import { sf } from "simpler-fetch";
 import { prettyPrintJson } from "../../utils/index.js";
 
 import { logger } from "../../logging/index.js";
+import { config } from "../../config/index.js";
+
+async function test() {
+  const { err, res } = await sf
+    .useOnce(
+      `https://api.telegram.org/bot${config.tele_adminbot_token}/sendMessage`
+    )
+    .POST()
+    .bodyJSON({
+      chat_id: config.tele_adminbot_admin_chat_id,
+      text: "Test message on startup",
+      parse_mode: "HTML",
+    })
+    .runJSON();
+
+  logger.error("tele test on startup 1", err);
+  logger.error("tele test on startup 2", JSON.stringify(res, null, 2));
+}
+config.env === "production" && test();
 
 export const ProdTelegramBotFF = (telegramBotToken: string) =>
   async function (
@@ -30,14 +49,6 @@ export const ProdTelegramBotFF = (telegramBotToken: string) =>
         parse_mode: "HTML",
       })
       .runJSON();
-
-    logger.error(`Debugging tele`, err, res);
-    logger.error(
-      `Debugging tele data`,
-      telegramBotToken,
-      recipientTelegramChatID,
-      message
-    );
 
     if (err !== undefined) {
       return err as Error;
