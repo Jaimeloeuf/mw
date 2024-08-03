@@ -4,8 +4,6 @@ import { CreateSimplePostProcessingJob } from "../../post-processing/index.js";
 import { notifyAdminWithInternalAdminTelegramBot } from "../../infra/index.js";
 import { blogEmailService } from "./blogEmailService.js";
 
-import { logger } from "../../logging/index.js";
-
 /**
  * Add new subscriber for blog
  */
@@ -44,7 +42,6 @@ export async function newSubscriber(email: string) {
       );
 
       if (notificationError instanceof Error) {
-        logger.error(`Debugging tele error`, notificationError);
         throw notificationError;
       }
     })

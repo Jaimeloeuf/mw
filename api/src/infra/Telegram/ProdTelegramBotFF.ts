@@ -1,6 +1,8 @@
 import { sf } from "simpler-fetch";
 import { prettyPrintJson } from "../../utils/index.js";
 
+import { logger } from "../../logging/index.js";
+
 export const ProdTelegramBotFF = (telegramBotToken: string) =>
   async function (
     recipientTelegramChatID: string,
@@ -28,6 +30,14 @@ export const ProdTelegramBotFF = (telegramBotToken: string) =>
         parse_mode: "HTML",
       })
       .runJSON();
+
+    logger.error(`Debugging tele`, err, res);
+    logger.error(
+      `Debugging tele data`,
+      telegramBotToken,
+      recipientTelegramChatID,
+      message
+    );
 
     if (err !== undefined) {
       return err as Error;
