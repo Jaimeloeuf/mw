@@ -51,14 +51,12 @@ function getMigrationIndex(dateString: string) {
 
   // Get the last migration index of today if any
   const lastUsedMigrationIndex = migrationDatesWithTheSameDate
-    .map((dateWithIndex) => dateWithIndex.slice(dateString.length))
-    .sort()
+    .map((dateWithIndex) => parseInt(dateWithIndex.slice(dateString.length)))
+    .sort((a, b) => a - b)
     .at(-1);
 
   const migrationIndex =
-    lastUsedMigrationIndex === undefined
-      ? 0
-      : parseInt(lastUsedMigrationIndex) + 1;
+    lastUsedMigrationIndex === undefined ? 0 : lastUsedMigrationIndex + 1;
 
   return migrationIndex;
 }
