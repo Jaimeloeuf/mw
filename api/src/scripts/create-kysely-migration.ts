@@ -55,8 +55,7 @@ function getMigrationIndex(dateString: string) {
     .sort((a, b) => a - b)
     .at(-1);
 
-  const migrationIndex =
-    lastUsedMigrationIndex === undefined ? 0 : lastUsedMigrationIndex + 1;
+  const migrationIndex = (lastUsedMigrationIndex ?? 0) + 1;
 
   return migrationIndex;
 }
