@@ -51,7 +51,7 @@ function getMigrationIndex(dateString: string) {
 
   // Get the last migration index of today if any
   const lastUsedMigrationIndex = migrationDatesWithTheSameDate
-    .map((dateWithIndex) => parseInt(dateWithIndex.slice(dateString.length)))
+    .map((dateWithIndex) => parseInt(dateWithIndex.slice(8))) // 8 bcs YYYYMMDD
     .sort((a, b) => a - b)
     .at(-1);
 
