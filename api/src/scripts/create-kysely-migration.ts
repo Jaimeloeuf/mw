@@ -72,6 +72,14 @@ async function createKyselyMigration() {
 
   rl.close();
 
+  if (migrationName !== migrationName.replaceAll(/\s/g, "")) {
+    logger.error(
+      createKyselyMigration.name,
+      `Migration name cannot have space, use _ instead`
+    );
+    return;
+  }
+
   if (migrationName !== migrationName.toLowerCase()) {
     logger.error(
       createKyselyMigration.name,
