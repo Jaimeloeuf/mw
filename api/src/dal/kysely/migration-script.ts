@@ -63,6 +63,10 @@ async function kyselyMigrateToLatest() {
   const endTime = performance.now();
   const time = Math.round(endTime - startTime);
 
+  logger.info(
+    kyselyMigrateToLatest.name,
+    `Ran ${results?.length ?? 0} migrations`
+  );
   logger.info(kyselyMigrateToLatest.name, `Migration completed in ${time} ms`);
 }
 
