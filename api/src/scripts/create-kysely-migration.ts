@@ -72,6 +72,14 @@ async function createKyselyMigration() {
 
   rl.close();
 
+  if (migrationName !== migrationName.toLowerCase()) {
+    logger.error(
+      createKyselyMigration.name,
+      `Migration name must be all lowercase`
+    );
+    return;
+  }
+
   const dateString = getDateString();
 
   const migrationIndex = getMigrationIndex(dateString);
