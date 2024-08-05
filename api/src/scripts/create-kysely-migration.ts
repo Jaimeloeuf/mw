@@ -76,7 +76,7 @@ async function createKyselyMigration() {
 
   const migrationIndex = getMigrationIndex(dateString);
 
-  const migrationFileName = `${dateString}${migrationIndex}_${migrationName}.ts`;
+  const migrationFileName = `${dateString}_${migrationIndex}_${migrationName}.ts`;
 
   const migrationFilePath = path.join(
     import.meta.dirname,
