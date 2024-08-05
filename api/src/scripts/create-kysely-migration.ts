@@ -39,9 +39,9 @@ function getMigrationIndex(dateString: string) {
 
   const migrationFileNames = fs.readdirSync(migrationFolderPath);
 
-  // Get all the `${migrationDate}${migrationIndex}` strings
+  // Get all the `${migrationDate}_${migrationIndex}` strings
   const migrationDates = migrationFileNames
-    .map((migrationFileName) => migrationFileName.split("_")[0])
+    .map((name) => name.split("_").slice(0, 2).join(""))
     .filter((name) => name !== undefined);
 
   // Find all the migrations that happened on the same as today's date string
