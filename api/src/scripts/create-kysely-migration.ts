@@ -72,6 +72,14 @@ async function createKyselyMigration() {
 
   rl.close();
 
+  if (migrationName.replaceAll(/^[_a-z0-9]+$/g, "") !== "") {
+    logger.error(
+      createKyselyMigration.name,
+      `Migration name can only contain alphanumeric characters and _`
+    );
+    return;
+  }
+
   if (migrationName !== migrationName.replaceAll(/\s/g, "")) {
     logger.error(
       createKyselyMigration.name,
