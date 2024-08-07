@@ -1,0 +1,96 @@
+import fs from "fs";
+import path from "path";
+import { logger } from "../../logging/index.js";
+import { routeTableTemplate } from "./routeTableTemplate.js";
+import { controllerImportTemplate } from "./controllerImportTemplate.js";
+import { routeDefinitionTemplate } from "./routeDefinitionTemplate.js";
+import type { ControllerFile } from "./ControllerFile.js";
+
+/**
+ * Generate the HTTP API ExpressJS routes table file, by looking at all the HTTP
+ * controllers in the controllers/ folder.
+ */
+async function generateHttpRoutesTable() {
+  const controllerFolderPath = path.join(
+    import.meta.dirname,
+    `../../controllers`
+  );
+
+  const generatedStatements = fs
+    // Read all files in /controller/**
+    .readdirSync(controllerFolderPath, {
+      recursive: true,
+      withFileTypes: true,
+    })
+
+    // Only keep valid .ts files
+    .filter((file) => file.name.includes("ts") && file.name !== "index.ts")
+
+    // Create file objects with name, full path and extracted http route string.
+    .map(function (file) {
+      const fullFilePath = path.resolve(file.parentPath, file.name);
+      const fileContent = fs.readFileSync(fullFilePath, { encoding: "utf8" });
+      return {
+        name: file.name,
+        path: fullFilePath,
+        httpRoute: fileContent.match(/path: "(.*)",/)?.[1],
+        httpMethod: fileContent.match(/method: "(.*)",/)?.[1],
+        controllerName: fileContent.match(/export const (.*) =/)?.[1],
+      };
+    })
+
+    // There may be certain files that are not actual controller files in
+    // /controller/** like helper functions etc... filter these out.
+    .filter(
+      (file): file is ControllerFile =>
+        file.httpRoute !== undefined &&
+        file.httpMethod !== undefined &&
+        file.controllerName !== undefined
+    )
+
+    // Sort these files by the http route strings alphabetically
+    .sort((a, b) =>
+      a.httpRoute > b.httpRoute ? 1 : b.httpRoute > a.httpRoute ? -1 : 0
+    )
+
+    // Generate the import and route definition statements
+    .map((file) => ({
+      controllerImportStatement: controllerImportTemplate(
+        file,
+        controllerFolderPath
+      ),
+      routeDefinition: routeDefinitionTemplate(file),
+    }))
+
+    // Combine import and route definition statements into 2 different arrays.
+    .reduce(
+      (acc, curr) => {
+        acc.controllerImportStatements.push(curr.controllerImportStatement);
+        acc.routeDefinitions.push(curr.routeDefinition);
+        return acc;
+      },
+      {
+        controllerImportStatements: [] as Array<string>,
+        routeDefinitions: [] as Array<string>,
+      }
+    );
+
+  const generatedCode = routeTableTemplate(
+    generatedStatements.controllerImportStatements.join(""),
+    generatedStatements.routeDefinitions.join("")
+  );
+
+  const routeTableFilePath = path.join(
+    import.meta.dirname,
+    `../../http/registerRoutesAndControllers.generated.ts`
+  );
+
+  fs.writeFileSync(routeTableFilePath, generatedCode);
+
+  logger.info(
+    generateHttpRoutesTable.name,
+    `Generated HTTP routes table file: ${routeTableFilePath}`
+  );
+}
+
+generateHttpRoutesTable();
