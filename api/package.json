@@ -15,7 +15,7 @@
     "lint": "npx eslint",
     "db:run-migrations": "npx tsx ./src/dal/kysely/migration-script.ts",
     "scripts:create-kysely-migration": "npx tsx ./src/scripts/create-kysely-migration.ts",
-    "scripts:generate-http-api-routes-table": "npx tsx ./src/scripts/genRouteTable/generate-http-api-routes-table.ts"
+    "codegen:genHttpRoutesTable": "npx tsx ./src/codegen/genHttpRoutesTable/genHttpRoutesTable.ts"
   },
   "engines": {
     "node": ">=20.0.0"

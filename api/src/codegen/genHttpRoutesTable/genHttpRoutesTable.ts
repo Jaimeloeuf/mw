@@ -10,7 +10,7 @@ import type { ControllerFile } from "./ControllerFile.js";
  * Generate the HTTP API ExpressJS routes table file, by looking at all the HTTP
  * controllers in the controllers/ folder.
  */
-async function generateHttpRoutesTable() {
+async function genHttpRoutesTable() {
   const controllerFolderPath = path.join(
     import.meta.dirname,
     `../../controllers`
@@ -88,9 +88,9 @@ async function generateHttpRoutesTable() {
   fs.writeFileSync(routeTableFilePath, generatedCode);
 
   logger.info(
-    generateHttpRoutesTable.name,
+    genHttpRoutesTable.name,
     `Generated HTTP routes table file: ${routeTableFilePath}`
   );
 }
 
-generateHttpRoutesTable();
+genHttpRoutesTable();
