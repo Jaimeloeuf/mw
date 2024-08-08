@@ -53,20 +53,14 @@ export async function genHttpRoutesTable() {
       a.httpRoute > b.httpRoute ? 1 : b.httpRoute > a.httpRoute ? -1 : 0
     )
 
-    // Generate the import and route definition statements
-    .map((file) => ({
-      controllerImportStatement: controllerImportTemplate(
-        file,
-        controllerFolderPath
-      ),
-      routeDefinition: routeDefinitionTemplate(file),
-    }))
-
-    // Combine import and route definition statements into 2 different arrays.
+    // Generate the import and route definition statements, and combine them
+    // into 2 different arrays.
     .reduce(
-      (acc, curr) => {
-        acc.controllerImportStatements.push(curr.controllerImportStatement);
-        acc.routeDefinitions.push(curr.routeDefinition);
+      (acc, file) => {
+        acc.controllerImportStatements.push(
+          controllerImportTemplate(file, controllerFolderPath)
+        );
+        acc.routeDefinitions.push(routeDefinitionTemplate(file));
         return acc;
       },
       {
