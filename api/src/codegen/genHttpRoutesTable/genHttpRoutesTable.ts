@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { logger } from "../../logging/index.js";
+import { genAndSaveGeneratedCode } from "../genAndSaveGeneratedCode.js";
 import { routeTableTemplate } from "./routeTableTemplate.js";
 import { controllerImportTemplate } from "./controllerImportTemplate.js";
 import { routeDefinitionTemplate } from "./routeDefinitionTemplate.js";
@@ -79,7 +80,11 @@ export async function genHttpRoutesTable() {
     `../../http/registerRoutesAndControllers.generated.ts`
   );
 
-  fs.writeFileSync(routeTableFilePath, generatedCode);
+  await genAndSaveGeneratedCode(
+    genHttpRoutesTable,
+    generatedCode,
+    routeTableFilePath
+  );
 
   logger.info(
     genHttpRoutesTable.name,
