@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs/promises";
 import path from "path";
 import { logger } from "../../logging/index.js";
 import { genAndSaveGeneratedCode } from "../genAndSaveGeneratedCode.js";
@@ -17,29 +17,34 @@ export async function genHttpRoutesTable() {
     `../../controllers`
   );
 
-  const generatedStatements = fs
-    // Read all files in /controller/**
-    .readdirSync(controllerFolderPath, {
-      recursive: true,
-      withFileTypes: true,
-    })
+  // Read all files in /controller/**
+  const controllerFilesDirent = await fs.readdir(controllerFolderPath, {
+    recursive: true,
+    withFileTypes: true,
+  });
 
-    // Only keep valid .ts files
-    .filter((file) => file.name.includes("ts") && file.name !== "index.ts")
+  const controllerFiles = await Promise.all(
+    controllerFilesDirent
+      // Only keep valid .ts files
+      .filter((file) => file.name.includes("ts") && file.name !== "index.ts")
 
-    // Create file objects with name, full path and extracted http route string.
-    .map(function (file) {
-      const fullFilePath = path.resolve(file.parentPath, file.name);
-      const fileContent = fs.readFileSync(fullFilePath, { encoding: "utf8" });
-      return {
-        name: file.name,
-        path: fullFilePath,
-        httpRoute: fileContent.match(/path: "(.*)",/)?.[1],
-        httpMethod: fileContent.match(/method: "(.*)",/)?.[1],
-        controllerName: fileContent.match(/export const (.*) =/)?.[1],
-      };
-    })
+      // Create file objects with name, full path and extracted http route string.
+      .map(async function (file) {
+        const fullFilePath = path.resolve(file.parentPath, file.name);
+        const fileContent = await fs.readFile(fullFilePath, {
+          encoding: "utf8",
+        });
+        return {
+          name: file.name,
+          path: fullFilePath,
+          httpRoute: fileContent.match(/path: "(.*)",/)?.[1],
+          httpMethod: fileContent.match(/method: "(.*)",/)?.[1],
+          controllerName: fileContent.match(/export const (.*) =/)?.[1],
+        };
+      })
+  );
 
+  const { controllerImportStatements, routeDefinitions } = controllerFiles
     // There may be certain files that are not actual controller files in
     // /controller/** like helper functions etc... filter these out.
     .filter(
@@ -71,8 +76,8 @@ export async function genHttpRoutesTable() {
     );
 
   const generatedCode = routeTableTemplate(
-    generatedStatements.controllerImportStatements.join(""),
-    generatedStatements.routeDefinitions.join("")
+    controllerImportStatements.join(""),
+    routeDefinitions.join("")
   );
 
   const routeTableFilePath = path.join(
