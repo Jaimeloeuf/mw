@@ -1,22 +1,15 @@
 import { logger } from "../logging/index.js";
 
-import { genHttpRoutesTable } from "./genHttpRoutesTable/genHttpRoutesTable.js";
+import { codegenRunAllModules } from "./codegenRunAllModules.js";
 
 async function codegenEntrypoint() {
-  logger.info(codegenEntrypoint.name, "Running codegen");
+  // No extra arguments, run all codegen modules
+  if (process.argv.length === 2) {
+    await codegenRunAllModules();
+    return;
+  }
 
-  const codegenModulePromises = [
-    // List all codegen modules here manually
-    // Although they will all run concurrently, they will be called sequentially
-    genHttpRoutesTable(),
-  ];
-
-  await Promise.all(codegenModulePromises);
-
-  logger.info(
-    codegenEntrypoint.name,
-    `Codegen completed, ran ${codegenModulePromises.length} modules`
-  );
+  logger.error(codegenEntrypoint.name, `Invalid codegen argument: ${arg}`);
 }
 
 codegenEntrypoint();
