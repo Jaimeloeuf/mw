@@ -3,6 +3,7 @@ import path from "path";
 import { tsImport } from "tsx/esm/api";
 import { logger } from "../logging/index.js";
 import { runCodegenModules } from "./runCodegenModules.js";
+import type { CodegenFunction } from "./CodegenFunction.js";
 
 export async function codegenRunSingleModule(codegenModuleName: string) {
   // Codegen module should be in this codegen/ folder, and should be in a folder
@@ -32,7 +33,7 @@ export async function codegenRunSingleModule(codegenModuleName: string) {
   // Extract out the named export and make sure it is a function
   const importedCodegenFunction = importedModule[
     codegenModuleName
-  ] as () => Promise<void>;
+  ] as CodegenFunction;
   if (typeof importedCodegenFunction !== "function") {
     logger.error(
       codegenRunSingleModule.name,

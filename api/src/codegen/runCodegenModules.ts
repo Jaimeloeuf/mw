@@ -1,7 +1,8 @@
 import { logger } from "../logging/index.js";
+import type { CodegenFunction } from "./CodegenFunction.js";
 
 export async function runCodegenModules(
-  ...codegenModules: Array<() => Promise<void>>
+  ...codegenModules: Array<CodegenFunction>
 ) {
   logger.info(runCodegenModules.name, "Running codegen");
 
