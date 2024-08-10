@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { tsImport } from "tsx/esm/api";
 import { logger } from "../logging/index.js";
+import { runCodegenModules } from "./runCodegenModules.js";
 
 export async function codegenRunSingleModule(codegenModuleName: string) {
   // Codegen module should be in this codegen/ folder, and should be in a folder
@@ -29,7 +30,9 @@ export async function codegenRunSingleModule(codegenModuleName: string) {
   const importedModule = await tsImport(codegenModulePath, import.meta.url);
 
   // Extract out the named export and make sure it is a function
-  const importedCodegenFunction = importedModule[codegenModuleName] as Function;
+  const importedCodegenFunction = importedModule[
+    codegenModuleName
+  ] as () => Promise<void>;
   if (typeof importedCodegenFunction !== "function") {
     logger.error(
       codegenRunSingleModule.name,
@@ -42,14 +45,7 @@ export async function codegenRunSingleModule(codegenModuleName: string) {
     return;
   }
 
-  logger.info(
-    codegenRunSingleModule.name,
-    `Running codegen module: ${codegenModuleName}`
-  );
-
-  await importedCodegenFunction();
-
-  logger.info(codegenRunSingleModule.name, `Codegen completed, ran 1 module`);
+  await runCodegenModules(importedCodegenFunction);
 
   return;
 }
