@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import * as prettier from "prettier";
-import { createHash } from "node:crypto";
+import { createHash } from "crypto";
 import { genGeneratedNotice } from "./genGeneratedNotice.js";
 
 /**

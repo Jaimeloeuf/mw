@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import type { Socket } from "node:net";
+import type { Socket } from "net";
 
 import { config } from "../config/index.js";
 import { logger } from "../logging/index.js";
