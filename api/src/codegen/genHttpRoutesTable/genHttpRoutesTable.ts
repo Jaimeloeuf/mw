@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { logger } from "../../logging/index.js";
+import { generatedSrcDirPath } from "../generatedSrcDirPath.js";
 import { genAndSaveGeneratedCode } from "../genAndSaveGeneratedCode.js";
 import { routeTableTemplate } from "./routeTableTemplate.js";
 import { controllerImportTemplate } from "./controllerImportTemplate.js";
@@ -81,8 +82,8 @@ export async function genHttpRoutesTable() {
   );
 
   const routeTableFilePath = path.join(
-    import.meta.dirname,
-    `../../http/registerRoutesAndControllers.generated.ts`
+    generatedSrcDirPath,
+    `registerRoutesAndControllers.generated.ts`
   );
 
   await genAndSaveGeneratedCode(
