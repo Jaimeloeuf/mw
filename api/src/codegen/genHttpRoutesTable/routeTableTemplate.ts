@@ -2,7 +2,7 @@ export const routeTableTemplate = (
   controllerImportStatement: string,
   routeDefinitions: string
 ) => `import type { Express } from "express";
-import { routeNotFound } from "./routeNotFound.js";
+import { routeNotFound } from "../http/routeNotFound.js";
 
 ${controllerImportStatement}
 
