@@ -2,12 +2,21 @@ import { logger } from "../logging/index.js";
 
 import { codegenRunAllModules } from "./codegenRunAllModules.js";
 import { codegenRunSingleModule } from "./codegenRunSingleModule.js";
+import { printCodegenCliHelp } from "./printCodegenCliHelp.js";
 import { printAllCodegenModules } from "./printAllCodegenModules.js";
 
 async function codegenEntrypoint() {
   // No extra arguments, run all codegen modules
   if (process.argv.length === 2) {
     await codegenRunAllModules();
+    return;
+  }
+
+  const arg = process.argv.at(-1) ?? "";
+
+  // Help menu
+  if (arg === "help") {
+    printCodegenCliHelp();
     return;
   }
 
