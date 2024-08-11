@@ -6,9 +6,9 @@ import { printCodegenCliHelp } from "./printCodegenCliHelp.js";
 import { printAllCodegenModules } from "./printAllCodegenModules.js";
 
 async function codegenEntrypoint() {
-  // No extra arguments, run all codegen modules
+  // No extra arguments, show help menu
   if (process.argv.length === 2) {
-    await codegenRunAllModules();
+    printCodegenCliHelp();
     return;
   }
 
@@ -26,13 +26,20 @@ async function codegenEntrypoint() {
     return;
   }
 
+  // Run all codegen modules
+  if (arg === "all") {
+    await codegenRunAllModules();
+    return;
+  }
+
   // Run a single codegen module
   if (arg.startsWith("gen")) {
     await codegenRunSingleModule(arg);
     return;
   }
 
-  logger.error(codegenEntrypoint.name, `Invalid codegen argument: ${arg}`);
+  logger.error(codegenEntrypoint.name, `Invalid codegen argument: ${arg}\n`);
+  printCodegenCliHelp();
 }
 
 codegenEntrypoint();
