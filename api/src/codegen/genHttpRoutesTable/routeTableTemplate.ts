@@ -2,10 +2,7 @@ export const routeTableTemplate = (
   controllerImportStatement: string,
   routeDefinitions: string
 ) => `import type { Express } from "express";
-import { routeNotFound } from "../http/routeNotFound.js";
-
 ${controllerImportStatement}
-
 /**
  * A route tables sort of file, where all HTTP API routes are defined here along
  * with the controllers/route-handlers that will be used to handle requests for
@@ -29,9 +26,5 @@ ${controllerImportStatement}
  */
 export function registerRoutesAndControllers(app: Express) {
   ${routeDefinitions}
-
-  // Since this is the last non-error-handling route handler used, assume 404
-  // as no other route handler responded.
-  app.use(routeNotFound.routeHandler);
 }
 `;

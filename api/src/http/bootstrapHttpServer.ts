@@ -7,6 +7,7 @@ import { logger } from "../logging/index.js";
 
 import { loggingMiddleware } from "./loggingMiddleware.js";
 import { registerRoutesAndControllers } from "../__generated/index.js";
+import { routeNotFound } from "./routeNotFound.js";
 
 /**
  * Bootstraps a web server using ExpressJS to route incoming HTTP requests to
@@ -23,6 +24,10 @@ export function bootstrapHttpServer() {
     .use(express.urlencoded({ extended: true }));
 
   registerRoutesAndControllers(app);
+
+  // Since this is the last non-error-handling route handler used, assume 404
+  // as no other route handler responded.
+  app.use(routeNotFound.routeHandler);
 
   const server = app.listen(config.port, () => {
     logger.info(

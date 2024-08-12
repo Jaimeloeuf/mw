@@ -6,11 +6,9 @@
  * genHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256<8c21c6561a21de1167c36a4fa34f5a7b8925d453c2c4000214289473b2441088>
+ * sha256<ae5dadbb57fbd5dc6af7c28364233a771e3dec06f853e4dae0bf350ed1876dfa>
  */
 import type { Express } from "express";
-import { routeNotFound } from "../http/routeNotFound.js";
-
 import { healthCheck } from "../controllers/healthCheck.js";
 import { blogNewSubscriberController } from "../controllers/blog/blogNewSubscriberController.js";
 import { version } from "../controllers/version.js";
@@ -49,8 +47,4 @@ export function registerRoutesAndControllers(app: Express) {
     "/version" satisfies typeof version.path,
     version.routeHandler,
   );
-
-  // Since this is the last non-error-handling route handler used, assume 404
-  // as no other route handler responded.
-  app.use(routeNotFound.routeHandler);
 }
