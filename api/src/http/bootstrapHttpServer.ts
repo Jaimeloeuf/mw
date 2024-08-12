@@ -6,7 +6,7 @@ import { config } from "../config/index.js";
 import { logger } from "../logging/index.js";
 
 import { loggingMiddleware } from "./loggingMiddleware.js";
-import { registerRoutesAndControllers } from "./registerRoutesAndControllers.js";
+import { registerRoutesAndControllers } from "../__generated/index.js";
 
 /**
  * Bootstraps a web server using ExpressJS to route incoming HTTP requests to
