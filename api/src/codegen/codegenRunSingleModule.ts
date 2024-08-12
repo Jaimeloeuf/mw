@@ -47,6 +47,4 @@ export async function codegenRunSingleModule(codegenModuleName: string) {
   }
 
   await runCodegenModules(importedCodegenFunction);
-
-  return;
 }
