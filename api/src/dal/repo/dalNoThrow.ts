@@ -1,5 +1,6 @@
-import { logger } from "../../logging/index.js";
+import { Exception } from "../../exceptions/index.js";
 import { toError } from "../../utils/index.js";
+import { logger } from "../../logging/index.js";
 
 /**
  * Used to wrap all DAL repo functions/methods so that they do not throw, and
@@ -18,6 +19,16 @@ export function dalNoThrow<T extends (...args: any) => Promise<any>>(fn: T) {
     try {
       return await fn(...args);
     } catch (e) {
+      // If it is an Exception, let it bubble up.
+      // The assumption here is that only services use data repos, and services
+      // are only called through controllers that have built in mechanisms for
+      // error and exception handling. So instead of returning this exception
+      // back to the service for them to throw and we assume they will always
+      // throw it once they receive it, we just let it bubble up here.
+      if (e instanceof Exception) {
+        throw e;
+      }
+
       const error = toError(e);
 
       logger.verbose(
