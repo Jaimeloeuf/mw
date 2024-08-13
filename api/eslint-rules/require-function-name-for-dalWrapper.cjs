@@ -2,7 +2,7 @@ module.exports = {
   meta: {
     type: "problem",
     docs: {
-      description: "Ensure functions passed to 'dalNoThrow' are named",
+      description: "Ensure functions passed to 'dalWrapper' are named",
     },
     fixable: "code",
     schema: [],
@@ -10,7 +10,7 @@ module.exports = {
   create(context) {
     return {
       CallExpression(node) {
-        if (node.callee.name !== "dalNoThrow") {
+        if (node.callee.name !== "dalWrapper") {
           return;
         }
 
@@ -20,7 +20,7 @@ module.exports = {
           }
 
           context.report({
-            message: `Functions passed to 'dalNoThrow' function must be named`,
+            message: `Functions passed to 'dalWrapper' function must be named`,
             loc: {
               start: node.callee.loc.end,
               end: node.callee.loc.end,

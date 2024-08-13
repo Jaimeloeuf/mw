@@ -3,14 +3,24 @@ import { toError } from "../../utils/index.js";
 import { logger } from "../../logging/index.js";
 
 /**
- * Used to wrap all DAL repo functions/methods so that they do not throw, and
- * instead have a return type of its original value unioned with `Error`.
+ * DAL function wrapper to catch and return any unknown Errors thrown by the
+ * underlying data libraries like Kysely/Pg/etc... so for example if a DAL
+ * function uses kysely to load a DB row and something went wrong that causes
+ * kysely to throw an Error, this function wrapper will catch it and return it.
+ *
+ * This however does not catch and return Exceptions thrown by the DAL function
+ * itself. For example, if a checkExistence DAL function reads a DB row to check
+ * if the row exists, and threw a `NotFoundException`, this exception will be
+ * re-thrown here to let it bubble up.
+ *
+ * The return type of the wrapped function is its original value unioned with
+ * `Error`.
  */
-export function dalNoThrow<T extends (...args: any) => Promise<any>>(fn: T) {
+export function dalWrapper<T extends (...args: any) => Promise<any>>(fn: T) {
   // Extra runtime check alongside compile time check with ESLint rule
-  // 'mwEslintPlugin/require-function-name-for-dalNoThrow'
+  // 'mwEslintPlugin/require-function-name-for-dalWrapper'
   if (fn.name === "") {
-    throw new Error(`Functions passed to ${dalNoThrow.name} must be named`);
+    throw new Error(`Functions passed to ${dalWrapper.name} must be named`);
   }
 
   async function wrappedFunction(
@@ -29,15 +39,16 @@ export function dalNoThrow<T extends (...args: any) => Promise<any>>(fn: T) {
         throw e;
       }
 
+      // Convert unknown `e` type to a definite `Error` type before returning it
       const error = toError(e);
 
       logger.verbose(
-        dalNoThrow.name,
+        dalWrapper.name,
         `Failed to execute DAL repo call: ${fn.name}`
       );
 
       logger.error(
-        `${dalNoThrow.name}:${fn.name}`,
+        `${dalWrapper.name}:${fn.name}`,
         error instanceof Error ? error.stack : error
       );
 
