@@ -1,5 +1,5 @@
 import { Exception } from "../../exceptions/index.js";
-import { toError } from "../../utils/index.js";
+import { unknownCatchToError } from "../../utils/index.js";
 import { logger } from "../../logging/index.js";
 
 /**
@@ -40,7 +40,7 @@ export function dalWrapper<T extends (...args: any) => Promise<any>>(fn: T) {
       }
 
       // Convert unknown `e` type to a definite `Error` type before returning it
-      const error = toError(e);
+      const error = unknownCatchToError(e);
 
       logger.verbose(
         dalWrapper.name,
