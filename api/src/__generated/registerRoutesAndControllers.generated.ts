@@ -6,7 +6,7 @@
  * genHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256<ae5dadbb57fbd5dc6af7c28364233a771e3dec06f853e4dae0bf350ed1876dfa>
+ * sha256<e6e4ff7b05e0152ddc5e03ef42c12c8369f0fd59e98e70ae9ef99a58364cef50>
  */
 import type { Express } from "express";
 import { healthCheck } from "../controllers/healthCheck.js";
@@ -40,7 +40,7 @@ export function registerRoutesAndControllers(app: Express) {
     healthCheck.routeHandler,
   );
   app["post" satisfies typeof blogNewSubscriberController.method](
-    "/blog/subscribe" satisfies typeof blogNewSubscriberController.path,
+    "/v1/blog/subscribe" satisfies typeof blogNewSubscriberController.path,
     blogNewSubscriberController.routeHandler,
   );
   app["get" satisfies typeof version.method](

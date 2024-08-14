@@ -38,6 +38,7 @@ export async function genHttpRoutesTable() {
         return {
           name: file.name,
           path: fullFilePath,
+          version: fileContent.match(/version: (.*),/)?.[1],
           httpRoute: fileContent.match(/path: "(.*)",/)?.[1],
           httpMethod: fileContent.match(/method: "(.*)",/)?.[1],
           controllerName: fileContent.match(/export const (.*) =/)?.[1],
@@ -50,6 +51,7 @@ export async function genHttpRoutesTable() {
     // /controller/** like helper functions etc... filter these out.
     .filter(
       (file): file is ControllerFile =>
+        file.version !== undefined &&
         file.httpRoute !== undefined &&
         file.httpMethod !== undefined &&
         file.controllerName !== undefined
