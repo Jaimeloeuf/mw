@@ -90,7 +90,7 @@ export const httpController = <
   }) => ValidJsendDatatype | Promise<ValidJsendDatatype>;
 }) => ({
   method,
-  path: version === "neutral" ? path : `v${version}/${path}`,
+  path: version === "neutral" ? path : `/v${version}${path}`,
   routeHandler: async (req: Request, res: Response) => {
     try {
       // Run Guard functions sequentialy if any, and before the expensive data
