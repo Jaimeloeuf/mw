@@ -33,6 +33,7 @@ import type { HttpRequestGuard } from "./HttpRequestGuard.js";
  * this execution flow.
  */
 export const httpController = <
+  Version extends number | "neutral",
   HttpMethodStringLiteralType extends
     | "get"
     | "post"
@@ -56,7 +57,7 @@ export const httpController = <
   /**
    * API version number.
    */
-  version: number | "neutral";
+  version: Version;
   /**
    * HTTP method.
    */
@@ -89,8 +90,9 @@ export const httpController = <
     setHttpStatusCode: (statusCode: number) => void;
   }) => ValidJsendDatatype | Promise<ValidJsendDatatype>;
 }) => ({
+  version,
   method,
-  path: version === "neutral" ? path : `/v${version}${path}`,
+  path,
   routeHandler: async (req: Request, res: Response) => {
     try {
       // Run Guard functions sequentialy if any, and before the expensive data
