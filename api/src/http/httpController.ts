@@ -90,12 +90,12 @@ export const httpController = <
     setHttpStatusCode: (statusCode: number) => void;
   }) => ValidJsendDatatype | Promise<ValidJsendDatatype>;
 }): {
-  version: Version;
+  version: `/v${Version}`;
   method: HttpMethodStringLiteralType;
   path: PathStringLiteralType;
   routeHandler: (req: Request, res: Response) => Promise<void>;
 } => ({
-  version,
+  version: `/v${version}`,
   method,
   path,
   routeHandler: async (req: Request, res: Response) => {

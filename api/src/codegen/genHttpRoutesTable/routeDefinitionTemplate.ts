@@ -1,11 +1,14 @@
 import { ControllerFile } from "./ControllerFile.js";
 
-const getVersionPathPrefix = (version: string) =>
-  version === '"neutral"' ? "" : `"/v${version}" + `;
+const getVersionPathPrefix = (file: ControllerFile) =>
+  file.version === '"neutral"'
+    ? ""
+    : `("/v${file.version}" satisfies typeof ${file.controllerName}.version) + `;
 
 export const routeDefinitionTemplate = (file: ControllerFile): string =>
   `app["${file.httpMethod}" satisfies typeof ${file.controllerName}.method](
-  ${getVersionPathPrefix(file.version)}("${file.httpRoute}" satisfies typeof ${file.controllerName}.path),
+  ${getVersionPathPrefix(file)}
+  ("${file.httpRoute}" satisfies typeof ${file.controllerName}.path),
   ${file.controllerName}.routeHandler
 );
 `;
