@@ -1,4 +1,5 @@
 import { bucketlistRepo } from "../../dal/index.js";
+import { errorToServiceException } from "../../exceptions/index.js";
 
 /**
  * Create a new bucketlist.
@@ -11,7 +12,7 @@ export async function createBucketlist(name: string, description: string) {
   });
 
   if (bucketlistCreationResult instanceof Error) {
-    throw bucketlistCreationResult;
+    throw errorToServiceException(bucketlistCreationResult);
   }
 
   return bucketlistCreationResult;
