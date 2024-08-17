@@ -8,20 +8,20 @@ import { blogEmailService } from "./blogEmailService.js";
  * Add new subscriber for blog
  */
 export async function newSubscriber(email: string) {
-  const isSubscribed = await blogSubscriberRepo.isEmailAlreadySubscribed(email);
+  const isSubscribed =
+    await blogSubscriberRepo.isEmailAlreadySubscribed.getResultOrThrowOnError(
+      email
+    );
 
   if (isSubscribed) {
     throw new ConflictException(`Email '${email}' already subscribed!`);
   }
 
-  const blogSubscriberResult = await blogSubscriberRepo.createBlogSubscriber({
-    id: crypto.randomUUID(),
-    email: email.toLowerCase(),
-  });
-
-  if (blogSubscriberResult instanceof Error) {
-    throw blogSubscriberResult;
-  }
+  const blogSubscriberResult =
+    await blogSubscriberRepo.createBlogSubscriber.getResultOrThrowOnError({
+      id: crypto.randomUUID(),
+      email: email.toLowerCase(),
+    });
 
   CreateSimplePostProcessingJob(newSubscriber.name)
     .runJobsInParallel()
