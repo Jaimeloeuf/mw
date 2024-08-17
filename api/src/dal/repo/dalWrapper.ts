@@ -1,20 +1,11 @@
-import { Exception } from "../../exceptions/index.js";
-import { unknownCatchToError } from "../../utils/index.js";
 import { logger } from "../../logging/index.js";
+import { unknownCatchToError } from "../../utils/index.js";
 
 /**
- * DAL function wrapper to catch and return any unknown Errors thrown by the
- * underlying data libraries like Kysely/Pg/etc... so for example if a DAL
- * function uses kysely to load a DB row and something went wrong that causes
- * kysely to throw an Error, this function wrapper will catch it and return it.
- *
- * This however does not catch and return Exceptions thrown by the DAL function
- * itself. For example, if a checkExistence DAL function reads a DB row to check
- * if the row exists, and threw a `NotFoundException`, this exception will be
- * re-thrown here to let it bubble up.
- *
- * The return type of the wrapped function is its original value unioned with
- * `Error`.
+ * DAL function wrapper to wrap them and provide common utility features such as
+ * error/exception logging, and to give DAL users (service functions) a choice
+ * of either calling the DAL function and let errors/exceptions bubble through
+ * or catch all errors/exceptions and return it for manual handling.
  */
 export function dalWrapper<T extends (...args: any) => Promise<any>>(fn: T) {
   // Extra runtime check alongside compile time check with ESLint rule
@@ -23,26 +14,31 @@ export function dalWrapper<T extends (...args: any) => Promise<any>>(fn: T) {
     throw new Error(`Functions passed to ${dalWrapper.name} must be named`);
   }
 
-  async function wrappedFunction(
+  /**
+   * Run DAL repo function and catches any error/exceptions encountered to
+   * return it. This means the return type will always be a union of the
+   * original DAL function's return type and Error.
+   *
+   * If you need to do some action like say, send user an email notification
+   * about the failed service function call, use this to get the error
+   * / exception back and handle it yourself manually alongside any action
+   * you want to run.
+   *
+   * If you want service function to stop executing on DAL errors/exceptions,
+   * and do not need to do any extra action in service function after the
+   * error/exception, then instead of manually checking if result is `Error`
+   * before re-throwing it, use the `getResultOrThrowOnError` method instead.
+   */
+  async function getResultOrError(
     ...args: Parameters<T>
   ): Promise<Error | Awaited<ReturnType<T>>> {
     try {
       return await fn(...args);
     } catch (e) {
-      // If it is an Exception, let it bubble up.
-      // The assumption here is that only services use data repos, and services
-      // are only called through controllers that have built in mechanisms for
-      // error and exception handling. So instead of returning this exception
-      // back to the service for them to throw and we assume they will always
-      // throw it once they receive it, we just let it bubble up here.
-      if (e instanceof Exception) {
-        throw e;
-      }
-
       // Convert unknown `e` type to a definite `Error` type before returning it
       const error = unknownCatchToError(e);
 
-      logger.verbose(
+      logger.error(
         dalWrapper.name,
         `Failed to execute DAL repo call: ${fn.name}`
       );
@@ -56,8 +52,35 @@ export function dalWrapper<T extends (...args: any) => Promise<any>>(fn: T) {
     }
   }
 
-  // Reuse fn.name so that logging uses the real name
-  Object.defineProperty(wrappedFunction, "name", { value: fn.name });
+  /**
+   * Run DAL repo function, and throws on any error/exceptions encountered.
+   *
+   * The primary purpose of this is so that service functions do not have to
+   * deal with manually checking if result is `Error` before re-throwing it
+   * themselves, and just let this method throw it for them instead.
+   *
+   * Only use this if you want service function to stop executing on DAL
+   * errors/exceptions, and do not need to do any extra action in service
+   * function.
+   *
+   * If you need to do some action like say, send user an email notification
+   * about the failed service function call, use `getResultOrError` instead to
+   * get the error/exception back and handle it yourself manually.
+   */
+  async function getResultOrThrowOnError(...args: Parameters<T>) {
+    // Still call the wrapped function to ensure that unknown catch types are
+    // converted to `Error` type and error logging is ran first.
+    const result = await getResultOrError(...args);
 
-  return wrappedFunction;
+    if (result instanceof Error) {
+      throw result;
+    }
+
+    return result;
+  }
+
+  return {
+    getResultOrError,
+    getResultOrThrowOnError,
+  };
 }

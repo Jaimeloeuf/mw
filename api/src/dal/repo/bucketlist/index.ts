@@ -1,7 +1,7 @@
-import { dalWrapper2 } from "../dalWrapper2.js";
+import { dalWrapper } from "../dalWrapper.js";
 
 import { createBucketlist } from "./createBucketlist.js";
 
 export const bucketlistRepo = {
-  createBucketlist: dalWrapper2(createBucketlist),
+  createBucketlist: dalWrapper(createBucketlist),
 };
