@@ -6,12 +6,13 @@
  * genHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256<805b4038134621968f6eac9f8b13a4444eb6926677979af99ecc7e99242a55d7>
+ * sha256<9de5a3a1f42d7bc900f98c70d2e7b4ae95c94fe45fd974aea944dba90a197a99>
  */
 import type { Express } from "express";
 import { healthCheck } from "../controllers/healthCheck.js";
 import { blogNewSubscriberController } from "../controllers/blog/blogNewSubscriberController.js";
 import { createBucketlistController } from "../controllers/bucketlist/createBucketlist.js";
+import { getBucketlistController } from "../controllers/bucketlist/getBucketlist.js";
 import { version } from "../controllers/version.js";
 
 /**
@@ -49,6 +50,11 @@ export function registerRoutesAndControllers(app: Express) {
     ("/v1" satisfies typeof createBucketlistController.version) +
       ("/bucketlist" satisfies typeof createBucketlistController.path),
     createBucketlistController.routeHandler,
+  );
+  app["get" satisfies typeof getBucketlistController.method](
+    ("/v1" satisfies typeof getBucketlistController.version) +
+      ("/bucketlist/:bucketlistID" satisfies typeof getBucketlistController.path),
+    getBucketlistController.routeHandler,
   );
   app["get" satisfies typeof version.method](
     "/version" satisfies typeof version.path,
