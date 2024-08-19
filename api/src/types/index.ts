@@ -2,4 +2,4 @@
  * Barrel file
  */
 
-export {};
+export * from "./utils/UnionToIntersection.js";
