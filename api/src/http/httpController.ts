@@ -33,19 +33,19 @@ import type { HttpRequestGuard } from "./HttpRequestGuard.js";
  * this execution flow.
  */
 export const httpController = <
-  Version extends number | "neutral",
-  HttpMethodStringLiteralType extends
+  const Version extends number | "neutral",
+  const HttpMethodStringLiteralType extends
     | "get"
     | "post"
     | "put"
     | "patch"
     | "delete"
     | "all",
-  PathStringLiteralType extends string,
-  NullableZodParserType extends ZodType | null,
-  RequestDataType = NullableZodParserType extends null
+  const PathStringLiteralType extends string,
+  const NullableZodParserType extends ZodType | null,
+  const RequestDataType = NullableZodParserType extends null
     ? null
-    : zodInfer<Exclude<NullableZodParserType, null>>
+    : zodInfer<Exclude<NullableZodParserType, null>>,
 >({
   version,
   method,
