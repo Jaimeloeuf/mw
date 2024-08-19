@@ -13,6 +13,7 @@ import type {
   JSendError,
 } from "./JSend.js";
 import type { HttpRequestGuard } from "./HttpRequestGuard.js";
+import type { UnionToIntersection } from "../types/index.js";
 
 /**
  * Use this function to wrap httpRequestHandlers/controllers to interface with
@@ -43,6 +44,38 @@ export const httpController = <
     | "all",
   const PathStringLiteralType extends string,
   const Guards extends Readonly<Array<HttpRequestGuard>> | null,
+  /**
+   * Infer return type of all the Guards combined into a single object, which
+   * will be the object passed into `httpRequestHandler` as guardData.
+   */
+  const GuardsDataType extends Guards extends null
+    ? null
+    : // Convert the union type of all Guards.check method's return type into an
+      // intersection type, i.e., convert `type1 | type2` to `type1 & type2` so
+      // that all properties are accessible.
+      UnionToIntersection<
+        // Exclude all invalid types first before converting the union type to
+        // an intersection type, since these invalid types when intersected with
+        // valid types will cause the intersection type to become `never`.
+        Exclude<
+          // Since check method can be async, unwrap the Awaitable return type.
+          Awaited<
+            // Get a union type of all Guards.check methods' return type.
+            ReturnType<
+              // Use Exclude on `Guards` type since `GuardsDataType` already did
+              // a conditional null type check.
+              Exclude<Guards, null>[number]["check"]
+            >
+          >,
+          | void
+          | Promise<void>
+          | undefined
+          | Promise<undefined>
+          | null
+          | Promise<null>
+          | never
+        >
+      >,
   const NullableZodParserType extends ZodType | null,
   const RequestDataType = NullableZodParserType extends null
     ? null
@@ -87,6 +120,7 @@ export const httpController = <
    */
   httpRequestHandler: (context: {
     req: Request;
+    guardData: GuardsDataType;
     requestData: RequestDataType;
     setHttpStatusCode: (statusCode: number) => void;
   }) => ValidJsendDatatype | Promise<ValidJsendDatatype>;
@@ -101,11 +135,16 @@ export const httpController = <
   path,
   routeHandler: async (req: Request, res: Response) => {
     try {
+      let guardData: GuardsDataType = {} as GuardsDataType;
+
       // Run Guard functions sequentialy if any, and before the expensive data
       // validation step. If a guard throws, all subsequent guards are skipped.
       if (guards !== null) {
         for (const guard of guards) {
-          await guard.check(req);
+          guardData = {
+            ...guardData,
+            ...(await guard.check(req)),
+          };
         }
       }
 
@@ -120,6 +159,7 @@ export const httpController = <
 
       const data = await httpRequestHandler({
         req,
+        guardData,
         requestData,
         // Wrap to preserve 'this' binding
         setHttpStatusCode: (statusCode: number) => res.status(statusCode),
