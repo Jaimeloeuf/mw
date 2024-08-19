@@ -7,11 +7,16 @@ import type { Request } from "express";
  *
  * If the request is allowed, it should just silently run till completion, if
  * the request is not allowed, this should throw an Exception/Error for
- * `expressWrapper` to handle/respond to the requestor.
+ * `httpController` to handle/respond to the requestor.
  */
-export abstract class HttpRequestGuard {
+export abstract class HttpRequestGuard<
+  T extends void | Record<any, any> = any,
+> {
   /**
    * Check if a request is allowed.
+   *
+   * Return type is unioned with `never` since check is allowed/expected to
+   * throw on guard validation/authentication/authorization errors.
    */
-  abstract check(req: Request): void | Promise<void> | never;
+  abstract check(req: Request): T | Promise<T> | never;
 }
