@@ -42,6 +42,7 @@ export const httpController = <
     | "delete"
     | "all",
   const PathStringLiteralType extends string,
+  const Guards extends Readonly<Array<HttpRequestGuard>> | null,
   const NullableZodParserType extends ZodType | null,
   const RequestDataType = NullableZodParserType extends null
     ? null
@@ -71,7 +72,7 @@ export const httpController = <
    * API request if any of these throws, else run request data validator if any
    * once guard checks complete.
    */
-  guards: Array<HttpRequestGuard> | null;
+  guards: Guards;
   /**
    * Optional request data validator, this ZodType will be used to parse and
    * validate all request data coming in, which includes
