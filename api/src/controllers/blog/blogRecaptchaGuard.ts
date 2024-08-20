@@ -1,6 +1,6 @@
 import { config } from "../../config/index.js";
-import { RecaptchaGuard } from "../../guards/index.js";
+import { RecaptchaGuardFF } from "../../guards/index.js";
 
-export const blogRecaptchaGuard = new RecaptchaGuard(
+export const blogRecaptchaGuard = RecaptchaGuardFF(
   config.blog_recaptcha_secret
 );
