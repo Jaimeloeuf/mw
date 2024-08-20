@@ -12,8 +12,7 @@ import type {
   JSendFail,
   JSendError,
 } from "./JSend.js";
-import type { HttpRequestGuard } from "./HttpRequestGuard.js";
-import type { UnionToIntersection } from "../types/index.js";
+import type { useHttpRequestGuard } from "./useHttpRequestGuard.js";
 
 /**
  * Use this function to wrap httpRequestHandlers/controllers to interface with
@@ -43,39 +42,21 @@ export const httpController = <
     | "delete"
     | "all",
   const PathStringLiteralType extends string,
-  const Guards extends Readonly<Array<HttpRequestGuard>> | null,
+  const Guards extends Readonly<
+    Array<ReturnType<typeof useHttpRequestGuard>>
+  > | null,
   /**
-   * Infer return type of all the Guards combined into a single object, which
-   * will be the object passed into `httpRequestHandler` as guardData.
+   * Infer return type of all the Guards combined into a single object under
+   * their specified string literal `guardNamespace`, which will then be passed
+   * into `httpRequestHandler` as guardData.
    */
   const GuardsDataType extends Guards extends null
     ? null
-    : // Convert the union type of all Guards.check method's return type into an
-      // intersection type, i.e., convert `type1 | type2` to `type1 & type2` so
-      // that all properties are accessible.
-      UnionToIntersection<
-        // Exclude all invalid types first before converting the union type to
-        // an intersection type, since these invalid types when intersected with
-        // valid types will cause the intersection type to become `never`.
-        Exclude<
-          // Since check method can be async, unwrap the Awaitable return type.
-          Awaited<
-            // Get a union type of all Guards.check methods' return type.
-            ReturnType<
-              // Use Exclude on `Guards` type since `GuardsDataType` already did
-              // a conditional null type check.
-              Exclude<Guards, null>[number]["check"]
-            >
-          >,
-          | void
-          | Promise<void>
-          | undefined
-          | Promise<undefined>
-          | null
-          | Promise<null>
-          | never
-        >
-      >,
+    : {
+        [T in Exclude<Guards, null>[number]["guardDataNamespace"]]: Awaited<
+          ReturnType<Exclude<Guards, null>[number]["guard"]>
+        >;
+      },
   const NullableZodParserType extends ZodType | null,
   const RequestDataType = NullableZodParserType extends null
     ? null
@@ -135,17 +116,21 @@ export const httpController = <
   path,
   routeHandler: async (req: Request, res: Response) => {
     try {
-      let guardData: GuardsDataType = {} as GuardsDataType;
+      let guardData = null as GuardsDataType;
 
       // Run Guard functions sequentialy if any, and before the expensive data
       // validation step. If a guard throws, all subsequent guards are skipped.
       if (guards !== null) {
-        for (const guard of guards) {
-          guardData = {
-            ...guardData,
-            ...(await guard.check(req)),
-          };
+        const partialGuardData: GuardsDataType = {} as Exclude<
+          GuardsDataType,
+          null
+        >;
+
+        for (const { guardDataNamespace, guard } of guards) {
+          partialGuardData[guardDataNamespace] = await guard(req);
         }
+
+        guardData = partialGuardData;
       }
 
       const requestData =
