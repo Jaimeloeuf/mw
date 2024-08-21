@@ -13,6 +13,7 @@ import type {
   JSendError,
 } from "./JSend.js";
 import type { useHttpRequestGuard } from "./useHttpRequestGuard.js";
+import type { NonEmptyArray } from "../types/index.js";
 
 /**
  * Use this function to wrap httpRequestHandlers/controllers to interface with
@@ -43,7 +44,7 @@ export const httpController = <
     | "all",
   const PathStringLiteralType extends string,
   const Guards extends Readonly<
-    Array<ReturnType<typeof useHttpRequestGuard>>
+    NonEmptyArray<ReturnType<typeof useHttpRequestGuard>>
   > | null,
   /**
    * Infer return type of all the Guards combined into a single object under
