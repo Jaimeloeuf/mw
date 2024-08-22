@@ -6,6 +6,6 @@ import type { Request } from "express";
  * Return type is unioned with `never` since check is allowed/expected to
  * throw on guard validation/authentication/authorization errors.
  */
-export type HttpRequestGuardFunction<GuardReturnType = any> = (
+export type HttpRequestGuard<GuardReturnType = any> = (
   req: Request
 ) => GuardReturnType | Promise<GuardReturnType> | never;

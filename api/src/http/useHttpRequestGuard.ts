@@ -1,4 +1,4 @@
-import type { HttpRequestGuardFunction } from "./HttpRequestGuardFunction.js";
+import type { HttpRequestGuard } from "./HttpRequestGuard.js";
 
 /**
  * Bind HTTP guard function and its return data to a particular namespace for
@@ -6,7 +6,7 @@ import type { HttpRequestGuardFunction } from "./HttpRequestGuardFunction.js";
  */
 export const useHttpRequestGuard = <
   const GuardDataNamespace extends string,
-  const GuardFunction extends HttpRequestGuardFunction,
+  const GuardFunction extends HttpRequestGuard,
 >(
   guardDataNamespace: GuardDataNamespace,
   guard: GuardFunction
