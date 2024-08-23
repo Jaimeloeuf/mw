@@ -1,4 +1,4 @@
-import { httpController } from "../http/httpController.js";
+import { httpController } from "../http/index.js";
 import { config } from "../config/index.js";
 
 export const version = httpController({

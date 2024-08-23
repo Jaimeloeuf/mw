@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { httpController } from "../../http/httpController.js";
+import { httpController } from "../../http/index.js";
 import { bucketlistService } from "../../services/index.js";
 
 export const createBucketlistController = httpController({

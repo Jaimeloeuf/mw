@@ -1,4 +1,4 @@
-import { httpController } from "../http/httpController.js";
+import { httpController } from "../http/index.js";
 
 export const healthCheck = httpController({
   version: "neutral",
