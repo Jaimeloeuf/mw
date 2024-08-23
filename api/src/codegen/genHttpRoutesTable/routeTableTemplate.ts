@@ -1,7 +1,7 @@
 export const routeTableTemplate = (
   controllerImportStatement: string,
   routeDefinitions: string
-) => `import type { Express } from "express";
+) => `import { Router } from "express";
 ${controllerImportStatement}
 /**
  * A route tables sort of file, where all HTTP API routes are defined here along
@@ -24,7 +24,11 @@ ${controllerImportStatement}
  * type checking operator, since both the HTTP methods and API paths are defined
  * as type literals!
  */
-export function registerRoutesAndControllers(app: Express) {
+export function registerRoutesAndControllers() {
+  const r = Router();
+
   ${routeDefinitions}
+
+  return r;
 }
 `;

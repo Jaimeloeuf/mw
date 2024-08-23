@@ -6,9 +6,9 @@
  * genHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256<9de5a3a1f42d7bc900f98c70d2e7b4ae95c94fe45fd974aea944dba90a197a99>
+ * sha256<b9907a334a125713221852f3c7e4fe4353705210f24578731d012e6c5a5e5c18>
  */
-import type { Express } from "express";
+import { Router } from "express";
 import { healthCheck } from "../controllers/healthCheck.js";
 import { blogNewSubscriberController } from "../controllers/blog/blogNewSubscriberController.js";
 import { createBucketlistController } from "../controllers/bucketlist/createBucketlist.js";
@@ -36,28 +36,32 @@ import { version } from "../controllers/version.js";
  * type checking operator, since both the HTTP methods and API paths are defined
  * as type literals!
  */
-export function registerRoutesAndControllers(app: Express) {
-  app["get" satisfies typeof healthCheck.method](
+export function registerRoutesAndControllers() {
+  const r = Router();
+
+  r["get" satisfies typeof healthCheck.method](
     "/" satisfies typeof healthCheck.path,
     healthCheck.routeHandler,
   );
-  app["post" satisfies typeof blogNewSubscriberController.method](
+  r["post" satisfies typeof blogNewSubscriberController.method](
     ("/v1" satisfies typeof blogNewSubscriberController.version) +
       ("/blog/subscribe" satisfies typeof blogNewSubscriberController.path),
     blogNewSubscriberController.routeHandler,
   );
-  app["post" satisfies typeof createBucketlistController.method](
+  r["post" satisfies typeof createBucketlistController.method](
     ("/v1" satisfies typeof createBucketlistController.version) +
       ("/bucketlist" satisfies typeof createBucketlistController.path),
     createBucketlistController.routeHandler,
   );
-  app["get" satisfies typeof getBucketlistController.method](
+  r["get" satisfies typeof getBucketlistController.method](
     ("/v1" satisfies typeof getBucketlistController.version) +
       ("/bucketlist/:bucketlistID" satisfies typeof getBucketlistController.path),
     getBucketlistController.routeHandler,
   );
-  app["get" satisfies typeof version.method](
+  r["get" satisfies typeof version.method](
     "/version" satisfies typeof version.path,
     version.routeHandler,
   );
+
+  return r;
 }

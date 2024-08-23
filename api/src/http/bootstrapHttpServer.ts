@@ -21,9 +21,9 @@ export function bootstrapHttpServer() {
     .use(cors())
     .use(loggingMiddleware)
     .use(express.json())
-    .use(express.urlencoded({ extended: true }));
-
-  registerRoutesAndControllers(app);
+    .use(express.urlencoded({ extended: true }))
+    // Register all the route->controller mappings with the /api prefix.
+    .use("/api", registerRoutesAndControllers());
 
   // Since this is the last non-error-handling route handler used, assume 404
   // as no other route handler responded.
