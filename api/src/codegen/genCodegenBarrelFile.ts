@@ -24,7 +24,7 @@ export async function genCodegenBarrelFile() {
       // Sort by name alphabetically to always have them in a stable position
       .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
       .map((dirent) => `export * from './${dirent.name.replace(".ts", ".js")}'`)
-      .join("\n\n");
+      .join("\n");
 
   const generatedFilePath = path.resolve(generatedSrcDirPath, `index.ts`);
 
