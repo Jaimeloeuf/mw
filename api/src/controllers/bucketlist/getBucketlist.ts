@@ -7,10 +7,12 @@ export const getBucketlistController = httpController({
   method: "get",
   path: "/bucketlist/:bucketlistID",
   guards: null,
-  requestDataValidator: z.object({
+  urlParamsValidator: z.object({
     bucketlistID: z.string(),
   }),
-  async httpRequestHandler({ requestData }) {
-    return bucketlistService.getBucketlist(requestData.bucketlistID);
+  urlQueryParamsValidator: null,
+  requestBodyValidator: null,
+  async httpRequestHandler({ urlParams }) {
+    return bucketlistService.getBucketlist(urlParams.bucketlistID);
   },
 });

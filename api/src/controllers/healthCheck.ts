@@ -5,7 +5,9 @@ export const healthCheck = httpController({
   method: "get",
   path: "/",
   guards: null,
-  requestDataValidator: null,
+  urlParamsValidator: null,
+  urlQueryParamsValidator: null,
+  requestBodyValidator: null,
   httpRequestHandler() {
     return "ok";
   },

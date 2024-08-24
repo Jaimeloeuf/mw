@@ -9,11 +9,13 @@ export const blogNewSubscriberController = httpController({
   method: "post",
   path: "/blog/subscribe",
   guards: [useHttpRequestGuard("recaptcha", blogRecaptchaGuard)],
-  requestDataValidator: z.object({
+  urlParamsValidator: null,
+  urlQueryParamsValidator: null,
+  requestBodyValidator: z.object({
     email: z.string().email(),
   }),
-  async httpRequestHandler({ requestData, setHttpStatusCode }) {
-    await blogService.newSubscriber(requestData.email);
+  async httpRequestHandler({ requestBody, setHttpStatusCode }) {
+    await blogService.newSubscriber(requestBody.email);
     setHttpStatusCode(201);
   },
 });

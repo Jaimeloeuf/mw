@@ -6,7 +6,9 @@ export const version = httpController({
   method: "get",
   path: "/version",
   guards: null,
-  requestDataValidator: null,
+  urlParamsValidator: null,
+  urlQueryParamsValidator: null,
+  requestBodyValidator: null,
   httpRequestHandler() {
     return `${config.env} - ${"..."}`;
   },

@@ -7,7 +7,9 @@ export const routeNotFound = httpController({
   method: "all",
   path: "*",
   guards: null,
-  requestDataValidator: null,
+  urlParamsValidator: null,
+  urlQueryParamsValidator: null,
+  requestBodyValidator: null,
   httpRequestHandler() {
     throw new NotFoundException("API Route not found");
   },

@@ -7,15 +7,17 @@ export const createBucketlistController = httpController({
   method: "post",
   path: "/bucketlist",
   guards: null,
-  requestDataValidator: z.object({
+  urlParamsValidator: null,
+  urlQueryParamsValidator: null,
+  requestBodyValidator: z.object({
     name: z.string(),
     description: z.string(),
   }),
-  async httpRequestHandler({ requestData, setHttpStatusCode }) {
+  async httpRequestHandler({ requestBody, setHttpStatusCode }) {
     setHttpStatusCode(201);
     return bucketlistService.createBucketlist(
-      requestData.name,
-      requestData.description
+      requestBody.name,
+      requestBody.description
     );
   },
 });

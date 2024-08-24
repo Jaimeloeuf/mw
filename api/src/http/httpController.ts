@@ -58,16 +58,26 @@ export const httpController = <
           ReturnType<Exclude<Guards, null>[number]["guard"]>
         >;
       },
-  const NullableZodParserType extends ZodType | null,
-  const RequestDataType = NullableZodParserType extends null
+  const NullableUrlParamsZodParserType extends ZodType | null,
+  const NullableUrlQueryParamsZodParserType extends ZodType | null,
+  const NullableRequestBodyZodParserType extends ZodType | null,
+  const UrlParamsType = NullableUrlParamsZodParserType extends null
     ? null
-    : zodInfer<Exclude<NullableZodParserType, null>>,
+    : zodInfer<Exclude<NullableUrlParamsZodParserType, null>>,
+  const UrlQueryParamsType = NullableUrlQueryParamsZodParserType extends null
+    ? null
+    : zodInfer<Exclude<NullableUrlQueryParamsZodParserType, null>>,
+  const RequestBodyType = NullableRequestBodyZodParserType extends null
+    ? null
+    : zodInfer<Exclude<NullableRequestBodyZodParserType, null>>,
 >({
   version,
   method,
   path,
   guards,
-  requestDataValidator,
+  urlParamsValidator,
+  urlQueryParamsValidator,
+  requestBodyValidator,
   httpRequestHandler,
 }: {
   /**
@@ -89,13 +99,20 @@ export const httpController = <
    */
   guards: Guards;
   /**
-   * Optional request data validator, this ZodType will be used to parse and
-   * validate all request data coming in, which includes
-   * 1. URL params
-   * 1. URL query params
-   * 1. request body.
+   * Optional URL params validator, this ZodType will be used to parse and
+   * validate the URL params before using it in the context object.
    */
-  requestDataValidator: NullableZodParserType;
+  urlParamsValidator: NullableUrlParamsZodParserType;
+  /**
+   * Optional URL query params validator, this ZodType will be used to parse and
+   * validate the URL query params before using it in the context object.
+   */
+  urlQueryParamsValidator: NullableUrlQueryParamsZodParserType;
+  /**
+   * Optional request body data validator, this ZodType will be used to parse
+   * and validate the request body data before using it in the context object.
+   */
+  requestBodyValidator: NullableRequestBodyZodParserType;
   /**
    * User defined function that is called to handle the API request once guard
    * functions finish running and request data is validated.
@@ -103,7 +120,9 @@ export const httpController = <
   httpRequestHandler: (context: {
     req: Request;
     guardData: GuardsDataType;
-    requestData: RequestDataType;
+    urlParams: UrlParamsType;
+    urlQueryParams: UrlQueryParamsType;
+    requestBody: RequestBodyType;
     setHttpStatusCode: (statusCode: number) => void;
   }) => ValidJsendDatatype | Promise<ValidJsendDatatype>;
 }): {
@@ -134,19 +153,25 @@ export const httpController = <
         guardData = partialGuardData;
       }
 
-      const requestData =
-        requestDataValidator === null
-          ? null
-          : requestDataValidator.parse({
-              ...req.params,
-              ...req.query,
-              ...req.body,
-            });
-
       const data = await httpRequestHandler({
         req,
         guardData,
-        requestData,
+
+        urlParams:
+          urlParamsValidator === null
+            ? null
+            : urlParamsValidator.parse(req.params),
+
+        urlQueryParams:
+          urlQueryParamsValidator === null
+            ? null
+            : urlQueryParamsValidator.parse(req.query),
+
+        requestBody:
+          requestBodyValidator === null
+            ? null
+            : requestBodyValidator.parse(req.body),
+
         // Wrap to preserve 'this' binding
         setHttpStatusCode: (statusCode: number) => res.status(statusCode),
       });
