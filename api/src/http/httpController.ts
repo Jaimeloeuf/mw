@@ -59,17 +59,29 @@ export const httpController = <
         >;
       },
   const NullableUrlParamsZodParserType extends ZodType | null,
-  const NullableUrlQueryParamsZodParserType extends ZodType | null,
-  const NullableRequestBodyZodParserType extends ZodType | null,
-  const UrlParamsType = NullableUrlParamsZodParserType extends null
+  const UrlParamsType extends NullableUrlParamsZodParserType extends null
     ? null
     : zodInfer<Exclude<NullableUrlParamsZodParserType, null>>,
-  const UrlQueryParamsType = NullableUrlQueryParamsZodParserType extends null
-    ? null
-    : zodInfer<Exclude<NullableUrlQueryParamsZodParserType, null>>,
-  const RequestBodyType = NullableRequestBodyZodParserType extends null
+  const NullableUrlQueryParamsZodParserType extends ZodType | null,
+  const UrlQueryParamsType extends
+    NullableUrlQueryParamsZodParserType extends null
+      ? null
+      : zodInfer<Exclude<NullableUrlQueryParamsZodParserType, null>>,
+  const NullableRequestBodyZodParserType extends ZodType | null,
+  const RequestBodyType extends NullableRequestBodyZodParserType extends null
     ? null
     : zodInfer<Exclude<NullableRequestBodyZodParserType, null>>,
+  const HttpRequestHandlerReturnType extends
+    | ValidJsendDatatype
+    | Promise<ValidJsendDatatype>,
+  const HttpRequestHandlerType extends (context: {
+    req: Request;
+    guardData: GuardsDataType;
+    urlParams: UrlParamsType;
+    urlQueryParams: UrlQueryParamsType;
+    requestBody: RequestBodyType;
+    setHttpStatusCode: (statusCode: number) => void;
+  }) => HttpRequestHandlerReturnType,
 >({
   version,
   method,
@@ -117,14 +129,7 @@ export const httpController = <
    * User defined function that is called to handle the API request once guard
    * functions finish running and request data is validated.
    */
-  httpRequestHandler: (context: {
-    req: Request;
-    guardData: GuardsDataType;
-    urlParams: UrlParamsType;
-    urlQueryParams: UrlQueryParamsType;
-    requestBody: RequestBodyType;
-    setHttpStatusCode: (statusCode: number) => void;
-  }) => ValidJsendDatatype | Promise<ValidJsendDatatype>;
+  httpRequestHandler: HttpRequestHandlerType;
 }): {
   version: `/v${Version}`;
   method: HttpMethodStringLiteralType;
