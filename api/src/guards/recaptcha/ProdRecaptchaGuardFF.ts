@@ -19,7 +19,7 @@ export const ProdRecaptchaGuardFF: RecaptchaGuardFFType = (
    */
   scoreRequirement: number = 0.5
 ) =>
-  async function (req: Request) {
+  async function ProdRecaptchaGuard(req: Request) {
     // Get the remote IP address of the user, since this service will be ran
     // behind a proxy, `x-forwarded-for` is used first to prevent using the
     // proxy's IP address as the value since it is always the same.
