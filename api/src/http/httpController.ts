@@ -135,10 +135,20 @@ export const httpController = <
   method: HttpMethodStringLiteralType;
   path: PathStringLiteralType;
   routeHandler: (req: Request, res: Response) => Promise<void>;
+
+  // These values are "re-exported" so that they can be used for type inference
+  urlParamsValidator: NullableUrlParamsZodParserType;
+  urlQueryParamsValidator: NullableUrlQueryParamsZodParserType;
+  requestBodyValidator: NullableRequestBodyZodParserType;
+  httpRequestHandler: HttpRequestHandlerType;
 } => ({
   version: `/v${version}`,
   method,
   path,
+  urlParamsValidator,
+  urlQueryParamsValidator,
+  requestBodyValidator,
+  httpRequestHandler,
   routeHandler: async (req: Request, res: Response) => {
     try {
       let guardData = null as GuardsDataType;
