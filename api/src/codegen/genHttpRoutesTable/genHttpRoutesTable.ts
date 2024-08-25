@@ -4,7 +4,6 @@ import { logger } from "../../logging/index.js";
 import { generatedSrcDirPath } from "../generatedSrcDirPath.js";
 import { genAndSaveGeneratedCode } from "../genAndSaveGeneratedCode.js";
 import { routeTableTemplate } from "./routeTableTemplate.js";
-import { controllerImportTemplate } from "./controllerImportTemplate.js";
 import { routeDefinitionTemplate } from "./routeDefinitionTemplate.js";
 import type { ControllerFile } from "./ControllerFile.js";
 
@@ -46,7 +45,7 @@ export async function genHttpRoutesTable() {
       })
   );
 
-  const { controllerImportStatements, routeDefinitions } = controllerFiles
+  const routeDefinitions = controllerFiles
     // There may be certain files that are not actual controller files in
     // /controller/** like helper functions etc... filter these out.
     .filter(
@@ -64,24 +63,15 @@ export async function genHttpRoutesTable() {
 
     // Generate the import and route definition statements, and combine them
     // into 2 different arrays.
-    .reduce(
-      (acc, file) => {
-        acc.controllerImportStatements.push(
-          controllerImportTemplate(file, controllerFolderPath)
-        );
-        acc.routeDefinitions.push(routeDefinitionTemplate(file));
-        return acc;
-      },
-      {
-        controllerImportStatements: [] as Array<string>,
-        routeDefinitions: [] as Array<string>,
-      }
-    );
+    .reduce((arr, file) => {
+      arr.push(routeDefinitionTemplate(file));
+      return arr;
+    }, [] as Array<string>)
 
-  const generatedCode = routeTableTemplate(
-    controllerImportStatements.join(""),
-    routeDefinitions.join("")
-  );
+    // Combine all route definitions into a single string
+    .join("");
+
+  const generatedCode = routeTableTemplate(routeDefinitions);
 
   const routeTableFilePath = path.join(
     generatedSrcDirPath,

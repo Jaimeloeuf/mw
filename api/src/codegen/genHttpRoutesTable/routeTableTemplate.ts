@@ -1,8 +1,7 @@
 export const routeTableTemplate = (
-  controllerImportStatement: string,
   routeDefinitions: string
 ) => `import { Router } from "express";
-${controllerImportStatement}
+import * as c from "./httpControllerBarrelFile.generated.js";
 /**
  * A route tables sort of file, where all HTTP API routes are defined here along
  * with the controllers/route-handlers that will be used to handle requests for

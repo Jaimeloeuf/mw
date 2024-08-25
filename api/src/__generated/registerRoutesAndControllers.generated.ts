@@ -6,15 +6,10 @@
  * genHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256<b9907a334a125713221852f3c7e4fe4353705210f24578731d012e6c5a5e5c18>
+ * sha256<822b9845f5fb03d1d4bac4ec7498b514a0146bca367b411bfdfbb28276514ed7>
  */
 import { Router } from "express";
-import { healthCheck } from "../controllers/healthCheck.js";
-import { blogNewSubscriberController } from "../controllers/blog/blogNewSubscriberController.js";
-import { createBucketlistController } from "../controllers/bucketlist/createBucketlist.js";
-import { getBucketlistController } from "../controllers/bucketlist/getBucketlist.js";
-import { version } from "../controllers/version.js";
-
+import * as c from "./httpControllerBarrelFile.generated.js";
 /**
  * A route tables sort of file, where all HTTP API routes are defined here along
  * with the controllers/route-handlers that will be used to handle requests for
@@ -39,28 +34,28 @@ import { version } from "../controllers/version.js";
 export function registerRoutesAndControllers() {
   const r = Router();
 
-  r["get" satisfies typeof healthCheck.method](
-    "/" satisfies typeof healthCheck.path,
-    healthCheck.routeHandler,
+  r["get" satisfies typeof c.healthCheck.method](
+    "/" satisfies typeof c.healthCheck.path,
+    c.healthCheck.routeHandler,
   );
-  r["post" satisfies typeof blogNewSubscriberController.method](
-    ("/v1" satisfies typeof blogNewSubscriberController.version) +
-      ("/blog/subscribe" satisfies typeof blogNewSubscriberController.path),
-    blogNewSubscriberController.routeHandler,
+  r["post" satisfies typeof c.blogNewSubscriberController.method](
+    ("/v1" satisfies typeof c.blogNewSubscriberController.version) +
+      ("/blog/subscribe" satisfies typeof c.blogNewSubscriberController.path),
+    c.blogNewSubscriberController.routeHandler,
   );
-  r["post" satisfies typeof createBucketlistController.method](
-    ("/v1" satisfies typeof createBucketlistController.version) +
-      ("/bucketlist" satisfies typeof createBucketlistController.path),
-    createBucketlistController.routeHandler,
+  r["post" satisfies typeof c.createBucketlistController.method](
+    ("/v1" satisfies typeof c.createBucketlistController.version) +
+      ("/bucketlist" satisfies typeof c.createBucketlistController.path),
+    c.createBucketlistController.routeHandler,
   );
-  r["get" satisfies typeof getBucketlistController.method](
-    ("/v1" satisfies typeof getBucketlistController.version) +
-      ("/bucketlist/:bucketlistID" satisfies typeof getBucketlistController.path),
-    getBucketlistController.routeHandler,
+  r["get" satisfies typeof c.getBucketlistController.method](
+    ("/v1" satisfies typeof c.getBucketlistController.version) +
+      ("/bucketlist/:bucketlistID" satisfies typeof c.getBucketlistController.path),
+    c.getBucketlistController.routeHandler,
   );
-  r["get" satisfies typeof version.method](
-    "/version" satisfies typeof version.path,
-    version.routeHandler,
+  r["get" satisfies typeof c.version.method](
+    "/version" satisfies typeof c.version.path,
+    c.version.routeHandler,
   );
 
   return r;
