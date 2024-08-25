@@ -6,58 +6,59 @@
  * genHttpDtoTypeDefinition
  *
  * Generated hash in hex for code after this section is:
- * sha256<fbeae0ffbd74b4b6c31063429bde9d99c27b93a8d36201ba58a00d290ab24df4>
+ * sha256<2182c5ce87d8c77f102bbce293fb2669787d7b7fe88828fa26eddf6f8f0dbf36>
  */
 import type { z } from "zod";
-
-import { healthCheck } from "../controllers/healthCheck.js";
-import { blogNewSubscriberController } from "../controllers/blog/blogNewSubscriberController.js";
-import { createBucketlistController } from "../controllers/bucketlist/createBucketlist.js";
-import { getBucketlistController } from "../controllers/bucketlist/getBucketlist.js";
-import { version } from "../controllers/version.js";
+import * as c from "./httpControllerBarrelFile.generated.js";
 
 export type healthCheck_QueryParams = z.infer<
-  Exclude<(typeof healthCheck)["urlQueryParamsValidator"], null>
+  Exclude<(typeof c.healthCheck)["urlQueryParamsValidator"], null>
 >;
 export type healthCheck_InputDTO = z.infer<
-  Exclude<(typeof healthCheck)["requestBodyValidator"], null>
+  Exclude<(typeof c.healthCheck)["requestBodyValidator"], null>
 >;
 export type healthCheck_OutputDTO = Awaited<
-  ReturnType<(typeof healthCheck)["httpRequestHandler"]>
+  ReturnType<(typeof c.healthCheck)["httpRequestHandler"]>
 >;
 export type blogNewSubscriberController_QueryParams = z.infer<
-  Exclude<(typeof blogNewSubscriberController)["urlQueryParamsValidator"], null>
+  Exclude<
+    (typeof c.blogNewSubscriberController)["urlQueryParamsValidator"],
+    null
+  >
 >;
 export type blogNewSubscriberController_InputDTO = z.infer<
-  Exclude<(typeof blogNewSubscriberController)["requestBodyValidator"], null>
+  Exclude<(typeof c.blogNewSubscriberController)["requestBodyValidator"], null>
 >;
 export type blogNewSubscriberController_OutputDTO = Awaited<
-  ReturnType<(typeof blogNewSubscriberController)["httpRequestHandler"]>
+  ReturnType<(typeof c.blogNewSubscriberController)["httpRequestHandler"]>
 >;
 export type createBucketlistController_QueryParams = z.infer<
-  Exclude<(typeof createBucketlistController)["urlQueryParamsValidator"], null>
+  Exclude<
+    (typeof c.createBucketlistController)["urlQueryParamsValidator"],
+    null
+  >
 >;
 export type createBucketlistController_InputDTO = z.infer<
-  Exclude<(typeof createBucketlistController)["requestBodyValidator"], null>
+  Exclude<(typeof c.createBucketlistController)["requestBodyValidator"], null>
 >;
 export type createBucketlistController_OutputDTO = Awaited<
-  ReturnType<(typeof createBucketlistController)["httpRequestHandler"]>
+  ReturnType<(typeof c.createBucketlistController)["httpRequestHandler"]>
 >;
 export type getBucketlistController_QueryParams = z.infer<
-  Exclude<(typeof getBucketlistController)["urlQueryParamsValidator"], null>
+  Exclude<(typeof c.getBucketlistController)["urlQueryParamsValidator"], null>
 >;
 export type getBucketlistController_InputDTO = z.infer<
-  Exclude<(typeof getBucketlistController)["requestBodyValidator"], null>
+  Exclude<(typeof c.getBucketlistController)["requestBodyValidator"], null>
 >;
 export type getBucketlistController_OutputDTO = Awaited<
-  ReturnType<(typeof getBucketlistController)["httpRequestHandler"]>
+  ReturnType<(typeof c.getBucketlistController)["httpRequestHandler"]>
 >;
 export type version_QueryParams = z.infer<
-  Exclude<(typeof version)["urlQueryParamsValidator"], null>
+  Exclude<(typeof c.version)["urlQueryParamsValidator"], null>
 >;
 export type version_InputDTO = z.infer<
-  Exclude<(typeof version)["requestBodyValidator"], null>
+  Exclude<(typeof c.version)["requestBodyValidator"], null>
 >;
 export type version_OutputDTO = Awaited<
-  ReturnType<(typeof version)["httpRequestHandler"]>
+  ReturnType<(typeof c.version)["httpRequestHandler"]>
 >;

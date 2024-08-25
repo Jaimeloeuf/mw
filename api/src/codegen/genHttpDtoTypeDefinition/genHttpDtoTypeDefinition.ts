@@ -3,7 +3,6 @@ import path from "path";
 import { logger } from "../../logging/index.js";
 import { generatedSrcDirPath } from "../generatedSrcDirPath.js";
 import { genAndSaveGeneratedCode } from "../genAndSaveGeneratedCode.js";
-import { controllerImportTemplate } from "./controllerImportTemplate.js";
 import type { ControllerFile } from "./ControllerFile.js";
 
 /**
@@ -41,7 +40,7 @@ export async function genHttpDtoTypeDefinition() {
       })
   );
 
-  const { controllerImportStatements, typeDefinitions } = controllerFiles
+  const typeDefinitions = controllerFiles
     // There may be certain files that are not actual controller files in
     // /controller/** like helper functions etc... filter these out.
     .filter(
@@ -57,35 +56,27 @@ export async function genHttpDtoTypeDefinition() {
 
     // Generate the import and type definition statements, and combine them
     // into 2 different arrays.
-    .reduce(
-      (acc, file) => {
-        acc.controllerImportStatements.push(
-          controllerImportTemplate(file, controllerFolderPath)
-        );
-        // @todo An advanced version would be to skip export if type resolves to `never`.
-        acc.typeDefinitions
-          .push(`export type ${file.controllerName}_QueryParams = z.infer<
-  Exclude<(typeof ${file.controllerName})["urlQueryParamsValidator"], null>
+    // @todo An advanced version would be to skip export if type resolves to `never`.
+    .reduce((typeDefinitions, file) => {
+      typeDefinitions.push(`export type ${file.controllerName}_QueryParams = z.infer<
+  Exclude<(typeof c.${file.controllerName})["urlQueryParamsValidator"], null>
 >;
 export type ${file.controllerName}_InputDTO = z.infer<
-  Exclude<(typeof ${file.controllerName})["requestBodyValidator"], null>
+  Exclude<(typeof c.${file.controllerName})["requestBodyValidator"], null>
 >;
 export type ${file.controllerName}_OutputDTO = Awaited<
-  ReturnType<(typeof ${file.controllerName})["httpRequestHandler"]>
+  ReturnType<(typeof c.${file.controllerName})["httpRequestHandler"]>
 >;`);
-        return acc;
-      },
-      {
-        controllerImportStatements: [] as Array<string>,
-        typeDefinitions: [] as Array<string>,
-      }
-    );
+      return typeDefinitions;
+    }, [] as Array<string>)
+
+    // Join array of type definitions into a single string
+    .join("");
 
   const generatedCode = `import type { z } from "zod";
+import * as c from "./httpControllerBarrelFile.generated.js";
 
-${controllerImportStatements.join("")}
-
-${typeDefinitions.join("")}
+${typeDefinitions}
 `;
 
   const generatedHttpDtoFilePath = path.join(
