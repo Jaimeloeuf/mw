@@ -47,6 +47,14 @@ export async function codegenRunSingleModule(codegenModuleName: string) {
     return;
   }
 
+  // For single module codegen, since we are unable to know if the output file
+  // path has changed, we must rely on users to manually delete it as we cannot
+  // delete all generated files since we do not regenerate all files.
+  logger.info(
+    codegenRunSingleModule.name,
+    "If your codegen module's output file has changed, please manually delete it first"
+  );
+
   await runCodegenModules(importedCodegenFunction);
 
   await genCodegenBarrelFile();

@@ -5,7 +5,11 @@ import { genHttpControllerBarrelFile } from "./genHttpControllerBarrelFile/genHt
 import { genHttpRoutesTable } from "./genHttpRoutesTable/genHttpRoutesTable.js";
 import { genHttpDtoTypeDefinition } from "./genHttpDtoTypeDefinition/genHttpDtoTypeDefinition.js";
 
+import { deleteAllGeneratedFiles } from "./deleteAllGeneratedFiles.js";
+
 export async function codegenRunAllModules() {
+  await deleteAllGeneratedFiles();
+
   await runCodegenModules(
     genHttpControllerBarrelFile,
     genHttpRoutesTable,
