@@ -1,3 +1,4 @@
+import { performance } from "perf_hooks";
 import { logger } from "../logging/index.js";
 import type { CodegenFunction } from "./CodegenFunction.js";
 
@@ -11,11 +12,15 @@ export async function runCodegenModules(
     `Running codegen(s): ${codegenFunctionNames}`
   );
 
+  const startTime = performance.now();
+
   // Run all the codegen modules asynchronously since they MUST be independent
   await Promise.all(codegenFunctions.map((codegenModule) => codegenModule()));
 
+  const endTime = performance.now();
+
   logger.info(
     runCodegenModules.name,
-    `Codegen completed, ran ${codegenFunctions.length} modules`
+    `Codegen completed, took ${Math.ceil(endTime - startTime)} ms to run ${codegenFunctions.length} modules`
   );
 }
