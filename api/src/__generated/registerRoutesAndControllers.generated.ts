@@ -6,7 +6,7 @@
  * genHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256<822b9845f5fb03d1d4bac4ec7498b514a0146bca367b411bfdfbb28276514ed7>
+ * sha256<468e36ec9c9b8488351d9163cf24dd9043dd00afa1cd44510f5dae1d413cd883>
  */
 import { Router } from "express";
 import * as c from "./httpControllerBarrelFile.generated.js";
@@ -34,25 +34,34 @@ import * as c from "./httpControllerBarrelFile.generated.js";
 export function registerRoutesAndControllers() {
   const r = Router();
 
+  // GET /api/
   r["get" satisfies typeof c.healthCheck.method](
     "/" satisfies typeof c.healthCheck.path,
     c.healthCheck.routeHandler,
   );
+
+  // POST /api/v1/blog/subscribe
   r["post" satisfies typeof c.blogNewSubscriberController.method](
     ("/v1" satisfies typeof c.blogNewSubscriberController.version) +
       ("/blog/subscribe" satisfies typeof c.blogNewSubscriberController.path),
     c.blogNewSubscriberController.routeHandler,
   );
+
+  // POST /api/v1/bucketlist
   r["post" satisfies typeof c.createBucketlistController.method](
     ("/v1" satisfies typeof c.createBucketlistController.version) +
       ("/bucketlist" satisfies typeof c.createBucketlistController.path),
     c.createBucketlistController.routeHandler,
   );
+
+  // GET /api/v1/bucketlist/:bucketlistID
   r["get" satisfies typeof c.getBucketlistController.method](
     ("/v1" satisfies typeof c.getBucketlistController.version) +
       ("/bucketlist/:bucketlistID" satisfies typeof c.getBucketlistController.path),
     c.getBucketlistController.routeHandler,
   );
+
+  // GET /api/version
   r["get" satisfies typeof c.version.method](
     "/version" satisfies typeof c.version.path,
     c.version.routeHandler,
