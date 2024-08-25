@@ -4,6 +4,7 @@ import { codegenRunAllModules } from "./codegenRunAllModules.js";
 import { codegenRunSingleModule } from "./codegenRunSingleModule.js";
 import { printCodegenCliHelp } from "./printCodegenCliHelp.js";
 import { printAllCodegenModules } from "./printAllCodegenModules.js";
+import { showGitStatusOfGeneratedFolder } from "./showGitStatusOfGeneratedFolder.js";
 
 async function codegenEntrypoint() {
   // No extra arguments, show help menu
@@ -29,12 +30,14 @@ async function codegenEntrypoint() {
   // Run all codegen modules
   if (arg === "all") {
     await codegenRunAllModules();
+    await showGitStatusOfGeneratedFolder();
     return;
   }
 
   // Run a single codegen module
   if (arg.startsWith("gen")) {
     await codegenRunSingleModule(arg);
+    await showGitStatusOfGeneratedFolder();
     return;
   }
 
