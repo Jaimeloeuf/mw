@@ -1,5 +1,5 @@
 import path from "path";
-import type { ControllerFile } from "./ControllerFile.js";
+import { ControllerFile } from "../utils/getControllerFiles/ControllerFile.js";
 
 export const controllerExportTemplate = (
   file: ControllerFile,

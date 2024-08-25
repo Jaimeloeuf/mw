@@ -1,4 +1,4 @@
-import { ControllerFile } from "./ControllerFile.js";
+import { ControllerFile } from "../utils/getControllerFiles/ControllerFile.js";
 
 const getVersionPathPrefix = (file: ControllerFile) =>
   file.version === '"neutral"'
