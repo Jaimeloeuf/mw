@@ -50,11 +50,30 @@ async function generateControllerFiles() {
           file.controllerName !== undefined
       )
 
-      // Sort these files by the http route strings alphabetically
-      .sort((a, b) =>
-        // @todo if they are the same string but diff version, then should sort by version..?
-        a.httpRoute > b.httpRoute ? 1 : b.httpRoute > a.httpRoute ? -1 : 0
-      )
+      // Sort these files by the http route strings alphabetically and version
+      .sort((a, b) => {
+        /* If the routes are different, sort them alphabetically */
+        if (a.httpRoute > b.httpRoute) {
+          return 1;
+        }
+        if (b.httpRoute > a.httpRoute) {
+          return -1;
+        }
+
+        /* If they are the same route but different versions, sort by version */
+        if (a.httpRoute === b.httpRoute) {
+          // neutral versions will always come first
+          if (a.version === '"neutral"') {
+            return -1;
+          }
+          if (b.version === '"neutral"') {
+            return 1;
+          }
+          return Number(a.version) - Number(b.version);
+        }
+
+        return 0;
+      })
   );
 }
 
