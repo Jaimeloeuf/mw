@@ -3,15 +3,19 @@ import path from "path";
 import readline from "readline/promises";
 import { logger } from "../logging/index.js";
 
-const codeTemplate = `import { z } from "zod";
+const codeTemplate = (
+  controllerName: string,
+  httpMethod: string,
+  apiPath: string
+) => `import { z } from "zod";
 // TODO:
 // Move this file into a app folder to fix the relative path import
 import { httpController, useHttpRequestGuard } from "../../http/index.js";
 
-export const blogNewSubscriberController = httpController({
+export const ${controllerName} = httpController({
   version: 1,
-  method: "YOUR_HTTP_METHOD",
-  path: "/YOUR_API_PATH",
+  method: "${httpMethod}",
+  path: "${apiPath}",
   guards: [/* Your request guards, replace array with null if none */],
   urlParamsValidator: null,
   urlQueryParamsValidator: null,
@@ -36,6 +40,13 @@ async function createHttpController() {
 
   const controllerName = await rl.question(`Controller name in camelCase: `);
 
+  const allowedHttpMethods = ["get", "post", "put", "patch", "delete", "all"];
+  const httpMethod = await rl.question(
+    `Express HTTP Method (${allowedHttpMethods.join(", ")}): `
+  );
+
+  const apiPath = await rl.question(`API url path (include starting /): `);
+
   rl.close();
 
   const controllerFilePath = path.join(
@@ -43,7 +54,10 @@ async function createHttpController() {
     `../controllers/${controllerName}.ts`
   );
 
-  fs.writeFileSync(controllerFilePath, codeTemplate);
+  fs.writeFileSync(
+    controllerFilePath,
+    codeTemplate(controllerName, httpMethod, apiPath)
+  );
 
   logger.info(
     createHttpController.name,
