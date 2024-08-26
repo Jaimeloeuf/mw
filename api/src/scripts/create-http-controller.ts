@@ -39,13 +39,34 @@ async function createHttpController() {
   });
 
   const controllerName = await rl.question(`Controller name in camelCase: `);
+  if (!new RegExp(/^[a-z][A-Za-z0-9]*$/g).test(controllerName)) {
+    logger.error(
+      createHttpController.name,
+      `Controller name must be camelCase.`
+    );
+    rl.close();
+    return;
+  }
 
   const allowedHttpMethods = ["get", "post", "put", "patch", "delete", "all"];
   const httpMethod = await rl.question(
     `Express HTTP Method (${allowedHttpMethods.join(", ")}): `
   );
+  if (!allowedHttpMethods.includes(httpMethod)) {
+    logger.error(
+      createHttpController.name,
+      `HTTP Method must be one of the allowed values`
+    );
+    rl.close();
+    return;
+  }
 
   const apiPath = await rl.question(`API url path (include starting /): `);
+  if (!apiPath.startsWith("/")) {
+    logger.error(createHttpController.name, `API path must start with /`);
+    rl.close();
+    return;
+  }
 
   rl.close();
 
