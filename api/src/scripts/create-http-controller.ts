@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import readline from "readline/promises";
 import { logger } from "../logging/index.js";
+import pc from "picocolors";
 
 const codeTemplate = (
   controllerName: string,
@@ -75,10 +76,8 @@ async function createHttpController() {
     `../controllers/${controllerName}.ts`
   );
 
-  fs.writeFileSync(
-    controllerFilePath,
-    codeTemplate(controllerName, httpMethod, apiPath)
-  );
+  const generatedCode = codeTemplate(controllerName, httpMethod, apiPath);
+  fs.writeFileSync(controllerFilePath, generatedCode, { mode: "" });
 
   logger.info(
     createHttpController.name,
@@ -88,6 +87,15 @@ async function createHttpController() {
     createHttpController.name,
     `Please update the controller file details and run "npm run codegen all" to update the generated files`
   );
+  logger.info(createHttpController.name, `You can also copy the printed code.`);
+
+  // Print out the generated code template without any additional formatting.
+  /* eslint-disable no-console */
+  console.log(
+    "\nFile has been generated but you can copy the output code too\n"
+  );
+  console.log(pc.green(generatedCode));
+  /* eslint-enable no-console */
 }
 
 createHttpController();
