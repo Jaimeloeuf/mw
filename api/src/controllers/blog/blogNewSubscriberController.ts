@@ -1,6 +1,5 @@
 import { z } from "zod";
-import { httpController } from "../../http/index.js";
-import { useHttpRequestGuard } from "../../http/useHttpRequestGuard.js";
+import { httpController, useHttpRequestGuard } from "../../http/index.js";
 import { blogRecaptchaGuard } from "./blogRecaptchaGuard.js";
 import { blogService } from "../../services/index.js";
 
