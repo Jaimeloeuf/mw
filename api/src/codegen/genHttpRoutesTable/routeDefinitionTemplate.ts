@@ -5,15 +5,9 @@ const getVersionPathPrefix = (file: ControllerFile) =>
     ? ""
     : `("/v${file.version}" satisfies typeof c.${file.controllerName}.version) + `;
 
-/** Generate a comment describing this HTTP API method and path */
-const getApiComment = (file: ControllerFile): string =>
-  `// ${file.httpMethod.toUpperCase()} /api${
-    file.version === '"neutral"' ? "" : "/v" + file.version
-  }${file.httpRoute}`;
-
 export const routeDefinitionTemplate = (file: ControllerFile): string =>
   `
-${getApiComment(file)}
+// ${file.httpMethod.toUpperCase()} /api${file.version === '"neutral"' ? "" : "/v" + file.version}${file.httpRoute}
 r["${file.httpMethod}" satisfies typeof c.${file.controllerName}.method](
   ${getVersionPathPrefix(file)}
   ("${file.httpRoute}" satisfies typeof c.${file.controllerName}.path),
