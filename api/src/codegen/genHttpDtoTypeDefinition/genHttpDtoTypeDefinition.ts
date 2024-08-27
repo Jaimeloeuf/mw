@@ -1,7 +1,9 @@
 import path from "path";
 import { logger } from "../../logging/index.js";
-import { generatedSrcDirPath } from "../generatedSrcDirPath.js";
-import { genAndSaveGeneratedCode } from "../genAndSaveGeneratedCode.js";
+import {
+  generatedSrcDirPath,
+  genAndSaveGeneratedCode,
+} from "../codegenForTs/index.js";
 import { getControllerFiles } from "../utils/getControllerFiles/getControllerFiles.js";
 
 /**

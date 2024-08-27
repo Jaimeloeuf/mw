@@ -3,7 +3,7 @@ import path from "path";
 import { tsImport } from "tsx/esm/api";
 import { logger } from "../logging/index.js";
 import { runCodegenModules } from "./runCodegenModules.js";
-import { genCodegenBarrelFile } from "./genCodegenBarrelFile.js";
+import { genCodegenBarrelFile } from "./codegenForTs/index.js";
 import type { CodegenFunction } from "./CodegenFunction.js";
 
 export async function codegenRunSingleModule(codegenModuleName: string) {

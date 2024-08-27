@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { logger } from "../logging/index.js";
-import { generatedSrcDirPath } from "./generatedSrcDirPath.js";
+import { generatedSrcDirPath } from "./codegenForTs/index.js";
 
 /**
  * Delete all generated files in __generated/ so that codegen can start afresh.

@@ -1,5 +1,5 @@
 import { runCodegenModules } from "./runCodegenModules.js";
-import { genCodegenBarrelFile } from "./genCodegenBarrelFile.js";
+import { genCodegenBarrelFile } from "./codegenForTs/index.js";
 
 import { genHttpControllerBarrelFile } from "./genHttpControllerBarrelFile/genHttpControllerBarrelFile.js";
 import { genHttpRoutesTable } from "./genHttpRoutesTable/genHttpRoutesTable.js";

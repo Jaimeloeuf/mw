@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import { logger } from "../logging/index.js";
+import { logger } from "../../logging/index.js";
 import { generatedSrcDirPath } from "./generatedSrcDirPath.js";
 import { genAndSaveGeneratedCode } from "./genAndSaveGeneratedCode.js";
 
