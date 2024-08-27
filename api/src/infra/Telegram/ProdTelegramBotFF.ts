@@ -8,7 +8,7 @@ export const ProdTelegramBotFF = (telegramBotToken: string) =>
     /**
      * Notification message. This supports HTML formatting
      */
-    message: string
+    message: string,
   ): Promise<void | Error> {
     // Simple wrapper to call the sendMessage API using HTML for formmating
     // instead of MarkdownV2 due to the restrictions in place for parsing
@@ -35,7 +35,7 @@ export const ProdTelegramBotFF = (telegramBotToken: string) =>
 
     if (!res.ok) {
       return new Error(
-        `Telegram message failed to send: ${prettyPrintJson(res.data)}`
+        `Telegram message failed to send: ${prettyPrintJson(res.data)}`,
       );
     }
   };

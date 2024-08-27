@@ -9,7 +9,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .createTable(bucketlistTableName)
     .addColumn("id", "varchar", (col) => col.primaryKey())
     .addColumn("created_at", "timestamp", (col) =>
-      col.defaultTo(sql`now()`).notNull()
+      col.defaultTo(sql`now()`).notNull(),
     )
     .addColumn("name", "varchar")
     .addColumn("description", "varchar")
@@ -19,7 +19,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .createTable(bucketlistItemTableName)
     .addColumn("id", "varchar", (col) => col.primaryKey())
     .addColumn("created_at", "timestamp", (col) =>
-      col.defaultTo(sql`now()`).notNull()
+      col.defaultTo(sql`now()`).notNull(),
     )
     .addColumn("bucketlist_id", "varchar")
     .addColumn("name", "varchar")

@@ -23,7 +23,7 @@ export type ${file.controllerName}_InputDTO = z.infer<
 >;
 export type ${file.controllerName}_OutputDTO = Awaited<
   ReturnType<(typeof c.${file.controllerName})["httpRequestHandler"]>
->;`
+>;`,
     )
 
     .join("");
@@ -36,17 +36,17 @@ ${typeDefinitions}
 
   const generatedHttpDtoFilePath = path.join(
     generatedSrcDirPath,
-    `httpDto.generated.ts`
+    `httpDto.generated.ts`,
   );
 
   await genAndSaveGeneratedCode(
     genHttpDtoTypeDefinition,
     generatedCode,
-    generatedHttpDtoFilePath
+    generatedHttpDtoFilePath,
   );
 
   logger.info(
     genHttpDtoTypeDefinition.name,
-    `Generated HTTP DTO type definition file: ${generatedHttpDtoFilePath}`
+    `Generated HTTP DTO type definition file: ${generatedHttpDtoFilePath}`,
   );
 }

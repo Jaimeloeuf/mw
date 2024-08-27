@@ -1,6 +1,6 @@
 export const ProdEmailServiceFF = (
   emailAddressForSendFrom: string,
-  emailAddressForReplyTo: string
+  emailAddressForReplyTo: string,
 ) =>
   async function ProdEmailService(
     recipientEmail: string,
@@ -13,7 +13,7 @@ export const ProdEmailServiceFF = (
     /**
      * Notification message. This supports HTML formatting
      */
-    message: string
+    message: string,
   ): Promise<void | Error> {
     //
   };

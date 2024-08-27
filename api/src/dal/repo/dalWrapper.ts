@@ -40,12 +40,12 @@ export function dalWrapper<T extends (...args: any) => Promise<any>>(fn: T) {
 
       logger.error(
         dalWrapper.name,
-        `Failed to execute DAL repo call: ${fn.name}`
+        `Failed to execute DAL repo call: ${fn.name}`,
       );
 
       logger.error(
         `${dalWrapper.name}:${fn.name}`,
-        error instanceof Error ? error.stack : error
+        error instanceof Error ? error.stack : error,
       );
 
       return error;

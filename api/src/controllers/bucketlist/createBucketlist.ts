@@ -17,7 +17,7 @@ export const createBucketlistController = httpController({
     setHttpStatusCode(201);
     return bucketlistService.createBucketlist(
       requestBody.name,
-      requestBody.description
+      requestBody.description,
     );
   },
 });

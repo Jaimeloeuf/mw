@@ -15,7 +15,7 @@ import { controllerExportTemplate } from "./controllerExportTemplate.js";
 export async function genHttpControllerBarrelFile() {
   const controllerFolderPath = path.join(
     import.meta.dirname,
-    `../../controllers`
+    `../../controllers`,
   );
 
   const controllerFiles = await getControllerFiles();
@@ -26,17 +26,17 @@ export async function genHttpControllerBarrelFile() {
 
   const generatedHttpDtoFilePath = path.join(
     generatedSrcDirPath,
-    `httpControllerBarrelFile.generated.ts`
+    `httpControllerBarrelFile.generated.ts`,
   );
 
   await genAndSaveGeneratedCode(
     genHttpControllerBarrelFile,
     generatedCode,
-    generatedHttpDtoFilePath
+    generatedHttpDtoFilePath,
   );
 
   logger.info(
     genHttpControllerBarrelFile.name,
-    `Generated HTTP controller barrel file: ${generatedHttpDtoFilePath}`
+    `Generated HTTP controller barrel file: ${generatedHttpDtoFilePath}`,
   );
 }

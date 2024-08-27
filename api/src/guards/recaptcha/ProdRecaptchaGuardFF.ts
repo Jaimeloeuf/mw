@@ -17,7 +17,7 @@ export const ProdRecaptchaGuardFF: RecaptchaGuardFFType = (
    * Minimum recaptcha score required to pass as human. This should be a
    * number between 0 and 1, where the higher it is the more human it is.
    */
-  scoreRequirement: number = 0.5
+  scoreRequirement: number = 0.5,
 ) =>
   async function ProdRecaptchaGuard(req: Request) {
     // Get the remote IP address of the user, since this service will be ran
@@ -34,7 +34,7 @@ export const ProdRecaptchaGuardFF: RecaptchaGuardFFType = (
 
     const { err, res } = await sf
       .useOnce(
-        `https://www.recaptcha.net/recaptcha/api/siteverify?secret=${recaptchaSecret}&response=${token}&remoteip=${remoteIP}`
+        `https://www.recaptcha.net/recaptcha/api/siteverify?secret=${recaptchaSecret}&response=${token}&remoteip=${remoteIP}`,
       )
       .POST()
       .runJSON<{ success: string; score: number; ["error-codes"]: any }>();
@@ -42,7 +42,7 @@ export const ProdRecaptchaGuardFF: RecaptchaGuardFFType = (
     if (err !== undefined) {
       // This should be a more specific one.... maybe service error or smth?
       throw new Error(
-        `Failed to verify recaptcha token: ${err.name}: ${err.message}`
+        `Failed to verify recaptcha token: ${err.name}: ${err.message}`,
       );
     }
 
@@ -52,7 +52,7 @@ export const ProdRecaptchaGuardFF: RecaptchaGuardFFType = (
 
     if (res.data.score < scoreRequirement) {
       throw new ForbiddenException(
-        `Recaptcha score too low: ${res.data.score}`
+        `Recaptcha score too low: ${res.data.score}`,
       );
     }
 

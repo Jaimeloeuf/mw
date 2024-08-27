@@ -1,5 +1,5 @@
 export const routeTableTemplate = (
-  routeDefinitions: string
+  routeDefinitions: string,
 ) => `import { Router } from "express";
 import * as c from "./httpControllerBarrelFile.generated.js";
 /**

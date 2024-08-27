@@ -22,17 +22,17 @@ export async function genHttpRoutesTable() {
 
   const routeTableFilePath = path.join(
     generatedSrcDirPath,
-    `registerRoutesAndControllers.generated.ts`
+    `registerRoutesAndControllers.generated.ts`,
   );
 
   await genAndSaveGeneratedCode(
     genHttpRoutesTable,
     generatedCode,
-    routeTableFilePath
+    routeTableFilePath,
   );
 
   logger.info(
     genHttpRoutesTable.name,
-    `Generated HTTP routes table file: ${routeTableFilePath}`
+    `Generated HTTP routes table file: ${routeTableFilePath}`,
   );
 }

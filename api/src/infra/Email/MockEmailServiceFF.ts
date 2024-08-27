@@ -4,7 +4,7 @@ import { prettyPrintJson } from "../../utils/index.js";
 
 export const MockEmailServiceFF = ((
   emailAddressForSendFrom: string,
-  emailAddressForReplyTo: string
+  emailAddressForReplyTo: string,
 ) =>
   async function MockEmailService(
     recipientEmail: string,
@@ -17,7 +17,7 @@ export const MockEmailServiceFF = ((
     /**
      * Notification message. This supports HTML formatting
      */
-    message: string
+    message: string,
   ) {
     logger.info(
       MockEmailService.name,
@@ -27,6 +27,6 @@ export const MockEmailServiceFF = ((
         recipientEmail,
         subject,
         message,
-      })
+      }),
     );
   }) satisfies typeof ProdEmailServiceFF;

@@ -24,7 +24,7 @@ async function kyselyMigrateToLatest() {
 
   logger.info(
     kyselyMigrateToLatest.name,
-    `Running migrations in: ${migrationFolder}`
+    `Running migrations in: ${migrationFolder}`,
   );
 
   const migrator = new Migrator({
@@ -43,17 +43,17 @@ async function kyselyMigrateToLatest() {
     if (migrationResult.status === "Success") {
       logger.info(
         kyselyMigrateToLatest.name,
-        `Successfully executed migration: ${migrationResult.migrationName}`
+        `Successfully executed migration: ${migrationResult.migrationName}`,
       );
     } else if (migrationResult.status === "Error") {
       logger.error(
         kyselyMigrateToLatest.name,
-        `Failed to executed migration: ${migrationResult.migrationName}`
+        `Failed to executed migration: ${migrationResult.migrationName}`,
       );
     } else if (migrationResult.status === "NotExecuted") {
       logger.error(
         kyselyMigrateToLatest.name,
-        `Migration skipped due to previous failure: ${migrationResult.migrationName}`
+        `Migration skipped due to previous failure: ${migrationResult.migrationName}`,
       );
     }
   });
@@ -65,7 +65,7 @@ async function kyselyMigrateToLatest() {
 
   logger.info(
     kyselyMigrateToLatest.name,
-    `Ran ${results?.length ?? 0} migrations`
+    `Ran ${results?.length ?? 0} migrations`,
   );
   logger.info(kyselyMigrateToLatest.name, `Migration completed in ${time} ms`);
 }

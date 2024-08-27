@@ -9,7 +9,7 @@ import type { ControllerFile } from "./ControllerFile.js";
 async function generateControllerFiles() {
   const controllerFolderPath = path.join(
     import.meta.dirname,
-    `../../../controllers`
+    `../../../controllers`,
   );
 
   // Read all files in /controller/**
@@ -37,7 +37,7 @@ async function generateControllerFiles() {
           httpMethod: fileContent.match(/method: "(.*)",/)?.[1],
           controllerName: fileContent.match(/export const (.*) =/)?.[1],
         };
-      })
+      }),
   ).then((possibleControllerFiles) =>
     possibleControllerFiles
       // There may be certain files that are not actual controller files in
@@ -47,7 +47,7 @@ async function generateControllerFiles() {
           file.version !== undefined &&
           file.httpRoute !== undefined &&
           file.httpMethod !== undefined &&
-          file.controllerName !== undefined
+          file.controllerName !== undefined,
       )
 
       // Sort these files by the http route strings alphabetically and version
@@ -73,7 +73,7 @@ async function generateControllerFiles() {
         }
 
         return 0;
-      })
+      }),
   );
 }
 

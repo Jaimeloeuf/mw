@@ -10,7 +10,7 @@ import { blogEmailService } from "./blogEmailService.js";
 export async function newSubscriber(email: string) {
   const isSubscribed =
     await blogSubscriberRepo.isEmailAlreadySubscribed.getResultOrThrowOnError(
-      email
+      email,
     );
 
   if (isSubscribed) {
@@ -29,7 +29,7 @@ export async function newSubscriber(email: string) {
       const result = await blogEmailService(
         blogSubscriberResult.email,
         "(JJ's Blog) You made it!",
-        `Thanks for being awesome and subscribing, add this email address to your whitelist to ensure it never goes to spam!`
+        `Thanks for being awesome and subscribing, add this email address to your whitelist to ensure it never goes to spam!`,
       );
 
       if (result instanceof Error) {
@@ -38,7 +38,7 @@ export async function newSubscriber(email: string) {
     })
     .addJob(async function notifyAdmin() {
       const notificationError = await notifyAdminWithInternalAdminTelegramBot(
-        `New blog subscriber: ${blogSubscriberResult.email}`
+        `New blog subscriber: ${blogSubscriberResult.email}`,
       );
 
       if (notificationError instanceof Error) {
