@@ -1,38 +1,17 @@
 import "dotenv/config";
 import { z } from "zod";
 import { logger } from "../logging/index.js";
-import {
-  genericMonoRepoConfigSchema,
-  genericMonoRepoConfigData,
-} from "./configs/genericMonoRepoConfig.js";
-import {
-  sharedInfraConfigSchema,
-  sharedInfraConfigData,
-} from "./configs/sharedInfraConfig.js";
-import {
-  appSpecificConfigSchema,
-  appSpecificConfigData,
-} from "./configs/appSpecificConfig.js";
+import { genericMonoRepoConfigData } from "./configs/genericMonoRepoConfig.js";
+import { sharedInfraConfigData } from "./configs/sharedInfraConfig.js";
+import { appSpecificConfigData } from "./configs/appSpecificConfig.js";
+import { combinedConfigSchema } from "./configs/combinedConfigSchema.js";
 
 function configBootstrap() {
-  /**
-   * Make sure you define the config in the right schema object
-   * Configs are grouped into
-   * 1. Generic monorepo config
-   * 1. App specific config (group them by app)
-   * 1. Shared infra config
-   */
-  const ConfigSchema = z.object({
-    ...genericMonoRepoConfigSchema,
-    ...sharedInfraConfigSchema,
-    ...appSpecificConfigSchema,
-  });
-
-  const { success, data, error } = ConfigSchema.safeParse({
+  const { success, data, error } = combinedConfigSchema.safeParse({
     ...genericMonoRepoConfigData,
     ...sharedInfraConfigData,
     ...appSpecificConfigData,
-  } satisfies Record<keyof z.infer<typeof ConfigSchema>, unknown>);
+  } satisfies Record<keyof z.infer<typeof combinedConfigSchema>, unknown>);
 
   if (!success) {
     logger.error(configBootstrap.name, `Failed to parse and initialise config`);
