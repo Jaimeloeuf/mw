@@ -29,11 +29,11 @@ export async function deleteAllGeneratedFiles() {
       .filter((file) => file.isFile() && file.name.endsWith(".generated.ts"))
 
       // Delete the file and map back the promise to await together
-      .map((file) => fs.rm(path.resolve(file.parentPath, file.name)))
+      .map((file) => fs.rm(path.resolve(file.parentPath, file.name))),
   );
 
   logger.info(
     deleteAllGeneratedFiles.name,
-    `Deleted all ${numberOfFilesDeleted} generated files`
+    `Deleted all ${numberOfFilesDeleted} generated files`,
   );
 }

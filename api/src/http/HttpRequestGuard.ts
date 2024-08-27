@@ -7,5 +7,5 @@ import type { Request } from "express";
  * throw on guard validation/authentication/authorization errors.
  */
 export type HttpRequestGuard<GuardReturnType = any> = (
-  req: Request
+  req: Request,
 ) => GuardReturnType | Promise<GuardReturnType> | never;

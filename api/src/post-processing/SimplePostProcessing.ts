@@ -15,11 +15,11 @@ export class SimplePostProcessing {
     /**
      * Optionally required only for sequential executions
      */
-    private continueOnFailure?: boolean
+    private continueOnFailure?: boolean,
   ) {
     if (runType === "sequentially" && continueOnFailure === undefined) {
       throw new Error(
-        `${SimplePostProcessing.name} requires continue option to be set for Sequential executions`
+        `${SimplePostProcessing.name} requires continue option to be set for Sequential executions`,
       );
     }
   }
@@ -37,7 +37,7 @@ export class SimplePostProcessing {
     // 'mwEslintPlugin/require-function-name'
     if (fn.name === "") {
       throw new Error(
-        `Functions passed to ${SimplePostProcessing.name} must be named`
+        `Functions passed to ${SimplePostProcessing.name} must be named`,
       );
     }
 
@@ -45,28 +45,28 @@ export class SimplePostProcessing {
       try {
         logger.verbose(
           `${this.callerName}:${SimplePostProcessing.name}`,
-          `Executing: ${fn.name}`
+          `Executing: ${fn.name}`,
         );
 
         await fn();
 
         logger.verbose(
           `${this.callerName}:${SimplePostProcessing.name}`,
-          `Successfully executed: ${fn.name}`
+          `Successfully executed: ${fn.name}`,
         );
 
         return true;
       } catch (error) {
         logger.verbose(
           `${this.callerName}:${SimplePostProcessing.name}`,
-          `Failed while executing: ${fn.name}`
+          `Failed while executing: ${fn.name}`,
         );
 
         // @todo Create and log an error ID
         // @todo Notify devs about this error
         logger.error(
           `${this.callerName}:${SimplePostProcessing.name}:${fn.name}`,
-          error instanceof Error ? error.stack : error
+          error instanceof Error ? error.stack : error,
         );
 
         return false;
@@ -90,14 +90,14 @@ export class SimplePostProcessing {
 
       logger.info(
         `${this.callerName}:${SimplePostProcessing.name}`,
-        `Executing these functions ${this.runType}: ${functionNames}`
+        `Executing these functions ${this.runType}: ${functionNames}`,
       );
 
       if (this.runType === "sequentially") {
         return runSequentially(
           SimplePostProcessing.name,
           this.#fns,
-          !!this.continueOnFailure
+          !!this.continueOnFailure,
         );
       }
 

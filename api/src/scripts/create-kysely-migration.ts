@@ -34,7 +34,7 @@ function getDateString() {
 function getMigrationIndex(dateString: string) {
   const migrationFolderPath = path.join(
     import.meta.dirname,
-    `../dal/kysely/migrations`
+    `../dal/kysely/migrations`,
   );
 
   const migrationFileNames = fs.readdirSync(migrationFolderPath);
@@ -46,7 +46,7 @@ function getMigrationIndex(dateString: string) {
 
   // Find all the migrations that happened on the same as today's date string
   const migrationDatesWithTheSameDate = migrationDates.filter((migrationDate) =>
-    migrationDate.includes(dateString)
+    migrationDate.includes(dateString),
   );
 
   // Get the last migration index of today if any
@@ -67,7 +67,7 @@ async function createKyselyMigration() {
   });
 
   const migrationName = await rl.question(
-    `Migration name (lowercase with _ separation): `
+    `Migration name (lowercase with _ separation): `,
   );
 
   rl.close();
@@ -75,7 +75,7 @@ async function createKyselyMigration() {
   if (migrationName.replaceAll(/^[_a-z0-9]+$/g, "") !== "") {
     logger.error(
       createKyselyMigration.name,
-      `Migration name can only contain alphanumeric characters and _`
+      `Migration name can only contain alphanumeric characters and _`,
     );
     return;
   }
@@ -83,7 +83,7 @@ async function createKyselyMigration() {
   if (migrationName !== migrationName.replaceAll(/\s/g, "")) {
     logger.error(
       createKyselyMigration.name,
-      `Migration name cannot have space, use _ instead`
+      `Migration name cannot have space, use _ instead`,
     );
     return;
   }
@@ -91,7 +91,7 @@ async function createKyselyMigration() {
   if (migrationName !== migrationName.toLowerCase()) {
     logger.error(
       createKyselyMigration.name,
-      `Migration name must be all lowercase`
+      `Migration name must be all lowercase`,
     );
     return;
   }
@@ -104,14 +104,14 @@ async function createKyselyMigration() {
 
   const migrationFilePath = path.join(
     import.meta.dirname,
-    `../dal/kysely/migrations/${migrationFileName}`
+    `../dal/kysely/migrations/${migrationFileName}`,
   );
 
   fs.writeFileSync(migrationFilePath, codeTemplate);
 
   logger.info(
     createKyselyMigration.name,
-    `Created migration file at: ${migrationFilePath}`
+    `Created migration file at: ${migrationFilePath}`,
   );
 }
 

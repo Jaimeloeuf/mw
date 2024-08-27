@@ -9,7 +9,7 @@ export async function runCodegenModules(
 
   logger.info(
     runCodegenModules.name,
-    `Running codegen(s): ${codegenFunctionNames}`
+    `Running codegen(s): ${codegenFunctionNames}`,
   );
 
   const startTime = performance.now();
@@ -21,6 +21,6 @@ export async function runCodegenModules(
 
   logger.info(
     runCodegenModules.name,
-    `Codegen completed, took ${Math.ceil(endTime - startTime)} ms to run ${codegenFunctions.length} modules`
+    `Codegen completed, took ${Math.ceil(endTime - startTime)} ms to run ${codegenFunctions.length} modules`,
   );
 }

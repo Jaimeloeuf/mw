@@ -9,7 +9,7 @@ import { logger } from "../logging/index.js";
 export function loggingMiddleware(
   req: Request,
   _: unknown,
-  next: NextFunction
+  next: NextFunction,
 ) {
   logger.verbose("HTTP Request", `${req.method} ${req.path}`);
   next();

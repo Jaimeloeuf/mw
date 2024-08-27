@@ -32,12 +32,12 @@ export function bootstrapHttpServer() {
     .listen(config.port, () => {
       logger.info(
         bootstrapHttpServer.name,
-        `Web Server now listening on port: ${config.port}`
+        `Web Server now listening on port: ${config.port}`,
       );
 
       logger.info(
         bootstrapHttpServer.name,
-        `Web Server global timeout set to: ${config.server_timeout} ms`
+        `Web Server global timeout set to: ${config.server_timeout} ms`,
       );
     })
 
@@ -56,7 +56,7 @@ export function bootstrapHttpServer() {
 
       logger.error(
         bootstrapHttpServer.name,
-        `Request to '${originalRequestUrl}' exceeded global timeout of ${config.server_timeout} ms`
+        `Request to '${originalRequestUrl}' exceeded global timeout of ${config.server_timeout} ms`,
       );
     });
 }

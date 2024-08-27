@@ -12,7 +12,7 @@ export function printAllCodegenModules() {
   /* eslint-disable no-console */
   console.log("These are the available codegen modules:");
   codegenModuleFolders.forEach((codegenModule, i) =>
-    console.log(`${i + 1}) ${codegenModule}`)
+    console.log(`${i + 1}) ${codegenModule}`),
   );
   console.log();
   /* eslint-enable no-console */

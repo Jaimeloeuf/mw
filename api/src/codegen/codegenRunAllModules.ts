@@ -13,7 +13,7 @@ export async function codegenRunAllModules() {
   await runCodegenModules(
     genHttpControllerBarrelFile,
     genHttpRoutesTable,
-    genHttpDtoTypeDefinition
+    genHttpDtoTypeDefinition,
   );
 
   await genCodegenBarrelFile();

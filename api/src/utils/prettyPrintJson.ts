@@ -12,7 +12,7 @@ export function prettyPrintJson(obj: any) {
   } catch (e) {
     logger.error(
       prettyPrintJson.name,
-      `JSON.stringify threw while trying to stringify: ${obj}`
+      `JSON.stringify threw while trying to stringify: ${obj}`,
     );
     logger.error(prettyPrintJson.name, `JSON.stringify threw: ${e}`);
 

@@ -13,7 +13,7 @@ export function printCodegenCliHelp() {
   console.log(pc.green("npm run codegen all"));
   console.log();
   console.log(
-    "Run a single codegen module, e.g. run the module genHttpRoutesTable"
+    "Run a single codegen module, e.g. run the module genHttpRoutesTable",
   );
   console.log(pc.green("npm run codegen genHttpRoutesTable"));
   console.log();

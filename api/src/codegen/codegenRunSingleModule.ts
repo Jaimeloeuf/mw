@@ -12,18 +12,18 @@ export async function codegenRunSingleModule(codegenModuleName: string) {
   const codegenModulePath = path.resolve(
     import.meta.dirname,
     codegenModuleName,
-    `${codegenModuleName}.ts`
+    `${codegenModuleName}.ts`,
   );
 
   const moduleExists = fs.existsSync(codegenModulePath);
   if (!moduleExists) {
     logger.error(
       codegenRunSingleModule.name,
-      `Codegen module does not exist: ${codegenModuleName}`
+      `Codegen module does not exist: ${codegenModuleName}`,
     );
     logger.error(
       codegenRunSingleModule.name,
-      `Use 'npm run codegen list' to see all codegen modules`
+      `Use 'npm run codegen list' to see all codegen modules`,
     );
     return;
   }
@@ -38,11 +38,11 @@ export async function codegenRunSingleModule(codegenModuleName: string) {
   if (typeof importedCodegenFunction !== "function") {
     logger.error(
       codegenRunSingleModule.name,
-      `Codegen module is malformed and does not export codegen function\nMake sure they are of the same name`
+      `Codegen module is malformed and does not export codegen function\nMake sure they are of the same name`,
     );
     logger.error(
       codegenRunSingleModule.name,
-      `Module found: ${importedModule}`
+      `Module found: ${importedModule}`,
     );
     return;
   }
@@ -52,7 +52,7 @@ export async function codegenRunSingleModule(codegenModuleName: string) {
   // delete all generated files since we do not regenerate all files.
   logger.info(
     codegenRunSingleModule.name,
-    "If your codegen module's output file has changed, please manually delete it first"
+    "If your codegen module's output file has changed, please manually delete it first",
   );
 
   await runCodegenModules(importedCodegenFunction);

@@ -13,6 +13,8 @@
     "build:full": "npm run delete-build-cache && npx tsc",
     "serve": "npm run build:watch & npm run start:watch",
     "lint": "npx eslint",
+    "format": "npx prettier --write src/**/*.ts",
+    "format:ci": "npx prettier --check src/**/*.ts",
     "db:run-migrations": "npx tsx ./src/dal/kysely/migration-script.ts",
     "scripts:create-kysely-migration": "npx tsx ./src/scripts/create-kysely-migration.ts",
     "scripts:create-http-controller": "npx tsx ./src/scripts/create-http-controller.ts",

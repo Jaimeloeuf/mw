@@ -19,7 +19,7 @@ export async function genCodegenBarrelFile() {
         (dirent) =>
           dirent.name !== "index.ts" &&
           dirent.name !== "README.md" &&
-          dirent.name.endsWith(".ts")
+          dirent.name.endsWith(".ts"),
       )
       // Sort by name alphabetically to always have them in a stable position
       .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
@@ -31,11 +31,11 @@ export async function genCodegenBarrelFile() {
   await genAndSaveGeneratedCode(
     genCodegenBarrelFile,
     generatedCode,
-    generatedFilePath
+    generatedFilePath,
   );
 
   logger.info(
     genCodegenBarrelFile.name,
-    `Generated barrel file: '${generatedFilePath}'`
+    `Generated barrel file: '${generatedFilePath}'`,
   );
 }

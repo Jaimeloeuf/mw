@@ -20,7 +20,7 @@ export function unknownCatchToError(e: unknown) {
 
   logger.error(
     unknownCatchToError.name,
-    `Found invalid error type thrown: ${prettyPrintJson(e)}`
+    `Found invalid error type thrown: ${prettyPrintJson(e)}`,
   );
 
   return new Error(e?.toString?.());

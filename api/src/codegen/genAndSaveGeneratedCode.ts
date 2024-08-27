@@ -17,7 +17,7 @@ import { genGeneratedNotice } from "./genGeneratedNotice.js";
 export async function genAndSaveGeneratedCode(
   generator: Function,
   generatedCode: string,
-  generatedCodeFilePath: string
+  generatedCodeFilePath: string,
 ) {
   const generatedCodeAfterFormatting = await prettier.format(generatedCode, {
     // Use this to trick prettier to use a TS parser automatically

@@ -7,7 +7,7 @@ import pc from "picocolors";
 const codeTemplate = (
   controllerName: string,
   httpMethod: string,
-  apiPath: string
+  apiPath: string,
 ) => `import { z } from "zod";
 // TODO:
 // Move this file into a app folder to fix the relative path import
@@ -43,7 +43,7 @@ async function createHttpController() {
   if (!new RegExp(/^[a-z][A-Za-z0-9]*$/g).test(controllerName)) {
     logger.error(
       createHttpController.name,
-      `Controller name must be camelCase.`
+      `Controller name must be camelCase.`,
     );
     rl.close();
     return;
@@ -51,12 +51,12 @@ async function createHttpController() {
 
   const allowedHttpMethods = ["get", "post", "put", "patch", "delete", "all"];
   const httpMethod = await rl.question(
-    `Express HTTP Method (${allowedHttpMethods.join(", ")}): `
+    `Express HTTP Method (${allowedHttpMethods.join(", ")}): `,
   );
   if (!allowedHttpMethods.includes(httpMethod)) {
     logger.error(
       createHttpController.name,
-      `HTTP Method must be one of the allowed values`
+      `HTTP Method must be one of the allowed values`,
     );
     rl.close();
     return;
@@ -73,7 +73,7 @@ async function createHttpController() {
 
   const controllerFilePath = path.join(
     import.meta.dirname,
-    `../controllers/${controllerName}.ts`
+    `../controllers/${controllerName}.ts`,
   );
 
   const generatedCode = codeTemplate(controllerName, httpMethod, apiPath);
@@ -81,18 +81,18 @@ async function createHttpController() {
 
   logger.info(
     createHttpController.name,
-    `Created controller file: ${controllerFilePath}`
+    `Created controller file: ${controllerFilePath}`,
   );
   logger.info(
     createHttpController.name,
-    `Please update the controller file details and run "npm run codegen all" to update the generated files`
+    `Please update the controller file details and run "npm run codegen all" to update the generated files`,
   );
   logger.info(createHttpController.name, `You can also copy the printed code.`);
 
   // Print out the generated code template without any additional formatting.
   /* eslint-disable no-console */
   console.log(
-    "\nFile has been generated but you can copy the output code too\n"
+    "\nFile has been generated but you can copy the output code too\n",
   );
   console.log(pc.green(generatedCode));
   /* eslint-enable no-console */

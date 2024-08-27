@@ -9,7 +9,7 @@ export const useHttpRequestGuard = <
   const GuardFunction extends HttpRequestGuard,
 >(
   guardDataNamespace: GuardDataNamespace,
-  guard: GuardFunction
+  guard: GuardFunction,
 ) =>
   <const>{
     guardDataNamespace,

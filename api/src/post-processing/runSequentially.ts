@@ -8,7 +8,7 @@ import type { WrappedFunction } from "./WrappedFunction.js";
 export async function runSequentially(
   logHeader: string,
   fns: Array<WrappedFunction>,
-  continueOnFailure: boolean
+  continueOnFailure: boolean,
 ) {
   let successfulExecutions = 0;
   let failedExecutions = 0;
@@ -22,14 +22,14 @@ export async function runSequentially(
       if (continueOnFailure) {
         logger.info(
           logHeader,
-          `Sequential execution continuing because it is configured to continue on failure`
+          `Sequential execution continuing because it is configured to continue on failure`,
         );
 
         continue;
       } else {
         logger.info(
           logHeader,
-          `Sequential execution stopped because it is configured to stop on failure`
+          `Sequential execution stopped because it is configured to stop on failure`,
         );
 
         break;
@@ -39,6 +39,6 @@ export async function runSequentially(
 
   logger.info(
     logHeader,
-    `Processed ${fns.length} jobs sequentially. ${successfulExecutions} succeeded and ${failedExecutions} failed.`
+    `Processed ${fns.length} jobs sequentially. ${successfulExecutions} succeeded and ${failedExecutions} failed.`,
   );
 }
