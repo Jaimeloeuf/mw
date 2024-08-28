@@ -1,9 +1,4 @@
-import path from "path";
-import { logger } from "../../logging/index.js";
-import {
-  generatedSrcDirPath,
-  genAndSaveGeneratedCode,
-} from "../codegenForTs/index.js";
+import { genAndSaveGeneratedCode } from "../codegenForTs/index.js";
 import { getControllerFiles } from "../utils/getControllerFiles/getControllerFiles.js";
 
 /**
@@ -36,19 +31,9 @@ import * as c from "./httpControllerBarrelFile.generated.js";
 ${typeDefinitions}
 `;
 
-  const generatedHttpDtoFilePath = path.join(
-    generatedSrcDirPath,
-    `httpDto.generated.ts`,
-  );
-
   await genAndSaveGeneratedCode(
     genHttpDtoTypeDefinition,
     generatedCode,
-    generatedHttpDtoFilePath,
-  );
-
-  logger.info(
-    genHttpDtoTypeDefinition.name,
-    `Generated HTTP DTO type definition file: ${generatedHttpDtoFilePath}`,
+    "httpDto",
   );
 }

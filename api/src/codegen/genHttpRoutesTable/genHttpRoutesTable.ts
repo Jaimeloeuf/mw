@@ -1,9 +1,4 @@
-import path from "path";
-import { logger } from "../../logging/index.js";
-import {
-  generatedSrcDirPath,
-  genAndSaveGeneratedCode,
-} from "../codegenForTs/index.js";
+import { genAndSaveGeneratedCode } from "../codegenForTs/index.js";
 import { getControllerFiles } from "../utils/getControllerFiles/getControllerFiles.js";
 import { routeTableTemplate } from "./routeTableTemplate.js";
 import { routeDefinitionTemplate } from "./routeDefinitionTemplate.js";
@@ -22,19 +17,9 @@ export async function genHttpRoutesTable() {
 
   const generatedCode = routeTableTemplate(routeDefinitions);
 
-  const routeTableFilePath = path.join(
-    generatedSrcDirPath,
-    `registerRoutesAndControllers.generated.ts`,
-  );
-
   await genAndSaveGeneratedCode(
     genHttpRoutesTable,
     generatedCode,
-    routeTableFilePath,
-  );
-
-  logger.info(
-    genHttpRoutesTable.name,
-    `Generated HTTP routes table file: ${routeTableFilePath}`,
+    "registerRoutesAndControllers",
   );
 }

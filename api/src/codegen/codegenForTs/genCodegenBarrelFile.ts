@@ -1,6 +1,4 @@
 import fs from "fs/promises";
-import path from "path";
-import { logger } from "../../logging/index.js";
 import { generatedSrcDirPath } from "./generatedSrcDirPath.js";
 import { genAndSaveGeneratedCode } from "./genAndSaveGeneratedCode.js";
 
@@ -26,16 +24,10 @@ export async function genCodegenBarrelFile() {
       .map((dirent) => `export * from './${dirent.name.replace(".ts", ".js")}'`)
       .join("\n");
 
-  const generatedFilePath = path.resolve(generatedSrcDirPath, `index.ts`);
-
   await genAndSaveGeneratedCode(
     genCodegenBarrelFile,
     generatedCode,
-    generatedFilePath,
-  );
-
-  logger.info(
-    genCodegenBarrelFile.name,
-    `Generated barrel file: '${generatedFilePath}'`,
+    "index",
+    ".ts",
   );
 }

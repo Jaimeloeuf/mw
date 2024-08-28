@@ -1,9 +1,5 @@
 import path from "path";
-import { logger } from "../../logging/index.js";
-import {
-  generatedSrcDirPath,
-  genAndSaveGeneratedCode,
-} from "../codegenForTs/index.js";
+import { genAndSaveGeneratedCode } from "../codegenForTs/index.js";
 import { getControllerFiles } from "../utils/getControllerFiles/getControllerFiles.js";
 import { controllerExportTemplate } from "./controllerExportTemplate.js";
 
@@ -26,19 +22,9 @@ export async function genHttpControllerBarrelFile() {
     .map((file) => controllerExportTemplate(file, controllerFolderPath))
     .join("");
 
-  const generatedHttpDtoFilePath = path.join(
-    generatedSrcDirPath,
-    `httpControllerBarrelFile.generated.ts`,
-  );
-
   await genAndSaveGeneratedCode(
     genHttpControllerBarrelFile,
     generatedCode,
-    generatedHttpDtoFilePath,
-  );
-
-  logger.info(
-    genHttpControllerBarrelFile.name,
-    `Generated HTTP controller barrel file: ${generatedHttpDtoFilePath}`,
+    "httpControllerBarrelFile",
   );
 }

@@ -1,7 +1,10 @@
+import path from "path";
 import fs from "fs/promises";
 import * as prettier from "prettier";
 import { createHash } from "crypto";
+import { generatedSrcDirPath } from "./generatedSrcDirPath.js";
 import { genGeneratedNotice } from "./genGeneratedNotice.js";
+import { logger } from "../../logging/index.js";
 
 /**
  * Generate the full code file (formatted + notice + hash) from the generator
@@ -17,7 +20,8 @@ import { genGeneratedNotice } from "./genGeneratedNotice.js";
 export async function genAndSaveGeneratedCode(
   generator: Function,
   generatedCode: string,
-  generatedCodeFilePath: string,
+  generatedCodeFileName: string,
+  generatedCodeFileNameExtension: string = ".generated.ts",
 ) {
   const generatedCodeAfterFormatting = await prettier.format(generatedCode, {
     // Use this to trick prettier to use a TS parser automatically
@@ -36,5 +40,12 @@ export async function genAndSaveGeneratedCode(
 
   const fullGeneratedCode = notice + generatedCodeAfterFormatting;
 
-  await fs.writeFile(generatedCodeFilePath, fullGeneratedCode);
+  const filePath = path.join(
+    generatedSrcDirPath,
+    `${generatedCodeFileName}${generatedCodeFileNameExtension}`,
+  );
+
+  await fs.writeFile(filePath, fullGeneratedCode);
+
+  logger.info(generator.name, `Generated file: ${filePath}`);
 }
