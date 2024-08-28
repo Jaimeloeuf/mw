@@ -1,10 +1,6 @@
-import path from "path";
-import fs from "fs/promises";
-import * as prettier from "prettier";
-import { createHash } from "crypto";
 import { generatedSrcDirPath } from "./generatedSrcDirPath.js";
 import { genGeneratedNotice } from "./genGeneratedNotice.js";
-import { logger } from "../../logging/index.js";
+import { genAndSaveGeneratedFile } from "../utils/genAndSaveGeneratedFile.js";
 
 /**
  * Generate the full code file (formatted + notice + hash) from the generator
@@ -16,6 +12,7 @@ import { logger } from "../../logging/index.js";
  * 1. Create the generated code warning/notice
  * 1. Combine all of these into a single string
  * 1. Save the full generated code to the provided file path
+ * 1. Log file name once it is saved
  */
 export async function genAndSaveGeneratedCode(
   generator: Function,
@@ -23,29 +20,13 @@ export async function genAndSaveGeneratedCode(
   generatedCodeFileName: string,
   generatedCodeFileNameExtension: string = ".generated.ts",
 ) {
-  const generatedCodeAfterFormatting = await prettier.format(generatedCode, {
-    // Use this to trick prettier to use a TS parser automatically
-    filepath: ".ts",
+  await genAndSaveGeneratedFile({
+    generator,
+    genGeneratedNotice,
+    generatedText: generatedCode,
+    generatedTextFileType: ".ts",
+    generatedFileRootDirPath: generatedSrcDirPath,
+    generatedTextFileName: generatedCodeFileName,
+    generatedTextFileNameExtension: generatedCodeFileNameExtension,
   });
-
-  const codeHash = createHash("sha256")
-    .update(generatedCodeAfterFormatting)
-    .digest()
-    .toString("hex");
-
-  // Wrap it so that it is easy to parse out with regex when needed
-  const wrappedCodeHash = `sha256<${codeHash}>`;
-
-  const notice = genGeneratedNotice(generator, wrappedCodeHash);
-
-  const fullGeneratedCode = notice + generatedCodeAfterFormatting;
-
-  const filePath = path.join(
-    generatedSrcDirPath,
-    `${generatedCodeFileName}${generatedCodeFileNameExtension}`,
-  );
-
-  await fs.writeFile(filePath, fullGeneratedCode);
-
-  logger.info(generator.name, `Generated file: ${filePath}`);
 }
