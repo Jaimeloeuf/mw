@@ -39,10 +39,10 @@ export async function genAndSaveGeneratedFile({
   });
 
   // Wrap it so that it is easy to parse out with regex when needed
-  const hash = `sha256<${createHash("sha256")
+  const hash = `sha256(${createHash("sha256")
     .update(generatedTextAfterFormatting)
     .digest()
-    .toString("hex")}>`;
+    .toString("hex")})`;
 
   const notice = genGeneratedNotice(generator, hash);
 

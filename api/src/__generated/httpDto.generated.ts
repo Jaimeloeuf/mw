@@ -6,7 +6,7 @@
  * genHttpDtoTypeDefinition
  *
  * Generated hash in hex for code after this section is:
- * sha256<2182c5ce87d8c77f102bbce293fb2669787d7b7fe88828fa26eddf6f8f0dbf36>
+ * sha256(2182c5ce87d8c77f102bbce293fb2669787d7b7fe88828fa26eddf6f8f0dbf36)
  */
 import type { z } from "zod";
 import * as c from "./httpControllerBarrelFile.generated.js";

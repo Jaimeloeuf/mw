@@ -6,7 +6,7 @@
  * genHttpControllerBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256<61d64409e019739959c9f5989a76380b7b234a02ac3af224e6f5f4ae63440a62>
+ * sha256(61d64409e019739959c9f5989a76380b7b234a02ac3af224e6f5f4ae63440a62)
  */
 export * from "../controllers/healthCheck.js";
 export * from "../controllers/blog/blogNewSubscriberController.js";
