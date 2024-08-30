@@ -4,6 +4,7 @@ import { genCodegenBarrelFile } from "./codegenForTs/index.js";
 import { genHttpControllerBarrelFile } from "./genHttpControllerBarrelFile/genHttpControllerBarrelFile.js";
 import { genHttpRoutesTable } from "./genHttpRoutesTable/genHttpRoutesTable.js";
 import { genHttpDtoTypeDefinition } from "./genHttpDtoTypeDefinition/genHttpDtoTypeDefinition.js";
+import { genServerConfigDoc } from "./genServerConfigDoc/genServerConfigDoc.js";
 
 import { deleteAllGeneratedFiles } from "./deleteAllGeneratedFiles.js";
 
@@ -14,6 +15,7 @@ export async function codegenRunAllModules() {
     genHttpControllerBarrelFile,
     genHttpRoutesTable,
     genHttpDtoTypeDefinition,
+    genServerConfigDoc,
   );
 
   await genCodegenBarrelFile();
