@@ -1,7 +1,14 @@
 import type { z } from "zod";
-import type { combinedConfigSchema } from "./configs/combinedConfigSchema.js";
+import type { combinedConfig } from "./configs/combinedConfigSchema.js";
 
 /**
- * Use Zod to infer the TS type of all the config values.
+ * Config Type should be an object of { ConfigName: ConfigValue }
+ *
+ * DO NOT DELETE THIS IS USED BY CODEGEN MODULE
+ * There is no references of this
  */
-export type ConfigType = z.infer<typeof combinedConfigSchema>;
+export type ConfigType = {
+  [K in keyof typeof combinedConfig]: z.infer<
+    (typeof combinedConfig)[K]["schema"]
+  >;
+};
