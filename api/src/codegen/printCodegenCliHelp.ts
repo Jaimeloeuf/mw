@@ -9,6 +9,9 @@ export function printCodegenCliHelp() {
   console.log("See all available codegen modules");
   console.log(pc.green("npm run codegen list"));
   console.log();
+  console.log("Validate that generated code is not manually modified");
+  console.log(pc.green("npm run codegen validate"));
+  console.log();
   console.log("Run all codegen modules");
   console.log(pc.green("npm run codegen all"));
   console.log();

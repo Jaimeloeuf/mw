@@ -5,6 +5,7 @@ import { codegenRunSingleModule } from "./codegenRunSingleModule.js";
 import { printCodegenCliHelp } from "./printCodegenCliHelp.js";
 import { printAllCodegenModules } from "./printAllCodegenModules.js";
 import { showGitStatusOfGeneratedFolder } from "./showGitStatusOfGeneratedFolder.js";
+import { validateGeneratedFiles } from "./validateGeneratedFiles/validateGeneratedFiles.js";
 
 async function codegenEntrypoint() {
   // No extra arguments, show help menu
@@ -24,6 +25,12 @@ async function codegenEntrypoint() {
   // List out all codegen modules
   if (arg === "list") {
     printAllCodegenModules();
+    return;
+  }
+
+  // Validate all existing generated files
+  if (arg === "validate") {
+    await validateGeneratedFiles();
     return;
   }
 
