@@ -1,3 +1,4 @@
 import path from "path";
 
-export const generatedDocDirPath = path.resolve("../docs");
+export const generatedDocDirPathString = "../docs";
+export const generatedDocDirPath = path.resolve(generatedDocDirPathString);
