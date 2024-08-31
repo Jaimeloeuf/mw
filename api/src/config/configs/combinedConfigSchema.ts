@@ -1,7 +1,16 @@
 import { z } from "zod";
-import { genericMonoRepoConfigSchema } from "./genericMonoRepoConfig.js";
-import { sharedInfraConfigSchema } from "./sharedInfraConfig.js";
-import { appSpecificConfigSchema } from "./appSpecificConfig.js";
+import {
+  genericMonoRepoConfigSchema,
+  genericMonoRepoConfig,
+} from "./genericMonoRepoConfig.js";
+import {
+  sharedInfraConfigSchema,
+  sharedInfraConfig,
+} from "./sharedInfraConfig.js";
+import {
+  appSpecificConfigSchema,
+  appSpecificConfig,
+} from "./appSpecificConfig.js";
 
 /**
  * Make sure you define the config in the right schema object
@@ -15,3 +24,9 @@ export const combinedConfigSchema = z.object({
   ...sharedInfraConfigSchema,
   ...appSpecificConfigSchema,
 });
+
+export const combinedConfig = {
+  ...genericMonoRepoConfig,
+  ...sharedInfraConfig,
+  ...appSpecificConfig,
+};
