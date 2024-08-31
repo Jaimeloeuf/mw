@@ -1,19 +1,10 @@
 import "dotenv/config";
-import { z } from "zod";
 import { logger } from "../logging/index.js";
 import { combinedConfig } from "./configs/combinedConfigSchema.js";
+import type { ConfigType } from "./ConfigType.js";
 
 function configBootstrap() {
-  /**
-   * Type should be an object of { ConfigName: ConfigValue }
-   */
-  type Config = {
-    [K in keyof typeof combinedConfig]: z.infer<
-      (typeof combinedConfig)[K]["schema"]
-    >;
-  };
-
-  const config: Partial<Config> = {};
+  const config: Partial<ConfigType> = {};
 
   for (const configName in combinedConfig) {
     const configMapping =
@@ -38,7 +29,7 @@ function configBootstrap() {
       configMapping.schema.parse(configMapping.datasource);
   }
 
-  return Object.freeze(config as Config);
+  return Object.freeze(config as ConfigType);
 }
 
 export const config = configBootstrap();
