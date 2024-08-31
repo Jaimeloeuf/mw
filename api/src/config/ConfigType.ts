@@ -4,8 +4,7 @@ import type { combinedConfig } from "./configs/combinedConfigSchema.js";
 /**
  * Config Type should be an object of { ConfigName: ConfigValue }
  *
- * DO NOT DELETE THIS IS USED BY CODEGEN MODULE
- * There is no references of this
+ * DO NOT DELETE THIS, THIS IS USED BY CODEGEN STEP (genServerConfigDoc)
  */
 export type ConfigType = {
   [K in keyof typeof combinedConfig]: z.infer<
