@@ -3,7 +3,8 @@ import fs from "fs/promises";
 import { performance } from "perf_hooks";
 import { Migrator, FileMigrationProvider } from "kysely";
 import { dbConnectionCheck } from "./dbConnectionCheck.js";
-import { apiDB, apiDbCleanup } from "./apiDB.js";
+import { createDB } from "./createDB.js";
+import { lazyConfig } from "../../config/lazyConfig.js";
 import { logger } from "../../logging/index.js";
 
 /**
@@ -16,21 +17,25 @@ async function kyselyMigrateToLatest() {
   /** This needs to be an absolute path */
   const migrationFolder = path.join(import.meta.dirname, "./migrations");
 
-  const dbConnectionOk = await dbConnectionCheck(apiDB);
+  const db = createDB({
+    connectionString: lazyConfig.db_conn_string(),
+  });
+
+  const dbConnectionOk = await dbConnectionCheck(db);
   if (!dbConnectionOk) {
     // Stop running migration immediately
     process.exit(1);
   }
 
+  const migrator = new Migrator({
+    db,
+    provider: new FileMigrationProvider({ fs, path, migrationFolder }),
+  });
+
   logger.info(
     kyselyMigrateToLatest.name,
     `Running migrations in: ${migrationFolder}`,
   );
-
-  const migrator = new Migrator({
-    db: apiDB,
-    provider: new FileMigrationProvider({ fs, path, migrationFolder }),
-  });
 
   const { error, results } = await migrator.migrateToLatest();
 
@@ -58,7 +63,8 @@ async function kyselyMigrateToLatest() {
     }
   });
 
-  await apiDbCleanup();
+  // Close all connections and release resources
+  await db.destroy();
 
   const endTime = performance.now();
   const time = Math.round(endTime - startTime);
