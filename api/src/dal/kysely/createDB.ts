@@ -1,11 +1,13 @@
 import pg from "pg";
 import { Kysely, PostgresDialect } from "kysely";
-import { Database } from "./definitions/index.js";
-import { config } from "../../config/index.js";
+import type { Database } from "./definitions/index.js";
 
 /**
- * The kysely db API.
+ * Creates a new kysely db instance. You should only create one instance per
+ * use case, so e.g. for API services, all API services should only share a
+ * single instance as this does connection pooling internally already.
  *
+ * ## More info on Kysely
  * Kysely knows your database structure using the generic Database interface
  * passed to its constructor.
  *
@@ -15,18 +17,10 @@ import { config } from "../../config/index.js";
  * as most dialect implementations use a connection pool internally, or no
  * connections at all, so you should not create a new instance for each request.
  */
-export const db = new Kysely<Database>({
-  dialect: new PostgresDialect({
-    pool: new pg.Pool({
-      connectionString: config.db_conn_string,
+export function createDB(config: { connectionString: string }) {
+  return new Kysely<Database>({
+    dialect: new PostgresDialect({
+      pool: new pg.Pool(config),
     }),
-  }),
-});
-
-/**
- * When needed, you can dispose of the Kysely instance, release resources and
- * close all connections.
- */
-export function dbCleanup() {
-  db.destroy();
+  });
 }

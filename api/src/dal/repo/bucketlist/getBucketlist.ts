@@ -1,16 +1,16 @@
-import { db } from "../../kysely/index.js";
+import { apiDB } from "../../kysely/index.js";
 import { NotFoundException } from "../../../exceptions/index.js";
 import { concurrent } from "../../../utils/index.js";
 
 export async function getBucketlist(id: string) {
   const { bucketlist, bucketlistItems } = await concurrent({
-    bucketlist: db
+    bucketlist: apiDB
       .selectFrom("bucketlist")
       .selectAll()
       .where("id", "=", id)
       .executeTakeFirst(),
 
-    bucketlistItems: db
+    bucketlistItems: apiDB
       .selectFrom("bucketlist_item")
       .selectAll()
       .where("bucketlist_id", "=", id)

@@ -1,7 +1,7 @@
-import { db } from "../../kysely/index.js";
+import { apiDB } from "../../kysely/index.js";
 
 export async function isEmailAlreadySubscribed(email: string) {
-  const subscriber = await db
+  const subscriber = await apiDB
     .selectFrom("blog_subscriber")
     .where("email", "=", email)
     .select("id")

@@ -2,6 +2,6 @@
  * Barrel file
  */
 
-export * from "./db.js";
+export * from "./apiDB.js";
 export * from "./dbConnectionCheck.js";
 export * from "./definitions/index.js";

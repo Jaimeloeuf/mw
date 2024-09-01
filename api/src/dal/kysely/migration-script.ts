@@ -3,7 +3,7 @@ import fs from "fs/promises";
 import { performance } from "perf_hooks";
 import { Migrator, FileMigrationProvider } from "kysely";
 import { dbConnectionCheck } from "./dbConnectionCheck.js";
-import { db, dbCleanup } from "./db.js";
+import { apiDB, apiDbCleanup } from "./apiDB.js";
 import { logger } from "../../logging/index.js";
 
 /**
@@ -28,7 +28,7 @@ async function kyselyMigrateToLatest() {
   );
 
   const migrator = new Migrator({
-    db,
+    db: apiDB,
     provider: new FileMigrationProvider({ fs, path, migrationFolder }),
   });
 
@@ -58,7 +58,7 @@ async function kyselyMigrateToLatest() {
     }
   });
 
-  await dbCleanup();
+  await apiDbCleanup();
 
   const endTime = performance.now();
   const time = Math.round(endTime - startTime);

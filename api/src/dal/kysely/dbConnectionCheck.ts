@@ -1,5 +1,5 @@
 import { sql } from "kysely";
-import { db } from "./db.js";
+import { apiDB } from "./apiDB.js";
 import { logger } from "../../logging/index.js";
 
 /**
@@ -11,7 +11,7 @@ export async function dbConnectionCheck() {
   try {
     // No-Op query to check connection. This only works for PostgreSQL
     // https://stackoverflow.com/questions/3668506/efficient-sql-test-query-or-validation-query-that-will-work-across-all-or-most
-    await sql`SELECT 1;`.execute(db);
+    await sql`SELECT 1;`.execute(apiDB);
 
     logger.info(dbConnectionCheck.name, `DB connection check PASSED`);
 
