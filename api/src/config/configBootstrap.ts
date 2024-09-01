@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { logger } from "../logging/index.js";
-import { combinedConfig } from "./configs/combinedConfigSchema.js";
+import { combinedConfig } from "./configs/combinedConfig.js";
 import type { ConfigType } from "./ConfigType.js";
 
 function configBootstrap() {

@@ -1,5 +1,5 @@
 import type { z } from "zod";
-import type { combinedConfig } from "./configs/combinedConfigSchema.js";
+import type { combinedConfig } from "./configs/combinedConfig.js";
 
 /**
  * Config Type should be an object of { ConfigName: ConfigValue }
