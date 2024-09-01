@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createConfigMapping } from "../createConfigMapping.js";
+import { createConfigMapping } from "../utils/createConfigMapping.js";
 
 /**
  * Generic config used to configure the monorepo as a whole instead of a

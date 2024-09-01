@@ -1,9 +1,9 @@
 import "dotenv/config";
-import { logger } from "../logging/index.js";
-import { combinedConfig } from "./configs/combinedConfig.js";
-import type { ConfigType } from "./ConfigType.js";
+import { logger } from "../../logging/index.js";
+import { combinedConfig } from "../configMappings/combinedConfig.js";
+import type { ConfigType } from "../ConfigType.js";
 
-function configBootstrap() {
+export function bootstrapConfig() {
   const config: Partial<ConfigType> = {};
 
   for (const configName in combinedConfig) {
@@ -12,7 +12,7 @@ function configBootstrap() {
 
     if (configMapping === undefined) {
       logger.error(
-        configBootstrap.name,
+        bootstrapConfig.name,
         `Cannot find config mapping for: ${configName}`,
       );
       process.exit(1);
@@ -31,5 +31,3 @@ function configBootstrap() {
 
   return Object.freeze(config as ConfigType);
 }
-
-export const config = configBootstrap();

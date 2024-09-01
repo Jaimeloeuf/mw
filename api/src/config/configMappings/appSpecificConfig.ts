@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createConfigMapping } from "../createConfigMapping.js";
+import { createConfigMapping } from "../utils/createConfigMapping.js";
 
 /**
  * App specific config (grouped by app)

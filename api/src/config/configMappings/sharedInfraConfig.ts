@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createConfigMapping } from "../createConfigMapping.js";
+import { createConfigMapping } from "../utils/createConfigMapping.js";
 
 /**
  * Configs for shared infra used across the different apps within the monorepo.
