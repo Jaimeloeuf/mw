@@ -1,4 +1,5 @@
 import { dbConnectionCheck } from "./kysely/index.js";
+import { apiDB } from "./kysely/apiDB.js";
 import { config } from "../config/index.js";
 import { logger } from "../logging/index.js";
 
@@ -18,7 +19,7 @@ export async function bootstrapDal() {
     return;
   }
 
-  const dbConnectionOk = await dbConnectionCheck();
+  const dbConnectionOk = await dbConnectionCheck(apiDB);
   if (!dbConnectionOk) {
     // Stop running service since nothing should continue on failure
     process.exit(1);

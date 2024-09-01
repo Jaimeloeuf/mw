@@ -16,7 +16,7 @@ async function kyselyMigrateToLatest() {
   /** This needs to be an absolute path */
   const migrationFolder = path.join(import.meta.dirname, "./migrations");
 
-  const dbConnectionOk = await dbConnectionCheck();
+  const dbConnectionOk = await dbConnectionCheck(apiDB);
   if (!dbConnectionOk) {
     // Stop running migration immediately
     process.exit(1);
