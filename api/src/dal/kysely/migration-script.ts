@@ -19,6 +19,7 @@ async function kyselyMigrateToLatest() {
 
   const db = createDB({
     connectionString: lazyConfig.db_conn_string(),
+    kysely_log_error: true,
   });
 
   const dbConnectionOk = await dbConnectionCheck(db);

@@ -1,5 +1,6 @@
 import pg from "pg";
 import { Kysely, PostgresDialect } from "kysely";
+import type { Logger, LogConfig } from "kysely";
 import type { Database } from "./definitions/index.js";
 
 /**
@@ -17,10 +18,23 @@ import type { Database } from "./definitions/index.js";
  * as most dialect implementations use a connection pool internally, or no
  * connections at all, so you should not create a new instance for each request.
  */
-export function createDB(config: { connectionString: string }) {
+export function createDB(config: {
+  connectionString: string;
+  kysely_log_query?: boolean;
+  kysely_log_error?: boolean;
+}) {
+  const log: Array<Exclude<LogConfig, Logger>[number]> = [];
+  if (config.kysely_log_query) {
+    log.push("query");
+  }
+  if (config.kysely_log_error) {
+    log.push("error");
+  }
+
   return new Kysely<Database>({
     dialect: new PostgresDialect({
       pool: new pg.Pool(config),
     }),
+    log,
   });
 }

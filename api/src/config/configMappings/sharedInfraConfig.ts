@@ -14,6 +14,28 @@ export const sharedInfraConfig = {
   ),
 
   /**
+   * Use this to log all kysely queries, defaults to false.
+   */
+  kysely_log_query: createConfigMapping(
+    z
+      .enum(["true", "false"])
+      .transform((v) => v === "true")
+      .default("false"),
+    process.env["KYSELY_LOG_QUERY"],
+  ),
+
+  /**
+   * Use this to log all kysely errors, defaults to false.
+   */
+  kysely_log_error: createConfigMapping(
+    z
+      .enum(["true", "false"])
+      .transform((v) => v === "true")
+      .default("false"),
+    process.env["KYSELY_LOG_ERROR"],
+  ),
+
+  /**
    * Telegram bot's token.
    * Placeholder can be used for development environments as it will be mocked.
    */

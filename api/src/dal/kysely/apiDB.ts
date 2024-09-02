@@ -6,6 +6,8 @@ import { config } from "../../config/index.js";
  */
 export const apiDB = createDB({
   connectionString: config.db_conn_string,
+  kysely_log_query: config.kysely_log_query,
+  kysely_log_error: config.kysely_log_error,
 });
 
 /**
