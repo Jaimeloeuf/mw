@@ -5,6 +5,7 @@ import type { MuwnoOrgTable } from "./MuwnoOrgTable.js";
 import type { MuwnoUserTable } from "./MuwnoUserTable.js";
 import type { MuwnoProductTable } from "./MuwnoProductTable.js";
 import type { MuwnoPmfSurveyResponseTable } from "./MuwnoPmfSurveyResponseTable.js";
+import type { MuwnoTaskTable } from "./MuwnoTaskTable.js";
 
 export interface Database {
   blog_subscriber: BlogSubscriberTable;
@@ -14,4 +15,5 @@ export interface Database {
   muwno_user: MuwnoUserTable;
   muwno_product: MuwnoProductTable;
   muwno_pmf_survey_response: MuwnoPmfSurveyResponseTable;
+  muwno_task: MuwnoTaskTable;
 }
