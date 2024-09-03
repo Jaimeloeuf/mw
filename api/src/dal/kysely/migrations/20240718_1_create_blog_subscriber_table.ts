@@ -6,11 +6,11 @@ const tableName = "blog_subscriber";
 export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
     .createTable(tableName)
-    .addColumn("id", "varchar", (col) => col.primaryKey())
+    .addColumn("id", "text", (col) => col.primaryKey())
     .addColumn("created_at", "timestamp", (col) =>
-      col.defaultTo(sql`now()`).notNull(),
+      col.notNull().defaultTo(sql`now()`),
     )
-    .addColumn("email", "varchar", (col) => col.notNull().unique())
+    .addColumn("email", "text", (col) => col.notNull().unique())
     .execute();
 }
 

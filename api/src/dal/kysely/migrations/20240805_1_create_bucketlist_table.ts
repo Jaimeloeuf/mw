@@ -7,23 +7,23 @@ const bucketlistItemTableName = "bucketlist_item";
 export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
     .createTable(bucketlistTableName)
-    .addColumn("id", "varchar", (col) => col.primaryKey())
+    .addColumn("id", "text", (col) => col.primaryKey())
     .addColumn("created_at", "timestamp", (col) =>
-      col.defaultTo(sql`now()`).notNull(),
+      col.notNull().defaultTo(sql`now()`),
     )
-    .addColumn("name", "varchar")
-    .addColumn("description", "varchar")
+    .addColumn("name", "text", (col) => col.notNull())
+    .addColumn("description", "text", (col) => col.notNull())
     .execute();
 
   await db.schema
     .createTable(bucketlistItemTableName)
-    .addColumn("id", "varchar", (col) => col.primaryKey())
+    .addColumn("id", "text", (col) => col.primaryKey())
     .addColumn("created_at", "timestamp", (col) =>
-      col.defaultTo(sql`now()`).notNull(),
+      col.notNull().defaultTo(sql`now()`),
     )
-    .addColumn("bucketlist_id", "varchar")
-    .addColumn("name", "varchar")
-    .addColumn("done", "boolean")
+    .addColumn("bucketlist_id", "text", (col) => col.notNull())
+    .addColumn("name", "text", (col) => col.notNull())
+    .addColumn("done", "boolean", (col) => col.notNull())
     .execute();
 }
 
