@@ -9,6 +9,7 @@ import type { MuwnoTaskTable } from "./MuwnoTaskTable.js";
 import type { MuwnoTeamMemberInvitationTable } from "./MuwnoTeamMemberInvitationTable.js";
 import type { MuwnoCustomerTable } from "./MuwnoCustomerTable.js";
 import type { MuwnoStripeWebhookEventTable } from "./MuwnoStripeWebhookEventTable.js";
+import type { MuwnoStripeCustomerTable } from "./MuwnoStripeCustomerTable.js";
 
 export interface Database {
   blog_subscriber: BlogSubscriberTable;
@@ -22,4 +23,5 @@ export interface Database {
   muwno_team_member_invitation: MuwnoTeamMemberInvitationTable;
   muwno_customer: MuwnoCustomerTable;
   muwno_stripe_webhook_event: MuwnoStripeWebhookEventTable;
+  muwno_stripe_customer: MuwnoStripeCustomerTable;
 }
