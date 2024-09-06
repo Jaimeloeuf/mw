@@ -11,6 +11,7 @@ import type { MuwnoCustomerTable } from "./MuwnoCustomerTable.js";
 import type { MuwnoStripeWebhookEventTable } from "./MuwnoStripeWebhookEventTable.js";
 import type { MuwnoStripeCustomerTable } from "./MuwnoStripeCustomerTable.js";
 import type { MuwnoStripeSetupNextTable } from "./MuwnoStripeSetupNextTable.js";
+import type { MuwnoApiKeyTable } from "./MuwnoApiKeyTable.js";
 
 export interface Database {
   blog_subscriber: BlogSubscriberTable;
@@ -26,4 +27,5 @@ export interface Database {
   muwno_stripe_webhook_event: MuwnoStripeWebhookEventTable;
   muwno_stripe_customer: MuwnoStripeCustomerTable;
   muwno_stripe_setup_next: MuwnoStripeSetupNextTable;
+  muwno_api_key: MuwnoApiKeyTable;
 }
