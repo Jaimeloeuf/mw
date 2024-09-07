@@ -23,5 +23,5 @@ export interface BucketlistTable {
 }
 
 export type Bucketlist = Selectable<BucketlistTable>;
-export type NewBucketlist = Insertable<BucketlistTable>;
-export type BucketlistUpdate = Updateable<BucketlistTable>;
+export type CreateBucketlist = Insertable<BucketlistTable>;
+export type UpdateBucketlist = Updateable<BucketlistTable>;

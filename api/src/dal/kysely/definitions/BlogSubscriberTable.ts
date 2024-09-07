@@ -18,5 +18,5 @@ export interface BlogSubscriberTable {
 }
 
 export type BlogSubscriber = Selectable<BlogSubscriberTable>;
-export type NewBlogSubscriber = Insertable<BlogSubscriberTable>;
-export type BlogSubscriberUpdate = Updateable<BlogSubscriberTable>;
+export type CreateBlogSubscriber = Insertable<BlogSubscriberTable>;
+export type UpdateBlogSubscriber = Updateable<BlogSubscriberTable>;
