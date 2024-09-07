@@ -1,6 +1,7 @@
 import { dalWrapper } from "../dalWrapper.js";
 
 import { getUser } from "./getUser.js";
+import { createUser } from "./createUser.js";
 import { isUserOnboarded } from "./isUserOnboarded.js";
 
 export const muwnoRepo = {
@@ -8,6 +9,11 @@ export const muwnoRepo = {
    * Get User Entity object, throws `NotFoundException` if not found.
    */
   getUser: dalWrapper(getUser),
+
+  /**
+   * Create a new User in data source
+   */
+  createUser: dalWrapper(createUser),
 
   /**
    * Check if given user completed onboarding.
