@@ -2,6 +2,7 @@ import { dalWrapper } from "../dalWrapper.js";
 
 import { getUser } from "./getUser.js";
 import { createUser } from "./createUser.js";
+import { updateUser } from "./updateUser.js";
 import { isUserOnboarded } from "./isUserOnboarded.js";
 
 export const muwnoRepo = {
@@ -14,6 +15,11 @@ export const muwnoRepo = {
    * Create a new User in data source
    */
   createUser: dalWrapper(createUser),
+
+  /**
+   * Update a User in data source
+   */
+  updateUser: dalWrapper(updateUser),
 
   /**
    * Check if given user completed onboarding.
