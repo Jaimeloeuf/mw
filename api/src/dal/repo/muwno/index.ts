@@ -9,6 +9,7 @@ import { canUserAccessOrg } from "./canUserAccessOrg.js";
 import { getOrg } from "./getOrg.js";
 import { getOrgOfUser } from "./getOrgOfUser.js";
 import { createOrg } from "./createOrg.js";
+import { updateOrg } from "./updateOrg.js";
 
 export const muwnoRepo = {
   /**
@@ -59,4 +60,9 @@ export const muwnoRepo = {
    * Create a new Organisation in data source
    */
   createOrg: dalWrapper(createOrg),
+
+  /**
+   * Update an Organisation in data source
+   */
+  updateOrg: dalWrapper(updateOrg),
 };
