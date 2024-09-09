@@ -7,6 +7,7 @@ import { deactivateUser } from "./deactivateUser.js";
 import { isUserOnboarded } from "./isUserOnboarded.js";
 import { canUserAccessOrg } from "./canUserAccessOrg.js";
 import { getOrg } from "./getOrg.js";
+import { getOrgOfUser } from "./getOrgOfUser.js";
 
 export const muwnoRepo = {
   /**
@@ -47,4 +48,9 @@ export const muwnoRepo = {
    * Get a single Org Entity object back
    */
   getOrg: dalWrapper(getOrg),
+
+  /**
+   * Get a user's Org Entity object back if they belong to an Org
+   */
+  getOrgOfUser: dalWrapper(getOrgOfUser),
 };
