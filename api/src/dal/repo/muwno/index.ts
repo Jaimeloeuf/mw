@@ -8,6 +8,7 @@ import { isUserOnboarded } from "./isUserOnboarded.js";
 import { canUserAccessOrg } from "./canUserAccessOrg.js";
 import { getOrg } from "./getOrg.js";
 import { getOrgOfUser } from "./getOrgOfUser.js";
+import { createOrg } from "./createOrg.js";
 
 export const muwnoRepo = {
   /**
@@ -53,4 +54,9 @@ export const muwnoRepo = {
    * Get a user's Org Entity object back if they belong to an Org
    */
   getOrgOfUser: dalWrapper(getOrgOfUser),
+
+  /**
+   * Create a new Organisation in data source
+   */
+  createOrg: dalWrapper(createOrg),
 };
