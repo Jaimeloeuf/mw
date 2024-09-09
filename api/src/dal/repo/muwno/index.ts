@@ -6,6 +6,7 @@ import { updateUser } from "./updateUser.js";
 import { deactivateUser } from "./deactivateUser.js";
 import { isUserOnboarded } from "./isUserOnboarded.js";
 import { canUserAccessOrg } from "./canUserAccessOrg.js";
+import { getOrg } from "./getOrg.js";
 
 export const muwnoRepo = {
   /**
@@ -41,4 +42,9 @@ export const muwnoRepo = {
    * Check if user have access permission to this Org.
    */
   canUserAccessOrg: dalWrapper(canUserAccessOrg),
+
+  /**
+   * Get a single Org Entity object back
+   */
+  getOrg: dalWrapper(getOrg),
 };
