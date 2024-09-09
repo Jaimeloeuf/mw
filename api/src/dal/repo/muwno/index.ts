@@ -11,6 +11,7 @@ import { getOrgOfUser } from "./getOrgOfUser.js";
 import { createOrg } from "./createOrg.js";
 import { updateOrg } from "./updateOrg.js";
 import { canUserAccessProduct } from "./canUserAccessProduct.js";
+import { getProduct } from "./getProduct.js";
 
 export const muwnoRepo = {
   /**
@@ -72,4 +73,9 @@ export const muwnoRepo = {
    * If product does not exists, it is also treated as a lack of permission.
    */
   canUserAccessProduct: dalWrapper(canUserAccessProduct),
+
+  /**
+   * Get a single product the user can access.
+   */
+  getProduct: dalWrapper(getProduct),
 };
