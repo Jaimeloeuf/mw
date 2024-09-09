@@ -10,6 +10,7 @@ import { getOrg } from "./getOrg.js";
 import { getOrgOfUser } from "./getOrgOfUser.js";
 import { createOrg } from "./createOrg.js";
 import { updateOrg } from "./updateOrg.js";
+import { canUserAccessProduct } from "./canUserAccessProduct.js";
 
 export const muwnoRepo = {
   /**
@@ -65,4 +66,10 @@ export const muwnoRepo = {
    * Update an Organisation in data source
    */
   updateOrg: dalWrapper(updateOrg),
+
+  /**
+   * Check if user have access permission to this product.
+   * If product does not exists, it is also treated as a lack of permission.
+   */
+  canUserAccessProduct: dalWrapper(canUserAccessProduct),
 };
