@@ -5,6 +5,7 @@ import { createUser } from "./createUser.js";
 import { updateUser } from "./updateUser.js";
 import { deactivateUser } from "./deactivateUser.js";
 import { isUserOnboarded } from "./isUserOnboarded.js";
+import { canUserAccessOrg } from "./canUserAccessOrg.js";
 
 export const muwnoRepo = {
   /**
@@ -35,4 +36,9 @@ export const muwnoRepo = {
    * 2. The org must have a valid subscription
    */
   isUserOnboarded: dalWrapper(isUserOnboarded),
+
+  /**
+   * Check if user have access permission to this Org.
+   */
+  canUserAccessOrg: dalWrapper(canUserAccessOrg),
 };
