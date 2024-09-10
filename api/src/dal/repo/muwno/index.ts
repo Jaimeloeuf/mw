@@ -12,6 +12,7 @@ import { createOrg } from "./createOrg.js";
 import { updateOrg } from "./updateOrg.js";
 import { canUserAccessProduct } from "./canUserAccessProduct.js";
 import { getProduct } from "./getProduct.js";
+import { getProductOrgID } from "./getProductOrgID.js";
 
 export const muwnoRepo = {
   /**
@@ -78,4 +79,9 @@ export const muwnoRepo = {
    * Get a single product the user can access.
    */
   getProduct: dalWrapper(getProduct),
+
+  /**
+   * Get a product's Org ID.
+   */
+  getProductOrgID: dalWrapper(getProductOrgID),
 };
