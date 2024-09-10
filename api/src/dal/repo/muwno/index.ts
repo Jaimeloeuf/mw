@@ -15,6 +15,7 @@ import { getProduct } from "./getProduct.js";
 import { getProductOrgID } from "./getProductOrgID.js";
 import { getProductsOfUserOrg } from "./getProductsOfUserOrg.js";
 import { createProduct } from "./createProduct.js";
+import { updateProduct } from "./updateProduct.js";
 
 export const muwnoRepo = {
   /**
@@ -96,4 +97,9 @@ export const muwnoRepo = {
    * Create a new Product in data source
    */
   createProduct: dalWrapper(createProduct),
+
+  /**
+   * Update a Product
+   */
+  updateProduct: dalWrapper(updateProduct),
 };
