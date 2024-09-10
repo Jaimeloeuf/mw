@@ -17,6 +17,7 @@ import { getProductsOfUserOrg } from "./getProductsOfUserOrg.js";
 import { createProduct } from "./createProduct.js";
 import { updateProduct } from "./updateProduct.js";
 import { deleteProduct } from "./deleteProduct.js";
+import { transferProduct } from "./transferProduct.js";
 
 export const muwnoRepo = {
   /**
@@ -108,4 +109,9 @@ export const muwnoRepo = {
    * Delete a single product.
    */
   deleteProduct: dalWrapper(deleteProduct),
+
+  /**
+   * Transfer product to a different Org.
+   */
+  transferProduct: dalWrapper(transferProduct),
 };
