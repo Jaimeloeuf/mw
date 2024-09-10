@@ -14,6 +14,7 @@ import { canUserAccessProduct } from "./canUserAccessProduct.js";
 import { getProduct } from "./getProduct.js";
 import { getProductOrgID } from "./getProductOrgID.js";
 import { getProductsOfUserOrg } from "./getProductsOfUserOrg.js";
+import { createProduct } from "./createProduct.js";
 
 export const muwnoRepo = {
   /**
@@ -90,4 +91,9 @@ export const muwnoRepo = {
    * Get all products of the user's Org.
    */
   getProductsOfUserOrg: dalWrapper(getProductsOfUserOrg),
+
+  /**
+   * Create a new Product in data source
+   */
+  createProduct: dalWrapper(createProduct),
 };
