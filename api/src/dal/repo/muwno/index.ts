@@ -13,6 +13,7 @@ import { updateOrg } from "./updateOrg.js";
 import { getOrgMembers } from "./getOrgMembers.js";
 import { createJoinOrgInvitation } from "./createJoinOrgInvitation.js";
 import { getPendingJoinOrgInvitation } from "./getPendingJoinOrgInvitation.js";
+import { getAllPendingJoinOrgInvitations } from "./getAllPendingJoinOrgInvitations.js";
 import { canUserAccessProduct } from "./canUserAccessProduct.js";
 import { getProduct } from "./getProduct.js";
 import { getProductOrgID } from "./getProductOrgID.js";
@@ -91,6 +92,11 @@ export const muwnoRepo = {
    * Get a pending team invitation using the given `invitationID`.
    */
   getPendingJoinOrgInvitation: dalWrapper(getPendingJoinOrgInvitation),
+
+  /**
+   * Get all pending team invitations of the given Org.
+   */
+  getAllPendingJoinOrgInvitations: dalWrapper(getAllPendingJoinOrgInvitations),
   /**
    * Check if user have access permission to this product.
    * If product does not exists, it is also treated as a lack of permission.
