@@ -12,6 +12,11 @@ export interface MuwnoApiKeyTable {
   created_at: ColumnType<Date, string | undefined, never>;
 
   /**
+   * What Org does this API Key belong to?
+   */
+  org_id: string;
+
+  /**
    * The unique hash of the API key.
    * Uses a hash to prevent direct access on lost of all keys on leak.
    */
