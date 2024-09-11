@@ -1,10 +1,11 @@
 import { apiDB } from "../../kysely/index.js";
+import type { MuwnoUser } from "../../kysely/index.js";
 import {
   NotFoundException,
   InvalidInternalStateException,
 } from "../../../exceptions/index.js";
 
-export async function isUserOnboarded(userID: string) {
+export async function isUserOnboarded(userID: MuwnoUser["id"]) {
   const user = await apiDB
     .selectFrom("muwno_user")
     .select("org_id")
