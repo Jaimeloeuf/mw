@@ -10,6 +10,7 @@ import { getOrg } from "./getOrg.js";
 import { getOrgOfUser } from "./getOrgOfUser.js";
 import { createOrg } from "./createOrg.js";
 import { updateOrg } from "./updateOrg.js";
+import { getOrgMembers } from "./getOrgMembers.js";
 import { canUserAccessProduct } from "./canUserAccessProduct.js";
 import { getProduct } from "./getProduct.js";
 import { getProductOrgID } from "./getProductOrgID.js";
@@ -74,6 +75,10 @@ export const muwnoRepo = {
    */
   updateOrg: dalWrapper(updateOrg),
 
+  /**
+   * Get all members of the Org team, sorted by newest member first.
+   */
+  getOrgMembers: dalWrapper(getOrgMembers),
   /**
    * Check if user have access permission to this product.
    * If product does not exists, it is also treated as a lack of permission.
