@@ -25,6 +25,7 @@ import { createProduct } from "./createProduct.js";
 import { updateProduct } from "./updateProduct.js";
 import { deleteProduct } from "./deleteProduct.js";
 import { transferProduct } from "./transferProduct.js";
+import { getFeedbackform } from "./getFeedbackform.js";
 
 export const muwnoRepo = {
   /**
@@ -158,4 +159,9 @@ export const muwnoRepo = {
    * Transfer product to a different Org.
    */
   transferProduct: dalWrapper(transferProduct),
+
+  /**
+   * Get a feedback form object.
+   */
+  getFeedbackform: dalWrapper(getFeedbackform),
 };
