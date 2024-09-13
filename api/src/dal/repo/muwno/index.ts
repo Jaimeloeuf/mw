@@ -16,6 +16,7 @@ import { getPendingJoinOrgInvitation } from "./getPendingJoinOrgInvitation.js";
 import { getAllPendingJoinOrgInvitations } from "./getAllPendingJoinOrgInvitations.js";
 import { getAllPendingJoinOrgInvitationsOfUser } from "./getAllPendingJoinOrgInvitationsOfUser.js";
 import { deletePendingJoinOrgInvitation } from "./deletePendingJoinOrgInvitation.js";
+import { removeOrgMember } from "./removeOrgMember.js";
 import { canUserAccessProduct } from "./canUserAccessProduct.js";
 import { getProduct } from "./getProduct.js";
 import { getProductOrgID } from "./getProductOrgID.js";
@@ -111,6 +112,12 @@ export const muwnoRepo = {
    * Delete a pending team invitation.
    */
   deletePendingJoinOrgInvitation: dalWrapper(deletePendingJoinOrgInvitation),
+
+  /**
+   * Remove member from team and all their data from the team.
+   */
+  removeOrgMember: dalWrapper(removeOrgMember),
+
   /**
    * Check if user have access permission to this product.
    * If product does not exists, it is also treated as a lack of permission.
