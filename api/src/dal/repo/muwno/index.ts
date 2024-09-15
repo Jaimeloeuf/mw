@@ -31,6 +31,7 @@ import { getNumberOfFeedbackResponsesStoredByOrg } from "./getNumberOfFeedbackRe
 import { getNumberOfFeedbackResponsesStoredByProduct } from "./getNumberOfFeedbackResponsesStoredByProduct.js";
 import { getFeedbackResponse } from "./getFeedbackResponse.js";
 import { getFeedbackResponses } from "./getFeedbackResponses.js";
+import { getProductIdOfFeedbackResponse } from "./getProductIdOfFeedbackResponse.js";
 
 export const muwnoRepo = {
   /**
@@ -198,4 +199,9 @@ export const muwnoRepo = {
    * Get survey responses of selected product, sorted by latest responses first.
    */
   getFeedbackResponses: dalWrapper(getFeedbackResponses),
+
+  /**
+   * Get product ID of a feedback response.
+   */
+  getProductIdOfFeedbackResponse: dalWrapper(getProductIdOfFeedbackResponse),
 };
