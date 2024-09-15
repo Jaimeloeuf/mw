@@ -27,6 +27,7 @@ import { deleteProduct } from "./deleteProduct.js";
 import { transferProduct } from "./transferProduct.js";
 import { getFeedbackform } from "./getFeedbackform.js";
 import { createFeedbackResponse } from "./createFeedbackResponse.js";
+import { getNumberOfFeedbackResponsesStoredByOrg } from "./getNumberOfFeedbackResponsesStoredByOrg.js";
 
 export const muwnoRepo = {
   /**
@@ -170,4 +171,11 @@ export const muwnoRepo = {
    * Save a feedback form response.
    */
   createFeedbackResponse: dalWrapper(createFeedbackResponse),
+
+  /**
+   * Get the number of survey responses currently stored for a given Org.
+   */
+  getNumberOfFeedbackResponsesStoredByOrg: dalWrapper(
+    getNumberOfFeedbackResponsesStoredByOrg,
+  ),
 };
