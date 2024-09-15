@@ -33,6 +33,7 @@ import { getFeedbackResponse } from "./getFeedbackResponse.js";
 import { getFeedbackResponses } from "./getFeedbackResponses.js";
 import { getProductIdOfFeedbackResponse } from "./getProductIdOfFeedbackResponse.js";
 import { createTask } from "./createTask.js";
+import { getTask } from "./getTask.js";
 
 export const muwnoRepo = {
   /**
@@ -210,4 +211,9 @@ export const muwnoRepo = {
    * Create a new Task in data source.
    */
   createTask: dalWrapper(createTask),
+
+  /**
+   * Get Task from data source.
+   */
+  getTask: dalWrapper(getTask),
 };
