@@ -36,6 +36,7 @@ import { createTask } from "./createTask.js";
 import { getTask } from "./getTask.js";
 import { updateTask } from "./updateTask.js";
 import { deleteTask } from "./deleteTask.js";
+import { getTasksOfResponse } from "./getTasksOfResponse.js";
 
 export const muwnoRepo = {
   /**
@@ -228,4 +229,10 @@ export const muwnoRepo = {
    * Delete Task in data source.
    */
   deleteTask: dalWrapper(deleteTask),
+
+  /**
+   * Get Tasks of response from data source.
+   */
+  getTasksOfResponse: dalWrapper(getTasksOfResponse),
+
 };
