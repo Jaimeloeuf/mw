@@ -26,6 +26,7 @@ import { updateProduct } from "./updateProduct.js";
 import { deleteProduct } from "./deleteProduct.js";
 import { transferProduct } from "./transferProduct.js";
 import { getFeedbackform } from "./getFeedbackform.js";
+import { createFeedbackResponse } from "./createFeedbackResponse.js";
 
 export const muwnoRepo = {
   /**
@@ -164,4 +165,9 @@ export const muwnoRepo = {
    * Get a feedback form object.
    */
   getFeedbackform: dalWrapper(getFeedbackform),
+
+  /**
+   * Save a feedback form response.
+   */
+  createFeedbackResponse: dalWrapper(createFeedbackResponse),
 };
