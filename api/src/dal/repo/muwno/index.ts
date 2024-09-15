@@ -30,6 +30,7 @@ import { createFeedbackResponse } from "./createFeedbackResponse.js";
 import { getNumberOfFeedbackResponsesStoredByOrg } from "./getNumberOfFeedbackResponsesStoredByOrg.js";
 import { getNumberOfFeedbackResponsesStoredByProduct } from "./getNumberOfFeedbackResponsesStoredByProduct.js";
 import { getFeedbackResponse } from "./getFeedbackResponse.js";
+import { getFeedbackResponses } from "./getFeedbackResponses.js";
 
 export const muwnoRepo = {
   /**
@@ -192,4 +193,9 @@ export const muwnoRepo = {
    * Get a single response.
    */
   getFeedbackResponse: dalWrapper(getFeedbackResponse),
+
+  /**
+   * Get survey responses of selected product, sorted by latest responses first.
+   */
+  getFeedbackResponses: dalWrapper(getFeedbackResponses),
 };
