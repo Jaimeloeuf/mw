@@ -32,6 +32,7 @@ import { getNumberOfFeedbackResponsesStoredByProduct } from "./getNumberOfFeedba
 import { getFeedbackResponse } from "./getFeedbackResponse.js";
 import { getFeedbackResponses } from "./getFeedbackResponses.js";
 import { getProductIdOfFeedbackResponse } from "./getProductIdOfFeedbackResponse.js";
+import { createTask } from "./createTask.js";
 
 export const muwnoRepo = {
   /**
@@ -204,4 +205,9 @@ export const muwnoRepo = {
    * Get product ID of a feedback response.
    */
   getProductIdOfFeedbackResponse: dalWrapper(getProductIdOfFeedbackResponse),
+
+  /**
+   * Create a new Task in data source.
+   */
+  createTask: dalWrapper(createTask),
 };
