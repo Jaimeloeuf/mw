@@ -29,6 +29,7 @@ import { getFeedbackform } from "./getFeedbackform.js";
 import { createFeedbackResponse } from "./createFeedbackResponse.js";
 import { getNumberOfFeedbackResponsesStoredByOrg } from "./getNumberOfFeedbackResponsesStoredByOrg.js";
 import { getNumberOfFeedbackResponsesStoredByProduct } from "./getNumberOfFeedbackResponsesStoredByProduct.js";
+import { getFeedbackResponse } from "./getFeedbackResponse.js";
 
 export const muwnoRepo = {
   /**
@@ -186,4 +187,9 @@ export const muwnoRepo = {
   getNumberOfFeedbackResponsesStoredByProduct: dalWrapper(
     getNumberOfFeedbackResponsesStoredByProduct,
   ),
+
+  /**
+   * Get a single response.
+   */
+  getFeedbackResponse: dalWrapper(getFeedbackResponse),
 };
