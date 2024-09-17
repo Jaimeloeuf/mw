@@ -38,6 +38,7 @@ import { updateTask } from "./updateTask.js";
 import { deleteTask } from "./deleteTask.js";
 import { getTasksOfResponse } from "./getTasksOfResponse.js";
 import { getProductIdOfTask } from "./getProductIdOfTask.js";
+import { markTaskAsDone } from "./markTaskAsDone.js";
 
 export const muwnoRepo = {
   /**
@@ -241,4 +242,9 @@ export const muwnoRepo = {
    * Get `ProductID` of a given task.
    */
   getProductIdOfTask: dalWrapper(getProductIdOfTask),
+
+  /**
+   * Mark a task as done in data source.
+   */
+  markTaskAsDone: dalWrapper(markTaskAsDone),
 };
