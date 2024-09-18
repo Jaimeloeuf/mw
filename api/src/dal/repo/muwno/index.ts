@@ -40,6 +40,7 @@ import { getTasksOfResponse } from "./getTasksOfResponse.js";
 import { getProductIdOfTask } from "./getProductIdOfTask.js";
 import { markTaskAsDone } from "./markTaskAsDone.js";
 import { createCustomer } from "./createCustomer.js";
+import { getNumberOfCustomersStoredByOrg } from "./getNumberOfCustomersStoredByOrg.js";
 
 export const muwnoRepo = {
   /**
@@ -253,4 +254,9 @@ export const muwnoRepo = {
    * Add a new Customer to data source.
    */
   createCustomer: dalWrapper(createCustomer),
+
+  /**
+   * Get the number of Customers currently stored by a given Org.
+   */
+  getNumberOfCustomersStoredByOrg: dalWrapper(getNumberOfCustomersStoredByOrg),
 };
