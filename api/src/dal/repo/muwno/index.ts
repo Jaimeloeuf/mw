@@ -39,6 +39,7 @@ import { deleteTask } from "./deleteTask.js";
 import { getTasksOfResponse } from "./getTasksOfResponse.js";
 import { getProductIdOfTask } from "./getProductIdOfTask.js";
 import { markTaskAsDone } from "./markTaskAsDone.js";
+import { createCustomer } from "./createCustomer.js";
 
 export const muwnoRepo = {
   /**
@@ -247,4 +248,9 @@ export const muwnoRepo = {
    * Mark a task as done in data source.
    */
   markTaskAsDone: dalWrapper(markTaskAsDone),
+
+  /**
+   * Add a new Customer to data source.
+   */
+  createCustomer: dalWrapper(createCustomer),
 };
