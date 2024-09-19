@@ -42,6 +42,7 @@ import { markTaskAsDone } from "./markTaskAsDone.js";
 import { createCustomer } from "./createCustomer.js";
 import { getNumberOfCustomersStoredByOrg } from "./getNumberOfCustomersStoredByOrg.js";
 import { markStripeWebhookEventAsProcessed } from "./markStripeWebhookEventAsProcessed.js";
+import { createStripeCustomer } from "./createStripeCustomer.js";
 
 export const muwnoRepo = {
   /**
@@ -267,4 +268,10 @@ export const muwnoRepo = {
   markStripeWebhookEventAsProcessed: dalWrapper(
     markStripeWebhookEventAsProcessed,
   ),
+
+  /**
+   * Create and save a new `StripeCustomer` object in data source. If `Org`
+   * already have a StripeCustomer, replace it with this new one.
+   */
+  createStripeCustomer: dalWrapper(createStripeCustomer),
 };
