@@ -41,6 +41,7 @@ import { getProductIdOfTask } from "./getProductIdOfTask.js";
 import { markTaskAsDone } from "./markTaskAsDone.js";
 import { createCustomer } from "./createCustomer.js";
 import { getNumberOfCustomersStoredByOrg } from "./getNumberOfCustomersStoredByOrg.js";
+import { markStripeWebhookEventAsProcessed } from "./markStripeWebhookEventAsProcessed.js";
 
 export const muwnoRepo = {
   /**
@@ -259,4 +260,11 @@ export const muwnoRepo = {
    * Get the number of Customers currently stored by a given Org.
    */
   getNumberOfCustomersStoredByOrg: dalWrapper(getNumberOfCustomersStoredByOrg),
+
+  /**
+   * Mark a given Stripe Webhook Event as processed.
+   */
+  markStripeWebhookEventAsProcessed: dalWrapper(
+    markStripeWebhookEventAsProcessed,
+  ),
 };
