@@ -52,6 +52,7 @@ import { deleteStripeSetupNext } from "./deleteStripeSetupNext.js";
 import { createApiKey } from "./createApiKey.js";
 import { getApiKey } from "./getApiKey.js";
 import { getApiKeysOfOrg } from "./getApiKeysOfOrg.js";
+import { deleteApiKey } from "./deleteApiKey.js";
 
 export const muwnoRepo = {
   /**
@@ -330,4 +331,9 @@ export const muwnoRepo = {
    * Get all API Key Detail objects of the Org.
    */
   getApiKeysOfOrg: dalWrapper(getApiKeysOfOrg),
+
+  /**
+   * Delete an API Key.
+   */
+  deleteApiKey: dalWrapper(deleteApiKey),
 };
