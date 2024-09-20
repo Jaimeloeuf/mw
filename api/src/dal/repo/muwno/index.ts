@@ -48,6 +48,7 @@ import { getStripeCustomerOfOrg } from "./getStripeCustomerOfOrg.js";
 import { updateStripeCustomerMeteredProductSubscription } from "./updateStripeCustomerMeteredProductSubscription.js";
 import { createStripeSetupNext } from "./createStripeSetupNext.js";
 import { getStripeSetupNext } from "./getStripeSetupNext.js";
+import { deleteStripeSetupNext } from "./deleteStripeSetupNext.js";
 
 export const muwnoRepo = {
   /**
@@ -306,4 +307,9 @@ export const muwnoRepo = {
    * Get one from the database
    */
   getStripeSetupNext: dalWrapper(getStripeSetupNext),
+
+  /**
+   * Delete one from the database
+   */
+  deleteStripeSetupNext: dalWrapper(deleteStripeSetupNext),
 };
