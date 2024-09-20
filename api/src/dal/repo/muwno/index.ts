@@ -33,6 +33,7 @@ import { getFeedbackResponse } from "./getFeedbackResponse.js";
 import { getFeedbackResponses } from "./getFeedbackResponses.js";
 import { getFeedbackResponseA2 } from "./getFeedbackResponseA2.js";
 import { getFeedbackResponseA3 } from "./getFeedbackResponseA3.js";
+import { getA3 } from "./getA3.js";
 import { getProductIdOfFeedbackResponse } from "./getProductIdOfFeedbackResponse.js";
 import { createTask } from "./createTask.js";
 import { getTask } from "./getTask.js";
@@ -235,6 +236,11 @@ export const muwnoRepo = {
    * important and oldest first, and up to the first 1000 answers.
    */
   getFeedbackResponseA3: dalWrapper(getFeedbackResponseA3),
+
+  /**
+   * Get Product's feedback response `a3`.
+   */
+  getA3: dalWrapper(getA3),
 
   /**
    * Get product ID of a feedback response.
