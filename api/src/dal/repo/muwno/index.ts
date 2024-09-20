@@ -50,6 +50,7 @@ import { createStripeSetupNext } from "./createStripeSetupNext.js";
 import { getStripeSetupNext } from "./getStripeSetupNext.js";
 import { deleteStripeSetupNext } from "./deleteStripeSetupNext.js";
 import { createApiKey } from "./createApiKey.js";
+import { getApiKey } from "./getApiKey.js";
 
 export const muwnoRepo = {
   /**
@@ -318,4 +319,9 @@ export const muwnoRepo = {
    * Save a newly created API Key.
    */
   createApiKey: dalWrapper(createApiKey),
+
+  /**
+   * Get a single API Key Detail object back using its ID.
+   */
+  getApiKey: dalWrapper(getApiKey),
 };
