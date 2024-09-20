@@ -47,6 +47,7 @@ import { getStripeCustomer } from "./getStripeCustomer.js";
 import { getStripeCustomerOfOrg } from "./getStripeCustomerOfOrg.js";
 import { updateStripeCustomerMeteredProductSubscription } from "./updateStripeCustomerMeteredProductSubscription.js";
 import { createStripeSetupNext } from "./createStripeSetupNext.js";
+import { getStripeSetupNext } from "./getStripeSetupNext.js";
 
 export const muwnoRepo = {
   /**
@@ -300,4 +301,9 @@ export const muwnoRepo = {
    * Save a Stripe Setup Next action into the database
    */
   createStripeSetupNext: dalWrapper(createStripeSetupNext),
+
+  /**
+   * Get one from the database
+   */
+  getStripeSetupNext: dalWrapper(getStripeSetupNext),
 };
