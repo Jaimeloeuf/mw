@@ -53,6 +53,7 @@ import { createApiKey } from "./createApiKey.js";
 import { getApiKey } from "./getApiKey.js";
 import { getApiKeysOfOrg } from "./getApiKeysOfOrg.js";
 import { deleteApiKey } from "./deleteApiKey.js";
+import { getApiKeyOrg } from "./getApiKeyOrg.js";
 
 export const muwnoRepo = {
   /**
@@ -336,4 +337,9 @@ export const muwnoRepo = {
    * Delete an API Key.
    */
   deleteApiKey: dalWrapper(deleteApiKey),
+
+  /**
+   * Get API Key's corresponding Org.
+   */
+  getApiKeyOrg: dalWrapper(getApiKeyOrg),
 };
