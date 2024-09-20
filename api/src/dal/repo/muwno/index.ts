@@ -45,6 +45,7 @@ import { markStripeWebhookEventAsProcessed } from "./markStripeWebhookEventAsPro
 import { createStripeCustomer } from "./createStripeCustomer.js";
 import { getStripeCustomer } from "./getStripeCustomer.js";
 import { getStripeCustomerOfOrg } from "./getStripeCustomerOfOrg.js";
+import { updateStripeCustomerMeteredProductSubscription } from "./updateStripeCustomerMeteredProductSubscription.js";
 
 export const muwnoRepo = {
   /**
@@ -286,4 +287,11 @@ export const muwnoRepo = {
    * Get a `StripeCustomer` object back using a `OrgID`.
    */
   getStripeCustomerOfOrg: dalWrapper(getStripeCustomerOfOrg),
+
+  /**
+   * Update metered product subscription ID.
+   */
+  updateStripeCustomerMeteredProductSubscription: dalWrapper(
+    updateStripeCustomerMeteredProductSubscription,
+  ),
 };
