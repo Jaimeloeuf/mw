@@ -43,6 +43,7 @@ import { createCustomer } from "./createCustomer.js";
 import { getNumberOfCustomersStoredByOrg } from "./getNumberOfCustomersStoredByOrg.js";
 import { markStripeWebhookEventAsProcessed } from "./markStripeWebhookEventAsProcessed.js";
 import { createStripeCustomer } from "./createStripeCustomer.js";
+import { getStripeCustomer } from "./getStripeCustomer.js";
 
 export const muwnoRepo = {
   /**
@@ -274,4 +275,9 @@ export const muwnoRepo = {
    * already have a StripeCustomer, replace it with this new one.
    */
   createStripeCustomer: dalWrapper(createStripeCustomer),
+
+  /**
+   * Get a `StripeCustomer` object back using a stripe customer ID.
+   */
+  getStripeCustomer: dalWrapper(getStripeCustomer),
 };
