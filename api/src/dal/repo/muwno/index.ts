@@ -44,6 +44,7 @@ import { getNumberOfCustomersStoredByOrg } from "./getNumberOfCustomersStoredByO
 import { markStripeWebhookEventAsProcessed } from "./markStripeWebhookEventAsProcessed.js";
 import { createStripeCustomer } from "./createStripeCustomer.js";
 import { getStripeCustomer } from "./getStripeCustomer.js";
+import { getStripeCustomerOfOrg } from "./getStripeCustomerOfOrg.js";
 
 export const muwnoRepo = {
   /**
@@ -280,4 +281,9 @@ export const muwnoRepo = {
    * Get a `StripeCustomer` object back using a stripe customer ID.
    */
   getStripeCustomer: dalWrapper(getStripeCustomer),
+
+  /**
+   * Get a `StripeCustomer` object back using a `OrgID`.
+   */
+  getStripeCustomerOfOrg: dalWrapper(getStripeCustomerOfOrg),
 };
