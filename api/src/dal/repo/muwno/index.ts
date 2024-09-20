@@ -49,6 +49,7 @@ import { updateStripeCustomerMeteredProductSubscription } from "./updateStripeCu
 import { createStripeSetupNext } from "./createStripeSetupNext.js";
 import { getStripeSetupNext } from "./getStripeSetupNext.js";
 import { deleteStripeSetupNext } from "./deleteStripeSetupNext.js";
+import { createApiKey } from "./createApiKey.js";
 
 export const muwnoRepo = {
   /**
@@ -312,4 +313,9 @@ export const muwnoRepo = {
    * Delete one from the database
    */
   deleteStripeSetupNext: dalWrapper(deleteStripeSetupNext),
+
+  /**
+   * Save a newly created API Key.
+   */
+  createApiKey: dalWrapper(createApiKey),
 };
