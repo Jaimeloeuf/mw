@@ -40,6 +40,7 @@ import { getTask } from "./getTask.js";
 import { updateTask } from "./updateTask.js";
 import { deleteTask } from "./deleteTask.js";
 import { getTasksOfResponse } from "./getTasksOfResponse.js";
+import { getTasksOfProduct } from "./getTasksOfProduct.js";
 import { getProductIdOfTask } from "./getProductIdOfTask.js";
 import { markTaskAsDone } from "./markTaskAsDone.js";
 import { createCustomer } from "./createCustomer.js";
@@ -272,6 +273,10 @@ export const muwnoRepo = {
    */
   getTasksOfResponse: dalWrapper(getTasksOfResponse),
 
+  /**
+   * Get Tasks of product from data source.
+   */
+  getTasksOfProduct: dalWrapper(getTasksOfProduct),
 
   /**
    * Get `ProductID` of a given task.
