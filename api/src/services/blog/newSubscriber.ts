@@ -1,7 +1,7 @@
 import { blogSubscriberRepo } from "../../dal/index.js";
 import { ConflictException } from "../../exceptions/index.js";
 import { CreateSimplePostProcessingJob } from "../../post-processing/index.js";
-import { notifyAdminWithInternalAdminTelegramBot } from "../../infra/index.js";
+import { notifyAdminWithInternalAdminTelegramBot } from "../../infra-shared/index.js";
 import { blogEmailService } from "./blogEmailService.js";
 
 /**
