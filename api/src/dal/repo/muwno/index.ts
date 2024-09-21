@@ -45,6 +45,7 @@ import { getProductIdOfTask } from "./getProductIdOfTask.js";
 import { markTaskAsDone } from "./markTaskAsDone.js";
 import { createCustomer } from "./createCustomer.js";
 import { getNumberOfCustomersStoredByOrg } from "./getNumberOfCustomersStoredByOrg.js";
+import { isStripeWebhookEventUnprocessed } from "./isStripeWebhookEventUnprocessed.js";
 import { markStripeWebhookEventAsProcessed } from "./markStripeWebhookEventAsProcessed.js";
 import { createStripeCustomer } from "./createStripeCustomer.js";
 import { getStripeCustomer } from "./getStripeCustomer.js";
@@ -297,6 +298,12 @@ export const muwnoRepo = {
    * Get the number of Customers currently stored by a given Org.
    */
   getNumberOfCustomersStoredByOrg: dalWrapper(getNumberOfCustomersStoredByOrg),
+
+  /**
+   * Check if the given Stripe Webhook Event is unprocessed, if it is, return
+   * true and record its ID so that it can be used for future checks.
+   */
+  isStripeWebhookEventUnprocessed: dalWrapper(isStripeWebhookEventUnprocessed),
 
   /**
    * Mark a given Stripe Webhook Event as processed.
