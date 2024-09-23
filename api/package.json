@@ -33,6 +33,7 @@
     "picocolors": "^1.0.1",
     "simpler-fetch": "^10.4.0",
     "ulid": "^2.3.0",
+    "vue": "^3.5.3",
     "zod": "^3.23.8"
   },
   "devDependencies": {

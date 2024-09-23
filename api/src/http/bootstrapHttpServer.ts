@@ -9,6 +9,8 @@ import { loggingMiddleware } from "./loggingMiddleware.js";
 import { registerRoutesAndControllers } from "../__generated/index.js";
 import { routeNotFound } from "./routeNotFound.js";
 
+import { entrypoints } from "./entrypoints.js";
+
 /**
  * Bootstraps a web server using ExpressJS to route incoming HTTP requests to
  * HTTP controllers.
@@ -23,6 +25,9 @@ export function bootstrapHttpServer() {
 
     // Register all the route->controller mappings with the /api prefix.
     .use("/api", registerRoutesAndControllers())
+
+    // Register all vue page entrypoints
+    .use(entrypoints())
 
     // Since this is the last non-error-handling route handler used, assume 404
     // as no other route handler responded.
