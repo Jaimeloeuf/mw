@@ -23,6 +23,9 @@ export function bootstrapHttpServer() {
     .use(express.json())
     .use(express.urlencoded({ extended: true }))
 
+    // Disable this for security
+    .disable("x-powered-by")
+
     // Register all the route->controller mappings with the /api prefix.
     .use("/api", registerRoutesAndControllers())
 
