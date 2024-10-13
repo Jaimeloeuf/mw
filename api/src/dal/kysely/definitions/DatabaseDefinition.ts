@@ -1,6 +1,9 @@
 import type { BlogSubscriberTable } from "./BlogSubscriberTable.js";
 import type { BucketlistTable } from "./BucketlistTable.js";
 import type { BucketlistItemTable } from "./BucketlistItemTable.js";
+import type { LeetcodeQuesTable } from "./LeetcodeQuesTable.js";
+import type { LeetcodeQuesTagTable } from "./LeetcodeQuesTagTable.js";
+import type { LeetcodeTagTable } from "./LeetcodeTagTable.js";
 import type { MuwnoOrgTable } from "./MuwnoOrgTable.js";
 import type { MuwnoUserTable } from "./MuwnoUserTable.js";
 import type { MuwnoProductTable } from "./MuwnoProductTable.js";
@@ -17,6 +20,9 @@ export interface Database {
   blog_subscriber: BlogSubscriberTable;
   bucketlist: BucketlistTable;
   bucketlist_item: BucketlistItemTable;
+  leetcode_ques: LeetcodeQuesTable;
+  leetcode_ques_tag: LeetcodeQuesTagTable;
+  leetcode_tag: LeetcodeTagTable;
   muwno_org: MuwnoOrgTable;
   muwno_user: MuwnoUserTable;
   muwno_product: MuwnoProductTable;
