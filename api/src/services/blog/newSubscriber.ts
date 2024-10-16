@@ -19,7 +19,6 @@ export async function newSubscriber(email: string) {
 
   const blogSubscriberResult =
     await blogSubscriberRepo.createBlogSubscriber.getResultOrThrowOnError({
-      id: crypto.randomUUID(),
       email: email.toLowerCase(),
     });
 
