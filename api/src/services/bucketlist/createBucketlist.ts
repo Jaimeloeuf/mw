@@ -6,7 +6,6 @@ import { bucketlistRepo } from "../../dal/index.js";
 export async function createBucketlist(name: string, description: string) {
   const bucketlist =
     await bucketlistRepo.createBucketlist.getResultOrThrowOnError({
-      id: crypto.randomUUID(),
       name,
       description,
     });
