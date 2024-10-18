@@ -21,7 +21,6 @@ export async function createApiKey(requestorID: string) {
   const prefix = key.slice(0, 6);
 
   const apiKey = await muwnoRepo.createApiKey.getResultOrThrowOnError({
-    id: ulid(),
     org_id: user.org_id,
     created_by: `${user.name} <${user.email}>`,
     hash,
