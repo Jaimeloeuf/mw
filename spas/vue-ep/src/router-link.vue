@@ -2,7 +2,10 @@
 import { ref, Component } from "vue";
 import { setRouterView } from "./router";
 
-const props = defineProps<{ route: string; preload?: true }>();
+const props = defineProps<{
+  route: string;
+  preloadOnHover?: true;
+}>();
 
 const preloadedComponent = ref<null | Component | Promise<Component>>(null);
 
@@ -23,7 +26,7 @@ async function loadComponent() {
 }
 
 function onHover() {
-  if (props.preload) {
+  if (props.preloadOnHover) {
     preloadedComponent.value = loadComponent();
   }
 }
