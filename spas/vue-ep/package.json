@@ -1,0 +1,20 @@
+{
+  "name": "vue-ep",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "serve": "npx vite --port 8080",
+    "build": "npx tsc -b && vite build",
+    "preview": "npx vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.5.10"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.1.4",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.8",
+    "vue-tsc": "^2.1.6"
+  }
+}
