@@ -8,6 +8,8 @@ import routerview from "./router-view.vue";
     <routerlink route="/home" preloadOnHover>Home</routerlink>
     <br />
     <routerlink route="/about" preloadOnHover>About</routerlink>
+    <br />
+    <routerlink route="/instant" preloadImmediately>Instant</routerlink>
   </div>
 
   <routerview />
