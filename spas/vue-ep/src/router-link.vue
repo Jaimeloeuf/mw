@@ -1,14 +1,16 @@
 <script setup lang="ts">
+import { ref, Component } from "vue";
 import { setRouterView } from "./router";
 
-const props = defineProps<{ route: string }>();
+const props = defineProps<{ route: string; preload?: true }>();
 
-async function onClick(e: Event) {
-  // Prevent browser refresh to do client side routing by replacing components
-  // dynamically instead.
-  e.preventDefault();
+const preloadedComponent = ref<null | Component | Promise<Component>>(null);
 
-  // Show some global transition UI
+async function loadComponent() {
+  // If the component is already preloaded
+  if (preloadedComponent.value !== null) {
+    return;
+  }
 
   // @todo Make API call to dynamically load the component here
   // @todo Use entrypoint definition js object to determine the component to load
@@ -17,7 +19,26 @@ async function onClick(e: Event) {
       ? await import("./pages/home.vue")
       : await import("./pages/about.vue");
 
-  setRouterView(dynamicallyLoadedComponent.default);
+  return dynamicallyLoadedComponent.default;
+}
+
+function onHover() {
+  if (props.preload) {
+    preloadedComponent.value = loadComponent();
+  }
+}
+
+async function onClick(e: Event) {
+  // Prevent browser refresh to do client side routing by replacing components
+  // dynamically instead.
+  e.preventDefault();
+
+  // Show some global transition UI
+
+  const dynamicallyLoadedComponent = await (preloadedComponent.value ??
+    loadComponent());
+
+  setRouterView(dynamicallyLoadedComponent);
 
   // Push state to history for URL to change too
   window.history.pushState({}, "", props.route);

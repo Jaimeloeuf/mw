@@ -5,9 +5,9 @@ import routerview from "./router-view.vue";
 
 <template>
   <div>
-    <routerlink route="/home">Home</routerlink>
+    <routerlink route="/home" preload>Home</routerlink>
     <br />
-    <routerlink route="/about">About</routerlink>
+    <routerlink route="/about" preload>About</routerlink>
   </div>
 
   <routerview />
