@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { sf } from "simpler-fetch";
 import { ref, Component } from "vue";
 import { setRouterView } from "./router";
 
@@ -18,20 +19,18 @@ async function loadComponent() {
     return;
   }
 
-  // @todo Make API call to dynamically load the component here
-  // @todo Use entrypoint definition js object to determine the component to load
-  switch (props.route) {
-    case "/home":
-      return (await import("./pages/home.vue")).default;
-    case "/about":
-      return (await import("./pages/about.vue")).default;
-    case "/instant":
-      return (await import("./pages/instant.vue")).default;
-    default:
-      throw new Error("404");
+  const [err, res] = await sf
+    .useOnce(`./entrypoint${props.route}`)
+    .GET()
+    .runText<string>();
+
+  if (err !== null) {
+    console.error("Failed to load entrypoint component");
+    return;
   }
-  // const dynamicallyLoadedComponent = await import(componentPath);
-  // return dynamicallyLoadedComponent.default;
+
+  // Dynamically evaluate loaded JS component
+  return eval(res.data);
 }
 
 function onHover() {
