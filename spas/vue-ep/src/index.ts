@@ -2,6 +2,15 @@ import fs from "fs/promises";
 import path from "path";
 import express from "express";
 
+const rootHtml = await fs.readFile(
+  path.resolve(import.meta.dirname, "../dist/index.html"),
+  "utf8"
+);
+
+async function returnRootHtml(_: unknown, res: express.Response) {
+  res.status(200).send(rootHtml);
+}
+
 async function bootstrapHttpServer() {
   express()
     .use(express.json())
@@ -13,13 +22,7 @@ async function bootstrapHttpServer() {
       next();
     })
 
-    .get("/", async (_, res) => {
-      const rootHtml = await fs.readFile(
-        path.resolve(import.meta.dirname, "../dist/index.html"),
-        "utf8"
-      );
-      res.status(200).send(rootHtml);
-    })
+    .get("/", returnRootHtml)
 
     .use(express.static("dist"))
 
