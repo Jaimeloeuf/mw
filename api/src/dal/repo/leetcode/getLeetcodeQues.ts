@@ -30,7 +30,7 @@ export async function getLeetcodeQues(leetcodeQuesID: LeetcodeQues["id"]) {
     .where(
       "id",
       "in",
-      leetcodeQuesTags.map((quesTag) => quesTag.id),
+      leetcodeQuesTags.map((quesTag) => quesTag.tag_id),
     )
     .execute()
     .then((tags) => tags.map((tag) => tag.tag));
