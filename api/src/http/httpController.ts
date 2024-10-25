@@ -80,6 +80,9 @@ export const httpController = <
     urlParams: UrlParamsType;
     urlQueryParams: UrlQueryParamsType;
     requestBody: RequestBodyType;
+    /**
+     * Use this to set HTTP status code on successful controller executions.
+     */
     setHttpStatusCode: (statusCode: number) => void;
   }) => HttpRequestHandlerReturnType,
 >({
@@ -168,6 +171,9 @@ export const httpController = <
         guardData = partialGuardData;
       }
 
+      // Defaults to 200 ok if no exceptions thrown
+      let statusCode = 200;
+
       const data = await httpRequestHandler({
         req,
         guardData,
@@ -187,14 +193,19 @@ export const httpController = <
             ? null
             : requestBodyValidator.parse(req.body),
 
-        // Wrap to preserve 'this' binding
-        setHttpStatusCode: (statusCode: number) => res.status(statusCode),
+        setHttpStatusCode: (code: number) => (statusCode = code),
       });
 
-      res.json({
-        status: "success",
-        data,
-      } satisfies JSendSuccess);
+      res
+        // Only set the status code right before sending back the data to ensure
+        // that the status code is not sent ahead of time before controller
+        // execution succeeds, which might cause issues if the controller thows
+        // and an error status code needs to be set.
+        .status(statusCode)
+        .json({
+          status: "success",
+          data,
+        } satisfies JSendSuccess);
     } catch (error) {
       // Create a err/err-log ID, to log it together with the error and send it
       // back to the client to improve debugging.
