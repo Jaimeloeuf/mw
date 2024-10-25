@@ -164,4 +164,20 @@ export const appSpecificConfig = {
     z.string().url(),
     process.env["MUWNO_FORM_LINK"],
   ),
+
+  /**
+   * Arbitrary default TTL
+   */
+  muwno_throttle_ttl: createConfigMapping(
+    z.number().default(3000),
+    process.env["MUWNO_THROTTLE_TTL"],
+  ),
+
+  /**
+   * Arbitrary default limit within each TTL period
+   */
+  muwno_throttle_limit: createConfigMapping(
+    z.number().default(150),
+    process.env["MUWNO_THROTTLE_LIMIT"],
+  ),
 } as const;
