@@ -6,7 +6,7 @@
  * genHttpDtoTypeDefinition
  *
  * Generated hash in hex for code after this section is:
- * sha256(2182c5ce87d8c77f102bbce293fb2669787d7b7fe88828fa26eddf6f8f0dbf36)
+ * sha256(2f4767afc0555e10745a2967f5b6294f761bbf28c5987f13f9624b8967601bf8)
  */
 import type { z } from "zod";
 import * as c from "./httpControllerBarrelFile.generated.js";
@@ -52,6 +52,18 @@ export type getBucketlistController_InputDTO = z.infer<
 >;
 export type getBucketlistController_OutputDTO = Awaited<
   ReturnType<(typeof c.getBucketlistController)["httpRequestHandler"]>
+>;
+export type createLeetcodeQuesController_QueryParams = z.infer<
+  Exclude<
+    (typeof c.createLeetcodeQuesController)["urlQueryParamsValidator"],
+    null
+  >
+>;
+export type createLeetcodeQuesController_InputDTO = z.infer<
+  Exclude<(typeof c.createLeetcodeQuesController)["requestBodyValidator"], null>
+>;
+export type createLeetcodeQuesController_OutputDTO = Awaited<
+  ReturnType<(typeof c.createLeetcodeQuesController)["httpRequestHandler"]>
 >;
 export type version_QueryParams = z.infer<
   Exclude<(typeof c.version)["urlQueryParamsValidator"], null>

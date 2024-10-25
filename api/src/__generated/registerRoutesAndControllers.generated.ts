@@ -6,7 +6,7 @@
  * genHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256(468e36ec9c9b8488351d9163cf24dd9043dd00afa1cd44510f5dae1d413cd883)
+ * sha256(d068ebf97aab4375accff9af786b816d780179dc3a256cacafd70ec055ff8963)
  */
 import { Router } from "express";
 import * as c from "./httpControllerBarrelFile.generated.js";
@@ -59,6 +59,13 @@ export function registerRoutesAndControllers() {
     ("/v1" satisfies typeof c.getBucketlistController.version) +
       ("/bucketlist/:bucketlistID" satisfies typeof c.getBucketlistController.path),
     c.getBucketlistController.routeHandler,
+  );
+
+  // POST /api/v1/leetcode/ques
+  r["post" satisfies typeof c.createLeetcodeQuesController.method](
+    ("/v1" satisfies typeof c.createLeetcodeQuesController.version) +
+      ("/leetcode/ques" satisfies typeof c.createLeetcodeQuesController.path),
+    c.createLeetcodeQuesController.routeHandler,
   );
 
   // GET /api/version
