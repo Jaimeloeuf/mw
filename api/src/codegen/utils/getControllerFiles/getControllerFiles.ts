@@ -9,7 +9,7 @@ import type { ControllerFile } from "./ControllerFile.js";
 async function generateControllerFiles() {
   const controllerFolderPath = path.join(
     import.meta.dirname,
-    `../../../controllers`,
+    `../../../controllers-http`,
   );
 
   // Read all files in /controller/**
