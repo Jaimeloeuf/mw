@@ -6,11 +6,12 @@
  * genHttpControllerBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(057adb18ef628eb8001a2e1fbe77d0233136dbd3180e823fa44b2f4b139e889c)
+ * sha256(d8123c38f12c703ef65b55e675fd77333bd9e8653e77f7c15c609e3e9adefed4)
  */
 export * from "../controllers/healthCheck.js";
 export * from "../controllers/blog/blogNewSubscriberController.js";
 export * from "../controllers/bucketlist/createBucketlist.js";
 export * from "../controllers/bucketlist/getBucketlist.js";
 export * from "../controllers/leetcode/createLeetcodeQues.js";
+export * from "../controllers/leetcode/getLeetcodeQues.js";
 export * from "../controllers/version.js";
