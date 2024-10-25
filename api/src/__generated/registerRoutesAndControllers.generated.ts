@@ -6,7 +6,7 @@
  * genHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256(37a220d643868b1f2a12f52a115fb7a4495b0eeb8fa383cd1d3ca4a705283091)
+ * sha256(d988e13dabc0ae34750dfea62b65ea477812b6628dcd2c252be34f6acca84b97)
  */
 import { Router } from "express";
 import * as c from "./httpControllerBarrelFile.generated.js";
@@ -35,9 +35,9 @@ export function registerRoutesAndControllers() {
   const r = Router();
 
   // GET /api/
-  r["get" satisfies typeof c.healthCheck.method](
-    "/" satisfies typeof c.healthCheck.path,
-    c.healthCheck.routeHandler,
+  r["get" satisfies typeof c.healthCheckController.method](
+    "/" satisfies typeof c.healthCheckController.path,
+    c.healthCheckController.routeHandler,
   );
 
   // POST /api/v1/blog/subscribe
@@ -76,9 +76,9 @@ export function registerRoutesAndControllers() {
   );
 
   // GET /api/version
-  r["get" satisfies typeof c.version.method](
-    "/version" satisfies typeof c.version.path,
-    c.version.routeHandler,
+  r["get" satisfies typeof c.versionController.method](
+    "/version" satisfies typeof c.versionController.path,
+    c.versionController.routeHandler,
   );
 
   return r;

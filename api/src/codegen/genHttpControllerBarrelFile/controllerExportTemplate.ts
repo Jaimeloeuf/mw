@@ -5,7 +5,7 @@ export const controllerExportTemplate = (
   file: ControllerFile,
   controllerFolderPath: string,
 ): string =>
-  `export * from "../controllers/${path.relative(
+  `export { default as ${file.controllerName} } from "../controllers-http/${path.relative(
     controllerFolderPath,
     file.path,
   )}";

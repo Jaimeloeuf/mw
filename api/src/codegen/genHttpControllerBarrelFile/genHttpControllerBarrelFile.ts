@@ -13,7 +13,7 @@ import { controllerExportTemplate } from "./controllerExportTemplate.js";
 export async function genHttpControllerBarrelFile() {
   const controllerFolderPath = path.join(
     import.meta.dirname,
-    `../../controllers`,
+    `../../controllers-http`,
   );
 
   const controllerFiles = await getControllerFiles();

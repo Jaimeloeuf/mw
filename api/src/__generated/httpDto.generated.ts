@@ -6,19 +6,19 @@
  * genHttpDtoTypeDefinition
  *
  * Generated hash in hex for code after this section is:
- * sha256(77a4a2d7d05b1d38063d88eff1569abd77f2c9ae6e53042a90a39910516a6c7e)
+ * sha256(b000075c6525c0b3d0b3e951c0599be84f01b21b6dd072e5f3159554fea4e298)
  */
 import type { z } from "zod";
 import * as c from "./httpControllerBarrelFile.generated.js";
 
-export type healthCheck_QueryParams = z.infer<
-  Exclude<(typeof c.healthCheck)["urlQueryParamsValidator"], null>
+export type healthCheckController_QueryParams = z.infer<
+  Exclude<(typeof c.healthCheckController)["urlQueryParamsValidator"], null>
 >;
-export type healthCheck_InputDTO = z.infer<
-  Exclude<(typeof c.healthCheck)["requestBodyValidator"], null>
+export type healthCheckController_InputDTO = z.infer<
+  Exclude<(typeof c.healthCheckController)["requestBodyValidator"], null>
 >;
-export type healthCheck_OutputDTO = Awaited<
-  ReturnType<(typeof c.healthCheck)["httpRequestHandler"]>
+export type healthCheckController_OutputDTO = Awaited<
+  ReturnType<(typeof c.healthCheckController)["httpRequestHandler"]>
 >;
 export type blogNewSubscriberController_QueryParams = z.infer<
   Exclude<
@@ -74,12 +74,12 @@ export type getLeetcodeQuesController_InputDTO = z.infer<
 export type getLeetcodeQuesController_OutputDTO = Awaited<
   ReturnType<(typeof c.getLeetcodeQuesController)["httpRequestHandler"]>
 >;
-export type version_QueryParams = z.infer<
-  Exclude<(typeof c.version)["urlQueryParamsValidator"], null>
+export type versionController_QueryParams = z.infer<
+  Exclude<(typeof c.versionController)["urlQueryParamsValidator"], null>
 >;
-export type version_InputDTO = z.infer<
-  Exclude<(typeof c.version)["requestBodyValidator"], null>
+export type versionController_InputDTO = z.infer<
+  Exclude<(typeof c.versionController)["requestBodyValidator"], null>
 >;
-export type version_OutputDTO = Awaited<
-  ReturnType<(typeof c.version)["httpRequestHandler"]>
+export type versionController_OutputDTO = Awaited<
+  ReturnType<(typeof c.versionController)["httpRequestHandler"]>
 >;

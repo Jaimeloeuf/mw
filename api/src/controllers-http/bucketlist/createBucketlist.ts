@@ -2,7 +2,7 @@ import { z } from "zod";
 import { httpController } from "../../http/index.js";
 import { bucketlistService } from "../../services/index.js";
 
-export const createBucketlistController = httpController({
+export default httpController({
   version: 1,
   method: "post",
   path: "/bucketlist",

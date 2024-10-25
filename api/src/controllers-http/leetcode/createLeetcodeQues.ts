@@ -2,7 +2,7 @@ import { z } from "zod";
 import { httpController } from "../../http/index.js";
 import { leetcodeService } from "../../services/index.js";
 
-export const createLeetcodeQuesController = httpController({
+export default httpController({
   version: 1,
   method: "post",
   path: "/leetcode/ques",

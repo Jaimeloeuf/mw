@@ -35,7 +35,7 @@ async function generateControllerFiles() {
           version: fileContent.match(/version: (.*),/)?.[1],
           httpRoute: fileContent.match(/path: "(.*)",/)?.[1],
           httpMethod: fileContent.match(/method: "(.*)",/)?.[1],
-          controllerName: fileContent.match(/export const (.*) =/)?.[1],
+          controllerName: file.name.replace(".ts", "") + "Controller",
         };
       }),
   ).then((possibleControllerFiles) =>
@@ -46,8 +46,7 @@ async function generateControllerFiles() {
         (file): file is ControllerFile =>
           file.version !== undefined &&
           file.httpRoute !== undefined &&
-          file.httpMethod !== undefined &&
-          file.controllerName !== undefined,
+          file.httpMethod !== undefined,
       )
 
       // Sort these files by the http route strings alphabetically and version
