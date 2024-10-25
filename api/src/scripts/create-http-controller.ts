@@ -5,15 +5,12 @@ import { logger } from "../logging/index.js";
 import pc from "picocolors";
 
 const codeTemplate = (
-  controllerName: string,
   httpMethod: string,
   apiPath: string,
 ) => `import { z } from "zod";
-// TODO:
-// Move this file into a app folder to fix the relative path import
-import { httpController, useHttpRequestGuard } from "../../http/index.js";
+import { httpController, useHttpRequestGuard } from "../http/index.js";
 
-export const ${controllerName} = httpController({
+export default httpController({
   version: 1,
   method: "${httpMethod}",
   path: "${apiPath}",
@@ -73,11 +70,11 @@ async function createHttpController() {
 
   const controllerFilePath = path.join(
     import.meta.dirname,
-    `../controllers/${controllerName}.ts`,
+    `../controllers-http/${controllerName}.ts`,
   );
 
-  const generatedCode = codeTemplate(controllerName, httpMethod, apiPath);
-  fs.writeFileSync(controllerFilePath, generatedCode, { mode: "" });
+  const generatedCode = codeTemplate(httpMethod, apiPath);
+  fs.writeFileSync(controllerFilePath, generatedCode);
 
   logger.info(
     createHttpController.name,
