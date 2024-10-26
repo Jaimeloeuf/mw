@@ -1,8 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import { tsImport } from "tsx/esm/api";
-import { logger } from "../../logging/index.js";
-import type { CodegenFunction } from "./CodegenFunction.js";
+import { loadCodegenFunction } from "./loadCodegenFunction.js";
 
 /**
  * Dynamically load and return all the codegen functions.
@@ -27,31 +25,12 @@ export async function loadAllCodegenFunctions() {
 
   const codegenModulePaths = allFoldersInCodegenFolder
     .filter((folder) => folder.name.startsWith("gen"))
-    .map(async (file) => {
-      // Cannot use `import` directly since it does not support loading .ts files
-      const importedModule = await tsImport(
+    .map((file) =>
+      loadCodegenFunction(
+        file.name,
         path.resolve(file.parentPath, file.name, file.name + ".ts"),
-        import.meta.url,
-      );
-
-      // Extract out the named export and make sure it is a function
-      const importedCodegenFunction: CodegenFunction =
-        importedModule[file.name];
-
-      if (typeof importedCodegenFunction !== "function") {
-        logger.error(
-          loadAllCodegenFunctions.name,
-          `Codegen module is malformed and does not export codegen function\nMake sure they are of the same name`,
-        );
-        logger.error(
-          loadAllCodegenFunctions.name,
-          `Module found: ${importedModule}`,
-        );
-        process.exit(1);
-      }
-
-      return importedCodegenFunction;
-    });
+      ),
+    );
 
   // Await for all the module load operations at the same time
   return Promise.all(codegenModulePaths);
