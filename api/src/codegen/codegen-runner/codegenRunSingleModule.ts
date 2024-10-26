@@ -1,9 +1,9 @@
 import fs from "fs";
 import path from "path";
 import { tsImport } from "tsx/esm/api";
-import { logger } from "../logging/index.js";
+import { logger } from "../../logging/index.js";
 import { runCodegenModules } from "./runCodegenModules.js";
-import { genCodegenBarrelFile } from "./codegenForTs/index.js";
+import { genCodegenBarrelFile } from "../codegenForTs/index.js";
 import type { CodegenFunction } from "./CodegenFunction.js";
 
 export async function codegenRunSingleModule(codegenModuleName: string) {
@@ -11,6 +11,7 @@ export async function codegenRunSingleModule(codegenModuleName: string) {
   // with the same name as itself
   const codegenModulePath = path.resolve(
     import.meta.dirname,
+    "../",
     codegenModuleName,
     `${codegenModuleName}.ts`,
   );

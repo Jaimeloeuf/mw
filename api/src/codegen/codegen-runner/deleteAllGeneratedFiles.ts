@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
-import { logger } from "../logging/index.js";
-import { generatedSrcDirPath } from "./codegenForTs/index.js";
+import { logger } from "../../logging/index.js";
+import { generatedSrcDirPath } from "../codegenForTs/index.js";
 
 /**
  * Delete all generated files in __generated/ so that codegen can start afresh.
@@ -16,6 +16,7 @@ import { generatedSrcDirPath } from "./codegenForTs/index.js";
  * all of them again.
  */
 export async function deleteAllGeneratedFiles() {
+  // @todo Delete generated docs too!
   const generatedFilesDirent = await fs.readdir(generatedSrcDirPath, {
     recursive: true,
     withFileTypes: true,

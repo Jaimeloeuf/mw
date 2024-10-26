@@ -18,7 +18,7 @@
     "db:run-migrations": "npx tsx ./src/dal/kysely/migration-script.ts",
     "scripts:create-kysely-migration": "npx tsx ./src/scripts/create-kysely-migration.ts",
     "scripts:create-http-controller": "npx tsx ./src/scripts/create-http-controller.ts",
-    "codegen": "npx tsx ./src/codegen/index.ts"
+    "codegen": "npx tsx ./src/codegen/codegen-runner/codegenRunner.ts"
   },
   "engines": {
     "node": ">=20.0.0"

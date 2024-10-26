@@ -1,13 +1,13 @@
-import { logger } from "../logging/index.js";
+import { logger } from "../../logging/index.js";
 
 import { codegenRunAllModules } from "./codegenRunAllModules.js";
 import { codegenRunSingleModule } from "./codegenRunSingleModule.js";
 import { printCodegenCliHelp } from "./printCodegenCliHelp.js";
 import { printAllCodegenModules } from "./printAllCodegenModules.js";
 import { showGitStatusOfGeneratedFolder } from "./showGitStatusOfGeneratedFolder.js";
-import { validateGeneratedFiles } from "./validateGeneratedFiles/validateGeneratedFiles.js";
+import { validateGeneratedFiles } from "../validateGeneratedFiles/validateGeneratedFiles.js";
 
-async function codegenEntrypoint() {
+async function codegenRunner() {
   // No extra arguments, show help menu
   if (process.argv.length === 2) {
     printCodegenCliHelp();
@@ -48,8 +48,8 @@ async function codegenEntrypoint() {
     return;
   }
 
-  logger.error(codegenEntrypoint.name, `Invalid codegen argument: ${arg}\n`);
+  logger.error(codegenRunner.name, `Invalid codegen argument: ${arg}\n`);
   printCodegenCliHelp();
 }
 
-codegenEntrypoint();
+codegenRunner();
