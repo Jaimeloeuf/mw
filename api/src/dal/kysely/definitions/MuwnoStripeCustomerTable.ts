@@ -18,9 +18,10 @@ export interface MuwnoStripeCustomerTable {
   org_id: string;
 
   /**
-   * The metered product's Stripe Subscription ID
+   * This is Stripe's Subscription ID for the metered product. This is nullable
+   * since this is only set once the subscription goes into effect.
    */
-  metered_subscription_id: string;
+  metered_subscription_id: null | string;
 }
 
 export type MuwnoStripeCustomer = Selectable<MuwnoStripeCustomerTable>;
