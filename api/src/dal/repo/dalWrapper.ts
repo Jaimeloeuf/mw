@@ -1,5 +1,5 @@
 import { logger } from "../../logging/index.js";
-import { noThrow } from "../../utils/index.js";
+import { noThrowPromise } from "../../utils/index.js";
 
 /**
  * DAL function wrapper to wrap them and provide common utility features such as
@@ -37,7 +37,7 @@ export function dalWrapper<
   async function getResultOrError(
     ...args: Parameters<T>
   ): Promise<[null, Result] | [Error, null]> {
-    const noThrowResult = await noThrow(() => fn(...args));
+    const noThrowResult = await noThrowPromise(fn(...args));
 
     if (noThrowResult[0] !== null) {
       logDalError(fn.name, noThrowResult[0]);
@@ -64,7 +64,7 @@ export function dalWrapper<
   async function getResultOrThrowOnError(
     ...args: Parameters<T>
   ): Promise<Result> {
-    const noThrowResult = await noThrow(() => fn(...args));
+    const noThrowResult = await noThrowPromise(fn(...args));
 
     if (noThrowResult[0] !== null) {
       logDalError(fn.name, noThrowResult[0]);
