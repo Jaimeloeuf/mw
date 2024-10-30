@@ -3,6 +3,8 @@ import { unknownCatchToError } from "./unknownCatchToError.js";
 /**
  * Utility wrapper function to wrap a promise to prevent it from throwing.
  *
+ * **If you need to wrap an async function instead, use `noThrowFunction`**
+ *
  * This will always return a 2 element tuple, whose type is
  * `[err, null] | [null, result]`. Similar to Go error handling, where if there
  * is an error the first element will be set to it and the second element will
@@ -11,7 +13,7 @@ import { unknownCatchToError } from "./unknownCatchToError.js";
  * You can then use TS type narrowing to determine if the function threw an
  * error or not. For example
  * ```typescript
- * const [err, result] = await noThrow(yourPromise);
+ * const [err, result] = await noThrowPromise(yourPromise);
  * if (err !== null){
  *     console.error('Operation failed with', err);
  *     return;

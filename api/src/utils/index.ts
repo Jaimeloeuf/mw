@@ -2,7 +2,7 @@
  * Barrel file
  */
 
-export * from "./noThrow.js";
+export * from "./noThrowFunction.js";
 export * from "./noThrowPromise.js";
 export * from "./concurrent.js";
 export * from "./prettyPrintJson.js";
