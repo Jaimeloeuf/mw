@@ -5,14 +5,21 @@ import { HttpTransformerableException } from "./HttpTransformerableException.js"
  * found.
  */
 export class NotFoundException extends HttpTransformerableException {
-  constructor(optionalMessage: string = "Not Found Exception") {
+  constructor(
+    optionalMessage: string = "Not Found Exception",
+    public readonly details?: Array<string>,
+  ) {
     super(optionalMessage);
   }
 
   transformToHttpResponseData() {
     return {
       httpStatusCode: 404,
-      jsendData: [NotFoundException.name, this.message],
+      jsendData: [
+        NotFoundException.name,
+        this.message,
+        ...(this.details ?? []),
+      ],
     };
   }
 }

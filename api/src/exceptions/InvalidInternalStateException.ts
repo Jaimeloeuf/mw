@@ -9,14 +9,21 @@ import { HttpTransformerableException } from "./HttpTransformerableException.js"
  * recoverable state.
  */
 export class InvalidInternalStateException extends HttpTransformerableException {
-  constructor(optionalMessage: string = "Invalid Internal State Exception") {
+  constructor(
+    optionalMessage: string = "Invalid Internal State Exception",
+    public readonly details?: Array<string>,
+  ) {
     super(optionalMessage);
   }
 
   transformToHttpResponseData() {
     return {
       httpStatusCode: 500,
-      jsendData: [InvalidInternalStateException.name, this.message],
+      jsendData: [
+        InvalidInternalStateException.name,
+        this.message,
+        ...(this.details ?? []),
+      ],
     };
   }
 }

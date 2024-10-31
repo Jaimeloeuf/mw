@@ -5,14 +5,21 @@ import { HttpTransformerableException } from "./HttpTransformerableException.js"
  * credentials, and that users can try again with the right credentials.
  */
 export class UnauthorizedException extends HttpTransformerableException {
-  constructor(optionalMessage: string = "Unauthorized Exception") {
+  constructor(
+    optionalMessage: string = "Unauthorized Exception",
+    public readonly details?: Array<string>,
+  ) {
     super(optionalMessage);
   }
 
   transformToHttpResponseData() {
     return {
       httpStatusCode: 401,
-      jsendData: [UnauthorizedException.name, this.message],
+      jsendData: [
+        UnauthorizedException.name,
+        this.message,
+        ...(this.details ?? []),
+      ],
     };
   }
 }

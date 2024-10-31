@@ -5,14 +5,21 @@ import { HttpTransformerableException } from "./HttpTransformerableException.js"
  * negative dollar amount from an ATM.
  */
 export class InvalidInputException extends HttpTransformerableException {
-  constructor(optionalMessage: string = "Invalid Input Exception") {
+  constructor(
+    optionalMessage: string = "Invalid Input Exception",
+    public readonly details?: Array<string>,
+  ) {
     super(optionalMessage);
   }
 
   transformToHttpResponseData() {
     return {
       httpStatusCode: 400,
-      jsendData: [InvalidInputException.name, this.message],
+      jsendData: [
+        InvalidInputException.name,
+        this.message,
+        ...(this.details ?? []),
+      ],
     };
   }
 }

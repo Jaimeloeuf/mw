@@ -10,14 +10,21 @@ import { HttpTransformerableException } from "./HttpTransformerableException.js"
  * clear on what exactly is the issue rather than masking behind some other type.
  */
 export class InvalidOperationException extends HttpTransformerableException {
-  constructor(optionalMessage: string = "Invalid Operation Exception") {
+  constructor(
+    optionalMessage: string = "Invalid Operation Exception",
+    public readonly details?: Array<string>,
+  ) {
     super(optionalMessage);
   }
 
   transformToHttpResponseData() {
     return {
       httpStatusCode: 400,
-      jsendData: [InvalidOperationException.name, this.message],
+      jsendData: [
+        InvalidOperationException.name,
+        this.message,
+        ...(this.details ?? []),
+      ],
     };
   }
 }
