@@ -4,46 +4,42 @@ import { HttpTransformerableException } from "./HttpTransformerableException.js"
  * HTTP transformable Exception for Generic DAL exceptions/errors.
  */
 export class GenericDalException extends HttpTransformerableException {
-  constructor(
+  static build(
     /**
-     * Either provide an `optionalMessage` string or an options object.
+     * Optional exception message to override the default message.
      */
-    options:
-      | string
-      | {
-          /**
-           * Optional exception message to override the default message.
-           */
-          optionalMessage?: string;
-
-          /**
-           * Optional HTTP status code to override the default 500.
-           */
-          httpStatusCode?: number;
-
-          /**
-           * Optionally any additional data the caller might wish to supply.
-           */
-          details?: Array<string>;
-        },
+    optionalMessage?: string,
   ) {
-    if (typeof options === "string") {
-      super(options);
-      this.httpStatusCode = 500;
-      return;
-    }
-
-    super(options.optionalMessage ?? "Generic DAL Exception");
-    this.httpStatusCode = options.httpStatusCode ?? 500;
-    this.details = options.details;
+    return new GenericDalException(optionalMessage);
   }
 
-  public readonly httpStatusCode: number;
-  public readonly details: Array<string> | undefined;
+  constructor(msg: string = "Generic DAL Exception") {
+    super(msg);
+  }
+
+  private httpStatusCode?: number;
+
+  /**
+   * Optionally override the default 500 HTTP status code.
+   */
+  setHttpStatusCode(httpStatusCode: number) {
+    this.httpStatusCode = httpStatusCode;
+    return this;
+  }
+
+  private details?: Array<string>;
+
+  /**
+   * Optionally set additional details the caller might wish to supply.
+   */
+  setAdditionalDetails(details: Array<string>) {
+    this.details = details;
+    return this;
+  }
 
   transformToHttpResponseData() {
     return {
-      httpStatusCode: this.httpStatusCode,
+      httpStatusCode: this.httpStatusCode ?? 500,
       jsendData: [
         GenericDalException.name,
         this.message,
