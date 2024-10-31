@@ -8,6 +8,7 @@ export * from "./HttpTransformerableException.js";
 export * from "./errorToServiceException.js";
 
 export * from "./ServiceException.js";
+export * from "./GenericDalException.js";
 export * from "./InvalidInputException.js";
 export * from "./InvalidOperationException.js";
 export * from "./UnauthorizedException.js";
