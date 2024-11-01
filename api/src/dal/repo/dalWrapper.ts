@@ -10,12 +10,22 @@ import { noThrowPromise } from "../../utils/index.js";
 export function dalWrapper<
   T extends (...args: any) => Promise<any>,
   Result extends Awaited<ReturnType<T>> = Awaited<ReturnType<T>>,
->(fn: T) {
+>(
+  fn: T,
+
+  /**
+   * Data Function name
+   */
+  name?: string,
+) {
+  // @todo Delete the eslint check once dfName is fully used
   // Extra runtime check alongside compile time check with ESLint rule
   // 'mwEslintPlugin/require-function-name-for-dalWrapper'
-  if (fn.name === "") {
-    throw new Error(`Functions passed to ${dalWrapper.name} must be named`);
-  }
+  // if (fn.name === "") {
+  //   throw new Error(`Functions passed to ${dalWrapper.name} must be named`);
+  // }
+
+  const dfName = name ?? fn.name;
 
   /**
    * Run DAL repo function and catches any error/exceptions encountered using
@@ -40,7 +50,7 @@ export function dalWrapper<
     const noThrowResult = await noThrowPromise(fn(...args));
 
     if (noThrowResult[0] !== null) {
-      logDalError(fn.name, noThrowResult[0]);
+      logDalError(dfName, noThrowResult[0]);
     }
 
     return noThrowResult;
@@ -67,7 +77,7 @@ export function dalWrapper<
     const noThrowResult = await noThrowPromise(fn(...args));
 
     if (noThrowResult[0] !== null) {
-      logDalError(fn.name, noThrowResult[0]);
+      logDalError(dfName, noThrowResult[0]);
       throw noThrowResult[0];
     }
 
