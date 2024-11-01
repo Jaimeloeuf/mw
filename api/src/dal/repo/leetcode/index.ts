@@ -1,7 +1,7 @@
 import { dalWrapper } from "../dalWrapper.js";
 
-import { getLeetcodeQues } from "./getLeetcodeQues.js";
-import { createLeetcodeQues } from "./createLeetcodeQues.js";
+import { getLeetcodeQues } from "./getLeetcodeQues.df.js";
+import { createLeetcodeQues } from "./createLeetcodeQues.df.js";
 
 export const leetcodeRepo = {
   getLeetcodeQues: dalWrapper(getLeetcodeQues),
