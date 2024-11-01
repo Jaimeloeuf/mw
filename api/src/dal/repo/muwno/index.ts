@@ -1,4 +1,4 @@
-import { dalWrapper } from "../dalWrapper.js";
+import { dataFn } from "../dataFn.js";
 
 import { getUser } from "./getUser.df.js";
 import { createUser } from "./createUser.df.js";
@@ -64,22 +64,22 @@ export const muwnoRepo = {
   /**
    * Get User Entity object, throws `NotFoundException` if not found.
    */
-  getUser: dalWrapper(getUser),
+  getUser: dataFn(getUser),
 
   /**
    * Create a new User in data source
    */
-  createUser: dalWrapper(createUser),
+  createUser: dataFn(createUser),
 
   /**
    * Update a User in data source
    */
-  updateUser: dalWrapper(updateUser),
+  updateUser: dataFn(updateUser),
 
   /**
    * Deactivate a User account
    */
-  deactivateUser: dalWrapper(deactivateUser),
+  deactivateUser: dataFn(deactivateUser),
 
   /**
    * Check if given user completed onboarding.
@@ -88,291 +88,289 @@ export const muwnoRepo = {
    * 1. User must have an Org
    * 2. The org must have a valid subscription
    */
-  isUserOnboarded: dalWrapper(isUserOnboarded),
+  isUserOnboarded: dataFn(isUserOnboarded),
 
   /**
    * Check if user have access permission to this Org.
    */
-  canUserAccessOrg: dalWrapper(canUserAccessOrg),
+  canUserAccessOrg: dataFn(canUserAccessOrg),
 
   /**
    * Get a single Org Entity object back
    */
-  getOrg: dalWrapper(getOrg),
+  getOrg: dataFn(getOrg),
 
   /**
    * Get a user's Org Entity object back if they belong to an Org
    */
-  getOrgOfUser: dalWrapper(getOrgOfUser),
+  getOrgOfUser: dataFn(getOrgOfUser),
 
   /**
    * Create a new Organisation in data source
    */
-  createOrg: dalWrapper(createOrg),
+  createOrg: dataFn(createOrg),
 
   /**
    * Update an Organisation in data source
    */
-  updateOrg: dalWrapper(updateOrg),
+  updateOrg: dataFn(updateOrg),
 
   /**
    * Get all members of the Org team, sorted by newest member first.
    */
-  getOrgMembers: dalWrapper(getOrgMembers),
+  getOrgMembers: dataFn(getOrgMembers),
 
   /**
    * Create and save a team member invite into data source.
    */
-  createJoinOrgInvitation: dalWrapper(createJoinOrgInvitation),
+  createJoinOrgInvitation: dataFn(createJoinOrgInvitation),
 
   /**
    * Get a pending team invitation using the given `invitationID`.
    */
-  getPendingJoinOrgInvitation: dalWrapper(getPendingJoinOrgInvitation),
+  getPendingJoinOrgInvitation: dataFn(getPendingJoinOrgInvitation),
 
   /**
    * Get all pending team invitations of the given Org.
    */
-  getAllPendingJoinOrgInvitations: dalWrapper(getAllPendingJoinOrgInvitations),
+  getAllPendingJoinOrgInvitations: dataFn(getAllPendingJoinOrgInvitations),
 
   /**
    * Get all pending team invitations of a given user.
    */
-  getAllPendingJoinOrgInvitationsOfUser: dalWrapper(
+  getAllPendingJoinOrgInvitationsOfUser: dataFn(
     getAllPendingJoinOrgInvitationsOfUser,
   ),
 
   /**
    * Delete a pending team invitation.
    */
-  deletePendingJoinOrgInvitation: dalWrapper(deletePendingJoinOrgInvitation),
+  deletePendingJoinOrgInvitation: dataFn(deletePendingJoinOrgInvitation),
 
   /**
    * Remove member from team and all their data from the team.
    */
-  removeOrgMember: dalWrapper(removeOrgMember),
+  removeOrgMember: dataFn(removeOrgMember),
 
   /**
    * Check if user have access permission to this product.
    * If product does not exists, it is also treated as a lack of permission.
    */
-  canUserAccessProduct: dalWrapper(canUserAccessProduct),
+  canUserAccessProduct: dataFn(canUserAccessProduct),
 
   /**
    * Get a single product the user can access.
    */
-  getProduct: dalWrapper(getProduct),
+  getProduct: dataFn(getProduct),
 
   /**
    * Get a product's Org ID.
    */
-  getProductOrgID: dalWrapper(getProductOrgID),
+  getProductOrgID: dataFn(getProductOrgID),
 
   /**
    * Get all products of the user's Org.
    */
-  getProductsOfUserOrg: dalWrapper(getProductsOfUserOrg),
+  getProductsOfUserOrg: dataFn(getProductsOfUserOrg),
 
   /**
    * Create a new Product in data source
    */
-  createProduct: dalWrapper(createProduct),
+  createProduct: dataFn(createProduct),
 
   /**
    * Update a Product
    */
-  updateProduct: dalWrapper(updateProduct),
+  updateProduct: dataFn(updateProduct),
 
   /**
    * Delete a single product.
    */
-  deleteProduct: dalWrapper(deleteProduct),
+  deleteProduct: dataFn(deleteProduct),
 
   /**
    * Transfer product to a different Org.
    */
-  transferProduct: dalWrapper(transferProduct),
+  transferProduct: dataFn(transferProduct),
 
   /**
    * Get a feedback form object.
    */
-  getFeedbackform: dalWrapper(getFeedbackform),
+  getFeedbackform: dataFn(getFeedbackform),
 
   /**
    * Save a feedback form response.
    */
-  createFeedbackResponse: dalWrapper(createFeedbackResponse),
+  createFeedbackResponse: dataFn(createFeedbackResponse),
 
   /**
    * Get the number of survey responses currently stored for a given Org.
    */
-  getNumberOfFeedbackResponsesStoredByOrg: dalWrapper(
+  getNumberOfFeedbackResponsesStoredByOrg: dataFn(
     getNumberOfFeedbackResponsesStoredByOrg,
   ),
 
   /**
    * Get the number of survey responses currently stored for a given Product.
    */
-  getNumberOfFeedbackResponsesStoredByProduct: dalWrapper(
+  getNumberOfFeedbackResponsesStoredByProduct: dataFn(
     getNumberOfFeedbackResponsesStoredByProduct,
   ),
 
   /**
    * Get a single response.
    */
-  getFeedbackResponse: dalWrapper(getFeedbackResponse),
+  getFeedbackResponse: dataFn(getFeedbackResponse),
 
   /**
    * Get survey responses of selected product, sorted by latest responses first.
    */
-  getFeedbackResponses: dalWrapper(getFeedbackResponses),
+  getFeedbackResponses: dataFn(getFeedbackResponses),
 
   /**
    * Get feedback response data `a2` of the given productID, sorted by most
    * important and oldest first, and up to the first 1000 answers.
    */
-  getFeedbackResponseA2: dalWrapper(getFeedbackResponseA2),
+  getFeedbackResponseA2: dataFn(getFeedbackResponseA2),
 
   /**
    * Get feedback response data `a3` of the given productID, sorted by most
    * important and oldest first, and up to the first 1000 answers.
    */
-  getFeedbackResponseA3: dalWrapper(getFeedbackResponseA3),
+  getFeedbackResponseA3: dataFn(getFeedbackResponseA3),
 
   /**
    * Get Product's feedback response `a3`.
    * @todo Use a better name for this to not conflict with the above methods
    */
-  getA3: dalWrapper(getA3),
+  getA3: dataFn(getA3),
 
   /**
    * Get product ID of a feedback response.
    */
-  getProductIdOfFeedbackResponse: dalWrapper(getProductIdOfFeedbackResponse),
+  getProductIdOfFeedbackResponse: dataFn(getProductIdOfFeedbackResponse),
 
   /**
    * Create a new Task in data source.
    */
-  createTask: dalWrapper(createTask),
+  createTask: dataFn(createTask),
 
   /**
    * Get Task from data source.
    */
-  getTask: dalWrapper(getTask),
+  getTask: dataFn(getTask),
 
   /**
    * Update Task in data source.
    */
-  updateTask: dalWrapper(updateTask),
+  updateTask: dataFn(updateTask),
 
   /**
    * Delete Task in data source.
    */
-  deleteTask: dalWrapper(deleteTask),
+  deleteTask: dataFn(deleteTask),
 
   /**
    * Get Tasks of response from data source.
    */
-  getTasksOfResponse: dalWrapper(getTasksOfResponse),
+  getTasksOfResponse: dataFn(getTasksOfResponse),
 
   /**
    * Get Tasks of product from data source.
    */
-  getTasksOfProduct: dalWrapper(getTasksOfProduct),
+  getTasksOfProduct: dataFn(getTasksOfProduct),
 
   /**
    * Get `ProductID` of a given task.
    */
-  getProductIdOfTask: dalWrapper(getProductIdOfTask),
+  getProductIdOfTask: dataFn(getProductIdOfTask),
 
   /**
    * Mark a task as done in data source.
    */
-  markTaskAsDone: dalWrapper(markTaskAsDone),
+  markTaskAsDone: dataFn(markTaskAsDone),
 
   /**
    * Add a new Customer to data source.
    */
-  createCustomer: dalWrapper(createCustomer),
+  createCustomer: dataFn(createCustomer),
 
   /**
    * Get the number of Customers currently stored by a given Org.
    */
-  getNumberOfCustomersStoredByOrg: dalWrapper(getNumberOfCustomersStoredByOrg),
+  getNumberOfCustomersStoredByOrg: dataFn(getNumberOfCustomersStoredByOrg),
 
   /**
    * Check if the given Stripe Webhook Event is unprocessed, if it is, return
    * true and record its ID so that it can be used for future checks.
    */
-  isStripeWebhookEventUnprocessed: dalWrapper(isStripeWebhookEventUnprocessed),
+  isStripeWebhookEventUnprocessed: dataFn(isStripeWebhookEventUnprocessed),
 
   /**
    * Mark a given Stripe Webhook Event as processed.
    */
-  markStripeWebhookEventAsProcessed: dalWrapper(
-    markStripeWebhookEventAsProcessed,
-  ),
+  markStripeWebhookEventAsProcessed: dataFn(markStripeWebhookEventAsProcessed),
 
   /**
    * Create and save a new `StripeCustomer` object in data source. If `Org`
    * already have a StripeCustomer, replace it with this new one.
    */
-  createStripeCustomer: dalWrapper(createStripeCustomer),
+  createStripeCustomer: dataFn(createStripeCustomer),
 
   /**
    * Get a `StripeCustomer` object back using a stripe customer ID.
    */
-  getStripeCustomer: dalWrapper(getStripeCustomer),
+  getStripeCustomer: dataFn(getStripeCustomer),
 
   /**
    * Get a `StripeCustomer` object back using a `OrgID`.
    */
-  getStripeCustomerOfOrg: dalWrapper(getStripeCustomerOfOrg),
+  getStripeCustomerOfOrg: dataFn(getStripeCustomerOfOrg),
 
   /**
    * Update metered product subscription ID.
    */
-  updateStripeCustomerMeteredProductSubscription: dalWrapper(
+  updateStripeCustomerMeteredProductSubscription: dataFn(
     updateStripeCustomerMeteredProductSubscription,
   ),
 
   /**
    * Save a Stripe Setup Next action into the database
    */
-  createStripeSetupNext: dalWrapper(createStripeSetupNext),
+  createStripeSetupNext: dataFn(createStripeSetupNext),
 
   /**
    * Get one from the database
    */
-  getStripeSetupNext: dalWrapper(getStripeSetupNext),
+  getStripeSetupNext: dataFn(getStripeSetupNext),
 
   /**
    * Delete one from the database
    */
-  deleteStripeSetupNext: dalWrapper(deleteStripeSetupNext),
+  deleteStripeSetupNext: dataFn(deleteStripeSetupNext),
 
   /**
    * Save a newly created API Key.
    */
-  createApiKey: dalWrapper(createApiKey),
+  createApiKey: dataFn(createApiKey),
 
   /**
    * Get a single API Key Detail object back using its ID.
    */
-  getApiKey: dalWrapper(getApiKey),
+  getApiKey: dataFn(getApiKey),
 
   /**
    * Get all API Key Detail objects of the Org.
    */
-  getApiKeysOfOrg: dalWrapper(getApiKeysOfOrg),
+  getApiKeysOfOrg: dataFn(getApiKeysOfOrg),
 
   /**
    * Delete an API Key.
    */
-  deleteApiKey: dalWrapper(deleteApiKey),
+  deleteApiKey: dataFn(deleteApiKey),
 
   /**
    * Get API Key's corresponding Org.
    */
-  getApiKeyOrg: dalWrapper(getApiKeyOrg),
+  getApiKeyOrg: dataFn(getApiKeyOrg),
 };

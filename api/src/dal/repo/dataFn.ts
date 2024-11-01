@@ -7,7 +7,7 @@ import { noThrowPromise } from "../../utils/index.js";
  * of either calling the DAL function and let errors/exceptions bubble through
  * or catch all errors/exceptions and return it for manual handling.
  */
-export function dalWrapper<
+export function dataFn<
   T extends (...args: any) => Promise<any>,
   Result extends Awaited<ReturnType<T>> = Awaited<ReturnType<T>>,
 >(
@@ -95,6 +95,6 @@ export function dalWrapper<
  * `getResultOrError` or `getResultOrThrowOnError`.
  */
 function logDalError(fnName: string, error: Error) {
-  logger.error(dalWrapper.name, `Failed to execute DAL repo call: ${fnName}`);
-  logger.error(`${dalWrapper.name}:${fnName}`, error?.stack ?? error);
+  logger.error(dataFn.name, `Failed to execute DAL repo call: ${fnName}`);
+  logger.error(`${dataFn.name}:${fnName}`, error?.stack ?? error);
 }
