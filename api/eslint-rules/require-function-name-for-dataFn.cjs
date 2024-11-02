@@ -15,17 +15,19 @@ module.exports = {
         }
 
         for (const item of node.arguments) {
-          if (item.name !== undefined || item?.id?.name !== undefined) {
+          const dataFnName = item.name ?? item?.id?.name;
+
+          if (dataFnName === undefined) {
+            context.report({
+              message: `Function passed to 'dataFn' must be named`,
+              loc: {
+                start: node.callee.loc.end,
+                end: node.callee.loc.end,
+              },
+            });
+
             continue;
           }
-
-          context.report({
-            message: `Functions passed to 'dataFn' function must be named`,
-            loc: {
-              start: node.callee.loc.end,
-              end: node.callee.loc.end,
-            },
-          });
         }
       },
     };
