@@ -18,7 +18,6 @@ export async function genAndSaveGeneratedCode(
   generator: Function,
   generatedCode: string,
   generatedCodeFileName: string,
-  generatedCodeFileNameExtension: string = ".generated.ts",
 ) {
   await genAndSaveGeneratedFile({
     generator,
