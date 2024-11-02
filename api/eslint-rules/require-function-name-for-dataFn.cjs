@@ -17,7 +17,17 @@ module.exports = {
           return;
         }
 
-        const fileName = path.basename(context.filename).replace(".df.ts", "");
+        const fileBaseName = path.basename(context.filename);
+
+        if (!fileBaseName.endsWith(".df.ts")) {
+          context.report({
+            node,
+            message: `'dataFn' can only be used in files with the '.df.ts' file extension`,
+          });
+          return;
+        }
+
+        const fileName = fileBaseName.replace(".df.ts", "");
 
         for (const item of node.arguments) {
           const dataFnName = item.name ?? item?.id?.name;
