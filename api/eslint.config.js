@@ -15,7 +15,7 @@ export default [
       "prefer-const": "error",
       "no-console": "warn",
       "mwEslintPlugin/require-function-name-for-addJob": "error",
-      "mwEslintPlugin/require-function-name-for-dalWrapper": "error",
+      "mwEslintPlugin/require-function-name-for-dataFn": "error",
     },
     plugins: {
       mwEslintPlugin,
