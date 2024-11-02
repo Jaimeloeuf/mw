@@ -1,7 +1,8 @@
 import fs from "fs/promises";
 import { generatedSrcDirPath } from "./generatedSrcDirPath.js";
-import { genAndSaveGeneratedCode } from "./genAndSaveGeneratedCode.js";
 import { filesToSkipForBarrelFileCodegen } from "./filesToSkipForBarrelFileCodegen.js";
+import { genAndSaveGeneratedFile } from "../utils/genAndSaveGeneratedFile.js";
+import { genGeneratedNotice } from "./genGeneratedNotice.js";
 
 /**
  * Generate barrel file for all generated files
@@ -24,10 +25,13 @@ export async function genCodegenBarrelFile() {
       .map((dirent) => `export * from './${dirent.name.replace(".ts", ".js")}'`)
       .join("\n");
 
-  await genAndSaveGeneratedCode(
-    genCodegenBarrelFile,
-    generatedCode,
-    "index",
-    ".ts",
-  );
+  await genAndSaveGeneratedFile({
+    generator: genCodegenBarrelFile,
+    genGeneratedNotice,
+    generatedText: generatedCode,
+    generatedFileRootDirPath: generatedSrcDirPath,
+    generatedTextFileName: "index",
+    generatedTextFileType: ".ts",
+    generatedTextFileNameExtension: ".ts",
+  });
 }
