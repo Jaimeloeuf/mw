@@ -12,7 +12,7 @@ export function dataFn<
   Result extends Awaited<ReturnType<T>> = Awaited<ReturnType<T>>,
 >(fn: T) {
   // Extra runtime check alongside compile time check with ESLint rule
-  // 'mwEslintPlugin/require-function-name-for-dataFn'
+  // 'mwEslintPlugin/dataFn'
   if (fn.name === "") {
     throw new Error(`Functions passed to ${dataFn.name} must be named`);
   }

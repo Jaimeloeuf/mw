@@ -5,7 +5,7 @@ module.exports = {
     type: "problem",
     docs: {
       description:
-        "Ensure functions passed to 'dataFn' are named and match the file name",
+        "Ensure that 'dataFn' is used correctly, which includes making sure it is only used in .df.ts files within dal/ and the function is named the same as the module name.",
     },
     fixable: "code",
     schema: [],
