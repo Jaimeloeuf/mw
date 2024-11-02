@@ -24,11 +24,23 @@ module.exports = {
 
           if (dataFnName === undefined) {
             context.report({
-              node,
+              node: item,
               message: `Function passed to 'dataFn' must be named`,
               loc: {
                 start: node.callee.loc.end,
                 end: node.callee.loc.end,
+              },
+              fix(fixer) {
+                const functionKeyword = context.sourceCode.getFirstToken(node, {
+                  filter: (token) =>
+                    token.type === "Keyword" && token.value === "function",
+                });
+
+                if (!functionKeyword) {
+                  return null;
+                }
+
+                return fixer.insertTextAfter(functionKeyword, ` ${fileName}`);
               },
             });
 
@@ -38,11 +50,27 @@ module.exports = {
           // Implement the fix function
           if (dataFnName !== fileName) {
             context.report({
-              node,
+              node: item,
               message: `Function passed to 'dataFn' must have the same name as module name. Expected '${fileName}', found '${dataFnName}'`,
               loc: {
                 start: node.callee.loc.end,
                 end: node.callee.loc.end,
+              },
+              fix(fixer) {
+                const invalidFunctionName = context.sourceCode.getFirstToken(
+                  node,
+                  {
+                    filter: (token) => token.type === "Identifier",
+                    // Skip pass the function keyword to get the function name
+                    skip: 1,
+                  },
+                );
+
+                if (!invalidFunctionName) {
+                  return null;
+                }
+
+                return fixer.replaceText(invalidFunctionName, fileName);
               },
             });
 
