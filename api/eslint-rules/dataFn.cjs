@@ -65,7 +65,6 @@ module.exports = {
             continue;
           }
 
-          // Implement the fix function
           if (dataFnName !== fileName) {
             context.report({
               node: item,
@@ -78,7 +77,8 @@ module.exports = {
                 const invalidFunctionName = context.sourceCode.getFirstToken(
                   node,
                   {
-                    filter: (token) => token.type === "Identifier",
+                    filter: (token) =>
+                      token.type === "Identifier" && token.value !== "async",
                     // Skip pass the function keyword to get the function name
                     skip: 1,
                   },
