@@ -34,7 +34,7 @@ export class SimplePostProcessing {
    */
   addJob(fn: Function) {
     // Extra runtime check alongside compile time check with ESLint rule
-    // 'mwEslintPlugin/require-function-name'
+    // 'mwEslintPlugin/require-function-name-for-addJob'
     if (fn.name === "") {
       throw new Error(
         `Functions passed to ${SimplePostProcessing.name} must be named`,
