@@ -13,12 +13,7 @@ export async function genCodegenBarrelFile() {
   const generatedCode =
     `// Barrel file\n` +
     filesInGeneratedFolder
-      .filter(
-        (dirent) =>
-          dirent.name !== "index.ts" &&
-          dirent.name !== "README.md" &&
-          dirent.name.endsWith(".ts"),
-      )
+      .filter((dirent) => dirent.name.endsWith(".generated.ts"))
       // Sort by name alphabetically to always have them in a stable position
       .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
       .map((dirent) => `export * from './${dirent.name.replace(".ts", ".js")}'`)
