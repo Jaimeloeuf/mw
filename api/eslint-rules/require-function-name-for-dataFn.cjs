@@ -27,6 +27,14 @@ module.exports = {
           return;
         }
 
+        if (!isFileInDalFolder(context.filename)) {
+          context.report({
+            node,
+            message: `'dataFn' can only be used within the /dal/* folder`,
+          });
+          return;
+        }
+
         const fileName = fileBaseName.replace(".df.ts", "");
 
         for (const item of node.arguments) {
@@ -91,3 +99,16 @@ module.exports = {
     };
   },
 };
+
+function isFileInDalFolder(filePath) {
+  const relativePath = path.relative(
+    path.join(__dirname, `../src/dal`),
+    filePath,
+  );
+
+  return (
+    relativePath &&
+    !relativePath.startsWith("..") &&
+    !path.isAbsolute(relativePath)
+  );
+}
