@@ -7,6 +7,6 @@ export const controllerExportTemplate = (
 ): string =>
   `export { default as ${file.controllerName} } from "../controllers-http/${path.relative(
     controllerFolderPath,
-    file.path,
+    file.path.replace(".ts", ".js"),
   )}";
-`.replace(".ts", ".js");
+`;
