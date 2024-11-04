@@ -1,6 +1,6 @@
+import { df } from "../../__generated/index.js";
 import { validateIfUserHaveValidRole } from "./validateIfUserHaveValidRole.js";
 import { canUserAccessOrg } from "./canUserAccessOrg.js";
-import { muwnoRepo } from "../../dal/index.js";
 import { NotFoundException } from "../../exceptions/index.js";
 
 /**
@@ -9,7 +9,7 @@ import { NotFoundException } from "../../exceptions/index.js";
 export async function deleteApiKey(requestorID: string, apiKeyID: string) {
   await validateIfUserHaveValidRole(requestorID, ["OrgOwner", "OrgAdmin"]);
 
-  const apiKey = await muwnoRepo.getApiKey.getResultOrThrowOnError(apiKeyID);
+  const apiKey = await df.getApiKey.getResultOrThrowOnError(apiKeyID);
 
   if (apiKey === null) {
     throw new NotFoundException(`API Key ${apiKeyID} does not exist.`);
@@ -17,5 +17,5 @@ export async function deleteApiKey(requestorID: string, apiKeyID: string) {
 
   await canUserAccessOrg(requestorID, apiKey.org_id);
 
-  await muwnoRepo.deleteApiKey.getResultOrThrowOnError(apiKey.id);
+  await df.deleteApiKey.getResultOrThrowOnError(apiKey.id);
 }

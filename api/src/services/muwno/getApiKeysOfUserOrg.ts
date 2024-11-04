@@ -1,15 +1,12 @@
-import { muwnoRepo } from "../../dal/index.js";
+import { df } from "../../__generated/index.js";
 
 /**
  * Get all the API Keys of the User's Org
  */
 export async function getApiKeysOfUserOrg(requestorID: string) {
-  const usersOrg =
-    await muwnoRepo.getOrgOfUser.getResultOrThrowOnError(requestorID);
+  const usersOrg = await df.getOrgOfUser.getResultOrThrowOnError(requestorID);
 
-  const apiKey = await muwnoRepo.getApiKeysOfOrg.getResultOrThrowOnError(
-    usersOrg.id,
-  );
+  const apiKey = await df.getApiKeysOfOrg.getResultOrThrowOnError(usersOrg.id);
 
   return apiKey;
 }

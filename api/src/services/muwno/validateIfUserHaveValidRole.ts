@@ -1,4 +1,4 @@
-import { muwnoRepo } from "../../dal/index.js";
+import { df } from "../../__generated/index.js";
 import { ForbiddenException } from "../../exceptions/index.js";
 import type { MuwnoUser } from "../../dal/index.js";
 
@@ -15,7 +15,7 @@ export async function validateIfUserHaveValidRole(
   roles: Array<MuwnoUser["role"]>,
   errorMessage?: string,
 ) {
-  const user = await muwnoRepo.getUser.getResultOrThrowOnError(userID);
+  const user = await df.getUser.getResultOrThrowOnError(userID);
 
   if (user.role === null || !roles.includes(user.role)) {
     throw new ForbiddenException(

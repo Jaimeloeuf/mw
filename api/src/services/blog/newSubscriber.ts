@@ -1,4 +1,4 @@
-import { blogSubscriberRepo } from "../../dal/index.js";
+import { df } from "../../__generated/index.js";
 import { ConflictException } from "../../exceptions/index.js";
 import { CreateSimplePostProcessingJob } from "../../post-processing/index.js";
 import { notifyAdminWithInternalAdminTelegramBot } from "../../infra-shared/index.js";
@@ -9,16 +9,14 @@ import { blogEmailService } from "./blogEmailService.js";
  */
 export async function newSubscriber(email: string) {
   const isSubscribed =
-    await blogSubscriberRepo.isEmailAlreadySubscribed.getResultOrThrowOnError(
-      email,
-    );
+    await df.isEmailAlreadySubscribed.getResultOrThrowOnError(email);
 
   if (isSubscribed) {
     throw new ConflictException(`Email '${email}' already subscribed!`);
   }
 
   const blogSubscriberResult =
-    await blogSubscriberRepo.createBlogSubscriber.getResultOrThrowOnError({
+    await df.createBlogSubscriber.getResultOrThrowOnError({
       email: email.toLowerCase(),
     });
 

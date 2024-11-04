@@ -1,11 +1,11 @@
-import { bucketlistRepo } from "../../dal/index.js";
+import { df } from "../../__generated/index.js";
 
 /**
  * Get a bucketlist.
  */
 export async function getBucketlist(bucketlistID: string) {
   const bucketlist =
-    await bucketlistRepo.getBucketlist.getResultOrThrowOnError(bucketlistID);
+    await df.getBucketlist.getResultOrThrowOnError(bucketlistID);
 
   return bucketlist;
 }

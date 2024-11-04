@@ -1,4 +1,4 @@
-import { leetcodeRepo } from "../../dal/index.js";
+import { df } from "../../__generated/index.js";
 
 /**
  * Create a new leetcode question.
@@ -7,5 +7,5 @@ export async function createLeetcodeQues(ques: {
   url: string;
   tags: Array<string>;
 }) {
-  return leetcodeRepo.createLeetcodeQues.getResultOrThrowOnError(ques);
+  return df.createLeetcodeQues.getResultOrThrowOnError(ques);
 }

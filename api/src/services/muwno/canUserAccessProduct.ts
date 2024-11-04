@@ -1,4 +1,4 @@
-import { muwnoRepo } from "../../dal/index.js";
+import { df } from "../../__generated/index.js";
 import { ForbiddenException } from "../../exceptions/index.js";
 
 /**
@@ -9,11 +9,10 @@ import { ForbiddenException } from "../../exceptions/index.js";
  * Treats invalid/non-existent `productID` as Forbidden request.
  */
 export async function canUserAccessProduct(userID: string, productID: string) {
-  const canAccess =
-    await muwnoRepo.canUserAccessProduct.getResultOrThrowOnError(
-      userID,
-      productID,
-    );
+  const canAccess = await df.canUserAccessProduct.getResultOrThrowOnError(
+    userID,
+    productID,
+  );
 
   if (!canAccess) {
     throw new ForbiddenException(
