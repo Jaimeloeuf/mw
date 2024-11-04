@@ -9,7 +9,7 @@ import { NotFoundException } from "../../exceptions/index.js";
 export async function deleteApiKey(requestorID: string, apiKeyID: string) {
   await validateIfUserHaveValidRole(requestorID, ["OrgOwner", "OrgAdmin"]);
 
-  const apiKey = await df.getApiKey.getResultOrThrowOnError(apiKeyID);
+  const apiKey = await df.muwnoGetApiKey.getResultOrThrowOnError(apiKeyID);
 
   if (apiKey === null) {
     throw new NotFoundException(`API Key ${apiKeyID} does not exist.`);
@@ -17,5 +17,5 @@ export async function deleteApiKey(requestorID: string, apiKeyID: string) {
 
   await canUserAccessOrg(requestorID, apiKey.org_id);
 
-  await df.deleteApiKey.getResultOrThrowOnError(apiKey.id);
+  await df.muwnoDeleteApiKey.getResultOrThrowOnError(apiKey.id);
 }

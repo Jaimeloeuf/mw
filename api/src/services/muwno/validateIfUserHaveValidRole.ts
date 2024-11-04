@@ -15,7 +15,7 @@ export async function validateIfUserHaveValidRole(
   roles: Array<MuwnoUser["role"]>,
   errorMessage?: string,
 ) {
-  const user = await df.getUser.getResultOrThrowOnError(userID);
+  const user = await df.muwnoGetUser.getResultOrThrowOnError(userID);
 
   if (user.role === null || !roles.includes(user.role)) {
     throw new ForbiddenException(

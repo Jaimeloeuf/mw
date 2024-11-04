@@ -5,7 +5,7 @@ import { df } from "../../__generated/index.js";
  */
 export async function getBucketlist(bucketlistID: string) {
   const bucketlist =
-    await df.getBucketlist.getResultOrThrowOnError(bucketlistID);
+    await df.bucketlistGetBucketlist.getResultOrThrowOnError(bucketlistID);
 
   return bucketlist;
 }

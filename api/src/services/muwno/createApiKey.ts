@@ -7,7 +7,7 @@ import { InvalidOperationException } from "../../exceptions/index.js";
  * Create a new API Key for user's Org.
  */
 export async function createApiKey(requestorID: string) {
-  const user = await df.getUser.getResultOrThrowOnError(requestorID);
+  const user = await df.muwnoGetUser.getResultOrThrowOnError(requestorID);
 
   if (user.org_id === null) {
     throw new InvalidOperationException(
@@ -19,7 +19,7 @@ export async function createApiKey(requestorID: string) {
   const hash = sha256hash(key);
   const prefix = key.slice(0, 6);
 
-  const apiKey = await df.createApiKey.getResultOrThrowOnError({
+  const apiKey = await df.muwnoCreateApiKey.getResultOrThrowOnError({
     org_id: user.org_id,
     created_by: `${user.name} <${user.email}>`,
     hash,

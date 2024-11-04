@@ -7,5 +7,5 @@ export async function createLeetcodeQues(ques: {
   url: string;
   tags: Array<string>;
 }) {
-  return df.createLeetcodeQues.getResultOrThrowOnError(ques);
+  return df.leetcodeCreateLeetcodeQues.getResultOrThrowOnError(ques);
 }
