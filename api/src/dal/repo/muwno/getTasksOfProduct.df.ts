@@ -1,10 +1,11 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type {
   MuwnoProduct,
   MuwnoPmfSurveyResponse,
 } from "../../kysely/index.js";
 
-export async function getTasksOfProduct(
+export default dataFn(async function getTasksOfProduct(
   productID: MuwnoProduct["id"],
   take: number,
   optionalPaginationID?: MuwnoPmfSurveyResponse["id"],
@@ -37,4 +38,4 @@ export async function getTasksOfProduct(
   }
 
   return query.execute();
-}
+});

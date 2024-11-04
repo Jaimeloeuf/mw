@@ -1,7 +1,12 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoStripeWebhookEvent } from "../../kysely/index.js";
 
-export async function isStripeWebhookEventUnprocessed(
+/**
+ * Check if the given Stripe Webhook Event is unprocessed, if it is, return
+ * true and record its ID so that it can be used for future checks.
+ */
+export default dataFn(async function isStripeWebhookEventUnprocessed(
   stripeWebhookEventID: MuwnoStripeWebhookEvent["stripe_event_id"],
   type: string,
   livemode: boolean,
@@ -38,4 +43,4 @@ export async function isStripeWebhookEventUnprocessed(
         throw err;
       })
   );
-}
+});

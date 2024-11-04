@@ -1,7 +1,8 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoProduct, UpdateMuwnoProduct } from "../../kysely/index.js";
 
-export async function updateProduct(
+export default dataFn(function updateProduct(
   productID: MuwnoProduct["id"],
   product: UpdateMuwnoProduct,
 ) {
@@ -11,4 +12,4 @@ export async function updateProduct(
     .where("id", "=", productID)
     .returningAll()
     .executeTakeFirstOrThrow();
-}
+});

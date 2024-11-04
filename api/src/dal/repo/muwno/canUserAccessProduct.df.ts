@@ -1,8 +1,13 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoUser, MuwnoProduct } from "../../kysely/index.js";
 import { NotFoundException } from "../../../exceptions/index.js";
 
-export async function canUserAccessProduct(
+/**
+ * Check if user have access permission to this product.
+ * If product does not exists, it is also treated as a lack of permission.
+ */
+export default dataFn(async function canUserAccessProduct(
   userID: MuwnoUser["id"],
   productID: MuwnoProduct["id"],
 ) {
@@ -29,4 +34,4 @@ export async function canUserAccessProduct(
 
   // If product cannot be loaded (undefined), it means user cannot access it
   return product !== undefined;
-}
+});

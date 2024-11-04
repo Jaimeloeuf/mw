@@ -1,3 +1,4 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import { injectID } from "../injectID.js";
 import type {
@@ -6,7 +7,7 @@ import type {
 } from "../../kysely/index.js";
 import { ServiceException } from "../../../exceptions/index.js";
 
-export async function createLeetcodeQues(leetcodeQues: {
+export default dataFn(async function createLeetcodeQues(leetcodeQues: {
   url: string;
   tags: Array<string>;
 }) {
@@ -48,4 +49,4 @@ export async function createLeetcodeQues(leetcodeQues: {
     ...createdLeetcodeQues,
     tags: leetcodeQues.tags,
   };
-}
+});

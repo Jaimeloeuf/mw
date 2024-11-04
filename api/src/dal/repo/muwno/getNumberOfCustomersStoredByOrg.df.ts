@@ -1,8 +1,11 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoOrg } from "../../kysely/index.js";
 import { ServiceException } from "../../../exceptions/index.js";
 
-export async function getNumberOfCustomersStoredByOrg(orgID: MuwnoOrg["id"]) {
+export default dataFn(async function getNumberOfCustomersStoredByOrg(
+  orgID: MuwnoOrg["id"],
+) {
   const number_of_customers_stored = await apiDB
     .selectFrom("muwno_customer")
     .select((eb) =>
@@ -21,4 +24,4 @@ export async function getNumberOfCustomersStoredByOrg(orgID: MuwnoOrg["id"]) {
   }
 
   return number_of_customers_stored;
-}
+});

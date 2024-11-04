@@ -1,10 +1,13 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoProduct } from "../../kysely/index.js";
 
 /**
- * Only load the "People that would benefit from Product" answer
+ * Get feedback response data `a2` of the given productID, which is the answer
+ * for "People that would benefit from Product", sorted by most important and
+ * oldest first, and up to the first 1000 answers.
  */
-export async function getFeedbackResponseA2(
+export default dataFn(async function getFeedbackResponseA2(
   productID: MuwnoProduct["id"],
   timeRange: number,
 ) {
@@ -36,4 +39,4 @@ export async function getFeedbackResponseA2(
   return query
     .execute()
     .then((responses) => responses.map((response) => response.a2));
-}
+});

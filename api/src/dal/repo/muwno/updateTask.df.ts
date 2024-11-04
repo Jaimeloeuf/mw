@@ -1,7 +1,8 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoTask, UpdateMuwnoTask } from "../../kysely/index.js";
 
-export async function updateTask(
+export default dataFn(function updateTask(
   taskID: MuwnoTask["id"],
   task: UpdateMuwnoTask["task"],
 ) {
@@ -13,4 +14,4 @@ export async function updateTask(
     .where("id", "=", taskID)
     .returningAll()
     .executeTakeFirstOrThrow();
-}
+});

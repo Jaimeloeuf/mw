@@ -1,7 +1,10 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { BlogSubscriber } from "../../kysely/index.js";
 
-export async function isEmailAlreadySubscribed(email: BlogSubscriber["email"]) {
+export default dataFn(async function isEmailAlreadySubscribed(
+  email: BlogSubscriber["email"],
+) {
   const subscriber = await apiDB
     .selectFrom("blog_subscriber")
     .where("email", "=", email)
@@ -9,4 +12,4 @@ export async function isEmailAlreadySubscribed(email: BlogSubscriber["email"]) {
     .executeTakeFirst();
 
   return subscriber !== undefined;
-}
+});

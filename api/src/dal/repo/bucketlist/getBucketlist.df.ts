@@ -1,9 +1,12 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { Bucketlist } from "../../kysely/index.js";
 import { NotFoundException } from "../../../exceptions/index.js";
 import { concurrent } from "../../../utils/index.js";
 
-export async function getBucketlist(bucketlistID: Bucketlist["id"]) {
+export default dataFn(async function getBucketlist(
+  bucketlistID: Bucketlist["id"],
+) {
   const { bucketlist, bucketlistItems } = await concurrent({
     bucketlist: apiDB
       .selectFrom("bucketlist")
@@ -26,4 +29,4 @@ export async function getBucketlist(bucketlistID: Bucketlist["id"]) {
     ...bucketlist,
     items: bucketlistItems,
   };
-}
+});

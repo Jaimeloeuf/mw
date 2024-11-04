@@ -1,8 +1,12 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import { injectID, OptionalID } from "../injectID.js";
 import type { CreateMuwnoCustomer } from "../../kysely/index.js";
 
-export async function createCustomer(
+/**
+ * Add a new Customer to data source.
+ */
+export default dataFn(async function createCustomer(
   customer: OptionalID<CreateMuwnoCustomer>,
 ) {
   return apiDB
@@ -10,4 +14,4 @@ export async function createCustomer(
     .values(injectID(customer))
     .returningAll()
     .executeTakeFirstOrThrow();
-}
+});

@@ -1,3 +1,4 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoUser } from "../../kysely/index.js";
 import {
@@ -5,7 +6,14 @@ import {
   InvalidInternalStateException,
 } from "../../../exceptions/index.js";
 
-export async function isUserOnboarded(userID: MuwnoUser["id"]) {
+/**
+ * Check if given user completed onboarding.
+ *
+ * To be considered onboarded
+ * 1. User must have an Org
+ * 2. The org must have a valid subscription
+ */
+export default dataFn(async function isUserOnboarded(userID: MuwnoUser["id"]) {
   const user = await apiDB
     .selectFrom("muwno_user")
     .select("org_id")
@@ -33,4 +41,4 @@ export async function isUserOnboarded(userID: MuwnoUser["id"]) {
   }
 
   return org.subscribed;
-}
+});

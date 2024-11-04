@@ -1,8 +1,12 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import { injectID, OptionalID } from "../injectID.js";
 import type { CreateMuwnoPmfSurveyResponse } from "../../kysely/index.js";
 
-export async function createFeedbackResponse(
+/**
+ * Save a feedback form response.
+ */
+export default dataFn(function createFeedbackResponse(
   pmfSurveyResponse: OptionalID<CreateMuwnoPmfSurveyResponse>,
 ) {
   return apiDB
@@ -10,4 +14,4 @@ export async function createFeedbackResponse(
     .values(injectID(pmfSurveyResponse))
     .returning("id")
     .executeTakeFirstOrThrow();
-}
+});

@@ -1,8 +1,14 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoProduct } from "../../kysely/index.js";
 import { NotFoundException } from "../../../exceptions/index.js";
 
-export async function getFeedbackform(productID: MuwnoProduct["id"]) {
+/**
+ * Get a feedback form object.
+ */
+export default dataFn(async function getFeedbackform(
+  productID: MuwnoProduct["id"],
+) {
   const product = await apiDB
     .selectFrom("muwno_product")
     .select(["name", "link"])
@@ -14,4 +20,4 @@ export async function getFeedbackform(productID: MuwnoProduct["id"]) {
   }
 
   return product;
-}
+});

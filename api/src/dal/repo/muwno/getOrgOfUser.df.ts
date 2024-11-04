@@ -1,3 +1,4 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoUser } from "../../kysely/index.js";
 import {
@@ -6,6 +7,9 @@ import {
 } from "../../../exceptions/index.js";
 
 /**
+ * Get a user's Org Entity object back if they belong to an Org
+ *
+ * ### Internal notes
  * Implementing this as a multi-part query instead of a single right join like
  * ```typescript
  * return apiDB
@@ -18,7 +22,7 @@ import {
  * so that the error messages can be more detailed on where the error originated
  * from rather than just a simple Org not found.
  */
-export async function getOrgOfUser(userID: MuwnoUser["id"]) {
+export default dataFn(async function getOrgOfUser(userID: MuwnoUser["id"]) {
   const user = await apiDB
     .selectFrom("muwno_user")
     .select("org_id")
@@ -46,4 +50,4 @@ export async function getOrgOfUser(userID: MuwnoUser["id"]) {
   }
 
   return org;
-}
+});

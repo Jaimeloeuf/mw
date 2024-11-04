@@ -1,7 +1,11 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoStripeWebhookEvent } from "../../kysely/index.js";
 
-export async function markStripeWebhookEventAsProcessed(
+/**
+ * Mark a given Stripe Webhook Event as processed.
+ */
+export default dataFn(async function markStripeWebhookEventAsProcessed(
   stripeWebhookEventID: MuwnoStripeWebhookEvent["stripe_event_id"],
 ) {
   await apiDB
@@ -11,4 +15,4 @@ export async function markStripeWebhookEventAsProcessed(
     })
     .where("stripe_event_id", "=", stripeWebhookEventID)
     .executeTakeFirstOrThrow();
-}
+});

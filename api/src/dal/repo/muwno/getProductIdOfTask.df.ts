@@ -1,8 +1,14 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoTask } from "../../kysely/index.js";
 import { NotFoundException } from "../../../exceptions/index.js";
 
-export async function getProductIdOfTask(taskID: MuwnoTask["id"]) {
+/**
+ * Get `ProductID` of a given task.
+ */
+export default dataFn(async function getProductIdOfTask(
+  taskID: MuwnoTask["id"],
+) {
   const task = await apiDB
     .selectFrom("muwno_task")
     .select("product_id")
@@ -14,4 +20,4 @@ export async function getProductIdOfTask(taskID: MuwnoTask["id"]) {
   }
 
   return task.product_id;
-}
+});

@@ -1,8 +1,9 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoTask } from "../../kysely/index.js";
 import { NotFoundException } from "../../../exceptions/index.js";
 
-export async function getTask(taskID: MuwnoTask["id"]) {
+export default dataFn(async function getTask(taskID: MuwnoTask["id"]) {
   const task = await apiDB
     .selectFrom("muwno_task")
     .selectAll()
@@ -14,4 +15,4 @@ export async function getTask(taskID: MuwnoTask["id"]) {
   }
 
   return task;
-}
+});

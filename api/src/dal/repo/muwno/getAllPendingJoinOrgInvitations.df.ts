@@ -1,7 +1,10 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoOrg } from "../../kysely/index.js";
 
-export async function getAllPendingJoinOrgInvitations(orgID: MuwnoOrg["id"]) {
+export default dataFn(function getAllPendingJoinOrgInvitations(
+  orgID: MuwnoOrg["id"],
+) {
   return apiDB
     .selectFrom("muwno_team_member_invitation")
     .selectAll("muwno_team_member_invitation")
@@ -22,4 +25,4 @@ export async function getAllPendingJoinOrgInvitations(orgID: MuwnoOrg["id"]) {
     )
     .select("muwno_org.name as org_name")
     .execute();
-}
+});

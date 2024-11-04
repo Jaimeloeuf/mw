@@ -1,8 +1,12 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoOrg } from "../../kysely/index.js";
 import { ServiceException } from "../../../exceptions/index.js";
 
-export async function getNumberOfFeedbackResponsesStoredByOrg(
+/**
+ * Get the number of survey responses currently stored for a given Org.
+ */
+export default dataFn(async function getNumberOfFeedbackResponsesStoredByOrg(
   orgID: MuwnoOrg["id"],
 ) {
   const productIDs = await apiDB
@@ -30,4 +34,4 @@ export async function getNumberOfFeedbackResponsesStoredByOrg(
   }
 
   return count;
-}
+});

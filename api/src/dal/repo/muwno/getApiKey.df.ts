@@ -1,8 +1,12 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoApiKey } from "../../kysely/index.js";
 import { NotFoundException } from "../../../exceptions/index.js";
 
-export async function getApiKey(apiKeyID: MuwnoApiKey["id"]) {
+/**
+ * Get a single API Key Detail object back using its ID.
+ */
+export default dataFn(async function getApiKey(apiKeyID: MuwnoApiKey["id"]) {
   const apiKey = await apiDB
     .selectFrom("muwno_api_key")
     .selectAll()
@@ -14,4 +18,4 @@ export async function getApiKey(apiKeyID: MuwnoApiKey["id"]) {
   }
 
   return apiKey;
-}
+});

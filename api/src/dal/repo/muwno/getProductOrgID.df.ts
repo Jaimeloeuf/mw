@@ -1,8 +1,14 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoProduct } from "../../kysely/index.js";
 import { NotFoundException } from "../../../exceptions/index.js";
 
-export async function getProductOrgID(productID: MuwnoProduct["id"]) {
+/**
+ * Get a product's Org ID.
+ */
+export default dataFn(async function getProductOrgID(
+  productID: MuwnoProduct["id"],
+) {
   const product = await apiDB
     .selectFrom("muwno_product")
     .select("org_id")
@@ -14,4 +20,4 @@ export async function getProductOrgID(productID: MuwnoProduct["id"]) {
   }
 
   return product.org_id;
-}
+});

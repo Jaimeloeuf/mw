@@ -1,3 +1,4 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoUser, MuwnoProduct } from "../../kysely/index.js";
 import { NotFoundException } from "../../../exceptions/index.js";
@@ -5,7 +6,7 @@ import { NotFoundException } from "../../../exceptions/index.js";
 /**
  * Loads product only if user can access it.
  */
-export async function getProduct(
+export default dataFn(async function getProduct(
   userID: MuwnoUser["id"],
   productID: MuwnoProduct["id"],
 ) {
@@ -35,4 +36,4 @@ export async function getProduct(
   }
 
   return product;
-}
+});

@@ -1,8 +1,9 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoPmfSurveyResponse } from "../../kysely/index.js";
 import { NotFoundException } from "../../../exceptions/index.js";
 
-export async function getFeedbackResponse(
+export default dataFn(async function getFeedbackResponse(
   feedbackResponseID: MuwnoPmfSurveyResponse["id"],
 ) {
   const feedbackResponse = await apiDB
@@ -18,4 +19,4 @@ export async function getFeedbackResponse(
   }
 
   return feedbackResponse;
-}
+});

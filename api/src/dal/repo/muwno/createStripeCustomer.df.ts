@@ -1,7 +1,12 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { CreateMuwnoStripeCustomer } from "../../kysely/index.js";
 
-export async function createStripeCustomer(
+/**
+ * Create and save a new `StripeCustomer` object in data source. If `Org`
+ * already have a StripeCustomer, replace it with this new one.
+ */
+export default dataFn(function createStripeCustomer(
   stripeCustomer: CreateMuwnoStripeCustomer,
 ) {
   return apiDB
@@ -9,4 +14,4 @@ export async function createStripeCustomer(
     .values(stripeCustomer)
     .returningAll()
     .executeTakeFirstOrThrow();
-}
+});

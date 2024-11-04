@@ -1,8 +1,9 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import { injectID, OptionalID } from "../injectID.js";
 import type { CreateBlogSubscriber } from "../../kysely/index.js";
 
-export function createBlogSubscriber(
+export default dataFn(function createBlogSubscriber(
   blogSubscriber: OptionalID<CreateBlogSubscriber>,
 ) {
   return apiDB
@@ -10,4 +11,4 @@ export function createBlogSubscriber(
     .values(injectID(blogSubscriber))
     .returningAll()
     .executeTakeFirstOrThrow();
-}
+});

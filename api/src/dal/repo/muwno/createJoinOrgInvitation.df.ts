@@ -1,8 +1,9 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import { injectID, OptionalID } from "../injectID.js";
 import type { CreateMuwnoTeamMemberInvitation } from "../../kysely/index.js";
 
-export async function createJoinOrgInvitation(
+export default dataFn(async function createJoinOrgInvitation(
   teamMemberInvitation: OptionalID<CreateMuwnoTeamMemberInvitation>,
 ) {
   return apiDB
@@ -10,4 +11,4 @@ export async function createJoinOrgInvitation(
     .values(injectID(teamMemberInvitation))
     .returningAll()
     .executeTakeFirstOrThrow();
-}
+});

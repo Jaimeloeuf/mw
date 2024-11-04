@@ -1,7 +1,11 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoProduct } from "../../kysely/index.js";
 
-export async function getFeedbackResponses(
+/**
+ * Get survey responses of selected product, sorted by latest responses first.
+ */
+export default dataFn(function getFeedbackResponses(
   productID: MuwnoProduct["id"],
   numberOfResponses: number,
 ) {
@@ -12,4 +16,4 @@ export async function getFeedbackResponses(
     .orderBy("created_at desc")
     .limit(numberOfResponses)
     .execute();
-}
+});

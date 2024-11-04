@@ -1,8 +1,14 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoUser } from "../../kysely/index.js";
 import { NotFoundException } from "../../../exceptions/index.js";
 
-export async function getProductsOfUserOrg(userID: MuwnoUser["id"]) {
+/**
+ * Get all products of the user's Org.
+ */
+export default dataFn(async function getProductsOfUserOrg(
+  userID: MuwnoUser["id"],
+) {
   const user = await apiDB
     .selectFrom("muwno_user")
     .select("org_id")
@@ -25,4 +31,4 @@ export async function getProductsOfUserOrg(userID: MuwnoUser["id"]) {
     .execute();
 
   return products;
-}
+});

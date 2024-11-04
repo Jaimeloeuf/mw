@@ -1,8 +1,12 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoStripeSetupNext } from "../../kysely/index.js";
 import { NotFoundException } from "../../../exceptions/index.js";
 
-export async function getStripeSetupNext(
+/**
+ * Get one from the database
+ */
+export default dataFn(async function getStripeSetupNext(
   stripeSetupNextID: MuwnoStripeSetupNext["stripe_setup_intent_id"],
 ) {
   const stripeSetupNext = await apiDB
@@ -18,4 +22,4 @@ export async function getStripeSetupNext(
   }
 
   return stripeSetupNext;
-}
+});

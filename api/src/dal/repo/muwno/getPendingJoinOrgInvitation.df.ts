@@ -1,8 +1,9 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoTeamMemberInvitation } from "../../kysely/index.js";
 import { NotFoundException } from "../../../exceptions/index.js";
 
-export async function getPendingJoinOrgInvitation(
+export default dataFn(async function getPendingJoinOrgInvitation(
   invitationID: MuwnoTeamMemberInvitation["id"],
 ) {
   const invitation = await apiDB
@@ -16,4 +17,4 @@ export async function getPendingJoinOrgInvitation(
   }
 
   return invitation;
-}
+});

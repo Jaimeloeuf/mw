@@ -1,9 +1,12 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { LeetcodeQues } from "../../kysely/index.js";
 import { NotFoundException } from "../../../exceptions/index.js";
 import { concurrent } from "../../../utils/index.js";
 
-export async function getLeetcodeQues(leetcodeQuesID: LeetcodeQues["id"]) {
+export default dataFn(async function getLeetcodeQues(
+  leetcodeQuesID: LeetcodeQues["id"],
+) {
   const { leetcodeQues, leetcodeQuesTags } = await concurrent({
     leetcodeQues: apiDB
       .selectFrom("leetcode_ques")
@@ -39,4 +42,4 @@ export async function getLeetcodeQues(leetcodeQuesID: LeetcodeQues["id"]) {
     ...leetcodeQues,
     tags,
   };
-}
+});

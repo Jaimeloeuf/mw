@@ -1,8 +1,12 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoUser, MuwnoOrg } from "../../kysely/index.js";
 import { NotFoundException } from "../../../exceptions/index.js";
 
-export async function canUserAccessOrg(
+/**
+ * Check if user have access permission to this Org.
+ */
+export default dataFn(async function canUserAccessOrg(
   userID: MuwnoUser["id"],
   orgID: MuwnoOrg["id"],
 ) {
@@ -17,4 +21,4 @@ export async function canUserAccessOrg(
   }
 
   return user.org_id === orgID;
-}
+});

@@ -1,7 +1,11 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoTeamMemberInvitation } from "../../kysely/index.js";
 
-export async function getAllPendingJoinOrgInvitationsOfUser(
+/**
+ * Get all pending team invitations of a given user.
+ */
+export default dataFn(function getAllPendingJoinOrgInvitationsOfUser(
   invitee_email: MuwnoTeamMemberInvitation["invitee_email"],
 ) {
   return apiDB
@@ -24,4 +28,4 @@ export async function getAllPendingJoinOrgInvitationsOfUser(
     )
     .select("muwno_org.name as org_name")
     .execute();
-}
+});

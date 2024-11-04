@@ -1,8 +1,12 @@
+import { dataFn } from "../dataFn.js";
 import { apiDB } from "../../kysely/index.js";
 import type { MuwnoStripeCustomer } from "../../kysely/index.js";
 import { NotFoundException } from "../../../exceptions/index.js";
 
-export async function getStripeCustomer(
+/**
+ * Get a `StripeCustomer` object back using a stripe customer ID.
+ */
+export default dataFn(async function getStripeCustomer(
   stripeCustomerID: MuwnoStripeCustomer["stripe_customer_id"],
 ) {
   const stripeCustomer = await apiDB
@@ -18,4 +22,4 @@ export async function getStripeCustomer(
   }
 
   return stripeCustomer;
-}
+});
