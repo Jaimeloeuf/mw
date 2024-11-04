@@ -18,7 +18,13 @@ export async function genAndSaveGeneratedCode(
   generator: Function,
   generatedCode: string,
   generatedCodeFileName: string,
+  options?: { doNotIncludeInGeneratedFolderBarrelFile?: true },
 ) {
+  const generatedTextFileNameExtension =
+    options?.doNotIncludeInGeneratedFolderBarrelFile
+      ? generatedCodeFileExtensionWithNoBarrelFileInclusion
+      : generatedCodeFileExtension;
+
   await genAndSaveGeneratedFile({
     generator,
     genGeneratedNotice,
@@ -26,6 +32,11 @@ export async function genAndSaveGeneratedCode(
     generatedTextFileType: ".ts",
     generatedFileRootDirPath: generatedSrcDirPath,
     generatedTextFileName: generatedCodeFileName,
-    generatedTextFileNameExtension: generatedCodeFileNameExtension,
+    generatedTextFileNameExtension,
   });
 }
+
+export const generatedCodeFileExtensionWithNoBarrelFileInclusion =
+  ".generated.do_not_include_in_barrel_file.ts";
+
+export const generatedCodeFileExtension = ".generated.ts";
