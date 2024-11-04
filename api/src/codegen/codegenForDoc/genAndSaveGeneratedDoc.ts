@@ -18,7 +18,6 @@ export async function genAndSaveGeneratedDoc(
   generator: Function,
   generatedDoc: string,
   generatedDocFileName: string,
-  generatedDocFileNameExtension: string = ".generated.md",
 ) {
   await genAndSaveGeneratedFile({
     generator,
@@ -27,6 +26,6 @@ export async function genAndSaveGeneratedDoc(
     generatedTextFileType: ".md",
     generatedFileRootDirPath: generatedDocDirPath,
     generatedTextFileName: generatedDocFileName,
-    generatedTextFileNameExtension: generatedDocFileNameExtension,
+    generatedTextFileNameExtension: ".generated.md",
   });
 }
