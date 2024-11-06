@@ -5,5 +5,6 @@ module.exports = {
   rules: {
     "require-function-name-for-addJob": require("./require-function-name-for-addJob.cjs"),
     dataFn: require("./dataFn.cjs"),
+    httpController: require("./httpController.cjs"),
   },
 };

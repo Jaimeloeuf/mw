@@ -1,6 +1,10 @@
 import { httpController } from "./httpController.js";
 import { NotFoundException } from "../exceptions/index.js";
 
+// This is used directly by bootstrapHttpServer to ensure it is placed as the
+// last route handler to catch all, which is why it is not part of codegened
+// routes table, and therefore why it is not in 'controllers-http/'
+// eslint-disable-next-line mwEslintPlugin/httpController
 export const routeNotFound = httpController({
   version: "neutral",
   // Method does not matter since this should be a catch all.

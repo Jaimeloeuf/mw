@@ -16,6 +16,7 @@ export default [
       "no-console": "warn",
       "mwEslintPlugin/require-function-name-for-addJob": "error",
       "mwEslintPlugin/dataFn": "error",
+      "mwEslintPlugin/httpController": "error",
     },
     plugins: {
       mwEslintPlugin,
