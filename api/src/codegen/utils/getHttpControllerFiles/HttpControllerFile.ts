@@ -4,5 +4,4 @@ export type HttpControllerFile = {
   version: string;
   httpRoute: string;
   httpMethod: string;
-  controllerName: string;
 };

@@ -6,80 +6,77 @@
  * genHttpDtoTypeDefinition
  *
  * Generated hash in hex for code after this section is:
- * sha256(b000075c6525c0b3d0b3e951c0599be84f01b21b6dd072e5f3159554fea4e298)
+ * sha256(bdc867df3c01226d4bee31de9c906350a0b4f8680ef4c559b10ab0efea42d555)
  */
 import type { z } from "zod";
 import * as c from "./httpControllerBarrelFile.generated.js";
 
 export type healthCheckController_QueryParams = z.infer<
-  Exclude<(typeof c.healthCheckController)["urlQueryParamsValidator"], null>
+  Exclude<(typeof c.healthCheck)["urlQueryParamsValidator"], null>
 >;
 export type healthCheckController_InputDTO = z.infer<
-  Exclude<(typeof c.healthCheckController)["requestBodyValidator"], null>
+  Exclude<(typeof c.healthCheck)["requestBodyValidator"], null>
 >;
 export type healthCheckController_OutputDTO = Awaited<
-  ReturnType<(typeof c.healthCheckController)["httpRequestHandler"]>
+  ReturnType<(typeof c.healthCheck)["httpRequestHandler"]>
 >;
-export type blogNewSubscriberController_QueryParams = z.infer<
+export type blogBlogNewSubscriberController_QueryParams = z.infer<
+  Exclude<(typeof c.blogBlogNewSubscriber)["urlQueryParamsValidator"], null>
+>;
+export type blogBlogNewSubscriberController_InputDTO = z.infer<
+  Exclude<(typeof c.blogBlogNewSubscriber)["requestBodyValidator"], null>
+>;
+export type blogBlogNewSubscriberController_OutputDTO = Awaited<
+  ReturnType<(typeof c.blogBlogNewSubscriber)["httpRequestHandler"]>
+>;
+export type bucketlistCreateBucketlistController_QueryParams = z.infer<
   Exclude<
-    (typeof c.blogNewSubscriberController)["urlQueryParamsValidator"],
+    (typeof c.bucketlistCreateBucketlist)["urlQueryParamsValidator"],
     null
   >
 >;
-export type blogNewSubscriberController_InputDTO = z.infer<
-  Exclude<(typeof c.blogNewSubscriberController)["requestBodyValidator"], null>
+export type bucketlistCreateBucketlistController_InputDTO = z.infer<
+  Exclude<(typeof c.bucketlistCreateBucketlist)["requestBodyValidator"], null>
 >;
-export type blogNewSubscriberController_OutputDTO = Awaited<
-  ReturnType<(typeof c.blogNewSubscriberController)["httpRequestHandler"]>
+export type bucketlistCreateBucketlistController_OutputDTO = Awaited<
+  ReturnType<(typeof c.bucketlistCreateBucketlist)["httpRequestHandler"]>
 >;
-export type createBucketlistController_QueryParams = z.infer<
+export type bucketlistGetBucketlistController_QueryParams = z.infer<
+  Exclude<(typeof c.bucketlistGetBucketlist)["urlQueryParamsValidator"], null>
+>;
+export type bucketlistGetBucketlistController_InputDTO = z.infer<
+  Exclude<(typeof c.bucketlistGetBucketlist)["requestBodyValidator"], null>
+>;
+export type bucketlistGetBucketlistController_OutputDTO = Awaited<
+  ReturnType<(typeof c.bucketlistGetBucketlist)["httpRequestHandler"]>
+>;
+export type leetcodeCreateLeetcodeQuesController_QueryParams = z.infer<
   Exclude<
-    (typeof c.createBucketlistController)["urlQueryParamsValidator"],
+    (typeof c.leetcodeCreateLeetcodeQues)["urlQueryParamsValidator"],
     null
   >
 >;
-export type createBucketlistController_InputDTO = z.infer<
-  Exclude<(typeof c.createBucketlistController)["requestBodyValidator"], null>
+export type leetcodeCreateLeetcodeQuesController_InputDTO = z.infer<
+  Exclude<(typeof c.leetcodeCreateLeetcodeQues)["requestBodyValidator"], null>
 >;
-export type createBucketlistController_OutputDTO = Awaited<
-  ReturnType<(typeof c.createBucketlistController)["httpRequestHandler"]>
+export type leetcodeCreateLeetcodeQuesController_OutputDTO = Awaited<
+  ReturnType<(typeof c.leetcodeCreateLeetcodeQues)["httpRequestHandler"]>
 >;
-export type getBucketlistController_QueryParams = z.infer<
-  Exclude<(typeof c.getBucketlistController)["urlQueryParamsValidator"], null>
+export type leetcodeGetLeetcodeQuesController_QueryParams = z.infer<
+  Exclude<(typeof c.leetcodeGetLeetcodeQues)["urlQueryParamsValidator"], null>
 >;
-export type getBucketlistController_InputDTO = z.infer<
-  Exclude<(typeof c.getBucketlistController)["requestBodyValidator"], null>
+export type leetcodeGetLeetcodeQuesController_InputDTO = z.infer<
+  Exclude<(typeof c.leetcodeGetLeetcodeQues)["requestBodyValidator"], null>
 >;
-export type getBucketlistController_OutputDTO = Awaited<
-  ReturnType<(typeof c.getBucketlistController)["httpRequestHandler"]>
->;
-export type createLeetcodeQuesController_QueryParams = z.infer<
-  Exclude<
-    (typeof c.createLeetcodeQuesController)["urlQueryParamsValidator"],
-    null
-  >
->;
-export type createLeetcodeQuesController_InputDTO = z.infer<
-  Exclude<(typeof c.createLeetcodeQuesController)["requestBodyValidator"], null>
->;
-export type createLeetcodeQuesController_OutputDTO = Awaited<
-  ReturnType<(typeof c.createLeetcodeQuesController)["httpRequestHandler"]>
->;
-export type getLeetcodeQuesController_QueryParams = z.infer<
-  Exclude<(typeof c.getLeetcodeQuesController)["urlQueryParamsValidator"], null>
->;
-export type getLeetcodeQuesController_InputDTO = z.infer<
-  Exclude<(typeof c.getLeetcodeQuesController)["requestBodyValidator"], null>
->;
-export type getLeetcodeQuesController_OutputDTO = Awaited<
-  ReturnType<(typeof c.getLeetcodeQuesController)["httpRequestHandler"]>
+export type leetcodeGetLeetcodeQuesController_OutputDTO = Awaited<
+  ReturnType<(typeof c.leetcodeGetLeetcodeQues)["httpRequestHandler"]>
 >;
 export type versionController_QueryParams = z.infer<
-  Exclude<(typeof c.versionController)["urlQueryParamsValidator"], null>
+  Exclude<(typeof c.version)["urlQueryParamsValidator"], null>
 >;
 export type versionController_InputDTO = z.infer<
-  Exclude<(typeof c.versionController)["requestBodyValidator"], null>
+  Exclude<(typeof c.version)["requestBodyValidator"], null>
 >;
 export type versionController_OutputDTO = Awaited<
-  ReturnType<(typeof c.versionController)["httpRequestHandler"]>
+  ReturnType<(typeof c.version)["httpRequestHandler"]>
 >;

@@ -6,7 +6,7 @@
  * genHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256(d988e13dabc0ae34750dfea62b65ea477812b6628dcd2c252be34f6acca84b97)
+ * sha256(6dd67bc85e1f51f74aa197087d8f78bb1a17f690ad53e325bc9a07f1d92e0e3d)
  */
 import { Router } from "express";
 import * as c from "./httpControllerBarrelFile.generated.js";
@@ -35,50 +35,50 @@ export function registerRoutesAndControllers() {
   const r = Router();
 
   // GET /api/
-  r["get" satisfies typeof c.healthCheckController.method](
-    "/" satisfies typeof c.healthCheckController.path,
-    c.healthCheckController.routeHandler,
+  r["get" satisfies typeof c.healthCheck.method](
+    "/" satisfies typeof c.healthCheck.path,
+    c.healthCheck.routeHandler,
   );
 
   // POST /api/v1/blog/subscribe
-  r["post" satisfies typeof c.blogNewSubscriberController.method](
-    ("/v1" satisfies typeof c.blogNewSubscriberController.version) +
-      ("/blog/subscribe" satisfies typeof c.blogNewSubscriberController.path),
-    c.blogNewSubscriberController.routeHandler,
+  r["post" satisfies typeof c.blogBlogNewSubscriber.method](
+    ("/v1" satisfies typeof c.blogBlogNewSubscriber.version) +
+      ("/blog/subscribe" satisfies typeof c.blogBlogNewSubscriber.path),
+    c.blogBlogNewSubscriber.routeHandler,
   );
 
   // POST /api/v1/bucketlist
-  r["post" satisfies typeof c.createBucketlistController.method](
-    ("/v1" satisfies typeof c.createBucketlistController.version) +
-      ("/bucketlist" satisfies typeof c.createBucketlistController.path),
-    c.createBucketlistController.routeHandler,
+  r["post" satisfies typeof c.bucketlistCreateBucketlist.method](
+    ("/v1" satisfies typeof c.bucketlistCreateBucketlist.version) +
+      ("/bucketlist" satisfies typeof c.bucketlistCreateBucketlist.path),
+    c.bucketlistCreateBucketlist.routeHandler,
   );
 
   // GET /api/v1/bucketlist/:bucketlistID
-  r["get" satisfies typeof c.getBucketlistController.method](
-    ("/v1" satisfies typeof c.getBucketlistController.version) +
-      ("/bucketlist/:bucketlistID" satisfies typeof c.getBucketlistController.path),
-    c.getBucketlistController.routeHandler,
+  r["get" satisfies typeof c.bucketlistGetBucketlist.method](
+    ("/v1" satisfies typeof c.bucketlistGetBucketlist.version) +
+      ("/bucketlist/:bucketlistID" satisfies typeof c.bucketlistGetBucketlist.path),
+    c.bucketlistGetBucketlist.routeHandler,
   );
 
   // POST /api/v1/leetcode/ques
-  r["post" satisfies typeof c.createLeetcodeQuesController.method](
-    ("/v1" satisfies typeof c.createLeetcodeQuesController.version) +
-      ("/leetcode/ques" satisfies typeof c.createLeetcodeQuesController.path),
-    c.createLeetcodeQuesController.routeHandler,
+  r["post" satisfies typeof c.leetcodeCreateLeetcodeQues.method](
+    ("/v1" satisfies typeof c.leetcodeCreateLeetcodeQues.version) +
+      ("/leetcode/ques" satisfies typeof c.leetcodeCreateLeetcodeQues.path),
+    c.leetcodeCreateLeetcodeQues.routeHandler,
   );
 
   // GET /api/v1/leetcode/ques/:leetcodeQuesID
-  r["get" satisfies typeof c.getLeetcodeQuesController.method](
-    ("/v1" satisfies typeof c.getLeetcodeQuesController.version) +
-      ("/leetcode/ques/:leetcodeQuesID" satisfies typeof c.getLeetcodeQuesController.path),
-    c.getLeetcodeQuesController.routeHandler,
+  r["get" satisfies typeof c.leetcodeGetLeetcodeQues.method](
+    ("/v1" satisfies typeof c.leetcodeGetLeetcodeQues.version) +
+      ("/leetcode/ques/:leetcodeQuesID" satisfies typeof c.leetcodeGetLeetcodeQues.path),
+    c.leetcodeGetLeetcodeQues.routeHandler,
   );
 
   // GET /api/version
-  r["get" satisfies typeof c.versionController.method](
-    "/version" satisfies typeof c.versionController.path,
-    c.versionController.routeHandler,
+  r["get" satisfies typeof c.version.method](
+    "/version" satisfies typeof c.version.path,
+    c.version.routeHandler,
   );
 
   return r;

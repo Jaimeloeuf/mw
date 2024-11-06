@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
+import { generateFullFileNameFromRelativePath } from "../generateFullFileNameFromRelativePath.js";
 import type { HttpControllerFile } from "./HttpControllerFile.js";
 
 /**
@@ -40,12 +41,15 @@ async function generateHttpControllerFiles() {
           encoding: "utf8",
         });
         return {
-          name: file.name,
           path: fullFilePath,
+          name: generateFullFileNameFromRelativePath(
+            controllerFolderPath,
+            fullFilePath,
+            ".ct.ts",
+          ),
           version: dataOrThrow(fileContent.match(/version: (.*),/)?.[1]),
           httpRoute: dataOrThrow(fileContent.match(/path: "(.*)",/)?.[1]),
           httpMethod: dataOrThrow(fileContent.match(/method: "(.*)",/)?.[1]),
-          controllerName: file.name.replace(".ct.ts", "") + "Controller",
         } as HttpControllerFile;
       }),
   );
