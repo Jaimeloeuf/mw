@@ -8,7 +8,7 @@ import type { DataFunctionFile } from "./DataFunctionFile.js";
 async function generateDataFunctionFiles() {
   const dataFunctionsFolderPath = path.join(
     import.meta.dirname,
-    `../../../dal/repo`,
+    `../../../dal/df`,
   );
 
   const filesDirent = await fs.readdir(dataFunctionsFolderPath, {

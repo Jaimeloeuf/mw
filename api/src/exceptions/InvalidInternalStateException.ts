@@ -2,8 +2,8 @@ import { HttpTransformerableException } from "./HttpTransformerableException.js"
 
 /**
  * Used when there is an invalid internal state that prevents the requested
- * action from being executed. E.g. a User object loaded from data repo has no
- * ID for some reason.
+ * action from being executed. E.g. a User object loaded from dal has no ID for
+ * some reason.
  *
  * This converts to a HTTP 500 code since this is generally not a user
  * recoverable state.

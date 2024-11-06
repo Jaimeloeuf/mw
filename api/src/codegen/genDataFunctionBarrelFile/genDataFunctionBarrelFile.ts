@@ -17,7 +17,7 @@ import { dataFunctionExportTemplate } from "./dataFunctionExportTemplate.js";
 export async function genDataFunctionBarrelFile() {
   const dataFunctionsFolderPath = path.join(
     import.meta.dirname,
-    `../../dal/repo`,
+    `../../dal/df`,
   );
 
   const files = await getDataFunctionFiles();

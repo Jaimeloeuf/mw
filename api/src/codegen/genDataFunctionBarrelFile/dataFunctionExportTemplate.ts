@@ -5,7 +5,7 @@ export const dataFunctionExportTemplate = (
   file: DataFunctionFile,
   dalFolderPath: string,
 ): string =>
-  `export { default as ${file.name} } from "../dal/repo/${path.relative(
+  `export { default as ${file.name} } from "../dal/df/${path.relative(
     dalFolderPath,
     file.path.replace(".ts", ".js"),
   )}";
