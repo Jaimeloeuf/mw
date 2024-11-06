@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
+import { generateFullFileNameFromRelativePath } from "../generateFullFileNameFromRelativePath.js";
 import type { DataFunctionFile } from "./DataFunctionFile.js";
 
 /**
@@ -20,33 +21,17 @@ async function generateDataFunctionFiles() {
     // Only keep valid .df.ts Data Function files
     .filter((file) => file.name.endsWith(".df.ts"))
 
-    .map((file): DataFunctionFile => {
-      return {
+    .map(
+      (file): DataFunctionFile => ({
         path: path.resolve(file.parentPath, file.name),
 
-        name: path
-
-          // Compute the relative path of data function folder to this df, so
-          // that we can use the path to generate the full df name. Doing this
-          // so that df names are essentially "namespaced" like they are in
-          // their folders, instead of creating globally unique names.
-          .relative(
-            dataFunctionsFolderPath,
-            path.resolve(file.parentPath, file.name),
-          )
-
-          // Remove file extension to only keep the name itself
-          .replace(".df.ts", "")
-
-          // Use regex to convert path splitters '/' into camelCase delimiters.
-          // E.g. leetcode/getQuestion.df.ts to leetcodeGetQuestion.df.ts
-          .replace(/\/([a-z])/g, (_, letter) => letter.toUpperCase())
-
-          // Use regex to convert strings with '-' into camelCase delimiters.
-          // E.g. blog-subscriber to blogSubscriber
-          .replace(/-([a-z])/g, (_, letter) => letter.toUpperCase()),
-      };
-    })
+        name: generateFullFileNameFromRelativePath(
+          dataFunctionsFolderPath,
+          path.resolve(file.parentPath, file.name),
+          ".df.ts",
+        ),
+      }),
+    )
 
     // Sort these files in a stable manner using their file path
     .sort((a, b) => {
