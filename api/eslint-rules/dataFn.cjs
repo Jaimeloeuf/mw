@@ -30,7 +30,7 @@ module.exports = {
         if (!isFileInDalFolder(context.filename)) {
           context.report({
             node,
-            message: `'dataFn' can only be used within the /dal/* folder`,
+            message: `'dataFn' can only be used within the /dal/df/* folder`,
           });
           return;
         }
@@ -102,7 +102,7 @@ module.exports = {
 
 function isFileInDalFolder(filePath) {
   const relativePath = path.relative(
-    path.join(__dirname, `../src/dal`),
+    path.join(__dirname, `../src/dal/df`),
     filePath,
   );
 
