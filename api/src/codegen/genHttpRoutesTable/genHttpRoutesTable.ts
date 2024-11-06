@@ -1,5 +1,5 @@
 import { genAndSaveGeneratedCode } from "../codegenForTs/index.js";
-import { getControllerFiles } from "../utils/getControllerFiles/getControllerFiles.js";
+import { getHttpControllerFiles } from "../utils/getHttpControllerFiles/getHttpControllerFiles.js";
 import { routeTableTemplate } from "./routeTableTemplate.js";
 import { routeDefinitionTemplate } from "./routeDefinitionTemplate.js";
 
@@ -8,7 +8,7 @@ import { routeDefinitionTemplate } from "./routeDefinitionTemplate.js";
  * controllers in the controllers/ folder.
  */
 export async function genHttpRoutesTable() {
-  const controllerFiles = await getControllerFiles();
+  const controllerFiles = await getHttpControllerFiles();
 
   // Generate route definition statements, and combine them into a single string
   const routeDefinitions = controllerFiles

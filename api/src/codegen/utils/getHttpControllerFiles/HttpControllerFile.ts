@@ -1,4 +1,4 @@
-export type ControllerFile = {
+export type HttpControllerFile = {
   name: string;
   path: string;
   version: string;

@@ -1,8 +1,8 @@
 import path from "path";
-import { ControllerFile } from "../utils/getControllerFiles/ControllerFile.js";
+import { HttpControllerFile } from "../utils/getHttpControllerFiles/HttpControllerFile.js";
 
 export const controllerExportTemplate = (
-  file: ControllerFile,
+  file: HttpControllerFile,
   controllerFolderPath: string,
 ): string =>
   `export { default as ${file.controllerName} } from "../controllers-http/${path.relative(

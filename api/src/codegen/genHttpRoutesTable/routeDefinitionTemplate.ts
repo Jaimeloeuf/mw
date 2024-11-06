@@ -1,11 +1,11 @@
-import { ControllerFile } from "../utils/getControllerFiles/ControllerFile.js";
+import { HttpControllerFile } from "../utils/getHttpControllerFiles/HttpControllerFile.js";
 
-const getVersionPathPrefix = (file: ControllerFile) =>
+const getVersionPathPrefix = (file: HttpControllerFile) =>
   file.version === '"neutral"'
     ? ""
     : `("/v${file.version}" satisfies typeof c.${file.controllerName}.version) + `;
 
-export const routeDefinitionTemplate = (file: ControllerFile): string =>
+export const routeDefinitionTemplate = (file: HttpControllerFile): string =>
   `
 // ${file.httpMethod.toUpperCase()} /api${file.version === '"neutral"' ? "" : "/v" + file.version}${file.httpRoute}
 r["${file.httpMethod}" satisfies typeof c.${file.controllerName}.method](

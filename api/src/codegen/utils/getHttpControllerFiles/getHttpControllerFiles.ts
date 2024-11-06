@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import type { ControllerFile } from "./ControllerFile.js";
+import type { HttpControllerFile } from "./HttpControllerFile.js";
 
 /**
  * Utility to get the data back if it is not null/undefined, else if it is null/
@@ -14,10 +14,10 @@ function dataOrThrow<T>(data: T | null | undefined): T {
 }
 
 /**
- * Generate an array of controller files with parsed data from within the
+ * Generate an array of HTTP controller files with parsed data from within the
  * controllers and sorted by their HTTP route + API version.
  */
-async function generateControllerFiles() {
+async function generateHttpControllerFiles() {
   const controllerFolderPath = path.join(
     import.meta.dirname,
     `../../../controllers-http`,
@@ -46,7 +46,7 @@ async function generateControllerFiles() {
           httpRoute: dataOrThrow(fileContent.match(/path: "(.*)",/)?.[1]),
           httpMethod: dataOrThrow(fileContent.match(/method: "(.*)",/)?.[1]),
           controllerName: file.name.replace(".ct.ts", "") + "Controller",
-        } as ControllerFile;
+        } as HttpControllerFile;
       }),
   );
 
@@ -78,18 +78,18 @@ async function generateControllerFiles() {
   return sortedFiles;
 }
 
-let controllerFiles: Readonly<Promise<readonly ControllerFile[]>> | null = null;
+let cachedFiles: Readonly<Promise<readonly HttpControllerFile[]>> | null = null;
 
 /**
- * Always return the single controllerFiles promise and let the callers resolve
+ * Always return the single cachedFiles promise and let the callers resolve
  * themselves but only ever call generateControllerFiles once.
  *
  * This is basically the cached version of generateControllerFiles.
  */
-export async function getControllerFiles() {
-  if (controllerFiles === null) {
-    controllerFiles = generateControllerFiles();
+export async function getHttpControllerFiles() {
+  if (cachedFiles === null) {
+    cachedFiles = generateHttpControllerFiles();
   }
 
-  return controllerFiles;
+  return cachedFiles;
 }

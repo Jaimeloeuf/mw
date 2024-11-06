@@ -1,5 +1,5 @@
 import { genAndSaveGeneratedCode } from "../codegenForTs/index.js";
-import { getControllerFiles } from "../utils/getControllerFiles/getControllerFiles.js";
+import { getHttpControllerFiles } from "../utils/getHttpControllerFiles/getHttpControllerFiles.js";
 
 /**
  * Generate all the HTTP API DTO type definitions using all the HTTP controllers
@@ -7,7 +7,7 @@ import { getControllerFiles } from "../utils/getControllerFiles/getControllerFil
  * big GraphQL schema file.
  */
 export async function genHttpDtoTypeDefinition() {
-  const controllerFiles = await getControllerFiles();
+  const controllerFiles = await getHttpControllerFiles();
 
   // @todo An advanced version would be to skip export if type resolves to `never`.
   const typeDefinitions = controllerFiles
