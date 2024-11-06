@@ -20,11 +20,15 @@ export function bootstrapHttpServer() {
     /* Register all the middlewares */
     .use(cors())
     .use(loggingMiddleware)
-    .use(express.json())
-    .use(express.urlencoded({ extended: true }))
 
     // Disable this for security
     .disable("x-powered-by")
+
+    // Only run the request data parser middlewares after /graphql route handler
+    // as it does its own parsing, so it will break if this is placed before
+    // that, and this is placed right before the route handlers that needs it.
+    .use(express.json())
+    .use(express.urlencoded({ extended: true }))
 
     // Register all the route->controller mappings with the /api prefix.
     .use("/api", registerRoutesAndControllers())
