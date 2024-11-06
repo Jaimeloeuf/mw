@@ -6,6 +6,7 @@ import { config } from "../config/index.js";
 import { logger } from "../logging/index.js";
 
 import { loggingMiddleware } from "./loggingMiddleware.js";
+import { httpRouteHandlerForGraphQL } from "../graphql/index.js";
 import { registerRoutesAndControllers } from "../__generated/index.js";
 import { routeNotFound } from "./routeNotFound.js";
 
@@ -20,6 +21,10 @@ export function bootstrapHttpServer() {
     /* Register all the middlewares */
     .use(cors())
     .use(loggingMiddleware)
+
+    // Using /gql instead of well known /graphql to avoid those scanning bots
+    .get("/gql", httpRouteHandlerForGraphQL)
+    .post("/gql", httpRouteHandlerForGraphQL)
 
     // Disable this for security
     .disable("x-powered-by")
