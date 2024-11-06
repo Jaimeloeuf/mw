@@ -15,6 +15,7 @@
     "lint": "npx eslint",
     "format": "npx prettier --write 'src/**/*.ts'",
     "format:ci": "npx prettier --check 'src/**/*.ts'",
+    "graphiql": "npx ruru -SP -p 4000 -e http://localhost:3000/gql",
     "db:run-migrations": "npx tsx ./src/dal/kysely/migration-script.ts",
     "scripts:create-kysely-migration": "npx tsx ./src/scripts/create-kysely-migration.ts",
     "scripts:create-http-controller": "npx tsx ./src/scripts/create-http-controller.ts",
@@ -48,6 +49,7 @@
     "nodemon": "^3.1.4",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
+    "ruru": "^2.0.0-beta.13",
     "tsx": "^4.16.5",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.0.0"
