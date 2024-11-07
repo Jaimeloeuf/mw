@@ -3,7 +3,7 @@ import { df } from "../../__generated/index.js";
 /**
  * Get a bucketlist.
  */
-export async function getBucketlist(bucketlistID: string) {
+export default async function (bucketlistID: string) {
   const bucketlist =
     await df.bucketlistGetBucketlist.getResultOrThrowOnError(bucketlistID);
 

@@ -6,7 +6,7 @@ import { InvalidOperationException } from "../../exceptions/index.js";
 /**
  * Create a new API Key for user's Org.
  */
-export async function createApiKey(requestorID: string) {
+export default async function (requestorID: string) {
   const user = await df.muwnoGetUser.getResultOrThrowOnError(requestorID);
 
   if (user.org_id === null) {

@@ -10,7 +10,7 @@ import type { MuwnoUser } from "../../dal/index.js";
  * An optional error message can be used to override the default invalid role
  * error message.
  */
-export async function validateIfUserHaveValidRole(
+export default async function (
   userID: string,
   roles: Array<MuwnoUser["role"]>,
   errorMessage?: string,

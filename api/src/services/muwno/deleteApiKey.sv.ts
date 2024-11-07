@@ -1,12 +1,12 @@
 import { df } from "../../__generated/index.js";
-import { validateIfUserHaveValidRole } from "./validateIfUserHaveValidRole.js";
-import { canUserAccessOrg } from "./canUserAccessOrg.js";
+import { default as validateIfUserHaveValidRole } from "./validateIfUserHaveValidRole.sv.js";
+import { default as canUserAccessOrg } from "./canUserAccessOrg.sv.js";
 import { NotFoundException } from "../../exceptions/index.js";
 
 /**
  * Delete an API Key.
  */
-export async function deleteApiKey(requestorID: string, apiKeyID: string) {
+export default async function (requestorID: string, apiKeyID: string) {
   await validateIfUserHaveValidRole(requestorID, ["OrgOwner", "OrgAdmin"]);
 
   const apiKey = await df.muwnoGetApiKey.getResultOrThrowOnError(apiKeyID);

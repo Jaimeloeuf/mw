@@ -7,7 +7,7 @@ import { blogEmailService } from "./blogEmailService.js";
 /**
  * Add new subscriber for blog
  */
-export async function newSubscriber(email: string) {
+export default async function (email: string) {
   const isSubscribed =
     await df.blogSubscriberIsEmailAlreadySubscribed.getResultOrThrowOnError(
       email,
@@ -22,7 +22,7 @@ export async function newSubscriber(email: string) {
       email: email.toLowerCase(),
     });
 
-  CreateSimplePostProcessingJob(newSubscriber.name)
+  CreateSimplePostProcessingJob("newSubscriber")
     .runJobsInParallel()
     .addJob(async function sendWelcomeEmail() {
       const result = await blogEmailService(

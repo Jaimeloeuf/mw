@@ -3,6 +3,6 @@ import { df } from "../../__generated/index.js";
 /**
  * Get a leetcode question.
  */
-export async function getLeetcodeQues(bucketlistID: string) {
+export default async function (bucketlistID: string) {
   return df.leetcodeGetLeetcodeQues.getResultOrThrowOnError(bucketlistID);
 }

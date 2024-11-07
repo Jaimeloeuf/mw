@@ -8,7 +8,7 @@ import { ForbiddenException } from "../../exceptions/index.js";
  *
  * Treats invalid/non-existent `orgID` as Forbidden request.
  */
-export async function canUserAccessOrg(userID: string, orgID: string) {
+export default async function (userID: string, orgID: string) {
   const canAccess = await df.muwnoCanUserAccessOrg.getResultOrThrowOnError(
     userID,
     orgID,
