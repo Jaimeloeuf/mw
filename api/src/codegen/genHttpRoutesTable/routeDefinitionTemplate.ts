@@ -3,14 +3,14 @@ import { HttpControllerFile } from "../utils/getHttpControllerFiles/HttpControll
 const getVersionPathPrefix = (file: HttpControllerFile) =>
   file.version === '"neutral"'
     ? ""
-    : `("/v${file.version}" satisfies typeof c.${file.controllerName}.version) + `;
+    : `("/v${file.version}" satisfies typeof c.${file.name}.version) + `;
 
 export const routeDefinitionTemplate = (file: HttpControllerFile): string =>
   `
 // ${file.httpMethod.toUpperCase()} /api${file.version === '"neutral"' ? "" : "/v" + file.version}${file.httpRoute}
-r["${file.httpMethod}" satisfies typeof c.${file.controllerName}.method](
+r["${file.httpMethod}" satisfies typeof c.${file.name}.method](
   ${getVersionPathPrefix(file)}
-  ("${file.httpRoute}" satisfies typeof c.${file.controllerName}.path),
-  c.${file.controllerName}.routeHandler
+  ("${file.httpRoute}" satisfies typeof c.${file.name}.path),
+  c.${file.name}.routeHandler
 );
 `;
