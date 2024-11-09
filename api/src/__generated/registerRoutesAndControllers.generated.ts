@@ -6,10 +6,10 @@
  * genHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256(6dd67bc85e1f51f74aa197087d8f78bb1a17f690ad53e325bc9a07f1d92e0e3d)
+ * sha256(efcd5a63c511d8e587bcb3503f6edee98fb3dca010391727a4f93a5912cd91ca)
  */
 import { Router } from "express";
-import * as c from "./httpControllerBarrelFile.generated.js";
+import * as c from "./httpControllerBarrelFile.generated.do_not_include_in_barrel_file.js";
 /**
  * A route tables sort of file, where all HTTP API routes are defined here along
  * with the controllers/route-handlers that will be used to handle requests for

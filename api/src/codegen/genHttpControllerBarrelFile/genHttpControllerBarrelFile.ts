@@ -26,5 +26,9 @@ export async function genHttpControllerBarrelFile() {
     genHttpControllerBarrelFile,
     generatedCode,
     "httpControllerBarrelFile",
+
+    // Do not re-export this in the barrel file, as this file will only be used
+    // by other generated files.
+    { doNotIncludeInGeneratedFolderBarrelFile: true },
   );
 }

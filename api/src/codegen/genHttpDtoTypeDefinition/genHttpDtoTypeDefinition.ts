@@ -1,4 +1,7 @@
-import { genAndSaveGeneratedCode } from "../codegenForTs/index.js";
+import {
+  genAndSaveGeneratedCode,
+  generatedCodeFileExtensionWithNoBarrelFileInclusion,
+} from "../codegenForTs/index.js";
 import { getHttpControllerFiles } from "../utils/getHttpControllerFiles/getHttpControllerFiles.js";
 
 /**
@@ -26,7 +29,7 @@ export type ${file.name}Controller_OutputDTO = Awaited<
     .join("");
 
   const generatedCode = `import type { z } from "zod";
-import * as c from "./httpControllerBarrelFile.generated.js";
+import * as c from "./httpControllerBarrelFile${generatedCodeFileExtensionWithNoBarrelFileInclusion.replace(".ts", ".js")}";
 
 ${typeDefinitions}
 `;

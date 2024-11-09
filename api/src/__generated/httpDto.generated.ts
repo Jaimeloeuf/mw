@@ -6,10 +6,10 @@
  * genHttpDtoTypeDefinition
  *
  * Generated hash in hex for code after this section is:
- * sha256(bdc867df3c01226d4bee31de9c906350a0b4f8680ef4c559b10ab0efea42d555)
+ * sha256(f0925ab27bb38c03d867fc0e817f2613bcc368c6fc170f21099a270fe40319f2)
  */
 import type { z } from "zod";
-import * as c from "./httpControllerBarrelFile.generated.js";
+import * as c from "./httpControllerBarrelFile.generated.do_not_include_in_barrel_file.js";
 
 export type healthCheckController_QueryParams = z.infer<
   Exclude<(typeof c.healthCheck)["urlQueryParamsValidator"], null>
