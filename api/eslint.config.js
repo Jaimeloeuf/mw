@@ -2,6 +2,7 @@ import globals from "globals";
 // import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 
+import perfectionist from "eslint-plugin-perfectionist";
 import mwEslintPlugin from "./eslint-rules/eslint-plugin-mw.cjs";
 
 export default [
@@ -19,6 +20,7 @@ export default [
       "mwEslintPlugin/httpController": "error",
     },
     plugins: {
+      perfectionist,
       mwEslintPlugin,
     },
   },
