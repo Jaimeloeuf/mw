@@ -1,111 +1,49 @@
-import { logger } from "../logging/index.js";
-import { runInParallel } from "./runInParallel.js";
-import { runSequentially } from "./runSequentially.js";
-import type { WrappedFunction } from "./WrappedFunction.js";
+import { SimplePostProcessingRunner } from "./SimplePostProcessingRunner.js";
 
 /**
- * Simple Post Processing mechanism that runs your job functions in web tier
+ * Simple Post Processing allows you to run your job functions in web tier
  * without blocking service function execution.
+ *
+ * Uses a fluent API to configure the jobs.
  */
-export class SimplePostProcessing {
-  constructor(
-    private callerName: string,
-    private runType: "sequentially" | "parallelly",
-
-    /**
-     * Optionally required only for sequential executions
-     */
-    private continueOnFailure?: boolean,
-  ) {
-    if (runType === "sequentially" && continueOnFailure === undefined) {
-      throw new Error(
-        `${SimplePostProcessing.name} requires continue option to be set for Sequential executions`,
-      );
-    }
-  }
-
-  #fns: Array<WrappedFunction> = [];
+export const SimplePostProcessing = (serviceFunctionName: string) => ({
+  /**
+   * All jobs will be ran and awaited together instead of waiting for each job
+   * to finish before running the next one.
+   */
+  runJobsInParallel() {
+    return new SimplePostProcessingRunner(serviceFunctionName, "parallelly");
+  },
 
   /**
-   * Functions added will be ran sequentially based on the sequence of addition
-   *
-   * ## Functions should be NAMED
-   * Used for logging, especially if there are any errors.
+   * Jobs will be ran in the order they are added and each job will only run
+   * after the previous job finishes.
    */
-  addJob(fn: Function) {
-    // Extra runtime check alongside compile time check with ESLint rule
-    // 'mwEslintPlugin/require-function-name-for-addJob'
-    if (fn.name === "") {
-      throw new Error(
-        `Functions passed to ${SimplePostProcessing.name} must be named`,
-      );
-    }
-
-    const wrappedFunction = async () => {
-      try {
-        logger.verbose(
-          `${this.callerName}:${SimplePostProcessing.name}`,
-          `Executing: ${fn.name}`,
+  runJobsSequentially() {
+    // Return another object to implement a builder pattern to configure options
+    // specific for sequential executions.
+    return {
+      /**
+       * Continue to execute all other jobs if a job failed.
+       */
+      continueOnFailure() {
+        return new SimplePostProcessingRunner(
+          serviceFunctionName,
+          "sequentially",
+          true,
         );
+      },
 
-        await fn();
-
-        logger.verbose(
-          `${this.callerName}:${SimplePostProcessing.name}`,
-          `Successfully executed: ${fn.name}`,
+      /**
+       * Stop executing all queued jobs if any job failed.
+       */
+      stopIfOneFails() {
+        return new SimplePostProcessingRunner(
+          serviceFunctionName,
+          "sequentially",
+          false,
         );
-
-        return true;
-      } catch (error) {
-        logger.verbose(
-          `${this.callerName}:${SimplePostProcessing.name}`,
-          `Failed while executing: ${fn.name}`,
-        );
-
-        // @todo Create and log an error ID
-        // @todo Notify devs about this error
-        logger.error(
-          `${this.callerName}:${SimplePostProcessing.name}:${fn.name}`,
-          error instanceof Error ? error.stack : error,
-        );
-
-        return false;
-      }
+      },
     };
-
-    // Reuse fn.name so that logging uses the real name
-    Object.defineProperty(wrappedFunction, "name", { value: fn.name });
-
-    this.#fns.push(wrappedFunction);
-
-    return this;
-  }
-
-  /**
-   * Complete setting of Jobs and run them in the next event loop.
-   */
-  async run() {
-    setImmediate(async () => {
-      const functionNames = this.#fns.map((fn) => fn.name).join(", ");
-
-      logger.info(
-        `${this.callerName}:${SimplePostProcessing.name}`,
-        `Executing these functions ${this.runType}: ${functionNames}`,
-      );
-
-      if (this.runType === "sequentially") {
-        return runSequentially(
-          SimplePostProcessing.name,
-          this.#fns,
-          !!this.continueOnFailure,
-        );
-      }
-
-      if (this.runType === "parallelly") {
-        return runInParallel(SimplePostProcessing.name, this.#fns);
-      }
-
-      throw new Error(`Unknown run type: ${this.runType}`);
-    });
-  }
-}
+  },
+});

@@ -2,4 +2,4 @@
  * Barrel file
  */
 
-export * from "./CreateSimplePostProcessingJob.js";
+export * from "./SimplePostProcessing.js";

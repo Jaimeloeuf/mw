@@ -1,6 +1,6 @@
 import { df } from "../../__generated/index.js";
 import { ConflictException } from "../../exceptions/index.js";
-import { CreateSimplePostProcessingJob } from "../../post-processing/index.js";
+import { SimplePostProcessing } from "../../post-processing/index.js";
 import { notifyAdminWithInternalAdminTelegramBot } from "../../infra-shared/index.js";
 import { blogEmailService } from "./blogEmailService.js";
 
@@ -22,7 +22,7 @@ export default async function (email: string) {
       email: email.toLowerCase(),
     });
 
-  CreateSimplePostProcessingJob("newSubscriber")
+  SimplePostProcessing("BlogNewSubscriber")
     .runJobsInParallel()
     .addJob(async function sendWelcomeEmail() {
       const result = await blogEmailService(
