@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { httpController } from "../../http/index.js";
-import { bucketlistService } from "../../services/index.js";
+import { sv } from "../../__generated/index.js";
 
 export default httpController({
   version: 1,
@@ -15,9 +15,6 @@ export default httpController({
   }),
   async httpRequestHandler({ requestBody, setHttpStatusCode }) {
     setHttpStatusCode(201);
-    return bucketlistService.createBucketlist(
-      requestBody.name,
-      requestBody.description,
-    );
+    return sv.bucketlistCreateOne(requestBody.name, requestBody.description);
   },
 });

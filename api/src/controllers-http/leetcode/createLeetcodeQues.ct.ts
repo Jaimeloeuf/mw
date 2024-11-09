@@ -1,6 +1,6 @@
 import { z } from "zod";
+import { sv } from "../../__generated/index.js";
 import { httpController } from "../../http/index.js";
-import { leetcodeService } from "../../services/index.js";
 
 export default httpController({
   version: 1,
@@ -15,6 +15,6 @@ export default httpController({
   }),
   async httpRequestHandler({ requestBody, setHttpStatusCode }) {
     setHttpStatusCode(201);
-    return leetcodeService.createLeetcodeQues(requestBody);
+    return sv.leetcodeCreateLeetcodeQues(requestBody);
   },
 });

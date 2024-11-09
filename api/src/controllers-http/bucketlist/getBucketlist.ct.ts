@@ -1,6 +1,6 @@
 import { z } from "zod";
+import { sv } from "../../__generated/index.js";
 import { httpController } from "../../http/index.js";
-import { bucketlistService } from "../../services/index.js";
 
 export default httpController({
   version: 1,
@@ -13,6 +13,6 @@ export default httpController({
   urlQueryParamsValidator: null,
   requestBodyValidator: null,
   async httpRequestHandler({ urlParams }) {
-    return bucketlistService.getBucketlist(urlParams.bucketlistID);
+    return sv.bucketlistGetOne(urlParams.bucketlistID);
   },
 });

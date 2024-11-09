@@ -1,7 +1,7 @@
 import { z } from "zod";
+import { sv } from "../../__generated/index.js";
 import { httpController, useHttpRequestGuard } from "../../http/index.js";
 import { blogRecaptchaGuard } from "./blogRecaptchaGuard.js";
-import { blogService } from "../../services/index.js";
 
 export default httpController({
   version: 1,
@@ -14,7 +14,7 @@ export default httpController({
     email: z.string().email(),
   }),
   async httpRequestHandler({ requestBody, setHttpStatusCode }) {
-    await blogService.newSubscriber(requestBody.email);
+    await sv.blogNewSubscriber(requestBody.email);
     setHttpStatusCode(201);
   },
 });
