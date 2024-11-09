@@ -1,18 +1,8 @@
 import fs from "fs/promises";
 import path from "path";
 import { generateFullFileNameFromRelativePath } from "../generateFullFileNameFromRelativePath.js";
+import { dataOrThrow } from "../../../utils/dataOrThrow.js";
 import type { HttpControllerFile } from "./HttpControllerFile.js";
-
-/**
- * Utility to get the data back if it is not null/undefined, else if it is null/
- * undefined, this will throw an Error.
- */
-function dataOrThrow<T>(data: T | null | undefined): T {
-  if (data === null || data === undefined) {
-    throw new Error(`${dataOrThrow.name} found ${data}`);
-  }
-  return data;
-}
 
 /**
  * Generate an array of HTTP controller files with parsed data from within the
