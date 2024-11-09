@@ -15,5 +15,9 @@ export const ProdEmailServiceFF = (
      */
     message: string,
   ): Promise<void | Error> {
-    //
+    emailAddressForSendFrom;
+    emailAddressForReplyTo;
+    recipientEmail;
+    subject;
+    message;
   };

@@ -9,7 +9,7 @@ import { vueTemplate } from "./entrypoint-vueTemplate.js";
 export function entrypoints() {
   const r = Router();
 
-  r.get("/ssr-app", async function (req, res, next) {
+  r.get("/ssr-app", async function (_req, res, _next) {
     // This must choose the right app to load using 'createApp' just like how
     // entrypoints does it.
     const renderedHtml = await renderToString(createApp());
