@@ -6,7 +6,7 @@
  * genHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256(efcd5a63c511d8e587bcb3503f6edee98fb3dca010391727a4f93a5912cd91ca)
+ * sha256(e33f780c9f17c33f6944701bb07774372044bfed37573cf389aeda7bdc4fda9c)
  */
 import { Router } from "express";
 import * as c from "./httpControllerBarrelFile.generated.do_not_include_in_barrel_file.js";
@@ -41,24 +41,24 @@ export function registerRoutesAndControllers() {
   );
 
   // POST /api/v1/blog/subscribe
-  r["post" satisfies typeof c.blogBlogNewSubscriber.method](
-    ("/v1" satisfies typeof c.blogBlogNewSubscriber.version) +
-      ("/blog/subscribe" satisfies typeof c.blogBlogNewSubscriber.path),
-    c.blogBlogNewSubscriber.routeHandler,
+  r["post" satisfies typeof c.blogNewSubscriber.method](
+    ("/v1" satisfies typeof c.blogNewSubscriber.version) +
+      ("/blog/subscribe" satisfies typeof c.blogNewSubscriber.path),
+    c.blogNewSubscriber.routeHandler,
   );
 
   // POST /api/v1/bucketlist
-  r["post" satisfies typeof c.bucketlistCreateBucketlist.method](
-    ("/v1" satisfies typeof c.bucketlistCreateBucketlist.version) +
-      ("/bucketlist" satisfies typeof c.bucketlistCreateBucketlist.path),
-    c.bucketlistCreateBucketlist.routeHandler,
+  r["post" satisfies typeof c.bucketlistCreateOne.method](
+    ("/v1" satisfies typeof c.bucketlistCreateOne.version) +
+      ("/bucketlist" satisfies typeof c.bucketlistCreateOne.path),
+    c.bucketlistCreateOne.routeHandler,
   );
 
   // GET /api/v1/bucketlist/:bucketlistID
-  r["get" satisfies typeof c.bucketlistGetBucketlist.method](
-    ("/v1" satisfies typeof c.bucketlistGetBucketlist.version) +
-      ("/bucketlist/:bucketlistID" satisfies typeof c.bucketlistGetBucketlist.path),
-    c.bucketlistGetBucketlist.routeHandler,
+  r["get" satisfies typeof c.bucketlistGetOne.method](
+    ("/v1" satisfies typeof c.bucketlistGetOne.version) +
+      ("/bucketlist/:bucketlistID" satisfies typeof c.bucketlistGetOne.path),
+    c.bucketlistGetOne.routeHandler,
   );
 
   // POST /api/v1/leetcode/ques

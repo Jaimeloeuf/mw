@@ -6,12 +6,12 @@
  * genHttpControllerBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(9be377f3cab0d93108112260010a11aca1b9fb447da8ff106e5cbdead762ab77)
+ * sha256(0e96a7e1e3e64d58abf04eb94795286747ce432b5fc976579ed75190d7d63b7c)
  */
 export { default as healthCheck } from "../controllers-http/healthCheck.ct.js";
-export { default as blogBlogNewSubscriber } from "../controllers-http/blog/blogNewSubscriber.ct.js";
-export { default as bucketlistCreateBucketlist } from "../controllers-http/bucketlist/createBucketlist.ct.js";
-export { default as bucketlistGetBucketlist } from "../controllers-http/bucketlist/getBucketlist.ct.js";
+export { default as blogNewSubscriber } from "../controllers-http/blog/newSubscriber.ct.js";
+export { default as bucketlistCreateOne } from "../controllers-http/bucketlist/createOne.ct.js";
+export { default as bucketlistGetOne } from "../controllers-http/bucketlist/getOne.ct.js";
 export { default as leetcodeCreateLeetcodeQues } from "../controllers-http/leetcode/createLeetcodeQues.ct.js";
 export { default as leetcodeGetLeetcodeQues } from "../controllers-http/leetcode/getLeetcodeQues.ct.js";
 export { default as version } from "../controllers-http/version.ct.js";
