@@ -12,6 +12,11 @@ export default [
     languageOptions: {
       globals: globals.node,
     },
+    linterOptions: {
+      // Disabling this for now so that we can add arbitrary eslint-disable lines
+      // to codegen generated files without issue.
+      reportUnusedDisableDirectives: "off",
+    },
     rules: {
       "prefer-const": "error",
       "no-console": "warn",

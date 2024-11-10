@@ -1,6 +1,7 @@
 import { genAndSaveGeneratedFile } from "../utils/genAndSaveGeneratedFile.js";
 import { generatedSrcDirPath } from "./generatedSrcDirPath.js";
 import { genGeneratedNotice } from "./genGeneratedNotice.js";
+import { getAllEslintRulesToDisable } from "./getAllEslintRulesToDisable.js";
 
 /**
  * Generate the full code file (formatted + notice + hash) from the generator
@@ -18,8 +19,18 @@ export async function genAndSaveGeneratedCode(
   generator: Function,
   generatedCode: string,
   generatedCodeFileName: string,
-  options?: { doNotIncludeInGeneratedFolderBarrelFile?: true },
+  options?: {
+    eslintRulesToDisable: Array<string>;
+    doNotIncludeInGeneratedFolderBarrelFile?: true;
+  },
 ) {
+  const eslintRuleDisableString = getAllEslintRulesToDisable(
+    options?.eslintRulesToDisable,
+  );
+
+  const generatedCodeWithEslintRuleDisableStringPrefix =
+    eslintRuleDisableString + generatedCode;
+
   const generatedTextFileNameExtension =
     options?.doNotIncludeInGeneratedFolderBarrelFile
       ? generatedCodeFileExtensionWithNoBarrelFileInclusion
@@ -28,7 +39,7 @@ export async function genAndSaveGeneratedCode(
   await genAndSaveGeneratedFile({
     generator,
     genGeneratedNotice,
-    generatedText: generatedCode,
+    generatedText: generatedCodeWithEslintRuleDisableStringPrefix,
     generatedTextFileType: ".ts",
     generatedFileRootDirPath: generatedSrcDirPath,
     generatedTextFileName: generatedCodeFileName,

@@ -6,6 +6,8 @@
  * genServiceBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(b86495660fecb5f4dc0b626fd6ce13a872d6acf8f299c3c289bc244638a25884)
+ * sha256(d0c0fec749a4aefa623cea518bba259a880af0ecdee1cab4d50df9c44a4e3ac6)
  */
+/* eslint-disable perfectionist/sort-imports */
+/* eslint-disable perfectionist/sort-exports */
 export * as sv from "./serviceExportFile.generated.do_not_include_in_barrel_file.js";

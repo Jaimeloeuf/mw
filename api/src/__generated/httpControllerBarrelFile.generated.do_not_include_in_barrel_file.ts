@@ -6,8 +6,10 @@
  * genHttpControllerBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(0e96a7e1e3e64d58abf04eb94795286747ce432b5fc976579ed75190d7d63b7c)
+ * sha256(c2353bab531867cd6bb8cff83780fe663e45e314567889bfb94e9e04882ffd75)
  */
+/* eslint-disable perfectionist/sort-imports */
+/* eslint-disable perfectionist/sort-exports */
 export { default as healthCheck } from "../controllers-http/healthCheck.ct.js";
 export { default as blogNewSubscriber } from "../controllers-http/blog/newSubscriber.ct.js";
 export { default as bucketlistCreateOne } from "../controllers-http/bucketlist/createOne.ct.js";

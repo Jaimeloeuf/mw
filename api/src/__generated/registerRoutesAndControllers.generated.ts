@@ -6,8 +6,10 @@
  * genHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256(e33f780c9f17c33f6944701bb07774372044bfed37573cf389aeda7bdc4fda9c)
+ * sha256(d81613c69fc36d5b15e0f6f6e7c23989c8b3667e61a8b5f1f91f79ef3096ca71)
  */
+/* eslint-disable perfectionist/sort-imports */
+/* eslint-disable perfectionist/sort-exports */
 import { Router } from "express";
 import * as c from "./httpControllerBarrelFile.generated.do_not_include_in_barrel_file.js";
 /**

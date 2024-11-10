@@ -6,8 +6,10 @@
  * genHttpDtoTypeDefinition
  *
  * Generated hash in hex for code after this section is:
- * sha256(5b1d5107c6fd3f76b23cf885018dc77f2712bbd7f7a582d758dd2ec6248c6476)
+ * sha256(e97859f6f293f5d7d7aeea8bcf31924aa64ec96cdbb4f0f768b82dc74c879f56)
  */
+/* eslint-disable perfectionist/sort-imports */
+/* eslint-disable perfectionist/sort-exports */
 import type { z } from "zod";
 import * as c from "./httpControllerBarrelFile.generated.do_not_include_in_barrel_file.js";
 

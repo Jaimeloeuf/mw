@@ -6,6 +6,8 @@
  * genDataFunctionBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(f96285c61cef7093bf4bfba83d67a91c9734e40e4d63285686d88bf372a1c35f)
+ * sha256(7835b6dcb7c17122eaad7a95805a0adde00c819ae32521bb8f13e88628d822a9)
  */
+/* eslint-disable perfectionist/sort-imports */
+/* eslint-disable perfectionist/sort-exports */
 export * as df from "./dataFunctionsExportFile.generated.do_not_include_in_barrel_file.js";
