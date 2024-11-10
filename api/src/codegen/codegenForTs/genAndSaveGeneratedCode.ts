@@ -20,7 +20,7 @@ export async function genAndSaveGeneratedCode(
   generatedCode: string,
   generatedCodeFileName: string,
   options?: {
-    eslintRulesToDisable: Array<string>;
+    eslintRulesToDisable?: Array<string>;
     doNotIncludeInGeneratedFolderBarrelFile?: true;
   },
 ) {
