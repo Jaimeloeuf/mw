@@ -1,10 +1,11 @@
-import { dataFn } from "../dataFn.js";
-import { apiDB } from "../../kysely/index.js";
 import type { MuwnoUser } from "../../kysely/index.js";
+
 import {
   NotFoundException,
   InvalidInternalStateException,
 } from "../../../exceptions/index.js";
+import { apiDB } from "../../kysely/index.js";
+import { dataFn } from "../dataFn.js";
 
 /**
  * Get a user's Org Entity object back if they belong to an Org

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { renderToString } from "vue/server-renderer";
+
 import { createApp } from "./entrypoint-app.js";
 import { vueTemplate } from "./entrypoint-vueTemplate.js";
 

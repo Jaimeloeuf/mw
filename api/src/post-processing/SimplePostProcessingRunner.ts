@@ -1,7 +1,8 @@
+import type { WrappedFunction } from "./WrappedFunction.js";
+
 import { logger } from "../logging/index.js";
 import { runInParallel } from "./runInParallel.js";
 import { runSequentially } from "./runSequentially.js";
-import type { WrappedFunction } from "./WrappedFunction.js";
 
 /**
  * Simple Post Processing runner that runs your job functions in web tier
@@ -104,6 +105,12 @@ export class SimplePostProcessingRunner {
       if (this.runType === "parallelly") {
         return runInParallel(SimplePostProcessingRunner.name, this.#fns);
       }
+
+      // @todo
+      // For both methods, if the post processing failed, we should either store
+      // the job as a jlow so that it can be either automatically retried at a
+      // later time or re-ran manually
+      // We should enforce a at least and at most once delivery type
 
       throw new Error(`Unknown run type: ${this.runType}`);
     });

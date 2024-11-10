@@ -1,6 +1,7 @@
-import { dataFn } from "../dataFn.js";
-import { apiDB } from "../../kysely/index.js";
 import type { MuwnoStripeWebhookEvent } from "../../kysely/index.js";
+
+import { apiDB } from "../../kysely/index.js";
+import { dataFn } from "../dataFn.js";
 
 /**
  * Mark a given Stripe Webhook Event as processed.

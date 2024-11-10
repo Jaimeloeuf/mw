@@ -1,6 +1,7 @@
-import { dataFn } from "../dataFn.js";
-import { apiDB } from "../../kysely/index.js";
 import type { MuwnoOrg } from "../../kysely/index.js";
+
+import { apiDB } from "../../kysely/index.js";
+import { dataFn } from "../dataFn.js";
 
 /**
  * Get all members of the Org team, sorted by newest member first.

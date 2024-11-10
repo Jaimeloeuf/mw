@@ -1,6 +1,7 @@
-import { dataFn } from "../dataFn.js";
-import { apiDB } from "../../kysely/index.js";
 import type { MuwnoUser } from "../../kysely/index.js";
+
+import { apiDB } from "../../kysely/index.js";
+import { dataFn } from "../dataFn.js";
 
 /**
  * Remove member from team and all their data from the team.

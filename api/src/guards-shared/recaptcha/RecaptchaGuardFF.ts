@@ -1,6 +1,6 @@
 import { config } from "../../config/index.js";
-import { ProdRecaptchaGuardFF } from "./ProdRecaptchaGuardFF.js";
 import { MockRecaptchaGuardFF } from "./MockRecaptchaGuardFF.js";
+import { ProdRecaptchaGuardFF } from "./ProdRecaptchaGuardFF.js";
 
 /**
  * Guard that validates recaptcha token found in a HTTP request header to ensure

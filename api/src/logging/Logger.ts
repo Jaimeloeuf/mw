@@ -1,5 +1,6 @@
-import { colorizeByLogLevel } from "./colorizeByLogLevel.js";
 import type { LogLevel } from "./LogLevel.js";
+
+import { colorizeByLogLevel } from "./colorizeByLogLevel.js";
 
 /**
  * Super simple custom logger, might change to use pino/winston in the future.

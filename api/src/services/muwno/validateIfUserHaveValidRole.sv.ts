@@ -1,6 +1,7 @@
+import type { MuwnoUser } from "../../dal/index.js";
+
 import { df } from "../../__generated/index.js";
 import { ForbiddenException } from "../../exceptions/index.js";
-import type { MuwnoUser } from "../../dal/index.js";
 
 /**
  * Validate if a user have at least one of the specified user roles.

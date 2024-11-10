@@ -1,6 +1,7 @@
-import { dataFn } from "../dataFn.js";
-import { apiDB } from "../../kysely/index.js";
 import type { MuwnoOrg, UpdateMuwnoOrg } from "../../kysely/index.js";
+
+import { apiDB } from "../../kysely/index.js";
+import { dataFn } from "../dataFn.js";
 
 export default dataFn(function updateOrg(
   orgID: MuwnoOrg["id"],

@@ -1,7 +1,8 @@
-import { dataFn } from "../dataFn.js";
-import { apiDB } from "../../kysely/index.js";
 import type { MuwnoStripeSetupNext } from "../../kysely/index.js";
+
 import { NotFoundException } from "../../../exceptions/index.js";
+import { apiDB } from "../../kysely/index.js";
+import { dataFn } from "../dataFn.js";
 
 /**
  * Get one from the database

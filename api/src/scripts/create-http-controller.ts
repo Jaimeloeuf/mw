@@ -1,8 +1,9 @@
 import fs from "fs";
 import path from "path";
-import readline from "readline/promises";
-import { logger } from "../logging/index.js";
 import pc from "picocolors";
+import readline from "readline/promises";
+
+import { logger } from "../logging/index.js";
 
 const codeTemplate = (
   httpMethod: string,

@@ -1,6 +1,8 @@
 import type { Request } from "express";
-import { ForbiddenException } from "../../exceptions/index.js";
+
 import type { RecaptchaGuardFFType } from "./RecaptchaGuardType.js";
+
+import { ForbiddenException } from "../../exceptions/index.js";
 
 export const MockRecaptchaGuardFF: RecaptchaGuardFFType = () =>
   async function MockRecaptchaGuard(req: Request) {

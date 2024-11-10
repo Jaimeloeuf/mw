@@ -1,5 +1,5 @@
-import path from "path";
 import fs from "fs/promises";
+import path from "path";
 
 const importedCreateAppFile = await fs.readFile(
   path.resolve(import.meta.dirname, "./entrypoint-app.js"),

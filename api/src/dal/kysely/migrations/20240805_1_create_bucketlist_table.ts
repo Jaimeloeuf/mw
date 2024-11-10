@@ -1,5 +1,6 @@
-import { sql } from "kysely";
 import type { Kysely } from "kysely";
+
+import { sql } from "kysely";
 
 const bucketlistTableName = "bucketlist";
 const bucketlistItemTableName = "bucketlist_item";

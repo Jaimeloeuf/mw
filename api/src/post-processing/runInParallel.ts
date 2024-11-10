@@ -1,5 +1,6 @@
-import { logger } from "../logging/index.js";
 import type { WrappedFunction } from "./WrappedFunction.js";
+
+import { logger } from "../logging/index.js";
 
 /**
  * Run SimplePostProcessing wrapped functions in parallel and awaiting for all

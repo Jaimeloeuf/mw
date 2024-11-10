@@ -1,7 +1,9 @@
 import fs from "fs/promises";
 import path from "path";
-import { generateFullFileNameFromRelativePath } from "../generateFullFileNameFromRelativePath.js";
+
 import type { DataFunctionFile } from "./DataFunctionFile.js";
+
+import { generateFullFileNameFromRelativePath } from "../generateFullFileNameFromRelativePath.js";
 
 /**
  * Generate an array of data function files sorted by their file path.

@@ -1,9 +1,10 @@
 import fs from "fs";
 import path from "path";
+
 import { logger } from "../../logging/index.js";
+import { genCodegenBarrelFile } from "../codegenForTs/index.js";
 import { loadCodegenFunction } from "./loadCodegenFunction.js";
 import { runCodegenModules } from "./runCodegenModules.js";
-import { genCodegenBarrelFile } from "../codegenForTs/index.js";
 
 export async function codegenRunSingleModule(codegenModuleName: string) {
   // Codegen module should be in this codegen/ folder, and should be in a folder

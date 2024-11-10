@@ -1,7 +1,8 @@
-import { promisify } from "util";
 import { exec } from "child_process";
-import { generatedSrcDirPathString } from "../codegenForTs/index.js";
+import { promisify } from "util";
+
 import { generatedDocDirPathString } from "../codegenForDoc/index.js";
+import { generatedSrcDirPathString } from "../codegenForTs/index.js";
 
 const asyncExec = promisify(exec);
 

@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import readline from "readline/promises";
+
 import { logger } from "../logging/index.js";
 
 const codeTemplate = `import { sql } from "kysely";

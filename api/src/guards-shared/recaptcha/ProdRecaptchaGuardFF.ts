@@ -1,11 +1,14 @@
-import { sf } from "simpler-fetch";
 import type { Request } from "express";
+
+import { sf } from "simpler-fetch";
+
+import type { RecaptchaGuardFFType } from "./RecaptchaGuardType.js";
+
 import {
   UnauthorizedException,
   ForbiddenException,
 } from "../../exceptions/index.js";
 import { prettyPrintJson } from "../../utils/index.js";
-import type { RecaptchaGuardFFType } from "./RecaptchaGuardType.js";
 
 export const ProdRecaptchaGuardFF: RecaptchaGuardFFType = (
   /**

@@ -1,4 +1,5 @@
 import path from "path";
+
 import { logger } from "../../logging/index.js";
 import { genAndSaveGeneratedDoc } from "../codegenForDoc/index.js";
 import { getTypeofTypeAlias } from "./getTypeofTypeAlias.js";

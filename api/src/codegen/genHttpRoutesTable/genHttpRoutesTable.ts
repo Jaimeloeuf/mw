@@ -1,7 +1,7 @@
 import { genAndSaveGeneratedCode } from "../codegenForTs/index.js";
 import { getHttpControllerFiles } from "../utils/getHttpControllerFiles/getHttpControllerFiles.js";
-import { routeTableTemplate } from "./routeTableTemplate.js";
 import { routeDefinitionTemplate } from "./routeDefinitionTemplate.js";
+import { routeTableTemplate } from "./routeTableTemplate.js";
 
 /**
  * Generate the HTTP API ExpressJS routes table file, by looking at all the HTTP

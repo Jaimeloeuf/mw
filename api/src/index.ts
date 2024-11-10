@@ -1,8 +1,8 @@
-import { logger } from "./logging/index.js";
-import { registerGlobalUncaughtIssueHandlers } from "./registerGlobalUncaughtIssueHandlers.js";
 import { config } from "./config/index.js";
 import { bootstrapDal } from "./dal/index.js";
 import { bootstrapHttpServer } from "./http/index.js";
+import { logger } from "./logging/index.js";
+import { registerGlobalUncaughtIssueHandlers } from "./registerGlobalUncaughtIssueHandlers.js";
 
 /**
  * All bootstrapping calls wrapped in async main function to ensure they run

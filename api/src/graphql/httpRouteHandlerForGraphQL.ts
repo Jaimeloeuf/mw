@@ -1,4 +1,5 @@
 import { createHandler } from "graphql-http/lib/use/http";
+
 import { schema } from "./schema.js";
 
 /**

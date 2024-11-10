@@ -1,16 +1,15 @@
-import express from "express";
-import cors from "cors";
 import type { Socket } from "net";
 
-import { config } from "../config/index.js";
-import { logger } from "../logging/index.js";
+import cors from "cors";
+import express from "express";
 
-import { loggingMiddleware } from "./loggingMiddleware.js";
-import { httpRouteHandlerForGraphQL } from "../graphql/index.js";
 import { registerRoutesAndControllers } from "../__generated/index.js";
-import { routeNotFound } from "./routeNotFound.js";
-
+import { config } from "../config/index.js";
+import { httpRouteHandlerForGraphQL } from "../graphql/index.js";
+import { logger } from "../logging/index.js";
 import { entrypoints } from "./entrypoints.js";
+import { loggingMiddleware } from "./loggingMiddleware.js";
+import { routeNotFound } from "./routeNotFound.js";
 
 /**
  * Bootstraps a web server using ExpressJS to route incoming HTTP requests to

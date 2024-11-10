@@ -1,9 +1,9 @@
-import { noThrowPromise } from "../../utils/index.js";
-import { logger } from "../../logging/index.js";
 import {
   ConflictException,
   GenericDalException,
 } from "../../exceptions/index.js";
+import { logger } from "../../logging/index.js";
+import { noThrowPromise } from "../../utils/index.js";
 
 /**
  * Utility wrapper around the `noThrowPromise` utility function, to transform

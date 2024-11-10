@@ -1,8 +1,10 @@
 import fs from "fs/promises";
 import path from "path";
-import { generateFullFileNameFromRelativePath } from "../generateFullFileNameFromRelativePath.js";
-import { dataOrThrow } from "../../../utils/dataOrThrow.js";
+
 import type { HttpControllerFile } from "./HttpControllerFile.js";
+
+import { dataOrThrow } from "../../../utils/dataOrThrow.js";
+import { generateFullFileNameFromRelativePath } from "../generateFullFileNameFromRelativePath.js";
 
 /**
  * Generate an array of HTTP controller files with parsed data from within the

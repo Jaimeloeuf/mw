@@ -1,4 +1,5 @@
 import type { z } from "zod";
+
 import type { combinedConfig } from "./configMappings/combinedConfig.js";
 
 /**

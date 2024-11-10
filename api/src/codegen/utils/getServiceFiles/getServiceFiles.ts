@@ -1,7 +1,9 @@
 import fs from "fs/promises";
 import path from "path";
-import { generateFullFileNameFromRelativePath } from "../generateFullFileNameFromRelativePath.js";
+
 import type { ServiceFile } from "./ServiceFile.js";
+
+import { generateFullFileNameFromRelativePath } from "../generateFullFileNameFromRelativePath.js";
 
 /**
  * Generate an array of Service files sorted by their file path.

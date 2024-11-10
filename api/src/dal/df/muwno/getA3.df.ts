@@ -1,9 +1,10 @@
-import { dataFn } from "../dataFn.js";
-import { apiDB } from "../../kysely/index.js";
 import type {
   MuwnoProduct,
   MuwnoPmfSurveyResponse,
 } from "../../kysely/index.js";
+
+import { apiDB } from "../../kysely/index.js";
+import { dataFn } from "../dataFn.js";
 
 /**
  * Get Product's feedback response `a3`.

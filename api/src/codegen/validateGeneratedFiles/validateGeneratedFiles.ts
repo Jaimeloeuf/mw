@@ -1,15 +1,16 @@
+import { createHash } from "crypto";
 import fs from "fs/promises";
 import path from "path";
-import { createHash } from "crypto";
-import {
-  generatedSrcDirPath,
-  genGeneratedNotice as genGeneratedNoticeForCode,
-} from "../codegenForTs/index.js";
+
+import { logger } from "../../logging/Logger.js";
 import {
   generatedDocDirPath,
   genGeneratedNotice as genGeneratedNoticeForDoc,
 } from "../codegenForDoc/index.js";
-import { logger } from "../../logging/Logger.js";
+import {
+  generatedSrcDirPath,
+  genGeneratedNotice as genGeneratedNoticeForCode,
+} from "../codegenForTs/index.js";
 
 const getNoticeLinesOfCode = (notice: string) => notice.split(/\n/).length - 1;
 

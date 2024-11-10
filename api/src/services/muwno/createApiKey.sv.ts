@@ -1,7 +1,8 @@
 import { randomBytes } from "crypto";
+
 import { df } from "../../__generated/index.js";
-import { sha256hash } from "../../utils/index.js";
 import { InvalidOperationException } from "../../exceptions/index.js";
+import { sha256hash } from "../../utils/index.js";
 
 /**
  * Create a new API Key for user's Org.

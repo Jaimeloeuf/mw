@@ -1,7 +1,8 @@
-import { dataFn } from "../dataFn.js";
-import { apiDB } from "../../kysely/index.js";
-import { injectID, OptionalID } from "../injectID.js";
 import type { CreateMuwnoApiKey } from "../../kysely/index.js";
+
+import { apiDB } from "../../kysely/index.js";
+import { dataFn } from "../dataFn.js";
+import { injectID, OptionalID } from "../injectID.js";
 
 /**
  * Save a newly created API Key.

@@ -1,7 +1,8 @@
-import { dataFn } from "../dataFn.js";
-import { apiDB } from "../../kysely/index.js";
 import type { MuwnoTask } from "../../kysely/index.js";
+
 import { NotFoundException } from "../../../exceptions/index.js";
+import { apiDB } from "../../kysely/index.js";
+import { dataFn } from "../dataFn.js";
 
 export default dataFn(async function getTask(taskID: MuwnoTask["id"]) {
   const task = await apiDB

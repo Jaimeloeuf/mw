@@ -1,11 +1,12 @@
-import path from "path";
 import fs from "fs/promises";
-import { performance } from "perf_hooks";
 import { Migrator, FileMigrationProvider } from "kysely";
-import { dbConnectionCheck } from "./dbConnectionCheck.js";
-import { createDB } from "./createDB.js";
+import path from "path";
+import { performance } from "perf_hooks";
+
 import { lazyConfig } from "../../config/lazyConfig.js";
 import { logger } from "../../logging/index.js";
+import { createDB } from "./createDB.js";
+import { dbConnectionCheck } from "./dbConnectionCheck.js";
 
 /**
  * Use kysely migrator to migrate DB to latest migration change as defined by

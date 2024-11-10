@@ -1,7 +1,8 @@
-import path from "path";
-import fs from "fs/promises";
-import * as prettier from "prettier";
 import { createHash } from "crypto";
+import fs from "fs/promises";
+import path from "path";
+import * as prettier from "prettier";
+
 import { logger } from "../../logging/index.js";
 
 /**

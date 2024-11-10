@@ -1,6 +1,6 @@
+import { appSpecificConfig } from "./appSpecificConfig.js";
 import { genericMonoRepoConfig } from "./genericMonoRepoConfig.js";
 import { sharedInfraConfig } from "./sharedInfraConfig.js";
-import { appSpecificConfig } from "./appSpecificConfig.js";
 
 /**
  * Make sure you define the config in the right mapping file

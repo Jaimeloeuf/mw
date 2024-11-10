@@ -1,7 +1,8 @@
-import { dataFn } from "../dataFn.js";
-import { apiDB } from "../../kysely/index.js";
 import type { MuwnoOrg } from "../../kysely/index.js";
+
 import { ServiceException } from "../../../exceptions/index.js";
+import { apiDB } from "../../kysely/index.js";
+import { dataFn } from "../dataFn.js";
 
 export default dataFn(async function getNumberOfCustomersStoredByOrg(
   orgID: MuwnoOrg["id"],

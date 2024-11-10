@@ -1,20 +1,20 @@
 import type { BlogSubscriberTable } from "./BlogSubscriberTable.js";
-import type { BucketlistTable } from "./BucketlistTable.js";
 import type { BucketlistItemTable } from "./BucketlistItemTable.js";
+import type { BucketlistTable } from "./BucketlistTable.js";
 import type { LeetcodeQuesTable } from "./LeetcodeQuesTable.js";
 import type { LeetcodeQuesTagTable } from "./LeetcodeQuesTagTable.js";
 import type { LeetcodeTagTable } from "./LeetcodeTagTable.js";
-import type { MuwnoOrgTable } from "./MuwnoOrgTable.js";
-import type { MuwnoUserTable } from "./MuwnoUserTable.js";
-import type { MuwnoProductTable } from "./MuwnoProductTable.js";
-import type { MuwnoPmfSurveyResponseTable } from "./MuwnoPmfSurveyResponseTable.js";
-import type { MuwnoTaskTable } from "./MuwnoTaskTable.js";
-import type { MuwnoTeamMemberInvitationTable } from "./MuwnoTeamMemberInvitationTable.js";
+import type { MuwnoApiKeyTable } from "./MuwnoApiKeyTable.js";
 import type { MuwnoCustomerTable } from "./MuwnoCustomerTable.js";
-import type { MuwnoStripeWebhookEventTable } from "./MuwnoStripeWebhookEventTable.js";
+import type { MuwnoOrgTable } from "./MuwnoOrgTable.js";
+import type { MuwnoPmfSurveyResponseTable } from "./MuwnoPmfSurveyResponseTable.js";
+import type { MuwnoProductTable } from "./MuwnoProductTable.js";
 import type { MuwnoStripeCustomerTable } from "./MuwnoStripeCustomerTable.js";
 import type { MuwnoStripeSetupNextTable } from "./MuwnoStripeSetupNextTable.js";
-import type { MuwnoApiKeyTable } from "./MuwnoApiKeyTable.js";
+import type { MuwnoStripeWebhookEventTable } from "./MuwnoStripeWebhookEventTable.js";
+import type { MuwnoTaskTable } from "./MuwnoTaskTable.js";
+import type { MuwnoTeamMemberInvitationTable } from "./MuwnoTeamMemberInvitationTable.js";
+import type { MuwnoUserTable } from "./MuwnoUserTable.js";
 
 export interface Database {
   blog_subscriber: BlogSubscriberTable;

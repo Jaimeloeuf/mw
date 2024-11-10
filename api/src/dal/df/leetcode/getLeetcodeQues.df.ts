@@ -1,8 +1,9 @@
-import { dataFn } from "../dataFn.js";
-import { apiDB } from "../../kysely/index.js";
 import type { LeetcodeQues } from "../../kysely/index.js";
+
 import { NotFoundException } from "../../../exceptions/index.js";
 import { concurrent } from "../../../utils/index.js";
+import { apiDB } from "../../kysely/index.js";
+import { dataFn } from "../dataFn.js";
 
 export default dataFn(async function getLeetcodeQues(
   leetcodeQuesID: LeetcodeQues["id"],

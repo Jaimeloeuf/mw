@@ -1,6 +1,6 @@
+import { genAndSaveGeneratedFile } from "../utils/genAndSaveGeneratedFile.js";
 import { generatedSrcDirPath } from "./generatedSrcDirPath.js";
 import { genGeneratedNotice } from "./genGeneratedNotice.js";
-import { genAndSaveGeneratedFile } from "../utils/genAndSaveGeneratedFile.js";
 
 /**
  * Generate the full code file (formatted + notice + hash) from the generator

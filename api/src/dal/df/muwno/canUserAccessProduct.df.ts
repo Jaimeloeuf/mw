@@ -1,7 +1,8 @@
-import { dataFn } from "../dataFn.js";
-import { apiDB } from "../../kysely/index.js";
 import type { MuwnoUser, MuwnoProduct } from "../../kysely/index.js";
+
 import { NotFoundException } from "../../../exceptions/index.js";
+import { apiDB } from "../../kysely/index.js";
+import { dataFn } from "../dataFn.js";
 
 /**
  * Check if user have access permission to this product.

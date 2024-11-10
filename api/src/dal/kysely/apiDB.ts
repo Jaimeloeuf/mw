@@ -1,5 +1,5 @@
-import { createDB } from "./createDB.js";
 import { config } from "../../config/index.js";
+import { createDB } from "./createDB.js";
 
 /**
  * Specific DB instance for all API service usecase.

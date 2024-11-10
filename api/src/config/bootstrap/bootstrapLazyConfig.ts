@@ -1,8 +1,10 @@
 import "dotenv/config";
+
+import type { ConfigType } from "../ConfigType.js";
+
 import { logger } from "../../logging/index.js";
 import { combinedConfig } from "../configMappings/combinedConfig.js";
 import { getValueFF } from "../utils/getValueFF.js";
-import type { ConfigType } from "../ConfigType.js";
 
 export function bootstrapLazyConfig() {
   type LazyConfig = { [K in keyof ConfigType]: () => ConfigType[K] };

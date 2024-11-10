@@ -1,5 +1,5 @@
-import { httpController } from "../http/index.js";
 import { config } from "../config/index.js";
+import { httpController } from "../http/index.js";
 
 export default httpController({
   version: "neutral",

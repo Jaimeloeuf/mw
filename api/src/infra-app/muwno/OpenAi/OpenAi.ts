@@ -1,4 +1,6 @@
 import OpenAI from "openai";
+
+import { logger } from "../../../logging/index.js";
 import {
   listOfNoFeedbackStringsMaxLength,
   listOfNoFeedbackStrings,

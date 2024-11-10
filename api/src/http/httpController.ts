@@ -1,11 +1,9 @@
 import type { Request, Response } from "express";
 import type { ZodType, infer as zodInfer } from "zod";
+
 import { ZodError } from "zod";
-import { logger } from "../logging/index.js";
-import {
-  HttpTransformerableException,
-  Exception,
-} from "../exceptions/index.js";
+
+import type { NonEmptyArray } from "../types/index.js";
 import type {
   ValidJsendDatatype,
   JSendSuccess,
@@ -13,7 +11,12 @@ import type {
   JSendError,
 } from "./JSend.js";
 import type { useHttpRequestGuard } from "./useHttpRequestGuard.js";
-import type { NonEmptyArray } from "../types/index.js";
+
+import {
+  HttpTransformerableException,
+  Exception,
+} from "../exceptions/index.js";
+import { logger } from "../logging/index.js";
 
 /**
  * Use this function to wrap httpRequestHandlers/controllers to interface with
@@ -166,6 +169,10 @@ export const httpController = <
 
         for (const { guardDataNamespace, guard } of guards) {
           partialGuardData[guardDataNamespace] = await guard(req);
+          logger.verbose(
+            `${httpController.name}:${guard.name}`,
+            `Passed guard check`,
+          );
         }
 
         guardData = partialGuardData;
@@ -207,11 +214,15 @@ export const httpController = <
           data,
         } satisfies JSendSuccess);
     } catch (error) {
+      // @todo Use the unknownCatchToError utils?
+
       // Create a err/err-log ID, to log it together with the error and send it
       // back to the client to improve debugging.
       const logID = crypto.randomUUID();
 
       // Simple error logging
+      // @todo Might log to an error logging service
+      // @todo Might log the e.cause property too
       logger.error(`${httpController.name}:${logID}`, (error as Error)?.stack);
 
       // If it is an exception that can be transformed into a HTTP response
@@ -237,6 +248,9 @@ export const httpController = <
           // Using 400 to indicate that it is an exception rather than error
           // since a retry without modification will probably not work assuming
           // it is not a server error.
+          // @todo Should not be 400, Instead of i should have a generic Service Exception, one that throws 400 and one that throws 500...!
+          // @todo then if really dont have, then throw a 500 to indicate that unclear exception happened
+          // Then this should be a JSendError since we dont not what the issue is
           .status(400)
           .json({
             status: "fail",

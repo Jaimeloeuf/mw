@@ -1,6 +1,8 @@
-import pg from "pg";
-import { Kysely, PostgresDialect } from "kysely";
 import type { Logger, LogConfig } from "kysely";
+
+import { Kysely, PostgresDialect } from "kysely";
+import pg from "pg";
+
 import type { Database } from "./definitions/index.js";
 
 /**

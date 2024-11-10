@@ -1,5 +1,5 @@
-import { httpController } from "./httpController.js";
 import { NotFoundException } from "../exceptions/index.js";
+import { httpController } from "./httpController.js";
 
 // This is used directly by bootstrapHttpServer to ensure it is placed as the
 // last route handler to catch all, which is why it is not part of codegened

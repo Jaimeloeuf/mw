@@ -1,4 +1,5 @@
 import type { Request, NextFunction } from "express";
+
 import { logger } from "../logging/index.js";
 
 /**

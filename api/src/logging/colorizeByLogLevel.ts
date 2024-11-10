@@ -1,4 +1,5 @@
 import pc from "picocolors";
+
 import type { LogLevel } from "./LogLevel.js";
 
 export function colorizeByLogLevel(level: LogLevel, text: string) {

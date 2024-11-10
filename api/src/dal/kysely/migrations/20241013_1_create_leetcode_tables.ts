@@ -1,5 +1,6 @@
-import { sql } from "kysely";
 import type { Kysely } from "kysely";
+
+import { sql } from "kysely";
 
 const leetcodeQuesTableName = "leetcode_ques";
 const leetcodeTagTableName = "leetcode_tag";

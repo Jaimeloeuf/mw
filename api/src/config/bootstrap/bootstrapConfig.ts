@@ -1,9 +1,12 @@
 import "dotenv/config";
-import { logger } from "../../logging/index.js";
-import { combinedConfig } from "../configMappings/combinedConfig.js";
-import { prettyPrintJson } from "../../utils/prettyPrintJson.js";
-import type { ConfigType } from "../ConfigType.js";
+
 import type { ZodIssue } from "zod";
+
+import type { ConfigType } from "../ConfigType.js";
+
+import { logger } from "../../logging/index.js";
+import { prettyPrintJson } from "../../utils/prettyPrintJson.js";
+import { combinedConfig } from "../configMappings/combinedConfig.js";
 
 export function bootstrapConfig() {
   const config: Partial<ConfigType> = {};

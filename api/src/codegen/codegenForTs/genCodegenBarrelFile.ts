@@ -1,6 +1,7 @@
 import fs from "fs/promises";
-import { generatedSrcDirPath } from "./generatedSrcDirPath.js";
+
 import { genAndSaveGeneratedFile } from "../utils/genAndSaveGeneratedFile.js";
+import { generatedSrcDirPath } from "./generatedSrcDirPath.js";
 import { genGeneratedNotice } from "./genGeneratedNotice.js";
 
 /**

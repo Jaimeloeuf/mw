@@ -1,9 +1,10 @@
-import { dataFn } from "../dataFn.js";
-import { apiDB } from "../../kysely/index.js";
 import type {
   MuwnoStripeCustomer,
   UpdateMuwnoStripeCustomer,
 } from "../../kysely/index.js";
+
+import { apiDB } from "../../kysely/index.js";
+import { dataFn } from "../dataFn.js";
 
 /**
  * Update metered product subscription ID.

@@ -1,7 +1,7 @@
-import { dbConnectionCheck } from "./kysely/index.js";
-import { apiDB } from "./kysely/apiDB.js";
 import { config } from "../config/index.js";
 import { logger } from "../logging/index.js";
+import { apiDB } from "./kysely/apiDB.js";
+import { dbConnectionCheck } from "./kysely/index.js";
 
 /**
  * Bootstrap function to import and setup kysely `db`.
