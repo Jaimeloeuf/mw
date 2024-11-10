@@ -6,5 +6,6 @@ module.exports = {
     "require-function-name-for-addJob": require("./require-function-name-for-addJob.cjs"),
     dataFn: require("./dataFn.cjs"),
     httpController: require("./httpController.cjs"),
+    "codegen-function-and-module-same-name": require("./codegen-function-and-module-same-name.cjs"),
   },
 };

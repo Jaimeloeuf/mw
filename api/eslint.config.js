@@ -25,6 +25,7 @@ export default [
       "mwEslintPlugin/require-function-name-for-addJob": "error",
       "mwEslintPlugin/dataFn": "error",
       "mwEslintPlugin/httpController": "error",
+      "mwEslintPlugin/codegen-function-and-module-same-name": "error",
     },
     plugins: {
       perfectionist,
