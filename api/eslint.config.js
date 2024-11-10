@@ -16,6 +16,7 @@ export default [
       "prefer-const": "error",
       "no-console": "warn",
       "perfectionist/sort-imports": "error",
+      "perfectionist/sort-exports": "error",
       "mwEslintPlugin/require-function-name-for-addJob": "error",
       "mwEslintPlugin/dataFn": "error",
       "mwEslintPlugin/httpController": "error",
