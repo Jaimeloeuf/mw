@@ -1,7 +1,7 @@
 import path from "path";
 
 import { genAndSaveGeneratedCode } from "../codegenForTs/index.js";
-import { getHttpControllerFiles } from "../utils/getHttpControllerFiles/getHttpControllerFiles.js";
+import { getHttpControllerFiles } from "../utils/index.js";
 import { controllerExportTemplate } from "./controllerExportTemplate.js";
 
 /**

@@ -1,6 +1,6 @@
 import path from "path";
 
-import { HttpControllerFile } from "../utils/getHttpControllerFiles/HttpControllerFile.js";
+import { HttpControllerFile } from "../utils/index.js";
 
 export const controllerExportTemplate = (
   file: HttpControllerFile,

@@ -1,6 +1,6 @@
 import path from "path";
 
-import { DataFunctionFile } from "../utils/getDataFunctionFiles/DataFunctionFile.js";
+import { DataFunctionFile } from "../utils/index.js";
 
 export const dataFunctionExportTemplate = (
   file: DataFunctionFile,

@@ -2,7 +2,7 @@ import {
   genAndSaveGeneratedCode,
   generatedCodeFileExtensionWithNoBarrelFileInclusion,
 } from "../codegenForTs/index.js";
-import { getHttpControllerFiles } from "../utils/getHttpControllerFiles/getHttpControllerFiles.js";
+import { getHttpControllerFiles } from "../utils/index.js";
 
 /**
  * Generate all the HTTP API DTO type definitions using all the HTTP controllers

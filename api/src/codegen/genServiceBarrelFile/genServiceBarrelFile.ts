@@ -4,7 +4,7 @@ import {
   genAndSaveGeneratedCode,
   generatedCodeFileExtensionWithNoBarrelFileInclusion,
 } from "../codegenForTs/index.js";
-import { getServiceFiles } from "../utils/getServiceFiles/getServiceFiles.js";
+import { getServiceFiles } from "../utils/index.js";
 import { serviceExportTemplate } from "./serviceExportTemplate.js";
 
 /**

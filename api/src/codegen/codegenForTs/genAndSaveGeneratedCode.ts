@@ -1,4 +1,4 @@
-import { genAndSaveGeneratedFile } from "../utils/genAndSaveGeneratedFile.js";
+import { genAndSaveGeneratedFile } from "../utils/index.js";
 import { generatedSrcDirPath } from "./generatedSrcDirPath.js";
 import { genGeneratedNotice } from "./genGeneratedNotice.js";
 import { getAllEslintRulesToDisable } from "./getAllEslintRulesToDisable.js";

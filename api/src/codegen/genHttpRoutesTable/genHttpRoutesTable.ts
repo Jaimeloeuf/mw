@@ -1,5 +1,5 @@
 import { genAndSaveGeneratedCode } from "../codegenForTs/index.js";
-import { getHttpControllerFiles } from "../utils/getHttpControllerFiles/getHttpControllerFiles.js";
+import { getHttpControllerFiles } from "../utils/index.js";
 import { routeDefinitionTemplate } from "./routeDefinitionTemplate.js";
 import { routeTableTemplate } from "./routeTableTemplate.js";
 

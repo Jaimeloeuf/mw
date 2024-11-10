@@ -1,6 +1,6 @@
 import path from "path";
 
-import { ServiceFile } from "../utils/getServiceFiles/ServiceFile.js";
+import { ServiceFile } from "../utils/index.js";
 
 export const serviceExportTemplate = (
   file: ServiceFile,

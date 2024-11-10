@@ -1,4 +1,4 @@
-import { HttpControllerFile } from "../utils/getHttpControllerFiles/HttpControllerFile.js";
+import { HttpControllerFile } from "../utils/index.js";
 
 const getVersionPathPrefix = (file: HttpControllerFile) =>
   file.version === '"neutral"'

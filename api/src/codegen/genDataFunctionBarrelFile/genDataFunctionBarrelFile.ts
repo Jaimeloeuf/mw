@@ -4,7 +4,7 @@ import {
   genAndSaveGeneratedCode,
   generatedCodeFileExtensionWithNoBarrelFileInclusion,
 } from "../codegenForTs/index.js";
-import { getDataFunctionFiles } from "../utils/getDataFunctionFiles/getDataFunctionFiles.js";
+import { getDataFunctionFiles } from "../utils/index.js";
 import { dataFunctionExportTemplate } from "./dataFunctionExportTemplate.js";
 
 /**
