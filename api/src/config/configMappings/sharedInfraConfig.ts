@@ -7,6 +7,30 @@ import { createConfigMapping } from "../utils/createConfigMapping.js";
  */
 export const sharedInfraConfig = {
   /**
+   * Github OAuth app client ID
+   */
+  auth_github_oauth_client_id: createConfigMapping(
+    z.string(),
+    process.env["AUTH_GITHUB_OAUTH_CLIENT_ID"],
+  ),
+
+  /**
+   * Github OAuth app client secret
+   */
+  auth_github_oauth_client_secret: createConfigMapping(
+    z.string(),
+    process.env["AUTH_GITHUB_OAUTH_CLIENT_SECRET"],
+  ),
+
+  /**
+   * Github OAuth app redirect URI
+   */
+  auth_github_oauth_redirect_uri: createConfigMapping(
+    z.string().url(),
+    process.env["AUTH_GITHUB_OAUTH_REDIRECT_URI"],
+  ),
+
+  /**
    * Database Connection String
    */
   db_conn_string: createConfigMapping(
