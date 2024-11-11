@@ -2,7 +2,7 @@ import path from "path";
 
 import {
   genAndSaveGeneratedCode,
-  generatedCodeFileExtensionWithNoBarrelFileInclusion,
+  generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport,
 } from "../codegenForTs/index.js";
 import { getServiceFiles } from "../utils/index.js";
 import { serviceExportTemplate } from "./serviceExportTemplate.js";
@@ -38,7 +38,7 @@ export async function genServiceBarrelFile() {
 
   await genAndSaveGeneratedCode(
     genServiceBarrelFile,
-    `export * as sv from "./${serviceExportFileName}${generatedCodeFileExtensionWithNoBarrelFileInclusion.replace(".ts", ".js")}"`,
+    `export * as sv from "./${serviceExportFileName}${generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
     "serviceBarrelFile",
   );
 }

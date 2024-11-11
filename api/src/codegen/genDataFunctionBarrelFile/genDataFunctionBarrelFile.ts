@@ -2,7 +2,7 @@ import path from "path";
 
 import {
   genAndSaveGeneratedCode,
-  generatedCodeFileExtensionWithNoBarrelFileInclusion,
+  generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport,
 } from "../codegenForTs/index.js";
 import { getDataFunctionFiles } from "../utils/index.js";
 import { dataFunctionExportTemplate } from "./dataFunctionExportTemplate.js";
@@ -41,7 +41,7 @@ export async function genDataFunctionBarrelFile() {
 
   await genAndSaveGeneratedCode(
     genDataFunctionBarrelFile,
-    `export * as df from "./${dataFunctionsExportFileName}${generatedCodeFileExtensionWithNoBarrelFileInclusion.replace(".ts", ".js")}"`,
+    `export * as df from "./${dataFunctionsExportFileName}${generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
     "dataFunctionsBarrelFile",
   );
 }
