@@ -5,11 +5,10 @@ import {
 import { getHttpControllerFiles } from "../utils/index.js";
 
 /**
- * Generate all the HTTP API DTO type definitions using all the HTTP controllers
- * in the controllers/ folder, and export it to a big DTO file kind of like a
- * big GraphQL schema file.
+ * Generate type definitions from all the HTTP controllers in the controllers/
+ * folder, and export it to file kind of like a big GraphQL schema file.
  */
-export async function genHttpDtoTypeDefinition() {
+export async function genHttpControllerTypeDefinitions() {
   const controllerFiles = await getHttpControllerFiles();
 
   // @todo An advanced version would be to skip export if type resolves to `never`.
@@ -35,8 +34,8 @@ ${typeDefinitions}
 `;
 
   await genAndSaveGeneratedCode(
-    genHttpDtoTypeDefinition,
+    genHttpControllerTypeDefinitions,
     generatedCode,
-    "httpDto",
+    "httpControllerTypeDefinitions",
   );
 }
