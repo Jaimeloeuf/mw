@@ -7,7 +7,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Get a `StripeCustomer` object back using a stripe customer ID.
  */
-export default dataFn(async function getStripeCustomer(
+export default dataFn(async function muwnoGetStripeCustomer(
   stripeCustomerID: MuwnoStripeCustomer["stripe_customer_id"],
 ) {
   const stripeCustomer = await apiDB

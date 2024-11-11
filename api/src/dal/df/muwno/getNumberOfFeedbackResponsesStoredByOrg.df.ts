@@ -7,7 +7,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Get the number of survey responses currently stored for a given Org.
  */
-export default dataFn(async function getNumberOfFeedbackResponsesStoredByOrg(
+export default dataFn(async function muwnoGetNumberOfFeedbackResponsesStoredByOrg(
   orgID: MuwnoOrg["id"],
 ) {
   const productIDs = await apiDB

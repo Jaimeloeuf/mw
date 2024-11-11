@@ -4,7 +4,7 @@ import { apiDB } from "../../kysely/index.js";
 import { dataFn } from "../dataFn.js";
 import { injectID, OptionalID } from "../injectID.js";
 
-export default dataFn(function createProduct(
+export default dataFn(function muwnoCreateProduct(
   product: OptionalID<CreateMuwnoProduct>,
 ) {
   return apiDB

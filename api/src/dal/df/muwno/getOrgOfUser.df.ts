@@ -23,7 +23,7 @@ import { dataFn } from "../dataFn.js";
  * so that the error messages can be more detailed on where the error originated
  * from rather than just a simple Org not found.
  */
-export default dataFn(async function getOrgOfUser(userID: MuwnoUser["id"]) {
+export default dataFn(async function muwnoGetOrgOfUser(userID: MuwnoUser["id"]) {
   const user = await apiDB
     .selectFrom("muwno_user")
     .select("org_id")

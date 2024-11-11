@@ -7,7 +7,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Get `ProductID` of a given task.
  */
-export default dataFn(async function getProductIdOfTask(
+export default dataFn(async function muwnoGetProductIdOfTask(
   taskID: MuwnoTask["id"],
 ) {
   const task = await apiDB

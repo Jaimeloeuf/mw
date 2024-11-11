@@ -3,7 +3,7 @@ import type { MuwnoOrg } from "../../kysely/index.js";
 import { apiDB } from "../../kysely/index.js";
 import { dataFn } from "../dataFn.js";
 
-export default dataFn(function getAllPendingJoinOrgInvitations(
+export default dataFn(function muwnoGetAllPendingJoinOrgInvitations(
   orgID: MuwnoOrg["id"],
 ) {
   return apiDB

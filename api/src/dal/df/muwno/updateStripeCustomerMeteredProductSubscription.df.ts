@@ -10,7 +10,7 @@ import { dataFn } from "../dataFn.js";
  * Update metered product subscription ID.
  */
 export default dataFn(
-  async function updateStripeCustomerMeteredProductSubscription(
+  async function muwnoUpdateStripeCustomerMeteredProductSubscription(
     stripeCustomerID: MuwnoStripeCustomer["stripe_customer_id"],
     meteredSubscriptionID: UpdateMuwnoStripeCustomer["metered_subscription_id"],
   ) {

@@ -6,7 +6,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Deactivate a User account to act as a soft delete.
  */
-export default dataFn(async function deactivateUser(userID: MuwnoUser["id"]) {
+export default dataFn(async function muwnoDeactivateUser(userID: MuwnoUser["id"]) {
   await apiDB
     .updateTable("muwno_user")
     .set({

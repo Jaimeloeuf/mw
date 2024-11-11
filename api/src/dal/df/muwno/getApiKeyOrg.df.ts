@@ -6,7 +6,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Get API Key's corresponding Org.
  */
-export default dataFn(function getApiKeyOrg(apiKeyHash: MuwnoApiKey["hash"]) {
+export default dataFn(function muwnoGetApiKeyOrg(apiKeyHash: MuwnoApiKey["hash"]) {
   return apiDB
     .selectFrom("muwno_api_key")
     .where("hash", "=", apiKeyHash)

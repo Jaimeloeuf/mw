@@ -7,7 +7,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Get one from the database
  */
-export default dataFn(async function getStripeSetupNext(
+export default dataFn(async function muwnoGetStripeSetupNext(
   stripeSetupNextID: MuwnoStripeSetupNext["stripe_setup_intent_id"],
 ) {
   const stripeSetupNext = await apiDB

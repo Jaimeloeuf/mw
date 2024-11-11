@@ -6,7 +6,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Transfer product to a different Org.
  */
-export default dataFn(function transferProduct(
+export default dataFn(function muwnoTransferProduct(
   productID: MuwnoProduct["id"],
   newOrgID: MuwnoOrg["id"],
 ) {

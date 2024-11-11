@@ -3,7 +3,7 @@ import type { MuwnoPmfSurveyResponse } from "../../kysely/index.js";
 import { apiDB } from "../../kysely/index.js";
 import { dataFn } from "../dataFn.js";
 
-export default dataFn(function getTasksOfResponse(
+export default dataFn(function muwnoGetTasksOfResponse(
   responseID: MuwnoPmfSurveyResponse["id"],
 ) {
   return apiDB

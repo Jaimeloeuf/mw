@@ -8,7 +8,7 @@ import { dataFn } from "../dataFn.js";
  * Get the number of survey responses currently stored for a given Product.
  */
 export default dataFn(
-  async function getNumberOfFeedbackResponsesStoredByProduct(
+  async function muwnoGetNumberOfFeedbackResponsesStoredByProduct(
     productID: MuwnoProduct["id"],
   ) {
     const count = await apiDB

@@ -7,7 +7,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Get User Entity object, throws `NotFoundException` if not found.
  */
-export default dataFn(async function getUser(userID: MuwnoUser["id"]) {
+export default dataFn(async function muwnoGetUser(userID: MuwnoUser["id"]) {
   const user = await apiDB
     .selectFrom("muwno_user")
     .selectAll()

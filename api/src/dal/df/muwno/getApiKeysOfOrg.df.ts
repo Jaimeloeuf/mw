@@ -6,7 +6,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Get all API Key Detail objects of the Org.
  */
-export default dataFn(function getApiKeysOfOrg(orgID: MuwnoOrg["id"]) {
+export default dataFn(function muwnoGetApiKeysOfOrg(orgID: MuwnoOrg["id"]) {
   return apiDB
     .selectFrom("muwno_api_key")
     .selectAll()

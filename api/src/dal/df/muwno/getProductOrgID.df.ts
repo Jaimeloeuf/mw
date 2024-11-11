@@ -7,7 +7,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Get a product's Org ID.
  */
-export default dataFn(async function getProductOrgID(
+export default dataFn(async function muwnoGetProductOrgID(
   productID: MuwnoProduct["id"],
 ) {
   const product = await apiDB

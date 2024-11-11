@@ -7,7 +7,7 @@ import { injectID, OptionalID } from "../injectID.js";
 /**
  * Save a newly created API Key.
  */
-export default dataFn(async function createApiKey(
+export default dataFn(async function muwnoCreateApiKey(
   apiKey: OptionalID<CreateMuwnoApiKey>,
 ) {
   return apiDB

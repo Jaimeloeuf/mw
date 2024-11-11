@@ -8,7 +8,7 @@ import { dataFn } from "../dataFn.js";
  * for "Main benefit of Product", sorted by most important and oldest first, and
  * up to the first 1000 answers.
  */
-export default dataFn(async function getFeedbackResponseA3(
+export default dataFn(async function muwnoGetFeedbackResponseA3(
   productID: MuwnoProduct["id"],
   timeRange: number,
 ) {

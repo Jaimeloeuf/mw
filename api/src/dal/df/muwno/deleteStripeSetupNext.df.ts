@@ -6,7 +6,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Delete one from the database
  */
-export default dataFn(async function deleteStripeSetupNext(
+export default dataFn(async function muwnoDeleteStripeSetupNext(
   stripeSetupNextID: MuwnoStripeSetupNext["stripe_setup_intent_id"],
 ) {
   await apiDB

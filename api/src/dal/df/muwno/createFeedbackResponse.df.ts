@@ -7,7 +7,7 @@ import { injectID, OptionalID } from "../injectID.js";
 /**
  * Save a feedback form response.
  */
-export default dataFn(function createFeedbackResponse(
+export default dataFn(function muwnoCreateFeedbackResponse(
   pmfSurveyResponse: OptionalID<CreateMuwnoPmfSurveyResponse>,
 ) {
   return apiDB

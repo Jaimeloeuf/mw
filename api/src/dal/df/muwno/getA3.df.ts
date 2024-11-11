@@ -10,7 +10,7 @@ import { dataFn } from "../dataFn.js";
  * Get Product's feedback response `a3`.
  * @todo Use a better name for this to not conflict with other data functions
  */
-export default dataFn(async function getA3(
+export default dataFn(async function muwnoGetA3(
   productID: MuwnoProduct["id"],
   take: number,
   optionalPaginationID?: MuwnoPmfSurveyResponse["id"],

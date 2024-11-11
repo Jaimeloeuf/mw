@@ -7,7 +7,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Check if user have access permission to this Org.
  */
-export default dataFn(async function canUserAccessOrg(
+export default dataFn(async function muwnoCanUserAccessOrg(
   userID: MuwnoUser["id"],
   orgID: MuwnoOrg["id"],
 ) {

@@ -6,7 +6,7 @@ import type {
 import { apiDB } from "../../kysely/index.js";
 import { dataFn } from "../dataFn.js";
 
-export default dataFn(async function getTasksOfProduct(
+export default dataFn(async function muwnoGetTasksOfProduct(
   productID: MuwnoProduct["id"],
   take: number,
   optionalPaginationID?: MuwnoPmfSurveyResponse["id"],

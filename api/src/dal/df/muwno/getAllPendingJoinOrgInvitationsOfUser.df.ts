@@ -6,7 +6,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Get all pending team invitations of a given user.
  */
-export default dataFn(function getAllPendingJoinOrgInvitationsOfUser(
+export default dataFn(function muwnoGetAllPendingJoinOrgInvitationsOfUser(
   invitee_email: MuwnoTeamMemberInvitation["invitee_email"],
 ) {
   return apiDB

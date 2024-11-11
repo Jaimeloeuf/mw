@@ -8,7 +8,7 @@ import { dataFn } from "../dataFn.js";
  * Check if user have access permission to this product.
  * If product does not exists, it is also treated as a lack of permission.
  */
-export default dataFn(async function canUserAccessProduct(
+export default dataFn(async function muwnoCanUserAccessProduct(
   userID: MuwnoUser["id"],
   productID: MuwnoProduct["id"],
 ) {

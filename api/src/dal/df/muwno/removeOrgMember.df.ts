@@ -6,7 +6,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Remove member from team and all their data from the team.
  */
-export default dataFn(async function removeOrgMember(userID: MuwnoUser["id"]) {
+export default dataFn(async function muwnoRemoveOrgMember(userID: MuwnoUser["id"]) {
   await apiDB
     .deleteFrom("muwno_team_member_invitation")
     .where("inviter_user_id", "=", userID)

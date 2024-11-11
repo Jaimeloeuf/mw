@@ -3,7 +3,7 @@ import type { MuwnoUser, UpdateMuwnoUser } from "../../kysely/index.js";
 import { apiDB } from "../../kysely/index.js";
 import { dataFn } from "../dataFn.js";
 
-export default dataFn(function updateUser(
+export default dataFn(function muwnoUpdateUser(
   userID: MuwnoUser["id"],
   user: UpdateMuwnoUser,
 ) {

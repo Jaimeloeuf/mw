@@ -8,7 +8,7 @@ import { injectID, OptionalID } from "../injectID.js";
 /**
  * Add a new Customer to data source.
  */
-export default dataFn(async function createCustomer(
+export default dataFn(async function muwnoCreateCustomer(
   customer: OptionalID<CreateMuwnoCustomer>,
 ) {
   return apiDB

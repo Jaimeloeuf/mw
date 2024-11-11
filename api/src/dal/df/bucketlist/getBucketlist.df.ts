@@ -5,7 +5,7 @@ import { concurrent } from "../../../utils/index.js";
 import { apiDB } from "../../kysely/index.js";
 import { dataFn } from "../dataFn.js";
 
-export default dataFn(async function getBucketlist(
+export default dataFn(async function bucketlistGetBucketlist(
   bucketlistID: Bucketlist["id"],
 ) {
   const { bucketlist, bucketlistItems } = await concurrent({

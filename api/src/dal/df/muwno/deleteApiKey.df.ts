@@ -6,6 +6,6 @@ import { dataFn } from "../dataFn.js";
 /**
  * Delete an API Key.
  */
-export default dataFn(async function deleteApiKey(apiKeyID: MuwnoApiKey["id"]) {
+export default dataFn(async function muwnoDeleteApiKey(apiKeyID: MuwnoApiKey["id"]) {
   await apiDB.deleteFrom("muwno_api_key").where("id", "=", apiKeyID).execute();
 });

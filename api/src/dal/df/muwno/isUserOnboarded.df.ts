@@ -14,7 +14,7 @@ import { dataFn } from "../dataFn.js";
  * 1. User must have an Org
  * 2. The org must have a valid subscription
  */
-export default dataFn(async function isUserOnboarded(userID: MuwnoUser["id"]) {
+export default dataFn(async function muwnoIsUserOnboarded(userID: MuwnoUser["id"]) {
   const user = await apiDB
     .selectFrom("muwno_user")
     .select("org_id")

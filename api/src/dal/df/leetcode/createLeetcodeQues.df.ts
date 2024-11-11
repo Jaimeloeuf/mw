@@ -8,7 +8,7 @@ import { apiDB } from "../../kysely/index.js";
 import { dataFn } from "../dataFn.js";
 import { injectID } from "../injectID.js";
 
-export default dataFn(async function createLeetcodeQues(leetcodeQues: {
+export default dataFn(async function leetcodeCreateLeetcodeQues(leetcodeQues: {
   url: string;
   tags: Array<string>;
 }) {

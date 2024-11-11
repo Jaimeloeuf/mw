@@ -6,7 +6,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Mark a given Stripe Webhook Event as processed.
  */
-export default dataFn(async function markStripeWebhookEventAsProcessed(
+export default dataFn(async function muwnoMarkStripeWebhookEventAsProcessed(
   stripeWebhookEventID: MuwnoStripeWebhookEvent["stripe_event_id"],
 ) {
   await apiDB

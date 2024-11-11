@@ -7,7 +7,7 @@ import { dataFn } from "../dataFn.js";
  * Check if the given Stripe Webhook Event is unprocessed, if it is, return
  * true and record its ID so that it can be used for future checks.
  */
-export default dataFn(async function isStripeWebhookEventUnprocessed(
+export default dataFn(async function muwnoIsStripeWebhookEventUnprocessed(
   stripeWebhookEventID: MuwnoStripeWebhookEvent["stripe_event_id"],
   type: string,
   livemode: boolean,

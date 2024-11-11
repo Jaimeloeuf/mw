@@ -7,7 +7,7 @@ import { dataFn } from "../dataFn.js";
  * Create and save a new `StripeCustomer` object in data source. If `Org`
  * already have a StripeCustomer, replace it with this new one.
  */
-export default dataFn(function createStripeCustomer(
+export default dataFn(function muwnoCreateStripeCustomer(
   stripeCustomer: CreateMuwnoStripeCustomer,
 ) {
   return apiDB

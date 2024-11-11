@@ -11,6 +11,10 @@ module.exports = {
     schema: [],
   },
   create(context) {
+    // @todo
+    // Make this more efficient, by making sure this is the right folder first
+    // before doing the CallExpression node visit check.
+
     return {
       CallExpression(node) {
         if (node.callee.name !== "dataFn") {
@@ -35,12 +39,15 @@ module.exports = {
           return;
         }
 
-        const fileName = fileBaseName.replace(".df.ts", "");
+        const expectedDataFunctionName = generateFullFileNameFromRelativePath(
+          dataFunctionFolderPath,
+          context.filename,
+        );
 
         for (const item of node.arguments) {
-          const dataFnName = item.name ?? item?.id?.name;
+          const dataFunctionName = item.name ?? item?.id?.name;
 
-          if (dataFnName === undefined) {
+          if (dataFunctionName === undefined) {
             context.report({
               node: item,
               message: `Function passed to 'dataFn' must be named`,
@@ -58,17 +65,20 @@ module.exports = {
                   return null;
                 }
 
-                return fixer.insertTextAfter(functionKeyword, ` ${fileName}`);
+                return fixer.insertTextAfter(
+                  functionKeyword,
+                  ` ${expectedDataFunctionName}`,
+                );
               },
             });
 
             continue;
           }
 
-          if (dataFnName !== fileName) {
+          if (dataFunctionName !== expectedDataFunctionName) {
             context.report({
               node: item,
-              message: `Function passed to 'dataFn' must have the same name as module name. Expected '${fileName}', found '${dataFnName}'`,
+              message: `Function passed to 'dataFn' must have the same name as module name. Expected '${expectedDataFunctionName}', found '${dataFunctionName}'`,
               loc: {
                 start: node.callee.loc.end,
                 end: node.callee.loc.end,
@@ -88,7 +98,10 @@ module.exports = {
                   return null;
                 }
 
-                return fixer.replaceText(invalidFunctionName, fileName);
+                return fixer.replaceText(
+                  invalidFunctionName,
+                  expectedDataFunctionName,
+                );
               },
             });
 
@@ -100,11 +113,10 @@ module.exports = {
   },
 };
 
+const dataFunctionFolderPath = path.join(__dirname, `../src/dal/df`);
+
 function isFileInDalFolder(filePath) {
-  const relativePath = path.relative(
-    path.join(__dirname, `../src/dal/df`),
-    filePath,
-  );
+  const relativePath = path.relative(dataFunctionFolderPath, filePath);
 
   return (
     relativePath &&
@@ -112,3 +124,35 @@ function isFileInDalFolder(filePath) {
     !path.isAbsolute(relativePath)
   );
 }
+
+/**
+ * Utility function to generate a name/string using the relative path with camel
+ * case. This allow names in folders to be uniquely "namespaced" in the global
+ * scope as long as they are unique in their own folders.
+ *
+ * Copied from `generateFullFileNameFromRelativePath.ts`.
+ */
+const generateFullFileNameFromRelativePath = (
+  /**
+   * Root folder path to start the namespacing from.
+   */
+  folderPath,
+
+  /**
+   * Path to the actual file itself.
+   */
+  filePath,
+) =>
+  path
+    .relative(folderPath, filePath)
+
+    // Remove file extension to only keep the name itself
+    .replace(".df.ts", "")
+
+    // Use regex to convert path splitters '/' into camelCase delimiters.
+    // E.g. folder/another/myData to folderAnotherMyData
+    .replace(/\/([a-z])/g, (_, char) => char.toUpperCase())
+
+    // Use regex to convert strings with '-' into camelCase delimiters.
+    // E.g. folder-with-dash/myData to folderWithDashMyData
+    .replace(/-([a-z])/g, (_, char) => char.toUpperCase());

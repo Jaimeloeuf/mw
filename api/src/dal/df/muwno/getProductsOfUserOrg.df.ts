@@ -7,7 +7,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Get all products of the user's Org.
  */
-export default dataFn(async function getProductsOfUserOrg(
+export default dataFn(async function muwnoGetProductsOfUserOrg(
   userID: MuwnoUser["id"],
 ) {
   const user = await apiDB

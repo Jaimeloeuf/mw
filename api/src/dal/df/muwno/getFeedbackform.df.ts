@@ -7,7 +7,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Get a feedback form object.
  */
-export default dataFn(async function getFeedbackform(
+export default dataFn(async function muwnoGetFeedbackform(
   productID: MuwnoProduct["id"],
 ) {
   const product = await apiDB

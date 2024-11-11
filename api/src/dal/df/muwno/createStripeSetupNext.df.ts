@@ -6,7 +6,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Save a Stripe Setup Next action into the database
  */
-export default dataFn(function createStripeSetupNext(
+export default dataFn(function muwnoCreateStripeSetupNext(
   stripeSetupNext: CreateMuwnoStripeSetupNext,
 ) {
   return apiDB

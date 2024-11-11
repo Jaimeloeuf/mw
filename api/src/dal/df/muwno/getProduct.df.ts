@@ -7,7 +7,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Loads product only if user can access it.
  */
-export default dataFn(async function getProduct(
+export default dataFn(async function muwnoGetProduct(
   userID: MuwnoUser["id"],
   productID: MuwnoProduct["id"],
 ) {

@@ -6,7 +6,7 @@ import { dataFn } from "../dataFn.js";
 /**
  * Get survey responses of selected product, sorted by latest responses first.
  */
-export default dataFn(function getFeedbackResponses(
+export default dataFn(function muwnoGetFeedbackResponses(
   productID: MuwnoProduct["id"],
   numberOfResponses: number,
 ) {

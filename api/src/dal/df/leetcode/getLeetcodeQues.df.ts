@@ -5,7 +5,7 @@ import { concurrent } from "../../../utils/index.js";
 import { apiDB } from "../../kysely/index.js";
 import { dataFn } from "../dataFn.js";
 
-export default dataFn(async function getLeetcodeQues(
+export default dataFn(async function leetcodeGetLeetcodeQues(
   leetcodeQuesID: LeetcodeQues["id"],
 ) {
   const { leetcodeQues, leetcodeQuesTags } = await concurrent({

@@ -4,7 +4,7 @@ import { NotFoundException } from "../../../exceptions/index.js";
 import { apiDB } from "../../kysely/index.js";
 import { dataFn } from "../dataFn.js";
 
-export default dataFn(async function getFeedbackResponse(
+export default dataFn(async function muwnoGetFeedbackResponse(
   feedbackResponseID: MuwnoPmfSurveyResponse["id"],
 ) {
   const feedbackResponse = await apiDB
