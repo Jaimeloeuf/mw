@@ -8,7 +8,7 @@ import { sha256hash } from "../../utils/index.js";
  * Create a new API Key for user's Org.
  */
 export default async function (requestorID: string) {
-  const user = await df.muwnoGetUser.getResultOrThrowOnError(requestorID);
+  const user = await df.muwnoGetUser.runAndThrowOnError(requestorID);
 
   if (user.org_id === null) {
     throw new InvalidOperationException(
@@ -20,7 +20,7 @@ export default async function (requestorID: string) {
   const hash = sha256hash(key);
   const prefix = key.slice(0, 6);
 
-  const apiKey = await df.muwnoCreateApiKey.getResultOrThrowOnError({
+  const apiKey = await df.muwnoCreateApiKey.runAndThrowOnError({
     org_id: user.org_id,
     created_by: `${user.name} <${user.email}>`,
     hash,

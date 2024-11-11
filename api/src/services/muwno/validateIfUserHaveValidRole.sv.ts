@@ -16,7 +16,7 @@ export default async function (
   roles: Array<MuwnoUser["role"]>,
   errorMessage?: string,
 ) {
-  const user = await df.muwnoGetUser.getResultOrThrowOnError(userID);
+  const user = await df.muwnoGetUser.runAndThrowOnError(userID);
 
   if (user.role === null || !roles.includes(user.role)) {
     throw new ForbiddenException(

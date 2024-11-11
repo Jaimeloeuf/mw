@@ -10,7 +10,7 @@ export default async function (requestorID: string, apiKeyID: string) {
     "OrgAdmin",
   ]);
 
-  const apiKey = await df.muwnoGetApiKey.getResultOrThrowOnError(apiKeyID);
+  const apiKey = await df.muwnoGetApiKey.runAndThrowOnError(apiKeyID);
 
   if (apiKey === null) {
     throw new NotFoundException(`API Key ${apiKeyID} does not exist.`);
@@ -18,5 +18,5 @@ export default async function (requestorID: string, apiKeyID: string) {
 
   await sv.muwnoCanUserAccessOrg(requestorID, apiKey.org_id);
 
-  await df.muwnoDeleteApiKey.getResultOrThrowOnError(apiKey.id);
+  await df.muwnoDeleteApiKey.runAndThrowOnError(apiKey.id);
 }

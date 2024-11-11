@@ -9,16 +9,14 @@ import { blogEmailService } from "./blogEmailService.js";
  */
 export default async function BlogNewSubscriber(email: string) {
   const isSubscribed =
-    await df.blogSubscriberIsEmailAlreadySubscribed.getResultOrThrowOnError(
-      email,
-    );
+    await df.blogSubscriberIsEmailAlreadySubscribed.runAndThrowOnError(email);
 
   if (isSubscribed) {
     throw new ConflictException(`Email '${email}' already subscribed!`);
   }
 
   const blogSubscriberResult =
-    await df.blogSubscriberCreateBlogSubscriber.getResultOrThrowOnError({
+    await df.blogSubscriberCreateBlogSubscriber.runAndThrowOnError({
       email: email.toLowerCase(),
     });
 

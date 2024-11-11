@@ -33,9 +33,9 @@ export function dataFn<
    * and do not need to do any extra action in service function after the
    * error/exception (i.e. you just re-throw the error in the service layer),
    * then instead of manually checking if data method errored before re-throwing
-   * it, use the `getResultOrThrowOnError` method instead.
+   * it, use the `runAndThrowOnError` method instead.
    */
-  async function getResultOrError(
+  async function run(
     ...args: Parameters<T>
   ): Promise<[null, Result] | [Error, null]> {
     if (config.df_verbose_log_calls) {
@@ -63,12 +63,10 @@ export function dataFn<
    * service function.
    *
    * If you need to do some action like say, send user an email notification
-   * about the failed data function call, use `getResultOrError` instead to get
-   * the error/exception back and handle it yourself manually.
+   * about the failed data function call, use `run` instead to get the error /
+   * exception back and handle it yourself manually.
    */
-  async function getResultOrThrowOnError(
-    ...args: Parameters<T>
-  ): Promise<Result> {
+  async function runAndThrowOnError(...args: Parameters<T>): Promise<Result> {
     if (config.df_verbose_log_calls) {
       logger.verbose(dataFn.name, `Running '${fn.name}' with:`, args);
     }
@@ -84,14 +82,14 @@ export function dataFn<
   }
 
   return {
-    getResultOrError,
-    getResultOrThrowOnError,
+    run,
+    runAndThrowOnError,
   };
 }
 
 /**
  * Log data function errors in the same format regardless of whether caller
- * choose to use `getResultOrError` or `getResultOrThrowOnError`.
+ * choose to use `run` or `runAndThrowOnError`.
  */
 function logDataFnError(fnName: string, error: Error) {
   logger.error(dataFn.name, `Error thrown in data function: ${fnName}`);

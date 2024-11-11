@@ -9,7 +9,7 @@ import { ForbiddenException } from "../../exceptions/index.js";
  * Treats invalid/non-existent `productID` as Forbidden request.
  */
 export default async function (userID: string, productID: string) {
-  const canAccess = await df.muwnoCanUserAccessProduct.getResultOrThrowOnError(
+  const canAccess = await df.muwnoCanUserAccessProduct.runAndThrowOnError(
     userID,
     productID,
   );
