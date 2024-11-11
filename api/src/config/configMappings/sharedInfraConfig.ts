@@ -31,6 +31,17 @@ export const sharedInfraConfig = {
   ),
 
   /**
+   * Output verbose logs whenever a df (Data Function) is called.
+   */
+  df_verbose_log_calls: createConfigMapping(
+    z
+      .enum(["true", "false"])
+      .transform((v) => v === "true")
+      .default("false"),
+    process.env["DF_VERBOSE_LOG_CALLS"],
+  ),
+
+  /**
    * Database Connection String
    */
   db_conn_string: createConfigMapping(

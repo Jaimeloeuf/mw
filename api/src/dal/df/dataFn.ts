@@ -1,3 +1,4 @@
+import { config } from "../../config/index.js";
 import { logger } from "../../logging/index.js";
 import { noThrowPromise } from "../../utils/index.js";
 
@@ -37,6 +38,10 @@ export function dataFn<
   async function getResultOrError(
     ...args: Parameters<T>
   ): Promise<[null, Result] | [Error, null]> {
+    if (config.df_verbose_log_calls) {
+      logger.verbose(dataFn.name, `Running '${fn.name}' with:`, args);
+    }
+
     const noThrowResult = await noThrowPromise(fn(...args));
 
     if (noThrowResult[0] !== null) {
@@ -64,6 +69,10 @@ export function dataFn<
   async function getResultOrThrowOnError(
     ...args: Parameters<T>
   ): Promise<Result> {
+    if (config.df_verbose_log_calls) {
+      logger.verbose(dataFn.name, `Running '${fn.name}' with:`, args);
+    }
+
     const noThrowResult = await noThrowPromise(fn(...args));
 
     if (noThrowResult[0] !== null) {
