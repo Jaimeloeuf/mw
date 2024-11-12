@@ -4,6 +4,7 @@
 
 export * from "./concurrent.js";
 export * from "./dataOrThrow.js";
+export * from "./logBeforeRun.js";
 export * from "./noThrowFunction.js";
 export * from "./noThrowPromise.js";
 export * from "./prettyPrintJson.js";
