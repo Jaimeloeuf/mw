@@ -1,6 +1,6 @@
 import { config } from "../../config/index.js";
 import { logger } from "../../logging/index.js";
-import { noThrowPromise } from "../../utils/index.js";
+import { prettyPrintJson, noThrowPromise } from "../../utils/index.js";
 
 /**
  * Data Function wrapper to wrap them and provide common utility features such
@@ -39,7 +39,11 @@ export function dataFn<
     ...args: Parameters<T>
   ): Promise<[null, Result] | [Error, null]> {
     if (config.df_verbose_log_calls) {
-      logger.verbose(dataFn.name, `Running '${fn.name}' with:`, args);
+      logger.verbose(
+        dataFn.name,
+        `Running '${fn.name}' with:`,
+        prettyPrintJson(args),
+      );
     }
 
     const noThrowResult = await noThrowPromise(fn(...args));
@@ -68,7 +72,11 @@ export function dataFn<
    */
   async function runAndThrowOnError(...args: Parameters<T>): Promise<Result> {
     if (config.df_verbose_log_calls) {
-      logger.verbose(dataFn.name, `Running '${fn.name}' with:`, args);
+      logger.verbose(
+        dataFn.name,
+        `Running '${fn.name}' with:`,
+        prettyPrintJson(args),
+      );
     }
 
     const noThrowResult = await noThrowPromise(fn(...args));
