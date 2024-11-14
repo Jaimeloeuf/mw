@@ -1,10 +1,13 @@
 import { unknownCatchToError } from "./index.js";
 
 /**
- * Utility wrapper function to wrap a function to prevent it from throwing.
+ * Utility wrapper function to wrap a function (both sync/async) to prevent it
+ * from throwing. Even if a synchronous function is passed in, this will still
+ * await it, which will be the equivalent of `Promise.resolve(value)`.
  *
  * **If you need to wrap a Promise instead, use `noThrowPromise`**
  *
+ * ## Return Type
  * This will always return a 2 element tuple, whose type is
  * `[err, null] | [null, result]`. Similar to Go error handling, where if there
  * is an error the first element will be set to it and the second element will
@@ -22,7 +25,7 @@ import { unknownCatchToError } from "./index.js";
  * ```
  */
 export async function noThrowFunction<
-  T extends (...args: any) => Promise<any>,
+  T extends (...args: any) => any,
   SuccessfulReturnType extends Awaited<ReturnType<T>> = Awaited<ReturnType<T>>,
 >(fn: T): Promise<[null, SuccessfulReturnType] | [Error, null]> {
   try {
