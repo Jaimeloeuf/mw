@@ -5,7 +5,7 @@ import { sessions } from "./mock-auth-db.js";
 /**
  * Get the session using a session ID directly.
  */
-export default dataFn(function authGetSession(sessionID: string) {
+export default dataFn(async function authGetSession(sessionID: string) {
   const session = sessions.get(sessionID);
 
   if (session === undefined) {

@@ -7,6 +7,20 @@ import { prettyPrintJson, noThrowPromise } from "../../utils/index.js";
  * as error/exception logging, and to give DAL users (service functions) a
  * choice of either calling the data function and let errors/exceptions bubble
  * through or catch all errors/exceptions and return it for manual handling.
+ *
+ * ## Generic Data Function types `T`
+ * All data functions are expected to either be `async`, or return a `Promise`.
+ * This is because the safety mechanism used by both methods below is
+ * `noThrowPromise`, which requires a Promise as input. If a synchronous
+ * function is used, it will not yield control flow back to `noThrowPromise`
+ * until it runs to completion, and if it throws, it cannot be caught, which
+ * defeats the whole point of using `noThrowPromise`. An alternative to this
+ * would be to use `noThrowFunction` safety wrapper instead with an anonymous
+ * function like `const noThrowResult = await noThrowFunction(() => fn(...args))`.
+ * But since most if not all data functions are expected to be asynchronous,
+ * it is not worth it to add a layer of function call / indirection just to
+ * support synchronous data functions. Therefore data functions must be either
+ * `async` or returns a `Promise`.
  */
 export function dataFn<
   T extends (...args: any) => Promise<any>,

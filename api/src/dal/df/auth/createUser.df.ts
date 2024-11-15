@@ -1,7 +1,7 @@
 import { dataFn } from "../dataFn.js";
 import { users } from "./mock-auth-db.js";
 
-export default dataFn(function authCreateUser(
+export default dataFn(async function authCreateUser(
   userID: string,
   githubID: number,
   githubUsername: string,
