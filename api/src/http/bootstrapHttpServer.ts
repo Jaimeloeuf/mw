@@ -6,6 +6,7 @@ import express from "express";
 import { registerRoutesAndControllers } from "../__generated/index.js";
 import { config } from "../config/index.js";
 import { httpRouteHandlerForGraphQL } from "../graphql/index.js";
+import { authControllers } from "../http-auth/index.js";
 import { logger } from "../logging/index.js";
 import { entrypoints } from "./entrypoints.js";
 import { loggingMiddleware } from "./loggingMiddleware.js";
@@ -36,6 +37,9 @@ export function bootstrapHttpServer() {
 
     // Register all the route->controller mappings with the /api prefix.
     .use("/api", registerRoutesAndControllers())
+
+    // Register all auth related routes
+    .use("/auth", authControllers())
 
     // Register all vue page entrypoints
     .use(entrypoints())
