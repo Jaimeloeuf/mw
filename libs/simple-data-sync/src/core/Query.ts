@@ -29,7 +29,7 @@ export class Query<T> {
   /**
    * `QuerySubscriber`s subscribed to the current Query instance.
    */
-  private subscribers: Array<QuerySubscriber<T>> = [];
+  private subscribers: Set<QuerySubscriber<T>> = new Set();
 
   /**
    * Call `queryStateChangeCallback` of all the `QuerySubscriber` subscribed to
@@ -105,13 +105,9 @@ export class Query<T> {
    * Add a subscriber
    */
   addSubscriber(subscriber: QuerySubscriber<T>) {
-    this.subscribers.push(subscriber);
+    this.subscribers.add(subscriber);
 
     // Return an unsubscribe function
-    return () => {
-      this.subscribers = this.subscribers.filter(
-        (existingSubscriber) => existingSubscriber !== subscriber
-      );
-    };
+    return () => this.subscribers.delete(subscriber);
   }
 }
