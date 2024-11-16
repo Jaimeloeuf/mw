@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "../types/HttpStatusCode.js";
 import { HttpTransformerableException } from "./HttpTransformerableException.js";
 
 /**
@@ -13,7 +14,7 @@ export class ForbiddenException extends HttpTransformerableException {
 
   transformToHttpResponseData() {
     return {
-      httpStatusCode: 403,
+      httpStatusCode: HttpStatusCode.Forbidden_403,
       jsendData: [
         ForbiddenException.name,
         this.message,

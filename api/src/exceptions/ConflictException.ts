@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "../types/HttpStatusCode.js";
 import { HttpTransformerableException } from "./HttpTransformerableException.js";
 
 /**
@@ -13,7 +14,7 @@ export class ConflictException extends HttpTransformerableException {
 
   transformToHttpResponseData() {
     return {
-      httpStatusCode: 409,
+      httpStatusCode: HttpStatusCode.Conflict_409,
       jsendData: [
         ConflictException.name,
         this.message,

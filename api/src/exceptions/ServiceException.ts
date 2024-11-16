@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "../types/HttpStatusCode.js";
 import { HttpTransformerableException } from "./HttpTransformerableException.js";
 
 /**
@@ -10,7 +11,7 @@ export class ServiceException extends HttpTransformerableException {
 
   transformToHttpResponseData() {
     return {
-      httpStatusCode: 500,
+      httpStatusCode: HttpStatusCode.InternalServerError_500,
       jsendData: [ServiceException.name, this.message],
     };
   }

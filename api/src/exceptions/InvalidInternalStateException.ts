@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "../types/HttpStatusCode.js";
 import { HttpTransformerableException } from "./HttpTransformerableException.js";
 
 /**
@@ -18,7 +19,7 @@ export class InvalidInternalStateException extends HttpTransformerableException 
 
   transformToHttpResponseData() {
     return {
-      httpStatusCode: 500,
+      httpStatusCode: HttpStatusCode.InternalServerError_500,
       jsendData: [
         InvalidInternalStateException.name,
         this.message,

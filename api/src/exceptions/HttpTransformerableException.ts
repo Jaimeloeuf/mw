@@ -1,4 +1,5 @@
 import type { ValidJsendDatatype } from "../http/index.js";
+import type { HttpStatusCode } from "../types/HttpStatusCode.js";
 
 import { Exception } from "./Exception.js";
 
@@ -9,7 +10,7 @@ export abstract class HttpTransformerableException extends Exception {
    * JSend specification for failures.
    */
   abstract transformToHttpResponseData(): {
-    httpStatusCode: number;
+    httpStatusCode: HttpStatusCode;
     jsendData: ValidJsendDatatype;
   };
 }

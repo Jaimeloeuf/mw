@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "../types/HttpStatusCode.js";
 import { HttpTransformerableException } from "./HttpTransformerableException.js";
 
 /**
@@ -14,7 +15,7 @@ export class UnauthorizedException extends HttpTransformerableException {
 
   transformToHttpResponseData() {
     return {
-      httpStatusCode: 401,
+      httpStatusCode: HttpStatusCode.Unauthorized_401,
       jsendData: [
         UnauthorizedException.name,
         this.message,

@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "../types/index.js";
 import { HttpTransformerableException } from "./HttpTransformerableException.js";
 
 /**
@@ -17,12 +18,13 @@ export class GenericDalException extends HttpTransformerableException {
     super(msg);
   }
 
-  private httpStatusCode?: number;
+  private httpStatusCode: HttpStatusCode =
+    HttpStatusCode.InternalServerError_500;
 
   /**
    * Optionally override the default 500 HTTP status code.
    */
-  setHttpStatusCode(httpStatusCode: number) {
+  setHttpStatusCode(httpStatusCode: HttpStatusCode) {
     this.httpStatusCode = httpStatusCode;
     return this;
   }
@@ -39,7 +41,7 @@ export class GenericDalException extends HttpTransformerableException {
 
   transformToHttpResponseData() {
     return {
-      httpStatusCode: this.httpStatusCode ?? 500,
+      httpStatusCode: this.httpStatusCode,
       jsendData: [
         GenericDalException.name,
         this.message,
