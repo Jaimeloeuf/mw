@@ -107,7 +107,10 @@ export class Query<T> {
   addSubscriber(subscriber: QuerySubscriber<T>) {
     this.subscribers.add(subscriber);
 
-    // Return an unsubscribe function
-    return () => this.subscribers.delete(subscriber);
+    // Return an unsubscribe function. Needs to be wrapped to have the
+    // `() => void` function type signature.
+    return () => {
+      this.subscribers.delete(subscriber);
+    };
   }
 }
