@@ -1,14 +1,14 @@
 import { dataFn } from "../dataFn.js";
-import { users } from "./mock-auth-db.js";
+import { db } from "./mock-auth-db.js";
 
 export default dataFn(async function authCreateUser(
   userID: string,
   githubID: number,
   githubUsername: string,
 ) {
-  users.set(userID, {
-    id: userID,
-    github_id: githubID,
-    username: githubUsername,
-  });
+  await db.run(`INSERT INTO users (id, username, github_id) VALUES (?, ?, ?)`, [
+    userID,
+    githubUsername,
+    githubID,
+  ]);
 });

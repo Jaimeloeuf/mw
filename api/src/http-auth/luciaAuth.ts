@@ -4,16 +4,9 @@ import { Lucia } from "lucia";
 import { config } from "../config/index.js";
 import { adapter } from "./luciaAdapter.js";
 
-interface DatabaseUser {
-  id: string;
-  username: string;
-  github_id: number;
-}
-
 declare module "lucia" {
   interface Register {
     Lucia: typeof lucia;
-    DatabaseUserAttributes: Omit<DatabaseUser, "id">;
   }
 }
 
@@ -22,12 +15,6 @@ export const lucia = new Lucia(adapter, {
     attributes: {
       secure: config.env === "production",
     },
-  },
-  getUserAttributes: (attributes) => {
-    return {
-      githubId: attributes.github_id,
-      username: attributes.username,
-    };
   },
 });
 

@@ -1,11 +1,26 @@
 import type { DatabaseSession } from "lucia";
 
 import { dataFn } from "../dataFn.js";
-import { sessions } from "./mock-auth-db.js";
+import { db } from "./mock-auth-db.js";
 
 export default dataFn(async function authUpsertSession(
-  sessionID: string,
   session: DatabaseSession,
 ) {
-  sessions.set(sessionID, session);
+  await db.run(
+    `
+    INSERT INTO sessions (id, user_id, expires_at, attributes)
+    VALUES (?, ?, ?, ?)
+    ON CONFLICT DO UPDATE SET
+      id = excluded.id,
+      user_id = excluded.user_id,
+      expires_at = excluded.expires_at,
+      attributes = excluded.attributes;
+  `,
+    [
+      session.id,
+      session.userId,
+      session.expiresAt.toISOString(),
+      JSON.stringify(session.attributes),
+    ],
+  );
 });

@@ -7,27 +7,13 @@ import { logBeforeRun } from "../utils/index.js";
 async function getSessionAndUser(
   sessionId: string,
 ): Promise<[session: DatabaseSession | null, user: DatabaseUser | null]> {
-  const [getSessionError, session] = await df.authGetSession.run(sessionId);
+  const [err, sessionAndUser] = await df.authGetSessionAndUser.run(sessionId);
 
-  if (getSessionError !== null) {
+  if (err !== null) {
     return [null, null];
   }
 
-  const [getUserError, user] = await df.authGetUser.run(session.userId);
-
-  if (getUserError !== null) {
-    return [null, null];
-  }
-
-  return [
-    session,
-    {
-      id: session.userId,
-      attributes: {
-        ...user,
-      },
-    },
-  ];
+  return [sessionAndUser.session, sessionAndUser.user as any];
 }
 
 async function getUserSessions(userId: UserId): Promise<DatabaseSession[]> {
@@ -37,21 +23,11 @@ async function getUserSessions(userId: UserId): Promise<DatabaseSession[]> {
     return [];
   }
 
-  const user = await df.authGetUser.runAndThrowOnError(session.userId);
-
-  return [
-    {
-      ...session,
-      attributes: {
-        ...user,
-      },
-    },
-  ];
+  return [session];
 }
 
 async function setSession(session: DatabaseSession): Promise<void> {
-  await df.authUpsertSession.runAndThrowOnError(session.id, session);
-  await df.authUpsertSessionForUser.runAndThrowOnError(session.userId, session);
+  await df.authUpsertSession.runAndThrowOnError(session);
 }
 
 async function updateSessionExpiration(
@@ -64,7 +40,7 @@ async function updateSessionExpiration(
     return;
   }
 
-  await df.authUpsertSession.runAndThrowOnError(session.id, {
+  await df.authUpsertSession.runAndThrowOnError({
     ...session,
     expiresAt,
   });

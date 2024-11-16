@@ -6,7 +6,7 @@
  * genDataFunctionBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(971252995f20369f776a37ab604e64bfe47a86d70c1da8f29c39787ca65d39fc)
+ * sha256(775b4a95224d0f00e55da8675769167fa4c3be29a091230a51ba5e90c2f4308a)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -14,11 +14,11 @@ export { default as authCreateUser } from "../dal/df/auth/createUser.df.js";
 export { default as authDeleteSession } from "../dal/df/auth/deleteSession.df.js";
 export { default as authDeleteSessionForUser } from "../dal/df/auth/deleteSessionForUser.df.js";
 export { default as authGetSession } from "../dal/df/auth/getSession.df.js";
+export { default as authGetSessionAndUser } from "../dal/df/auth/getSessionAndUser.df.js";
 export { default as authGetUser } from "../dal/df/auth/getUser.df.js";
 export { default as authGetUserSession } from "../dal/df/auth/getUserSession.df.js";
 export { default as authGetUserWithGithubID } from "../dal/df/auth/getUserWithGithubID.df.js";
 export { default as authUpsertSession } from "../dal/df/auth/upsertSession.df.js";
-export { default as authUpsertSessionForUser } from "../dal/df/auth/upsertSessionForUser.df.js";
 export { default as blogSubscriberCreateBlogSubscriber } from "../dal/df/blog-subscriber/createBlogSubscriber.df.js";
 export { default as blogSubscriberDeleteBlogSubscriber } from "../dal/df/blog-subscriber/deleteBlogSubscriber.df.js";
 export { default as blogSubscriberGetAllBlogSubscriber } from "../dal/df/blog-subscriber/getAllBlogSubscriber.df.js";
