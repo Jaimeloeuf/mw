@@ -12,7 +12,10 @@ export class QuerySubscriber<T> {
    */
   private query: Query<T>;
 
-  constructor(queryClient: QueryClient, queryOptions: QueryOptions<T>) {
+  constructor(
+    queryClient: QueryClient,
+    private readonly queryOptions: QueryOptions<T>
+  ) {
     this.query = queryClient.getQuery(queryOptions);
   }
 
@@ -35,10 +38,23 @@ export class QuerySubscriber<T> {
     // Add self as a subscriber to the `Query`'s `QueryState` changes.
     const unsubscribe = this.query.addSubscriber(this);
 
-    // Kick off a query run on new subscription
-    this.query.run();
+    this.runQueryIfStale();
 
     return unsubscribe;
+  }
+
+  /**
+   * Run query if the query has never been ran before, or if the cached query is
+   * past its stale time.
+   */
+  runQueryIfStale() {
+    if (
+      this.query.state.lastSuccessfulQueryTime === null ||
+      Date.now() - this.query.state.lastSuccessfulQueryTime >
+        (this.queryOptions?.staleAfterMilliseconds ?? 0)
+    ) {
+      this.query.run();
+    }
   }
 
   /**
