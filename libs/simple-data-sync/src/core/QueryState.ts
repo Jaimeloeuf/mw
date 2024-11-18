@@ -25,4 +25,11 @@ export interface QueryState<T> {
    * completed yet.
    */
   error: null | Error;
+
+  /**
+   * The last time the query completed successfully in unix timestamp in
+   * milliseconds. This is null until the first time the Query completes
+   * successfully.
+   */
+  lastSuccessfulQueryTime: null | number;
 }

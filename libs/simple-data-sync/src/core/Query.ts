@@ -19,6 +19,7 @@ export class Query<T> {
     isLoading: false,
     data: null,
     error: null,
+    lastSuccessfulQueryTime: null,
   };
 
   /**
@@ -72,6 +73,7 @@ export class Query<T> {
 
         status: "success",
         isLoading: false,
+        lastSuccessfulQueryTime: Date.now(),
         data,
       }));
     } catch (error) {
