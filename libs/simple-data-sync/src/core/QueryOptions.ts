@@ -4,7 +4,12 @@
  */
 export type QueryOptions<T> = {
   queryFn: () => Promise<T>;
-  cacheKeys: Array<string>;
+
+  /**
+   * `CacheKeys` can be any JSON.stringifiable value! Usually a string or an
+   * array of strings.
+   */
+  cacheKeys: any;
 
   /**
    * How long before cached query is marked as stale, and queryFn is re-ran.

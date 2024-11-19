@@ -16,7 +16,7 @@ export default function Post() {
         res.json()
       );
     },
-    cacheKeys: [`post/${postID}`],
+    cacheKeys: `post/${postID}`,
   });
 
   return (

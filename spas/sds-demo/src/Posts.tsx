@@ -14,7 +14,7 @@ export default function Posts() {
       console.log("Posts: queryFn called");
       return fetch("http://localhost:3000/posts").then((res) => res.json());
     },
-    cacheKeys: ["posts"],
+    cacheKeys: "posts",
   });
 
   async function deletePost(postID: string) {
