@@ -34,6 +34,12 @@ express()
     await new Promise((res) => setTimeout(res, 500));
     res.status(200).json(posts[req.params["postID"]]);
   })
+  .delete("/post/:postID", async (req, res) => {
+    // Simulate a time consuming API call
+    await new Promise((res) => setTimeout(res, 1000));
+    delete posts[req.params["postID"]];
+    res.status(201).end();
+  })
   .listen(3000, () => {
     console.log(`SDS Demo server listening on port ${3000}`);
   });

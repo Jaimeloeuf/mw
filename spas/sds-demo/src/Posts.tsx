@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Posts() {
   console.log("Posts: rendering");
 
-  const { status, error, data } = useQuery<{
+  const { status, error, data, refetch } = useQuery<{
     [postID: string]: {
       title: string;
       body: string;
@@ -16,6 +16,11 @@ export default function Posts() {
     },
     cacheKeys: ["posts"],
   });
+
+  async function deletePost(postID: string) {
+    await fetch(`http://localhost:3000/post/${postID}`, { method: "DELETE" });
+    refetch();
+  }
 
   return (
     <>
@@ -34,14 +39,18 @@ export default function Posts() {
               <div>
                 {Object.entries(data!).map(([postID, post]) => {
                   return (
-                    <Link to={`post/${postID}`} key={postID}>
-                      {post.title}
+                    <div key={postID}>
+                      <Link to={`post/${postID}`}>
+                        {post.title}
+                        <br />
+                        {post.body}
+                        <br />
+                      </Link>
+                      <button onClick={() => deletePost(postID)}>delete</button>
                       <br />
-                      {post.body}
                       <br />
                       <br />
-                      <br />
-                    </Link>
+                    </div>
                   );
                 })}
               </div>
