@@ -7,7 +7,7 @@ import type { QuerySubscriber } from "./QuerySubscriber";
  * deduplication, and notifying its `QuerySubscriber`s on `QueryState` change.
  */
 export class Query<T> {
-  constructor(private queryFn: QueryOptions<T>["queryFn"]) {}
+  constructor(private options: QueryOptions<T>) {}
 
   /**
    * A `Query`'s current `QueryState`.
@@ -66,7 +66,7 @@ export class Query<T> {
     }));
 
     try {
-      const data = await this.queryFn();
+      const data = await this.options.queryFn();
 
       this.updateQueryState((originalState) => ({
         ...originalState,

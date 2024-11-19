@@ -20,7 +20,7 @@ export class QueryClient {
 
     // Create Query and set in cache if it isnt already cached
     if (!this.queryCache.has(queryCacheHash)) {
-      this.queryCache.set(queryCacheHash, new Query(queryOptions.queryFn));
+      this.queryCache.set(queryCacheHash, new Query(queryOptions));
     }
 
     // Using a non-null assertion operator since we just set it in the cache if
