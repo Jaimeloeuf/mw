@@ -1,4 +1,5 @@
 import type { QueryState } from "./QueryState";
+import type { QueryClient } from "./QueryClient";
 import type { QueryOptions } from "./QueryOptions";
 import type { QuerySubscriber } from "./QuerySubscriber";
 
@@ -7,7 +8,10 @@ import type { QuerySubscriber } from "./QuerySubscriber";
  * deduplication, and notifying its `QuerySubscriber`s on `QueryState` change.
  */
 export class Query<T> {
-  constructor(private options: QueryOptions<T>) {}
+  constructor(
+    private options: QueryOptions<T>,
+    private removeQueryFromCache: () => void
+  ) {}
 
   /**
    * A `Query`'s current `QueryState`.
@@ -33,6 +37,12 @@ export class Query<T> {
   private subscribers: Set<QuerySubscriber<T>> = new Set();
 
   /**
+   * `setTimeout`'s returned ID used for scheduling `QueryClient` cache eviction
+   * for garbage collection.
+   */
+  private garbageCollectionTimeoutID?: number;
+
+  /**
    * Call `queryStateChangeCallback` of all the `QuerySubscriber` subscribed to
    * this `Query`.
    */
@@ -51,6 +61,33 @@ export class Query<T> {
   ) {
     this.state = updater(this.state);
     this.notifySubscribers();
+  }
+
+  /**
+   * If `QueryOption['cacheForMilliseconds']` is specified, this will schedule a
+   * timeout to remove query from `QueryClient`'s cache, which will eventually
+   * be garbaged collected by JS engine as the data is no longer referenced.
+   */
+  private scheduleGarbageCollection() {
+    if (this.options.cacheForMilliseconds === undefined) {
+      return;
+    }
+
+    this.garbageCollectionTimeoutID = setTimeout(
+      this.removeQueryFromCache,
+      this.options.cacheForMilliseconds
+    );
+  }
+
+  /**
+   * Clear an existing garbage collection scheduled timeout if it exists.
+   */
+  private unscheduleGarbageCollection() {
+    if (this.garbageCollectionTimeoutID === undefined) {
+      return;
+    }
+
+    clearTimeout(this.garbageCollectionTimeoutID);
   }
 
   /**
@@ -109,10 +146,22 @@ export class Query<T> {
   addSubscriber(subscriber: QuerySubscriber<T>) {
     this.subscribers.add(subscriber);
 
+    // Everytime there is a new subscription, we want to make sure that the
+    // cached query's scheduled garbage collection if any stops running.
+    this.unscheduleGarbageCollection();
+
     // Return an unsubscribe function. Needs to be wrapped to have the
     // `() => void` function type signature.
     return () => {
       this.subscribers.delete(subscriber);
+
+      // If all the subscribers have unsubscribed from this Query, we want to
+      // schedule a garbage collection event some time in the future. Note that
+      // this scheduled garbage collection event can be undone the moment there
+      // is a new subscriber to this Query.
+      if (this.subscribers.size === 0) {
+        this.scheduleGarbageCollection();
+      }
     };
   }
 }

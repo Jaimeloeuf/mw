@@ -11,4 +11,11 @@ export type QueryOptions<T> = {
    * If this is not specified, cached query will always be marked as stale.
    */
   staleAfterMilliseconds?: number;
+
+  /**
+   * How long should the cached query be kept for, before it is evicted from
+   * `QueryClient`'s cache? If this is not specified, query will be cached
+   * infinitely until the application/QueryClient resets.
+   */
+  cacheForMilliseconds?: number;
 };
