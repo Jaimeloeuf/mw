@@ -58,9 +58,18 @@ export class QuerySubscriber<T> {
   }
 
   /**
-   * Get `QueryState` of the `Query` this `QuerySubscriber` subscribes to.
+   * Get the current subscription details, which includes the `Query`'s
+   * `QueryState` and other details.
    */
-  getResult() {
-    return this.query.state;
+  getSubscription() {
+    return {
+      ...this.query.state,
+
+      /**
+       * This allow users to explicitly re-run `Query` queryFn bypassing checks
+       * like staleness check, etc...
+       */
+      refetch: () => this.query.run(),
+    };
   }
 }

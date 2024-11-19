@@ -1,13 +1,12 @@
 import * as React from "react";
 import { QuerySubscriber } from "../core/QuerySubscriber.js";
 import { queryClientContext } from "./QueryClientContextProvider.js";
-import type { QueryState } from "../core/QueryState.js";
 import type { QueryOptions } from "../core/QueryOptions.js";
 
 /**
  * React hook.
  */
-export function useQuery<T>(queryOptions: QueryOptions<T>): QueryState<T> {
+export function useQuery<T>(queryOptions: QueryOptions<T>) {
   const [_rerenderCount, rerender] = React.useReducer((i: number) => i + 1, 0);
 
   const queryClient = React.useContext(queryClientContext);
@@ -37,5 +36,5 @@ export function useQuery<T>(queryOptions: QueryOptions<T>): QueryState<T> {
     return unsubscribe;
   }, []);
 
-  return querySubscriberRef.current.getResult();
+  return querySubscriberRef.current.getSubscription();
 }
