@@ -22,6 +22,11 @@ export default function Posts() {
     refetch();
   }
 
+  async function createNewPost() {
+    await fetch(`http://localhost:3000/post`, { method: "POST" });
+    refetch();
+  }
+
   return (
     <>
       <h1>Posts</h1>
@@ -53,6 +58,7 @@ export default function Posts() {
                     </div>
                   );
                 })}
+                <button onClick={createNewPost}>Create New Post</button>
               </div>
             );
         }

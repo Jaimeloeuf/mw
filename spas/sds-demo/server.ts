@@ -4,19 +4,19 @@ import cors from "cors";
 const posts = {
   1: {
     title: "Post 1",
-    body: "this is the first blog post in a series of long blog posts",
+    body: "this is the 1 blog post in a series of long blog posts",
   },
   2: {
     title: "Post 2",
-    body: "this is the second blog post in a series of long blog posts",
+    body: "this is the 2 blog post in a series of long blog posts",
   },
   3: {
     title: "Post 3",
-    body: "this is the third blog post in a series of long blog posts",
+    body: "this is the 3 blog post in a series of long blog posts",
   },
   4: {
     title: "Post 4",
-    body: "this is the fourth blog post in a series of long blog posts",
+    body: "this is the 4 blog post in a series of long blog posts",
   },
 };
 
@@ -28,6 +28,26 @@ express()
     // Simulate a time consuming API call
     await new Promise((res) => setTimeout(res, 1000));
     res.status(200).json(posts);
+  })
+  .post("/post", async (_, res) => {
+    // Simulate a time consuming API call
+    await new Promise((res) => setTimeout(res, 1000));
+
+    const newPostID =
+      parseInt(
+        Object.keys(posts)
+          .sort((a, b) => parseInt(a) - parseInt(b))
+          .at(-1)!
+      ) + 1;
+
+    const newPost = {
+      title: `Post ${newPostID}`,
+      body: `this is the ${newPostID} blog post in a series of long blog posts`,
+    };
+
+    posts[newPostID] = newPost;
+
+    res.status(200).json(newPost);
   })
   .get("/post/:postID", async (req, res) => {
     // Simulate a time consuming API call
