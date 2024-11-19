@@ -1,4 +1,5 @@
 import { Query } from "./Query";
+import { hashQueryCacheKeys } from "./hashQueryCacheKeys.js";
 import type { QueryOptions } from "../core/QueryOptions.js";
 
 /**
@@ -15,8 +16,7 @@ export class QueryClient {
    * Get a Query if it already exists, else, create a new one.
    */
   getQuery<T>(queryOptions: QueryOptions<T>) {
-    // Create a hash by simply JSON.stringifying the Array of strings
-    const queryCacheHash = JSON.stringify(queryOptions.cacheKeys);
+    const queryCacheHash = hashQueryCacheKeys(queryOptions.cacheKeys);
 
     // Create Query and set in cache if it isnt already cached
     if (!this.queryCache.has(queryCacheHash)) {
