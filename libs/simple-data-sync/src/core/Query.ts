@@ -64,18 +64,19 @@ export class Query<T> {
   }
 
   /**
-   * If `QueryOption['cacheForMilliseconds']` is specified, this will schedule a
-   * timeout to remove query from `QueryClient`'s cache, which will eventually
-   * be garbaged collected by JS engine as the data is no longer referenced.
+   * If `QueryOption['runGarbageCollectionAfterMilliseconds']` is specified,
+   * this will schedule a timeout to remove query from `QueryClient`'s cache,
+   * which will eventually be garbaged collected by JS engine as the data is no
+   * longer referenced.
    */
   private scheduleGarbageCollection() {
-    if (this.options.cacheForMilliseconds === undefined) {
+    if (this.options.runGarbageCollectionAfterMilliseconds === undefined) {
       return;
     }
 
     this.garbageCollectionTimeoutID = setTimeout(
       this.removeQueryFromCache,
-      this.options.cacheForMilliseconds
+      this.options.runGarbageCollectionAfterMilliseconds
     );
   }
 

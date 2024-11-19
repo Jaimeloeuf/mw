@@ -32,11 +32,11 @@ export class QueryClient {
 
   /**
    * On window focus event, query client will re-run all `queryFn`s whose
-   * `Query` has set `QueryOption['refetchOnFocus']` to true.
+   * `Query` has set `QueryOption['refetchOnWindowFocus']` to true.
    */
   onWindowFocus() {
     for (const query of this.queryCache.values()) {
-      if (query.options.refetchOnFocus) {
+      if (query.options.refetchOnWindowFocus) {
         query.run();
       }
     }
