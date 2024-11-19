@@ -13,6 +13,15 @@ export function QueryClientContextProvider(props: {
   client: QueryClient;
   children: React.ReactNode;
 }) {
+  React.useEffect(() => {
+    // @todo Check if on client before attaching event listeners
+    window.addEventListener("visibilitychange", () => {
+      if (window.document.visibilityState === "visible") {
+        props.client.onWindowFocus();
+      }
+    });
+  }, [props.client]);
+
   return (
     <queryClientContext.Provider value={props.client}>
       {props.children}

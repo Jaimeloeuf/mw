@@ -9,7 +9,7 @@ import type { QuerySubscriber } from "./QuerySubscriber";
  */
 export class Query<T> {
   constructor(
-    private options: QueryOptions<T>,
+    public options: QueryOptions<T>,
     private removeQueryFromCache: () => void
   ) {}
 

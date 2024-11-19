@@ -18,4 +18,11 @@ export type QueryOptions<T> = {
    * infinitely until the application/QueryClient resets.
    */
   cacheForMilliseconds?: number;
+
+  /**
+   * Should the query be refetched when the window comes back into focus? E.g.
+   * if user switches away to another window/tab and comes back, should the
+   * `queryFn` be ran again to refresh the data?
+   */
+  refetchOnFocus?: boolean;
 };
