@@ -18,14 +18,13 @@ export default function Post() {
         res.json()
       );
     },
-    cacheKeys: `post/${postID}`,
+    cacheKey: `post/${postID}`,
   });
 
   async function deletePost() {
     await fetch(`http://localhost:3000/post/${postID}`, { method: "DELETE" });
-
     queryClient.invalidateQuery("posts", `post/${postID}`);
-
+    // @todo Only do this on mutation success
     navigate("/");
   }
 

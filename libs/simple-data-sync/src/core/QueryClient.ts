@@ -1,5 +1,5 @@
 import { Query } from "./Query";
-import { hashQueryCacheKeys } from "./hashQueryCacheKeys.js";
+import { hashQueryCacheKey } from "./hashQueryCacheKey.js";
 import type { QueryOptions } from "../core/QueryOptions.js";
 
 /**
@@ -16,7 +16,7 @@ export class QueryClient {
    * Get a Query if it already exists, else, create a new one.
    */
   getQuery<T>(queryOptions: QueryOptions<T>) {
-    const queryCacheHash = hashQueryCacheKeys(queryOptions.cacheKeys);
+    const queryCacheHash = hashQueryCacheKey(queryOptions.cacheKey);
 
     // Create Query and set in cache if it isnt already cached
     if (!this.queryCache.has(queryCacheHash)) {
@@ -31,12 +31,12 @@ export class QueryClient {
   }
 
   /**
-   * Invalidate an existing `Query` using the same `QueryOption['cacheKeys']`.
+   * Invalidate an existing `Query` using the same `QueryOption['cacheKey']`.
    * This will return a boolean to indicate if cached query has been deleted.
    */
-  invalidateQuery(...cacheKeys: QueryOptions<any>["cacheKeys"]) {
+  invalidateQuery(...cacheKeys: QueryOptions<any>["cacheKey"]) {
     for (const cacheKey of cacheKeys) {
-      const queryCacheHash = hashQueryCacheKeys(cacheKey);
+      const queryCacheHash = hashQueryCacheKey(cacheKey);
 
       if (!this.queryCache.has(queryCacheHash)) {
         continue;

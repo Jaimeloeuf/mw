@@ -1,15 +1,15 @@
 /**
  * `QueryOptions` is used to define all the parameters of a Query, from the
- * `queryFn` itself to `cacheKeys` to determine how to cache the given Query.
+ * `queryFn` itself to `cacheKey` to determine how to cache the given Query.
  */
 export type QueryOptions<T> = {
   queryFn: () => Promise<T>;
 
   /**
-   * `CacheKeys` can be any JSON.stringifiable value! Usually a string or an
-   * array of strings.
+   * This can be any JSON.stringifiable value! Usually a string or an array of
+   * strings.
    */
-  cacheKeys: any;
+  cacheKey: any;
 
   /**
    * How long before cached query is marked as stale, and queryFn is re-ran.
