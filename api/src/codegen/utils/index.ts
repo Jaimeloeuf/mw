@@ -10,3 +10,5 @@ export * from "./getHttpControllerFiles/getHttpControllerFiles.js";
 export * from "./getHttpControllerFiles/HttpControllerFile.js";
 export * from "./getServiceFiles/getServiceFiles.js";
 export * from "./getServiceFiles/ServiceFile.js";
+export * from "./getStartupFiles/getStartupFiles.js";
+export * from "./getStartupFiles/StartupFile.js";

@@ -1,3 +1,4 @@
+import { startupModuleRunner } from "./__generated/index.js";
 import { config } from "./config/index.js";
 import { bootstrapDal } from "./dal/index.js";
 import { bootstrapHttpServer } from "./http/index.js";
@@ -16,6 +17,8 @@ async function main() {
   logger.info(main.name, `Env: ${config.env}`);
 
   await bootstrapDal();
+
+  await startupModuleRunner();
 
   bootstrapHttpServer();
 }
