@@ -1,5 +1,6 @@
 import { useQuery } from "../../../libs/simple-data-sync";
 import { Link } from "react-router-dom";
+import { queryClient } from "./queryClient";
 
 export default function Posts() {
   console.log("Posts: rendering");
@@ -19,7 +20,7 @@ export default function Posts() {
 
   async function deletePost(postID: string) {
     await fetch(`http://localhost:3000/post/${postID}`, { method: "DELETE" });
-    refetch();
+    queryClient.invalidateQuery("posts");
   }
 
   async function createNewPost() {

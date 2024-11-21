@@ -1,10 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Posts from "./Posts.tsx";
 import Post from "./Post.tsx";
-import {
-  QueryClient,
-  QueryClientContextProvider,
-} from "../../../libs/simple-data-sync";
+import { QueryClientContextProvider } from "../../../libs/simple-data-sync";
+import { queryClient } from "./queryClient.ts";
 
 const router = createBrowserRouter([
   {
@@ -16,8 +14,6 @@ const router = createBrowserRouter([
     element: <Post />,
   },
 ]);
-
-const queryClient = new QueryClient();
 
 export default function App() {
   return (
