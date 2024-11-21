@@ -6,7 +6,7 @@
  * genHttpControllerTypeDefinitions
  *
  * Generated hash in hex for code after this section is:
- * sha256(e97859f6f293f5d7d7aeea8bcf31924aa64ec96cdbb4f0f768b82dc74c879f56)
+ * sha256(7a4210db467c7687f0f3c7e7c434d2e1aa4e9ce8447da478bb2d76fe62335a14)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -78,4 +78,13 @@ export type versionController_InputDTO = z.infer<
 >;
 export type versionController_OutputDTO = Awaited<
   ReturnType<(typeof c.version)["httpRequestHandler"]>
+>;
+export type webhookTelegramController_QueryParams = z.infer<
+  Exclude<(typeof c.webhookTelegram)["urlQueryParamsValidator"], null>
+>;
+export type webhookTelegramController_InputDTO = z.infer<
+  Exclude<(typeof c.webhookTelegram)["requestBodyValidator"], null>
+>;
+export type webhookTelegramController_OutputDTO = Awaited<
+  ReturnType<(typeof c.webhookTelegram)["httpRequestHandler"]>
 >;

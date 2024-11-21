@@ -6,7 +6,7 @@
  * genHttpControllerBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(c2353bab531867cd6bb8cff83780fe663e45e314567889bfb94e9e04882ffd75)
+ * sha256(8c42d7ff150949b8b3ec6c5b1c173a92725366fd3448d114b2ebfe86fca396cb)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -17,3 +17,4 @@ export { default as bucketlistGetOne } from "../controllers-http/bucketlist/getO
 export { default as leetcodeCreateLeetcodeQues } from "../controllers-http/leetcode/createLeetcodeQues.ct.js";
 export { default as leetcodeGetLeetcodeQues } from "../controllers-http/leetcode/getLeetcodeQues.ct.js";
 export { default as version } from "../controllers-http/version.ct.js";
+export { default as webhookTelegram } from "../controllers-http/webhook/telegram.ct.js";

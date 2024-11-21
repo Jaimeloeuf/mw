@@ -72,6 +72,15 @@ export const sharedInfraConfig = {
   ),
 
   /**
+   * A string used as part of the URL to form a secret webhook path to prevent
+   * the path from getting called maliciously.
+   */
+  tele_webhook_secret_path: createConfigMapping(
+    z.string(),
+    process.env["TELE_WEBHOOK_SECRET_PATH"],
+  ),
+
+  /**
    * Telegram bot's token.
    * Placeholder can be used for development environments as it will be mocked.
    */

@@ -6,7 +6,7 @@
  * genHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256(d81613c69fc36d5b15e0f6f6e7c23989c8b3667e61a8b5f1f91f79ef3096ca71)
+ * sha256(bc875153006f0e38688de69323b2118896dad8d36554362b655f7a81425f0050)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -81,6 +81,13 @@ export function registerRoutesAndControllers() {
   r["get" satisfies typeof c.version.method](
     "/version" satisfies typeof c.version.path,
     c.version.routeHandler,
+  );
+
+  // GET /api/v1/webhook/telegram/:telegramWebhookSecretPath/:telegramBotToken
+  r["get" satisfies typeof c.webhookTelegram.method](
+    ("/v1" satisfies typeof c.webhookTelegram.version) +
+      ("/webhook/telegram/:telegramWebhookSecretPath/:telegramBotToken" satisfies typeof c.webhookTelegram.path),
+    c.webhookTelegram.routeHandler,
   );
 
   return r;
