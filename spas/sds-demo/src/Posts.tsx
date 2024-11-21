@@ -20,7 +20,7 @@ export default function Posts() {
 
   async function deletePost(postID: string) {
     await fetch(`http://localhost:3000/post/${postID}`, { method: "DELETE" });
-    queryClient.invalidateQuery("posts");
+    queryClient.invalidateQuery("posts", `post/${postID}`);
   }
 
   async function createNewPost() {

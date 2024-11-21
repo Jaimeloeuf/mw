@@ -34,20 +34,20 @@ export class QueryClient {
    * Invalidate an existing `Query` using the same `QueryOption['cacheKeys']`.
    * This will return a boolean to indicate if cached query has been deleted.
    */
-  invalidateQuery(cacheKeys: QueryOptions<any>["cacheKeys"]) {
-    const queryCacheHash = hashQueryCacheKeys(cacheKeys);
+  invalidateQuery(...cacheKeys: QueryOptions<any>["cacheKeys"]) {
+    for (const cacheKey of cacheKeys) {
+      const queryCacheHash = hashQueryCacheKeys(cacheKey);
 
-    if (!this.queryCache.has(queryCacheHash)) {
-      return false;
+      if (!this.queryCache.has(queryCacheHash)) {
+        continue;
+      }
+
+      // Using a non-null assertion operator since we just set it in the cache if
+      // it didnt already exists.
+      const query = this.queryCache.get(queryCacheHash)!;
+
+      query.run();
     }
-
-    // Using a non-null assertion operator since we just set it in the cache if
-    // it didnt already exists.
-    const query = this.queryCache.get(queryCacheHash)!;
-
-    query.run();
-
-    return true;
   }
 
   /**
