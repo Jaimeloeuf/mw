@@ -37,7 +37,7 @@ express()
       parseInt(
         Object.keys(posts)
           .sort((a, b) => parseInt(a) - parseInt(b))
-          .at(-1)!
+          .at(-1) ?? "0"
       ) + 1;
 
     const newPost = {
