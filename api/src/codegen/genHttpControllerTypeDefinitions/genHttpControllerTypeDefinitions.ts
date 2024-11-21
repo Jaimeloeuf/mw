@@ -14,7 +14,10 @@ export async function genHttpControllerTypeDefinitions() {
   // @todo An advanced version would be to skip export if type resolves to `never`.
   const typeDefinitions = controllerFiles
     .map(
-      (file) => `export type ${file.name}Controller_QueryParams = z.infer<
+      (file) => `export type ${file.name}Controller_UrlParams = z.infer<
+  Exclude<(typeof c.${file.name})["urlParamsValidator"], null>
+>;
+export type ${file.name}Controller_QueryParams = z.infer<
   Exclude<(typeof c.${file.name})["urlQueryParamsValidator"], null>
 >;
 export type ${file.name}Controller_InputDTO = z.infer<
