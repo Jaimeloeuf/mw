@@ -31,6 +31,26 @@ export class QueryClient {
   }
 
   /**
+   * Invalidate an existing `Query` using the same `QueryOption['cacheKeys']`.
+   * This will return a boolean to indicate if cached query has been deleted.
+   */
+  invalidateQuery(cacheKeys: QueryOptions<any>["cacheKeys"]) {
+    const queryCacheHash = hashQueryCacheKeys(cacheKeys);
+
+    if (!this.queryCache.has(queryCacheHash)) {
+      return false;
+    }
+
+    // Using a non-null assertion operator since we just set it in the cache if
+    // it didnt already exists.
+    const query = this.queryCache.get(queryCacheHash)!;
+
+    query.run();
+
+    return true;
+  }
+
+  /**
    * On window focus event, query client will re-run all `queryFn`s whose
    * `Query` has set `QueryOption['refetchOnWindowFocus']` to true.
    */
