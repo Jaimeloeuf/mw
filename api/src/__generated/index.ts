@@ -6,7 +6,7 @@
  * genCodegenBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(80371828fb8539f07173aac57b992903e14e051784d1eabc23a21849c4967d65)
+ * sha256(768780666c9183533d67ed60086cc5b213a0b240dbb93169377a6555670d3c51)
  */
 // Barrel file
 export * from "./dataFunctionsBarrelFile.generated.js";
@@ -15,3 +15,4 @@ export * from "./registerRoutesAndControllers.generated.js";
 export * from "./serviceBarrelFile.generated.js";
 export * from "./startupModulesBarrelFile.generated.js";
 export * from "./startupModulesRunner.generated.js";
+export * from "./urlBuilderBarrelFile.generated.js";
