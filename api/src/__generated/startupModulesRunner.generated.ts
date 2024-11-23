@@ -6,7 +6,7 @@
  * genStartupModuleRunner
  *
  * Generated hash in hex for code after this section is:
- * sha256(6f7a71278a0dff79490c39d57cdacbdeb4a3ebad9f5b9034f4b21527104d3338)
+ * sha256(b282e8fb50ae4beb9d4d4393ebddae096d71ad0fb2ccaab7ad3e0b421b435b87)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -20,7 +20,7 @@ import { st } from "./startupModulesBarrelFile.generated.js";
  */
 export async function startupModuleRunner() {
   try {
-    await Promise.all([]);
+    await Promise.all([st.telegramRegisterAllTelegramBotWebhookUrls()]);
   } catch (e) {
     const error = unknownCatchToError(e);
 
