@@ -102,6 +102,7 @@ export const httpController = <
   urlParamsValidator,
   urlQueryParamsValidator,
   requestBodyValidator,
+  doNotModifyResponseData,
   httpRequestHandler,
 }: {
   /**
@@ -137,6 +138,13 @@ export const httpController = <
    * and validate the request body data before using it in the context object.
    */
   requestBodyValidator: NullableRequestBodyZodParserType;
+  /**
+   * Occasionally, you may want to respond with the controller returned data
+   * directly without JSend conversion, for e.g. when responding to a client we
+   * do not own or control like webhook calls, we need to respond back in the
+   * requestors expected data format. Set this to true to avoid wrapping.
+   */
+  doNotModifyResponseData?: boolean;
   /**
    * User defined function that is called to handle the API request once guard
    * functions finish running and request data is validated.
@@ -215,10 +223,14 @@ export const httpController = <
         // execution succeeds, which might cause issues if the controller thows
         // and an error status code needs to be set.
         .status(statusCode)
-        .json({
-          status: "success",
-          data,
-        } satisfies JSendSuccess);
+        .json(
+          doNotModifyResponseData
+            ? data
+            : ({
+                status: "success",
+                data,
+              } satisfies JSendSuccess),
+        );
     } catch (error) {
       // @todo Use the unknownCatchToError utils?
 
