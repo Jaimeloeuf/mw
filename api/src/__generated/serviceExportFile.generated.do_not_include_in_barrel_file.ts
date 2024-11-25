@@ -6,7 +6,7 @@
  * genServiceBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(4bd95a56174357f38343e2fe08e9bec1324d824d6e352937d94c70cd33c86f5e)
+ * sha256(3de676507c8b6bef83a2adcfc953fdf4b86d1266ae42b7d4c7d49d9334deefbe)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -20,4 +20,6 @@ export { default as muwnoCanUserAccessProduct } from "../services/muwno/canUserA
 export { default as muwnoCreateApiKey } from "../services/muwno/createApiKey.sv.js";
 export { default as muwnoDeleteApiKey } from "../services/muwno/deleteApiKey.sv.js";
 export { default as muwnoGetApiKeysOfUserOrg } from "../services/muwno/getApiKeysOfUserOrg.sv.js";
+export { default as muwnoTelegramWebhook } from "../services/muwno/telegramWebhook.sv.js";
 export { default as muwnoValidateIfUserHaveValidRole } from "../services/muwno/validateIfUserHaveValidRole.sv.js";
+export { default as mwTelegramWebhook } from "../services/mw/telegramWebhook.sv.js";

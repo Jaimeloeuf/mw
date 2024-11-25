@@ -1,4 +1,5 @@
 import { config } from "../../config/index.js";
+import { dataOrThrow } from "../../utils/index.js";
 import { registerTelegramWebhookUrl } from "./registerTelegramWebhookUrl.js";
 
 /**
@@ -13,5 +14,9 @@ export default async function registerAllTelegramBotWebhookUrls() {
 
   await Promise.all([
     registerTelegramWebhookUrl("MW Admin Bot", config.tele_adminbot_token),
+    registerTelegramWebhookUrl(
+      "Muwno Bot",
+      dataOrThrow(config.muwno_tele_bot_token),
+    ),
   ]);
 }
