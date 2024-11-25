@@ -22,6 +22,7 @@
     "scratchpad": "npx tsx ./src/scripts/scratchpad.ts",
     "scripts:create-kysely-migration": "npx tsx ./src/scripts/create-kysely-migration.ts",
     "scripts:create-http-controller": "npx tsx ./src/scripts/create-http-controller.ts",
+    "ngrok": "ngrok http http://localhost:3000",
     "codegen": "npx tsx ./src/codegen/codegen-runner/codegenRunner.ts"
   },
   "engines": {
