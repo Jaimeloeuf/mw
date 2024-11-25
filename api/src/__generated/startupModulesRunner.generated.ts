@@ -6,7 +6,7 @@
  * genStartupModuleRunner
  *
  * Generated hash in hex for code after this section is:
- * sha256(b282e8fb50ae4beb9d4d4393ebddae096d71ad0fb2ccaab7ad3e0b421b435b87)
+ * sha256(5e34c364bab6e2613dc1c83d4feaba07bea0245a8d423c5c89831465b16b7a46)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -20,7 +20,11 @@ import { st } from "./startupModulesBarrelFile.generated.js";
  */
 export async function startupModuleRunner() {
   try {
-    await Promise.all([st.telegramRegisterAllTelegramBotWebhookUrls()]);
+    logger.info(startupModuleRunner.name, "Running (1) Startup Modules");
+
+    await Promise.all([
+      logBeforeRun(st.telegramRegisterAllTelegramBotWebhookUrls)(),
+    ]);
   } catch (e) {
     const error = unknownCatchToError(e);
 
@@ -35,3 +39,10 @@ export async function startupModuleRunner() {
     process.exit(1);
   }
 }
+
+const logBeforeRun = (fn: () => any) =>
+  async function () {
+    logger.verbose(`${startupModuleRunner.name}:${fn.name}`, "Start");
+    await fn();
+    logger.verbose(`${startupModuleRunner.name}:${fn.name}`, "Completed");
+  };

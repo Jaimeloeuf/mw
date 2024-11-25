@@ -13,8 +13,10 @@ import { st } from "./startupModulesBarrelFile${generatedCodeFileExtensionForJsI
  */
 export async function startupModuleRunner() {
   try {
+    logger.info(startupModuleRunner.name, "Running (${files.length}) Startup Modules");
+
     await Promise.all([
-      ${files.map((file) => `st.${file.name}(),\n`)}
+      ${files.map((file) => `logBeforeRun(st.${file.name})()`)}
     ]);
   } catch (e) {
     const error = unknownCatchToError(e);
@@ -30,4 +32,11 @@ export async function startupModuleRunner() {
     process.exit(1);
   }
 }
+
+const logBeforeRun = (fn: () => any) =>
+  async function () {
+    logger.verbose(\`\${startupModuleRunner.name}:\${fn.name}\`, "Start");
+    await fn();
+    logger.verbose(\`\${startupModuleRunner.name}:\${fn.name}\`, "Completed");
+  };
 `;
