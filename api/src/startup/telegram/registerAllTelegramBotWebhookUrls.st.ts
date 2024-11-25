@@ -18,5 +18,9 @@ export default async function registerAllTelegramBotWebhookUrls() {
       "Muwno Bot",
       dataOrThrow(config.muwno_tele_bot_token),
     ),
+    registerTelegramWebhookUrl(
+      "Whatch Bot",
+      dataOrThrow(config.whatch_tele_bot_token),
+    ),
   ]);
 }

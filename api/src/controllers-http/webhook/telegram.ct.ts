@@ -37,6 +37,10 @@ export default httpController({
         return sv.muwnoTelegramWebhook(requestBody);
       }
 
+      case config.whatch_tele_bot_token: {
+        return sv.whatchTelegramWebhook(requestBody);
+      }
+
       // If the bot token is not valid
       default: {
         throw new NotFoundException("API Route not found");

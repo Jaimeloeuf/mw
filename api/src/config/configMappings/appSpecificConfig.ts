@@ -181,4 +181,13 @@ export const appSpecificConfig = {
     z.number().default(150),
     process.env["MUWNO_THROTTLE_LIMIT"],
   ),
+
+  /**
+   * whatch Telegram bot's token.
+   * This is optional for development environments as it will be mocked.
+   */
+  whatch_tele_bot_token: createConfigMapping(
+    z.string().optional(),
+    process.env["WHATCH_TELE_BOT_TOKEN"],
+  ),
 } as const;
