@@ -3,7 +3,7 @@ import { Migrator, FileMigrationProvider } from "kysely";
 import path from "path";
 import { performance } from "perf_hooks";
 
-import { lazyConfig } from "../../config/lazyConfig.js";
+import { config } from "../../config/index.js";
 import { logger } from "../../logging/index.js";
 import { createDB } from "./createDB.js";
 import { dbConnectionCheck } from "./dbConnectionCheck.js";
@@ -19,7 +19,7 @@ async function kyselyMigrateToLatest() {
   const migrationFolder = path.join(import.meta.dirname, "./migrations");
 
   const db = createDB({
-    connectionString: lazyConfig.db_conn_string(),
+    connectionString: config.db_conn_string(),
     kysely_log_error: true,
   });
 

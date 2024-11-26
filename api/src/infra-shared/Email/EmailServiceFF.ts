@@ -3,4 +3,4 @@ import { MockEmailServiceFF } from "./MockEmailServiceFF.js";
 import { ProdEmailServiceFF } from "./ProdEmailServiceFF.js";
 
 export const EmailServiceFF =
-  config.env === "production" ? ProdEmailServiceFF : MockEmailServiceFF;
+  config.env() === "production" ? ProdEmailServiceFF : MockEmailServiceFF;

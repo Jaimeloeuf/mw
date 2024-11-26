@@ -103,7 +103,7 @@ export function authControllers() {
         "Set-Cookie",
         serializeCookie("github_oauth_state", githubOauthState, {
           path: "/",
-          secure: config.env === "production",
+          secure: config.env() === "production",
           httpOnly: true,
           maxAge: 60 * 10,
           sameSite: "lax",

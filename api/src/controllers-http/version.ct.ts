@@ -10,6 +10,6 @@ export default httpController({
   urlQueryParamsValidator: null,
   requestBodyValidator: null,
   httpRequestHandler() {
-    return `${config.env} - ${"..."}`;
+    return `${config.env()} - ${"..."}`;
   },
 });

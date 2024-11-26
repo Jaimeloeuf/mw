@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { lazyConfig } from "../config/lazyConfig.js";
+import { config } from "../config/index.js";
 
 /**
  * `npm run scratchpad`
@@ -9,7 +9,7 @@ import { lazyConfig } from "../config/lazyConfig.js";
  * commit any changes to this into source control.
  */
 async function scratchpad() {
-  lazyConfig.env;
+  console.log("config.env()", config.env());
 }
 
 scratchpad();

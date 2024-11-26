@@ -11,10 +11,10 @@ import { dbConnectionCheck } from "./kysely/index.js";
  * Will exit current process if connection check fails.
  */
 export async function bootstrapDal() {
-  if (config.env !== "production") {
+  if (config.env() !== "production") {
     logger.info(
       bootstrapDal.name,
-      `DB connection check SKIPPED in ${config.env} (non production) environment`,
+      `DB connection check SKIPPED in ${config.env()} (non production) environment`,
     );
     return;
   }

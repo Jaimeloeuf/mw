@@ -52,7 +52,7 @@ export function dataFn<
   async function run(
     ...args: Parameters<T>
   ): Promise<[null, Result] | [Error, null]> {
-    if (config.df_verbose_log_calls) {
+    if (config.df_verbose_log_calls()) {
       logger.verbose(
         dataFn.name,
         `Running '${fn.name}' with:`,
@@ -85,7 +85,7 @@ export function dataFn<
    * exception back and handle it yourself manually.
    */
   async function runAndThrowOnError(...args: Parameters<T>): Promise<Result> {
-    if (config.df_verbose_log_calls) {
+    if (config.df_verbose_log_calls()) {
       logger.verbose(
         dataFn.name,
         `Running '${fn.name}' with:`,

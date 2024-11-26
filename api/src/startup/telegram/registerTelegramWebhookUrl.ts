@@ -12,7 +12,7 @@ export async function registerTelegramWebhookUrl(
   const urlObject = new URL(
     urlBuilder.forWebhookTelegram({
       urlParams: {
-        telegramWebhookSecretPath: config.tele_webhook_secret_path,
+        telegramWebhookSecretPath: config.tele_webhook_secret_path(),
         telegramBotToken: botToken,
       },
     }),

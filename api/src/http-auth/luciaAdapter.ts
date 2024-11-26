@@ -59,7 +59,7 @@ async function deleteExpiredSessions(): Promise<void> {
 }
 
 const logBeforeRunIfNotProd = <T extends (...args: any) => any>(fn: T) =>
-  config.env === "production" ? fn : logBeforeRun(fn);
+  config.env() === "production" ? fn : logBeforeRun(fn);
 
 export const adapter: Adapter = {
   getSessionAndUser: logBeforeRunIfNotProd(getSessionAndUser),

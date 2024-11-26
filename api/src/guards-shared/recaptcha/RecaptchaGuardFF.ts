@@ -7,4 +7,4 @@ import { ProdRecaptchaGuardFF } from "./ProdRecaptchaGuardFF.js";
  * that requests are made by humans.
  */
 export const RecaptchaGuardFF =
-  config.env === "production" ? ProdRecaptchaGuardFF : MockRecaptchaGuardFF;
+  config.env() === "production" ? ProdRecaptchaGuardFF : MockRecaptchaGuardFF;

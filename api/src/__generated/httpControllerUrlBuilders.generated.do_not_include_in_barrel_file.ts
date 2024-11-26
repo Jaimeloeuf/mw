@@ -6,7 +6,7 @@
  * genHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(3f609a399ae515067e167c3bb2667bcabc80121aecd738965ae0aaf3da101493)
+ * sha256(3284addb04576e1328ed800cce80e1479beafc24e5c1798e72ed37637e0b8bc5)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -43,7 +43,7 @@ export const forHealthCheck = (
     urlQueryParams: t.healthCheckController_QueryParams;
   }>,
 ) =>
-  `${config.base_url_to_self}/api${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
+  `${config.base_url_to_self()}/api${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
 
 export const forBlogNewSubscriber = (
   options: UrlBuilderOptions<{
@@ -51,7 +51,7 @@ export const forBlogNewSubscriber = (
     urlQueryParams: t.blogNewSubscriberController_QueryParams;
   }>,
 ) =>
-  `${config.base_url_to_self}/api/v1/blog/subscribe${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
+  `${config.base_url_to_self()}/api/v1/blog/subscribe${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
 
 export const forBucketlistCreateOne = (
   options: UrlBuilderOptions<{
@@ -59,7 +59,7 @@ export const forBucketlistCreateOne = (
     urlQueryParams: t.bucketlistCreateOneController_QueryParams;
   }>,
 ) =>
-  `${config.base_url_to_self}/api/v1/bucketlist${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
+  `${config.base_url_to_self()}/api/v1/bucketlist${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
 
 export const forBucketlistGetOne = (
   options: UrlBuilderOptions<{
@@ -67,7 +67,7 @@ export const forBucketlistGetOne = (
     urlQueryParams: t.bucketlistGetOneController_QueryParams;
   }>,
 ) =>
-  `${config.base_url_to_self}/api/v1/bucketlist/${options.urlParams.bucketlistID}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
+  `${config.base_url_to_self()}/api/v1/bucketlist/${options.urlParams.bucketlistID}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
 
 export const forLeetcodeCreateLeetcodeQues = (
   options: UrlBuilderOptions<{
@@ -75,7 +75,7 @@ export const forLeetcodeCreateLeetcodeQues = (
     urlQueryParams: t.leetcodeCreateLeetcodeQuesController_QueryParams;
   }>,
 ) =>
-  `${config.base_url_to_self}/api/v1/leetcode/ques${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
+  `${config.base_url_to_self()}/api/v1/leetcode/ques${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
 
 export const forLeetcodeGetLeetcodeQues = (
   options: UrlBuilderOptions<{
@@ -83,7 +83,7 @@ export const forLeetcodeGetLeetcodeQues = (
     urlQueryParams: t.leetcodeGetLeetcodeQuesController_QueryParams;
   }>,
 ) =>
-  `${config.base_url_to_self}/api/v1/leetcode/ques/${options.urlParams.leetcodeQuesID}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
+  `${config.base_url_to_self()}/api/v1/leetcode/ques/${options.urlParams.leetcodeQuesID}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
 
 export const forVersion = (
   options: UrlBuilderOptions<{
@@ -91,7 +91,7 @@ export const forVersion = (
     urlQueryParams: t.versionController_QueryParams;
   }>,
 ) =>
-  `${config.base_url_to_self}/api/version${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
+  `${config.base_url_to_self()}/api/version${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
 
 export const forWebhookTelegram = (
   options: UrlBuilderOptions<{
@@ -99,4 +99,4 @@ export const forWebhookTelegram = (
     urlQueryParams: t.webhookTelegramController_QueryParams;
   }>,
 ) =>
-  `${config.base_url_to_self}/api/v1/webhook/telegram/${options.urlParams.telegramWebhookSecretPath}/${options.urlParams.telegramBotToken}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
+  `${config.base_url_to_self()}/api/v1/webhook/telegram/${options.urlParams.telegramWebhookSecretPath}/${options.urlParams.telegramBotToken}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;

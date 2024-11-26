@@ -33,7 +33,7 @@ export function urlBuilderTemplate(file: HttpControllerFile) {
     urlParams: t.${controllerName}_UrlParams;
     urlQueryParams: t.${controllerName}_QueryParams;
   }>,
-) => \`\${config.base_url_to_self}/api${getVersionPrefix(file)}${pathString}\${createUrlQueryParamsString((options as any)?.urlQueryParams)}\`;
+) => \`\${config.base_url_to_self()}/api${getVersionPrefix(file)}${pathString}\${createUrlQueryParamsString((options as any)?.urlQueryParams)}\`;
 
 `;
 }

@@ -21,7 +21,7 @@ export default httpController({
   async httpRequestHandler({ urlParams, requestBody }) {
     // Ensure that the caller knows the webhook secret path token
     if (
-      urlParams.telegramWebhookSecretPath !== config.tele_webhook_secret_path
+      urlParams.telegramWebhookSecretPath !== config.tele_webhook_secret_path()
     ) {
       throw new NotFoundException("API Route not found");
     }
@@ -29,15 +29,15 @@ export default httpController({
     // Validate if it is a Bot we own, and call/route to its own service to
     // handle the request. 404 if it isnt a valid bot managed by us.
     switch (urlParams.telegramBotToken) {
-      case config.tele_adminbot_token: {
+      case config.tele_adminbot_token(): {
         return sv.mwTelegramWebhook(requestBody);
       }
 
-      case config.muwno_tele_bot_token: {
+      case config.muwno_tele_bot_token(): {
         return sv.muwnoTelegramWebhook(requestBody);
       }
 
-      case config.whatch_tele_bot_token: {
+      case config.whatch_tele_bot_token(): {
         return sv.whatchTelegramWebhook(requestBody);
       }
 

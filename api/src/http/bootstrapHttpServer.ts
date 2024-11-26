@@ -49,15 +49,15 @@ export function bootstrapHttpServer() {
     .use(routeNotFound.routeHandler)
 
     // Start listening to network port and returns the created server instance.
-    .listen(config.port, () => {
+    .listen(config.port(), () => {
       logger.info(
         bootstrapHttpServer.name,
-        `Web Server now listening on port: ${config.port}`,
+        `Web Server now listening on port: ${config.port()}`,
       );
 
       logger.info(
         bootstrapHttpServer.name,
-        `Web Server global timeout set to: ${config.server_timeout} ms`,
+        `Web Server global timeout set to: ${config.server_timeout()} ms`,
       );
     })
 
@@ -65,7 +65,7 @@ export function bootstrapHttpServer() {
     // Note that setting this does not stop any in progress controller/service/
     // post-processing execution. All it does is hangup on the socket connected
     // to the client and logs it as an error.
-    .setTimeout(config.server_timeout)
+    .setTimeout(config.server_timeout())
 
     // Event handler that runs after express forces a timeout set above.
     .on("timeout", (socket: Socket) => {
@@ -76,7 +76,7 @@ export function bootstrapHttpServer() {
 
       logger.error(
         bootstrapHttpServer.name,
-        `Request to '${originalRequestUrl}' exceeded global timeout of ${config.server_timeout} ms`,
+        `Request to '${originalRequestUrl}' exceeded global timeout of ${config.server_timeout()} ms`,
       );
     });
 }

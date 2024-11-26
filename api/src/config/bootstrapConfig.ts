@@ -1,27 +1,20 @@
 import "dotenv/config";
 
-import type { ConfigType } from "../ConfigType.js";
+import type { ConfigType } from "./ConfigType.js";
 
-import { logger } from "../../logging/index.js";
-import { combinedConfig } from "../configMappings/combinedConfig.js";
-import { getValueFF } from "../utils/getValueFF.js";
+import { combinedConfig } from "./configMappings/combinedConfig.js";
+import { getValueFF } from "./utils/getValueFF.js";
 
-export function bootstrapLazyConfig() {
-  type LazyConfig = { [K in keyof ConfigType]: () => ConfigType[K] };
+export function bootstrapConfig() {
+  type LazyConfig = {
+    [K in keyof ConfigType]: (forceReload?: true) => ConfigType[K];
+  };
 
   const lazyConfig: Partial<LazyConfig> = {};
 
   for (const configName in combinedConfig) {
     const configMapping =
       combinedConfig[configName as keyof typeof combinedConfig];
-
-    if (configMapping === undefined) {
-      logger.error(
-        bootstrapLazyConfig.name,
-        `Cannot find config mapping for: ${configName}`,
-      );
-      process.exit(1);
-    }
 
     // @ts-ignore
     // Have to ts-ignore here in order for the type to work easily, see

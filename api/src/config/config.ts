@@ -1,3 +1,3 @@
-import { bootstrapConfig } from "./bootstrap/bootstrapConfig.js";
+import { bootstrapConfig } from "./bootstrapConfig.js";
 
 export const config = bootstrapConfig();
