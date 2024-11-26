@@ -6,7 +6,6 @@ import type { ZodType } from "zod";
  */
 export function createConfig<
   const ConfigSchema extends ZodType,
-  // const ConfigType extends z.infer<ConfigSchema>,
   const ConfigLoaderType extends "sync" | "async",
   const ConfigLoader extends () => ConfigLoaderType extends "sync"
     ? any
