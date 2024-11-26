@@ -20,20 +20,27 @@ export async function loadAndValidateConfig(
 ) {
   const errors: Array<ZodIssue | string> = [];
 
-  for (const configName of namesOfConfigToValidate) {
-    try {
-      await config[configName]();
-    } catch (error) {
-      if (error instanceof ZodError) {
-        // Show both the error and what configName the error is for
-        errors.push(...error.errors.map((issue) => ({ configName, ...issue })));
-      } else {
-        errors.push(
-          error?.toString() ?? `Unknown Error validating: ${configName}`,
-        );
+  // Instead of awaiting one by one in a loop, run all of them concurrently.
+  const loadAndValidatePromises = namesOfConfigToValidate.map(
+    async (configName) => {
+      try {
+        await config[configName]();
+      } catch (error) {
+        if (error instanceof ZodError) {
+          // Show both the error and what configName the error is for
+          errors.push(
+            ...error.errors.map((issue) => ({ configName, ...issue })),
+          );
+        } else {
+          errors.push(
+            error?.toString() ?? `Unknown Error validating: ${configName}`,
+          );
+        }
       }
-    }
-  }
+    },
+  );
+
+  await Promise.all(loadAndValidatePromises);
 
   if (errors.length > 0) {
     logger.error(
