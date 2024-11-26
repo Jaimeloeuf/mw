@@ -22,6 +22,7 @@ export const genericMonoRepoConfig = {
     function () {
       return process.env["NODE_ENV"];
     },
+    true,
   ),
 
   /**
@@ -33,16 +34,22 @@ export const genericMonoRepoConfig = {
     function () {
       return process.env["VERSION"];
     },
+    true,
   ),
 
   /**
    * Port for the HTTP webserver
    */
-  port: createConfig(z.number().positive().default(3000), "sync", function () {
-    return process.env["PORT"] === undefined
-      ? undefined
-      : parseInt(process.env["PORT"]);
-  }),
+  port: createConfig(
+    z.number().positive().default(3000),
+    "sync",
+    function () {
+      return process.env["PORT"] === undefined
+        ? undefined
+        : parseInt(process.env["PORT"]);
+    },
+    true,
+  ),
 
   /**
    * Server wide 60 seconds timeout hard limit, should not change this unless
@@ -57,6 +64,7 @@ export const genericMonoRepoConfig = {
         ? undefined
         : parseInt(process.env["SERVER_TIMEOUT"]);
     },
+    true,
   ),
 
   /**
@@ -78,5 +86,6 @@ export const genericMonoRepoConfig = {
     function () {
       return process.env["BASE_URL_TO_SELF"];
     },
+    true,
   ),
 } as const;

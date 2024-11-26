@@ -9,9 +9,14 @@ export const sharedInfraConfig = {
   /**
    * Github OAuth app client ID
    */
-  auth_github_oauth_client_id: createConfig(z.string(), "sync", function () {
-    return process.env["AUTH_GITHUB_OAUTH_CLIENT_ID"];
-  }),
+  auth_github_oauth_client_id: createConfig(
+    z.string(),
+    "sync",
+    function () {
+      return process.env["AUTH_GITHUB_OAUTH_CLIENT_ID"];
+    },
+    true,
+  ),
 
   /**
    * Github OAuth app client secret
@@ -22,6 +27,7 @@ export const sharedInfraConfig = {
     function () {
       return process.env["AUTH_GITHUB_OAUTH_CLIENT_SECRET"];
     },
+    true,
   ),
 
   /**
@@ -33,6 +39,7 @@ export const sharedInfraConfig = {
     function () {
       return process.env["AUTH_GITHUB_OAUTH_REDIRECT_URI"];
     },
+    true,
   ),
 
   /**
@@ -47,14 +54,20 @@ export const sharedInfraConfig = {
     function () {
       return process.env["DF_VERBOSE_LOG_CALLS"];
     },
+    true,
   ),
 
   /**
    * Database Connection String
    */
-  db_conn_string: createConfig(z.string(), "sync", function () {
-    return process.env["DB_CONN_STRING"];
-  }),
+  db_conn_string: createConfig(
+    z.string(),
+    "sync",
+    function () {
+      return process.env["DB_CONN_STRING"];
+    },
+    true,
+  ),
 
   /**
    * Use this to log all kysely queries, defaults to false.
@@ -68,6 +81,7 @@ export const sharedInfraConfig = {
     function () {
       return process.env["KYSELY_LOG_QUERY"];
     },
+    true,
   ),
 
   /**
@@ -82,29 +96,45 @@ export const sharedInfraConfig = {
     function () {
       return process.env["KYSELY_LOG_ERROR"];
     },
+    true,
   ),
 
   /**
    * A string used as part of the URL to form a secret webhook path to prevent
    * the path from getting called maliciously.
    */
-  tele_webhook_secret_path: createConfig(z.string(), "sync", function () {
-    return process.env["TELE_WEBHOOK_SECRET_PATH"];
-  }),
+  tele_webhook_secret_path: createConfig(
+    z.string(),
+    "sync",
+    function () {
+      return process.env["TELE_WEBHOOK_SECRET_PATH"];
+    },
+    true,
+  ),
 
   /**
    * Telegram bot's token.
    * Placeholder can be used for development environments as it will be mocked.
    */
-  tele_adminbot_token: createConfig(z.string(), "sync", function () {
-    return process.env["TELE_ADMINBOT_TOKEN"];
-  }),
+  tele_adminbot_token: createConfig(
+    z.string(),
+    "sync",
+    function () {
+      return process.env["TELE_ADMINBOT_TOKEN"];
+    },
+    true,
+  ),
 
   /**
    * Chat ID of the team's telegram admin chat for notifications.
    * Placeholder can be used for development environments as it will be mocked.
    */
-  tele_adminbot_admin_chat_id: createConfig(z.string(), "sync", function () {
-    return process.env["TELE_ADMINBOT_ADMIN_CHAT_ID"];
-  }),
+  tele_adminbot_admin_chat_id: createConfig(
+    z.string(),
+    "sync",
+    function () {
+      return process.env["TELE_ADMINBOT_ADMIN_CHAT_ID"];
+    },
+    true,
+  ),
 } as const;

@@ -1,5 +1,8 @@
 import { startupModuleRunner } from "./__generated/index.js";
-import { config } from "./config/index.js";
+import {
+  loadAndValidateRequiredConfigsOnStartup,
+  config,
+} from "./config/index.js";
 import { bootstrapDal } from "./dal/index.js";
 import { bootstrapHttpServer } from "./http/index.js";
 import { logger } from "./logging/index.js";
@@ -12,8 +15,8 @@ import { registerGlobalUncaughtIssueHandlers } from "./registerGlobalUncaughtIss
 async function main() {
   registerGlobalUncaughtIssueHandlers();
 
-  // config bootstrapper is ran as part of import process, it is used here to
-  // prevent unused variable linting issue.
+  await loadAndValidateRequiredConfigsOnStartup();
+
   logger.info(main.name, `Env: ${config.env()}`);
 
   await bootstrapDal();
