@@ -6,8 +6,9 @@
  * genStartupModulesBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(4c8b2b8d9cc241260a9fecf9005ef67ca1fc6dcc8e626e859136da43fa64c053)
+ * sha256(cca26eef6e417794306121f7886e753933b2793830fb9524982d1f7da26019b5)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
+export { default as telegramRegisterAllTelegramBotCommands } from "../startup/telegram/registerAllTelegramBotCommands.st.js";
 export { default as telegramRegisterAllTelegramBotWebhookUrls } from "../startup/telegram/registerAllTelegramBotWebhookUrls.st.js";
