@@ -1,6 +1,6 @@
 import { df } from "../../__generated/index.js";
 import { ConflictException } from "../../exceptions/index.js";
-import { notifyAdminWithInternalAdminTelegramBot } from "../../infra-shared/index.js";
+import { notifyAdminWithInternalAdminTelegramBot } from "../../infra/index.js";
 import { SimplePostProcessing } from "../../post-processing/index.js";
 import { blogEmailService } from "./blogEmailService.js";
 

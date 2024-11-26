@@ -35,6 +35,7 @@ export const ProdTelegramBotFF = (telegramBotToken: string) =>
     }
 
     if (!res.ok) {
+      // @todo Should be an exception instead
       return new Error(
         `Telegram message failed to send: ${prettyPrintJson(res.data)}`,
       );

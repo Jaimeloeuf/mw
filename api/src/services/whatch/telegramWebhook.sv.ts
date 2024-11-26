@@ -1,4 +1,4 @@
-import type { TelegramWebhookData } from "../../infra-shared/index.js";
+import type { TelegramWebhookData } from "../../infra/index.js";
 
 /**
  * Handles incoming messages from whatch telegram bot.

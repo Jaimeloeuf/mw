@@ -4,7 +4,7 @@ import { sv } from "../../__generated/index.js";
 import { config } from "../../config/index.js";
 import { NotFoundException } from "../../exceptions/index.js";
 import { httpController } from "../../http/index.js";
-import { telegramWebhookDataSchema } from "../../infra-shared/index.js";
+import { telegramWebhookDataSchema } from "../../infra/index.js";
 
 export default httpController({
   version: 1,
