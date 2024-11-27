@@ -2,9 +2,14 @@ import type { TelegramWebhookData } from "../index.js";
 import type { CommandData } from "./CommandData.js";
 
 import { sv } from "../../__generated/index.js";
+import { config } from "../../config/index.js";
 import { TelegramBot } from "./TelegramBot.js";
 
 export default class WhatchBot extends TelegramBot {
+  override async getToken() {
+    return config.whatch_tele_bot_token();
+  }
+
   override commands = [
     {
       command: "eating",

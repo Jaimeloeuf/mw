@@ -4,8 +4,14 @@ import type { CommandData } from "./CommandData.js";
 import { getCommand } from "./getCommand.js";
 
 /**
- * Telegram Bot base class for all bot implementations to extend. Override
- * `commands` and `onMessage` as necessary.
+ * Telegram Bot base class for all bot implementations to extend.
+ *
+ * ## Override Items (required)
+ * 1. `getToken` instance method
+ *
+ * ## Override Items (optional)
+ * 1. `commands` instance variable
+ * 1. `onMessage` instance method
  */
 export class TelegramBot {
   /**
@@ -23,6 +29,15 @@ export class TelegramBot {
       this.singleton = new this();
     }
     return this.singleton!;
+  }
+
+  /**
+   * Override this method to return the bot token string.
+   *
+   * This is async to support all types of config loaders.
+   */
+  async getToken(): Promise<string> {
+    throw new Error(`Unimplemented! Override '${this.getToken.name}' method`);
   }
 
   /**
