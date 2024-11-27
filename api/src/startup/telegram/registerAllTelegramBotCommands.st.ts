@@ -1,6 +1,6 @@
 import { config } from "../../config/index.js";
+import { setCommands } from "../../infra/Telegram/setCommands.js";
 import { dataOrThrow } from "../../utils/index.js";
-import { setCommands } from "./setCommands.js";
 
 /**
  * Register telegram bot commands.

@@ -1,6 +1,6 @@
 import { urlBuilder } from "../../__generated/index.js";
-import { config } from "../../config/config.js";
-import { ServiceException } from "../../exceptions/ServiceException.js";
+import { config } from "../../config/index.js";
+import { ServiceException } from "../../exceptions/index.js";
 import { logger } from "../../logging/index.js";
 import { tApi } from "./tApi.js";
 

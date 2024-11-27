@@ -1,6 +1,7 @@
 import type { TelegramWebhookData } from "../Telegram/telegramWebhookDataSchema.js";
 import type { CommandData } from "./CommandData.js";
 
+import { registerTelegramWebhookUrl } from "../Telegram/registerTelegramWebhookUrl.js";
 import { getCommand } from "./getCommand.js";
 
 /**
@@ -38,6 +39,17 @@ export class TelegramBot {
    */
   async getToken(): Promise<string> {
     throw new Error(`Unimplemented! Override '${this.getToken.name}' method`);
+  }
+
+  /**
+   * ## DO NOT OVERRIDE!
+   * Call this to register the telegram webhook URL for the current bot.
+   */
+  async registerTelegramWebhookUrl() {
+    return registerTelegramWebhookUrl(
+      this.constructor.name,
+      await this.getToken(),
+    );
   }
 
   /**
