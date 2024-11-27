@@ -8,7 +8,6 @@ import { config } from "../../config/index.js";
 import { ServiceException } from "../../exceptions/index.js";
 import { logger } from "../../logging/index.js";
 import { prettyPrintJson } from "../../utils/index.js";
-import { setCommands } from "../Telegram/setCommands.js";
 import { tApi } from "../Telegram/tApi.js";
 import { getCommand } from "./getCommand.js";
 
@@ -65,8 +64,29 @@ export abstract class TelegramBot {
    * ## DO NOT OVERRIDE!
    * Call this to register the telegram commands for the current bot.
    */
-  async setCommands() {
-    return setCommands(await this.getToken(), this.commands);
+  async setCommands(options?: {
+    /**
+     * Should the new commands be merged into the list of existing commands? Or
+     * should these be all the new commands by overriding all existing commands?
+     */
+    merge?: boolean;
+  }) {
+    const botToken = await this.getToken();
+
+    // Merge existing commands and new commands into new array before setting
+    // commands if user did not leave commands empty
+    if (this.commands.length !== 0 && options?.merge) {
+      const response = await tApi(botToken, "getMyCommands");
+      if (!response.ok) {
+        throw new Error("Failed to get existing commands");
+      }
+
+      return tApi(botToken, "setMyCommands", {
+        commands: [...response.result, ...this.commands],
+      });
+    }
+
+    return tApi(botToken, "setMyCommands", { commands: this.commands });
   }
 
   /**
