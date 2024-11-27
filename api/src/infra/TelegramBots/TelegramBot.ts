@@ -3,10 +3,13 @@ import { sf } from "simpler-fetch";
 import type { TelegramWebhookData } from "../Telegram/telegramWebhookDataSchema.js";
 import type { CommandData } from "./CommandData.js";
 
+import { urlBuilder } from "../../__generated/index.js";
+import { config } from "../../config/index.js";
 import { ServiceException } from "../../exceptions/index.js";
+import { logger } from "../../logging/index.js";
 import { prettyPrintJson } from "../../utils/index.js";
-import { registerTelegramWebhookUrl } from "../Telegram/registerTelegramWebhookUrl.js";
 import { setCommands } from "../Telegram/setCommands.js";
+import { tApi } from "../Telegram/tApi.js";
 import { getCommand } from "./getCommand.js";
 
 /**
@@ -25,9 +28,36 @@ export abstract class TelegramBot {
    * Call this to register the telegram webhook URL for the current bot.
    */
   async registerTelegramWebhookUrl() {
-    return registerTelegramWebhookUrl(
-      this.constructor.name,
-      await this.getToken(),
+    const telegramBotToken = await this.getToken();
+
+    // Following telegram's recommendations to use bot token as path
+    const urlObject = new URL(
+      urlBuilder.forWebhookTelegram({
+        urlParams: {
+          telegramWebhookSecretPath: config.tele_webhook_secret_path(),
+          telegramBotToken,
+        },
+      }),
+    );
+
+    // Must be https scheme as specified in telegram bot API docs
+    if (urlObject.protocol !== "https:") {
+      throw new ServiceException(
+        "Only HTTPS URLs are allowed for telegram bot webhooks",
+      );
+    }
+
+    const setWebhookResponse = await tApi(telegramBotToken, "setWebhook", {
+      url: urlObject.toString(),
+    });
+
+    if (!setWebhookResponse.ok) {
+      throw new ServiceException(setWebhookResponse?.description);
+    }
+
+    logger.info(
+      `${TelegramBot.name}:${this.registerTelegramWebhookUrl.name}`,
+      `Successfully registered telegram webhook URL for ${this.constructor.name} to: ${urlObject.toString()}`,
     );
   }
 
