@@ -1,10 +1,12 @@
 import { z } from "zod";
 
-import { sv } from "../../__generated/index.js";
 import { config } from "../../config/index.js";
 import { NotFoundException } from "../../exceptions/index.js";
 import { httpController } from "../../http/index.js";
 import { telegramWebhookDataSchema } from "../../infra/index.js";
+import MuwnoBot from "../../infra/TelegramBots/MuwnoBot.js";
+import MwBot from "../../infra/TelegramBots/MwBot.js";
+import WhatchBot from "../../infra/TelegramBots/WhatchBot.js";
 
 export default httpController({
   version: 1,
@@ -30,15 +32,13 @@ export default httpController({
     // handle the request. 404 if it isnt a valid bot managed by us.
     switch (urlParams.telegramBotToken) {
       case config.tele_adminbot_token(): {
-        return sv.mwTelegramWebhook(requestBody);
+        return MwBot.getSingleton().onUpdate(requestBody)
       }
-
       case config.muwno_tele_bot_token(): {
-        return sv.muwnoTelegramWebhook(requestBody);
+        return MuwnoBot.getSingleton().onUpdate(requestBody);
       }
-
       case config.whatch_tele_bot_token(): {
-        return sv.whatchTelegramWebhook(requestBody);
+        return WhatchBot.getSingleton().onUpdate(requestBody);
       }
 
       // If the bot token is not valid
