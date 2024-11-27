@@ -12,8 +12,8 @@ export default async function registerAllTelegramBotWebhookUrls() {
   }
 
   await Promise.all([
-    infra.TelegramBotsMwBot.getSingleton().registerTelegramWebhookUrl(),
-    infra.TelegramBotsMuwnoBot.getSingleton().registerTelegramWebhookUrl(),
-    infra.TelegramBotsWhatchBot.getSingleton().registerTelegramWebhookUrl(),
+    infra.TelegramBotsMwBot().registerTelegramWebhookUrl(),
+    infra.TelegramBotsMuwnoBot().registerTelegramWebhookUrl(),
+    infra.TelegramBotsWhatchBot().registerTelegramWebhookUrl(),
   ]);
 }

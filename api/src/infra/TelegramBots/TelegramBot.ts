@@ -17,23 +17,6 @@ import { getCommand } from "./getCommand.js";
  */
 export class TelegramBot {
   /**
-   * The singleton telegram bot instance for the specific TelegramBot
-   * implementation. This is unique for each bot class.
-   */
-  static singleton?: TelegramBot;
-
-  /**
-   * Static method to load the singleton instance and create it if it doesnt
-   * already exists.
-   */
-  static getSingleton() {
-    if (this.singleton === undefined) {
-      this.singleton = new this();
-    }
-    return this.singleton!;
-  }
-
-  /**
    * Override this method to return the bot token string.
    *
    * This is async to support all types of config loaders.

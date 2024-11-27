@@ -5,7 +5,7 @@ import { sv } from "../../__generated/index.js";
 import { config } from "../../config/index.js";
 import { TelegramBot } from "./TelegramBot.js";
 
-export default class WhatchBot extends TelegramBot {
+class WhatchBot extends TelegramBot {
   override async getToken() {
     return config.whatch_tele_bot_token();
   }
@@ -28,4 +28,13 @@ export default class WhatchBot extends TelegramBot {
       },
     },
   ];
+}
+
+let cachedBot: WhatchBot | null = null;
+
+export default function () {
+  if (cachedBot === null) {
+    cachedBot = new WhatchBot();
+  }
+  return cachedBot;
 }

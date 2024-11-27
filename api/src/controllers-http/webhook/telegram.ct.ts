@@ -30,13 +30,13 @@ export default httpController({
     // handle the request. 404 if it isnt a valid bot managed by us.
     switch (urlParams.telegramBotToken) {
       case config.tele_adminbot_token(): {
-        return infra.TelegramBotsMwBot.getSingleton().onUpdate(requestBody);
+        return infra.TelegramBotsMwBot().onUpdate(requestBody);
       }
       case config.muwno_tele_bot_token(): {
-        return infra.TelegramBotsMuwnoBot.getSingleton().onUpdate(requestBody);
+        return infra.TelegramBotsMuwnoBot().onUpdate(requestBody);
       }
       case config.whatch_tele_bot_token(): {
-        return infra.TelegramBotsWhatchBot.getSingleton().onUpdate(requestBody);
+        return infra.TelegramBotsWhatchBot().onUpdate(requestBody);
       }
 
       // If the bot token is not valid

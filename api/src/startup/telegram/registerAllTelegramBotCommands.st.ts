@@ -12,8 +12,8 @@ export default async function registerAllTelegramBotCommands() {
   }
 
   await Promise.all([
-    infra.TelegramBotsMwBot.getSingleton().setCommands(),
-    infra.TelegramBotsMuwnoBot.getSingleton().setCommands(),
-    infra.TelegramBotsWhatchBot.getSingleton().setCommands(),
+    infra.TelegramBotsMwBot().setCommands(),
+    infra.TelegramBotsMuwnoBot().setCommands(),
+    infra.TelegramBotsWhatchBot().setCommands(),
   ]);
 }
