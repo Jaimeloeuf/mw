@@ -13,3 +13,18 @@ For the most part, infra modules should not hold core business logic as all core
 ## Naming
 1. Folders for generic infra services that is meant for all apps in the monorepo to use, should use a generic name.
 1. Folders for app specific infra services should have the app name prefixed, e.g. the `OpenAi` service for Muwno only should be named `MuwnoOpenAi`.
+
+
+## How to use?
+Use infra modules by importing the `infra` namespace from `__generated/index.js`. For example,
+```typescript
+import { infra } from "../../__generated/index.js";
+
+infra.emailSharedSendEmail(...)
+```
+
+
+## Infra module addition/deletion
+Once a new infra module is added or a infra module is deleted, re-run codegen with `npm run codegen all` to update the generated `infra` export namespace.
+
+The codegen step responsible for this is `genInfraBarrelFile`.

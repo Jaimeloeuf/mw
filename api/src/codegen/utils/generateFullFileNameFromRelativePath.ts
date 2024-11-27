@@ -27,8 +27,8 @@ export const generateFullFileNameFromRelativePath = (
 
     // Use regex to convert path splitters '/' into camelCase delimiters.
     // E.g. folder/another/myData to folderAnotherMyData
-    .replace(/\/([a-z])/g, (_, char) => char.toUpperCase())
+    .replace(/\/([a-zA-Z])/g, (_, char) => char.toUpperCase())
 
     // Use regex to convert strings with '-' into camelCase delimiters.
     // E.g. folder-with-dash/myData to folderWithDashMyData
-    .replace(/-([a-z])/g, (_, char) => char.toUpperCase());
+    .replace(/-([a-zA-Z])/g, (_, char) => char.toUpperCase());
