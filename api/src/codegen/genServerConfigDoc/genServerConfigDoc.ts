@@ -23,7 +23,10 @@ export async function genServerConfigDoc() {
   }
 
   const generatedConfigRows = configType
-    .map(({ name, type }) => `${name}|${type.replaceAll("|", "\\|")}|`)
+    .map(
+      ({ name, type }) =>
+        `${name}|${type.replaceAll("|", "\\|").replaceAll("<", "\\<").replaceAll(">", "\\>")}|`,
+    )
     .join("\n");
 
   const generatedCode = serverConfigTemplate(generatedConfigRows);
