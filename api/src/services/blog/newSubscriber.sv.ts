@@ -1,6 +1,5 @@
-import { df } from "../../__generated/index.js";
+import { df, infra } from "../../__generated/index.js";
 import { ConflictException } from "../../exceptions/index.js";
-import { notifyAdminWithInternalAdminTelegramBot } from "../../infra/index.js";
 import { SimplePostProcessing } from "../../post-processing/index.js";
 import { blogEmailService } from "./blogEmailService.js";
 
@@ -34,9 +33,9 @@ export default async function BlogNewSubscriber(email: string) {
       }
     })
     .addJob(async function notifyAdmin() {
-      const notificationError = await notifyAdminWithInternalAdminTelegramBot(
-        `New blog subscriber: ${blogSubscriberResult.email}`,
-      );
+      const notificationError = await infra
+        .TelegramBotsMwBot()
+        .notifyAdmin(`New blog subscriber: ${blogSubscriberResult.email}`);
 
       if (notificationError instanceof Error) {
         throw notificationError;

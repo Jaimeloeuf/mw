@@ -5,6 +5,10 @@ class MwBot extends TelegramBot {
   override async getToken() {
     return config.tele_adminbot_token();
   }
+
+  notifyAdmin(message: string) {
+    return this.sendMessage(config.tele_adminbot_admin_chat_id(), message);
+  }
 }
 
 let cachedBot: MwBot | null = null;

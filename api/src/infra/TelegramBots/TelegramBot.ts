@@ -1,6 +1,10 @@
+import { sf } from "simpler-fetch";
+
 import type { TelegramWebhookData } from "../Telegram/telegramWebhookDataSchema.js";
 import type { CommandData } from "./CommandData.js";
 
+import { ServiceException } from "../../exceptions/index.js";
+import { prettyPrintJson } from "../../utils/index.js";
 import { registerTelegramWebhookUrl } from "../Telegram/registerTelegramWebhookUrl.js";
 import { setCommands } from "../Telegram/setCommands.js";
 import { getCommand } from "./getCommand.js";
@@ -117,5 +121,48 @@ export class TelegramBot {
       chat_id: update.message.chat.id,
       text: "Not Supported",
     };
+  }
+
+  /**
+   * Call this to send a message to a user.
+   */
+  async sendMessage(
+    recipientTelegramChatID: string,
+
+    /**
+     * Notification message. This supports HTML formatting
+     */
+    message: string,
+  ): Promise<void | Error> {
+    const token = await this.getToken();
+
+    // Call sendMessage API using HTML for formating instead of MarkdownV2 due
+    // to the restrictions in place for parsing markdown text. Especially when
+    // trying to send user input directly to telegram API, it may crash as user
+    // may use special reserved characters and cause server the crash. Thus the
+    // fix to this is just use HTML formatting instead.
+    // References:
+    // https://core.telegram.org/bots/api#markdownv2-style
+    // https://stackoverflow.com/questions/62600596/why-is-a-reserved-character-in-markdownv2-in-telegrams-bot-api
+    // https://github.com/telegraf/telegraf/issues/1242
+    const { err, res } = await sf
+      .useOnce(`https://api.telegram.org/bot${token}/sendMessage`)
+      .POST()
+      .bodyJSON({
+        chat_id: recipientTelegramChatID,
+        text: message,
+        parse_mode: "HTML",
+      })
+      .runJSON();
+
+    if (err !== undefined) {
+      return err as Error;
+    }
+
+    if (!res.ok) {
+      return new ServiceException(
+        `Failed to send telegram message: ${prettyPrintJson(res.data)}`,
+      );
+    }
   }
 }
