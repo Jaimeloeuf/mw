@@ -1,6 +1,5 @@
+import { infra } from "../../__generated/index.js";
 import { config } from "../../config/index.js";
-import { setCommands } from "../../infra/Telegram/setCommands.js";
-import { dataOrThrow } from "../../utils/index.js";
 
 /**
  * Register telegram bot commands.
@@ -12,10 +11,9 @@ export default async function registerAllTelegramBotCommands() {
     return;
   }
 
-  await setCommands(dataOrThrow(config.whatch_tele_bot_token()), [
-    {
-      command: "eating",
-      description: "Get a random video to watch while eating",
-    },
+  await Promise.all([
+    infra.TelegramBotsMwBot.getSingleton().setCommands(),
+    infra.TelegramBotsMuwnoBot.getSingleton().setCommands(),
+    infra.TelegramBotsWhatchBot.getSingleton().setCommands(),
   ]);
 }

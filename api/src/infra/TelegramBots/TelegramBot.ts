@@ -2,6 +2,7 @@ import type { TelegramWebhookData } from "../Telegram/telegramWebhookDataSchema.
 import type { CommandData } from "./CommandData.js";
 
 import { registerTelegramWebhookUrl } from "../Telegram/registerTelegramWebhookUrl.js";
+import { setCommands } from "../Telegram/setCommands.js";
 import { getCommand } from "./getCommand.js";
 
 /**
@@ -50,6 +51,14 @@ export class TelegramBot {
       this.constructor.name,
       await this.getToken(),
     );
+  }
+
+  /**
+   * ## DO NOT OVERRIDE!
+   * Call this to register the telegram commands for the current bot.
+   */
+  async setCommands() {
+    return setCommands(await this.getToken(), this.commands);
   }
 
   /**
