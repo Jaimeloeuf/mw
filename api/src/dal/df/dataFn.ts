@@ -21,6 +21,10 @@ import { prettyPrintJson, noThrowPromise } from "../../utils/index.js";
  * it is not worth it to add a layer of function call / indirection just to
  * support synchronous data functions. Therefore data functions must be either
  * `async` or returns a `Promise`.
+ *
+ * ## The idea of run modes
+ * This is a data function specific implementation of
+ * `wrapFunctionToProvideRunModes`
  */
 export function dataFn<
   T extends (...args: any) => Promise<any>,

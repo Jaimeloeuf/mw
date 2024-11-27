@@ -11,3 +11,4 @@ export * from "./prettyPrintJson.js";
 export * from "./sha256hash.js";
 export * from "./unixSecondsToIsoString.js";
 export * from "./unknownCatchToError.js";
+export * from "./wrapFunctionToProvideRunModes.js";
