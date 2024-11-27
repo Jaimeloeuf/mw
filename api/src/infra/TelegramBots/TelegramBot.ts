@@ -10,24 +10,15 @@ import { setCommands } from "../Telegram/setCommands.js";
 import { getCommand } from "./getCommand.js";
 
 /**
- * Telegram Bot base class for all bot implementations to extend.
- *
- * ## Override Items (required)
- * 1. `getToken` instance method
- *
- * ## Override Items (optional)
- * 1. `commands` instance variable
- * 1. `onMessage` instance method
+ * Telegram Bot base abstract class.
  */
-export class TelegramBot {
+export abstract class TelegramBot {
   /**
    * Override this method to return the bot token string.
    *
    * This is async to support all types of config loaders.
    */
-  async getToken(): Promise<string> {
-    throw new Error(`Unimplemented! Override '${this.getToken.name}' method`);
-  }
+  abstract getToken(): string | Promise<string>;
 
   /**
    * ## DO NOT OVERRIDE!
