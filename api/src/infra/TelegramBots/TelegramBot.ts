@@ -1,5 +1,3 @@
-import { sf } from "simpler-fetch";
-
 import type { TelegramWebhookData } from "../Telegram/telegramWebhookDataSchema.js";
 import type { CommandData } from "./CommandData.js";
 
@@ -7,7 +5,10 @@ import { urlBuilder } from "../../__generated/index.js";
 import { config } from "../../config/index.js";
 import { ServiceException } from "../../exceptions/index.js";
 import { logger } from "../../logging/index.js";
-import { prettyPrintJson } from "../../utils/index.js";
+import {
+  prettyPrintJson,
+  wrapFunctionToProvideRunModes,
+} from "../../utils/index.js";
 import { tApi } from "../Telegram/tApi.js";
 import { getCommand } from "./getCommand.js";
 
@@ -165,16 +166,17 @@ export abstract class TelegramBot {
   }
 
   /**
-   * Call this to send a message to a user.
+   * Call this to send a message to a user and get back the API JSON response.
    */
-  async sendMessage(
+  sendMessage = wrapFunctionToProvideRunModes(this.#sendMessage.bind(this));
+  async #sendMessage(
     recipientTelegramChatID: string,
 
     /**
      * Notification message. This supports HTML formatting
      */
     message: string,
-  ): Promise<void | Error> {
+  ) {
     const token = await this.getToken();
 
     // Call sendMessage API using HTML for formating instead of MarkdownV2 due
@@ -186,24 +188,18 @@ export abstract class TelegramBot {
     // https://core.telegram.org/bots/api#markdownv2-style
     // https://stackoverflow.com/questions/62600596/why-is-a-reserved-character-in-markdownv2-in-telegrams-bot-api
     // https://github.com/telegraf/telegraf/issues/1242
-    const { err, res } = await sf
-      .useOnce(`https://api.telegram.org/bot${token}/sendMessage`)
-      .POST()
-      .bodyJSON({
-        chat_id: recipientTelegramChatID,
-        text: message,
-        parse_mode: "HTML",
-      })
-      .runJSON();
-
-    if (err !== undefined) {
-      return err as Error;
-    }
+    const res = await tApi(token, "sendMessage", {
+      chat_id: recipientTelegramChatID,
+      text: message,
+      parse_mode: "HTML",
+    });
 
     if (!res.ok) {
-      return new ServiceException(
-        `Failed to send telegram message: ${prettyPrintJson(res.data)}`,
+      throw new ServiceException(
+        `Failed to send telegram message: ${prettyPrintJson(res)}`,
       );
     }
+
+    return res;
   }
 }

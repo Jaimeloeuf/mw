@@ -7,7 +7,10 @@ class MwBot extends TelegramBot {
   }
 
   notifyAdmin(message: string) {
-    return this.sendMessage(config.tele_adminbot_admin_chat_id(), message);
+    return this.sendMessage.runAndThrowOnError(
+      config.tele_adminbot_admin_chat_id(),
+      message,
+    );
   }
 }
 
