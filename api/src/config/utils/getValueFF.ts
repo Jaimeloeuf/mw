@@ -1,5 +1,6 @@
 import type { z } from "zod";
 
+import type { ConfigLoader } from "../ConfigLoader.js";
 import type { createConfig } from "./createConfig.js";
 
 /**
@@ -20,7 +21,7 @@ export function getValueFF<
     () => ConfigMapping["configLoaderType"] extends "sync"
       ? ConfigType
       : Promise<ConfigType>,
->(configMapping: ConfigMapping) {
+>(configMapping: ConfigMapping): ConfigLoader<ConfigValueType> {
   if (configMapping.configLoaderType === "sync") {
     let value: ConfigValueType | null = null;
 
