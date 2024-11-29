@@ -33,13 +33,11 @@ export default async function BlogNewSubscriber(email: string) {
       }
     })
     .addJob(async function notifyAdmin() {
-      const notificationError = await infra
+      await infra
         .TelegramBotsMwBot()
-        .notifyAdmin(`New blog subscriber: ${blogSubscriberResult.email}`);
-
-      if (notificationError instanceof Error) {
-        throw notificationError;
-      }
+        .notifyAdmin.runAndThrowOnError(
+          `New blog subscriber: ${blogSubscriberResult.email}`,
+        );
     })
     .run();
 }
