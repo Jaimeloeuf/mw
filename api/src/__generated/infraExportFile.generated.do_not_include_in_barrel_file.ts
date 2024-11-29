@@ -6,10 +6,10 @@
  * genInfraBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(6d3fe9ac5c6bb3e687f5e1727e3e465ca1298045028077e1c5d0f16a53971cf8)
+ * sha256(9c5087e0d6517cb0a3657ad58c363c690b881249504f1f8f020a6203f0b78e47)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
-export { default as TelegramBotsMuwnoBot } from "../infra/TelegramBots/MuwnoBot.in.js";
-export { default as TelegramBotsMwBot } from "../infra/TelegramBots/MwBot.in.js";
-export { default as TelegramBotsWhatchBot } from "../infra/TelegramBots/WhatchBot.in.js";
+export { default as TelegramBotsMuwnoBot } from "../infra/Telegram/Bots/MuwnoBot.in.js";
+export { default as TelegramBotsMwBot } from "../infra/Telegram/Bots/MwBot.in.js";
+export { default as TelegramBotsWhatchBot } from "../infra/Telegram/Bots/WhatchBot.in.js";

@@ -1,5 +1,5 @@
-import { config } from "../../config/index.js";
-import { TelegramBot } from "./TelegramBot.js";
+import { config } from "../../../config/index.js";
+import { TelegramBot } from "../TelegramBot.js";
 
 class MuwnoBot extends TelegramBot {
   override async getToken() {

@@ -38,6 +38,7 @@ export default httpController({
       case config.whatch_tele_bot_token(): {
         return infra.TelegramBotsWhatchBot().onUpdate(requestBody);
       }
+      // Add new bots right above this line following the same format
 
       // If the bot token is not valid
       default: {

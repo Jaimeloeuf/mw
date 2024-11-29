@@ -1,6 +1,6 @@
-import { config } from "../../config/index.js";
-import { wrapFunctionToProvideRunModes } from "../../utils/wrapFunctionToProvideRunModes.js";
-import { TelegramBot } from "./TelegramBot.js";
+import { config } from "../../../config/index.js";
+import { wrapFunctionToProvideRunModes } from "../../../utils/wrapFunctionToProvideRunModes.js";
+import { TelegramBot } from "../TelegramBot.js";
 
 class MwBot extends TelegramBot {
   override async getToken() {

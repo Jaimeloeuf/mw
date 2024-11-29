@@ -1,5 +1,5 @@
-import type { TelegramWebhookData } from "../Telegram/telegramWebhookDataSchema.js";
 import type { CommandData } from "./CommandData.js";
+import type { TelegramWebhookData } from "./telegramWebhookDataSchema.js";
 
 import { urlBuilder } from "../../__generated/index.js";
 import { config } from "../../config/index.js";
@@ -9,8 +9,8 @@ import {
   prettyPrintJson,
   wrapFunctionToProvideRunModes,
 } from "../../utils/index.js";
-import { tApi } from "../Telegram/tApi.js";
 import { getCommand } from "./getCommand.js";
+import { tApi } from "./tApi.js";
 
 /**
  * Telegram Bot base abstract class.

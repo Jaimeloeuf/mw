@@ -1,9 +1,9 @@
-import type { TelegramWebhookData } from "../index.js";
-import type { CommandData } from "./CommandData.js";
+import type { TelegramWebhookData } from "../../index.js";
+import type { CommandData } from "../CommandData.js";
 
-import { sv } from "../../__generated/index.js";
-import { config } from "../../config/index.js";
-import { TelegramBot } from "./TelegramBot.js";
+import { sv } from "../../../__generated/index.js";
+import { config } from "../../../config/index.js";
+import { TelegramBot } from "../TelegramBot.js";
 
 class WhatchBot extends TelegramBot {
   override async getToken() {

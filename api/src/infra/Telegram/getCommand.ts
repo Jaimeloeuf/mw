@@ -1,5 +1,5 @@
-import type { TelegramWebhookData } from "../Telegram/telegramWebhookDataSchema.js";
 import type { CommandData } from "./CommandData.js";
+import type { TelegramWebhookData } from "./telegramWebhookDataSchema.js";
 
 /**
  * Utility function to parse a command from the message, returns null if given
