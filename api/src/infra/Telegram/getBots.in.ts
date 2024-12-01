@@ -43,13 +43,11 @@ export default async function getAllBots() {
     // Log out all the bots that are successfully registered on first load in
     // non production environments, since in non production environments we
     // expect only some bots for development/testing use case to be available.
-    if (config.env() !== "production") {
-      logger.verbose(
-        getAllBots.name,
-        "All the available bots:",
-        Object.values(cachedBots).map((bot) => bot.constructor.name),
-      );
-    }
+    logger.nonProdVerbose(
+      getAllBots.name,
+      "All the available bots:",
+      Object.values(cachedBots).map((bot) => bot.constructor.name),
+    );
   }
 
   return cachedBots;

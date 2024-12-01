@@ -15,7 +15,7 @@ export function registerGlobalUncaughtIssueHandlers() {
     );
   });
 
-  logger.verbose(
+  logger.nonProdVerbose(
     registerGlobalUncaughtIssueHandlers.name,
     "Registered global handlers for uncaught promise rejections and errors",
   );

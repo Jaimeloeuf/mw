@@ -183,7 +183,7 @@ export const httpController = <
 
         for (const { guardDataNamespace, guard } of guards) {
           partialGuardData[guardDataNamespace] = await guard(req);
-          logger.verbose(
+          logger.nonProdVerbose(
             `${httpController.name}:${guard.name}`,
             `Passed guard check`,
           );
