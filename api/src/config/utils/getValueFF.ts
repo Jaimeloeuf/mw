@@ -17,10 +17,9 @@ import type { createConfig } from "./createConfig.js";
 export function getValueFF<
   const ConfigMapping extends ReturnType<typeof createConfig>,
   const ConfigType extends z.infer<ConfigMapping["schema"]>,
-  const ConfigValueType extends
-    () => ConfigMapping["configLoaderType"] extends "sync"
-      ? ConfigType
-      : Promise<ConfigType>,
+  const ConfigValueType extends ConfigMapping["configLoaderType"] extends "sync"
+    ? ConfigType
+    : Promise<ConfigType>,
 >(configMapping: ConfigMapping): ConfigLoader<ConfigValueType> {
   if (configMapping.configLoaderType === "sync") {
     let value: ConfigValueType | null = null;

@@ -114,7 +114,6 @@ export const sharedInfraConfig = {
 
   /**
    * Telegram bot's token.
-   * Placeholder can be used for development environments as it will be mocked.
    */
   tele_adminbot_token: createConfig(
     z.string(),
@@ -127,7 +126,6 @@ export const sharedInfraConfig = {
 
   /**
    * Chat ID of the team's telegram admin chat for notifications.
-   * Placeholder can be used for development environments as it will be mocked.
    */
   tele_adminbot_admin_chat_id: createConfig(
     z.string(),
