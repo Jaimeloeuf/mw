@@ -20,6 +20,14 @@ export default [
     rules: {
       "prefer-const": "error",
       "no-console": "warn",
+      // Potentially helpful when doing codegen with manual sections for users
+      // to fill in before committing.
+      // "no-warning-comments": [
+      //   "error",
+      //   {
+      //     terms: ["@nocommit"],
+      //   },
+      // ],
       "perfectionist/sort-imports": "error",
       "perfectionist/sort-exports": "error",
       "mwEslintPlugin/require-function-name-for-addJob": "error",
