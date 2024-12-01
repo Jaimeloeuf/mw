@@ -9,3 +9,7 @@ Remember to name all bot classes with `.in.ts` so that it will be part of the in
 ## Bot addition/deletion
 1. Once a new Bot is added or a Bot is deleted, re-run codegen with `npm run codegen all` to update the generated `infra` export namespace. The codegen step responsible for this is `genInfraBarrelFile`.
 1. Register the bot in [`allBotLoaders.ts`](./allBotLoaders.ts).
+
+
+## Development
+Remember to temporarily remove the production only blocker in [`setupTelegramBots`](../../../startup/telegram/setupTelegramBots.st.ts) in order to test your bot's webhook and commands.

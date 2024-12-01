@@ -9,7 +9,7 @@ import {
   prettyPrintJson,
   wrapFunctionToProvideRunModes,
 } from "../../utils/index.js";
-import { getCommand } from "./getCommand.js";
+import { getCommandIfAny } from "./getCommandIfAny.js";
 import { tApi } from "./tApi.js";
 
 /**
@@ -121,12 +121,20 @@ export abstract class TelegramBot {
    * response.
    */
   onUpdate(update: TelegramWebhookData) {
-    for (const { command, onCommand } of this.commands) {
-      const commandData = getCommand(update, command);
+    const commandData = getCommandIfAny(update);
 
-      // If null means that the command is not found
-      if (commandData !== null) {
-        return onCommand(commandData, update);
+    // If not null means that is a command found in the message
+    if (commandData !== null) {
+      const registeredCommand = this.commandsObject[commandData.command];
+
+      if (registeredCommand !== undefined) {
+        return registeredCommand.onCommand(commandData, update);
+      }
+
+      // If no command handler registered for the command received, and command
+      // is a /start command, do nothing by default
+      if (commandData.command === "start") {
+        return;
       }
     }
 
@@ -136,6 +144,15 @@ export abstract class TelegramBot {
   /**
    * Override this to supply your list of bot commands and its callback
    * functions (which should call service functions to handle business logic).
+   *
+   * ## /start
+   * Start is a special command, since thats the command user sends to your bot
+   * to get started. Ideally if your bot supports a start flow, it should define
+   * a `/start` command. However unlike other commands, if /start is not defined
+   * we **WILL NOT** run the fallback `onMessage` response to ensure that bots
+   * without the /start command registered dont always end up sending users a
+   * "Not Supported" as per the default onMessage response right at the start of
+   * their onboarding flow.
    */
   commands: Array<{
     /**
@@ -158,6 +175,25 @@ export abstract class TelegramBot {
      */
     onCommand: (data: CommandData, update: TelegramWebhookData) => any;
   }> = [];
+
+  #cachedCommandsAsObject: {
+    [command: string]: (typeof TelegramBot)["prototype"]["commands"][number];
+  } | null = null;
+
+  /**
+   * Get an object mapping of `command`->`CommandDefinition`
+   */
+  get commandsObject() {
+    if (this.#cachedCommandsAsObject === null) {
+      this.#cachedCommandsAsObject = {};
+
+      for (const command of this.commands) {
+        this.#cachedCommandsAsObject[command.command] = command;
+      }
+    }
+
+    return this.#cachedCommandsAsObject;
+  }
 
   /**
    * This method is called when there is a new message that doesnt contain any
