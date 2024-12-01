@@ -3,7 +3,7 @@ import { TelegramBot } from "../TelegramBot.js";
 
 class MuwnoBot extends TelegramBot {
   override async getToken() {
-    return config.whatch_tele_bot_token();
+    return config.muwno_tele_bot_token();
   }
 }
 
