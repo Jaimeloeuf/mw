@@ -24,6 +24,17 @@ export abstract class TelegramBot {
   abstract getToken(): string | Promise<string>;
 
   /**
+   * Run this to setup the telegram bot.
+   *
+   * Internally this just wraps and call `registerTelegramWebhookUrl` and
+   * `setCommands`.
+   */
+  async setup() {
+    await this.registerTelegramWebhookUrl();
+    await this.setCommands();
+  }
+
+  /**
    * ## DO NOT OVERRIDE!
    * Call this to register the telegram webhook URL for the current bot.
    */
