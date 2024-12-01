@@ -26,24 +26,15 @@ export default httpController({
       throw new NotFoundException("API Route not found");
     }
 
-    // Validate if it is a Bot we own, and call/route to its own service to
-    // handle the request. 404 if it isnt a valid bot managed by us.
-    switch (urlParams.telegramBotToken) {
-      case config.tele_adminbot_token(): {
-        return infra.TelegramBotsMwBot().onUpdate(requestBody);
-      }
-      case config.muwno_tele_bot_token(): {
-        return infra.TelegramBotsMuwnoBot().onUpdate(requestBody);
-      }
-      case config.whatch_tele_bot_token(): {
-        return infra.TelegramBotsWhatchBot().onUpdate(requestBody);
-      }
-      // Add new bots right above this line following the same format
+    const bot = await infra.TelegramGetBotWithToken(urlParams.telegramBotToken);
 
-      // If the bot token is not valid
-      default: {
-        throw new NotFoundException("API Route not found");
-      }
+    // If the bot token is not valid (no bot found for this token), treat it as
+    // a invalid API route.
+    if (bot === undefined) {
+      throw new NotFoundException("API Route not found");
     }
+
+    // Send telegram webhook 'Update' object for TelegramBot to handle
+    return bot.onUpdate(requestBody);
   },
 });

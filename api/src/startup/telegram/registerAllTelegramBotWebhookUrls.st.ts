@@ -11,9 +11,7 @@ export default async function registerAllTelegramBotWebhookUrls() {
     return;
   }
 
-  await Promise.all([
-    infra.TelegramBotsMwBot().registerTelegramWebhookUrl(),
-    infra.TelegramBotsMuwnoBot().registerTelegramWebhookUrl(),
-    infra.TelegramBotsWhatchBot().registerTelegramWebhookUrl(),
-  ]);
+  const bots = await infra.TelegramGetBotsArray();
+
+  await Promise.all(bots.map((bot) => bot.registerTelegramWebhookUrl()));
 }
