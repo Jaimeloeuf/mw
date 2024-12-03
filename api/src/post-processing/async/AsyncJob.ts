@@ -1,6 +1,6 @@
+import type { AsyncJobResult } from "./AsyncJobResult.js";
 import type { AsyncJobStatus } from "./AsyncJobStatus.js";
 import type { AsyncJobTypeConfig } from "./AsyncJobTypeConfig.js";
-import type { JobResult } from "./JobResult.js";
 
 /**
  * Async Job represents a single run/instance of the specified `AsyncJobType`.
@@ -66,5 +66,5 @@ export type AsyncJob = Pick<AsyncJobTypeConfig, "machineType" | "priority"> & {
    *
    * This is null until the job function finishes.
    */
-  jobResult: null | JobResult;
+  jobResult: null | AsyncJobResult;
 };

@@ -1,7 +1,7 @@
 /**
  * Return type of the Async Job Type run function.
  */
-export type JobResult<Detail = unknown> = {
+export type AsyncJobResult<Detail = unknown> = {
   success: boolean;
 
   /**

@@ -2,7 +2,7 @@ import type { ZodType } from "zod";
 
 import type { AsyncJobMachineType } from "./AsyncJobMachineType.js";
 import type { AsyncJobPriority } from "./AsyncJobPriority.js";
-import type { JobResult } from "./JobResult.js";
+import type { AsyncJobResult } from "./AsyncJobResult.js";
 
 /**
  * Config object for an Async Job Type.
@@ -47,5 +47,5 @@ export type AsyncJobTypeConfig<
   /**
    * The actual job function definition.
    */
-  run(argument: AsyncJobArgumentType): JobResult | Promise<JobResult>;
+  run(argument: AsyncJobArgumentType): AsyncJobResult | Promise<AsyncJobResult>;
 };
