@@ -38,6 +38,22 @@ export type AsyncJobTypeConfig<
   priority: AsyncJobPriority;
 
   /**
+   * An optional timeout in seconds for every Job of this Job Type. Once time is
+   * up we will try to kill the job, and record that it finished in failure with
+   * exceeded timeout as failure reason.
+   *
+   * This timeout applies for all Jobs of this Job Type, so make sure it can
+   * accomodate up to the longest run of a job. You can also override this for
+   * a single Job when scheduling it.
+   *
+   * If none is set, a default timeout of 1 hour will be used.
+   *
+   * Set this to `null` if you explicitly do not want it to ever timeout, use
+   * carefully as this could run into an infinite loop and hog the server.
+   */
+  timeout?: number | null;
+
+  /**
    * Optional `Zod` Validator to validate job arguments.
    */
   argumentValidator?: AsyncJobArgumentType extends void

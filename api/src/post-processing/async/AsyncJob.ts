@@ -5,7 +5,10 @@ import type { AsyncJobTypeConfig } from "./AsyncJobTypeConfig.js";
 /**
  * Async Job represents a single run/instance of the specified `AsyncJobType`.
  */
-export type AsyncJob = Pick<AsyncJobTypeConfig, "machineType" | "priority"> & {
+export type AsyncJob = Pick<
+  AsyncJobTypeConfig,
+  "machineType" | "priority" | "timeout"
+> & {
   /**
    * Unique ID for each Job (also known as a run or job instance).
    */
