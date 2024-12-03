@@ -5,10 +5,7 @@ import type { AsyncJobTypeConfig } from "./AsyncJobTypeConfig.js";
 /**
  * Async Job represents a single run/instance of the specified `AsyncJobType`.
  */
-export type AsyncJob = Pick<
-  AsyncJobTypeConfig,
-  "machineType" | "priority" | "timeout"
-> & {
+export type AsyncJob = Pick<AsyncJobTypeConfig, "machineType" | "priority"> & {
   /**
    * Unique ID for each Job (also known as a run or job instance).
    */
@@ -38,6 +35,16 @@ export type AsyncJob = Pick<
    * Stack Trace of how this Job got scheduled and where is it scheduled from.
    */
   stackTrace: string;
+
+  /**
+   * A timeout in seconds for this Job. Once time is up we will try to kill the
+   * job, and record that it finished in failure with exceeded timeout as
+   * failure reason.
+   *
+   * If this is explicitly set to `null`, it means the job will never timeout,
+   * use carefully as this could run into an infinite loop and hog the server.
+   */
+  timeout: number | null;
 
   /**
    * When is this Job scheduled in ISO time?
