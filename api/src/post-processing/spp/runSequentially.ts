@@ -1,6 +1,6 @@
 import type { WrappedFunction } from "./WrappedFunction.js";
 
-import { logger } from "../logging/index.js";
+import { logger } from "../../logging/index.js";
 
 /**
  * Run SimplePostProcessing wrapped functions sequentially by awaiting for each

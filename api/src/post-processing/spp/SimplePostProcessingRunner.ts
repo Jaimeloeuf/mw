@@ -1,6 +1,6 @@
 import type { WrappedFunction } from "./WrappedFunction.js";
 
-import { logger } from "../logging/index.js";
+import { logger } from "../../logging/index.js";
 import { runInParallel } from "./runInParallel.js";
 import { runSequentially } from "./runSequentially.js";
 

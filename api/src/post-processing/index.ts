@@ -2,4 +2,4 @@
  * Barrel file
  */
 
-export * from "./SimplePostProcessing.js";
+export * from "./spp/SimplePostProcessing.js";
