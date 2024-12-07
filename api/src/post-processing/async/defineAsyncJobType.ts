@@ -1,9 +1,8 @@
-import type { ZodType } from "zod";
-
 import type { AsyncJob } from "./AsyncJob.js";
 import type { AsyncJobType } from "./AsyncJobType.js";
 import type { AsyncJobTypeConfig } from "./AsyncJobTypeConfig.js";
 
+import { InvalidInternalStateException } from "../../exceptions/index.js";
 import { getStackTrace } from "../../utils/index.js";
 import { AsyncJobStatus } from "./AsyncJobStatus.js";
 
@@ -24,7 +23,7 @@ export function defineAsyncJobType<T>(
     async scheduleJob(runOptions) {
       const serialisedJobArgumentsOrNull =
         validateJobArgumentsAndJsonSerialiseIt(
-          asyncJobConfig.argumentValidator,
+          asyncJobConfig,
           runOptions?.jobArguments,
         );
 
@@ -67,18 +66,22 @@ export function defineAsyncJobType<T>(
  * If there is no argumentValidator given, assume that the job does not take any
  * arguments and returns null instead.
  */
-function validateJobArgumentsAndJsonSerialiseIt(
-  argumentValidator?: ZodType<any> | void,
+function validateJobArgumentsAndJsonSerialiseIt<T>(
+  asyncJobConfig: AsyncJobTypeConfig<T>,
   jobArguments?: unknown,
 ) {
-  if (argumentValidator === undefined) {
+  if (asyncJobConfig.argumentValidator === undefined) {
     return null;
   }
 
-  const { success, data, error } = argumentValidator.safeParse(jobArguments);
+  const { success, data, error } =
+    asyncJobConfig.argumentValidator.safeParse(jobArguments);
 
   if (!success) {
-    throw new Error(error.toString());
+    throw new InvalidInternalStateException(
+      `Invalid Async Job arguments for '${asyncJobConfig.name}' ` +
+        error.toString(),
+    );
   }
 
   let jsonStringifyResult;
@@ -86,7 +89,9 @@ function validateJobArgumentsAndJsonSerialiseIt(
   try {
     jsonStringifyResult = JSON.stringify(data);
   } catch (error) {
-    throw new Error("Failed to JSON.stringify Async Job arguments");
+    throw new InvalidInternalStateException(
+      `Failed to JSON.stringify Async Job arguments for '${asyncJobConfig.name}' due to '${error?.toString()}'`,
+    );
   }
 
   return jsonStringifyResult;
