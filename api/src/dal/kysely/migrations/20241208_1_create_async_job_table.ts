@@ -27,9 +27,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("caller", "text", (col) => col.notNull())
     .addColumn("stack_trace", "text", (col) => col.notNull())
     .addColumn("timeout", "integer")
-    .addColumn("time_scheduled", "timestamp", (col) =>
-      col.notNull().defaultTo(sql`now()`),
-    )
+    .addColumn("time_scheduled", "timestamp", (col) => col.notNull())
     .addColumn("time_start", "timestamp")
     .addColumn("time_finish", "timestamp")
     .addColumn("job_arguments", "text")
