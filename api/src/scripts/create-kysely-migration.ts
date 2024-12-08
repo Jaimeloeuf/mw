@@ -4,8 +4,9 @@ import readline from "readline/promises";
 
 import { logger } from "../logging/index.js";
 
-const codeTemplate = `import { sql } from "kysely";
-import type { Kysely } from "kysely";
+const codeTemplate = `import type { Kysely } from "kysely";
+
+import { sql } from "kysely";
 
 export async function up(db: Kysely<any>): Promise<void> {
   await db.schema.createTable(tableName);
