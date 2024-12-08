@@ -1,3 +1,4 @@
+import type { AsyncJobTable } from "./AsyncJobTable.js";
 import type { BlogSubscriberTable } from "./BlogSubscriberTable.js";
 import type { BucketlistItemTable } from "./BucketlistItemTable.js";
 import type { BucketlistTable } from "./BucketlistTable.js";
@@ -17,6 +18,7 @@ import type { MuwnoTeamMemberInvitationTable } from "./MuwnoTeamMemberInvitation
 import type { MuwnoUserTable } from "./MuwnoUserTable.js";
 
 export interface Database {
+  async_job: AsyncJobTable;
   blog_subscriber: BlogSubscriberTable;
   bucketlist: BucketlistTable;
   bucketlist_item: BucketlistItemTable;
