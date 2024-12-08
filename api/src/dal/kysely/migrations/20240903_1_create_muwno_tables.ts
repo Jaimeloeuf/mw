@@ -2,6 +2,8 @@ import type { Kysely } from "kysely";
 
 import { sql } from "kysely";
 
+const subscriptionPlanEnumName = "muwno_subscription_plan";
+const roleEnumName = "muwno_user_role";
 const orgTableName = "muwno_org";
 const userTableName = "muwno_user";
 const productTableName = "muwno_product";
@@ -16,12 +18,12 @@ const apiKeyTableName = "muwno_api_key";
 
 export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
-    .createType("subscription_plan")
+    .createType(subscriptionPlanEnumName)
     .asEnum(["Standard"])
     .execute();
 
   await db.schema
-    .createType("role")
+    .createType(roleEnumName)
     .asEnum(["OrgUser", "OrgAdmin", "OrgOwner"])
     .execute();
 
@@ -38,7 +40,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("size", "text")
     .addColumn("verified", "boolean", (col) => col.notNull())
     .addColumn("subscribed", "boolean", (col) => col.notNull())
-    .addColumn("subscription_plan", sql`subscription_plan`)
+    .addColumn("subscription_plan", sql.raw(subscriptionPlanEnumName))
     .execute();
 
   await db.schema
@@ -49,7 +51,7 @@ export async function up(db: Kysely<any>): Promise<void> {
       col.notNull().defaultTo(sql`now()`),
     )
     .addColumn("org_id", "text")
-    .addColumn("role", sql`role`)
+    .addColumn("role", sql.raw(roleEnumName))
     .addColumn("name", "text", (col) => col.notNull())
     .addColumn("email", "text", (col) => col.notNull().unique())
     .addColumn("deactivated", "boolean", (col) => col.notNull())
@@ -102,7 +104,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("org_id", "text", (col) => col.notNull())
     .addColumn("inviter_user_id", "text", (col) => col.notNull())
     .addColumn("invitee_email", "text", (col) => col.notNull().unique())
-    .addColumn("role", sql`role`, (col) => col.notNull())
+    .addColumn("role", sql.raw(roleEnumName), (col) => col.notNull())
     .execute();
 
   await db.schema
@@ -178,4 +180,8 @@ export async function down(db: Kysely<any>): Promise<void> {
   await db.schema.dropTable(stripeCustomerTableName).execute();
   await db.schema.dropTable(stripeSetupNextTableName).execute();
   await db.schema.dropTable(apiKeyTableName).execute();
+
+  // Delete the enum types
+  await db.schema.dropType(roleEnumName).execute();
+  await db.schema.dropType(subscriptionPlanEnumName).execute();
 }
