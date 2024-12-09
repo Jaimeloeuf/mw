@@ -2,7 +2,9 @@ import type { AsyncJob } from "./AsyncJob.js";
 import type { AsyncJobType } from "./AsyncJobType.js";
 import type { AsyncJobTypeConfig } from "./AsyncJobTypeConfig.js";
 
+import { df } from "../../__generated/index.js";
 import { InvalidInternalStateException } from "../../exceptions/index.js";
+import { logger } from "../../logging/index.js";
 import { getStackTrace } from "../../utils/index.js";
 import { AsyncJobStatus } from "./AsyncJobStatus.js";
 
@@ -27,7 +29,7 @@ export function defineAsyncJobType<T>(
           runOptions?.jobArguments,
         );
 
-      const data: AsyncJob = {
+      const asyncJob: AsyncJob = {
         id: crypto.randomUUID(),
         jobTypeID: asyncJobConfig.id,
         status: AsyncJobStatus.queued,
@@ -51,7 +53,12 @@ export function defineAsyncJobType<T>(
         stackTrace: getStackTrace(2),
       };
 
-      data;
+      await df.asyncCreateJob.runAndThrowOnError(asyncJob);
+
+      logger.verbose(
+        `${asyncJob.caller}:${this.scheduleJob.name}`,
+        `Successfully scheduled async job '${asyncJobConfig.name}'`,
+      );
     },
   };
 }
