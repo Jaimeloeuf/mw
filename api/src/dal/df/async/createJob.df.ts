@@ -10,6 +10,8 @@ export default dataFn(async function asyncCreateJob(job: AsyncJob) {
       id: job.id,
       job_type_id: job.jobTypeID,
       status: job.status,
+      priority: job.priority,
+      machine_type: job.machineType,
       caller: job.caller,
       stack_trace: job.stackTrace,
       timeout: job.timeout,

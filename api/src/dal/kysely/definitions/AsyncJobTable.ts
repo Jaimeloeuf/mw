@@ -1,5 +1,7 @@
 import type { ColumnType, Insertable, Selectable, Updateable } from "kysely";
 
+import type { AsyncJobMachineType } from "../../../post-processing/async/AsyncJobMachineType.js";
+import type { AsyncJobPriority } from "../../../post-processing/async/AsyncJobPriority.js";
 import type { AsyncJobStatus } from "../../../post-processing/async/AsyncJobStatus.js";
 import type { NullableAndVoidable } from "../../../types/index.js";
 
@@ -10,6 +12,12 @@ export interface AsyncJobTable {
   id: ColumnType<string, string, never>;
   job_type_id: ColumnType<string, string, never>;
   status: ColumnType<AsyncJobStatus, AsyncJobStatus, AsyncJobStatus>;
+  priority: ColumnType<AsyncJobPriority, AsyncJobPriority, AsyncJobPriority>;
+  machine_type: ColumnType<
+    AsyncJobMachineType,
+    AsyncJobMachineType,
+    AsyncJobMachineType
+  >;
   caller: ColumnType<string, string, never>;
   stack_trace: ColumnType<string, string, never>;
   timeout: ColumnType<
