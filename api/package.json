@@ -19,6 +19,7 @@
     "format:ci": "npx prettier --check 'src/**/*.ts'",
     "graphiql": "npx ruru -SP -p 4000 -e http://localhost:3000/gql",
     "db:run-migrations": "npx tsx ./src/dal/kysely/migration-script.ts",
+    "db:run-down-migrations": "npx tsx ./src/dal/kysely/migration-down-script.ts",
     "scratchpad": "npx tsx ./src/scripts/scratchpad.ts",
     "scripts:create-kysely-migration": "npx tsx ./src/scripts/create-kysely-migration.ts",
     "scripts:create-http-controller": "npx tsx ./src/scripts/create-http-controller.ts",
