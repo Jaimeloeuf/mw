@@ -1,4 +1,4 @@
-import type { MigrationResultSet } from "kysely";
+import type { MigrationInfo, MigrationResultSet } from "kysely";
 import type { Migrator } from "kysely";
 
 import { performance } from "perf_hooks";

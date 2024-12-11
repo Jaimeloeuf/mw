@@ -24,7 +24,6 @@ export async function confirmMigrationWithUser(
   const { db, migrator } = await createDbAndMigrator();
   const migrations = await migrator.getMigrations();
   await migrateConfirmationFunction(migrations);
-  db.destroy();
 
   const rl = readline.createInterface({
     input: process.stdin,
@@ -43,5 +42,9 @@ export async function confirmMigrationWithUser(
   }
 
   logger.info(confirmMigrationWithUser.name, "Aborting...");
+
+  // Destroy DB connection so that the CLI program can exit.
+  await db.destroy();
+
   return false;
 }
