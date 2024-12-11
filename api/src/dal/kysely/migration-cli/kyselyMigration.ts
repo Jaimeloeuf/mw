@@ -26,9 +26,6 @@ export async function kyselyMigration(
 
   const startTime = performance.now();
 
-  /** This needs to be an absolute path */
-  const migrationFolder = path.join(import.meta.dirname, "../migrations");
-
   const db = createDB({
     connectionString: config.db_conn_string(),
     kysely_log_error: true,
@@ -39,6 +36,9 @@ export async function kyselyMigration(
   if (!dbConnectionOk) {
     process.exit(1);
   }
+
+  /** This needs to be an absolute path */
+  const migrationFolder = path.join(import.meta.dirname, "../migrations");
 
   const migrator = new Migrator({
     db,
