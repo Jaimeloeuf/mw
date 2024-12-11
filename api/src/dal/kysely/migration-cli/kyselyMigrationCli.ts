@@ -1,5 +1,6 @@
 import { logger } from "../../../logging/index.js";
 import { kyselyMigration } from "./kyselyMigration.js";
+import { printAllMigrations } from "./printAllMigrations.js";
 import { printMigrationCliHelp } from "./printMigrationCliHelp.js";
 
 async function kyselyMigrationCli() {
@@ -10,6 +11,11 @@ async function kyselyMigrationCli() {
   }
 
   const arg = process.argv.at(-1) ?? "";
+
+  if (arg === "list") {
+    await printAllMigrations();
+    return;
+  }
 
   if (arg === "all") {
     await kyselyMigration("Migrate all up?", (migrator) =>
