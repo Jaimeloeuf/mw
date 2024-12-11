@@ -1,8 +1,16 @@
+import type { MigrationInfo } from "kysely";
+
 import readline from "node:readline";
 
 import { logger } from "../../../logging/index.js";
+import { createDbAndMigrator } from "./createDbAndMigrator.js";
 
-export async function confirmMigrationWithUser(confirmationQuestion: string) {
+export async function confirmMigrationWithUser(
+  migrateConfirmationFunction: (
+    migrations: ReadonlyArray<MigrationInfo>,
+  ) => unknown,
+  confirmationQuestion: string,
+) {
   const isKyeselyMigrationRanInCI = process.argv.includes("--ci");
 
   if (isKyeselyMigrationRanInCI) {
@@ -12,6 +20,10 @@ export async function confirmMigrationWithUser(confirmationQuestion: string) {
     );
     return true;
   }
+
+  const { migrator } = await createDbAndMigrator();
+  const migrations = await migrator.getMigrations();
+  await migrateConfirmationFunction(migrations);
 
   const rl = readline.createInterface({
     input: process.stdin,

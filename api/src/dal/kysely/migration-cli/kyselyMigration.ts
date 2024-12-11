@@ -13,9 +13,15 @@ import { createDbAndMigrator } from "./createDbAndMigrator.js";
  */
 export async function kyselyMigration(
   migrationConfirmationQuestion: string,
+  migrateConfirmationFunction: (
+    migrations: ReadonlyArray<MigrationInfo>,
+  ) => unknown,
   migrateFunction: (migrator: Migrator) => Promise<MigrationResultSet>,
 ) {
-  const confirm = await confirmMigrationWithUser(migrationConfirmationQuestion);
+  const confirm = await confirmMigrationWithUser(
+    migrateConfirmationFunction,
+    migrationConfirmationQuestion,
+  );
   if (!confirm) {
     return;
   }
