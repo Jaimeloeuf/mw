@@ -5,10 +5,10 @@ import { Migrator, FileMigrationProvider } from "kysely";
 import path from "path";
 import { performance } from "perf_hooks";
 
-import { config } from "../../config/index.js";
-import { logger } from "../../logging/index.js";
-import { createDB } from "./createDB.js";
-import { dbConnectionCheck } from "./dbConnectionCheck.js";
+import { config } from "../../../config/index.js";
+import { logger } from "../../../logging/index.js";
+import { createDB } from "../createDB.js";
+import { dbConnectionCheck } from "../dbConnectionCheck.js";
 
 /**
  * Use kysely migrator to migrate DB to latest migration change as defined by
@@ -20,7 +20,7 @@ export async function kyselyMigration(
   const startTime = performance.now();
 
   /** This needs to be an absolute path */
-  const migrationFolder = path.join(import.meta.dirname, "./migrations");
+  const migrationFolder = path.join(import.meta.dirname, "../migrations");
 
   const db = createDB({
     connectionString: config.db_conn_string(),
