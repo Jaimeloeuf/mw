@@ -21,9 +21,10 @@ export async function confirmMigrationWithUser(
     return true;
   }
 
-  const { migrator } = await createDbAndMigrator();
+  const { db, migrator } = await createDbAndMigrator();
   const migrations = await migrator.getMigrations();
   await migrateConfirmationFunction(migrations);
+  db.destroy();
 
   const rl = readline.createInterface({
     input: process.stdin,
