@@ -9,14 +9,21 @@ import { config } from "../../../config/index.js";
 import { logger } from "../../../logging/index.js";
 import { createDB } from "../createDB.js";
 import { dbConnectionCheck } from "../dbConnectionCheck.js";
+import { confirmMigrationWithUser } from "./confirmMigrationWithUser.js";
 
 /**
  * Use kysely migrator to migrate DB to latest migration change as defined by
  * migration files.
  */
 export async function kyselyMigration(
+  migrationConfirmationQuestion: string,
   migrateFunction: (migrator: Migrator) => Promise<MigrationResultSet>,
 ) {
+  const confirm = await confirmMigrationWithUser(migrationConfirmationQuestion);
+  if (!confirm) {
+    return;
+  }
+
   const startTime = performance.now();
 
   /** This needs to be an absolute path */

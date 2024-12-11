@@ -12,17 +12,23 @@ async function kyselyMigrationCli() {
   const arg = process.argv.at(-1) ?? "";
 
   if (arg === "all") {
-    await kyselyMigration((migrator) => migrator.migrateToLatest());
+    await kyselyMigration("Migrate all up?", (migrator) =>
+      migrator.migrateToLatest(),
+    );
     return;
   }
 
   if (arg === "up") {
-    await kyselyMigration((migrator) => migrator.migrateUp());
+    await kyselyMigration("Migrate one step up?", (migrator) =>
+      migrator.migrateUp(),
+    );
     return;
   }
 
   if (arg === "down") {
-    await kyselyMigration((migrator) => migrator.migrateDown());
+    await kyselyMigration("Migrate one step down?", (migrator) =>
+      migrator.migrateDown(),
+    );
     return;
   }
 
