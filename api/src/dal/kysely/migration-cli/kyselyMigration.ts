@@ -15,7 +15,7 @@ export async function kyselyMigration(
   migrationConfirmationQuestion: string,
   migrateConfirmationFunction: (
     migrations: ReadonlyArray<MigrationInfo>,
-  ) => unknown,
+  ) => boolean | Promise<boolean>,
   migrateFunction: (migrator: Migrator) => Promise<MigrationResultSet>,
 ) {
   const confirm = await confirmMigrationWithUser(

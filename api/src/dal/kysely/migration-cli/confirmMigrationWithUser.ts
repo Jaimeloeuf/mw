@@ -8,7 +8,7 @@ import { createDbAndMigrator } from "./createDbAndMigrator.js";
 export async function confirmMigrationWithUser(
   migrateConfirmationFunction: (
     migrations: ReadonlyArray<MigrationInfo>,
-  ) => unknown,
+  ) => boolean | Promise<boolean>,
   confirmationQuestion: string,
 ) {
   const isKyeselyMigrationRanInCI = process.argv.includes("--ci");
@@ -23,7 +23,13 @@ export async function confirmMigrationWithUser(
 
   const { db, migrator } = await createDbAndMigrator();
   const migrations = await migrator.getMigrations();
-  await migrateConfirmationFunction(migrations);
+  const shouldContinue = await migrateConfirmationFunction(migrations);
+
+  if (!shouldContinue) {
+    // Destroy DB connection so that the CLI program can exit.
+    await db.destroy();
+    return false;
+  }
 
   const rl = readline.createInterface({
     input: process.stdin,

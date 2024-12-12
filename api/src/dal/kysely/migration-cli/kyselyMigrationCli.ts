@@ -25,6 +25,14 @@ async function kyselyMigrationCli() {
           (migration) => migration.executedAt === undefined,
         );
 
+        if (unexecutedMigrations.length === 0) {
+          logger.info(
+            kyselyMigrationCli.name,
+            "There is no more Migrations left to migrate up.",
+          );
+          return false;
+        }
+
         logger.info(
           kyselyMigrationCli.name,
           `There is ${unexecutedMigrations.length} migration(s) left to migrate up`,
@@ -36,6 +44,8 @@ async function kyselyMigrationCli() {
             `Migration ${index + 1} to migrate up: ${migration.name}`,
           );
         }
+
+        return true;
       },
       (migrator) => migrator.migrateToLatest(),
     );
@@ -55,13 +65,15 @@ async function kyselyMigrationCli() {
             kyselyMigrationCli.name,
             "There is no unexecuted Migration left to migrate up.",
           );
-          return;
+          return false;
         }
 
         logger.info(
           kyselyMigrationCli.name,
           `Migration to migrate up: ${nextUnexecutedMigration.name}`,
         );
+
+        return true;
       },
       (migrator) => migrator.migrateUp(),
     );
@@ -81,13 +93,15 @@ async function kyselyMigrationCli() {
             kyselyMigrationCli.name,
             "There is no executed Migration left to migrate down.",
           );
-          return;
+          return false;
         }
 
         logger.info(
           kyselyMigrationCli.name,
           `Migration to migrate down: ${lastExecutedMigration.name}`,
         );
+
+        return true;
       },
       (migrator) => migrator.migrateDown(),
     );
