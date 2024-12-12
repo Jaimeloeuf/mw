@@ -19,7 +19,6 @@ async function kyselyMigrationCli() {
 
   if (arg === "all") {
     await kyselyMigration(
-      "Migrate all up?",
       function (migrations) {
         const unexecutedMigrations = migrations.filter(
           (migration) => migration.executedAt === undefined,
@@ -54,7 +53,6 @@ async function kyselyMigrationCli() {
 
   if (arg === "up") {
     await kyselyMigration(
-      "Migrate one step up?",
       function (migrations) {
         const nextUnexecutedMigration = migrations
           .filter((migration) => migration.executedAt === undefined)
@@ -82,7 +80,6 @@ async function kyselyMigrationCli() {
 
   if (arg === "down") {
     await kyselyMigration(
-      "Migrate one step down?",
       function (migrations) {
         const lastExecutedMigration = migrations
           .filter((migration) => migration.executedAt !== undefined)

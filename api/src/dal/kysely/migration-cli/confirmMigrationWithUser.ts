@@ -9,7 +9,6 @@ export async function confirmMigrationWithUser(
   migrateConfirmationFunction: (
     migrations: ReadonlyArray<MigrationInfo>,
   ) => boolean | Promise<boolean>,
-  confirmationQuestion: string,
 ) {
   const { db, migrator } = await createDbAndMigrator();
   const migrations = await migrator.getMigrations();
@@ -36,7 +35,7 @@ export async function confirmMigrationWithUser(
   });
 
   const answer = await new Promise((resolve: (answer: string) => void) =>
-    rl.question(confirmationQuestion + " [y/n]: ", resolve),
+    rl.question("Confirm migration? [y/n]: ", resolve),
   );
 
   rl.close();
