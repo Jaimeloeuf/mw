@@ -6,6 +6,9 @@ export function printMigrationCliHelp() {
   console.log(pc.green("npm run db:migrate"));
   console.log(pc.green("npm run db:migrate help"));
   console.log();
+  console.log("Create a new migration file");
+  console.log(pc.green("npm run db:migrate create"));
+  console.log();
   console.log("Migrate up to the latest migration");
   console.log(pc.green("npm run db:migrate all"));
   console.log();

@@ -1,4 +1,5 @@
 import { logger } from "../../../logging/index.js";
+import { createKyselyMigration } from "./createKyselyMigrationFile/createKyselyMigration.js";
 import { kyselyMigration } from "./kyselyMigration.js";
 import { printAllMigrations } from "./printAllMigrations.js";
 import { printMigrationCliHelp } from "./printMigrationCliHelp.js";
@@ -102,6 +103,11 @@ async function kyselyMigrationCli() {
       },
       (migrator) => migrator.migrateDown(),
     );
+    return;
+  }
+
+  if (arg === "create") {
+    await createKyselyMigration();
     return;
   }
 

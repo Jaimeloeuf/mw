@@ -20,7 +20,6 @@
     "graphiql": "npx ruru -SP -p 4000 -e http://localhost:3000/gql",
     "db:migrate": "npx tsx ./src/dal/kysely/migration-cli/kyselyMigrationCli.ts",
     "scratchpad": "npx tsx ./src/scripts/scratchpad.ts",
-    "scripts:create-kysely-migration": "npx tsx ./src/scripts/create-kysely-migration.ts",
     "scripts:create-http-controller": "npx tsx ./src/scripts/create-http-controller.ts",
     "ngrok": "ngrok http http://localhost:3000",
     "codegen": "npx tsx ./src/codegen/codegen-runner/codegenRunner.ts"

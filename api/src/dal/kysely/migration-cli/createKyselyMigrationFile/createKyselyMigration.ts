@@ -2,8 +2,8 @@ import fs from "fs";
 import path from "path";
 import readline from "readline/promises";
 
-import { logger } from "../logging/index.js";
-import { getDateString } from "../utils/index.js";
+import { logger } from "../../../../logging/index.js";
+import { getDateString } from "../../../../utils/index.js";
 
 const codeTemplate = `import type { Kysely } from "kysely";
 
@@ -22,7 +22,7 @@ export async function down(db: Kysely<any>): Promise<void> {
 function getMigrationIndex(dateString: string) {
   const migrationFolderPath = path.join(
     import.meta.dirname,
-    `../dal/kysely/migrations`,
+    `../../migrations`,
   );
 
   const migrationFileNames = fs.readdirSync(migrationFolderPath);
@@ -48,7 +48,7 @@ function getMigrationIndex(dateString: string) {
   return migrationIndex;
 }
 
-async function createKyselyMigration() {
+export async function createKyselyMigration() {
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -92,7 +92,7 @@ async function createKyselyMigration() {
 
   const migrationFilePath = path.join(
     import.meta.dirname,
-    `../dal/kysely/migrations/${migrationFileName}`,
+    `../../migrations/${migrationFileName}`,
   );
 
   fs.writeFileSync(migrationFilePath, codeTemplate);
@@ -102,5 +102,3 @@ async function createKyselyMigration() {
     `Created migration file at: ${migrationFilePath}`,
   );
 }
-
-createKyselyMigration();
