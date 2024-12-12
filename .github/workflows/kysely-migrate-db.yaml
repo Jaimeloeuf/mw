@@ -36,6 +36,6 @@ jobs:
         run: npm ci
 
       - name: Apply migrations to the database
-        run: npm run db:run-migrations
+        run: npm run db:migrate -- --ci all
         env:
           DB_CONN_STRING: ${{ secrets.DB_CONN_STRING }}
