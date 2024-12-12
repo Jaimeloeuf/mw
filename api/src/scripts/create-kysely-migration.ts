@@ -3,6 +3,7 @@ import path from "path";
 import readline from "readline/promises";
 
 import { logger } from "../logging/index.js";
+import { getDateString } from "../utils/index.js";
 
 const codeTemplate = `import type { Kysely } from "kysely";
 
@@ -16,21 +17,6 @@ export async function down(db: Kysely<any>): Promise<void> {
   await db.schema.dropTable(tableName).execute();
 }
 `;
-
-/** Create date string in the YYYYMMDD format for current UTC time */
-function getDateString() {
-  const now = new Date();
-
-  const year = now.getUTCFullYear();
-
-  const month = now.getUTCMonth() + 1; // Zero based month
-  const monthString = month > 9 ? month : `0${month}`;
-
-  const day = now.getUTCDate();
-  const dayString = day > 9 ? day : `0${day}`;
-
-  return `${year}${monthString}${dayString}`;
-}
 
 /** Get the migration index, where there can be more than 1 migration a day */
 function getMigrationIndex(dateString: string) {

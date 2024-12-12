@@ -4,6 +4,7 @@
 
 export * from "./concurrent.js";
 export * from "./dataOrThrow.js";
+export * from "./getDateString.js";
 export * from "./getStackTrace.js";
 export * from "./logBeforeRun.js";
 export * from "./noOp.js";
