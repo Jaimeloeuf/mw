@@ -11,24 +11,23 @@ export async function confirmMigrationWithUser(
   ) => boolean | Promise<boolean>,
   confirmationQuestion: string,
 ) {
-  const isKyeselyMigrationRanInCI = process.argv.includes("--ci");
+  const { db, migrator } = await createDbAndMigrator();
+  const migrations = await migrator.getMigrations();
 
+  const shouldContinue = await migrateConfirmationFunction(migrations);
+  if (!shouldContinue) {
+    // Destroy DB connection so that the CLI program can exit.
+    await db.destroy();
+    return false;
+  }
+
+  const isKyeselyMigrationRanInCI = process.argv.includes("--ci");
   if (isKyeselyMigrationRanInCI) {
     logger.info(
       confirmMigrationWithUser.name,
       "Skipping confirmation validation in CI environment...",
     );
     return true;
-  }
-
-  const { db, migrator } = await createDbAndMigrator();
-  const migrations = await migrator.getMigrations();
-  const shouldContinue = await migrateConfirmationFunction(migrations);
-
-  if (!shouldContinue) {
-    // Destroy DB connection so that the CLI program can exit.
-    await db.destroy();
-    return false;
   }
 
   const rl = readline.createInterface({
