@@ -9,6 +9,8 @@ const codeTemplate = `import type { Kysely } from "kysely";
 
 import { sql } from "kysely";
 
+const tableName = "your_table_name";
+
 export async function up(db: Kysely<any>): Promise<void> {
   await db.schema.createTable(tableName);
 }
