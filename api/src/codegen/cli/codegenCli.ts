@@ -6,7 +6,7 @@ import { printAllCodegenModules } from "./printAllCodegenModules.js";
 import { printCodegenCliHelp } from "./printCodegenCliHelp.js";
 import { showGitStatusOfGeneratedFolder } from "./showGitStatusOfGeneratedFolder.js";
 
-async function codegenRunner() {
+async function codegenCli() {
   // No extra arguments, show help menu
   if (process.argv.length === 2) {
     printCodegenCliHelp();
@@ -47,8 +47,8 @@ async function codegenRunner() {
     return;
   }
 
-  logger.error(codegenRunner.name, `Invalid codegen argument: ${arg}\n`);
+  logger.error(codegenCli.name, `Invalid codegen argument: ${arg}\n`);
   printCodegenCliHelp();
 }
 
-codegenRunner();
+codegenCli();
