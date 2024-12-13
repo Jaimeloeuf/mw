@@ -4,51 +4,8 @@ import readline from "readline/promises";
 
 import { logger } from "../../../../logging/index.js";
 import { getDateString } from "../../../../utils/index.js";
-
-const codeTemplate = `import type { Kysely } from "kysely";
-
-import { sql } from "kysely";
-
-const tableName = "your_table_name";
-
-export async function up(db: Kysely<any>): Promise<void> {
-  await db.schema.createTable(tableName);
-}
-
-export async function down(db: Kysely<any>): Promise<void> {
-  await db.schema.dropTable(tableName).execute();
-}
-`;
-
-/** Get the migration index, where there can be more than 1 migration a day */
-function getMigrationIndex(dateString: string) {
-  const migrationFolderPath = path.join(
-    import.meta.dirname,
-    `../../migrations`,
-  );
-
-  const migrationFileNames = fs.readdirSync(migrationFolderPath);
-
-  // Get all the `${migrationDate}_${migrationIndex}` strings
-  const migrationDates = migrationFileNames
-    .map((name) => name.split("_").slice(0, 2).join(""))
-    .filter((name) => name !== undefined);
-
-  // Find all the migrations that happened on the same as today's date string
-  const migrationDatesWithTheSameDate = migrationDates.filter((migrationDate) =>
-    migrationDate.includes(dateString),
-  );
-
-  // Get the last migration index of today if any
-  const lastUsedMigrationIndex = migrationDatesWithTheSameDate
-    .map((dateWithIndex) => parseInt(dateWithIndex.slice(8))) // 8 bcs YYYYMMDD
-    .sort((a, b) => a - b)
-    .at(-1);
-
-  const migrationIndex = (lastUsedMigrationIndex ?? 0) + 1;
-
-  return migrationIndex;
-}
+import { getMigrationIndex } from "./getMigrationIndex.js";
+import { migrationFileTemplate } from "./migrationFileTemplate.js";
 
 export async function createKyselyMigration() {
   const rl = readline.createInterface({
