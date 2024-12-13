@@ -7,6 +7,8 @@ import { getDateString } from "../../../../utils/index.js";
 import { getMigrationIndex } from "./getMigrationIndex.js";
 import { migrationFileTemplate } from "./migrationFileTemplate.js";
 
+const migrationFolderPath = path.join(import.meta.dirname, `../../migrations`);
+
 export async function createKyselyMigration() {
   const rl = readline.createInterface({
     input: process.stdin,
@@ -45,16 +47,13 @@ export async function createKyselyMigration() {
 
   const dateString = getDateString();
 
-  const migrationIndex = getMigrationIndex(dateString);
+  const migrationIndex = getMigrationIndex(migrationFolderPath, dateString);
 
   const migrationFileName = `${dateString}_${migrationIndex}_${migrationName}.ts`;
 
-  const migrationFilePath = path.join(
-    import.meta.dirname,
-    `../../migrations/${migrationFileName}`,
-  );
+  const migrationFilePath = path.join(migrationFolderPath, migrationFileName);
 
-  fs.writeFileSync(migrationFilePath, codeTemplate);
+  fs.writeFileSync(migrationFilePath, migrationFileTemplate);
 
   logger.info(
     createKyselyMigration.name,

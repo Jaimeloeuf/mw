@@ -1,15 +1,12 @@
 import fs from "fs";
-import path from "path";
 
 /**
  * Get the migration index, where there can be more than 1 migration a day
  */
-export function getMigrationIndex(dateString: string) {
-  const migrationFolderPath = path.join(
-    import.meta.dirname,
-    `../../migrations`,
-  );
-
+export function getMigrationIndex(
+  migrationFolderPath: string,
+  dateString: string,
+) {
   const migrationFileNames = fs.readdirSync(migrationFolderPath);
 
   // Get all the `${migrationDate}_${migrationIndex}` strings
