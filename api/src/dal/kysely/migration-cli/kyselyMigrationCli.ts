@@ -1,6 +1,9 @@
 import { logger } from "../../../logging/index.js";
 import { createKyselyMigration } from "./createKyselyMigrationFile/createKyselyMigration.js";
 import { kyselyMigration } from "./kyselyMigration.js";
+import { migrateConfirmationForAll } from "./migrateConfirmation/migrateConfirmationForAll.js";
+import { migrateConfirmationForDown } from "./migrateConfirmation/migrateConfirmationForDown.js";
+import { migrateConfirmationForUp } from "./migrateConfirmation/migrateConfirmationForUp.js";
 import { printAllMigrations } from "./printAllMigrations.js";
 import { printMigrationCliHelp } from "./printMigrationCliHelp.js";
 
@@ -19,89 +22,22 @@ async function kyselyMigrationCli() {
   }
 
   if (arg === "all") {
-    await kyselyMigration(
-      function (migrations) {
-        const unexecutedMigrations = migrations.filter(
-          (migration) => migration.executedAt === undefined,
-        );
-
-        if (unexecutedMigrations.length === 0) {
-          logger.info(
-            kyselyMigrationCli.name,
-            "There is no more Migrations left to migrate up.",
-          );
-          return false;
-        }
-
-        logger.info(
-          kyselyMigrationCli.name,
-          `There is ${unexecutedMigrations.length} migration(s) left to migrate up`,
-        );
-
-        for (const [index, migration] of unexecutedMigrations.entries()) {
-          logger.info(
-            kyselyMigrationCli.name,
-            `Migration ${index + 1} to migrate up: ${migration.name}`,
-          );
-        }
-
-        return true;
-      },
-      (migrator) => migrator.migrateToLatest(),
+    await kyselyMigration(migrateConfirmationForAll, (migrator) =>
+      migrator.migrateToLatest(),
     );
     return;
   }
 
   if (arg === "up") {
-    await kyselyMigration(
-      function (migrations) {
-        const nextUnexecutedMigration = migrations
-          .filter((migration) => migration.executedAt === undefined)
-          .at(0);
-
-        if (nextUnexecutedMigration === undefined) {
-          logger.info(
-            kyselyMigrationCli.name,
-            "There is no unexecuted Migration left to migrate up.",
-          );
-          return false;
-        }
-
-        logger.info(
-          kyselyMigrationCli.name,
-          `Migration to migrate up: ${nextUnexecutedMigration.name}`,
-        );
-
-        return true;
-      },
-      (migrator) => migrator.migrateUp(),
+    await kyselyMigration(migrateConfirmationForUp, (migrator) =>
+      migrator.migrateUp(),
     );
     return;
   }
 
   if (arg === "down") {
-    await kyselyMigration(
-      function (migrations) {
-        const lastExecutedMigration = migrations
-          .filter((migration) => migration.executedAt !== undefined)
-          .at(-1);
-
-        if (lastExecutedMigration === undefined) {
-          logger.info(
-            kyselyMigrationCli.name,
-            "There is no executed Migration left to migrate down.",
-          );
-          return false;
-        }
-
-        logger.info(
-          kyselyMigrationCli.name,
-          `Migration to migrate down: ${lastExecutedMigration.name}`,
-        );
-
-        return true;
-      },
-      (migrator) => migrator.migrateDown(),
+    await kyselyMigration(migrateConfirmationForDown, (migrator) =>
+      migrator.migrateDown(),
     );
     return;
   }
