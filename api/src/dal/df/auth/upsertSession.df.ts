@@ -1,5 +1,6 @@
 import type { DatabaseSession } from "lucia";
 
+import { json } from "../../../utils/index.js";
 import { dataFn } from "../dataFn.js";
 import { db } from "./mock-auth-db.js";
 
@@ -20,7 +21,7 @@ export default dataFn(async function authUpsertSession(
       session.id,
       session.userId,
       session.expiresAt.toISOString(),
-      JSON.stringify(session.attributes),
+      json.stringify(session.attributes),
     ],
   );
 });

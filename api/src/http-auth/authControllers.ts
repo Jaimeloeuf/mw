@@ -9,6 +9,7 @@ import { parseCookies, serializeCookie } from "oslo/cookie";
 import { df } from "../__generated/index.js";
 import { config } from "../config/index.js";
 import { logger } from "../logging/index.js";
+import { json } from "../utils/index.js";
 import { GitHubUser } from "./GitHubUser.js";
 import { luciaAuthForGithub, lucia } from "./luciaAuth.js";
 
@@ -200,7 +201,7 @@ export function authControllers() {
 	</head>
 	<body>
 		<h1>You are now logged in! Redirecting you to ...</h1>
-    <p>Github username: ${res.locals["user"].username}</p>
+    <p>User data: ${json.stringify(res.locals["user"])}</p>
     <p>UserID: ${res.locals["user"].id}</p>
 		<button onclick="fetch('/auth/logout', { method: 'POST' }).then(res => res.text()).then(loc => (window.location=loc))">Logout</a>
 	</body>
