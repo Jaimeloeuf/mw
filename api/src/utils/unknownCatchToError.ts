@@ -23,5 +23,5 @@ export function unknownCatchToError(e: unknown) {
     `Found invalid error type thrown: ${json.stringifyPretty(e)}`,
   );
 
-  return new Error(e?.toString?.());
+  return new Error(e?.toString?.() ?? "Unknown value caught");
 }

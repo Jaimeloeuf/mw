@@ -6,7 +6,7 @@ import { ServiceException } from "../exceptions/ServiceException.js";
 export function errorToServiceException(e: Error) {
   const exception = new ServiceException(e.message);
 
-  exception.name = e.name;
+  exception.name = e.name ?? ServiceException.name;
 
   if (e.stack !== undefined) {
     exception.stack = e.stack;

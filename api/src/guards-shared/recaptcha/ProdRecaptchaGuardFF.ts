@@ -6,6 +6,7 @@ import type { RecaptchaGuardFFType } from "./RecaptchaGuardType.js";
 
 import {
   UnauthorizedException,
+  ServiceException,
   ForbiddenException,
 } from "../../exceptions/index.js";
 import { json } from "../../utils/index.js";
@@ -43,8 +44,7 @@ export const ProdRecaptchaGuardFF: RecaptchaGuardFFType = (
       .runJSON<{ success: string; score: number; ["error-codes"]: any }>();
 
     if (err !== undefined) {
-      // This should be a more specific one.... maybe service error or smth?
-      throw new Error(
+      throw new ServiceException(
         `Failed to verify recaptcha token: ${err.name}: ${err.message}`,
       );
     }
