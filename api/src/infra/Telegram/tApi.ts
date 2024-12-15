@@ -1,3 +1,5 @@
+import { json } from "../../utils/index.js";
+
 /**
  * tApi (telegram API). This uses HTTP POST method and JSON body for sending
  * data by default, and parses the response as JSON.
@@ -72,5 +74,5 @@ export const tApi = (
   fetch(`https://api.telegram.org/bot${botToken}/${tApiMethod}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
+    body: json.stringify(body),
   }).then((res) => res.json());

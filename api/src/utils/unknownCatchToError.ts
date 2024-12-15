@@ -1,5 +1,5 @@
 import { logger } from "../logging/index.js";
-import { prettyPrintJson } from "./prettyPrintJson.js";
+import { json } from "./json.js";
 
 /**
  * Since 'useUnknownInCatchVariables' is enabled in TSConfig, this utility
@@ -20,7 +20,7 @@ export function unknownCatchToError(e: unknown) {
 
   logger.error(
     unknownCatchToError.name,
-    `Found invalid error type thrown: ${prettyPrintJson(e)}`,
+    `Found invalid error type thrown: ${json.stringifyPretty(e)}`,
   );
 
   return new Error(e?.toString?.());

@@ -8,7 +8,7 @@ import {
   UnauthorizedException,
   ForbiddenException,
 } from "../../exceptions/index.js";
-import { prettyPrintJson } from "../../utils/index.js";
+import { json } from "../../utils/index.js";
 
 export const ProdRecaptchaGuardFF: RecaptchaGuardFFType = (
   /**
@@ -50,7 +50,9 @@ export const ProdRecaptchaGuardFF: RecaptchaGuardFFType = (
     }
 
     if (!res.data.success) {
-      throw new ForbiddenException(prettyPrintJson(res.data["error-codes"]));
+      throw new ForbiddenException(
+        json.stringifyPretty(res.data["error-codes"]),
+      );
     }
 
     if (res.data.score < scoreRequirement) {

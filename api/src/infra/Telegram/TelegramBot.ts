@@ -5,10 +5,7 @@ import { urlBuilder } from "../../__generated/index.js";
 import { config } from "../../config/index.js";
 import { ServiceException } from "../../exceptions/index.js";
 import { logger } from "../../logging/index.js";
-import {
-  prettyPrintJson,
-  wrapFunctionToProvideRunModes,
-} from "../../utils/index.js";
+import { json, wrapFunctionToProvideRunModes } from "../../utils/index.js";
 import { getCommandIfAny } from "./getCommandIfAny.js";
 import { tApi } from "./tApi.js";
 
@@ -243,7 +240,7 @@ export abstract class TelegramBot {
 
     if (!res.ok) {
       throw new ServiceException(
-        `Failed to send telegram message: ${prettyPrintJson(res)}`,
+        `Failed to send telegram message: ${json.stringifyPretty(res)}`,
       );
     }
 

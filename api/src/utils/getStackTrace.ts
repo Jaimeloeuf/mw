@@ -1,4 +1,4 @@
-import { prettyPrintJson } from "./prettyPrintJson.js";
+import { json } from "./json.js";
 
 /**
  * Get stack trace in JSON string format
@@ -8,7 +8,7 @@ import { prettyPrintJson } from "./prettyPrintJson.js";
  * and JSON stringify it.
  */
 export const getStackTrace = (numberOfStackFramesToDrop: number = 0) =>
-  prettyPrintJson(
+  json.stringifyPretty(
     Error()
       .stack?.split("\n")
       // Always drop at least 1 line, since this isnt part of the stack frames,

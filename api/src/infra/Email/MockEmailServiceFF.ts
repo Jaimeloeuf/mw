@@ -1,7 +1,7 @@
 import type { ProdEmailServiceFF } from "./ProdEmailServiceFF.js";
 
 import { logger } from "../../logging/index.js";
-import { prettyPrintJson } from "../../utils/index.js";
+import { json } from "../../utils/index.js";
 
 export const MockEmailServiceFF = ((
   emailAddressForSendFrom: string,
@@ -22,7 +22,7 @@ export const MockEmailServiceFF = ((
   ) {
     logger.info(
       MockEmailService.name,
-      prettyPrintJson({
+      json.stringifyPretty({
         emailAddressForSendFrom,
         emailAddressForReplyTo,
         recipientEmail,

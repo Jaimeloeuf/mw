@@ -7,7 +7,7 @@ import { ZodError } from "zod";
 import type { ConfigType } from "./ConfigType.js";
 
 import { logger } from "../logging/index.js";
-import { prettyPrintJson } from "../utils/prettyPrintJson.js";
+import { json } from "../utils/index.js";
 import { config } from "./config.js";
 
 /**
@@ -46,7 +46,7 @@ export async function loadAndValidateConfig(
     logger.error(
       loadAndValidateConfig.name,
       `Failed to load and validate config value(s)`,
-      prettyPrintJson(errors),
+      json.stringifyPretty(errors),
     );
     process.exit(1);
   }

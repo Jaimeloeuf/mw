@@ -1,6 +1,6 @@
 import { config } from "../../config/index.js";
 import { logger } from "../../logging/index.js";
-import { prettyPrintJson, noThrowPromise } from "../../utils/index.js";
+import { json, noThrowPromise } from "../../utils/index.js";
 
 /**
  * Data Function wrapper to wrap them and provide common utility features such
@@ -60,7 +60,7 @@ export function dataFn<
       logger.verbose(
         dataFn.name,
         `Running '${fn.name}' with:`,
-        prettyPrintJson(args),
+        json.stringifyPretty(args),
       );
     }
 
@@ -93,7 +93,7 @@ export function dataFn<
       logger.verbose(
         dataFn.name,
         `Running '${fn.name}' with:`,
-        prettyPrintJson(args),
+        json.stringifyPretty(args),
       );
     }
 

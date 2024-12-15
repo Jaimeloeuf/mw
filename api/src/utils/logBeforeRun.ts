@@ -1,5 +1,5 @@
 import { logger } from "../logging/Logger.js";
-import { prettyPrintJson } from "./prettyPrintJson.js";
+import { json } from "./json.js";
 
 /**
  * Utility function wrapper to log a function's name and arguments before it is
@@ -10,7 +10,7 @@ export function logBeforeRun<T extends (...args: any) => any>(fn: T) {
     logger.verbose(
       `${logBeforeRun.name}:${fn.name}`,
       `Called with:`,
-      prettyPrintJson(args),
+      json.stringifyPretty(args),
     );
     return fn(...args);
   };
