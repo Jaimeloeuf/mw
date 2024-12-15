@@ -1,6 +1,7 @@
 import type { AsyncJob } from "../../../post-processing/async/AsyncJob.js";
 
 import { AsyncJobMachineType } from "../../../post-processing/async/AsyncJobMachineType.js";
+import { AsyncJobPriority } from "../../../post-processing/async/AsyncJobPriority.js";
 import { AsyncJobStatus } from "../../../post-processing/async/AsyncJobStatus.js";
 import { apiDB } from "../../kysely/index.js";
 import { dataFn } from "../dataFn.js";
@@ -9,17 +10,29 @@ import { dataFn } from "../dataFn.js";
  * DataFn to get a job from DB after marking it as pre-processing in a single
  * transaction.
  */
-export default dataFn(async function asyncGetNextJobToProcess(
-  machineType: AsyncJobMachineType,
-): Promise<null | AsyncJob> {
+export default dataFn(async function asyncGetNextJobToProcess({
+  machineType,
+  priority,
+}: {
+  machineType: AsyncJobMachineType;
+  priority?: AsyncJobPriority;
+}): Promise<null | AsyncJob> {
   const asyncJob = await apiDB.transaction().execute(async (db) => {
-    const asyncJob = await db
+    let asyncJobQuery = db
       .selectFrom("async_job")
       .selectAll()
       .where("machine_type", "=", machineType)
-      .orderBy("priority", "asc")
-      .limit(1)
-      .executeTakeFirst();
+      .limit(1);
+
+    // If `priority` is specified, filter for that specific priority, else grab
+    // the job of the highest priority.
+    if (priority) {
+      asyncJobQuery = asyncJobQuery.where("priority", "=", priority);
+    } else {
+      asyncJobQuery = asyncJobQuery.orderBy("priority", "asc");
+    }
+
+    const asyncJob = await asyncJobQuery.executeTakeFirst();
 
     if (asyncJob === undefined) {
       return null;
