@@ -18,7 +18,8 @@ export default dataFn(async function asyncCreateJob(job: AsyncJob) {
       time_scheduled: job.timeScheduled,
       time_start: job.timeStart,
       time_finish: job.timeFinish,
-      job_arguments: job.jobArguments,
+      job_arguments:
+        job.jobArguments === null ? null : JSON.stringify(job.jobArguments),
       job_result: job.jobResult === null ? null : JSON.stringify(job.jobResult),
     })
     .returningAll()

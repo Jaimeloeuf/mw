@@ -67,9 +67,11 @@ export type AsyncJob = Pick<AsyncJobTypeConfig, "machineType" | "priority"> & {
   timeFinish: null | string;
 
   /**
-   * JSON serializable data stored in DB either as JSON string.
+   * JSON serializable data stored in DB either as JSON string or object.
+   *
+   * This can be null if the job function has no arguments.
    */
-  jobArguments: null | string;
+  jobArguments: null | unknown;
 
   /**
    * JSON serializable data stored in DB either as JSON string or object.

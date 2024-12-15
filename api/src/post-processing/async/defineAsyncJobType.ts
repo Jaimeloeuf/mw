@@ -91,15 +91,5 @@ function validateJobArgumentsAndJsonSerialiseIt<T>(
     );
   }
 
-  let jsonStringifyResult;
-
-  try {
-    jsonStringifyResult = JSON.stringify(data);
-  } catch (error) {
-    throw new InvalidInternalStateException(
-      `Failed to JSON.stringify Async Job arguments for '${asyncJobConfig.name}' due to '${error?.toString()}'`,
-    );
-  }
-
-  return jsonStringifyResult;
+  return data;
 }
