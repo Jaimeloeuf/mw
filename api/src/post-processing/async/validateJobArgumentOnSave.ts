@@ -1,5 +1,6 @@
-import { InvalidInternalStateException } from "../../exceptions/InvalidInternalStateException.js";
 import type { AsyncJobTypeConfig } from "./AsyncJobTypeConfig.js";
+
+import { InvalidInternalStateException } from "../../exceptions/InvalidInternalStateException.js";
 
 /**
  * Validate Job arguments using the zod validator if any, if valid, return the
