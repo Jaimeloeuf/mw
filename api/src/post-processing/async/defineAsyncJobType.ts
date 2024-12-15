@@ -23,11 +23,10 @@ export function defineAsyncJobType<T>(
      * Use this to schedule a new Job of this Job Type.
      */
     async scheduleJob(runOptions) {
-      const serialisedJobArgumentsOrNull =
-        validateJobArgumentsAndJsonSerialiseIt(
-          asyncJobConfig,
-          runOptions?.jobArguments,
-        );
+      const validatedJobArgument = validateJobArgument(
+        asyncJobConfig,
+        runOptions?.jobArguments,
+      );
 
       const asyncJob: AsyncJob = {
         id: crypto.randomUUID(),
@@ -37,7 +36,7 @@ export function defineAsyncJobType<T>(
         timeStart: null,
         timeFinish: null,
         jobResult: null,
-        jobArguments: serialisedJobArgumentsOrNull,
+        jobArguments: validatedJobArgument,
         priority: runOptions?.priorityOverride ?? asyncJobConfig.priority,
         machineType:
           runOptions?.machineTypeOverride ?? asyncJobConfig.machineType,
@@ -65,15 +64,14 @@ export function defineAsyncJobType<T>(
 
 /**
  * Validate Job arguments using the zod validator if any, if valid, return the
- * JSON serialised job arguments as a string.
+ * parsed argument.
  *
- * If arguments is invalid, or fails to be serialised with JSON.stringify, an
- * error will be thrown.
+ * If arguments is invalid an error will be thrown.
  *
  * If there is no argumentValidator given, assume that the job does not take any
  * arguments and returns null instead.
  */
-function validateJobArgumentsAndJsonSerialiseIt<T>(
+function validateJobArgument<T>(
   asyncJobConfig: AsyncJobTypeConfig<T>,
   jobArguments?: unknown,
 ) {
