@@ -91,7 +91,10 @@ export abstract class TelegramBot {
       }
 
       return tApi(botToken, "setMyCommands", {
-        commands: [...response.result, ...this.commands],
+        commands: [
+          ...(Array.isArray(response.result) ? response.result : []),
+          ...this.commands,
+        ],
       });
     }
 
