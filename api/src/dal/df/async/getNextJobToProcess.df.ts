@@ -1,7 +1,7 @@
 import type { AsyncJob } from "../../../async/AsyncJob.js";
+import type { AsyncJobMachineType } from "../../../async/AsyncJobMachineType.js";
+import type { AsyncJobPriority } from "../../../async/AsyncJobPriority.js";
 
-import { AsyncJobMachineType } from "../../../async/AsyncJobMachineType.js";
-import { AsyncJobPriority } from "../../../async/AsyncJobPriority.js";
 import { AsyncJobStatus } from "../../../async/AsyncJobStatus.js";
 import { apiDB } from "../../kysely/index.js";
 import { dataFn } from "../dataFn.js";
