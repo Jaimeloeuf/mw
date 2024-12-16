@@ -1,4 +1,4 @@
-import type { AsyncJob } from "../../../post-processing/async/AsyncJob.js";
+import type { AsyncJob } from "../../../async/AsyncJob.js";
 
 import { apiDB } from "../../kysely/index.js";
 import { dataFn } from "../dataFn.js";

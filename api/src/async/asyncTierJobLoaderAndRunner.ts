@@ -1,5 +1,5 @@
-import { df } from "../../__generated/index.js";
-import { logger } from "../../logging/index.js";
+import { df } from "../__generated/index.js";
+import { logger } from "../logging/index.js";
 import { AsyncJobMachineType } from "./AsyncJobMachineType.js";
 import { AsyncJobStatus } from "./AsyncJobStatus.js";
 import { mappingOfAsyncJobs } from "./mappingOfAsyncJobs.js";

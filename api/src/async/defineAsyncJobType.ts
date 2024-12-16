@@ -2,9 +2,9 @@ import type { AsyncJob } from "./AsyncJob.js";
 import type { AsyncJobType } from "./AsyncJobType.js";
 import type { AsyncJobTypeConfig } from "./AsyncJobTypeConfig.js";
 
-import { df } from "../../__generated/index.js";
-import { logger } from "../../logging/index.js";
-import { getStackTrace } from "../../utils/index.js";
+import { df } from "../__generated/index.js";
+import { logger } from "../logging/index.js";
+import { getStackTrace } from "../utils/index.js";
 import { AsyncJobStatus } from "./AsyncJobStatus.js";
 import { validateJobArgumentOnSave } from "./validateJobArgumentOnSave.js";
 
