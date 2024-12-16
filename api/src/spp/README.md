@@ -1,5 +1,5 @@
-# api/src/post-processing/spp
-Simple Post Processing
+# api/src/spp
+spp (Simple Post Processing)
 
 `SimplePostProcessing` allows service functions to define jobs (functions) to run asynchronously after things like responding to a client request, so as to not block the Request/Response flow on non business critical work, and also to ensure that if the non business critical work fails, it does not fail the overall service execution.
 
