@@ -3,23 +3,8 @@ import fs from "fs/promises";
 import path from "path";
 
 import { logger } from "../../logging/Logger.js";
-import {
-  generatedDocDirPath,
-  genGeneratedNotice as genGeneratedNoticeForDoc,
-} from "../codegenForDoc/index.js";
-import {
-  generatedSrcDirPath,
-  genGeneratedNotice as genGeneratedNoticeForCode,
-} from "../codegenForTs/index.js";
-
-const getNoticeLinesOfCode = (notice: string) => notice.split(/\n/).length - 1;
-
-const generatedCodeNoticeLinesOfCode = getNoticeLinesOfCode(
-  genGeneratedNoticeForCode({ name: "" } as Function, ""),
-);
-const generatedCodeNoticeLinesOfDoc = getNoticeLinesOfCode(
-  genGeneratedNoticeForDoc({ name: "" } as Function, ""),
-);
+import { generatedDocDirPath } from "../codegenForDoc/index.js";
+import { generatedSrcDirPath } from "../codegenForTs/index.js";
 
 /**
  * Look for all generated files and check if they are valid by checking if they
@@ -57,30 +42,17 @@ export async function validateGeneratedFiles() {
         return null;
       }
 
-      const fileType = ".".concat(file.name.split(".").at(-1)!);
-      const generatedNoticeLinesOfCode =
-        fileType === ".ts"
-          ? generatedCodeNoticeLinesOfCode
-          : fileType === ".md"
-            ? generatedCodeNoticeLinesOfDoc
-            : 0;
+      const fileWithoutHash = fileContent.replace(/sha256\([^)]*\)/, "");
 
-      // Always assume that all files uses LF as EOL
-      const fileContentWithoutGeneratedNotice = fileContent
-        .split(/\n/)
-        .slice(generatedNoticeLinesOfCode)
-        .join("\n");
-
-      const computedFileHash = createHash("sha256")
-        .update(fileContentWithoutGeneratedNotice)
+      const hash = createHash("sha256")
+        .update(fileWithoutHash)
         .digest()
         .toString("hex");
 
       return {
         name: file.name,
-        path: filePath,
         hash: extractedFileHash,
-        fileModified: computedFileHash !== extractedFileHash,
+        fileModified: hash !== extractedFileHash,
       };
     }),
   ).then((files) => files.filter((file) => file !== null));
@@ -100,7 +72,7 @@ export async function validateGeneratedFiles() {
   for (let i = 0; i < modifiedFiles.length; i++) {
     logger.error(
       validateGeneratedFiles.name,
-      `${i + 1}: ${modifiedFiles[i]!.path}`,
+      `${i + 1}: ${modifiedFiles[i]!.name}`,
     );
   }
 }
