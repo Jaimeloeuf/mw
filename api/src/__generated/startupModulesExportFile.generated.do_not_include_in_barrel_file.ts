@@ -6,7 +6,7 @@
  * genStartupModulesBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(b3288ac664f567b2bd7273ef921127cb4517700377b888b8953f559afb959653)
+ * sha256(77c47543f22f8c2673d2b92092ac65a823b58d8c1816f2f2e7cbe3ce5e91e420)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */

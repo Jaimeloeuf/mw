@@ -6,7 +6,7 @@
  * genInfraBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(38141a7ec9c81f8c8cb968d794aef00ca3fd03522a06d2a627e2b565aed56792)
+ * sha256(36ba1d8162f35ba043184479a76a8acd838a52b4e1cfe8686a1a644af61e6c96)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */

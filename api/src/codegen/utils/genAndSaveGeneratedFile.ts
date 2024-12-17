@@ -11,9 +11,11 @@ import { logger } from "../../logging/index.js";
  *
  * This function will
  * 1. Format the given text with prettier
- * 1. Create a sha256 hash in hexcode for your generated text
- * 1. Create the generated text warning/notice
- * 1. Combine all of these into a single string
+ * 1. Create the generated text warning/notice without hash
+ * 1. Combine given text and notice into a single string
+ * 1. Create a sha256 hash in hexcode for the generated string without hash.
+ * 1. Create the generated text warning/notice with the new hash
+ * 1. Combine given text and notice with hash into a single string
  * 1. Save the full generated text to the provided file path
  * 1. Log file name once it is saved
  */
@@ -39,9 +41,14 @@ export async function genAndSaveGeneratedFile({
     filepath: generatedTextFileType,
   });
 
+  const noticeWithoutHash = genGeneratedNotice(generator, "");
+
+  const fullyGeneratedTextWithoutHash =
+    noticeWithoutHash + generatedTextAfterFormatting;
+
   // Wrap it so that it is easy to parse out with regex when needed
   const hash = `sha256(${createHash("sha256")
-    .update(generatedTextAfterFormatting)
+    .update(fullyGeneratedTextWithoutHash)
     .digest()
     .toString("hex")})`;
 

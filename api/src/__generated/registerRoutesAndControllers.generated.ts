@@ -6,7 +6,7 @@
  * genHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256(7227243a148218b53047ee2b84f790cc6f9f3ee2a95809b942ee66390f8a5b8c)
+ * sha256(7a77f33f54fb216c60e9ca3531bf100b3f084109cd7b464beaacb1bce349d7dc)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */

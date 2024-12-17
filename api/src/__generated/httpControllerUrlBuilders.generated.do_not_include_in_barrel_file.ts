@@ -6,7 +6,7 @@
  * genHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(3284addb04576e1328ed800cce80e1479beafc24e5c1798e72ed37637e0b8bc5)
+ * sha256(94abac12e6cba114ad2edceb4ba081e81eb093afdb64521b43ec921ee28f509d)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */

@@ -6,7 +6,7 @@
  * genHttpControllerBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(8c42d7ff150949b8b3ec6c5b1c173a92725366fd3448d114b2ebfe86fca396cb)
+ * sha256(f115d576c13bdcc90855f6ea63d2bc865e166ed1f1d22b3f1fa0eef8e31b7de1)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */

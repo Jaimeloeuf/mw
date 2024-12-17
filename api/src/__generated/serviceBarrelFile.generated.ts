@@ -6,7 +6,7 @@
  * genServiceBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(d0c0fec749a4aefa623cea518bba259a880af0ecdee1cab4d50df9c44a4e3ac6)
+ * sha256(a27fae76e33eb3365b7b3db007f827e339dfcddd6eff6c9b9669a13ea8656c06)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */

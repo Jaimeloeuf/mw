@@ -6,7 +6,7 @@
  * genDataFunctionBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(7835b6dcb7c17122eaad7a95805a0adde00c819ae32521bb8f13e88628d822a9)
+ * sha256(d9fe72163fb206266208fe449bde97e7b317da661231fa0805794e806fa54282)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */

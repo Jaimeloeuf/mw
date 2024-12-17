@@ -6,7 +6,7 @@
  * genStartupModuleRunner
  *
  * Generated hash in hex for code after this section is:
- * sha256(c88a26b63bd6c7b1815c8f3c5e90828796e34765505b176bde568df0df258502)
+ * sha256(acdbc9baf6f98b2b96637d3ea3d4400a3a29ffb593bccaec875372b3ee8a3511)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
