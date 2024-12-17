@@ -35,6 +35,7 @@ export default [
       "mwEslintPlugin/httpController": "error",
       "mwEslintPlugin/codegen-function-and-module-same-name": "error",
       "mwEslintPlugin/startup-function-and-module-same-name": "error",
+      "mwEslintPlugin/generated-file-is-valid": "error",
     },
     plugins: {
       perfectionist,

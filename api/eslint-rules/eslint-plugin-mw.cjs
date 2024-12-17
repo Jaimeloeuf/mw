@@ -8,5 +8,6 @@ module.exports = {
     httpController: require("./httpController.cjs"),
     "codegen-function-and-module-same-name": require("./codegen-function-and-module-same-name.cjs"),
     "startup-function-and-module-same-name": require("./startup-function-and-module-same-name.cjs"),
+    "generated-file-is-valid": require("./generated-file-is-valid.cjs"),
   },
 };
