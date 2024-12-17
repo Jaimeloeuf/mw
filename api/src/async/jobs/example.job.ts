@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-import { logger } from "../../../logging/index.js";
-import { json } from "../../../utils/index.js";
+import { logger } from "../../logging/index.js";
+import { json } from "../../utils/index.js";
 import { AsyncJobMachineType } from "../AsyncJobMachineType.js";
 import { AsyncJobPriority } from "../AsyncJobPriority.js";
 import { defineAsyncJobType } from "../defineAsyncJobType.js";
