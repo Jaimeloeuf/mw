@@ -1,5 +1,6 @@
 import { df } from "../__generated/index.js";
 import { logger } from "../logging/index.js";
+import { noThrowFunction } from "../utils/index.js";
 import { AsyncJobMachineType } from "./AsyncJobMachineType.js";
 import { AsyncJobStatus } from "./AsyncJobStatus.js";
 import { mappingOfAsyncJobs } from "./mappingOfAsyncJobs.js";
@@ -85,13 +86,35 @@ export async function asyncTierJobLoaderAndRunner() {
   asyncJob.timeStart = new Date().toISOString();
   await df.asyncUpdateJob.runAndThrowOnError(asyncJob);
 
-  const results = await asyncJobType.run(jobArguments);
+  const [runError, runResults] = await noThrowFunction(() =>
+    asyncJobType.run(jobArguments),
+  );
+
+  if (runError !== null) {
+    asyncJob.timeFinish = new Date().toISOString();
+    asyncJob.status = AsyncJobStatus.finishFail;
+    asyncJob.jobResult = {
+      success: false,
+      description: runError.message,
+    };
+
+    await df.asyncUpdateJob.runAndThrowOnError(asyncJob);
+
+    logger.error(asyncTierJobLoaderAndRunner.name, runError.message);
+
+    return;
+  }
 
   asyncJob.timeFinish = new Date().toISOString();
-  asyncJob.jobResult = results;
-  asyncJob.status = results.success
+  asyncJob.jobResult = runResults;
+  asyncJob.status = runResults.success
     ? AsyncJobStatus.finishSuccess
     : AsyncJobStatus.finishFail;
 
   await df.asyncUpdateJob.runAndThrowOnError(asyncJob);
+
+  logger.info(
+    asyncTierJobLoaderAndRunner.name,
+    `Succesfully completed AsyncJob ${asyncJobType.name}:${asyncJob.id}`,
+  );
 }

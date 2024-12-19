@@ -62,6 +62,11 @@ export type AsyncJobTypeConfig<
 
   /**
    * The actual job function definition.
+   *
+   * Prefer to return an `AsyncJobResult` regardless of success or failure.
+   * However even if your `run` method throws, it will be caught and the
+   * `AsyncJobResult` will be set for you where the description will be the
+   * error message.
    */
   run(argument: AsyncJobArgumentType): AsyncJobResult | Promise<AsyncJobResult>;
 };
