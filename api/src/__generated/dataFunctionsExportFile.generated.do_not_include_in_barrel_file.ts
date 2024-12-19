@@ -6,12 +6,13 @@
  * genDataFunctionBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(bdd3c7a77a94c44b8265d72d6db88374b648cd0b754a49e3ccb9410b7bf0efe3)
+ * sha256(4d98864ab0a102eb13e07025a7edaba20439e286800a0c03906a13d533f515dc)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
 export { default as asyncCreateJob } from "../dal/df/async/createJob.df.js";
 export { default as asyncGetNextJobToProcess } from "../dal/df/async/getNextJobToProcess.df.js";
+export { default as asyncUpdateJob } from "../dal/df/async/updateJob.df.js";
 export { default as authCreateUser } from "../dal/df/auth/createUser.df.js";
 export { default as authDeleteSession } from "../dal/df/auth/deleteSession.df.js";
 export { default as authDeleteSessionForUser } from "../dal/df/auth/deleteSessionForUser.df.js";
