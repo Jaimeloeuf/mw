@@ -34,11 +34,18 @@ export async function asyncTierJobLoaderAndRunner() {
   const asyncJobTypeModule = mappingOfAsyncJobs[asyncJob.jobTypeID];
 
   if (asyncJobTypeModule === undefined) {
-    logger.error(
-      asyncTierJobLoaderAndRunner.name,
-      `AsyncJobType ID '${asyncJob.jobTypeID}' not found, it might be deleted`,
-    );
-    // @todo Might throw an error instead
+    const errMsg = `AsyncJobType ID '${asyncJob.jobTypeID}' not found, it might be deleted`;
+
+    asyncJob.status = AsyncJobStatus.finishFail;
+    asyncJob.jobResult = {
+      success: false,
+      description: errMsg,
+    };
+
+    await df.asyncUpdateJob.runAndThrowOnError(asyncJob);
+
+    logger.error(asyncTierJobLoaderAndRunner.name, errMsg);
+
     return;
   }
 
@@ -53,14 +60,21 @@ export async function asyncTierJobLoaderAndRunner() {
       asyncJob.jobArguments,
     );
 
-    // @todo If args failed validation, write to DB that it failed, then exit...
     if (argsParsingErr !== null) {
-      logger.error(
-        asyncTierJobLoaderAndRunner.name,
+      const errMsg =
         `Invalid Async Job arguments for '${asyncJobType.name}' ` +
-          argsParsingErr.toString(),
-      );
-      // @todo Might throw an error instead
+        argsParsingErr.toString();
+
+      asyncJob.status = AsyncJobStatus.finishFail;
+      asyncJob.jobResult = {
+        success: false,
+        description: errMsg,
+      };
+
+      await df.asyncUpdateJob.runAndThrowOnError(asyncJob);
+
+      logger.error(asyncTierJobLoaderAndRunner.name, errMsg);
+
       return;
     }
 
@@ -69,15 +83,15 @@ export async function asyncTierJobLoaderAndRunner() {
 
   asyncJob.status = AsyncJobStatus.started;
   asyncJob.timeStart = new Date().toISOString();
+  await df.asyncUpdateJob.runAndThrowOnError(asyncJob);
 
   const results = await asyncJobType.run(jobArguments);
 
+  asyncJob.timeFinish = new Date().toISOString();
+  asyncJob.jobResult = results;
   asyncJob.status = results.success
     ? AsyncJobStatus.finishSuccess
     : AsyncJobStatus.finishFail;
-  asyncJob.timeFinish = new Date().toISOString();
-  asyncJob.jobResult = results;
 
-  // @todo Write the updated jobData object back to DB
-  asyncJob;
+  await df.asyncUpdateJob.runAndThrowOnError(asyncJob);
 }
