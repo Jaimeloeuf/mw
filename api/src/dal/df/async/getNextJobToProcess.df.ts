@@ -5,6 +5,7 @@ import type { AsyncJobPriority } from "../../../async/AsyncJobPriority.js";
 import { AsyncJobStatus } from "../../../async/AsyncJobStatus.js";
 import { apiDB } from "../../kysely/index.js";
 import { dataFn } from "../dataFn.js";
+import { mapDbAsyncJobToAsyncJob } from "./mapDbAsyncJobToAsyncJob.js";
 
 /**
  * DataFn to get a job from DB after marking it as pre-processing in a single
@@ -52,23 +53,5 @@ export default dataFn(async function asyncGetNextJobToProcess({
     return null;
   }
 
-  return {
-    id: asyncJob.id,
-    jobTypeID: asyncJob.job_type_id,
-    status: asyncJob.status,
-    priority: asyncJob.priority,
-    machineType: asyncJob.machine_type,
-    caller: asyncJob.caller,
-    stackTrace: asyncJob.stack_trace,
-    timeout: asyncJob.timeout,
-    timeScheduled: asyncJob.time_scheduled.toISOString(),
-    timeStart: asyncJob.time_start?.toISOString() ?? null,
-    timeFinish: asyncJob.time_finish?.toISOString() ?? null,
-    jobArguments:
-      asyncJob.job_arguments === null
-        ? null
-        : JSON.parse(asyncJob.job_arguments),
-    jobResult:
-      asyncJob.job_result === null ? null : JSON.parse(asyncJob.job_result),
-  };
+  return mapDbAsyncJobToAsyncJob(asyncJob);
 });
