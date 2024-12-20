@@ -4,6 +4,8 @@
 
 export * from "./genAndSaveGeneratedFile.js";
 export * from "./generateFullFileNameFromRelativePath.js";
+export * from "./getAsyncJobTypeFiles/AsyncJobTypeFile.js";
+export * from "./getAsyncJobTypeFiles/getAsyncJobTypeFiles.js";
 export * from "./getDataFunctionFiles/DataFunctionFile.js";
 export * from "./getDataFunctionFiles/getDataFunctionFiles.js";
 export * from "./getHttpControllerFiles/getHttpControllerFiles.js";
