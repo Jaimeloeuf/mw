@@ -1,8 +1,8 @@
 import type { ColumnType, Insertable, Selectable, Updateable } from "kysely";
 
-import type { AsyncJobMachineType } from "../../../post-processing/async/AsyncJobMachineType.js";
-import type { AsyncJobPriority } from "../../../post-processing/async/AsyncJobPriority.js";
-import type { AsyncJobStatus } from "../../../post-processing/async/AsyncJobStatus.js";
+import type { AsyncJobMachineType } from "../../../async/AsyncJobMachineType.js";
+import type { AsyncJobPriority } from "../../../async/AsyncJobPriority.js";
+import type { AsyncJobStatus } from "../../../async/AsyncJobStatus.js";
 import type { NullableAndVoidable } from "../../../types/index.js";
 
 /**
