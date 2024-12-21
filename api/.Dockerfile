@@ -30,7 +30,7 @@ COPY ./src/ ./src/
 
 # Build
 RUN npm run lint
-RUN npm run build:full
+RUN npm run build
 
 # Define exposed ports, acting only as documentation. Docker run STILL need to
 # map the ports with -p option.
