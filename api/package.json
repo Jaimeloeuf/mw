@@ -13,7 +13,6 @@
     "build:watch": "npx tsc -w",
     "build:full": "npm run delete-build-cache && npx tsc",
     "serve": "npm run build:watch & npm run start:watch",
-    "next": "npx tsx --tsconfig tsconfig.next-server.json ./src/next/server.ts",
     "lint": "npx eslint",
     "lint:fix": "npx eslint --fix",
     "format": "npx prettier --write 'src/**/*.ts'",

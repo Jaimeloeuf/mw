@@ -23,7 +23,7 @@ async function main() {
 
   await startupModuleRunner();
 
-  bootstrapHttpServer();
+  await bootstrapHttpServer();
 }
 
 main();
