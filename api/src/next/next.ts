@@ -1,8 +1,9 @@
 import next from "next";
 
-// @ts-ignore
+import { config } from "../config/index.js";
+
 export const nextJsApp = next({
-  dev: process.env.NODE_ENV !== "production",
+  dev: config.env() !== "production",
   dir: import.meta.dirname,
 });
 
