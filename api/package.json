@@ -11,7 +11,7 @@
     "start:watch": "npx nodemon ./dist/index.js",
     "build": "npx tsc",
     "build:watch": "npx tsc -w",
-    "build:full": "npm run delete-build-cache && npx tsc",
+    "build:full": "npm run delete-build-cache && npm run build",
     "serve": "npm run build:watch & npm run start:watch",
     "lint": "npx eslint",
     "lint:fix": "npx eslint --fix",
