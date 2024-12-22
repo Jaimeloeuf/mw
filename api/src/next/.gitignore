@@ -1,0 +1,4 @@
+# Since 'Next Build' distDir config option only allows same folder build output
+# the production .next build output will always be in this folder, which should
+# not be included as part of source control.
+.next/
