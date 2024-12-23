@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 export default {
-  // output: "standalone",
+  output: "standalone",
 
   typescript: {
     // Cannot use main api tsconfig "../../tsconfig.json", so using the
