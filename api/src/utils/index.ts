@@ -2,6 +2,7 @@
  * Barrel file
  */
 
+export * from "./capitalizeFirstLetter.js";
 export * from "./concurrent.js";
 export * from "./dataOrThrow.js";
 export * from "./getDateString.js";

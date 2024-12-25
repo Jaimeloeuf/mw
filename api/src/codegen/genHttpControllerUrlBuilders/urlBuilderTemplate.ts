@@ -1,7 +1,5 @@
+import { capitalizeFirstLetter } from "../../utils/index.js";
 import { HttpControllerFile } from "../utils/index.js";
-
-const capitalizeFirstLetter = (s: string) =>
-  String(s).charAt(0).toUpperCase() + String(s).slice(1);
 
 const getVersionPrefix = (file: HttpControllerFile) =>
   file.version === '"neutral"' ? "" : "/v" + file.version;
