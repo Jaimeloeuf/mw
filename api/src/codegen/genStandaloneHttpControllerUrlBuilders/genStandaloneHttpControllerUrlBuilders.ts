@@ -50,7 +50,7 @@ export type UrlBuilderOptions<T> = VoidIfAllPropertiesInObjectIsVoid<
     "../next/app/urlBuilders/createUrlQueryParamsString",
   );
 
-  for (const controllerFile of controllerFiles) {
+  const urlBuilderWrites = controllerFiles.map(async (controllerFile) => {
     const urlBuilderName = `urlBuilderFor${capitalizeFirstLetter(controllerFile.name)}`;
 
     await genAndSaveGeneratedCode(
@@ -65,5 +65,7 @@ export type UrlBuilderOptions<T> = VoidIfAllPropertiesInObjectIsVoid<
       // the files independently.
       { doNotIncludeInGeneratedFolderBarrelFile: true },
     );
-  }
+  });
+
+  await Promise.all(urlBuilderWrites);
 }
