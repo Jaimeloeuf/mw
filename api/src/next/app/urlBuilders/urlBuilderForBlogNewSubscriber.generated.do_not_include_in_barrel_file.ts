@@ -6,19 +6,22 @@
  * genStandaloneHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(9e5872ef5e8c52c788819dc04a3840a4b5e21228d7e4a7503e325e063a5f2fbf)
+ * sha256(14e5b67c9f5aac4affeef5d942208216f81532c59b8ad15fea612dfeace90505)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
-import type * as t from "../../../__generated/httpControllerTypeDefinitions.generated.js";
+import type {
+  blogNewSubscriberController_UrlParams,
+  blogNewSubscriberController_QueryParams,
+} from "../../../__generated/httpControllerTypeDefinitions.generated.js";
 import type { UrlBuilderOptions } from "./UrlBuilderOptions.generated.js";
 
 import { createUrlQueryParamsString } from "./createUrlQueryParamsString.generated";
 
 export const urlBuilderForBlogNewSubscriber = (
   options: UrlBuilderOptions<{
-    urlParams: t.blogNewSubscriberController_UrlParams;
-    urlQueryParams: t.blogNewSubscriberController_QueryParams;
+    urlParams: blogNewSubscriberController_UrlParams;
+    urlQueryParams: blogNewSubscriberController_QueryParams;
   }>,
 ) =>
   `http://localhost:3000/api/v1/blog/subscribe${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;

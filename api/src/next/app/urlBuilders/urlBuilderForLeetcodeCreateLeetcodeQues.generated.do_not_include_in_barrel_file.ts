@@ -6,19 +6,22 @@
  * genStandaloneHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(c9063176638322214a285adc359a4bb76afd2440814e89943dc75829ab6e53f9)
+ * sha256(1eb718f312f96bc9f660c631ae076de4814d33f991477e37b63338efd8abc216)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
-import type * as t from "../../../__generated/httpControllerTypeDefinitions.generated.js";
+import type {
+  leetcodeCreateLeetcodeQuesController_UrlParams,
+  leetcodeCreateLeetcodeQuesController_QueryParams,
+} from "../../../__generated/httpControllerTypeDefinitions.generated.js";
 import type { UrlBuilderOptions } from "./UrlBuilderOptions.generated.js";
 
 import { createUrlQueryParamsString } from "./createUrlQueryParamsString.generated";
 
 export const urlBuilderForLeetcodeCreateLeetcodeQues = (
   options: UrlBuilderOptions<{
-    urlParams: t.leetcodeCreateLeetcodeQuesController_UrlParams;
-    urlQueryParams: t.leetcodeCreateLeetcodeQuesController_QueryParams;
+    urlParams: leetcodeCreateLeetcodeQuesController_UrlParams;
+    urlQueryParams: leetcodeCreateLeetcodeQuesController_QueryParams;
   }>,
 ) =>
   `http://localhost:3000/api/v1/leetcode/ques${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;

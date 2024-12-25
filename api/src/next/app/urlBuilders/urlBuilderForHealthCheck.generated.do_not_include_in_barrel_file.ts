@@ -6,19 +6,22 @@
  * genStandaloneHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(e4386c61128f3cd0f90b940c244bde2e9810d79ab135966bc2e0c0aa86d6fdb2)
+ * sha256(357b0f6b3e4558e84752333882b97c45ed15bbf257b411751f47089f3d22dff2)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
-import type * as t from "../../../__generated/httpControllerTypeDefinitions.generated.js";
+import type {
+  healthCheckController_UrlParams,
+  healthCheckController_QueryParams,
+} from "../../../__generated/httpControllerTypeDefinitions.generated.js";
 import type { UrlBuilderOptions } from "./UrlBuilderOptions.generated.js";
 
 import { createUrlQueryParamsString } from "./createUrlQueryParamsString.generated";
 
 export const urlBuilderForHealthCheck = (
   options: UrlBuilderOptions<{
-    urlParams: t.healthCheckController_UrlParams;
-    urlQueryParams: t.healthCheckController_QueryParams;
+    urlParams: healthCheckController_UrlParams;
+    urlQueryParams: healthCheckController_QueryParams;
   }>,
 ) =>
   `http://localhost:3000/api${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;

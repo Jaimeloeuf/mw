@@ -32,15 +32,18 @@ export function urlBuilderTemplate(
 
   const controllerName = `${file.name}Controller`;
 
-  return `import type * as t from "../../../__generated/httpControllerTypeDefinitions.generated.js";
+  const urlParamTypeSymbol = `${controllerName}_UrlParams`;
+  const queryParamTypeSymbol = `${controllerName}_QueryParams`;
+
+  return `import type { ${urlParamTypeSymbol}, ${queryParamTypeSymbol} } from "../../../__generated/httpControllerTypeDefinitions.generated.js";
 import type { UrlBuilderOptions } from "./UrlBuilderOptions.generated.js";
 
 import { createUrlQueryParamsString } from "./createUrlQueryParamsString.generated";
 
 export const ${urlBuilderName} = (
   options: UrlBuilderOptions<{
-    urlParams: t.${controllerName}_UrlParams;
-    urlQueryParams: t.${controllerName}_QueryParams;
+    urlParams: ${urlParamTypeSymbol};
+    urlQueryParams: ${queryParamTypeSymbol};
   }>,
 ) => \`${apiBaseUrl}/api${getVersionPrefix(file)}${pathString}\${createUrlQueryParamsString((options as any)?.urlQueryParams)}\`;
 `;

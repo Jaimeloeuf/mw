@@ -6,19 +6,22 @@
  * genStandaloneHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(f6ea6e3dfeccbb2e41bd637b45635a2cb46fb8a44698a7654ad68b0476eca1b8)
+ * sha256(cf9774eaa04706ae2e99a3cadcd017b6c4866992daf18bd7ad8d0a3c1e62427b)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
-import type * as t from "../../../__generated/httpControllerTypeDefinitions.generated.js";
+import type {
+  versionController_UrlParams,
+  versionController_QueryParams,
+} from "../../../__generated/httpControllerTypeDefinitions.generated.js";
 import type { UrlBuilderOptions } from "./UrlBuilderOptions.generated.js";
 
 import { createUrlQueryParamsString } from "./createUrlQueryParamsString.generated";
 
 export const urlBuilderForVersion = (
   options: UrlBuilderOptions<{
-    urlParams: t.versionController_UrlParams;
-    urlQueryParams: t.versionController_QueryParams;
+    urlParams: versionController_UrlParams;
+    urlQueryParams: versionController_QueryParams;
   }>,
 ) =>
   `http://localhost:3000/api/version${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
