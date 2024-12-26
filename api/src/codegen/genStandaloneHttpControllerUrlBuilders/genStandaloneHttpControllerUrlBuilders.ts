@@ -60,10 +60,6 @@ export type UrlBuilderOptions<T> = VoidIfAllPropertiesInObjectIsVoid<
 
       // Unlike other generated files, this is generated in the "next" folder
       `../next/app/urlBuilders/${urlBuilderName}`,
-
-      // Do not re-export this in the barrel file, as we want users to import
-      // the files independently.
-      { doNotIncludeInGeneratedFolderBarrelFile: true },
     );
   });
 
