@@ -6,7 +6,7 @@
  * genStandaloneHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(357b0f6b3e4558e84752333882b97c45ed15bbf257b411751f47089f3d22dff2)
+ * sha256(2fda2f25708173dd62f64c910244ab65b325e03ab11541c698666d8ec6d13603)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -17,6 +17,11 @@ import type {
 import type { UrlBuilderOptions } from "./UrlBuilderOptions.generated.js";
 
 import { createUrlQueryParamsString } from "./createUrlQueryParamsString.generated";
+
+export type {
+  healthCheckController_InputDTO,
+  healthCheckController_OutputDTO,
+} from "../../../__generated/httpControllerTypeDefinitions.generated.js";
 
 export const urlBuilderForHealthCheck = (
   options: UrlBuilderOptions<{

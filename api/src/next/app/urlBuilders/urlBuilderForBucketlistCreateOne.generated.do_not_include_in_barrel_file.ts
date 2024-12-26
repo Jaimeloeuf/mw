@@ -6,7 +6,7 @@
  * genStandaloneHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(cf6c8213cf1ce1496a3659f06971897e1ec1de646b389307aa1d7fe54931409d)
+ * sha256(3226b627519a745a41e39bcac93edc80a865caab3ab7abed56d90884c9cf2767)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -17,6 +17,11 @@ import type {
 import type { UrlBuilderOptions } from "./UrlBuilderOptions.generated.js";
 
 import { createUrlQueryParamsString } from "./createUrlQueryParamsString.generated";
+
+export type {
+  bucketlistCreateOneController_InputDTO,
+  bucketlistCreateOneController_OutputDTO,
+} from "../../../__generated/httpControllerTypeDefinitions.generated.js";
 
 export const urlBuilderForBucketlistCreateOne = (
   options: UrlBuilderOptions<{

@@ -6,7 +6,7 @@
  * genStandaloneHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(c669d1410d31b04bfb566ececb7a377d66ac464d38e0950613960b8834627dee)
+ * sha256(7956174376352eee389e1400cea08c44bb1a68c9250639c46dcf0155e0e0f463)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -17,6 +17,11 @@ import type {
 import type { UrlBuilderOptions } from "./UrlBuilderOptions.generated.js";
 
 import { createUrlQueryParamsString } from "./createUrlQueryParamsString.generated";
+
+export type {
+  webhookTelegramController_InputDTO,
+  webhookTelegramController_OutputDTO,
+} from "../../../__generated/httpControllerTypeDefinitions.generated.js";
 
 export const urlBuilderForWebhookTelegram = (
   options: UrlBuilderOptions<{

@@ -34,6 +34,8 @@ export function urlBuilderTemplate(
 
   const urlParamTypeSymbol = `${controllerName}_UrlParams`;
   const queryParamTypeSymbol = `${controllerName}_QueryParams`;
+  const inputDTOTypeSymbol = `${controllerName}_InputDTO`;
+  const outputDTOTypeSymbol = `${controllerName}_OutputDTO`;
 
   return `import type {
   ${urlParamTypeSymbol},
@@ -42,6 +44,11 @@ export function urlBuilderTemplate(
 import type { UrlBuilderOptions } from "./UrlBuilderOptions.generated.js";
 
 import { createUrlQueryParamsString } from "./createUrlQueryParamsString.generated";
+
+export type {
+  ${inputDTOTypeSymbol},
+  ${outputDTOTypeSymbol},
+} from "../../../__generated/httpControllerTypeDefinitions.generated.js";
 
 export const ${urlBuilderName} = (
   options: UrlBuilderOptions<{

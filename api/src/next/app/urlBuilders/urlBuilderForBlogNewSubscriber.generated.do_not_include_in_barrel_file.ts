@@ -6,7 +6,7 @@
  * genStandaloneHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(14e5b67c9f5aac4affeef5d942208216f81532c59b8ad15fea612dfeace90505)
+ * sha256(d620855202d195ea1bd79ab0c85e1922d85c58d02d6936083fb27e8b5424b835)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -17,6 +17,11 @@ import type {
 import type { UrlBuilderOptions } from "./UrlBuilderOptions.generated.js";
 
 import { createUrlQueryParamsString } from "./createUrlQueryParamsString.generated";
+
+export type {
+  blogNewSubscriberController_InputDTO,
+  blogNewSubscriberController_OutputDTO,
+} from "../../../__generated/httpControllerTypeDefinitions.generated.js";
 
 export const urlBuilderForBlogNewSubscriber = (
   options: UrlBuilderOptions<{
