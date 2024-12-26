@@ -35,7 +35,10 @@ export function urlBuilderTemplate(
   const urlParamTypeSymbol = `${controllerName}_UrlParams`;
   const queryParamTypeSymbol = `${controllerName}_QueryParams`;
 
-  return `import type { ${urlParamTypeSymbol}, ${queryParamTypeSymbol} } from "../../../__generated/httpControllerTypeDefinitions.generated.js";
+  return `import type {
+  ${urlParamTypeSymbol},
+  ${queryParamTypeSymbol},
+} from "../../../__generated/httpControllerTypeDefinitions.generated.js";
 import type { UrlBuilderOptions } from "./UrlBuilderOptions.generated.js";
 
 import { createUrlQueryParamsString } from "./createUrlQueryParamsString.generated";
