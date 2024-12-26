@@ -1,8 +1,4 @@
-import { config } from "../../config/index.js";
 import { HttpControllerFile } from "../utils/index.js";
-
-// Need to generate at build time so it doesnt need to be bundled with the Next stuff
-const apiBaseUrl = config.base_url_to_self();
 
 const getVersionPrefix = (file: HttpControllerFile) =>
   file.version === '"neutral"' ? "" : "/v" + file.version;
@@ -55,6 +51,6 @@ export const ${urlBuilderName} = (
     urlParams: ${urlParamTypeSymbol};
     urlQueryParams: ${queryParamTypeSymbol};
   }>,
-) => \`${apiBaseUrl}/api${getVersionPrefix(file)}${pathString}\${createUrlQueryParamsString((options as any)?.urlQueryParams)}\`;
+) => \`\${process.env["BASE_URL_TO_SELF"]}/api${getVersionPrefix(file)}${pathString}\${createUrlQueryParamsString((options as any)?.urlQueryParams)}\`;
 `;
 }

@@ -6,7 +6,7 @@
  * genStandaloneHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(b119e3b27c5e44ee3702af5c91ac67f1499a85dc16aa6ef4b5f879d1c870556c)
+ * sha256(3bc35626aee545a0a7d5567b946601e1cc44d7698c2bcd3de5ba408514eea5f0)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -29,4 +29,4 @@ export const urlBuilderForVersion = (
     urlQueryParams: versionController_QueryParams;
   }>,
 ) =>
-  `http://localhost:3000/api/version${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
+  `${process.env["BASE_URL_TO_SELF"]}/api/version${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;

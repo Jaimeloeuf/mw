@@ -6,7 +6,7 @@
  * genStandaloneHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(2fda2f25708173dd62f64c910244ab65b325e03ab11541c698666d8ec6d13603)
+ * sha256(559af375e880ecd0385f4695c8510765055b3e4d5d7494a54a28ccfc4fd7acb0)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -29,4 +29,4 @@ export const urlBuilderForHealthCheck = (
     urlQueryParams: healthCheckController_QueryParams;
   }>,
 ) =>
-  `http://localhost:3000/api${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
+  `${process.env["BASE_URL_TO_SELF"]}/api${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;

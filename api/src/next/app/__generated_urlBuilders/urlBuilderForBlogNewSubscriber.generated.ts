@@ -6,7 +6,7 @@
  * genStandaloneHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(d620855202d195ea1bd79ab0c85e1922d85c58d02d6936083fb27e8b5424b835)
+ * sha256(2bb3de74b3bfeada1d41bd3c33332ca8e352610afbe6fe4c642bf88cb0f4f415)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -29,4 +29,4 @@ export const urlBuilderForBlogNewSubscriber = (
     urlQueryParams: blogNewSubscriberController_QueryParams;
   }>,
 ) =>
-  `http://localhost:3000/api/v1/blog/subscribe${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
+  `${process.env["BASE_URL_TO_SELF"]}/api/v1/blog/subscribe${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;

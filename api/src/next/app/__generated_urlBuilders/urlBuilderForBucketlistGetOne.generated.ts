@@ -6,7 +6,7 @@
  * genStandaloneHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(5bfa17512efdc22bb714c27db3501811ca10c7e90702ec0df97ebdeed6969267)
+ * sha256(4fc9208586f7c173561d954f74e72176e04b5f8d520703c9ec2654b9bf3e51bb)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -29,4 +29,4 @@ export const urlBuilderForBucketlistGetOne = (
     urlQueryParams: bucketlistGetOneController_QueryParams;
   }>,
 ) =>
-  `http://localhost:3000/api/v1/bucketlist/${options.urlParams.bucketlistID}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
+  `${process.env["BASE_URL_TO_SELF"]}/api/v1/bucketlist/${options.urlParams.bucketlistID}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;

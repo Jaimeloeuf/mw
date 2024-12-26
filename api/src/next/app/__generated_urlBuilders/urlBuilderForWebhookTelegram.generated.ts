@@ -6,7 +6,7 @@
  * genStandaloneHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(7956174376352eee389e1400cea08c44bb1a68c9250639c46dcf0155e0e0f463)
+ * sha256(5ae1a7105e67fefdb8cdfe9f58f97c776bb9b6c14a42c36d3f8c0ce625509477)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -29,4 +29,4 @@ export const urlBuilderForWebhookTelegram = (
     urlQueryParams: webhookTelegramController_QueryParams;
   }>,
 ) =>
-  `http://localhost:3000/api/v1/webhook/telegram/${options.urlParams.telegramWebhookSecretPath}/${options.urlParams.telegramBotToken}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
+  `${process.env["BASE_URL_TO_SELF"]}/api/v1/webhook/telegram/${options.urlParams.telegramWebhookSecretPath}/${options.urlParams.telegramBotToken}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;

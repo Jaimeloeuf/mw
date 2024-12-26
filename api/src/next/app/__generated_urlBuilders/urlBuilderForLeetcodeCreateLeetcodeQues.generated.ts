@@ -6,7 +6,7 @@
  * genStandaloneHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(2dd4c05ef852a0883f74247197267294ea5b958b7ffcefcd6855e26a2c838ead)
+ * sha256(b03edcc980a761ad14e4883f076d2c6fb8c525a17211519f47f5a955a53669b5)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -29,4 +29,4 @@ export const urlBuilderForLeetcodeCreateLeetcodeQues = (
     urlQueryParams: leetcodeCreateLeetcodeQuesController_QueryParams;
   }>,
 ) =>
-  `http://localhost:3000/api/v1/leetcode/ques${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
+  `${process.env["BASE_URL_TO_SELF"]}/api/v1/leetcode/ques${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
