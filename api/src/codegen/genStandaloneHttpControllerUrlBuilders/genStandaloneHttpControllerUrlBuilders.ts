@@ -27,7 +27,7 @@ export async function genStandaloneHttpControllerUrlBuilders() {
 export type UrlBuilderOptions<T> = VoidIfAllPropertiesInObjectIsVoid<
   RemoveMapKeyIfNever<T>
 >;`,
-    "../next/app/urlBuilders/UrlBuilderOptions",
+    "../next/app/__generated_urlBuilders/UrlBuilderOptions",
   );
 
   await genAndSaveGeneratedCode(
@@ -47,7 +47,7 @@ export type UrlBuilderOptions<T> = VoidIfAllPropertiesInObjectIsVoid<
 
   return "?" + queryParams.toString();
 }`,
-    "../next/app/urlBuilders/createUrlQueryParamsString",
+    "../next/app/__generated_urlBuilders/createUrlQueryParamsString",
   );
 
   const urlBuilderWrites = controllerFiles.map(async (controllerFile) => {
@@ -59,7 +59,7 @@ export type UrlBuilderOptions<T> = VoidIfAllPropertiesInObjectIsVoid<
       urlBuilderTemplate(controllerFile, urlBuilderName),
 
       // Unlike other generated files, this is generated in the "next" folder
-      `../next/app/urlBuilders/${urlBuilderName}`,
+      `../next/app/__generated_urlBuilders/${urlBuilderName}`,
     );
   });
 
