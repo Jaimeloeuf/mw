@@ -39,6 +39,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("timeout", "integer")
     .addColumn("time_scheduled", "timestamp", (col) => col.notNull())
     .addColumn("time_start_after", "timestamp")
+    .addColumn("time_preprocess", "timestamp")
     .addColumn("time_start", "timestamp")
     .addColumn("time_finish", "timestamp")
     .addColumn("job_arguments", "text")
