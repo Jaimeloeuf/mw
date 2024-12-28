@@ -22,6 +22,7 @@ export default dataFn(async function asyncGetNextJobToProcess({
     let asyncJobQuery = db
       .selectFrom("async_job")
       .selectAll()
+      .where("status", "=", AsyncJobStatus.queued)
       .where("machine_type", "=", machineType)
       .limit(1);
 
