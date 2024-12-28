@@ -33,6 +33,7 @@ export function defineAsyncJobType<T>(
         jobTypeID: asyncJobConfig.id,
         status: AsyncJobStatus.queued,
         timeScheduled: new Date().toISOString(),
+        timePreprocess: null,
         timeStart: null,
         timeFinish: null,
         jobResult: null,

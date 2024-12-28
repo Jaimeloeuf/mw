@@ -15,6 +15,7 @@ export function mapAsyncJobToDbAsyncJob(job: AsyncJob): CreateAsyncJob {
     timeout: job.timeout,
     time_scheduled: job.timeScheduled,
     time_start_after: job.timeStartAfter,
+    time_preprocess: job.timePreprocess,
     time_start: job.timeStart,
     time_finish: job.timeFinish,
     job_arguments:

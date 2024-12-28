@@ -61,6 +61,13 @@ export type AsyncJob = Pick<AsyncJobTypeConfig, "machineType" | "priority"> & {
   timeStartAfter: null | string;
 
   /**
+   * When did the Job start getting pre-processed in ISO time?
+   *
+   * This is null until the job starts pre-processing.
+   */
+  timePreprocess: null | string;
+
+  /**
    * When did the Job's `run` method start running in ISO time?
    *
    * This is null until the job function starts running.
