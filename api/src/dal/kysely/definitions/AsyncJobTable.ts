@@ -26,6 +26,11 @@ export interface AsyncJobTable {
     never
   >;
   time_scheduled: ColumnType<Date, string, never>;
+  time_start_after: ColumnType<
+    NullableAndVoidable<Date>,
+    NullableAndVoidable<string>,
+    NullableAndVoidable<string>
+  >;
   time_start: ColumnType<
     NullableAndVoidable<Date>,
     NullableAndVoidable<string>,
