@@ -31,6 +31,11 @@ export interface AsyncJobTable {
     NullableAndVoidable<string>,
     NullableAndVoidable<string>
   >;
+  time_preprocess: ColumnType<
+    NullableAndVoidable<Date>,
+    NullableAndVoidable<string>,
+    NullableAndVoidable<string>
+  >;
   time_start: ColumnType<
     NullableAndVoidable<Date>,
     NullableAndVoidable<string>,
