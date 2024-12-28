@@ -37,6 +37,8 @@ export function defineAsyncJobType<T>(
         timeFinish: null,
         jobResult: null,
         jobArguments: validatedJobArgument,
+
+        timeStartAfter: runOptions?.startAfter ?? null,
         priority: runOptions?.priorityOverride ?? asyncJobConfig.priority,
         machineType:
           runOptions?.machineTypeOverride ?? asyncJobConfig.machineType,

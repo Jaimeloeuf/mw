@@ -52,6 +52,15 @@ export type AsyncJob = Pick<AsyncJobTypeConfig, "machineType" | "priority"> & {
   timeScheduled: string;
 
   /**
+   * ISO time for when to start the job after. The job is guaranteed to start
+   * after this time, but not immediately at this time since it will only run
+   * when there is an available machine after this start time.
+   *
+   * This is null if the job function should start running as soon as possible.
+   */
+  timeStartAfter: null | string;
+
+  /**
    * When did the Job's `run` method start running in ISO time?
    *
    * This is null until the job function starts running.

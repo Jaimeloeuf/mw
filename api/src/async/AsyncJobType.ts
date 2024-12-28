@@ -20,6 +20,12 @@ export type AsyncJobType<T = any> = AsyncJobTypeConfig<T> & {
     jobArguments: T;
 
     /**
+     * Set a ISO DateTime string, so that the async job will only run AFTER this
+     * date and never before it.
+     */
+    startAfter?: AsyncJob["timeStartAfter"];
+
+    /**
      * Override the Async Job Type's default priority level.
      */
     priorityOverride?: AsyncJobTypeConfig["priority"];
