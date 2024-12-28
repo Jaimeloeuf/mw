@@ -18,12 +18,15 @@ export default dataFn(async function asyncGetNextJobToProcess({
   machineType: AsyncJobMachineType;
   priority?: AsyncJobPriority;
 }): Promise<null | AsyncJob> {
+  const now = new Date();
+
   const asyncJob = await apiDB.transaction().execute(async (db) => {
     let asyncJobQuery = db
       .selectFrom("async_job")
       .selectAll()
       .where("status", "=", AsyncJobStatus.queued)
       .where("machine_type", "=", machineType)
+      .where("time_start_after", "<=", now)
       .limit(1);
 
     // If `priority` is specified, filter for that specific priority, else grab
