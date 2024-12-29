@@ -50,6 +50,7 @@ export default dataFn(async function asyncGetNextJobToProcess({
       .where("id", "=", asyncJob.id)
       .set({
         status: AsyncJobStatus.preProcessing,
+        time_preprocess: new Date().toISOString(),
       })
       .returningAll()
       .executeTakeFirstOrThrow();
