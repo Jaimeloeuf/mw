@@ -88,4 +88,20 @@ export const genericMonoRepoConfig = {
     },
     true,
   ),
+
+  /**
+   * Use this to set if the web tier entrypoint should start running async jobs
+   * too, defaults to false.
+   */
+  run_async_jobs_in_web_tier: createConfig(
+    z
+      .enum(["true", "false"])
+      .transform((v) => v === "true")
+      .default("false"),
+    "sync",
+    function () {
+      return process.env["RUN_ASYNC_JOBS_IN_WEB_TIER"];
+    },
+    true,
+  ),
 } as const;
