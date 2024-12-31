@@ -1,4 +1,5 @@
 import { startupModuleRunner } from "./__generated/index.js";
+import { bootstrapAsyncJobForWebTier } from "./async/bootstrapAsyncJobForWebTier.js";
 import {
   loadAndValidateRequiredConfigsOnStartup,
   config,
@@ -24,6 +25,8 @@ async function main() {
   await startupModuleRunner();
 
   await bootstrapHttpServer();
+
+  await bootstrapAsyncJobForWebTier();
 }
 
 main();
