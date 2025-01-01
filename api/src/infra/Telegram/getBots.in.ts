@@ -24,7 +24,7 @@ export default async function getAllBots() {
 
       // Try to load the bot token, assume that if the bot token is loaded, it
       // means that the bot is available and vice versa.
-      const [error, botToken] = await noThrowFunction(() => bot.getToken());
+      const [error, botToken] = await noThrowFunction(bot.getToken.bind(bot));
 
       if (error !== null && config.env() === "production") {
         logger.error(

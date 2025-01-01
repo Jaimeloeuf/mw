@@ -26,10 +26,14 @@ import { unknownCatchToError } from "./index.js";
  */
 export async function noThrowFunction<
   T extends (...args: any) => any,
+  FnArgs extends Parameters<T>,
   SuccessfulReturnType extends Awaited<ReturnType<T>> = Awaited<ReturnType<T>>,
->(fn: T): Promise<[null, SuccessfulReturnType] | [Error, null]> {
+>(
+  fn: T,
+  ...args: FnArgs
+): Promise<[null, SuccessfulReturnType] | [Error, null]> {
   try {
-    return [null, await fn()];
+    return [null, await fn(...args)];
   } catch (e) {
     // Convert unknown `e` type to a definite `Error` type before returning it
     return [unknownCatchToError(e), null];
