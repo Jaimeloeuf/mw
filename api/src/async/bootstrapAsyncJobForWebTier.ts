@@ -1,4 +1,6 @@
+import { df } from "../__generated/index.js";
 import { config } from "../config/index.js";
+import { AsyncJobMachineType } from "./AsyncJobMachineType.js";
 import { asyncTierJobLoaderAndRunner } from "./asyncTierJobLoaderAndRunner.js";
 
 /**
@@ -25,6 +27,17 @@ export async function bootstrapAsyncJobForWebTier() {
 async function runAsyncJobRecurringly() {
   await asyncTierJobLoaderAndRunner();
 
+  const [err, numberOfJobsQueued] = await df.asyncGetNumberOfJobsQueued.run(
+    AsyncJobMachineType.web,
+  );
+
+  // If there is an error trying to get Job Queue count or if there is no job in
+  // the queue, wait for a generous 10mins before checking again, else try to
+  // clear the queue asap with a 1s delay in between to ensure that the web tier
+  // traffic doesnt get too big of a impact running async jobs.
+  const timeDelayBeforeNextRun =
+    err !== null || numberOfJobsQueued === 0 ? 600_000 : 1000;
+
   // Schedule the next run
-  setTimeout(runAsyncJobRecurringly, 10_000);
+  setTimeout(runAsyncJobRecurringly, timeDelayBeforeNextRun);
 }
