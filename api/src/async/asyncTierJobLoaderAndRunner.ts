@@ -86,8 +86,25 @@ export async function asyncTierJobLoaderAndRunner() {
   asyncJob.timeStart = new Date().toISOString();
   await df.asyncUpdateJob.runAndThrowOnError(asyncJob);
 
-  const [runError, runResults] = await noThrowFunction(() =>
-    asyncJobType.run(jobArguments),
+  const asyncJobTimeout = asyncJob.timeout;
+
+  const wrappedAsyncJobRunFunction =
+    asyncJobTimeout === null
+      ? () => asyncJobType.run(jobArguments)
+      : async () => {
+          const timeoutID = setTimeout(() => {
+            throw new Error(`AsyncJob timed out after ${asyncJobTimeout}s`);
+          }, asyncJobTimeout * 1000);
+
+          const result = await asyncJobType.run(jobArguments);
+
+          clearTimeout(timeoutID);
+
+          return result;
+        };
+
+  const [runError, runResults] = await noThrowFunction(
+    wrappedAsyncJobRunFunction,
   );
 
   if (runError !== null) {
