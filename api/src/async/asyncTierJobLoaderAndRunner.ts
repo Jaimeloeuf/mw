@@ -1,7 +1,7 @@
 import { df } from "../__generated/index.js";
-import { TimeoutException } from "../exceptions/index.js";
 import { logger } from "../logging/index.js";
 import { noThrowFunction } from "../utils/index.js";
+import { runFunctionWithTimeout } from "../utils/runFunctionWithTimeout.js";
 import { AsyncJobMachineType } from "./AsyncJobMachineType.js";
 import { AsyncJobStatus } from "./AsyncJobStatus.js";
 import { mappingOfAsyncJobs } from "./mappingOfAsyncJobs.js";
@@ -87,27 +87,17 @@ export async function asyncTierJobLoaderAndRunner() {
   asyncJob.timeStart = new Date().toISOString();
   await df.asyncUpdateJob.runAndThrowOnError(asyncJob);
 
-  const asyncJobTimeout = asyncJob.timeout;
-
-  const wrappedAsyncJobRunFunction =
-    asyncJobTimeout === null
-      ? () => asyncJobType.run(jobArguments)
-      : async () => {
-          const timeoutID = setTimeout(() => {
-            throw new TimeoutException(
-              `AsyncJob timed out after ${asyncJobTimeout}s`,
-            );
-          }, asyncJobTimeout * 1000);
-
-          const result = await asyncJobType.run(jobArguments);
-
-          clearTimeout(timeoutID);
-
-          return result;
-        };
+  const asyncJobTypeRunFn = asyncJobType.run.bind(asyncJobType, jobArguments);
 
   const [runError, runResults] = await noThrowFunction(
-    wrappedAsyncJobRunFunction,
+    asyncJob.timeout === null
+      ? asyncJobTypeRunFn
+      : () =>
+          runFunctionWithTimeout(
+            asyncJobTypeRunFn,
+            asyncJob.timeout! * 1000,
+            `AsyncJob timed out after ${asyncJob.timeout}s`,
+          ),
   );
 
   if (runError !== null) {
