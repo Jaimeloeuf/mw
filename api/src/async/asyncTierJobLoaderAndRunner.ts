@@ -1,4 +1,5 @@
 import { df } from "../__generated/index.js";
+import { TimeoutException } from "../exceptions/index.js";
 import { logger } from "../logging/index.js";
 import { noThrowFunction } from "../utils/index.js";
 import { AsyncJobMachineType } from "./AsyncJobMachineType.js";
@@ -93,7 +94,9 @@ export async function asyncTierJobLoaderAndRunner() {
       ? () => asyncJobType.run(jobArguments)
       : async () => {
           const timeoutID = setTimeout(() => {
-            throw new Error(`AsyncJob timed out after ${asyncJobTimeout}s`);
+            throw new TimeoutException(
+              `AsyncJob timed out after ${asyncJobTimeout}s`,
+            );
           }, asyncJobTimeout * 1000);
 
           const result = await asyncJobType.run(jobArguments);
