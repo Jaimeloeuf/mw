@@ -13,4 +13,5 @@ export * from "./InvalidInternalStateException.js";
 export * from "./InvalidOperationException.js";
 export * from "./NotFoundException.js";
 export * from "./ServiceException.js";
+export * from "./TimeoutException.js";
 export * from "./UnauthorizedException.js";
