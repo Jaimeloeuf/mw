@@ -1,5 +1,17 @@
 import { TimeoutException } from "../exceptions/index.js";
 
+async function delayAndThrow(
+  timeoutInMilliseconds: number,
+  timeoutExceptionMessage: string,
+  controller: { skip: boolean },
+) {
+  await new Promise((res) => setTimeout(res, timeoutInMilliseconds));
+
+  if (!controller.skip) {
+    throw new TimeoutException(timeoutExceptionMessage);
+  }
+}
+
 /**
  * Runs a given function with a timeout, and will stop the given function's
  * execution once the timeout has been hit, by having a `TimeoutException`
@@ -16,21 +28,19 @@ export async function runFunctionWithTimeout<T extends (...args: any) => any>(
   timeoutInMilliseconds: number,
   timeoutExceptionMessage: string,
 ) {
-  let timeoutID: ReturnType<typeof setTimeout>;
+  const controller = { skip: false };
 
   try {
-    timeoutID = setTimeout(() => {
-      throw new TimeoutException(timeoutExceptionMessage);
-    }, timeoutInMilliseconds);
+    delayAndThrow(timeoutInMilliseconds, timeoutExceptionMessage, controller);
 
     const result = await fn();
 
-    clearTimeout(timeoutID);
+    controller.skip = true;
 
     return result;
   } catch (error) {
     // Always clear timeout before re-throwing error / bubbling error up.
-    clearTimeout(timeoutID!);
+    controller.skip = true;
     throw error;
   }
 }
