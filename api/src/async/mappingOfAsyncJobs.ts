@@ -11,7 +11,7 @@ import type { AsyncJobType } from "./AsyncJobType.js";
  */
 export const mappingOfAsyncJobs: Record<
   string,
-  () => Promise<{ default: AsyncJobType }>
+  () => Promise<{ default: AsyncJobType<any> }>
 > = {
   "186e39bb-0bd5-451c-8a90-557ae9a54ca8": () => import("./jobs/example.job.js"),
 };
