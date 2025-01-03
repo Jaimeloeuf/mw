@@ -1,7 +1,6 @@
 import { df } from "../__generated/index.js";
 import { logger } from "../logging/index.js";
 import { noThrowFunction } from "../utils/index.js";
-import { runFunctionWithTimeout } from "../utils/runFunctionWithTimeout.js";
 import { AsyncJobMachineType } from "./AsyncJobMachineType.js";
 import { AsyncJobStatus } from "./AsyncJobStatus.js";
 import { mappingOfAsyncJobs } from "./mappingOfAsyncJobs.js";
@@ -87,17 +86,13 @@ export async function asyncTierJobLoaderAndRunner() {
   asyncJob.timeStart = new Date().toISOString();
   await df.asyncUpdateJob.runAndThrowOnError(asyncJob);
 
-  const asyncJobTypeRunFn = asyncJobType.run.bind(asyncJobType, jobArguments);
+  // @todo
+  // Re-implement loader and runner to run jobs in child process to implement
+  // timeouts (asyncJob.timeout) by killing child process at point of timeout,
+  // since there is no primitives for doing this well in the same JS process.
 
   const [runError, runResults] = await noThrowFunction(
-    asyncJob.timeout === null
-      ? asyncJobTypeRunFn
-      : () =>
-          runFunctionWithTimeout(
-            asyncJobTypeRunFn,
-            asyncJob.timeout! * 1000,
-            `AsyncJob timed out after ${asyncJob.timeout}s`,
-          ),
+    asyncJobType.run.bind(asyncJobType, jobArguments),
   );
 
   if (runError !== null) {
