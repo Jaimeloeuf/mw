@@ -6,7 +6,7 @@ import type { AsyncJobTypeConfig } from "./AsyncJobTypeConfig.js";
  * An object type to describe an Async Job Type, alongside a `scheduleJob`
  * method for users to schedule a Job of that Job Type.
  */
-export type AsyncJobType<AsyncJobArgumentType = any> =
+export type AsyncJobType<AsyncJobArgumentType = void> =
   AsyncJobTypeConfig<AsyncJobArgumentType> & {
     scheduleJob: (runOptions?: {
       /**
@@ -18,7 +18,9 @@ export type AsyncJobType<AsyncJobArgumentType = any> =
       /**
        * Arguments for this Job.
        */
-      jobArguments: AsyncJobArgumentType;
+      jobArguments: AsyncJobArgumentType extends void
+        ? void
+        : AsyncJobArgumentType;
 
       /**
        * Set a ISO DateTime string, so that the async job will only run AFTER this
