@@ -68,5 +68,7 @@ export type AsyncJobTypeConfig<
    * `AsyncJobResult` will be set for you where the description will be the
    * error message.
    */
-  run(argument: AsyncJobArgumentType): AsyncJobResult | Promise<AsyncJobResult>;
+  run(
+    argument: AsyncJobArgumentType extends void ? null : AsyncJobArgumentType,
+  ): AsyncJobResult | Promise<AsyncJobResult>;
 };
