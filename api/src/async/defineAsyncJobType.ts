@@ -12,9 +12,9 @@ import { validateJobArgumentOnSave } from "./validateJobArgumentOnSave.js";
  * Function to define an `AsyncJobType` object and creating the `scheduleJob`
  * method.
  */
-export function defineAsyncJobType<T>(
-  asyncJobConfig: AsyncJobTypeConfig<T>,
-): AsyncJobType<T> {
+export function defineAsyncJobType<AsyncJobArgumentType = void>(
+  asyncJobConfig: AsyncJobTypeConfig<AsyncJobArgumentType>,
+): AsyncJobType<AsyncJobArgumentType> {
   return {
     ...asyncJobConfig,
 
