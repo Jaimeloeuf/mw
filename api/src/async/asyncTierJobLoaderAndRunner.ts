@@ -1,9 +1,8 @@
-import { df } from "../__generated/index.js";
+import { df, asyncJobTypeMapping } from "../__generated/index.js";
 import { logger } from "../logging/index.js";
 import { noThrowFunction } from "../utils/index.js";
 import { AsyncJobMachineType } from "./AsyncJobMachineType.js";
 import { AsyncJobStatus } from "./AsyncJobStatus.js";
-import { mappingOfAsyncJobs } from "./mappingOfAsyncJobs.js";
 import { validateJobArgumentOnRead } from "./validateJobArgumentOnRead.js";
 
 /**
@@ -32,7 +31,7 @@ export async function asyncTierJobLoaderAndRunner() {
     `Found Async Job to run: ${asyncJob.id}`,
   );
 
-  const asyncJobTypeModule = mappingOfAsyncJobs[asyncJob.jobTypeID];
+  const asyncJobTypeModule = asyncJobTypeMapping[asyncJob.jobTypeID];
 
   if (asyncJobTypeModule === undefined) {
     const errMsg = `AsyncJobType ID '${asyncJob.jobTypeID}' not found, it might be deleted`;
