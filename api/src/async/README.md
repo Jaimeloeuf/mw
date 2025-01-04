@@ -2,6 +2,10 @@
 `async` allow users to define and schedule asynchronous background jobs.
 
 
+## Where do i write them? tl;dr
+Define your [Async Job Type here](./jobs/) and run `codegen` step to access them from the `__generated` folder.
+
+
 ## What is the point of async jobs?
 To run general compute without blocking the main caller/triggerer, e.g. we want to run some video processing, but we want to trigger this job from the web tier, without blocking web tier and spending web tier resources on running this.
 
