@@ -2,7 +2,11 @@ import fs from "fs/promises";
 import path from "path";
 
 import { logger } from "../../logging/index.js";
-import { generatedSrcDirPath } from "../codegenForTs/index.js";
+import {
+  generatedSrcDirPath,
+  generatedCodeFileExtension,
+  generatedCodeFileExtensionWithNoBarrelFileInclusion,
+} from "../codegenForTs/index.js";
 
 /**
  * Delete all generated files in __generated/ so that codegen can start afresh.
@@ -28,7 +32,14 @@ export async function deleteAllGeneratedFiles() {
     generatedFilesDirent
 
       // Only keep valid generated files
-      .filter((file) => file.isFile() && file.name.endsWith(".generated.ts"))
+      .filter(
+        (file) =>
+          file.isFile() &&
+          (file.name.endsWith(generatedCodeFileExtension) ||
+            file.name.endsWith(
+              generatedCodeFileExtensionWithNoBarrelFileInclusion,
+            )),
+      )
 
       // Delete the file and map back the promise to await together
       .map((file) => fs.rm(path.resolve(file.parentPath, file.name))),
