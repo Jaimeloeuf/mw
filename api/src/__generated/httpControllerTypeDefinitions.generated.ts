@@ -6,11 +6,12 @@
  * genHttpControllerTypeDefinitions
  *
  * Generated hash in hex for code after this section is:
- * sha256(63c8c02858a8a8bb87d558aa31dfa08a3a5469b37bb4c8ca61524fa6ecbddd7d)
+ * sha256(bf5f401e4e34e51ddb9ec734319df92a93e9a50696c67a422e35204f80c9c675)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
 import type { z } from "zod";
+import type { JSendSuccess } from "../http/JSend.js";
 import * as c from "./httpControllerBarrelFile.generated.do_not_include_in_barrel_file.js";
 
 export type healthCheckController_UrlParams = z.infer<
@@ -25,6 +26,8 @@ export type healthCheckController_InputDTO = z.infer<
 export type healthCheckController_OutputDTO = Awaited<
   ReturnType<(typeof c.healthCheck)["httpRequestHandler"]>
 >;
+export type healthCheckController_OutputFullDTO =
+  JSendSuccess<healthCheckController_OutputDTO>;
 export type blogNewSubscriberController_UrlParams = z.infer<
   Exclude<(typeof c.blogNewSubscriber)["urlParamsValidator"], null>
 >;
@@ -37,6 +40,8 @@ export type blogNewSubscriberController_InputDTO = z.infer<
 export type blogNewSubscriberController_OutputDTO = Awaited<
   ReturnType<(typeof c.blogNewSubscriber)["httpRequestHandler"]>
 >;
+export type blogNewSubscriberController_OutputFullDTO =
+  JSendSuccess<blogNewSubscriberController_OutputDTO>;
 export type bucketlistCreateOneController_UrlParams = z.infer<
   Exclude<(typeof c.bucketlistCreateOne)["urlParamsValidator"], null>
 >;
@@ -49,6 +54,8 @@ export type bucketlistCreateOneController_InputDTO = z.infer<
 export type bucketlistCreateOneController_OutputDTO = Awaited<
   ReturnType<(typeof c.bucketlistCreateOne)["httpRequestHandler"]>
 >;
+export type bucketlistCreateOneController_OutputFullDTO =
+  JSendSuccess<bucketlistCreateOneController_OutputDTO>;
 export type bucketlistGetOneController_UrlParams = z.infer<
   Exclude<(typeof c.bucketlistGetOne)["urlParamsValidator"], null>
 >;
@@ -61,6 +68,8 @@ export type bucketlistGetOneController_InputDTO = z.infer<
 export type bucketlistGetOneController_OutputDTO = Awaited<
   ReturnType<(typeof c.bucketlistGetOne)["httpRequestHandler"]>
 >;
+export type bucketlistGetOneController_OutputFullDTO =
+  JSendSuccess<bucketlistGetOneController_OutputDTO>;
 export type leetcodeCreateLeetcodeQuesController_UrlParams = z.infer<
   Exclude<(typeof c.leetcodeCreateLeetcodeQues)["urlParamsValidator"], null>
 >;
@@ -76,6 +85,8 @@ export type leetcodeCreateLeetcodeQuesController_InputDTO = z.infer<
 export type leetcodeCreateLeetcodeQuesController_OutputDTO = Awaited<
   ReturnType<(typeof c.leetcodeCreateLeetcodeQues)["httpRequestHandler"]>
 >;
+export type leetcodeCreateLeetcodeQuesController_OutputFullDTO =
+  JSendSuccess<leetcodeCreateLeetcodeQuesController_OutputDTO>;
 export type leetcodeGetLeetcodeQuesController_UrlParams = z.infer<
   Exclude<(typeof c.leetcodeGetLeetcodeQues)["urlParamsValidator"], null>
 >;
@@ -88,6 +99,8 @@ export type leetcodeGetLeetcodeQuesController_InputDTO = z.infer<
 export type leetcodeGetLeetcodeQuesController_OutputDTO = Awaited<
   ReturnType<(typeof c.leetcodeGetLeetcodeQues)["httpRequestHandler"]>
 >;
+export type leetcodeGetLeetcodeQuesController_OutputFullDTO =
+  JSendSuccess<leetcodeGetLeetcodeQuesController_OutputDTO>;
 export type versionController_UrlParams = z.infer<
   Exclude<(typeof c.version)["urlParamsValidator"], null>
 >;
@@ -100,6 +113,8 @@ export type versionController_InputDTO = z.infer<
 export type versionController_OutputDTO = Awaited<
   ReturnType<(typeof c.version)["httpRequestHandler"]>
 >;
+export type versionController_OutputFullDTO =
+  JSendSuccess<versionController_OutputDTO>;
 export type webhookTelegramController_UrlParams = z.infer<
   Exclude<(typeof c.webhookTelegram)["urlParamsValidator"], null>
 >;
@@ -112,3 +127,5 @@ export type webhookTelegramController_InputDTO = z.infer<
 export type webhookTelegramController_OutputDTO = Awaited<
   ReturnType<(typeof c.webhookTelegram)["httpRequestHandler"]>
 >;
+export type webhookTelegramController_OutputFullDTO =
+  JSendSuccess<webhookTelegramController_OutputDTO>;
