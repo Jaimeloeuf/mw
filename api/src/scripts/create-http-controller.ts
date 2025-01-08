@@ -71,7 +71,7 @@ async function createHttpController() {
 
   const controllerFilePath = path.join(
     import.meta.dirname,
-    `../controllers-http/${controllerName}.ts`,
+    `../controllers-http/${controllerName}.ct.ts`,
   );
 
   const generatedCode = codeTemplate(httpMethod, apiPath);
