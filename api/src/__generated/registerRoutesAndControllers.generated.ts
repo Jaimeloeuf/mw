@@ -6,7 +6,7 @@
  * genHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256(7a77f33f54fb216c60e9ca3531bf100b3f084109cd7b464beaacb1bce349d7dc)
+ * sha256(387c58972d1d500700aa0809f7b0abf594909d1d3f7feed93e7590ad96045aaa)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -61,6 +61,13 @@ export function registerRoutesAndControllers() {
     ("/v1" satisfies typeof c.bucketlistGetOne.version) +
       ("/bucketlist/:bucketlistID" satisfies typeof c.bucketlistGetOne.path),
     c.bucketlistGetOne.routeHandler,
+  );
+
+  // GET /api/v1/check/checklist/:checklistID
+  r["get" satisfies typeof c.checkGetChecklist.method](
+    ("/v1" satisfies typeof c.checkGetChecklist.version) +
+      ("/check/checklist/:checklistID" satisfies typeof c.checkGetChecklist.path),
+    c.checkGetChecklist.routeHandler,
   );
 
   // POST /api/v1/leetcode/ques

@@ -6,7 +6,7 @@
  * genHttpControllerTypeDefinitions
  *
  * Generated hash in hex for code after this section is:
- * sha256(bf5f401e4e34e51ddb9ec734319df92a93e9a50696c67a422e35204f80c9c675)
+ * sha256(4b72f528e646765bac08d25903bb6fc900681d28547daf581820abcd9d1e0292)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -70,6 +70,20 @@ export type bucketlistGetOneController_OutputDTO = Awaited<
 >;
 export type bucketlistGetOneController_OutputFullDTO =
   JSendSuccess<bucketlistGetOneController_OutputDTO>;
+export type checkGetChecklistController_UrlParams = z.infer<
+  Exclude<(typeof c.checkGetChecklist)["urlParamsValidator"], null>
+>;
+export type checkGetChecklistController_QueryParams = z.infer<
+  Exclude<(typeof c.checkGetChecklist)["urlQueryParamsValidator"], null>
+>;
+export type checkGetChecklistController_InputDTO = z.infer<
+  Exclude<(typeof c.checkGetChecklist)["requestBodyValidator"], null>
+>;
+export type checkGetChecklistController_OutputDTO = Awaited<
+  ReturnType<(typeof c.checkGetChecklist)["httpRequestHandler"]>
+>;
+export type checkGetChecklistController_OutputFullDTO =
+  JSendSuccess<checkGetChecklistController_OutputDTO>;
 export type leetcodeCreateLeetcodeQuesController_UrlParams = z.infer<
   Exclude<(typeof c.leetcodeCreateLeetcodeQues)["urlParamsValidator"], null>
 >;

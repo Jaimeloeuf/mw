@@ -6,7 +6,7 @@
  * genHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(94abac12e6cba114ad2edceb4ba081e81eb093afdb64521b43ec921ee28f509d)
+ * sha256(b2da501ebbc7d549ed91f2984f87fc23eda51116dc244d96d430fd271c362170)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -68,6 +68,14 @@ export const forBucketlistGetOne = (
   }>,
 ) =>
   `${config.base_url_to_self()}/api/v1/bucketlist/${options.urlParams.bucketlistID}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
+
+export const forCheckGetChecklist = (
+  options: UrlBuilderOptions<{
+    urlParams: t.checkGetChecklistController_UrlParams;
+    urlQueryParams: t.checkGetChecklistController_QueryParams;
+  }>,
+) =>
+  `${config.base_url_to_self()}/api/v1/check/checklist/${options.urlParams.checklistID}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
 
 export const forLeetcodeCreateLeetcodeQues = (
   options: UrlBuilderOptions<{
