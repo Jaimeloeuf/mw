@@ -1,11 +1,16 @@
 import { apiDB } from "../kysely/index.js";
 import { BaseEnt, EntCrudOperator } from "./Orm.js";
 
-export class BlogSubscriber extends BaseEnt {
+type BlogSubsciber = {
+  email: string;
+};
+
+export class EntBlogSubscriber extends BaseEnt<BlogSubsciber> {
   constructor(
     public data: {
       id: string;
       createdAt: Date;
+      updatedAt: Date;
       email: string;
     },
   ) {
@@ -16,8 +21,8 @@ export class BlogSubscriber extends BaseEnt {
     return JSON.stringify(this.data);
   }
 
-  static override jsonParse(jsonString: string): BlogSubscriber {
-    return new BlogSubscriber(JSON.parse(jsonString));
+  static override jsonParse(jsonString: string): EntBlogSubscriber {
+    return new EntBlogSubscriber(JSON.parse(jsonString));
   }
 }
 
@@ -37,9 +42,10 @@ export const BlogSubscriberOperators = {
       .where("id", "=", id)
       .executeTakeFirstOrThrow();
 
-    return new BlogSubscriber({
+    return new EntBlogSubscriber({
       id: data.id,
       createdAt: data.created_at,
+      updatedAt: data.created_at,
       email: data.email,
     });
   },
@@ -59,4 +65,4 @@ export const BlogSubscriberOperators = {
       .returningAll()
       .executeTakeFirst();
   },
-} satisfies EntCrudOperator<BlogSubscriber>;
+} satisfies EntCrudOperator<EntBlogSubscriber>;
