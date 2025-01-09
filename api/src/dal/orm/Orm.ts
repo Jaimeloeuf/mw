@@ -25,3 +25,28 @@ export abstract class BaseEnt {
     );
   }
 }
+
+/**
+ * Operators to implement basic CRUD + Upsert feature set for a given Ent.
+ */
+export interface EntCrudOperator<Ent> {
+  /**
+   * Override and implement this
+   */
+  create(ent: Ent): Promise<void>;
+
+  /**
+   * Override and implement this
+   */
+  get(id: string): Promise<Ent>;
+
+  /**
+   * Override and implement this
+   */
+  update(ent: Ent): Promise<void>;
+
+  /**
+   * Override and implement this
+   */
+  delete(id: string): Promise<void>;
+}
