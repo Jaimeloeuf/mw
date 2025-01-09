@@ -29,7 +29,7 @@ export abstract class BaseEnt {
 /**
  * Operators to implement basic CRUD + Upsert feature set for a given Ent.
  */
-export interface EntCrudOperator<Ent> {
+export interface EntCrudOperator<Ent extends BaseEnt> {
   /**
    * Override and implement this
    */
