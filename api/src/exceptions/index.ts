@@ -15,3 +15,4 @@ export * from "./NotFoundException.js";
 export * from "./ServiceException.js";
 export * from "./TimeoutException.js";
 export * from "./UnauthorizedException.js";
+export * from "./UnimplementedException.js";
