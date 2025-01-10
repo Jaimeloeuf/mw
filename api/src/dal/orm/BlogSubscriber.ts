@@ -1,11 +1,11 @@
 import { apiDB } from "../kysely/index.js";
 import { BaseEnt, defineEntCrudOperator } from "./Orm.js";
 
-type BlogSubsciber = {
+type BlogSubsciberData = {
   email: string;
 };
 
-export class EntBlogSubscriber extends BaseEnt<BlogSubsciber> {
+export class EntBlogSubscriber extends BaseEnt<BlogSubsciberData> {
   constructor(
     public data: {
       id: string;
