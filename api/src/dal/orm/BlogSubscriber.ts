@@ -27,12 +27,19 @@ export class EntBlogSubscriber extends BaseEnt<BlogSubsciber> {
 }
 
 export const BlogSubscriberOperators = {
-  async create(ent) {
-    await apiDB
+  async create(data) {
+    const dbData = await apiDB
       .insertInto("blog_subscriber")
-      .values(ent.data)
+      .values(data)
       .returningAll()
       .executeTakeFirstOrThrow();
+
+    return new EntBlogSubscriber({
+      id: dbData.id,
+      createdAt: dbData.created_at,
+      updatedAt: dbData.created_at,
+      email: dbData.email,
+    });
   },
 
   async get(id) {

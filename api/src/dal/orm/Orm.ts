@@ -53,7 +53,7 @@ export interface EntCrudOperator<Ent extends BaseEnt<any>> {
   /**
    * Override and implement this
    */
-  create(ent: Ent): Promise<void>;
+  create(data: Ent["data"]): Promise<Ent>;
 
   /**
    * Override and implement this
