@@ -18,9 +18,16 @@ type EntManagedData = {
 };
 
 /**
+ * All data stored in Ent must extend this type.
+ */
+type EntSupportedData = Record<string, unknown>;
+
+/**
  * Base abstract Entity class for all Ents to extend/implement
  */
-export abstract class BaseEnt<DataType extends Record<string, unknown>> {
+export abstract class BaseEnt<
+  DataType extends EntSupportedData = EntSupportedData,
+> {
   /**
    * The Ent's data
    */
@@ -50,7 +57,7 @@ export abstract class BaseEnt<DataType extends Record<string, unknown>> {
 /**
  * Operators to implement basic CRUD + Upsert feature set for a given Ent.
  */
-export interface EntCrudOperator<Ent extends BaseEnt<any>> {
+export interface EntCrudOperator<Ent extends BaseEnt> {
   /**
    * Override and implement this
    */
@@ -72,12 +79,12 @@ export interface EntCrudOperator<Ent extends BaseEnt<any>> {
   delete(id: string): Promise<void>;
 }
 
-type EntClass<Ent extends BaseEnt<any>> = new (...args: any) => Ent;
+type EntClass<Ent extends BaseEnt> = new (...args: any) => Ent;
 
 /**
  * Operators to implement basic CRUD + Upsert feature set for a given Ent.
  */
-export interface EntCrudOperatorDefinition<Ent extends BaseEnt<any>> {
+export interface EntCrudOperatorDefinition<Ent extends BaseEnt> {
   create(ent: Ent): Promise<void>;
   get(id: string): Promise<Ent>;
   update(ent: Ent): Promise<void>;
@@ -85,7 +92,7 @@ export interface EntCrudOperatorDefinition<Ent extends BaseEnt<any>> {
 }
 
 export function defineEntCrudOperator<
-  EntInstance extends BaseEnt<any>,
+  EntInstance extends BaseEnt,
   Ent extends EntClass<EntInstance>,
 >(
   entClass: Ent,
