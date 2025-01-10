@@ -93,7 +93,6 @@ export function defineEntCrudOperator<
 ): EntCrudOperator<EntInstance> {
   return {
     get: entCrudOperatorDefinition.get,
-    update: entCrudOperatorDefinition.update,
     delete: entCrudOperatorDefinition.delete,
 
     async create(data: Omit<EntInstance["data"], keyof EntManagedData>) {
@@ -106,6 +105,11 @@ export function defineEntCrudOperator<
       });
       await entCrudOperatorDefinition.create(ent);
       return ent;
+    },
+
+    async update(ent: EntInstance) {
+      ent.data.updatedAt = new Date();
+      await entCrudOperatorDefinition.update(ent);
     },
   };
 }
