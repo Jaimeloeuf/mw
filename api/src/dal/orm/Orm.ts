@@ -54,7 +54,7 @@ export interface EntCrudOperator<Ent extends BaseEnt<any>> {
   /**
    * Override and implement this
    */
-  create(data: Ent["data"]): Promise<Ent>;
+  create(data: Omit<Ent["data"], keyof EntManagedData>): Promise<Ent>;
 
   /**
    * Override and implement this
@@ -70,4 +70,42 @@ export interface EntCrudOperator<Ent extends BaseEnt<any>> {
    * Override and implement this
    */
   delete(id: string): Promise<void>;
+}
+
+type EntClass<Ent extends BaseEnt<any>> = new (...args: any) => Ent;
+
+/**
+ * Operators to implement basic CRUD + Upsert feature set for a given Ent.
+ */
+export interface EntCrudOperatorDefinition<Ent extends BaseEnt<any>> {
+  create(ent: Ent): Promise<void>;
+  get(id: string): Promise<Ent>;
+  update(ent: Ent): Promise<void>;
+  delete(id: string): Promise<void>;
+}
+
+export function defineEntCrudOperator<
+  EntInstance extends BaseEnt<any>,
+  Ent extends EntClass<EntInstance>,
+>(
+  entClass: Ent,
+  entCrudOperatorDefinition: EntCrudOperatorDefinition<EntInstance>,
+): EntCrudOperator<EntInstance> {
+  return {
+    get: entCrudOperatorDefinition.get,
+    update: entCrudOperatorDefinition.update,
+    delete: entCrudOperatorDefinition.delete,
+
+    async create(data: Omit<EntInstance["data"], keyof EntManagedData>) {
+      const now = new Date();
+      const ent = new entClass({
+        id: crypto.randomUUID(),
+        createdAt: now,
+        updatedAt: now,
+        ...data,
+      });
+      await entCrudOperatorDefinition.create(ent);
+      return ent;
+    },
+  };
 }

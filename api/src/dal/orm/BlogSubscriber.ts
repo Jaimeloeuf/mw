@@ -1,5 +1,5 @@
 import { apiDB } from "../kysely/index.js";
-import { BaseEnt, EntCrudOperator } from "./Orm.js";
+import { BaseEnt, defineEntCrudOperator } from "./Orm.js";
 
 type BlogSubsciber = {
   email: string;
@@ -26,20 +26,20 @@ export class EntBlogSubscriber extends BaseEnt<BlogSubsciber> {
   }
 }
 
-export const BlogSubscriberOperators = {
-  async create(data) {
-    const dbData = await apiDB
+export const BlogSubscriberOperators = defineEntCrudOperator<
+  EntBlogSubscriber,
+  typeof EntBlogSubscriber
+>(EntBlogSubscriber, {
+  async create(ent) {
+    await apiDB
       .insertInto("blog_subscriber")
-      .values(data)
+      .values({
+        id: ent.data.id,
+        email: ent.data.email,
+        created_at: ent.data.createdAt.toISOString(),
+      })
       .returningAll()
       .executeTakeFirstOrThrow();
-
-    return new EntBlogSubscriber({
-      id: dbData.id,
-      createdAt: dbData.created_at,
-      updatedAt: dbData.created_at,
-      email: dbData.email,
-    });
   },
 
   async get(id) {
@@ -72,4 +72,4 @@ export const BlogSubscriberOperators = {
       .returningAll()
       .executeTakeFirst();
   },
-} satisfies EntCrudOperator<EntBlogSubscriber>;
+});
