@@ -24,7 +24,7 @@ export class EntBlogSubscriber extends BaseEnt {
   }
 }
 
-export const BlogSubscriberOperators = defineEntCrudOperator({
+export const EntBlogSubscriberOperators = defineEntCrudOperator({
   entClass: EntBlogSubscriber,
 
   entCrudOperators: {
