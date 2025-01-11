@@ -125,7 +125,7 @@ export function defineEntCrudOperator<
     async create(data: Omit<EntInstance["data"], keyof EntManagedData>) {
       const now = new Date();
       const ent = new entClass({
-        id: crypto.randomUUID(),
+        id: generateEntID(entClass),
         createdAt: now,
         updatedAt: now,
         ...data,
@@ -139,4 +139,18 @@ export function defineEntCrudOperator<
       await entCrudOperatorDefinition.update(ent);
     },
   };
+}
+
+/**
+ * Generate a new ID for a given Ent type using a UUID combined with the
+ * `EntTypeID` set on the Ent class itself.
+ *
+ * EntTypeID is added to the end of the ID to ensure it does not cause indexing
+ * issues with storage layers.
+ */
+function generateEntID(entClass: EntClass<BaseEnt>): string {
+  // Casting to get the value of the non-abstract class
+  const entTypeID = (entClass as unknown as typeof BaseEnt).EntTypeID;
+  const uuid = crypto.randomUUID();
+  return `${uuid}_${entTypeID}`;
 }
