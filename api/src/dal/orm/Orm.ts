@@ -117,11 +117,15 @@ export interface EntCrudOperatorDefinition<Ent extends BaseEnt> {
 export function defineEntCrudOperator<
   EntInstance extends BaseEnt,
   Ent extends EntClass<EntInstance>,
+  EntCustomOperators extends { [OperatorName: string]: (...args: any) => any },
 >(
   entClass: Ent,
   entCrudOperatorDefinition: EntCrudOperatorDefinition<EntInstance>,
-): EntCrudOperator<EntInstance> {
+  entCustomOperators: EntCustomOperators,
+): EntCrudOperator<EntInstance> & EntCustomOperators {
   return {
+    ...entCustomOperators,
+
     /**
      * Verify ID before loading Ent.
      */
