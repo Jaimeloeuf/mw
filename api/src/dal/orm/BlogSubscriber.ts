@@ -6,6 +6,8 @@ type BlogSubsciberData = {
 };
 
 export class EntBlogSubscriber extends BaseEnt<BlogSubsciberData> {
+  static override EntTypeID = "0dda";
+
   constructor(
     public data: {
       id: string;

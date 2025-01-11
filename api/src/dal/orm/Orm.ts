@@ -29,6 +29,17 @@ export abstract class BaseEnt<
   DataType extends EntSupportedData = EntSupportedData,
 > {
   /**
+   * ID to uniquely identify every Ent Type, and will be used as all the Ent
+   * instance's ID prefix.
+   *
+   * 4 character alphanumeric [a-z, 0-9] string for ~1.5 million unique IDs.
+   *
+   * This will allow us to quickly identify what is the Ent Type by looking at
+   * the Ent instance ID.
+   */
+  static EntTypeID: string;
+
+  /**
    * The Ent's data
    */
   abstract data: EntManagedData & DataType;
