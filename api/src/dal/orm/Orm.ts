@@ -135,6 +135,10 @@ export function defineEntCrudOperator<
       return entCrudOperatorDefinition.get(id);
     },
 
+    /**
+     * Create a new Ent instance using the given Ent data and auto generated
+     * ID and timestamps, which is written to storage layer before returned.
+     */
     async create(data: Omit<EntInstance["data"], keyof EntManagedData>) {
       const now = new Date();
       const ent = new entClass({
@@ -147,6 +151,9 @@ export function defineEntCrudOperator<
       return ent;
     },
 
+    /**
+     * Update `updatedAt` timestamp before updating storage layer with operator.
+     */
     async update(ent: EntInstance) {
       ent.data.updatedAt = new Date();
       await entCrudOperatorDefinition.update(ent);
