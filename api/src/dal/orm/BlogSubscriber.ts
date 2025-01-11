@@ -35,9 +35,10 @@ export const BlogSubscriberOperators = defineEntCrudOperator<
     getAll: () => Promise<Array<EntBlogSubscriber>>;
     isEmailAlreadySubscribed: (email: string) => Promise<boolean>;
   }
->(
-  EntBlogSubscriber,
-  {
+>({
+  entClass: EntBlogSubscriber,
+
+  entCrudOperators: {
     async create(ent) {
       await apiDB
         .insertInto("blog_subscriber")
@@ -83,7 +84,8 @@ export const BlogSubscriberOperators = defineEntCrudOperator<
         .executeTakeFirst();
     },
   },
-  {
+
+  entCustomOperators: {
     async getAll() {
       const data = await apiDB
         .selectFrom("blog_subscriber")
@@ -111,4 +113,4 @@ export const BlogSubscriberOperators = defineEntCrudOperator<
       return subscriber !== undefined;
     },
   },
-);
+});

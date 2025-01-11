@@ -118,11 +118,15 @@ export function defineEntCrudOperator<
   EntInstance extends BaseEnt,
   Ent extends EntClass<EntInstance>,
   EntCustomOperators extends { [OperatorName: string]: (...args: any) => any },
->(
-  entClass: Ent,
-  entCrudOperatorDefinition: EntCrudOperatorDefinition<EntInstance>,
-  entCustomOperators: EntCustomOperators,
-): EntCrudOperator<EntInstance> & EntCustomOperators {
+>({
+  entClass,
+  entCrudOperators,
+  entCustomOperators,
+}: {
+  entClass: Ent;
+  entCrudOperators: EntCrudOperatorDefinition<EntInstance>;
+  entCustomOperators: EntCustomOperators;
+}): EntCrudOperator<EntInstance> & EntCustomOperators {
   return {
     ...entCustomOperators,
 
@@ -136,7 +140,7 @@ export function defineEntCrudOperator<
           `Invalid ID '${id}' used for '${entClass.name}'`,
         );
       }
-      return entCrudOperatorDefinition.get(id);
+      return entCrudOperators.get(id);
     },
 
     /**
@@ -151,7 +155,7 @@ export function defineEntCrudOperator<
         updatedAt: now,
         ...data,
       });
-      await entCrudOperatorDefinition.create(ent);
+      await entCrudOperators.create(ent);
       return ent;
     },
 
@@ -160,7 +164,7 @@ export function defineEntCrudOperator<
      */
     async update(ent: EntInstance) {
       ent.data.updatedAt = new Date();
-      await entCrudOperatorDefinition.update(ent);
+      await entCrudOperators.update(ent);
     },
 
     /**
@@ -173,7 +177,7 @@ export function defineEntCrudOperator<
           `Invalid ID '${id}' used for '${entClass.name}'`,
         );
       }
-      await entCrudOperatorDefinition.delete(id);
+      await entCrudOperators.delete(id);
     },
   };
 }
