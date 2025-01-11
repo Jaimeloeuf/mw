@@ -1,4 +1,7 @@
-import { UnimplementedException } from "../../exceptions/index.js";
+import {
+  UnimplementedException,
+  NotFoundException,
+} from "../../exceptions/index.js";
 
 type EntManagedData = {
   /**
@@ -119,8 +122,20 @@ export function defineEntCrudOperator<
   entCrudOperatorDefinition: EntCrudOperatorDefinition<EntInstance>,
 ): EntCrudOperator<EntInstance> {
   return {
-    get: entCrudOperatorDefinition.get,
     delete: entCrudOperatorDefinition.delete,
+
+    /**
+     * Verify ID before loading Ent.
+     */
+    get(id: string) {
+      const isEntIdValid = verifyEntID(entClass, id);
+      if (!isEntIdValid) {
+        throw new NotFoundException(
+          `Invalid ID '${id}' used for '${entClass.name}'`,
+        );
+      }
+      return entCrudOperatorDefinition.get(id);
+    },
 
     async create(data: Omit<EntInstance["data"], keyof EntManagedData>) {
       const now = new Date();
@@ -153,4 +168,14 @@ function generateEntID(entClass: EntClass<BaseEnt>): string {
   const entTypeID = (entClass as unknown as typeof BaseEnt).EntTypeID;
   const uuid = crypto.randomUUID();
   return `${uuid}_${entTypeID}`;
+}
+
+/**
+ * Verify if the Ent ID is valid for a given Ent Type / Class.
+ */
+function verifyEntID(entClass: EntClass<BaseEnt>, entID: string): boolean {
+  const entTypeID = (entClass as unknown as typeof BaseEnt).EntTypeID;
+  // By hardcoding 41, we can also ensure that the ID is of the right length,
+  // and not just an arbitrary length string that happens to end with EntTypeID.
+  return entID.endsWith(`_${entTypeID}`, 41);
 }
