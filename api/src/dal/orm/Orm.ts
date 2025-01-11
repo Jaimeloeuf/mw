@@ -122,8 +122,6 @@ export function defineEntCrudOperator<
   entCrudOperatorDefinition: EntCrudOperatorDefinition<EntInstance>,
 ): EntCrudOperator<EntInstance> {
   return {
-    delete: entCrudOperatorDefinition.delete,
-
     /**
      * Verify ID before loading Ent.
      */
@@ -152,6 +150,19 @@ export function defineEntCrudOperator<
     async update(ent: EntInstance) {
       ent.data.updatedAt = new Date();
       await entCrudOperatorDefinition.update(ent);
+    },
+
+    /**
+     * Verify ID before deleting Ent.
+     */
+    async delete(id: string) {
+      const isEntIdValid = verifyEntID(entClass, id);
+      if (!isEntIdValid) {
+        throw new NotFoundException(
+          `Invalid ID '${id}' used for '${entClass.name}'`,
+        );
+      }
+      await entCrudOperatorDefinition.delete(id);
     },
   };
 }
