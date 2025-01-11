@@ -61,7 +61,9 @@ export const BlogSubscriberOperators = defineEntCrudOperator<
     await apiDB
       .updateTable("blog_subscriber")
       .where("id", "=", ent.data.id)
-      .set(ent.data)
+      .set({
+        email: ent.data.email,
+      })
       .execute();
   },
 
