@@ -1,11 +1,7 @@
 import { apiDB } from "../kysely/index.js";
 import { BaseEnt, defineEntCrudOperator } from "./Orm.js";
 
-type BlogSubsciberData = {
-  email: string;
-};
-
-export class EntBlogSubscriber extends BaseEnt<BlogSubsciberData> {
+export class EntBlogSubscriber extends BaseEnt {
   static override EntTypeID = "0dda";
 
   constructor(
