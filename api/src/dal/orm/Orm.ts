@@ -102,7 +102,7 @@ export interface EntCrudOperator<Ent extends BaseEnt> {
   // @todo Upsert
 }
 
-type EntClass<Ent extends BaseEnt> = new (...args: any) => Ent;
+type EntClass<Ent extends BaseEnt = BaseEnt> = new (...args: any) => Ent;
 
 /**
  * Operators to implement basic CRUD + Upsert feature set for a given Ent.
@@ -115,15 +115,15 @@ export interface EntCrudOperatorDefinition<Ent extends BaseEnt> {
 }
 
 export function defineEntCrudOperator<
-  EntInstance extends BaseEnt,
-  Ent extends EntClass<EntInstance>,
+  Ent extends EntClass,
+  EntInstance extends Ent extends EntClass<infer EntType> ? EntType : never,
   EntCustomOperators extends { [OperatorName: string]: (...args: any) => any },
 >({
   entClass,
   entCrudOperators,
   entCustomOperators,
 }: {
-  entClass: Ent;
+  entClass: EntClass<EntInstance>;
   entCrudOperators: EntCrudOperatorDefinition<EntInstance>;
   entCustomOperators: EntCustomOperators;
 }): EntCrudOperator<EntInstance> & EntCustomOperators {

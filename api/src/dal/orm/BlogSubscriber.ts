@@ -28,14 +28,7 @@ export class EntBlogSubscriber extends BaseEnt<BlogSubsciberData> {
   }
 }
 
-export const BlogSubscriberOperators = defineEntCrudOperator<
-  EntBlogSubscriber,
-  typeof EntBlogSubscriber,
-  {
-    getAll: () => Promise<Array<EntBlogSubscriber>>;
-    isEmailAlreadySubscribed: (email: string) => Promise<boolean>;
-  }
->({
+export const BlogSubscriberOperators = defineEntCrudOperator({
   entClass: EntBlogSubscriber,
 
   entCrudOperators: {
