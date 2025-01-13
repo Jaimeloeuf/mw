@@ -9,6 +9,7 @@ export class EntTemplate extends BaseEnt {
       createdAt: Date;
       updatedAt: Date;
 
+      // @todo
       // Define your Ent's data fields after this line. You can use JSDocs on
       // the properties here and it will be available in your product code.
       // /**

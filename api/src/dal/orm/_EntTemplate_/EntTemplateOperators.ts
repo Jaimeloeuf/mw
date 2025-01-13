@@ -31,5 +31,11 @@ export const EntTemplateOperators = defineEntCrudOperator({
 
   entCustomOperators: {
     // Implement any custom operator methods using your preferred storage layer.
+    // You can use JSDocs on the methods here and it will be available in your
+    // product code.
+    // /**
+    //  * E.g. Check if user is allowed to do this action
+    //  */
+    // canUserDeleteThis: string;
   },
 });
