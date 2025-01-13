@@ -4,7 +4,7 @@ export class EntTemplate extends BaseEnt {
   static override EntTypeID = "__generated_ent_type_id__";
 
   constructor(
-    public data: {
+    public readonly data: {
       readonly id: string;
       readonly createdAt: Date;
       updatedAt: Date;

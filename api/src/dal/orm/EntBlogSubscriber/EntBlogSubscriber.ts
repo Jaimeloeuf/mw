@@ -4,7 +4,7 @@ export class EntBlogSubscriber extends BaseEnt {
   static override EntTypeID = "0dda";
 
   constructor(
-    public data: {
+    public readonly data: {
       readonly id: string;
       readonly createdAt: Date;
       updatedAt: Date;

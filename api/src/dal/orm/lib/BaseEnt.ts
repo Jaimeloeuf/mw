@@ -26,7 +26,7 @@ export abstract class BaseEnt<
   /**
    * The Ent's data
    */
-  abstract data: EntManagedData & DataType;
+  abstract readonly data: EntManagedData & DataType;
 
   get id(): string {
     return this.data.id;
