@@ -22,11 +22,6 @@ export class EntTemplate extends BaseEnt {
   }
 
   // @todo Remove this if it is not serialisable
-  jsonSerialise(): string {
-    return JSON.stringify(this.data);
-  }
-
-  // @todo Remove this if it is not serialisable
   // @todo Prefer to use Zod here instead of just JSON.parse
   static override jsonParse(jsonString: string): EntTemplate {
     return new EntTemplate(JSON.parse(jsonString));

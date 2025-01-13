@@ -33,11 +33,16 @@ export abstract class BaseEnt<
   }
 
   /**
-   * Implement this to provide a consistent way for sending the data over the
-   * network using JSON. This also means that all data in an Ent should use
-   * primitive types that are JSON serializable.
+   * This method provides a consistent way for sending the data over the network
+   * using JSON. This also means that all data in an Ent should use primitive
+   * types that are JSON serializable.
+   *
+   * Override this if you do not want to use the default `JSON.stringify`
+   * serialisation method.
    */
-  abstract jsonSerialise(): string;
+  jsonSerialise(): string {
+    return JSON.stringify(this.data);
+  }
 
   /**
    * Recommended to use `zod` instead of parsing with `JSON.parse`.
