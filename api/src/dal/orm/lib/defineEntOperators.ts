@@ -8,9 +8,9 @@ import { entIdGenerate } from "./entIdGenerate.js";
 import { entIdVerify } from "./entIdVerify.js";
 
 /**
- * Define Ent CRUD operators for product code to interface with an Ent type.
+ * Define Ent operators for product code to interface with an Ent type.
  */
-export function defineEntCrudOperator<
+export function defineEntOperators<
   Ent extends EntClass,
   EntInstance extends Ent extends EntClass<infer EntType> ? EntType : never,
   EntCustomOperators extends { [OperatorName: string]: (...args: any) => any },

@@ -3,4 +3,4 @@
  */
 
 export * from "./BaseEnt.js";
-export * from "./defineEntCrudOperator.js";
+export * from "./defineEntOperators.js";
