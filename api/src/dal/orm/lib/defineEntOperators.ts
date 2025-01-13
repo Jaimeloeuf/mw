@@ -14,15 +14,16 @@ export function defineEntOperators<
   Ent extends EntClass,
   EntInstance extends Ent extends EntClass<infer EntType> ? EntType : never,
   EntCustomOperators extends { [OperatorName: string]: (...args: any) => any },
->({
-  entClass,
-  entCrudOperators,
-  entCustomOperators,
-}: {
-  entClass: EntClass<EntInstance>;
-  entCrudOperators: EntCrudOperatorDefinition<EntInstance>;
-  entCustomOperators: EntCustomOperators;
-}): EntCrudOperator<EntInstance> & EntCustomOperators {
+>(
+  entClass: EntClass<EntInstance>,
+  {
+    entCrudOperators,
+    entCustomOperators,
+  }: {
+    entCrudOperators: EntCrudOperatorDefinition<EntInstance>;
+    entCustomOperators: EntCustomOperators;
+  },
+): EntCrudOperator<EntInstance> & EntCustomOperators {
   return {
     ...entCustomOperators,
 

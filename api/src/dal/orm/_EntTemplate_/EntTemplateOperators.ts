@@ -5,9 +5,7 @@ import { apiDB } from "../../kysely/index.js";
 import { defineEntOperators } from "../lib/index.js";
 import { EntTemplate } from "./EntTemplate.js";
 
-export const EntTemplateOperators = defineEntOperators({
-  entClass: EntTemplate,
-
+export const EntTemplateOperators = defineEntOperators(EntTemplate, {
   entCrudOperators: {
     async create(ent) {
       // Implement create method using your preferred storage layer.
