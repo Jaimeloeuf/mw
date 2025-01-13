@@ -16,16 +16,13 @@ export function defineEntOperators<
   EntCustomOperators extends { [OperatorName: string]: (...args: any) => any },
 >(
   entClass: EntClass<EntInstance>,
-  {
-    entCrudOperators,
-    entCustomOperators,
-  }: {
-    entCrudOperators: EntCrudOperatorDefinition<EntInstance>;
-    entCustomOperators: EntCustomOperators;
+  operators: {
+    CRUD: EntCrudOperatorDefinition<EntInstance>;
+    custom: EntCustomOperators;
   },
 ): EntCrudOperator<EntInstance> & EntCustomOperators {
   return {
-    ...entCustomOperators,
+    ...operators.custom,
 
     /**
      * Verify ID before loading Ent.
@@ -37,7 +34,7 @@ export function defineEntOperators<
           `Invalid ID '${id}' used for '${entClass.name}'`,
         );
       }
-      return entCrudOperators.get(id);
+      return operators.CRUD.get(id);
     },
 
     /**
@@ -52,7 +49,7 @@ export function defineEntOperators<
         updatedAt: now,
         ...data,
       });
-      await entCrudOperators.create(ent);
+      await operators.CRUD.create(ent);
       return ent;
     },
 
@@ -61,7 +58,7 @@ export function defineEntOperators<
      */
     async update(ent: EntInstance) {
       ent.data.updatedAt = new Date();
-      await entCrudOperators.update(ent);
+      await operators.CRUD.update(ent);
     },
 
     /**
@@ -74,7 +71,7 @@ export function defineEntOperators<
           `Invalid ID '${id}' used for '${entClass.name}'`,
         );
       }
-      await entCrudOperators.delete(id);
+      await operators.CRUD.delete(id);
     },
   };
 }

@@ -5,7 +5,7 @@ import { EntBlogSubscriber } from "./EntBlogSubscriber.js";
 export const EntBlogSubscriberOperators = defineEntOperators(
   EntBlogSubscriber,
   {
-    entCrudOperators: {
+    CRUD: {
       async create(ent) {
         await apiDB
           .insertInto("blog_subscriber")
@@ -52,7 +52,7 @@ export const EntBlogSubscriberOperators = defineEntOperators(
       },
     },
 
-    entCustomOperators: {
+    custom: {
       async getAll() {
         const data = await apiDB
           .selectFrom("blog_subscriber")

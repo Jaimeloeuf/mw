@@ -6,7 +6,7 @@ import { defineEntOperators } from "../lib/index.js";
 import { EntTemplate } from "./EntTemplate.js";
 
 export const EntTemplateOperators = defineEntOperators(EntTemplate, {
-  entCrudOperators: {
+  CRUD: {
     async create(ent) {
       // Implement create method using your preferred storage layer.
     },
@@ -27,7 +27,7 @@ export const EntTemplateOperators = defineEntOperators(EntTemplate, {
     },
   },
 
-  entCustomOperators: {
+  custom: {
     // Implement any custom operator methods using your preferred storage layer.
     // You can use JSDocs on the methods here and it will be available in your
     // product code.
