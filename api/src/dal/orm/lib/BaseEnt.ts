@@ -1,3 +1,4 @@
+import type { EntClass } from "./EntClass.js";
 import type { EntManagedData } from "./EntManagedData.js";
 import type { EntSupportedData } from "./EntSupportedData.js";
 
@@ -45,11 +46,18 @@ export abstract class BaseEnt<
   }
 
   /**
-   * Recommended to use `zod` instead of parsing with `JSON.parse`.
+   * This static method allows you to create a new instance of your Ent from a
+   * JSON string. However this is not always recommended as this uses
+   * `JSON.parse` directly and feeds the result to the Ent constructor directly
+   * without any validation.
+   *
+   * If you would like to have validation and other safer parse options, you
+   * can override the static `jsonParseAndValidate` method and use that instead.
    */
-  static jsonParse(jsonString: string): unknown {
-    throw new UnimplementedException(
-      `jsonParse not implemented! Cannot parse: ${jsonString}`,
-    );
+  static jsonParse<Ent extends BaseEnt>(
+    this: EntClass<Ent>,
+    jsonString: string,
+  ): Ent {
+    return new this(JSON.parse(jsonString));
   }
 }

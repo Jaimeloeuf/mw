@@ -17,8 +17,4 @@ export class EntBlogSubscriber extends BaseEnt {
   ) {
     super();
   }
-
-  static override jsonParse(jsonString: string): EntBlogSubscriber {
-    return new EntBlogSubscriber(JSON.parse(jsonString));
-  }
 }
