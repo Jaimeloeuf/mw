@@ -26,7 +26,7 @@ async function createEnt() {
 
   const entFolderPath = path.join(
     import.meta.dirname,
-    `../dal/orm/${fullEntName}`,
+    `../ents/${fullEntName}`,
   );
 
   // Will throw if folder already exists

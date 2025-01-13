@@ -3,7 +3,7 @@ import type { EntCrudOperator } from "./EntCrudOperator.js";
 import type { EntCrudOperatorStorageAdapter } from "./EntCrudOperatorStorageAdapter.js";
 import type { EntManagedData } from "./EntManagedData.js";
 
-import { NotFoundException } from "../../../exceptions/NotFoundException.js";
+import { NotFoundException } from "../exceptions/NotFoundException.js";
 import { entIdGenerate } from "./entIdGenerate.js";
 import { entIdVerify } from "./entIdVerify.js";
 

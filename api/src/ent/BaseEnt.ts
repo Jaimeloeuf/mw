@@ -2,7 +2,7 @@ import type { EntClass } from "./EntClass.js";
 import type { EntManagedData } from "./EntManagedData.js";
 import type { EntSupportedData } from "./EntSupportedData.js";
 
-import { UnimplementedException } from "../../../exceptions/index.js";
+import { UnimplementedException } from "../exceptions/index.js";
 
 /**
  * Base abstract Entity class for all Ents to extend.

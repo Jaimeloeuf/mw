@@ -1,4 +1,4 @@
-import { BaseEnt } from "../lib/index.js";
+import { BaseEnt } from "../../ent/index.js";
 
 export class EntTemplate extends BaseEnt {
   static override EntTypeID = "__generated_ent_type_id__";
