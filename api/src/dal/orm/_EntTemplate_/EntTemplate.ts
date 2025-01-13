@@ -5,8 +5,8 @@ export class EntTemplate extends BaseEnt {
 
   constructor(
     public data: {
-      id: string;
-      createdAt: Date;
+      readonly id: string;
+      readonly createdAt: Date;
       updatedAt: Date;
 
       // @todo
