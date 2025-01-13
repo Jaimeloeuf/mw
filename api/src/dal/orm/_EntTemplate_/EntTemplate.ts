@@ -26,7 +26,7 @@ export class EntTemplate extends BaseEnt {
    * Implement this yourself using Zod instead of just `JSON.parse` or delete
    * this method if not needed.
    */
-  // static override jsonParseAndValidate(jsonString: string): EntTemplate {
+  // static override jsonParseAndValidate(jsonString: string) {
   //   return new EntTemplate(...);
   // }
 }

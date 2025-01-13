@@ -60,4 +60,18 @@ export abstract class BaseEnt<
   ): Ent {
     return new this(JSON.parse(jsonString));
   }
+
+  /**
+   * Override this method to implement a `JSON.parse` and validate feature for
+   * your Ent, preferrably using something like `zod` instead of parsing with
+   * `JSON.parse`.
+   *
+   * This will throw `UnimplementedException` if you tried to use it without
+   * overriding it.
+   */
+  static jsonParseAndValidate(jsonString: string) {
+    throw new UnimplementedException(
+      `${BaseEnt.jsonParseAndValidate.name} not implemented! Cannot parse: ${jsonString}`,
+    );
+  }
 }
