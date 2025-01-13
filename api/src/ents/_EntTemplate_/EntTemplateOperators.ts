@@ -1,6 +1,4 @@
-// @todo Remove this
 // @ts-nocheck
-
 import { apiDB } from "../../dal/kysely/index.js";
 import { defineEntOperators } from "../../ent/index.js";
 import { EntTemplate } from "./EntTemplate.js";

@@ -49,10 +49,9 @@ async function createEnt() {
     path.join(entFolderPath, `../_EntTemplate_/EntTemplateOperators.ts`),
     { encoding: "utf8" },
   );
-  const entOperatorsFile = entOperatorsFileTemplate.replaceAll(
-    "EntTemplate",
-    fullEntName,
-  );
+  const entOperatorsFile = entOperatorsFileTemplate
+    .replaceAll("EntTemplate", fullEntName)
+    .replace("// @ts-nocheck", "");
   await fs.writeFile(
     path.join(entFolderPath, `${fullEntName}Operators.ts`),
     entOperatorsFile,
