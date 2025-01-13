@@ -1,6 +1,6 @@
 import type { EntClass } from "./EntClass.js";
 import type { EntCrudOperator } from "./EntCrudOperator.js";
-import type { EntCrudOperatorDefinition } from "./EntCrudOperatorDefinition.js";
+import type { EntCrudOperatorStorageAdapter } from "./EntCrudOperatorStorageAdapter.js";
 import type { EntManagedData } from "./EntManagedData.js";
 
 import { NotFoundException } from "../../../exceptions/NotFoundException.js";
@@ -17,7 +17,7 @@ export function defineEntOperators<
 >(
   entClass: EntClass<EntInstance>,
   operators: {
-    CRUD: EntCrudOperatorDefinition<EntInstance>;
+    CRUD: EntCrudOperatorStorageAdapter<EntInstance>;
     custom: EntCustomOperators;
   },
 ): EntCrudOperator<EntInstance> & EntCustomOperators {
