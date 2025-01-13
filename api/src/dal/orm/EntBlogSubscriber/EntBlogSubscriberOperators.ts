@@ -1,5 +1,5 @@
 import { apiDB } from "../../kysely/index.js";
-import { defineEntCrudOperator } from "../Orm.js";
+import { defineEntCrudOperator } from "../lib/index.js";
 import { EntBlogSubscriber } from "./EntBlogSubscriber.js";
 
 export const EntBlogSubscriberOperators = defineEntCrudOperator({

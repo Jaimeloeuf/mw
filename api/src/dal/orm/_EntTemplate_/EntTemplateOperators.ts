@@ -2,7 +2,7 @@
 // @ts-nocheck
 
 import { apiDB } from "../../kysely/index.js";
-import { defineEntCrudOperator } from "../Orm.js";
+import { defineEntCrudOperator } from "../lib/index.js";
 import { EntTemplate } from "./EntTemplate.js";
 
 export const EntTemplateOperators = defineEntCrudOperator({

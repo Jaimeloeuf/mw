@@ -1,4 +1,4 @@
-import { BaseEnt } from "../Orm.js";
+import { BaseEnt } from "../lib/index.js";
 
 export class EntBlogSubscriber extends BaseEnt {
   static override EntTypeID = "0dda";
