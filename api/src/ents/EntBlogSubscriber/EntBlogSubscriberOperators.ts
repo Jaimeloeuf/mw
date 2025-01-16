@@ -11,8 +11,9 @@ export const EntBlogSubscriberOperators = defineEntOperators(
           .insertInto("blog_subscriber")
           .values({
             id: ent.data.id,
-            email: ent.data.email,
             created_at: ent.data.createdAt.toISOString(),
+            updated_at: ent.data.updatedAt.toISOString(),
+            email: ent.data.email,
           })
           .returningAll()
           .executeTakeFirstOrThrow();
@@ -28,7 +29,7 @@ export const EntBlogSubscriberOperators = defineEntOperators(
         return new EntBlogSubscriber({
           id: data.id,
           createdAt: data.created_at,
-          updatedAt: data.created_at,
+          updatedAt: data.updated_at,
           email: data.email,
         });
       },
@@ -38,6 +39,7 @@ export const EntBlogSubscriberOperators = defineEntOperators(
           .updateTable("blog_subscriber")
           .where("id", "=", ent.data.id)
           .set({
+            updated_at: ent.data.updatedAt.toISOString(),
             email: ent.data.email,
           })
           .execute();
@@ -64,7 +66,7 @@ export const EntBlogSubscriberOperators = defineEntOperators(
             new EntBlogSubscriber({
               id: data.id,
               createdAt: data.created_at,
-              updatedAt: data.created_at,
+              updatedAt: data.updated_at,
               email: data.email,
             }),
         );

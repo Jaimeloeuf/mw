@@ -5,11 +5,8 @@ export interface BlogSubscriberTable {
    * Unique opaque ID that cannot be updated
    */
   id: ColumnType<string, string, never>;
-
-  /**
-   * Track when did the subscriber subscribe
-   */
   created_at: ColumnType<Date, string | undefined, never>;
+  updated_at: ColumnType<Date, string, string>;
 
   /**
    * Unique subscriber's email

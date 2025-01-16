@@ -17,6 +17,7 @@ export default async function BlogNewSubscriber(email: string) {
   const blogSubscriberResult =
     await df.blogSubscriberCreateBlogSubscriber.runAndThrowOnError({
       email: email.toLowerCase(),
+      updated_at: new Date().toISOString(),
     });
 
   SimplePostProcessing(BlogNewSubscriber.name)
