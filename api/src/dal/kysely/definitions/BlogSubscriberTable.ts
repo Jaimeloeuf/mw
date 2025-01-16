@@ -9,7 +9,7 @@ export interface BlogSubscriberTable {
   updated_at: ColumnType<Date, string, string>;
 
   /**
-   * Unique subscriber's email
+   * Subscriber's email
    */
   email: ColumnType<string>;
 }
