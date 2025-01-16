@@ -1,5 +1,6 @@
 import type { AsyncJobTable } from "./AsyncJobTable.js";
 import type { BlogSubscriberTable } from "./BlogSubscriberTable.js";
+import type { BlogTable } from "./BlogTable.js";
 import type { BucketlistItemTable } from "./BucketlistItemTable.js";
 import type { BucketlistTable } from "./BucketlistTable.js";
 import type { LeetcodeQuesTable } from "./LeetcodeQuesTable.js";
@@ -20,6 +21,7 @@ import type { MuwnoUserTable } from "./MuwnoUserTable.js";
 export interface Database {
   async_job: AsyncJobTable;
   blog_subscriber: BlogSubscriberTable;
+  blog: BlogTable;
   bucketlist: BucketlistTable;
   bucketlist_item: BucketlistItemTable;
   leetcode_ques: LeetcodeQuesTable;

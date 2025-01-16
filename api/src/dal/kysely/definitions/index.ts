@@ -4,6 +4,7 @@
 
 export * from "./AsyncJobTable.js";
 export * from "./BlogSubscriberTable.js";
+export * from "./BlogTable.js";
 export * from "./BucketlistItemTable.js";
 export * from "./BucketlistTable.js";
 export * from "./DatabaseDefinition.js";
