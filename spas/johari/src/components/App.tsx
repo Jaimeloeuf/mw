@@ -22,9 +22,11 @@ const router = createBrowserRouter([
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="p-8">
-        <p className="text-4xl pb-8">Johari</p>
-        <RouterProvider router={router} />
+      <div className="flex flex-row justify-center">
+        <div className="p-8 max-w-screen-sm">
+          <p className="text-4xl pb-8">Johari</p>
+          <RouterProvider router={router} />
+        </div>
       </div>
     </QueryClientProvider>
   );

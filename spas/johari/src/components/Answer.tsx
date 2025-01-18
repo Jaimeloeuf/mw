@@ -9,11 +9,19 @@ export default function () {
   } = useEmptyJohariOptionsSet();
 
   function toggleSelection(johariOption: string) {
-    setJohariOptions(johariOption, johariOptions[johariOption]);
+    if (numberOfSelectedOptions > 5 && johariOptions[johariOption] !== true) {
+      alert("You can only select up to 6 words");
+      return;
+    }
+
+    setJohariOptions({
+      ...johariOptions,
+      [johariOption]: !johariOptions[johariOption],
+    });
   }
 
   return (
-    <div className="max-w-screen-sm">
+    <div>
       <div className="pb-4 flex flex-row justify-between">
         <p className="text-lg">Selected {numberOfSelectedOptions}/6 words</p>
         <button
@@ -25,7 +33,7 @@ export default function () {
         </button>
       </div>
 
-      <div className="flex flex-row flex-wrap gap-8">
+      <div className="flex flex-row flex-wrap gap-6">
         {Object.entries(johariOptions).map(([johariOption, isSelected]) => (
           <JohariOptionButton
             key={johariOption}
@@ -36,8 +44,16 @@ export default function () {
         ))}
       </div>
 
-      <div>
-        <button className="" disabled={numberOfSelectedOptions !== 6}>
+      <div className="pt-8">
+        <button
+          className={
+            "px-4 text-lg border rounded-lg " +
+            (numberOfSelectedOptions === 6
+              ? "text-green-600 border-green-600"
+              : "cursor-not-allowed text-gray-500 border-gray-300")
+          }
+          disabled={numberOfSelectedOptions !== 6}
+        >
           Submit
         </button>
       </div>
@@ -54,8 +70,10 @@ function JohariOptionButton(props: {
     <button
       onClick={() => props.toggleSelection(props.johariOption)}
       className={
-        "px-4 border border-gray-600 rounded-lg " +
-        (props.isSelected ? "bg-white" : "bg-gray-200")
+        "px-4 border rounded-lg " +
+        (props.isSelected
+          ? "font-light text-green-600 border-green-500"
+          : "font-extralight border-gray-300")
       }
     >
       {props.johariOption}

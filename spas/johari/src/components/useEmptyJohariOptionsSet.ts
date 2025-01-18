@@ -17,17 +17,7 @@ export function useEmptyJohariOptionsSet() {
 
   return {
     johariOptions,
-    setJohariOptions(johariOption: string, option: boolean) {
-      if (numberOfSelectedOptions > 5) {
-        alert("You can only select up to 6 words");
-        return;
-      }
-
-      setJohariOptions({
-        ...johariOptions,
-        [johariOption]: !option,
-      });
-    },
+    setJohariOptions,
     resetJohariOptions,
     numberOfSelectedOptions,
   };
