@@ -1,0 +1,31 @@
+{
+  "name": "johari",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "serve": "npx vite --port 8080",
+    "build": "npx vite build",
+    "preview": "npx vite preview",
+    "lint": "npx eslint ."
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.64.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.1.2"
+  },
+  "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.62.16",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react-swc": "^3.7.2",
+    "autoprefixer": "^10.4.20",
+    "globals": "^15.14.0",
+    "postcss": "^8.5.1",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7"
+  }
+}
