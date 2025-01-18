@@ -61,9 +61,18 @@ export function useEmptyJohariOptionsSet() {
     witty: false,
   });
 
+  const numberOfSelectedOptions = Object.values(johariOptions).filter(
+    (option) => option
+  ).length;
+
   return {
     johariOptions,
     setJohariOptions(johariOption: string, option: boolean) {
+      if (numberOfSelectedOptions > 5) {
+        alert("You can only select up to 6 words");
+        return;
+      }
+
       setJohariOptions({
         ...johariOptions,
         [johariOption]: !option,
