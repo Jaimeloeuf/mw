@@ -1,3 +1,4 @@
+import type { AssocTable } from "./AssocTable.js";
 import type { AsyncJobTable } from "./AsyncJobTable.js";
 import type { BlogSubscriberTable } from "./BlogSubscriberTable.js";
 import type { BlogTable } from "./BlogTable.js";
@@ -19,6 +20,7 @@ import type { MuwnoTeamMemberInvitationTable } from "./MuwnoTeamMemberInvitation
 import type { MuwnoUserTable } from "./MuwnoUserTable.js";
 
 export interface Database {
+  assoc: AssocTable;
   async_job: AsyncJobTable;
   blog_subscriber: BlogSubscriberTable;
   blog: BlogTable;
