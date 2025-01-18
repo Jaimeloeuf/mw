@@ -9,6 +9,11 @@ export interface BlogSubscriberTable {
   updated_at: ColumnType<Date, string, string>;
 
   /**
+   * Blog ID. This cannot be updated.
+   */
+  blog_id: ColumnType<string, string, never>;
+
+  /**
    * Subscriber's email
    */
   email: ColumnType<string>;

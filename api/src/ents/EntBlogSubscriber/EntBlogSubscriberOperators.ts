@@ -13,6 +13,7 @@ export const EntBlogSubscriberOperators = defineEntOperators(
             id: ent.data.id,
             created_at: ent.data.createdAt.toISOString(),
             updated_at: ent.data.updatedAt.toISOString(),
+            blog_id: ent.data.blogID,
             email: ent.data.email,
           })
           .returningAll()
@@ -30,6 +31,7 @@ export const EntBlogSubscriberOperators = defineEntOperators(
           id: data.id,
           createdAt: data.created_at,
           updatedAt: data.updated_at,
+          blogID: data.blog_id,
           email: data.email,
         });
       },
@@ -67,6 +69,7 @@ export const EntBlogSubscriberOperators = defineEntOperators(
               id: data.id,
               createdAt: data.created_at,
               updatedAt: data.updated_at,
+              blogID: data.blog_id,
               email: data.email,
             }),
         );

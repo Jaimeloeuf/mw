@@ -10,6 +10,11 @@ export class EntBlogSubscriber extends BaseEnt {
       updatedAt: Date;
 
       /**
+       * Which blog is this subscriber subscribed to?
+       */
+      blogID: string;
+
+      /**
        * Subscriber's email
        */
       email: string;
