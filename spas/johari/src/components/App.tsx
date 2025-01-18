@@ -2,11 +2,16 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "../queryClient.ts";
 import Home from "./Home.tsx";
+import Answer from "./Answer.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/answer",
+    element: <Answer />,
   },
 ]);
 
