@@ -11,14 +11,17 @@ export function useEmptyJohariOptionsSet() {
     [setJohariOptions]
   );
 
-  const numberOfSelectedOptions = Object.values(johariOptions).filter(
-    (option) => option
-  ).length;
+  const selectedWords = Object.entries(johariOptions)
+    .filter(([_, option]) => option)
+    .map(([word]) => word);
+
+  const numberOfSelectedOptions = selectedWords.length;
 
   return {
     johariOptions,
     setJohariOptions,
     resetJohariOptions,
+    selectedWords,
     numberOfSelectedOptions,
   };
 }
