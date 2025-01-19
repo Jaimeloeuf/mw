@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { sv } from "../../__generated/index.js";
 import { httpController } from "../../http/index.js";
 
 export default httpController({
@@ -14,6 +15,6 @@ export default httpController({
     words: z.array(z.string()),
   }),
   async httpRequestHandler({ requestBody }) {
-    requestBody;
+    return sv.johariCreateJohari(requestBody);
   },
 });
