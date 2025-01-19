@@ -6,7 +6,7 @@
  * genHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(b2da501ebbc7d549ed91f2984f87fc23eda51116dc244d96d430fd271c362170)
+ * sha256(e9a8159b80583e3dc621ee78786b35d06da09767eb0be6d3d7816d1284127df9)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -76,6 +76,14 @@ export const forCheckGetChecklist = (
   }>,
 ) =>
   `${config.base_url_to_self()}/api/v1/check/checklist/${options.urlParams.checklistID}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
+
+export const forJohariCreateJohari = (
+  options: UrlBuilderOptions<{
+    urlParams: t.johariCreateJohariController_UrlParams;
+    urlQueryParams: t.johariCreateJohariController_QueryParams;
+  }>,
+) =>
+  `${config.base_url_to_self()}/api/v1/johari/create${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
 
 export const forLeetcodeCreateLeetcodeQues = (
   options: UrlBuilderOptions<{

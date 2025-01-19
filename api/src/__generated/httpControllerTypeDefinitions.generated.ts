@@ -6,7 +6,7 @@
  * genHttpControllerTypeDefinitions
  *
  * Generated hash in hex for code after this section is:
- * sha256(4b72f528e646765bac08d25903bb6fc900681d28547daf581820abcd9d1e0292)
+ * sha256(f83a3f6a305bd9e3757863fd91c260a95614290a18900ad2467a5cd52c5a24c9)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -84,6 +84,20 @@ export type checkGetChecklistController_OutputDTO = Awaited<
 >;
 export type checkGetChecklistController_OutputFullDTO =
   JSendSuccess<checkGetChecklistController_OutputDTO>;
+export type johariCreateJohariController_UrlParams = z.infer<
+  Exclude<(typeof c.johariCreateJohari)["urlParamsValidator"], null>
+>;
+export type johariCreateJohariController_QueryParams = z.infer<
+  Exclude<(typeof c.johariCreateJohari)["urlQueryParamsValidator"], null>
+>;
+export type johariCreateJohariController_InputDTO = z.infer<
+  Exclude<(typeof c.johariCreateJohari)["requestBodyValidator"], null>
+>;
+export type johariCreateJohariController_OutputDTO = Awaited<
+  ReturnType<(typeof c.johariCreateJohari)["httpRequestHandler"]>
+>;
+export type johariCreateJohariController_OutputFullDTO =
+  JSendSuccess<johariCreateJohariController_OutputDTO>;
 export type leetcodeCreateLeetcodeQuesController_UrlParams = z.infer<
   Exclude<(typeof c.leetcodeCreateLeetcodeQues)["urlParamsValidator"], null>
 >;
