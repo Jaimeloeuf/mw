@@ -1,12 +1,15 @@
-import { useEmptyJohariOptionsSet } from "./useEmptyJohariOptionsSet";
+import type { useEmptyJohariOptionsSet } from "./useEmptyJohariOptionsSet";
 
-export default function () {
+export default function (
+  props: ReturnType<typeof useEmptyJohariOptionsSet> & { onSubmit: () => void }
+) {
   const {
     johariOptions,
     setJohariOptions,
     resetJohariOptions,
     numberOfSelectedOptions,
-  } = useEmptyJohariOptionsSet();
+    onSubmit,
+  } = props;
 
   function toggleSelection(johariOption: string) {
     if (numberOfSelectedOptions > 5 && johariOptions[johariOption] !== true) {
@@ -53,6 +56,7 @@ export default function () {
               : "cursor-not-allowed text-gray-500 border-gray-300")
           }
           disabled={numberOfSelectedOptions !== 6}
+          onClick={onSubmit}
         >
           Submit
         </button>
