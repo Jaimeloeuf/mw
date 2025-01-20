@@ -4,6 +4,8 @@ import type { BlogSubscriberTable } from "./BlogSubscriberTable.js";
 import type { BlogTable } from "./BlogTable.js";
 import type { BucketlistItemTable } from "./BucketlistItemTable.js";
 import type { BucketlistTable } from "./BucketlistTable.js";
+import type { JohariAnswerTable } from "./JohariAnswerTable.js";
+import type { JohariTable } from "./JohariTable.js";
 import type { LeetcodeQuesTable } from "./LeetcodeQuesTable.js";
 import type { LeetcodeQuesTagTable } from "./LeetcodeQuesTagTable.js";
 import type { LeetcodeTagTable } from "./LeetcodeTagTable.js";
@@ -25,6 +27,8 @@ export interface Database {
   blog_subscriber: BlogSubscriberTable;
   blog: BlogTable;
   bucketlist: BucketlistTable;
+  johari_answer: JohariAnswerTable;
+  johari: JohariTable;
   bucketlist_item: BucketlistItemTable;
   leetcode_ques: LeetcodeQuesTable;
   leetcode_ques_tag: LeetcodeQuesTagTable;
