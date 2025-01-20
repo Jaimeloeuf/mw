@@ -6,7 +6,7 @@
  * genHttpControllerTypeDefinitions
  *
  * Generated hash in hex for code after this section is:
- * sha256(f83a3f6a305bd9e3757863fd91c260a95614290a18900ad2467a5cd52c5a24c9)
+ * sha256(1be820c389b1930c4b31004eebb5f39be90a663c5762d788b975c76422e2bfa2)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -84,6 +84,20 @@ export type checkGetChecklistController_OutputDTO = Awaited<
 >;
 export type checkGetChecklistController_OutputFullDTO =
   JSendSuccess<checkGetChecklistController_OutputDTO>;
+export type johariGetJohariController_UrlParams = z.infer<
+  Exclude<(typeof c.johariGetJohari)["urlParamsValidator"], null>
+>;
+export type johariGetJohariController_QueryParams = z.infer<
+  Exclude<(typeof c.johariGetJohari)["urlQueryParamsValidator"], null>
+>;
+export type johariGetJohariController_InputDTO = z.infer<
+  Exclude<(typeof c.johariGetJohari)["requestBodyValidator"], null>
+>;
+export type johariGetJohariController_OutputDTO = Awaited<
+  ReturnType<(typeof c.johariGetJohari)["httpRequestHandler"]>
+>;
+export type johariGetJohariController_OutputFullDTO =
+  JSendSuccess<johariGetJohariController_OutputDTO>;
 export type johariCreateJohariController_UrlParams = z.infer<
   Exclude<(typeof c.johariCreateJohari)["urlParamsValidator"], null>
 >;

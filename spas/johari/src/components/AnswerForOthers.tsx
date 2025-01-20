@@ -17,11 +17,9 @@ export default function () {
   const { status, isError, error, data } = useQuery({
     queryKey: ["johari", johariID],
     async queryFn() {
-      // @todo Load Johari from API
-      await new Promise((res) => setTimeout(res, 1000));
-      return {
-        name: "JJ",
-      };
+      return fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/johari/${johariID}`
+      ).then((res) => res.json());
     },
   });
 
@@ -68,7 +66,7 @@ export default function () {
       <p className="text-2xl pb-6">
         Answer for
         <span className="pl-2 underline underline-offset-4 font-extralight decoration-1">
-          {data.name}
+          {data.data.name}
         </span>
       </p>
 

@@ -6,7 +6,7 @@
  * genHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256(3b8b893110e2be17e4c49152408a813e62a5f5c6d6d8fba989db3b05d912de3b)
+ * sha256(26afa773881c5a11806e42d2aa3d0d75354b493b2650b88635b4c4841530c39f)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -68,6 +68,13 @@ export function registerRoutesAndControllers() {
     ("/v1" satisfies typeof c.checkGetChecklist.version) +
       ("/check/checklist/:checklistID" satisfies typeof c.checkGetChecklist.path),
     c.checkGetChecklist.routeHandler,
+  );
+
+  // GET /api/v1/johari/:johariID
+  r["get" satisfies typeof c.johariGetJohari.method](
+    ("/v1" satisfies typeof c.johariGetJohari.version) +
+      ("/johari/:johariID" satisfies typeof c.johariGetJohari.path),
+    c.johariGetJohari.routeHandler,
   );
 
   // POST /api/v1/johari/create
