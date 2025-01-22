@@ -1,4 +1,4 @@
-export const createEmptyJohariOptionsObject = () => ({
+export const createEmptyJohariOptionsObject = (): Record<string, boolean> => ({
   able: false,
   accepting: false,
   adaptable: false,
