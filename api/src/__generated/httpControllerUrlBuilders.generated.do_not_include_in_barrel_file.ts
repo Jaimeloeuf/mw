@@ -6,7 +6,7 @@
  * genHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(57f8bcba3a34b5f4754c6a43069b2e1298c2191066357286514e344aa0f7e7d9)
+ * sha256(8ec1e583922713b057006f5696e3937ff5a54fa2935bf7a5d30ef4129098a021)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -84,6 +84,14 @@ export const forJohariGetJohari = (
   }>,
 ) =>
   `${config.base_url_to_self()}/api/v1/johari/${options.urlParams.johariID}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
+
+export const forJohariCreateJohariAnswer = (
+  options: UrlBuilderOptions<{
+    urlParams: t.johariCreateJohariAnswerController_UrlParams;
+    urlQueryParams: t.johariCreateJohariAnswerController_QueryParams;
+  }>,
+) =>
+  `${config.base_url_to_self()}/api/v1/johari/answer${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
 
 export const forJohariCreateJohari = (
   options: UrlBuilderOptions<{

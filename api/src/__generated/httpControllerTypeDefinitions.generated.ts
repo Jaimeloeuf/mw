@@ -6,7 +6,7 @@
  * genHttpControllerTypeDefinitions
  *
  * Generated hash in hex for code after this section is:
- * sha256(1be820c389b1930c4b31004eebb5f39be90a663c5762d788b975c76422e2bfa2)
+ * sha256(5344bdbc9c73df3502bced6219f382afc1b8f078efee09ae6ab70afb74d5036f)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -98,6 +98,20 @@ export type johariGetJohariController_OutputDTO = Awaited<
 >;
 export type johariGetJohariController_OutputFullDTO =
   JSendSuccess<johariGetJohariController_OutputDTO>;
+export type johariCreateJohariAnswerController_UrlParams = z.infer<
+  Exclude<(typeof c.johariCreateJohariAnswer)["urlParamsValidator"], null>
+>;
+export type johariCreateJohariAnswerController_QueryParams = z.infer<
+  Exclude<(typeof c.johariCreateJohariAnswer)["urlQueryParamsValidator"], null>
+>;
+export type johariCreateJohariAnswerController_InputDTO = z.infer<
+  Exclude<(typeof c.johariCreateJohariAnswer)["requestBodyValidator"], null>
+>;
+export type johariCreateJohariAnswerController_OutputDTO = Awaited<
+  ReturnType<(typeof c.johariCreateJohariAnswer)["httpRequestHandler"]>
+>;
+export type johariCreateJohariAnswerController_OutputFullDTO =
+  JSendSuccess<johariCreateJohariAnswerController_OutputDTO>;
 export type johariCreateJohariController_UrlParams = z.infer<
   Exclude<(typeof c.johariCreateJohari)["urlParamsValidator"], null>
 >;
