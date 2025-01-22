@@ -29,18 +29,22 @@ export default function () {
 
   const mutation = useMutation({
     mutationFn() {
-      // @todo Call API to save answer
-      const answer = {
-        name,
-        answer: johariAnswerOptions.selectedWords,
-      };
-      // return fetch("");
-      return new Promise((resolve) => resolve(undefined));
+      return fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/johari/answer`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            johariID,
+            name,
+            words: johariAnswerOptions.selectedWords,
+          }),
+        }
+      ).then((res) => res.json());
     },
     onSuccess() {
-      // @todo Get JohariID back
-      const johariID = "";
-
       // @todo Show button to let them redirect to their main display page or Create their own one
       navigate(`/view/${johariID}`);
     },
