@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useEmptyJohariOptionsSet } from "./useEmptyJohariOptionsSet";
 import Answer from "./Answer";
+import { useJohari } from "./useJohari";
 
-/**
- * Form to create a new Johari exercise for self.
- */
 export default function () {
   const { johariID } = useParams();
 
@@ -14,14 +12,7 @@ export default function () {
     throw new Error("Invalid JohariID");
   }
 
-  const { status, isError, error, data } = useQuery({
-    queryKey: ["johari", johariID],
-    async queryFn() {
-      return fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/v1/johari/${johariID}`
-      ).then((res) => res.json());
-    },
-  });
+  const { status, isError, error, data } = useJohari(johariID);
 
   const [name, setName] = useState("");
   const johariAnswerOptions = useEmptyJohariOptionsSet();
