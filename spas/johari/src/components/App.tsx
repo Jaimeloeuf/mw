@@ -4,6 +4,7 @@ import { queryClient } from "../queryClient.ts";
 import Home from "./Home.tsx";
 import CreateNew from "./CreateNew.tsx";
 import AnswerForOthers from "./AnswerForOthers.tsx";
+import View from "./View.tsx";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: "/answer/:johariID",
     element: <AnswerForOthers />,
+  },
+  {
+    path: "/view/:johariID",
+    element: <View />,
   },
 ]);
 
