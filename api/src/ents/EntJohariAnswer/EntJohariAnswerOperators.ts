@@ -58,5 +58,26 @@ export const EntJohariAnswerOperators = defineEntOperators(EntJohariAnswer, {
     },
   },
 
-  custom: {},
+  custom: {
+    async getAllAnswersForJohari(johariID: string) {
+      const data = await apiDB
+        .selectFrom("johari_answer")
+        .selectAll()
+        .where("johari_id", "=", johariID)
+        .orderBy("created_at", "desc")
+        .execute();
+
+      return data.map(
+        (data) =>
+          new EntJohariAnswer({
+            id: data.id,
+            createdAt: data.created_at,
+            updatedAt: data.updated_at,
+            johariID: data.johari_id,
+            name: data.name,
+            words: data.words,
+          }),
+      );
+    },
+  },
 });
