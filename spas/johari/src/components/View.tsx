@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useJohari } from "./useJohari";
+import ViewAnswer from "./ViewAnswer";
 
 export default function JohariLoader() {
   const { johariID } = useParams();
@@ -31,12 +32,25 @@ export default function JohariLoader() {
 function JohariView(props: { words: string; name: string }) {
   return (
     <div>
-      <p className="text-2xl pb-6">
+      <p className="text-2xl pb-12">
         Johari Window for
         <span className="pl-2 underline underline-offset-4 font-extralight decoration-1">
           {props.name}
         </span>
       </p>
+
+      <div>
+        <p className="pb-6 text-xl">
+          Individual Answers, see answer from
+          <select
+            title="Answer Owner"
+            className="ml-4 px-2 outline-none border border-gray-300 rounded-lg font-extralight"
+          >
+            <option value={props.name}>{props.name}</option>
+          </select>
+        </p>
+        <ViewAnswer {...props} />
+      </div>
     </div>
   );
 }
