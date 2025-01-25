@@ -33,7 +33,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex flex-row justify-center">
-        <div className="p-8 max-w-screen-sm">
+        <div className="p-8 max-w-screen-sm w-full">
           <p className="text-4xl pb-8">Johari</p>
           <RouterProvider router={router} />
         </div>
