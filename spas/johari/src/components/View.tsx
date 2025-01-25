@@ -51,6 +51,15 @@ function JohariView(props: {
     };
   }>;
 }) {
+  const tabs = [
+    { value: "answer-self", name: `${props.ownerName}'s own answer` },
+    { value: "answer-others-summary", name: "Summary of other's answers" },
+    { value: "answer-others-individual", name: "Other's answers" },
+  ] as const;
+
+  const [activeTab, setActiveTab] =
+    useState<(typeof tabs)[number]["value"]>("answer-self");
+
   const [selectedAnswerer, setSelectedAnswerer] = useState(
     props.answers[0]?.data?.name
   );
@@ -60,51 +69,71 @@ function JohariView(props: {
 
   return (
     <div>
-      <p className="text-2xl pb-12">
+      <p className="text-2xl pb-8">
         Johari Window for
         <span className="pl-2 underline underline-offset-4 font-extralight decoration-1">
           {props.ownerName}
         </span>
       </p>
 
-      <div className="pb-12">
-        <p className="pb-6 text-xl">{props.ownerName}'s own answer</p>
-        <ViewAnswer words={props.ownerWords} />
-      </div>
-
-      <div className="pb-12">
-        <p className="pb-6 text-xl">
-          Summary of {props.answers.length} answers from others
-        </p>
-        <ViewSummary
-          words={props.answers.map((answers) => answers.data.words)}
-        />
-      </div>
-
-      <div>
-        <p className="pb-6 text-xl">
-          Received {props.answers.length} answers, see answer from
-          <select
-            title="Answer Owner"
-            className="ml-4 px-2 outline-none border border-gray-300 rounded-lg font-extralight"
-            value={selectedAnswerer}
-            onChange={(e) => setSelectedAnswerer(e.target.value)}
+      <div className="mb-8 pb-2 border-b flex flex-row flex-wrap justify-between gap-2">
+        {tabs.map((tab) => (
+          <button
+            className={
+              "px-2 " +
+              (tab.value === activeTab ? `bg-blue-100 rounded-lg` : "")
+            }
+            onClick={() => setActiveTab(tab.value)}
           >
-            {props.answers.map((answer) => (
-              <option
-                // Key is a combo to ensure that duplicate names dont cause issues
-                key={answer.data.name + answer.data.words}
-                value={answer.data.name}
-              >
-                {answer.data.name}
-              </option>
-            ))}
-          </select>
-        </p>
-        {selectedAnswerWords !== undefined && (
-          <ViewAnswer words={selectedAnswerWords} />
-        )}
+            {tab.name}
+          </button>
+        ))}
       </div>
+
+      {activeTab === "answer-self" && (
+        <div className="pb-12">
+          <p className="pb-6 text-xl">{props.ownerName}'s own answer</p>
+          <ViewAnswer words={props.ownerWords} />
+        </div>
+      )}
+
+      {activeTab === "answer-others-summary" && (
+        <div className="pb-12">
+          <p className="pb-6 text-xl">
+            Summary of {props.answers.length} answers from others
+          </p>
+          <ViewSummary
+            words={props.answers.map((answers) => answers.data.words)}
+          />
+        </div>
+      )}
+
+      {activeTab === "answer-others-individual" && (
+        <div>
+          <p className="pb-6 text-xl">
+            Received {props.answers.length} answers, see answer from
+            <select
+              title="Answer Owner"
+              className="ml-4 px-2 outline-none border border-gray-300 rounded-lg font-extralight"
+              value={selectedAnswerer}
+              onChange={(e) => setSelectedAnswerer(e.target.value)}
+            >
+              {props.answers.map((answer) => (
+                <option
+                  // Key is a combo to ensure that duplicate names dont cause issues
+                  key={answer.data.name + answer.data.words}
+                  value={answer.data.name}
+                >
+                  {answer.data.name}
+                </option>
+              ))}
+            </select>
+          </p>
+          {selectedAnswerWords !== undefined && (
+            <ViewAnswer words={selectedAnswerWords} />
+          )}
+        </div>
+      )}
     </div>
   );
 }
