@@ -6,7 +6,7 @@
  * genServiceBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(e27f7a2e1bf3e21dfc15556f8494c4ebee51d5905ad3d41b7ef37b6702827757)
+ * sha256(c8e9940491570ec9e3ed8a544338cddec80a627b0a95d2f48616f3e87167752e)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -16,6 +16,7 @@ export { default as bucketlistGetOne } from "../services/bucketlist/getOne.sv.js
 export { default as johariCreateJohari } from "../services/johari/createJohari.sv.js";
 export { default as johariCreateJohariAnswer } from "../services/johari/createJohariAnswer.sv.js";
 export { default as johariGetJohari } from "../services/johari/getJohari.sv.js";
+export { default as johariGetJohariAnswers } from "../services/johari/getJohariAnswers.sv.js";
 export { default as leetcodeCreateLeetcodeQues } from "../services/leetcode/createLeetcodeQues.sv.js";
 export { default as leetcodeGetLeetcodeQues } from "../services/leetcode/getLeetcodeQues.sv.js";
 export { default as muwnoCanUserAccessOrg } from "../services/muwno/canUserAccessOrg.sv.js";
