@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useJohari } from "./useJohari";
 import { useJohariAnswers } from "./useJohariAnswers";
 import ViewAnswer from "./ViewAnswer";
+import ViewSummary from "./ViewSummary";
 
 export default function JohariLoader() {
   const { johariID } = useParams();
@@ -69,6 +70,15 @@ function JohariView(props: {
       <div className="pb-12">
         <p className="pb-6 text-xl">{props.ownerName}'s own answer</p>
         <ViewAnswer words={props.ownerWords} />
+      </div>
+
+      <div className="pb-12">
+        <p className="pb-6 text-xl">
+          Summary of {props.answers.length} answers from others
+        </p>
+        <ViewSummary
+          words={props.answers.map((answers) => answers.data.words)}
+        />
       </div>
 
       <div>
