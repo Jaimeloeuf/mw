@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
+import type { johariGetJohariController_OutputFullDTO } from "@generated-api-types";
 
 export function useJohari(johariID: string) {
-  return useQuery({
+  return useQuery<johariGetJohariController_OutputFullDTO>({
     queryKey: ["johari", johariID],
     async queryFn() {
       return fetch(

@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "paths": {
+      "@generated-api-types": [
+        "../../api/src/__generated/httpControllerTypeDefinitions.generated.ts"
+      ]
+    },
+
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
