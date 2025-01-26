@@ -4,6 +4,7 @@ import { useJohari } from "./useJohari";
 import { useJohariAnswers } from "./useJohariAnswers";
 import ViewAnswer from "./ViewAnswer";
 import ViewSummary from "./ViewSummary";
+import ViewIndividualAnswers from "./ViewIndividualAnswers";
 
 export default function JohariLoader() {
   const { johariID } = useParams();
@@ -60,13 +61,6 @@ function JohariView(props: {
   const [activeTab, setActiveTab] =
     useState<(typeof tabs)[number]["value"]>("answer-self");
 
-  const [selectedAnswerer, setSelectedAnswerer] = useState(
-    props.answers[0]?.data?.name
-  );
-  const selectedAnswerWords = props.answers.find(
-    (answer) => answer.data.name === selectedAnswerer
-  )?.data?.words;
-
   return (
     <div>
       <p className="text-2xl pb-8">
@@ -109,30 +103,7 @@ function JohariView(props: {
       )}
 
       {activeTab === "answer-others-individual" && (
-        <div>
-          <p className="pb-6 text-xl">
-            Received {props.answers.length} answers, see answer from
-            <select
-              title="Answer Owner"
-              className="ml-4 px-2 outline-none border border-gray-300 rounded-lg font-extralight"
-              value={selectedAnswerer}
-              onChange={(e) => setSelectedAnswerer(e.target.value)}
-            >
-              {props.answers.map((answer) => (
-                <option
-                  // Key is a combo to ensure that duplicate names dont cause issues
-                  key={answer.data.name + answer.data.words}
-                  value={answer.data.name}
-                >
-                  {answer.data.name}
-                </option>
-              ))}
-            </select>
-          </p>
-          {selectedAnswerWords !== undefined && (
-            <ViewAnswer words={selectedAnswerWords} />
-          )}
-        </div>
+        <ViewIndividualAnswers answers={props.answers} />
       )}
     </div>
   );
