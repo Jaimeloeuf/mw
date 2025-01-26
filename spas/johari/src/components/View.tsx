@@ -6,7 +6,7 @@ import ViewAnswer from "./ViewAnswer";
 import ViewSummary from "./ViewSummary";
 import ViewIndividualAnswers from "./ViewIndividualAnswers";
 
-export default function JohariLoader() {
+export default function JohariView() {
   const { johariID } = useParams();
 
   if (johariID === undefined) {
@@ -15,6 +15,18 @@ export default function JohariLoader() {
 
   const johariQuery = useJohari(johariID);
   const johariAnswersQuery = useJohariAnswers(johariID);
+
+  const tabs = [
+    {
+      value: "answer-self",
+      name: `${johariQuery?.data?.data?.name}'s own answer`,
+    },
+    { value: "answer-others-summary", name: "Summary of other's answers" },
+    { value: "answer-others-individual", name: "Other's answers" },
+  ] as const;
+
+  const [activeTab, setActiveTab] =
+    useState<(typeof tabs)[number]["value"]>("answer-self");
 
   if (
     johariQuery.status === "pending" ||
@@ -34,39 +46,11 @@ export default function JohariLoader() {
   }
 
   return (
-    <JohariView
-      ownerName={johariQuery.data.data.name}
-      ownerWords={johariQuery.data.data.words}
-      answers={johariAnswersQuery.data.data}
-    />
-  );
-}
-
-function JohariView(props: {
-  ownerName: string;
-  ownerWords: string;
-  answers: Array<{
-    data: {
-      name: string;
-      words: string;
-    };
-  }>;
-}) {
-  const tabs = [
-    { value: "answer-self", name: `${props.ownerName}'s own answer` },
-    { value: "answer-others-summary", name: "Summary of other's answers" },
-    { value: "answer-others-individual", name: "Other's answers" },
-  ] as const;
-
-  const [activeTab, setActiveTab] =
-    useState<(typeof tabs)[number]["value"]>("answer-self");
-
-  return (
     <div>
       <p className="text-2xl pb-8">
         Johari Window for
         <span className="pl-2 underline underline-offset-4 font-extralight decoration-1">
-          {props.ownerName}
+          {johariQuery.data.data.name}
         </span>
       </p>
 
@@ -86,24 +70,28 @@ function JohariView(props: {
 
       {activeTab === "answer-self" && (
         <div>
-          <p className="pb-6 text-xl">{props.ownerName}'s own answer</p>
-          <ViewAnswer words={props.ownerWords} />
+          <p className="pb-6 text-xl">
+            {johariQuery.data.data.name}'s own answer
+          </p>
+          <ViewAnswer words={johariQuery.data.data.words} />
         </div>
       )}
 
       {activeTab === "answer-others-summary" && (
         <div>
           <p className="pb-6 text-xl">
-            Summary of {props.answers.length} answers from others
+            Summary of {johariAnswersQuery.data.data.length} answers from others
           </p>
           <ViewSummary
-            words={props.answers.map((answers) => answers.data.words)}
+            words={johariAnswersQuery.data.data.map(
+              (answers) => answers.data.words
+            )}
           />
         </div>
       )}
 
       {activeTab === "answer-others-individual" && (
-        <ViewIndividualAnswers answers={props.answers} />
+        <ViewIndividualAnswers answers={johariAnswersQuery.data.data} />
       )}
     </div>
   );
