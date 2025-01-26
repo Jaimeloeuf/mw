@@ -1,0 +1,42 @@
+################################################################################
+################################################################################
+######## Global root .gitignore to ignore common stuff across all repos ########
+################################################################################
+################################################################################
+
+
+### Local secrets
+**/*.env
+**/*.pem
+
+
+### Build output
+**/dist/
+**/*.tsbuildinfo*
+
+
+### Cache
+**/node_modules/
+**/.cache
+
+
+### Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
+### Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
