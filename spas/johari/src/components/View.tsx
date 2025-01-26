@@ -85,14 +85,14 @@ function JohariView(props: {
       </div>
 
       {activeTab === "answer-self" && (
-        <div className="pb-12">
+        <div>
           <p className="pb-6 text-xl">{props.ownerName}'s own answer</p>
           <ViewAnswer words={props.ownerWords} />
         </div>
       )}
 
       {activeTab === "answer-others-summary" && (
-        <div className="pb-12">
+        <div>
           <p className="pb-6 text-xl">
             Summary of {props.answers.length} answers from others
           </p>
