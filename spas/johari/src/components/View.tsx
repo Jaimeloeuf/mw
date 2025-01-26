@@ -57,6 +57,7 @@ export default function JohariView() {
       <div className="mb-8 pb-2 border-b flex flex-row flex-wrap justify-between gap-2">
         {tabs.map((tab) => (
           <button
+            key={tab.value}
             className={
               "px-2 " +
               (tab.value === activeTab ? `bg-blue-100 rounded-lg` : "")
