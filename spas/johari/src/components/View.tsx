@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { useJohari } from "./useJohari";
 import { useJohariAnswers } from "./useJohariAnswers";
 import ViewAnswer from "./ViewAnswer";
