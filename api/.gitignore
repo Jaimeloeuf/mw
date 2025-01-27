@@ -1,5 +1,2 @@
-node_modules/
-dist/
-tsconfig.tsbuildinfo
-*.env
+# Sqlite mock DBs should be only used for local development/testing purposes.
 sqlite-mock-dbs/*.db
