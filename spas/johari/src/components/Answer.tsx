@@ -38,12 +38,17 @@ export default function (
 
       <div className="flex flex-row flex-wrap gap-6">
         {Object.entries(johariOptions).map(([johariOption, isSelected]) => (
-          <JohariOptionButton
-            key={johariOption}
-            johariOption={johariOption}
-            isSelected={isSelected}
-            toggleSelection={toggleSelection}
-          />
+          <button
+            onClick={() => toggleSelection(johariOption)}
+            className={
+              "px-4 border rounded-lg " +
+              (isSelected
+                ? "font-light text-green-600 border-green-500"
+                : "font-extralight border-gray-300")
+            }
+          >
+            {johariOption}
+          </button>
         ))}
       </div>
 
@@ -62,25 +67,5 @@ export default function (
         </button>
       </div>
     </div>
-  );
-}
-
-function JohariOptionButton(props: {
-  johariOption: string;
-  isSelected: boolean;
-  toggleSelection: (johariOption: string) => void;
-}) {
-  return (
-    <button
-      onClick={() => props.toggleSelection(props.johariOption)}
-      className={
-        "px-4 border rounded-lg " +
-        (props.isSelected
-          ? "font-light text-green-600 border-green-500"
-          : "font-extralight border-gray-300")
-      }
-    >
-      {props.johariOption}
-    </button>
   );
 }
