@@ -39,6 +39,7 @@ export default function (
       <div className="flex flex-row flex-wrap gap-6">
         {Object.entries(johariOptions).map(([johariOption, isSelected]) => (
           <button
+            key={johariOption}
             onClick={() => toggleSelection(johariOption)}
             className={
               "px-4 border rounded-lg " +
