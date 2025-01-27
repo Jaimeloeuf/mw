@@ -1,29 +1,10 @@
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { BrowserRouter, Routes, Route } from "react-router";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "../queryClient.ts";
 import Home from "./Home.tsx";
 import CreateNew from "./CreateNew.tsx";
 import AnswerForOthers from "./AnswerForOthers.tsx";
 import View from "./View.tsx";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/create",
-    element: <CreateNew />,
-  },
-  {
-    path: "/answer/:johariID",
-    element: <AnswerForOthers />,
-  },
-  {
-    path: "/view/:johariID",
-    element: <View />,
-  },
-]);
 
 /**
  * Root component, that wraps the whole app to provide the Query Client, and to
@@ -32,12 +13,20 @@ const router = createBrowserRouter([
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex flex-row justify-center">
-        <div className="p-8 max-w-screen-sm w-full">
-          <p className="text-4xl pb-8">Johari</p>
-          <RouterProvider router={router} />
+      <BrowserRouter>
+        <div className="flex flex-row justify-center">
+          <div className="p-8 max-w-screen-sm w-full">
+            <p className="text-4xl pb-8">Johari</p>
+
+            <Routes>
+              <Route index element={<Home />} />
+              <Route path="create" element={<CreateNew />} />
+              <Route path="answer/:johariID" element={<AnswerForOthers />} />
+              <Route path="view/:johariID" element={<View />} />
+            </Routes>
+          </div>
         </div>
-      </div>
+      </BrowserRouter>
     </QueryClientProvider>
   );
 }
