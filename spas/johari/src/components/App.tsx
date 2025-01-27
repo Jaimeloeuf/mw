@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router";
+import { BrowserRouter, Routes, Route, Link } from "react-router";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "../queryClient.ts";
 import Home from "./Home.tsx";
@@ -16,7 +16,9 @@ export default function App() {
       <BrowserRouter>
         <div className="flex flex-row justify-center">
           <div className="p-8 max-w-screen-sm w-full">
-            <p className="text-4xl pb-8">Johari</p>
+            <Link to="/">
+              <p className="text-4xl pb-8">Johari</p>
+            </Link>
 
             <Routes>
               <Route index element={<Home />} />
