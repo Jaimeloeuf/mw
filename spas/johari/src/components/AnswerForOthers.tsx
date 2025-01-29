@@ -91,6 +91,9 @@ export default function () {
       </div>
 
       <div className="pt-8">
+        <p className="pb-2 text-lg">
+          Choose 6 words that best describes {data.data.name}
+        </p>
         <Answer {...johariAnswerOptions} onSubmit={mutation.mutate} />
       </div>
     </div>

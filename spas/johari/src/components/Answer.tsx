@@ -25,10 +25,12 @@ export default function (
 
   return (
     <div>
-      <div className="pb-4 flex flex-row justify-between">
-        <p className="text-lg">Selected {numberOfSelectedOptions}/6 words</p>
+      <div className="pb-4 flex flex-row items-center gap-2">
+        <p className="font-light text-sm">
+          Selected {numberOfSelectedOptions}/6 words
+        </p>
         <button
-          className="px-4 text-red-500 border border-red-500 rounded-lg"
+          className="px-2 text-xs text-red-500 border border-red-500 rounded-lg"
           disabled={numberOfSelectedOptions === 0}
           onClick={resetJohariOptions}
         >
