@@ -3,6 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { useEmptyJohariOptionsSet } from "./useEmptyJohariOptionsSet";
 import Answer from "./Answer";
+import ErrorModal from "./ErrorModal";
 
 /**
  * Form to create a new Johari exercise for self.
@@ -39,6 +40,10 @@ export default function () {
       navigate(`/view/${johariID}`);
     },
   });
+
+  if (mutation.isError) {
+    return <ErrorModal error={mutation.error} clearError={mutation.reset} />;
+  }
 
   return (
     <div>

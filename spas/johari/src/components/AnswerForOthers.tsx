@@ -4,6 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useEmptyJohariOptionsSet } from "./useEmptyJohariOptionsSet";
 import Answer from "./Answer";
 import { useJohari } from "./useJohari";
+import ErrorModal from "./ErrorModal";
 
 export default function () {
   const { johariID } = useParams();
@@ -54,6 +55,10 @@ export default function () {
         <p className="text-xl font-thin">{error.toString()}</p>
       </div>
     );
+  }
+
+  if (mutation.isError) {
+    return <ErrorModal error={mutation.error} clearError={mutation.reset} />;
   }
 
   return (
