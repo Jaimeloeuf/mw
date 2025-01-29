@@ -7,18 +7,18 @@ import ViewAnswer from "./ViewAnswer";
 export default function (props: {
   answers: Array<{
     data: {
+      id: string;
       name: string;
       words: string;
     };
   }>;
 }) {
   const [selectedAnswerer, setSelectedAnswerer] = useState(
-    props.answers[0]?.data?.name
+    props.answers[0]?.data?.id
   );
 
-  // @todo This will break if there are 2 or more ppl who use the same name
   const selectedAnswerWords = props.answers.find(
-    (answer) => answer.data.name === selectedAnswerer
+    (answer) => answer.data.id === selectedAnswerer
   )?.data?.words;
 
   return (
@@ -35,7 +35,7 @@ export default function (props: {
             <option
               // Key is a combo to ensure that duplicate names dont cause issues
               key={answer.data.name + answer.data.words}
-              value={answer.data.name}
+              value={answer.data.id}
             >
               {answer.data.name}
             </option>
