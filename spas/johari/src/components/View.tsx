@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import { useJohari } from "./useJohari";
 import { useJohariAnswers } from "./useJohariAnswers";
 import ViewAnswer from "./ViewAnswer";
-import ViewSummary from "./ViewSummary";
+import ViewAnswersSummary from "./ViewAnswersSummary";
 import ViewIndividualAnswers from "./ViewIndividualAnswers";
 
 export default function JohariView() {
@@ -79,16 +79,7 @@ export default function JohariView() {
       )}
 
       {activeTab === "answer-others-summary" && (
-        <div>
-          <p className="pb-6 text-xl">
-            Summary of {johariAnswersQuery.data.data.length} answers from others
-          </p>
-          <ViewSummary
-            words={johariAnswersQuery.data.data.map(
-              (answers) => answers.data.words
-            )}
-          />
-        </div>
+        <ViewAnswersSummary answers={johariAnswersQuery.data.data} />
       )}
 
       {activeTab === "answer-others-individual" && (
