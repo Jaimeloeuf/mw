@@ -92,7 +92,11 @@ export default function JohariView() {
       )}
 
       {activeTab === "answer-others-individual" && (
-        <ViewIndividualAnswers answers={johariAnswersQuery.data.data} />
+        <ViewIndividualAnswers
+          johariID={johariID}
+          ownerName={johariQuery.data.data.name}
+          answers={johariAnswersQuery.data.data}
+        />
       )}
     </div>
   );
