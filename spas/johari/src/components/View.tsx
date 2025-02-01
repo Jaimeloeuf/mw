@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router";
 import { useJohari } from "./useJohari";
 import { useJohariAnswers } from "./useJohariAnswers";
-import ViewAnswer from "./ViewAnswer";
+import ViewOwnAnswer from "./ViewOwnAnswer";
 import ViewAnswersSummary from "./ViewAnswersSummary";
 import ViewIndividualAnswers from "./ViewIndividualAnswers";
 
@@ -70,12 +70,10 @@ export default function JohariView() {
       </div>
 
       {activeTab === "answer-self" && (
-        <div>
-          <p className="pb-6 text-xl">
-            {johariQuery.data.data.name}'s own answer
-          </p>
-          <ViewAnswer words={johariQuery.data.data.words} />
-        </div>
+        <ViewOwnAnswer
+          ownerName={johariQuery.data.data.name}
+          ownerAnswerWords={johariQuery.data.data.words}
+        />
       )}
 
       {activeTab === "answer-others-summary" && (
