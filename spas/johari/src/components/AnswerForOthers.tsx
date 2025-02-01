@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, Link } from "react-router";
 import { useMutation } from "@tanstack/react-query";
 import { useEmptyJohariOptionsSet } from "./useEmptyJohariOptionsSet";
+import WhatIsThis from "./WhatIsThis";
 import Answer from "./Answer";
 import { useJohari } from "./useJohari";
 import ErrorModal from "./ErrorModal";
@@ -118,11 +119,17 @@ export default function () {
 
   return (
     <div>
-      <p className="text-2xl pb-6">
-        Answer for
-        <span className="pl-2 underline underline-offset-4 font-extralight decoration-1">
+      <div className="pb-12">
+        <WhatIsThis />
+      </div>
+
+      <p className="pb-4 text-2xl font-light">Why me?</p>
+      <p className="pb-8">
+        <span className="underline underline-offset-4 decoration-1">
           {data.data.name}
-        </span>
+        </span>{" "}
+        values your input and need your help to describe them using words in
+        this list for them to better understand their own personality!
       </p>
 
       <div className="flex flex-row flex-wrap gap-6 w-full">
