@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router";
+import { Link } from "react-router";
 import { useEmptyJohariOptionsSet } from "./useEmptyJohariOptionsSet";
+import LinkShareCard from "./LinkShareCard";
 import Answer from "./Answer";
 import ErrorModal from "./ErrorModal";
+import type { johariCreateJohariController_OutputFullDTO } from "@generated-api-types";
 
 /**
  * Form to create a new Johari exercise for self.
@@ -11,9 +13,8 @@ import ErrorModal from "./ErrorModal";
 export default function () {
   const [name, setName] = useState("");
   const johariAnswerOptions = useEmptyJohariOptionsSet();
-  const navigate = useNavigate();
 
-  const mutation = useMutation({
+  const mutation = useMutation<johariCreateJohariController_OutputFullDTO>({
     mutationFn() {
       if (name === "") {
         throw new Error("Name cannot be empty!");
@@ -33,16 +34,52 @@ export default function () {
         }
       ).then((res) => res.json());
     },
-    onSuccess(data) {
-      // @todo Generate a shareable link
-      // @todo Show button to let them redirect to their main display page
-      const johariID = data.data;
-      navigate(`/view/${johariID}`);
-    },
   });
 
   if (mutation.isError) {
     return <ErrorModal error={mutation.error} clearError={mutation.reset} />;
+  }
+
+  if (mutation.isSuccess) {
+    return (
+      <div className="flex flex-row items-center">
+        <div>
+          <p className="py-8 text-3xl font-thin">
+            Yay your Johari Window is created!
+          </p>
+
+          <div className="pb-8">
+            <LinkShareCard johariID={mutation.data.data} ownerName={name} />
+          </div>
+
+          <div className="border border-green-600 rounded-lg">
+            <Link
+              to={`/view/${mutation.data.data}`}
+              className="text-green-600 text-2xl"
+            >
+              <div className="p-4 flex w-full flex-row items-center justify-between">
+                See your Johari Window
+                <svg
+                  className="h-5 w-5 shrink-0 rotate-90"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M9 5 5 1 1 5"
+                  />
+                </svg>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
