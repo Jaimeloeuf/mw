@@ -1,7 +1,7 @@
 import { getLink } from "./getLink";
 import CopyOnClick from "./CopyOnClick";
 
-export default function NoAnswerCard(props: {
+export default function LinkShareCard(props: {
   johariID: string;
   ownerName: string;
 }) {
