@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router";
 import { useJohari } from "./useJohari";
 import { useJohariAnswers } from "./useJohariAnswers";
+import NoAnswerCard from "./NoAnswerCard";
 import ViewOwnAnswer from "./ViewOwnAnswer";
 import ViewAnswersSummary from "./ViewAnswersSummary";
 import ViewIndividualAnswers from "./ViewIndividualAnswers";
@@ -76,17 +77,29 @@ export default function JohariView() {
         />
       )}
 
-      {activeTab === "answer-others-summary" && (
-        <ViewAnswersSummary answers={johariAnswersQuery.data.data} />
-      )}
+      {activeTab === "answer-others-summary" &&
+        (johariAnswersQuery.data.data.length === 0 ? (
+          <NoAnswerCard
+            johariID={johariID}
+            ownerName={johariQuery.data.data.name}
+          />
+        ) : (
+          <ViewAnswersSummary answers={johariAnswersQuery.data.data} />
+        ))}
 
-      {activeTab === "answer-others-individual" && (
-        <ViewIndividualAnswers
-          johariID={johariID}
-          ownerName={johariQuery.data.data.name}
-          answers={johariAnswersQuery.data.data}
-        />
-      )}
+      {activeTab === "answer-others-individual" &&
+        (johariAnswersQuery.data.data.length === 0 ? (
+          <NoAnswerCard
+            johariID={johariID}
+            ownerName={johariQuery.data.data.name}
+          />
+        ) : (
+          <ViewIndividualAnswers
+            johariID={johariID}
+            ownerName={johariQuery.data.data.name}
+            answers={johariAnswersQuery.data.data}
+          />
+        ))}
     </div>
   );
 }
