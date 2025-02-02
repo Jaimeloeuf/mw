@@ -34,12 +34,8 @@ export default function (props: {
           onChange={(e) => setSelectedAnswerer(e.target.value)}
         >
           {props.answers.map((answer) => (
-            <option
-              // Key is a combo to ensure that duplicate names dont cause issues
-              key={answer.data.name + answer.data.words}
-              value={answer.data.id}
-            >
-              {answer.data.name}
+            <option key={answer.data.id} value={answer.data.id}>
+              {answer.data.name !== "" ? answer.data.name : "<anonymous user>"}
             </option>
           ))}
         </select>
