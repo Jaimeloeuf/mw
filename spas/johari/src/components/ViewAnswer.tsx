@@ -7,7 +7,7 @@ export default function (props: { words: string }) {
   const johariOptions = useJohariOptions(props.words);
 
   return (
-    <div className="flex flex-row flex-wrap gap-6">
+    <div className="flex flex-row flex-wrap gap-4">
       {Object.entries(johariOptions).map(([johariOption, isSelected]) => (
         <p
           key={johariOption}

@@ -7,7 +7,7 @@ export default function (props: { words: Array<string> }) {
   const johariAnswerSummary = useJohariAnswerSummary(props.words);
 
   return (
-    <div className="flex flex-row flex-wrap gap-6">
+    <div className="flex flex-row flex-wrap gap-4">
       {Object.entries(johariAnswerSummary).map(
         ([johariWord, numberOfSelections]) => (
           <p

@@ -13,7 +13,7 @@ export default function (props: {
 }) {
   return (
     <div>
-      <p className="pb-6 text-xl">
+      <p className="pb-6 text-lg">
         Summary of {props.answers.length} answers from others
       </p>
       <ViewSummary words={props.answers.map((answers) => answers.data.words)} />

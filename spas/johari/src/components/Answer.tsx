@@ -38,7 +38,7 @@ export default function (
         </button>
       </div>
 
-      <div className="flex flex-row flex-wrap gap-6">
+      <div className="flex flex-row flex-wrap gap-4">
         {Object.entries(johariOptions).map(([johariOption, isSelected]) => (
           <button
             key={johariOption}
@@ -58,7 +58,7 @@ export default function (
       <div className="pt-8">
         <button
           className={
-            "px-4 text-lg border rounded-lg " +
+            "w-full px-4 text-lg border rounded-lg " +
             (numberOfSelectedOptions === 6
               ? "text-green-600 border-green-600"
               : "cursor-not-allowed text-gray-500 border-gray-300")

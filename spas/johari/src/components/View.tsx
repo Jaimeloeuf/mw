@@ -4,7 +4,7 @@ import { useJohari } from "./useJohari";
 import { useJohariAnswers } from "./useJohariAnswers";
 import LinkShareModal from "./LinkShareModal";
 import NoAnswerCard from "./NoAnswerCard";
-import ViewOwnAnswer from "./ViewOwnAnswer";
+import ViewAnswer from "./ViewAnswer";
 import ViewAnswersSummary from "./ViewAnswersSummary";
 import ViewIndividualAnswers from "./ViewIndividualAnswers";
 
@@ -21,7 +21,7 @@ export default function JohariView() {
   const tabs = [
     {
       value: "answer-self",
-      name: `${johariQuery?.data?.data?.name}'s own answer`,
+      name: `${johariQuery?.data?.data?.name}'s answer`,
     },
     { value: "answer-others-summary", name: "Summary of other's answers" },
     { value: "answer-others-individual", name: "Other's answers" },
@@ -63,13 +63,13 @@ export default function JohariView() {
         />
       </div>
 
-      <div className="mb-8 pb-2 border-b flex flex-row flex-wrap justify-between gap-2">
+      <div className="mb-8 py-2 border-t sm:border-t-0 border-b flex flex-col sm:flex-row flex-wrap justify-between gap-2">
         {tabs.map((tab) => (
           <button
             key={tab.value}
             className={
-              "px-2 " +
-              (tab.value === activeTab ? `bg-blue-100 rounded-lg` : "")
+              "text-left sm:text-center px-2 " +
+              (tab.value === activeTab ? `bg-zinc-200 rounded-lg` : "")
             }
             onClick={() => setActiveTab(tab.value)}
           >
@@ -79,10 +79,7 @@ export default function JohariView() {
       </div>
 
       {activeTab === "answer-self" && (
-        <ViewOwnAnswer
-          ownerName={johariQuery.data.data.name}
-          ownerAnswerWords={johariQuery.data.data.words}
-        />
+        <ViewAnswer words={johariQuery.data.data.words} />
       )}
 
       {activeTab === "answer-others-summary" &&

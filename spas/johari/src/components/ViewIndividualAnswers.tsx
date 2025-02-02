@@ -25,7 +25,7 @@ export default function (props: {
 
   return (
     <div>
-      <p className="pb-6 text-xl">
+      <p className="pb-6 text-lg">
         Received {props.answers.length} answers, see answer from
         <select
           title="Answer Owner"
