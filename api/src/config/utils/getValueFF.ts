@@ -3,6 +3,8 @@ import type { z } from "zod";
 import type { ConfigLoader } from "../ConfigLoader.js";
 import type { createConfig } from "./createConfig.js";
 
+import { isPromise } from "../../utils/index.js";
+
 /**
  * Get Value factory function, creates and return a 'getValue' function that
  * 1. Loads the config value with `configLoader` and run zod schema validation.
@@ -25,9 +27,6 @@ export function getValueFF<
   let value: ConfigValueType | null = null;
 
   return function (forceReload?: true): ConfigValueType {
-    const isPromise = (value: unknown): boolean =>
-      value instanceof Promise && typeof (value as any)?.then === "function";
-
     if (forceReload || value === null) {
       const configLoaderResult = configMapping.configLoader();
 
