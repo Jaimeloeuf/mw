@@ -6,10 +6,7 @@ import type { ZodType } from "zod";
  */
 export function createConfig<
   const ConfigSchema extends ZodType,
-  const ConfigLoaderType extends "sync" | "async",
-  const ConfigLoader extends () => ConfigLoaderType extends "sync"
-    ? any
-    : Promise<any>,
+  const ConfigLoader extends () => any,
 >(
   /**
    * A zod validator for the config value from config loader called to make sure
@@ -18,14 +15,12 @@ export function createConfig<
   configSchema: ConfigSchema,
 
   /**
-   * Determines whether bootstrapped config function will be sync or async.
-   */
-  configLoaderType: ConfigLoaderType,
-
-  /**
    * configLoader can be any loader function that loads the config value from
    * whatever data source from env var to secret keychain over the network, and
    * returns the config value. This can be either a sync or async function.
+   *
+   * When user uses the config value, this function will be ran and its value
+   * is validated/transformed, cached and returned, unless specified otherwise.
    */
   configLoader: ConfigLoader,
 
@@ -42,8 +37,6 @@ export function createConfig<
      * loader function is valid.
      */
     schema: configSchema,
-
-    configLoaderType,
 
     /**
      * The loader function that actually returns the config value.

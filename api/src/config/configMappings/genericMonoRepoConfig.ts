@@ -18,7 +18,6 @@ export const genericMonoRepoConfig = {
         z.literal("test"),
       ])
       .default("development"),
-    "sync",
     function () {
       return process.env["NODE_ENV"];
     },
@@ -30,7 +29,6 @@ export const genericMonoRepoConfig = {
    */
   version: createConfig(
     z.string().default("DEBUG_MODE_VERSION"),
-    "sync",
     function () {
       return process.env["VERSION"];
     },
@@ -42,7 +40,6 @@ export const genericMonoRepoConfig = {
    */
   port: createConfig(
     z.number().positive().default(3000),
-    "sync",
     function () {
       return process.env["PORT"] === undefined
         ? undefined
@@ -58,7 +55,6 @@ export const genericMonoRepoConfig = {
    */
   server_timeout: createConfig(
     z.number().positive().default(60_000),
-    "sync",
     function () {
       return process.env["SERVER_TIMEOUT"] === undefined
         ? undefined
@@ -82,7 +78,6 @@ export const genericMonoRepoConfig = {
       .refine((url) => !url.endsWith("/"), {
         message: "Base URL cannot end with a trailing slash.",
       }),
-    "sync",
     function () {
       return process.env["BASE_URL_TO_SELF"];
     },
@@ -98,7 +93,6 @@ export const genericMonoRepoConfig = {
       .enum(["true", "false"])
       .transform((v) => v === "true")
       .default("false"),
-    "sync",
     function () {
       return process.env["RUN_ASYNC_JOBS_IN_WEB_TIER"];
     },

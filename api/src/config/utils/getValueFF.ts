@@ -8,45 +8,39 @@ import type { createConfig } from "./createConfig.js";
  * 1. Loads the config value with `configLoader` and run zod schema validation.
  * 1. Caches the config value for subsequent requests, unless user requests for
  * a `forceReload`.
- * 1. Returned function will either be sync/async depending on the
- * `configLoaderType` defined with `createConfig`.
  *
  * Note that the returned function can throw if either `configLoader` or `zod`
  * throws.
  */
 export function getValueFF<
   const ConfigMapping extends ReturnType<typeof createConfig>,
-  const ConfigType extends z.infer<ConfigMapping["schema"]>,
-  const ConfigValueType extends ConfigMapping["configLoaderType"] extends "sync"
-    ? ConfigType
-    : Promise<ConfigType>,
+  const ConfigLoaderReturnType extends ReturnType<
+    ConfigMapping["configLoader"]
+  >,
+  const ConfigValueType extends ConfigLoaderReturnType extends Promise<unknown>
+    ? Promise<z.infer<ConfigMapping["schema"]>>
+    : z.infer<ConfigMapping["schema"]>,
 >(configMapping: ConfigMapping): ConfigLoader<ConfigValueType> {
-  if (configMapping.configLoaderType === "sync") {
-    let value: ConfigValueType | null = null;
-
-    return function (forceReload?: true): ConfigValueType {
-      if (forceReload || value === null) {
-        // Using parse instead of safe parse to let errors bubble up
-        value = configMapping.schema.parse(configMapping.configLoader());
-      }
-
-      // Using non-null assertion operator here since we are sure after the
-      // previous null check that this will definitely be set already.
-      return value!;
-    };
-  }
-
   /* For async config loaders */
   let value: ConfigValueType | null = null;
 
   return function (forceReload?: true): ConfigValueType {
+    const isPromise = (value: unknown): boolean =>
+      value instanceof Promise && typeof (value as any)?.then === "function";
+
     if (forceReload || value === null) {
-      value = configMapping
-        .configLoader()
-        .then((result: Awaited<ConfigValueType>) =>
-          // Using parse instead of safe parse to let errors bubble up
-          configMapping.schema.parse(result),
+      const configLoaderResult = configMapping.configLoader();
+
+      if (isPromise(configLoaderResult)) {
+        value = configLoaderResult.then(
+          (result: Awaited<ConfigLoaderReturnType>) =>
+            // Using parse instead of safe parse to let errors bubble up
+            configMapping.schema.parse(result),
         );
+      } else {
+        // Using parse instead of safe parse to let errors bubble up
+        value = configMapping.schema.parse(configLoaderResult);
+      }
     }
 
     // Using non-null assertion operator here since we are sure after the

@@ -11,7 +11,6 @@ export const sharedInfraConfig = {
    */
   auth_github_oauth_client_id: createConfig(
     z.string(),
-    "sync",
     function () {
       return process.env["AUTH_GITHUB_OAUTH_CLIENT_ID"];
     },
@@ -23,7 +22,6 @@ export const sharedInfraConfig = {
    */
   auth_github_oauth_client_secret: createConfig(
     z.string(),
-    "sync",
     function () {
       return process.env["AUTH_GITHUB_OAUTH_CLIENT_SECRET"];
     },
@@ -35,7 +33,6 @@ export const sharedInfraConfig = {
    */
   auth_github_oauth_redirect_uri: createConfig(
     z.string().url(),
-    "sync",
     function () {
       return process.env["AUTH_GITHUB_OAUTH_REDIRECT_URI"];
     },
@@ -50,7 +47,6 @@ export const sharedInfraConfig = {
       .enum(["true", "false"])
       .transform((v) => v === "true")
       .default("false"),
-    "sync",
     function () {
       return process.env["DF_VERBOSE_LOG_CALLS"];
     },
@@ -62,7 +58,6 @@ export const sharedInfraConfig = {
    */
   db_conn_string: createConfig(
     z.string(),
-    "sync",
     function () {
       return process.env["DB_CONN_STRING"];
     },
@@ -77,7 +72,6 @@ export const sharedInfraConfig = {
       .enum(["true", "false"])
       .transform((v) => v === "true")
       .default("false"),
-    "sync",
     function () {
       return process.env["KYSELY_LOG_QUERY"];
     },
@@ -92,7 +86,6 @@ export const sharedInfraConfig = {
       .enum(["true", "false"])
       .transform((v) => v === "true")
       .default("false"),
-    "sync",
     function () {
       return process.env["KYSELY_LOG_ERROR"];
     },
@@ -105,7 +98,6 @@ export const sharedInfraConfig = {
    */
   tele_webhook_secret_path: createConfig(
     z.string(),
-    "sync",
     function () {
       return process.env["TELE_WEBHOOK_SECRET_PATH"];
     },
@@ -117,7 +109,6 @@ export const sharedInfraConfig = {
    */
   tele_adminbot_token: createConfig(
     z.string(),
-    "sync",
     function () {
       return process.env["TELE_ADMINBOT_TOKEN"];
     },
@@ -129,7 +120,6 @@ export const sharedInfraConfig = {
    */
   tele_adminbot_admin_chat_id: createConfig(
     z.string(),
-    "sync",
     function () {
       return process.env["TELE_ADMINBOT_ADMIN_CHAT_ID"];
     },
