@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router";
 import { useJohari } from "./useJohari";
 import { useJohariAnswers } from "./useJohariAnswers";
+import LinkShareModal from "./LinkShareModal";
 import NoAnswerCard from "./NoAnswerCard";
 import ViewOwnAnswer from "./ViewOwnAnswer";
 import ViewAnswersSummary from "./ViewAnswersSummary";
@@ -48,12 +49,19 @@ export default function JohariView() {
 
   return (
     <div>
-      <p className="text-2xl pb-8">
-        Johari Window for
-        <span className="pl-2 underline underline-offset-4 font-extralight decoration-1">
-          {johariQuery.data.data.name}
-        </span>
-      </p>
+      <div className="pb-8 flex flex-col gap-2 md:flex-row md:justify-between">
+        <p className="text-2xl w-full">
+          Johari Window for
+          <span className="pl-2 underline underline-offset-4 font-extralight decoration-1">
+            {johariQuery.data.data.name}
+          </span>
+        </p>
+
+        <LinkShareModal
+          johariID={johariID}
+          ownerName={johariQuery.data.data.name}
+        />
+      </div>
 
       <div className="mb-8 pb-2 border-b flex flex-row flex-wrap justify-between gap-2">
         {tabs.map((tab) => (
