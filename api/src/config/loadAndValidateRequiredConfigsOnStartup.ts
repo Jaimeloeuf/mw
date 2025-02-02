@@ -9,7 +9,6 @@ import { loadAndValidateConfig } from "./loadAndValidateConfig.js";
  * Required configs are configs created with 'loadOnStartup' set to true in
  * `createConfig`.
  */
-
 export function loadAndValidateRequiredConfigsOnStartup() {
   const configsToLoadAndValidateOnStartup = Object.entries(combinedConfig)
     .filter(([_, config]) => config.loadOnStartup)

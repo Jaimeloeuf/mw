@@ -14,6 +14,13 @@ import { config } from "./config.js";
  * Given a list of config names, load them using their `configLoader`s and
  * validate them using their zod schema, and record all errors. If there are any
  * errors, log all the errors and quit the current process.
+ *
+ * Below is a sample function call to be placed in a repo bootstrap function, to
+ * only allow the repo to be bootstrapped if all the specified required config
+ * values are available.
+ * ```typescript
+ * validateConfig(["async_token_from_secretservice", "muwno_recaptcha_secret"]);
+ * ```
  */
 export async function loadAndValidateConfig(
   namesOfConfigToValidate: Array<keyof ConfigType>,
