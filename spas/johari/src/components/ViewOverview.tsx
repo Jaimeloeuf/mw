@@ -87,6 +87,12 @@ export default function (props: {
     }
   }
 
+  // Sort the arrays by most answered word first
+  arena.sort((a, b) => b.ppl.length - a.ppl.length);
+  blindspot.sort((a, b) => b.ppl.length - a.ppl.length);
+  facade.sort((a, b) => b.ppl.length - a.ppl.length);
+  unknown.sort((a, b) => b.ppl.length - a.ppl.length);
+
   return (
     <div>
       <div className="pb-8">
