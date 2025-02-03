@@ -98,40 +98,36 @@ export default function (props: {
 
       <div className="-m-4 sm:m-0 grid grid-cols-[auto_1fr_1fr] justify-start">
         <div></div>
-        <p className="text-sm max-w-min pb-2">Known to self</p>
-        <p className="text-sm max-w-min pb-2">Unknown to self</p>
+        <p className="text-sm font-light max-w-min pb-2">Known to self</p>
+        <p className="text-sm font-light max-w-min pb-2">Unknown to self</p>
 
-        <p className="text-sm max-w-min pr-2 sm:pr-4">Known to others</p>
-        <div className="min-h-32 p-1 sm:p-2 border border-zinc-200">
-          <p className="text-sm font-thin italic underline decoration-zinc-300">
-            Arena
-          </p>
+        <p className="text-sm font-light max-w-min pr-2 sm:pr-4">
+          Known to others
+        </p>
+        <div className="min-h-32 p-2 sm:p-3 border border-zinc-200">
+          <p className="pb-1 italic underline decoration-zinc-400">Arena</p>
           {arena.map((res) => (
             <WordWithTooltip key={res.word} {...res} />
           ))}
         </div>
-        <div className="min-h-32 p-1 sm:p-2 border border-zinc-200">
-          <p className="text-sm font-thin italic underline decoration-zinc-300">
-            Blindspot
-          </p>
+        <div className="min-h-32 p-2 sm:p-3 border border-zinc-200">
+          <p className="pb-1 italic underline decoration-zinc-400">Blindspot</p>
           {blindspot.map((res) => (
             <WordWithTooltip key={res.word} {...res} />
           ))}
         </div>
 
-        <p className="text-sm max-w-min pr-2 sm:pr-4">Unknown to others</p>
-        <div className="min-h-32 p-1 sm:p-2 border border-zinc-200">
-          <p className="text-sm font-thin italic underline decoration-zinc-300">
-            Facade
-          </p>
+        <p className="text-sm font-light max-w-min pr-2 sm:pr-4">
+          Unknown to others
+        </p>
+        <div className="min-h-32 p-2 sm:p-3 border border-zinc-200">
+          <p className="pb-1 italic underline decoration-zinc-400">Facade</p>
           {facade.map((res) => (
             <WordWithTooltip key={res.word} {...res} />
           ))}
         </div>
-        <div className="min-h-32 p-1 sm:p-2 border border-zinc-200">
-          <p className="text-sm font-thin italic underline decoration-zinc-300">
-            Unknown
-          </p>
+        <div className="min-h-32 p-2 sm:p-3 border border-zinc-200">
+          <p className="pb-1 italic underline decoration-zinc-400">Unknown</p>
           {unknown.map((res) => (
             <WordWithTooltip key={res.word} {...res} />
           ))}
