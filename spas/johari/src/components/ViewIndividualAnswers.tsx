@@ -25,20 +25,35 @@ export default function (props: {
 
   return (
     <div>
+      <p className="pb-2 text-lg">
+        All {props.answers.length} answers from others
+      </p>
+      <div className="flex flex-col gap-1 pb-6">
+        {props.answers.map((answer) => (
+          <p className="text-sm">
+            <span className="font-medium">{answer.data.name}</span> thinks that
+            you are <i>{answer.data.words.split(",").join(", ")}</i>
+          </p>
+        ))}
+      </div>
+
       <p className="pb-6 text-lg">
-        Received {props.answers.length} answers, see answer from
+        See
         <select
-          title="Answer Owner"
-          className="ml-4 px-2 outline-none border border-gray-300 rounded-lg font-extralight"
+          title="answerer"
+          className="mx-2 px-2 outline-none border border-gray-300 rounded-lg font-extralight"
           value={selectedAnswerer}
           onChange={(e) => setSelectedAnswerer(e.target.value)}
         >
           {props.answers.map((answer) => (
             <option key={answer.data.id} value={answer.data.id}>
-              {answer.data.name !== "" ? answer.data.name : "<anonymous user>"}
+              {answer.data.name !== ""
+                ? `${answer.data.name}'s`
+                : "<anonymous user>"}
             </option>
           ))}
         </select>
+        answer
       </p>
       {selectedAnswerWords !== undefined && (
         <ViewAnswer words={selectedAnswerWords} />
