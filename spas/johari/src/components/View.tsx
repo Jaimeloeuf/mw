@@ -4,6 +4,7 @@ import { useJohari } from "./useJohari";
 import { useJohariAnswers } from "./useJohariAnswers";
 import LinkShareModal from "./LinkShareModal";
 import NoAnswerCard from "./NoAnswerCard";
+import ViewOverview from "./ViewOverview";
 import ViewAnswer from "./ViewAnswer";
 import ViewAnswersSummary from "./ViewAnswersSummary";
 import ViewIndividualAnswers from "./ViewIndividualAnswers";
@@ -19,6 +20,7 @@ export default function JohariView() {
   const johariAnswersQuery = useJohariAnswers(johariID);
 
   const tabs = [
+    { value: "overview", name: `Overview` },
     {
       value: "answer-self",
       name: `${johariQuery?.data?.data?.name}'s answer`,
@@ -28,7 +30,7 @@ export default function JohariView() {
   ] as const;
 
   const [activeTab, setActiveTab] =
-    useState<(typeof tabs)[number]["value"]>("answer-self");
+    useState<(typeof tabs)[number]["value"]>("overview");
 
   if (
     johariQuery.status === "pending" ||
@@ -77,6 +79,14 @@ export default function JohariView() {
           </button>
         ))}
       </div>
+
+      {activeTab === "overview" && (
+        <ViewOverview
+          ownerName={johariQuery.data.data.name}
+          ownerAnswerWords={johariQuery.data.data.words}
+          answers={johariAnswersQuery.data.data}
+        />
+      )}
 
       {activeTab === "answer-self" && (
         <ViewAnswer words={johariQuery.data.data.words} />
