@@ -1,6 +1,7 @@
 import type { LogLevel } from "./LogLevel.js";
 
 import { config } from "../config/index.js";
+import { noOp } from "../utils/index.js";
 import { colorizeByLogLevel } from "./colorizeByLogLevel.js";
 
 /**
@@ -49,7 +50,7 @@ class Logger {
    */
   nonProdVerbose =
     config.env() === "production"
-      ? (_label: string, ..._args: Parameters<typeof console.log>) => {}
+      ? noOp<[label: string, ...args: Parameters<typeof console.log>]>
       : (label: string, ...args: Parameters<typeof console.log>) =>
           this.log("Verbose", label, args);
 }
