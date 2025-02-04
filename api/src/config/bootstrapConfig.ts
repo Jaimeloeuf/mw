@@ -19,8 +19,10 @@ export function bootstrapConfig() {
     // https://www.totaltypescript.com/iterate-over-object-keys-in-typescript#solution-1-cast-to-keyof-typeof
     // https://stackoverflow.com/questions/72282500/for-in-loop-converting-typescript-types-to-intersection
     // https://stackoverflow.com/questions/61829651/how-can-i-iterate-over-record-keys-in-a-proper-type-safe-way
-    config[configName as keyof typeof combinedConfig] =
-      getValueFF(configMapping);
+    config[configName as keyof typeof combinedConfig] = getValueFF(
+      configName,
+      configMapping,
+    );
   }
 
   return Object.freeze(config as ConfigType);

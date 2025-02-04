@@ -22,11 +22,14 @@ export function getValueFF<
   const ConfigValueType extends ConfigLoaderReturnType extends Promise<unknown>
     ? Promise<z.infer<ConfigMapping["schema"]>>
     : z.infer<ConfigMapping["schema"]>,
->(configMapping: ConfigMapping): ConfigLoader<ConfigValueType> {
+>(
+  configName: string,
+  configMapping: ConfigMapping,
+): ConfigLoader<ConfigValueType> {
   /* For async config loaders */
   let value: ConfigValueType | null = null;
 
-  return function (forceReload?: true): ConfigValueType {
+  const getValue = (forceReload?: true): ConfigValueType => {
     if (forceReload || value === null) {
       const configLoaderResult = configMapping.configLoader();
 
@@ -46,4 +49,15 @@ export function getValueFF<
     // previous null check that this will definitely be set already.
     return value!;
   };
+
+  // Set function name to be `configName` so that users can dynamically use
+  // .name to get the correct name instead of 'getValue' or 'anonymous'.
+  // Equivalent to `getValue.name = configName;` but since name is readonly,
+  // have to use object property definition.
+  Object.defineProperty(getValue, "name", {
+    value: configName,
+    writable: false,
+  });
+
+  return getValue;
 }
