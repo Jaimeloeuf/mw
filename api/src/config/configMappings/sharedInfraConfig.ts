@@ -1,11 +1,32 @@
 import { z } from "zod";
 
+import { json } from "../../utils/index.js";
 import { createConfig } from "../utils/createConfig.js";
 
 /**
  * Configs for shared infra used across the different apps within the monorepo.
  */
 export const sharedInfraConfig = {
+  /**
+   * Allow users to disable certain HTTP routes using env var like
+   * ```.env
+   * HTTP_DISABLED_PATHS=["GET /api/","POST /api/v1/blog/subscribe"]
+   * ```
+   *
+   * so that they can either use this during emergencies to shut routes down
+   * without code change or to run something in prod first for testing without
+   * exposing the HTTP controller publicly.
+   */
+  http_disabled_paths: createConfig(
+    z.set(z.string()),
+    function () {
+      return new Set(
+        json.parse<Array<string>>(process.env["HTTP_DISABLED_PATHS"] ?? "[]"),
+      );
+    },
+    true,
+  ),
+
   /**
    * Github OAuth app client ID
    */
