@@ -3,7 +3,30 @@ import { generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport } from "
 export const routeTableTemplate = (
   routeDefinitions: string,
 ) => `import { Router } from "express";
+
+import { config } from "../config/index.js";
+import { logger } from "../logging/index.js";
 import * as c from "./httpControllerBarrelFile${generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";
+
+/**
+ * Utility function to only register a HTTP route if it is not disabled via the
+ * config option.
+ */
+function registerRouteIfNotDisabled({
+  route,
+  registerRoute,
+}: {
+  route: string;
+  registerRoute: () => void;
+}) {
+  if (config.http_disabled_paths().has(route)) {
+    logger.verbose(\`HTTP Route disabled (with config.\${config.http_disabled_paths.name})\`, \`\${route}\`);
+    return;
+  }
+  registerRoute();
+  logger.nonProdVerbose("HTTP Route registered", route);
+}
+
 /**
  * A route tables sort of file, where all HTTP API routes are defined here along
  * with the controllers/route-handlers that will be used to handle requests for

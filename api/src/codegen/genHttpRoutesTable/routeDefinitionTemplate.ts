@@ -7,10 +7,13 @@ const getVersionPathPrefix = (file: HttpControllerFile) =>
 
 export const routeDefinitionTemplate = (file: HttpControllerFile): string =>
   `
-// ${file.httpMethod.toUpperCase()} /api${file.version === '"neutral"' ? "" : "/v" + file.version}${file.httpRoute}
-r["${file.httpMethod}" satisfies typeof c.${file.name}.method](
-  ${getVersionPathPrefix(file)}
-  ("${file.httpRoute}" satisfies typeof c.${file.name}.path),
-  c.${file.name}.routeHandler
-);
+registerRouteIfNotDisabled({
+  route: "${file.httpMethod.toUpperCase()} /api${file.version === '"neutral"' ? "" : "/v" + file.version}${file.httpRoute}",
+  registerRoute: () =>
+    r["${file.httpMethod}" satisfies typeof c.${file.name}.method](
+      ${getVersionPathPrefix(file)}
+      ("${file.httpRoute}" satisfies typeof c.${file.name}.path),
+      c.${file.name}.routeHandler
+    ),
+});
 `;

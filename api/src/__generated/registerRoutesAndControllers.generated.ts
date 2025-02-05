@@ -6,12 +6,38 @@
  * genHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256(1ec067f80e71ac593ef30f5a87028fd4bc80fa6f5fc11f6a9ef799c38f02fcd7)
+ * sha256(838902fdcb55b09faa86e774d8eab28ce18c9030a149e52418eb100d9114ef92)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
 import { Router } from "express";
+
+import { config } from "../config/index.js";
+import { logger } from "../logging/index.js";
 import * as c from "./httpControllerBarrelFile.generated.do_not_include_in_barrel_file.js";
+
+/**
+ * Utility function to only register a HTTP route if it is not disabled via the
+ * config option.
+ */
+function registerRouteIfNotDisabled({
+  route,
+  registerRoute,
+}: {
+  route: string;
+  registerRoute: () => void;
+}) {
+  if (config.http_disabled_paths().has(route)) {
+    logger.verbose(
+      `HTTP Route disabled (with config.${config.http_disabled_paths.name})`,
+      `${route}`,
+    );
+    return;
+  }
+  registerRoute();
+  logger.nonProdVerbose("HTTP Route registered", route);
+}
+
 /**
  * A route tables sort of file, where all HTTP API routes are defined here along
  * with the controllers/route-handlers that will be used to handle requests for
@@ -36,94 +62,134 @@ import * as c from "./httpControllerBarrelFile.generated.do_not_include_in_barre
 export function registerRoutesAndControllers() {
   const r = Router();
 
-  // GET /api/
-  r["get" satisfies typeof c.healthCheck.method](
-    "/" satisfies typeof c.healthCheck.path,
-    c.healthCheck.routeHandler,
-  );
+  registerRouteIfNotDisabled({
+    route: "GET /api/",
+    registerRoute: () =>
+      r["get" satisfies typeof c.healthCheck.method](
+        "/" satisfies typeof c.healthCheck.path,
+        c.healthCheck.routeHandler,
+      ),
+  });
 
-  // POST /api/v1/blog/subscribe
-  r["post" satisfies typeof c.blogNewSubscriber.method](
-    ("/v1" satisfies typeof c.blogNewSubscriber.version) +
-      ("/blog/subscribe" satisfies typeof c.blogNewSubscriber.path),
-    c.blogNewSubscriber.routeHandler,
-  );
+  registerRouteIfNotDisabled({
+    route: "POST /api/v1/blog/subscribe",
+    registerRoute: () =>
+      r["post" satisfies typeof c.blogNewSubscriber.method](
+        ("/v1" satisfies typeof c.blogNewSubscriber.version) +
+          ("/blog/subscribe" satisfies typeof c.blogNewSubscriber.path),
+        c.blogNewSubscriber.routeHandler,
+      ),
+  });
 
-  // POST /api/v1/bucketlist
-  r["post" satisfies typeof c.bucketlistCreateOne.method](
-    ("/v1" satisfies typeof c.bucketlistCreateOne.version) +
-      ("/bucketlist" satisfies typeof c.bucketlistCreateOne.path),
-    c.bucketlistCreateOne.routeHandler,
-  );
+  registerRouteIfNotDisabled({
+    route: "POST /api/v1/bucketlist",
+    registerRoute: () =>
+      r["post" satisfies typeof c.bucketlistCreateOne.method](
+        ("/v1" satisfies typeof c.bucketlistCreateOne.version) +
+          ("/bucketlist" satisfies typeof c.bucketlistCreateOne.path),
+        c.bucketlistCreateOne.routeHandler,
+      ),
+  });
 
-  // GET /api/v1/bucketlist/:bucketlistID
-  r["get" satisfies typeof c.bucketlistGetOne.method](
-    ("/v1" satisfies typeof c.bucketlistGetOne.version) +
-      ("/bucketlist/:bucketlistID" satisfies typeof c.bucketlistGetOne.path),
-    c.bucketlistGetOne.routeHandler,
-  );
+  registerRouteIfNotDisabled({
+    route: "GET /api/v1/bucketlist/:bucketlistID",
+    registerRoute: () =>
+      r["get" satisfies typeof c.bucketlistGetOne.method](
+        ("/v1" satisfies typeof c.bucketlistGetOne.version) +
+          ("/bucketlist/:bucketlistID" satisfies typeof c.bucketlistGetOne.path),
+        c.bucketlistGetOne.routeHandler,
+      ),
+  });
 
-  // GET /api/v1/check/checklist/:checklistID
-  r["get" satisfies typeof c.checkGetChecklist.method](
-    ("/v1" satisfies typeof c.checkGetChecklist.version) +
-      ("/check/checklist/:checklistID" satisfies typeof c.checkGetChecklist.path),
-    c.checkGetChecklist.routeHandler,
-  );
+  registerRouteIfNotDisabled({
+    route: "GET /api/v1/check/checklist/:checklistID",
+    registerRoute: () =>
+      r["get" satisfies typeof c.checkGetChecklist.method](
+        ("/v1" satisfies typeof c.checkGetChecklist.version) +
+          ("/check/checklist/:checklistID" satisfies typeof c.checkGetChecklist.path),
+        c.checkGetChecklist.routeHandler,
+      ),
+  });
 
-  // GET /api/v1/johari/:johariID
-  r["get" satisfies typeof c.johariGetJohari.method](
-    ("/v1" satisfies typeof c.johariGetJohari.version) +
-      ("/johari/:johariID" satisfies typeof c.johariGetJohari.path),
-    c.johariGetJohari.routeHandler,
-  );
+  registerRouteIfNotDisabled({
+    route: "GET /api/v1/johari/:johariID",
+    registerRoute: () =>
+      r["get" satisfies typeof c.johariGetJohari.method](
+        ("/v1" satisfies typeof c.johariGetJohari.version) +
+          ("/johari/:johariID" satisfies typeof c.johariGetJohari.path),
+        c.johariGetJohari.routeHandler,
+      ),
+  });
 
-  // POST /api/v1/johari/answer
-  r["post" satisfies typeof c.johariCreateJohariAnswer.method](
-    ("/v1" satisfies typeof c.johariCreateJohariAnswer.version) +
-      ("/johari/answer" satisfies typeof c.johariCreateJohariAnswer.path),
-    c.johariCreateJohariAnswer.routeHandler,
-  );
+  registerRouteIfNotDisabled({
+    route: "POST /api/v1/johari/answer",
+    registerRoute: () =>
+      r["post" satisfies typeof c.johariCreateJohariAnswer.method](
+        ("/v1" satisfies typeof c.johariCreateJohariAnswer.version) +
+          ("/johari/answer" satisfies typeof c.johariCreateJohariAnswer.path),
+        c.johariCreateJohariAnswer.routeHandler,
+      ),
+  });
 
-  // GET /api/v1/johari/answers/:johariID
-  r["get" satisfies typeof c.johariGetJohariAnswers.method](
-    ("/v1" satisfies typeof c.johariGetJohariAnswers.version) +
-      ("/johari/answers/:johariID" satisfies typeof c.johariGetJohariAnswers.path),
-    c.johariGetJohariAnswers.routeHandler,
-  );
+  registerRouteIfNotDisabled({
+    route: "GET /api/v1/johari/answers/:johariID",
+    registerRoute: () =>
+      r["get" satisfies typeof c.johariGetJohariAnswers.method](
+        ("/v1" satisfies typeof c.johariGetJohariAnswers.version) +
+          ("/johari/answers/:johariID" satisfies typeof c.johariGetJohariAnswers.path),
+        c.johariGetJohariAnswers.routeHandler,
+      ),
+  });
 
-  // POST /api/v1/johari/create
-  r["post" satisfies typeof c.johariCreateJohari.method](
-    ("/v1" satisfies typeof c.johariCreateJohari.version) +
-      ("/johari/create" satisfies typeof c.johariCreateJohari.path),
-    c.johariCreateJohari.routeHandler,
-  );
+  registerRouteIfNotDisabled({
+    route: "POST /api/v1/johari/create",
+    registerRoute: () =>
+      r["post" satisfies typeof c.johariCreateJohari.method](
+        ("/v1" satisfies typeof c.johariCreateJohari.version) +
+          ("/johari/create" satisfies typeof c.johariCreateJohari.path),
+        c.johariCreateJohari.routeHandler,
+      ),
+  });
 
-  // POST /api/v1/leetcode/ques
-  r["post" satisfies typeof c.leetcodeCreateLeetcodeQues.method](
-    ("/v1" satisfies typeof c.leetcodeCreateLeetcodeQues.version) +
-      ("/leetcode/ques" satisfies typeof c.leetcodeCreateLeetcodeQues.path),
-    c.leetcodeCreateLeetcodeQues.routeHandler,
-  );
+  registerRouteIfNotDisabled({
+    route: "POST /api/v1/leetcode/ques",
+    registerRoute: () =>
+      r["post" satisfies typeof c.leetcodeCreateLeetcodeQues.method](
+        ("/v1" satisfies typeof c.leetcodeCreateLeetcodeQues.version) +
+          ("/leetcode/ques" satisfies typeof c.leetcodeCreateLeetcodeQues.path),
+        c.leetcodeCreateLeetcodeQues.routeHandler,
+      ),
+  });
 
-  // GET /api/v1/leetcode/ques/:leetcodeQuesID
-  r["get" satisfies typeof c.leetcodeGetLeetcodeQues.method](
-    ("/v1" satisfies typeof c.leetcodeGetLeetcodeQues.version) +
-      ("/leetcode/ques/:leetcodeQuesID" satisfies typeof c.leetcodeGetLeetcodeQues.path),
-    c.leetcodeGetLeetcodeQues.routeHandler,
-  );
+  registerRouteIfNotDisabled({
+    route: "GET /api/v1/leetcode/ques/:leetcodeQuesID",
+    registerRoute: () =>
+      r["get" satisfies typeof c.leetcodeGetLeetcodeQues.method](
+        ("/v1" satisfies typeof c.leetcodeGetLeetcodeQues.version) +
+          ("/leetcode/ques/:leetcodeQuesID" satisfies typeof c.leetcodeGetLeetcodeQues.path),
+        c.leetcodeGetLeetcodeQues.routeHandler,
+      ),
+  });
 
-  // GET /api/version
-  r["get" satisfies typeof c.version.method](
-    "/version" satisfies typeof c.version.path,
-    c.version.routeHandler,
-  );
+  registerRouteIfNotDisabled({
+    route: "GET /api/version",
+    registerRoute: () =>
+      r["get" satisfies typeof c.version.method](
+        "/version" satisfies typeof c.version.path,
+        c.version.routeHandler,
+      ),
+  });
 
-  // POST /api/v1/webhook/telegram/:telegramWebhookSecretPath/:telegramBotToken
-  r["post" satisfies typeof c.webhookTelegram.method](
-    ("/v1" satisfies typeof c.webhookTelegram.version) +
-      ("/webhook/telegram/:telegramWebhookSecretPath/:telegramBotToken" satisfies typeof c.webhookTelegram.path),
-    c.webhookTelegram.routeHandler,
-  );
+  registerRouteIfNotDisabled({
+    route:
+      "POST /api/v1/webhook/telegram/:telegramWebhookSecretPath/:telegramBotToken",
+    registerRoute: () =>
+      r["post" satisfies typeof c.webhookTelegram.method](
+        ("/v1" satisfies typeof c.webhookTelegram.version) +
+          ("/webhook/telegram/:telegramWebhookSecretPath/:telegramBotToken" satisfies typeof c.webhookTelegram.path),
+        c.webhookTelegram.routeHandler,
+      ),
+  });
 
   return r;
 }
