@@ -31,7 +31,7 @@ export default function () {
             name,
             words: johariAnswerOptions.selectedWords,
           }),
-        }
+        },
       ).then((res) => res.json());
     },
   });

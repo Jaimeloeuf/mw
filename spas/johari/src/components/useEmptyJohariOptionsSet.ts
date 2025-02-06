@@ -3,12 +3,12 @@ import { createEmptyJohariOptionsObject } from "./createEmptyJohariOptionsObject
 
 export function useEmptyJohariOptionsSet() {
   const [johariOptions, setJohariOptions] = useState<Record<string, boolean>>(
-    createEmptyJohariOptionsObject()
+    createEmptyJohariOptionsObject(),
   );
 
   const resetJohariOptions = useCallback(
     () => setJohariOptions(createEmptyJohariOptionsObject()),
-    [setJohariOptions]
+    [setJohariOptions],
   );
 
   const selectedWords = Object.entries(johariOptions)

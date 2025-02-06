@@ -22,7 +22,7 @@ export default function (props: {
 
   const { arena, blindspot, facade, unknown } = useJohariWindow(
     ownerJohariOptions,
-    johariAnswerers
+    johariAnswerers,
   );
 
   return (

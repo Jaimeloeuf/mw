@@ -16,11 +16,11 @@ export default function (props: {
   }>;
 }) {
   const [selectedAnswerer, setSelectedAnswerer] = useState(
-    props.answers[0]?.data?.id
+    props.answers[0]?.data?.id,
   );
 
   const selectedAnswerWords = props.answers.find(
-    (answer) => answer.data.id === selectedAnswerer
+    (answer) => answer.data.id === selectedAnswerer,
   )?.data?.words;
 
   return (

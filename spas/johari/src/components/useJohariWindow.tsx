@@ -5,7 +5,7 @@ import { useMemo } from "react";
  */
 export function useJohariWindow(
   ownerJohariOptions: Record<string, boolean>,
-  johariAnswerers: Record<string, Array<string>>
+  johariAnswerers: Record<string, Array<string>>,
 ) {
   return useMemo(() => {
     const arena: Array<{

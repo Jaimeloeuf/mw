@@ -10,12 +10,12 @@ export function useJohariAnswerers(
       name: string;
       words: string;
     };
-  }>
+  }>,
 ) {
   return useMemo(() => {
     const johariWords = Object.keys(createEmptyJohariOptionsObject());
     const johariAnswerers = Object.fromEntries(
-      new Map(johariWords.map((word) => [word, [] as Array<string>]))
+      new Map(johariWords.map((word) => [word, [] as Array<string>])),
     );
 
     for (const answer of answers) {

@@ -1,7 +1,7 @@
 import type { useEmptyJohariOptionsSet } from "./useEmptyJohariOptionsSet";
 
 export default function (
-  props: ReturnType<typeof useEmptyJohariOptionsSet> & { onSubmit: () => void }
+  props: ReturnType<typeof useEmptyJohariOptionsSet> & { onSubmit: () => void },
 ) {
   const {
     johariOptions,

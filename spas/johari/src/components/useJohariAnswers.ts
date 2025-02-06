@@ -9,7 +9,7 @@ export function useJohariAnswers(johariID: string) {
     queryKey: ["johari", "answers", johariID],
     async queryFn() {
       return fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/v1/johari/answers/${johariID}`
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/johari/answers/${johariID}`,
       ).then((res) => res.json());
     },
   });

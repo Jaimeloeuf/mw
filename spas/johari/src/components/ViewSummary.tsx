@@ -21,7 +21,7 @@ export default function (props: { words: Array<string> }) {
           >
             {johariWord} {numberOfSelections !== 0 && `(${numberOfSelections})`}
           </p>
-        )
+        ),
       )}
     </div>
   );
