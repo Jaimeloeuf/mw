@@ -15,7 +15,7 @@ export default function App() {
   return (
     <ErrorBoundary
       fallback={
-        <div className="w-dvw h-dvh flex flex-row justify-center items-center">
+        <div className="flex h-dvh w-dvw flex-row items-center justify-center">
           Oops... something went seriously wrong...
         </div>
       }
@@ -23,9 +23,9 @@ export default function App() {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <div className="flex flex-row justify-center">
-            <div className="p-8 max-w-screen-sm w-full">
+            <div className="w-full max-w-screen-sm p-8">
               <Link to="/">
-                <p className="text-4xl pb-8">Johari</p>
+                <p className="pb-8 text-4xl">Johari</p>
               </Link>
 
               <Routes>

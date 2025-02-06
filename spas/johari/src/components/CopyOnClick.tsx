@@ -17,7 +17,7 @@ export default function CopyOnClick(props: {
   }
 
   return (
-    <span className="cursor-pointer select-none w-full" onClick={copy}>
+    <span className="w-full cursor-pointer select-none" onClick={copy}>
       {props.children}
     </span>
   );

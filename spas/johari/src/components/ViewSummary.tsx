@@ -13,10 +13,10 @@ export default function (props: { words: Array<string> }) {
           <p
             key={johariWord}
             className={
-              "px-4 border rounded-lg " +
+              "rounded-lg border px-4 " +
               (numberOfSelections > 0
-                ? "font-light text-green-600 border-green-500"
-                : "font-extralight border-gray-300")
+                ? "border-green-500 font-light text-green-600"
+                : "border-gray-300 font-extralight")
             }
           >
             {johariWord} {numberOfSelections !== 0 && `(${numberOfSelections})`}

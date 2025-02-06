@@ -52,12 +52,12 @@ export default function () {
             <LinkShareCard johariID={mutation.data.data} ownerName={name} />
           </div>
 
-          <div className="border border-green-600 rounded-lg">
+          <div className="rounded-lg border border-green-600">
             <Link
               to={`/view/${mutation.data.data}`}
-              className="text-green-600 text-2xl"
+              className="text-2xl text-green-600"
             >
-              <div className="p-4 flex w-full flex-row items-center justify-between">
+              <div className="flex w-full flex-row items-center justify-between p-4">
                 See your Johari Window
                 <svg
                   className="h-5 w-5 shrink-0 rotate-90"
@@ -84,16 +84,16 @@ export default function () {
 
   return (
     <div>
-      <p className="text-2xl pb-6">Create</p>
+      <p className="pb-6 text-2xl">Create</p>
 
-      <div className="flex flex-row flex-wrap gap-6 w-full">
+      <div className="flex w-full flex-row flex-wrap gap-6">
         <label className="w-full">
           <p className="text-lg">Name</p>
           <input
             type="text"
             name="name"
             id="name"
-            className="px-4 py-1 font-extralight outline-none border rounded-lg w-full"
+            className="w-full rounded-lg border px-4 py-1 font-extralight outline-none"
             placeholder="your name so other's know who this window belongs to!"
             value={name}
             onChange={(e) => setName(e.target.value)}

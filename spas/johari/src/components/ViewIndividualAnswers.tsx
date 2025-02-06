@@ -41,7 +41,7 @@ export default function (props: {
         See
         <select
           title="answerer"
-          className="mx-2 px-2 outline-none border border-gray-300 rounded-lg font-extralight"
+          className="mx-2 rounded-lg border border-gray-300 px-2 font-extralight outline-none"
           value={selectedAnswerer}
           onChange={(e) => setSelectedAnswerer(e.target.value)}
         >

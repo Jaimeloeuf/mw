@@ -25,12 +25,12 @@ export default function (
 
   return (
     <div>
-      <div className="pb-4 flex flex-row items-center gap-2">
-        <p className="font-light text-sm">
+      <div className="flex flex-row items-center gap-2 pb-4">
+        <p className="text-sm font-light">
           Selected {numberOfSelectedOptions}/6 words
         </p>
         <button
-          className="px-2 text-xs text-red-500 border border-red-500 rounded-lg"
+          className="rounded-lg border border-red-500 px-2 text-xs text-red-500"
           disabled={numberOfSelectedOptions === 0}
           onClick={resetJohariOptions}
         >
@@ -44,10 +44,10 @@ export default function (
             key={johariOption}
             onClick={() => toggleSelection(johariOption)}
             className={
-              "px-4 border rounded-lg " +
+              "rounded-lg border px-4 " +
               (isSelected
-                ? "font-light text-green-600 border-green-500"
-                : "font-extralight border-gray-300")
+                ? "border-green-500 font-light text-green-600"
+                : "border-gray-300 font-extralight")
             }
           >
             {johariOption}
@@ -58,10 +58,10 @@ export default function (
       <div className="pt-8">
         <button
           className={
-            "w-full px-4 text-lg border rounded-lg " +
+            "w-full rounded-lg border px-4 text-lg " +
             (numberOfSelectedOptions === 6
-              ? "text-green-600 border-green-600"
-              : "cursor-not-allowed text-gray-500 border-gray-300")
+              ? "border-green-600 text-green-600"
+              : "cursor-not-allowed border-gray-300 text-gray-500")
           }
           disabled={numberOfSelectedOptions !== 6}
           onClick={onSubmit}

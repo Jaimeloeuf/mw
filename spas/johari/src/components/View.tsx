@@ -37,7 +37,7 @@ export default function JohariView() {
     johariAnswersQuery.status === "pending"
   ) {
     return (
-      <p className="py-8 text-2xl font-thin text-center">... loading ...</p>
+      <p className="py-8 text-center text-2xl font-thin">... loading ...</p>
     );
   }
 
@@ -51,10 +51,10 @@ export default function JohariView() {
 
   return (
     <div>
-      <div className="pb-8 flex flex-col gap-2 md:flex-row md:justify-between">
-        <p className="text-2xl w-full">
+      <div className="flex flex-col gap-2 pb-8 md:flex-row md:justify-between">
+        <p className="w-full text-2xl">
           Johari Window for
-          <span className="pl-2 underline underline-offset-4 font-extralight decoration-1">
+          <span className="pl-2 font-extralight underline decoration-1 underline-offset-4">
             {johariQuery.data.data.name}
           </span>
         </p>
@@ -65,13 +65,13 @@ export default function JohariView() {
         />
       </div>
 
-      <div className="mb-8 py-2 border-t sm:border-t-0 border-b flex flex-col sm:flex-row flex-wrap justify-between gap-2">
+      <div className="mb-8 flex flex-col flex-wrap justify-between gap-2 border-b border-t py-2 sm:flex-row sm:border-t-0">
         {tabs.map((tab) => (
           <button
             key={tab.value}
             className={
-              "text-left sm:text-center px-2 " +
-              (tab.value === activeTab ? `bg-zinc-200 rounded-lg` : "")
+              "px-2 text-left sm:text-center " +
+              (tab.value === activeTab ? `rounded-lg bg-zinc-200` : "")
             }
             onClick={() => setActiveTab(tab.value)}
           >

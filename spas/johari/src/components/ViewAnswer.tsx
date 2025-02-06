@@ -12,10 +12,10 @@ export default function (props: { words: string }) {
         <p
           key={johariOption}
           className={
-            "px-4 border rounded-lg " +
+            "rounded-lg border px-4 " +
             (isSelected
-              ? "font-light text-green-600 border-green-500"
-              : "font-extralight border-gray-300")
+              ? "border-green-500 font-light text-green-600"
+              : "border-gray-300 font-extralight")
           }
         >
           {johariOption}

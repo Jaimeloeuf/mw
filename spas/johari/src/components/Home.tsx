@@ -10,7 +10,7 @@ export default function () {
 
       <Link
         to="/create"
-        className="p-4 text-green-600 text-2xl border border-green-600 rounded-lg"
+        className="rounded-lg border border-green-600 p-4 text-2xl text-green-600"
       >
         <div className="flex w-full flex-row items-center justify-between">
           Start
