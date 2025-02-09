@@ -26,12 +26,12 @@ export async function bootstrapHttpServer() {
     .use(cors())
     .use(loggingMiddleware)
 
+    // Disable this for security
+    .disable("x-powered-by")
+
     // Using /gql instead of well known /graphql to avoid those scanning bots
     .get("/gql", httpRouteHandlerForGraphQL)
     .post("/gql", httpRouteHandlerForGraphQL)
-
-    // Disable this for security
-    .disable("x-powered-by")
 
     // Only run the request data parser middlewares after /graphql route handler
     // as it does its own parsing, so it will break if this is placed before
