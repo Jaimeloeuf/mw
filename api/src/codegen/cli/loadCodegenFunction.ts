@@ -11,6 +11,7 @@ export async function loadCodegenFunction(
   codegenModuleName: string,
   codegenModulePath: string,
 ) {
+  // @todo Migrate to using node import directly with strip types flag in future
   // Cannot use `import` directly since it does not support loading .ts files
   const importedModule = await tsImport(codegenModulePath, import.meta.url);
 
