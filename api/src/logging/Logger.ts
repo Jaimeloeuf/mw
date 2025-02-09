@@ -49,7 +49,16 @@ class Logger {
    * level, but unlike `verbose`, this only logs in none production environment.
    */
   nonProdVerbose =
-    config.env() === "production"
+    // @todo There could be a better fix for this
+    // Instead of using the config directly like 'config.env() === "production"'
+    // there are cases where the config object is not bootstrapped correctly and
+    // ends up being undefined which causes whatever that is using it to crash.
+    // Since Logger is such an integral part of so many other 'entrypoints'
+    // there are many cases where this just crash because of how the entrypoint
+    // trigger things without bootstrapping everything properly. Therefore this
+    // simple fix is placed so that when that happens, we can fallback to using
+    // the env var directly.
+    (config?.env() ?? process.env["NODE_ENV"]) === "production"
       ? noOp<[label: string, ...args: Parameters<typeof console.log>]>
       : (label: string, ...args: Parameters<typeof console.log>) =>
           this.log("Verbose", label, args);
