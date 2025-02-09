@@ -3,7 +3,7 @@ import type { z } from "zod";
 import type { ConfigLoader } from "../ConfigLoader.js";
 import type { createConfig } from "./createConfig.js";
 
-import { isPromise } from "../../utils/index.js";
+import { isPromise } from "../../utils/isPromise.js";
 
 /**
  * Get Value factory function, creates and return a 'getValue' function that
