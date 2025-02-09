@@ -28,6 +28,20 @@ export const sharedInfraConfig = {
   ),
 
   /**
+   * Enable verbose logs for successful HTTP route registrations
+   */
+  http_verbose_log_route_registration: createConfig(
+    z
+      .enum(["true", "false"])
+      .default("false")
+      .transform((v) => v === "true"),
+    function () {
+      return process.env["HTTP_VERBOSE_LOG_ROUTE_REGISTRATION"];
+    },
+    true,
+  ),
+
+  /**
    * Github OAuth app client ID
    */
   auth_github_oauth_client_id: createConfig(

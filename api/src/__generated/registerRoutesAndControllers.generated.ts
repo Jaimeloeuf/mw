@@ -6,7 +6,7 @@
  * genHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256(838902fdcb55b09faa86e774d8eab28ce18c9030a149e52418eb100d9114ef92)
+ * sha256(5fb46a192b39b18f423c7fa0f9ec24390849ece4f92ec6fc50bb7fc6f994080a)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -35,7 +35,9 @@ function registerRouteIfNotDisabled({
     return;
   }
   registerRoute();
-  logger.nonProdVerbose("HTTP Route registered", route);
+  if (config.http_verbose_log_route_registration()) {
+    logger.nonProdVerbose("HTTP Route registered", route);
+  }
 }
 
 /**

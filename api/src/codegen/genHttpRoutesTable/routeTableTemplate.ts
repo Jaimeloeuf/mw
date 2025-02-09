@@ -24,7 +24,9 @@ function registerRouteIfNotDisabled({
     return;
   }
   registerRoute();
-  logger.nonProdVerbose("HTTP Route registered", route);
+  if (config.http_verbose_log_route_registration()) {
+    logger.nonProdVerbose("HTTP Route registered", route);
+  }
 }
 
 /**
