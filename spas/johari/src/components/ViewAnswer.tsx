@@ -1,3 +1,4 @@
+import { twJoin } from "tailwind-merge";
 import { useJohariOptions } from "./useJohariOptions";
 
 /**
@@ -11,12 +12,12 @@ export default function (props: { words: string }) {
       {Object.entries(johariOptions).map(([johariOption, isSelected]) => (
         <p
           key={johariOption}
-          className={
-            "rounded-lg border px-4 " +
-            (isSelected
+          className={twJoin(
+            "rounded-lg border px-4",
+            isSelected
               ? "border-green-500 font-light text-green-600"
-              : "border-gray-300 font-extralight")
-          }
+              : "border-gray-300 font-extralight",
+          )}
         >
           {johariOption}
         </p>

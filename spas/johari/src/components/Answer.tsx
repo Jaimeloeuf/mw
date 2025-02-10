@@ -1,3 +1,4 @@
+import { twJoin } from "tailwind-merge";
 import type { useEmptyJohariOptionsSet } from "./useEmptyJohariOptionsSet";
 
 export default function (
@@ -43,12 +44,12 @@ export default function (
           <button
             key={johariOption}
             onClick={() => toggleSelection(johariOption)}
-            className={
-              "rounded-lg border px-4 " +
-              (isSelected
+            className={twJoin(
+              "rounded-lg border px-4",
+              isSelected
                 ? "border-green-500 font-light text-green-600"
-                : "border-gray-300 font-extralight")
-            }
+                : "border-gray-300 font-extralight",
+            )}
           >
             {johariOption}
           </button>
@@ -57,12 +58,12 @@ export default function (
 
       <div className="pt-8">
         <button
-          className={
-            "w-full rounded-lg border px-4 text-lg " +
-            (numberOfSelectedOptions === 6
+          className={twJoin(
+            "w-full rounded-lg border px-4 text-lg",
+            numberOfSelectedOptions === 6
               ? "border-green-600 text-green-600"
-              : "cursor-not-allowed border-gray-300 text-gray-500")
-          }
+              : "cursor-not-allowed border-gray-300 text-gray-500",
+          )}
           disabled={numberOfSelectedOptions !== 6}
           onClick={onSubmit}
         >

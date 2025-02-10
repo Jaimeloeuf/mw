@@ -1,3 +1,4 @@
+import { twJoin } from "tailwind-merge";
 import { useJohariAnswerSummary } from "./useJohariAnswerSummary";
 
 /**
@@ -12,12 +13,12 @@ export default function (props: { words: Array<string> }) {
         ([johariWord, numberOfSelections]) => (
           <p
             key={johariWord}
-            className={
-              "rounded-lg border px-4 " +
-              (numberOfSelections > 0
+            className={twJoin(
+              "rounded-lg border px-4",
+              numberOfSelections > 0
                 ? "border-green-500 font-light text-green-600"
-                : "border-gray-300 font-extralight")
-            }
+                : "border-gray-300 font-extralight",
+            )}
           >
             {johariWord} {numberOfSelections !== 0 && `(${numberOfSelections})`}
           </p>

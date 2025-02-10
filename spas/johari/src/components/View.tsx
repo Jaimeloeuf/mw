@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router";
+import { twJoin } from "tailwind-merge";
 import { useJohari } from "./useJohari";
 import { useJohariAnswers } from "./useJohariAnswers";
 import LinkShareModal from "./LinkShareModal";
@@ -65,14 +66,14 @@ export default function JohariView() {
         />
       </div>
 
-      <div className="mb-8 flex flex-col flex-wrap justify-between gap-2 border-b border-t py-2 sm:flex-row sm:border-t-0">
+      <div className="mb-8 flex flex-col flex-wrap justify-between gap-2 border-t border-b py-2 sm:flex-row sm:border-t-0">
         {tabs.map((tab) => (
           <button
             key={tab.value}
-            className={
-              "px-2 text-left sm:text-center " +
-              (tab.value === activeTab ? `rounded-lg bg-zinc-200` : "")
-            }
+            className={twJoin(
+              "px-2 text-left sm:text-center",
+              tab.value === activeTab && `rounded-lg bg-zinc-200`,
+            )}
             onClick={() => setActiveTab(tab.value)}
           >
             {tab.name}
