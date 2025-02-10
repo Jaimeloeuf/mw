@@ -1,5 +1,5 @@
 import { twJoin } from "tailwind-merge";
-import type { useEmptyJohariOptionsSet } from "./useEmptyJohariOptionsSet";
+import type { useEmptyJohariOptionsSet } from "../hooks/useEmptyJohariOptionsSet";
 
 export default function (
   props: ReturnType<typeof useEmptyJohariOptionsSet> & { onSubmit: () => void },

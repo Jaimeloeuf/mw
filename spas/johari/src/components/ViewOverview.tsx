@@ -1,6 +1,6 @@
-import { useJohariOptions } from "./useJohariOptions";
-import { useJohariAnswerers } from "./useJohariAnswerers";
-import { useJohariWindow } from "./useJohariWindow";
+import { useJohariOptions } from "../hooks/useJohariOptions";
+import { useJohariAnswerers } from "../hooks/useJohariAnswerers";
+import { useJohariWindow } from "../hooks/useJohariWindow";
 import { WordWithTooltip } from "./WordWithTooltip";
 
 /**

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { Link } from "react-router";
-import { useEmptyJohariOptionsSet } from "./useEmptyJohariOptionsSet";
+import { useEmptyJohariOptionsSet } from "../hooks/useEmptyJohariOptionsSet";
 import LinkShareCard from "./LinkShareCard";
 import Answer from "./Answer";
 import ErrorModal from "./ErrorModal";

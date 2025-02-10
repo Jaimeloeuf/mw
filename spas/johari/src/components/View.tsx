@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useParams } from "react-router";
 import { twJoin } from "tailwind-merge";
-import { useJohari } from "./useJohari";
-import { useJohariAnswers } from "./useJohariAnswers";
+import { useJohari } from "../hooks/useJohari";
+import { useJohariAnswers } from "../hooks/useJohariAnswers";
 import LinkShareModal from "./LinkShareModal";
 import NoAnswerCard from "./NoAnswerCard";
 import ViewOverview from "./ViewOverview";

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router";
 import { useMutation } from "@tanstack/react-query";
-import { useEmptyJohariOptionsSet } from "./useEmptyJohariOptionsSet";
 import WhatIsThis from "./WhatIsThis";
 import Answer from "./Answer";
-import { useJohari } from "./useJohari";
 import ErrorModal from "./ErrorModal";
+import { useJohari } from "../hooks/useJohari";
+import { useEmptyJohariOptionsSet } from "../hooks/useEmptyJohariOptionsSet";
 import type { johariCreateJohariAnswerController_OutputFullDTO } from "@generated-api-types";
 
 export default function () {

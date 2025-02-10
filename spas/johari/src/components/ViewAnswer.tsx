@@ -1,5 +1,5 @@
 import { twJoin } from "tailwind-merge";
-import { useJohariOptions } from "./useJohariOptions";
+import { useJohariOptions } from "../hooks/useJohariOptions";
 
 /**
  * Component that renders all words and highlight answer words

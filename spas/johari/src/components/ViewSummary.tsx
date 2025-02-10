@@ -1,5 +1,5 @@
 import { twJoin } from "tailwind-merge";
-import { useJohariAnswerSummary } from "./useJohariAnswerSummary";
+import { useJohariAnswerSummary } from "../hooks/useJohariAnswerSummary";
 
 /**
  * Component that renders a summary of all the words answered for a Johari.

@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { createEmptyJohariOptionsObject } from "./createEmptyJohariOptionsObject";
+import { createEmptyJohariOptionsObject } from "../components/createEmptyJohariOptionsObject";
 
 export function useEmptyJohariOptionsSet() {
   const [johariOptions, setJohariOptions] = useState<Record<string, boolean>>(
