@@ -1,4 +1,4 @@
-import { getLink } from "./getLink";
+import { getLink } from "../utils/getLink";
 import CopyOnClick from "./CopyOnClick";
 
 export default function LinkShareCard(props: {

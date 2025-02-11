@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { createEmptyJohariOptionsObject } from "../components/createEmptyJohariOptionsObject";
+import { createEmptyJohariOptionsObject } from "../utils/createEmptyJohariOptionsObject";
 
 /**
  * Hook to parse array of `words` answer into a Johari Answer Summary object

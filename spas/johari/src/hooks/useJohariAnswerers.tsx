@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { createEmptyJohariOptionsObject } from "../components/createEmptyJohariOptionsObject";
+import { createEmptyJohariOptionsObject } from "../utils/createEmptyJohariOptionsObject";
 
 /**
  * Hook to create a mapping of Johari word to answerers that selected the word
