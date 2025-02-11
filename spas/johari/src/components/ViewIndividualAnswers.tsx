@@ -30,7 +30,7 @@ export default function (props: {
       </p>
       <div className="flex flex-col gap-1 pb-6">
         {props.answers.map((answer) => (
-          <p className="text-sm">
+          <p key={answer.data.id} className="text-sm">
             <span className="font-medium">{answer.data.name}</span> thinks that
             you are <i>{answer.data.words.split(",").join(", ")}</i>
           </p>
