@@ -5,7 +5,7 @@ export interface BlogSubscriberTable {
    * Unique opaque ID that cannot be updated
    */
   id: ColumnType<string, string, never>;
-  created_at: ColumnType<Date, string | undefined, never>;
+  created_at: ColumnType<Date, string, never>;
   updated_at: ColumnType<Date, string, string>;
 
   /**
