@@ -9,7 +9,7 @@ export interface LeetcodeQuesTable {
   /**
    * Track when was this created
    */
-  created_at: ColumnType<Date, string | undefined, never>;
+  created_at: ColumnType<Date, string, never>;
 
   /**
    * The full unique URL to the question

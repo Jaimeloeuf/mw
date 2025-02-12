@@ -16,6 +16,7 @@ export default dataFn(async function leetcodeCreateLeetcodeQues(leetcodeQues: {
     .insertInto("leetcode_ques")
     .values(
       injectID<CreateLeetcodeQues>({
+        created_at: new Date().toISOString(),
         url: leetcodeQues.url,
       }),
     )
@@ -28,7 +29,14 @@ export default dataFn(async function leetcodeCreateLeetcodeQues(leetcodeQues: {
 
   const createdLeetcodeTags = await apiDB
     .insertInto("leetcode_tag")
-    .values(leetcodeQues.tags.map((tag) => injectID({ tag })))
+    .values(
+      leetcodeQues.tags.map((tag) =>
+        injectID({
+          created_at: new Date().toISOString(),
+          tag,
+        }),
+      ),
+    )
     .returningAll()
     .execute();
 
@@ -38,6 +46,7 @@ export default dataFn(async function leetcodeCreateLeetcodeQues(leetcodeQues: {
     .values(
       createdLeetcodeTags.map((tag) =>
         injectID<CreateLeetcodeQuesTag>({
+          created_at: new Date().toISOString(),
           ques_id: createdLeetcodeQues.id,
           tag_id: tag.id,
         }),
