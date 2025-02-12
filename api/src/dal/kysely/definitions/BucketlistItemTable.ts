@@ -9,7 +9,7 @@ export interface BucketlistItemTable {
   /**
    * Track when bucketlist is created
    */
-  created_at: ColumnType<Date, string | undefined, never>;
+  created_at: ColumnType<Date, string, never>;
 
   /**
    * ID of the bucketlist this bucketlist item belongs to

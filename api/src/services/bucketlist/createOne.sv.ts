@@ -5,6 +5,7 @@ import { df } from "../../__generated/index.js";
  */
 export default async function (name: string, description: string) {
   const bucketlist = await df.bucketlistCreateBucketlist.runAndThrowOnError({
+    created_at: new Date().toISOString(),
     name,
     description,
   });
