@@ -9,7 +9,7 @@ export interface MuwnoApiKeyTable {
   /**
    * Track when was the API Key created
    */
-  created_at: ColumnType<Date, string | undefined, never>;
+  created_at: ColumnType<Date, string, never>;
 
   /**
    * What Org does this API Key belong to?

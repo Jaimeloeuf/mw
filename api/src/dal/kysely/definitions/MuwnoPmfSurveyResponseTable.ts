@@ -9,7 +9,7 @@ export interface MuwnoPmfSurveyResponseTable {
   /**
    * Track when was the survey response recorded
    */
-  created_at: ColumnType<Date, string | undefined, never>;
+  created_at: ColumnType<Date, string, never>;
 
   /**
    * The survey's Product ID.

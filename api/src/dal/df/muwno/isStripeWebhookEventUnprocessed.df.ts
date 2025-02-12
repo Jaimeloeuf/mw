@@ -16,6 +16,7 @@ export default dataFn(async function muwnoIsStripeWebhookEventUnprocessed(
     apiDB
       .insertInto("muwno_stripe_webhook_event")
       .values({
+        created_at: new Date().toISOString(),
         stripe_event_id: stripeWebhookEventID,
         type,
         livemode,

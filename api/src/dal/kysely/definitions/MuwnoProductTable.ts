@@ -9,7 +9,7 @@ export interface MuwnoProductTable {
   /**
    * Track when was the Product created
    */
-  created_at: ColumnType<Date, string | undefined, never>;
+  created_at: ColumnType<Date, string, never>;
 
   /**
    * The product's Org ID.

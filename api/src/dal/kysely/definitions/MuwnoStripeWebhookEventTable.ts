@@ -10,7 +10,7 @@ export interface MuwnoStripeWebhookEventTable {
   /**
    * Track the time of DB insertion, not time where Stripe created the event.
    */
-  created_at: ColumnType<Date, string | undefined, never>;
+  created_at: ColumnType<Date, string, never>;
 
   /**
    * Event type

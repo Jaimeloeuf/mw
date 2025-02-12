@@ -9,12 +9,12 @@ export interface MuwnoCustomerTable {
   /**
    * Track when was the Customer created
    */
-  created_at: ColumnType<Date, string | undefined, never>;
+  created_at: ColumnType<Date, string, never>;
 
   /**
    * Track when was the Customer imported into muwno
    */
-  imported_at: ColumnType<Date, string | undefined, never>;
+  imported_at: ColumnType<Date, string, never>;
 
   /**
    * What Org does this customer belong to?

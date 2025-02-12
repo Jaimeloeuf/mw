@@ -20,7 +20,7 @@ export interface MuwnoUserTable {
   /**
    * Track when was the User created
    */
-  created_at: ColumnType<Date, string | undefined, never>;
+  created_at: ColumnType<Date, string, never>;
 
   /**
    * The user's Org ID.

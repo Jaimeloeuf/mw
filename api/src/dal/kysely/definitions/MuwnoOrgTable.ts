@@ -9,7 +9,7 @@ export interface MuwnoOrgTable {
   /**
    * Track when was the Org created
    */
-  created_at: ColumnType<Date, string | undefined, never>;
+  created_at: ColumnType<Date, string, never>;
 
   /**
    * Name of the Org

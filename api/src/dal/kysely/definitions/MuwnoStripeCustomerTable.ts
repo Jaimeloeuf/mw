@@ -10,7 +10,7 @@ export interface MuwnoStripeCustomerTable {
   /**
    * Track when was the Stripe Customer created
    */
-  created_at: ColumnType<Date, string | undefined, never>;
+  created_at: ColumnType<Date, string, never>;
 
   /**
    * The corresponding Org ID of this Stripe Customer

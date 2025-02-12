@@ -20,7 +20,7 @@ export interface MuwnoStripeSetupNextTable {
   /**
    * Track when was the Stripe setup intent next action created
    */
-  created_at: ColumnType<Date, string | undefined, never>;
+  created_at: ColumnType<Date, string, never>;
 
   /**
    * Next action is stored as a JSON object since different next actions can

@@ -9,7 +9,7 @@ export interface MuwnoTeamMemberInvitationTable {
   /**
    * Track when was the invitation created
    */
-  created_at: ColumnType<Date, string | undefined, never>;
+  created_at: ColumnType<Date, string, never>;
 
   /**
    * Org ID that the user is being invited to join

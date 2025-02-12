@@ -9,7 +9,7 @@ export interface MuwnoTaskTable {
   /**
    * Track when was the Task created
    */
-  created_at: ColumnType<Date, string | undefined, never>;
+  created_at: ColumnType<Date, string, never>;
 
   /**
    * The task's Product ID

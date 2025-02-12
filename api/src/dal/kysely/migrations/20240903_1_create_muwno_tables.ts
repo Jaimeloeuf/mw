@@ -1,7 +1,5 @@
 import type { Kysely } from "kysely";
 
-import { sql } from "kysely";
-
 const orgTableName = "muwno_org";
 const userTableName = "muwno_user";
 const productTableName = "muwno_product";
@@ -18,9 +16,7 @@ export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
     .createTable(orgTableName)
     .addColumn("id", "text", (col) => col.primaryKey())
-    .addColumn("created_at", "timestamp", (col) =>
-      col.notNull().defaultTo(sql`now()`),
-    )
+    .addColumn("created_at", "timestamp", (col) => col.notNull())
     .addColumn("name", "text", (col) => col.notNull())
     .addColumn("email", "text", (col) => col.notNull())
     .addColumn("phone", "text", (col) => col.notNull())
@@ -35,9 +31,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .createTable(userTableName)
     .addColumn("iid", "serial", (col) => col.primaryKey())
     .addColumn("id", "text", (col) => col.notNull().unique())
-    .addColumn("created_at", "timestamp", (col) =>
-      col.notNull().defaultTo(sql`now()`),
-    )
+    .addColumn("created_at", "timestamp", (col) => col.notNull())
     .addColumn("org_id", "text")
     .addColumn("role", "text")
     .addColumn("name", "text", (col) => col.notNull())
@@ -48,9 +42,7 @@ export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
     .createTable(productTableName)
     .addColumn("id", "text", (col) => col.primaryKey())
-    .addColumn("created_at", "timestamp", (col) =>
-      col.notNull().defaultTo(sql`now()`),
-    )
+    .addColumn("created_at", "timestamp", (col) => col.notNull())
     .addColumn("name", "text", (col) => col.notNull())
     .addColumn("link", "text")
     .addColumn("description", "text", (col) => col.notNull())
@@ -60,9 +52,7 @@ export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
     .createTable(pmfSurveyResponseTableName)
     .addColumn("id", "text", (col) => col.primaryKey())
-    .addColumn("created_at", "timestamp", (col) =>
-      col.notNull().defaultTo(sql`now()`),
-    )
+    .addColumn("created_at", "timestamp", (col) => col.notNull())
     .addColumn("product_id", "text", (col) => col.notNull())
     .addColumn("a1", "int2", (col) => col.notNull())
     .addColumn("a2", "text", (col) => col.notNull())
@@ -73,9 +63,7 @@ export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
     .createTable(taskTableName)
     .addColumn("id", "text", (col) => col.primaryKey())
-    .addColumn("created_at", "timestamp", (col) =>
-      col.notNull().defaultTo(sql`now()`),
-    )
+    .addColumn("created_at", "timestamp", (col) => col.notNull())
     .addColumn("product_id", "text", (col) => col.notNull())
     .addColumn("pmf_survey_response_id", "text", (col) => col.notNull())
     .addColumn("score", "int2", (col) => col.notNull())
@@ -86,9 +74,7 @@ export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
     .createTable(teamMemberInvitationTableName)
     .addColumn("id", "text", (col) => col.primaryKey())
-    .addColumn("created_at", "timestamp", (col) =>
-      col.notNull().defaultTo(sql`now()`),
-    )
+    .addColumn("created_at", "timestamp", (col) => col.notNull())
     .addColumn("org_id", "text", (col) => col.notNull())
     .addColumn("inviter_user_id", "text", (col) => col.notNull())
     .addColumn("invitee_email", "text", (col) => col.notNull().unique())
@@ -98,12 +84,8 @@ export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
     .createTable(customerTableName)
     .addColumn("id", "text", (col) => col.primaryKey())
-    .addColumn("created_at", "timestamp", (col) =>
-      col.notNull().defaultTo(sql`now()`),
-    )
-    .addColumn("imported_at", "timestamp", (col) =>
-      col.notNull().defaultTo(sql`now()`),
-    )
+    .addColumn("created_at", "timestamp", (col) => col.notNull())
+    .addColumn("imported_at", "timestamp", (col) => col.notNull())
     .addColumn("org_id", "text", (col) => col.notNull())
     .addColumn("cid", "text", (col) => col.notNull())
     .addUniqueConstraint("cid is unique within an Org", ["org_id", "cid"])
@@ -115,9 +97,7 @@ export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
     .createTable(stripeWebhookEventTableName)
     .addColumn("stripe_event_id", "text", (col) => col.primaryKey())
-    .addColumn("created_at", "timestamp", (col) =>
-      col.notNull().defaultTo(sql`now()`),
-    )
+    .addColumn("created_at", "timestamp", (col) => col.notNull())
     .addColumn("type", "text", (col) => col.notNull())
     .addColumn("livemode", "boolean", (col) => col.notNull())
     .addColumn("processed", "boolean", (col) => col.notNull())
@@ -126,9 +106,7 @@ export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
     .createTable(stripeCustomerTableName)
     .addColumn("stripe_customer_id", "text", (col) => col.primaryKey())
-    .addColumn("created_at", "timestamp", (col) =>
-      col.notNull().defaultTo(sql`now()`),
-    )
+    .addColumn("created_at", "timestamp", (col) => col.notNull())
     .addColumn("org_id", "text", (col) => col.notNull().unique())
     .addColumn("metered_subscription_id", "text")
     .execute();
@@ -136,18 +114,14 @@ export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
     .createTable(stripeSetupNextTableName)
     .addColumn("stripe_setup_intent_id", "text", (col) => col.primaryKey())
-    .addColumn("created_at", "timestamp", (col) =>
-      col.notNull().defaultTo(sql`now()`),
-    )
+    .addColumn("created_at", "timestamp", (col) => col.notNull())
     .addColumn("next", "json", (col) => col.notNull())
     .execute();
 
   await db.schema
     .createTable(apiKeyTableName)
     .addColumn("id", "text", (col) => col.primaryKey())
-    .addColumn("created_at", "timestamp", (col) =>
-      col.notNull().defaultTo(sql`now()`),
-    )
+    .addColumn("created_at", "timestamp", (col) => col.notNull())
     .addColumn("org_id", "text", (col) => col.notNull())
     .addColumn("hash", "text", (col) => col.notNull().unique())
     .addColumn("prefix", "text", (col) => col.notNull())
