@@ -28,8 +28,10 @@ export function defineAsyncJobType<AsyncJobArgumentType = void>(
         runOptions?.jobArguments,
       );
 
+      const asyncJobID = crypto.randomUUID();
+
       const asyncJob: AsyncJob = {
-        id: crypto.randomUUID(),
+        id: asyncJobID,
         jobTypeID: asyncJobConfig.id,
         status: AsyncJobStatus.queued,
         timeScheduled: new Date().toISOString(),
@@ -61,6 +63,8 @@ export function defineAsyncJobType<AsyncJobArgumentType = void>(
         `${asyncJob.caller}:${this.scheduleJob.name}`,
         `Successfully scheduled async job '${asyncJobConfig.name}'`,
       );
+
+      return asyncJobID;
     },
   };
 }

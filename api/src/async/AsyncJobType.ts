@@ -42,5 +42,5 @@ export type AsyncJobType<AsyncJobArgumentType = void> =
        * Override the Async Job Type's default machine type.
        */
       machineTypeOverride?: AsyncJobMachineType;
-    }) => Promise<void>;
+    }) => Promise<string>;
   };
