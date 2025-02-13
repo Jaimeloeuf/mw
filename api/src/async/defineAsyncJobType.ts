@@ -73,15 +73,8 @@ export function defineAsyncJobType<AsyncJobArgumentType = void>(
      */
     async cancelJob(jobID) {
       const job = await df.asyncCancelJob.runAndThrowOnError(jobID);
-
-      if (job === undefined) {
-        return {
-          cancelled: false,
-        };
-      }
-
       return {
-        cancelled: true,
+        cancelled: job.status === AsyncJobStatus.cancelled,
         job,
       };
     },

@@ -46,6 +46,6 @@ export type AsyncJobType<AsyncJobArgumentType = void> =
 
     cancelJob: (jobID: string) => Promise<{
       cancelled: boolean;
-      job?: AsyncJob;
+      job: AsyncJob;
     }>;
   };

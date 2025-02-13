@@ -1,3 +1,4 @@
+import { df } from "../../../__generated/index.js";
 import { AsyncJobStatus } from "../../../async/AsyncJobStatus.js";
 import { apiDB } from "../../kysely/index.js";
 import { dataFn } from "../dataFn.js";
@@ -15,7 +16,7 @@ export default dataFn(async function asyncCancelJob(jobID: string) {
     .executeTakeFirst();
 
   if (updatedJob === undefined) {
-    return;
+    return df.asyncGetJob.runAndThrowOnError(jobID);
   }
 
   return mapDbAsyncJobToAsyncJob(updatedJob);
