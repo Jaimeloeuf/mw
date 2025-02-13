@@ -43,4 +43,9 @@ export type AsyncJobType<AsyncJobArgumentType = void> =
        */
       machineTypeOverride?: AsyncJobMachineType;
     }) => Promise<string>;
+
+    cancelJob: (jobID: string) => Promise<{
+      cancelled: boolean;
+      job?: AsyncJob;
+    }>;
   };

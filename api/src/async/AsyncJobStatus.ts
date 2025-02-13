@@ -8,6 +8,12 @@ export enum AsyncJobStatus {
   queued = "queued",
 
   /**
+   * The Job has been cancelled when it was still waiting in queue. A job that
+   * is already preProcessing, started or finished, cannot be cancelled.
+   */
+  cancelled = "cancelled",
+
+  /**
    * The Job has been loaded from the DB for pre-processing and then processing.
    *
    * This should act as a "lock" so other instances of Async Job runners should

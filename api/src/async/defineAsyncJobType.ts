@@ -66,5 +66,24 @@ export function defineAsyncJobType<AsyncJobArgumentType = void>(
 
       return asyncJobID;
     },
+
+    /**
+     * ## DO NOT OVERRIDE!
+     * Use this to cancel a Job of this Job Type.
+     */
+    async cancelJob(jobID) {
+      const job = await df.asyncCancelJob.runAndThrowOnError(jobID);
+
+      if (job === undefined) {
+        return {
+          cancelled: false,
+        };
+      }
+
+      return {
+        cancelled: true,
+        job,
+      };
+    },
   };
 }
