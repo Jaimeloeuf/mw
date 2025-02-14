@@ -64,10 +64,10 @@ export type AsyncJobType<AsyncJobArgumentType = void> =
        * context on why the job is cancelled, which can be helpful for debugging
        * purposes.
        */
-      cancellationContext?:
-        | string
-        | Record<string, string | number | boolean>
-        | Array<string | number | boolean>,
+      cancellationContext?: Exclude<
+        AsyncJob["cancellationData"],
+        null
+      >["cancellationContext"],
     ) => Promise<{
       cancelled: boolean;
       job: AsyncJob;

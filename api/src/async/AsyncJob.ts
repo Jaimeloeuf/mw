@@ -106,6 +106,37 @@ export type AsyncJob = Pick<AsyncJobTypeConfig, "machineType" | "priority"> & {
 
   /**
    * JSON serializable data stored in DB either as JSON string or object.
+   *
+   * ##
+   * I want to have the option to store information for debugging purposes when
+   * an async job is cancelled.
+   *
+   * When storing info for debugging purposes when an async job is scheduled, we
+   * can rely on just looking at the `jobType`, `caller`, `stackTrace` and
+   * `jobArguments` because these should contain all information needed for us
+   * to understand what is going on at the point when the job is scheduled.
+   *
+   * However, since we do not have things like `jobArguments` when cancelling
+   * the job, it is hard to understand the whole picture of what actually
+   * happened at the point of cancellation.
+   *
+   * So this `cancellationData` should hold all the information about what
+   * happened at the point of cancellation for debugging purposes, while not
+   * taking up multiple fields since this isnt always used. Which is also why
+   * this is a single JSON stringifiable object instead of different fields
+   * because this is only used for debugging.
    */
-  cancellationData: null | AsyncJobResult;
+  cancellationData: null | {
+    stackTrace: string;
+
+    /**
+     * Optionally, pass in anything that is JSON stringifiable for additional
+     * context on why the job is cancelled, which can be helpful for debugging
+     * purposes.
+     */
+    cancellationContext?:
+      | string
+      | Record<string, string | number | boolean>
+      | Array<string | number | boolean>;
+  };
 };
