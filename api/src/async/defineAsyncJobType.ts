@@ -52,7 +52,7 @@ export function defineAsyncJobType<AsyncJobArgumentType = void>(
 
         // Drop 2 stack frames, 1 for the getStackTrace function and 1 for the
         // current scheduleJob function.
-        stackTrace: getStackTrace(2),
+        stackTrace: getStackTrace.asJsonString(2),
       };
 
       await df.asyncCreateJob.runAndThrowOnError(asyncJob);
@@ -71,7 +71,7 @@ export function defineAsyncJobType<AsyncJobArgumentType = void>(
         json.stringifyPretty({
           // Drop 2 stack frames, 1 for the getStackTrace function and 1 for the
           // current cancelJob function.
-          stackTrace: getStackTrace(2),
+          stackTrace: getStackTrace.asArray(2),
 
           // Assuming that whatever is passed in would be JSON stringifiable
           cancellationContext,
