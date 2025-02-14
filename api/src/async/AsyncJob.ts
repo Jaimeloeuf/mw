@@ -103,4 +103,9 @@ export type AsyncJob = Pick<AsyncJobTypeConfig, "machineType" | "priority"> & {
    * This is null until the job function finishes.
    */
   jobResult: null | AsyncJobResult;
+
+  /**
+   * JSON serializable data stored in DB either as JSON string or object.
+   */
+  cancellationData: null | AsyncJobResult;
 };

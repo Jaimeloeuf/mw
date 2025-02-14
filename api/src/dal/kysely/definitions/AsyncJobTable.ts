@@ -61,6 +61,11 @@ export interface AsyncJobTable {
     NullableAndVoidable<string>,
     NullableAndVoidable<string>
   >;
+  cancellation_data: ColumnType<
+    NullableAndVoidable<string>,
+    NullableAndVoidable<string>,
+    NullableAndVoidable<string>
+  >;
 }
 
 export type AsyncJob = Selectable<AsyncJobTable>;

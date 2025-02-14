@@ -52,8 +52,23 @@ export type AsyncJobType<AsyncJobArgumentType = void> =
      * `scheduleJob` method. A job can only be cancelled if its status is still
      * `AsyncJobStatus.queued`, once the job has began pre-processing, it can
      * not be cancelled anymore.
+     *
+     * The `cancellationContext` is only stored as `AsyncJob['cancellationData']`
+     * if the job is cancelled, else this is discarded.
      */
-    cancelJob: (jobID: string) => Promise<{
+    cancelJob: (
+      jobID: string,
+
+      /**
+       * Optionally, pass in anything that is JSON stringifiable for additional
+       * context on why the job is cancelled, which can be helpful for debugging
+       * purposes.
+       */
+      cancellationContext?:
+        | string
+        | Record<string, string | number | boolean>
+        | Array<string | number | boolean>,
+    ) => Promise<{
       cancelled: boolean;
       job: AsyncJob;
     }>;

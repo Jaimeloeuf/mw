@@ -4,7 +4,10 @@ import { apiDB } from "../../kysely/index.js";
 import { dataFn } from "../dataFn.js";
 import { mapDbAsyncJobToAsyncJob } from "./mapDbAsyncJobToAsyncJob.js";
 
-export default dataFn(async function asyncCancelJob(jobID: string) {
+export default dataFn(async function asyncCancelJob(
+  jobID: string,
+  cancellationData?: string,
+) {
   const updatedJob = await apiDB
     .updateTable("async_job")
     .where("id", "=", jobID)
@@ -12,6 +15,7 @@ export default dataFn(async function asyncCancelJob(jobID: string) {
     .set({
       status: AsyncJobStatus.cancelled,
       time_cancelled: new Date().toISOString(),
+      cancellation_data: cancellationData,
     })
     .returningAll()
     .executeTakeFirst();

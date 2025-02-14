@@ -21,6 +21,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("time_cancelled", "timestamp")
     .addColumn("job_arguments", "text")
     .addColumn("job_result", "text")
+    .addColumn("cancellation_data", "text")
     .execute();
 }
 

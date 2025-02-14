@@ -4,7 +4,7 @@ import type { AsyncJobTypeConfig } from "./AsyncJobTypeConfig.js";
 
 import { df } from "../__generated/index.js";
 import { logger } from "../logging/index.js";
-import { getStackTrace } from "../utils/index.js";
+import { getStackTrace, json } from "../utils/index.js";
 import { AsyncJobStatus } from "./AsyncJobStatus.js";
 import { validateJobArgumentOnSave } from "./validateJobArgumentOnSave.js";
 
@@ -35,6 +35,7 @@ export function defineAsyncJobType<AsyncJobArgumentType = void>(
         timeStart: null,
         timeFinish: null,
         timeCancelled: null,
+        cancellationData: null,
         jobResult: null,
         jobArguments: validatedJobArgument,
 
@@ -64,8 +65,19 @@ export function defineAsyncJobType<AsyncJobArgumentType = void>(
       return asyncJobID;
     },
 
-    async cancelJob(jobID) {
-      const job = await df.asyncCancelJob.runAndThrowOnError(jobID);
+    async cancelJob(jobID, cancellationContext) {
+      const job = await df.asyncCancelJob.runAndThrowOnError(
+        jobID,
+        json.stringifyPretty({
+          // Drop 2 stack frames, 1 for the getStackTrace function and 1 for the
+          // current cancelJob function.
+          stackTrace: getStackTrace(2),
+
+          // Assuming that whatever is passed in would be JSON stringifiable
+          cancellationContext,
+        }),
+      );
+
       return {
         cancelled: job.status === AsyncJobStatus.cancelled,
         job,

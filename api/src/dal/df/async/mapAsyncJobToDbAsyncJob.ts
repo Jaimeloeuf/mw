@@ -22,5 +22,9 @@ export function mapAsyncJobToDbAsyncJob(job: AsyncJob): CreateAsyncJob {
     job_arguments:
       job.jobArguments === null ? null : json.stringify(job.jobArguments),
     job_result: job.jobResult === null ? null : json.stringify(job.jobResult),
+    cancellation_data:
+      job.cancellationData === null
+        ? null
+        : json.stringify(job.cancellationData),
   };
 }
