@@ -18,6 +18,7 @@ export function mapDbAsyncJobToAsyncJob(job: DBAsyncJob): AsyncJob {
     timePreprocess: job.time_preprocess?.toISOString() ?? null,
     timeStart: job.time_start?.toISOString() ?? null,
     timeFinish: job.time_finish?.toISOString() ?? null,
+    timeCancelled: job.time_cancelled?.toISOString() ?? null,
     jobArguments:
       job.job_arguments === null ? null : json.parse(job.job_arguments),
     jobResult: job.job_result === null ? null : json.parse(job.job_result),

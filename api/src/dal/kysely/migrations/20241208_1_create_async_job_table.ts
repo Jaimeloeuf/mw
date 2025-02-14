@@ -18,6 +18,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("time_preprocess", "timestamp")
     .addColumn("time_start", "timestamp")
     .addColumn("time_finish", "timestamp")
+    .addColumn("time_cancelled", "timestamp")
     .addColumn("job_arguments", "text")
     .addColumn("job_result", "text")
     .execute();

@@ -46,6 +46,11 @@ export interface AsyncJobTable {
     NullableAndVoidable<string>,
     NullableAndVoidable<string>
   >;
+  time_cancelled: ColumnType<
+    NullableAndVoidable<Date>,
+    NullableAndVoidable<string>,
+    NullableAndVoidable<string>
+  >;
   job_arguments: ColumnType<
     NullableAndVoidable<string>,
     NullableAndVoidable<string>,

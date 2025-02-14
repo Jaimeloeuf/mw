@@ -18,6 +18,7 @@ export function mapAsyncJobToDbAsyncJob(job: AsyncJob): CreateAsyncJob {
     time_preprocess: job.timePreprocess,
     time_start: job.timeStart,
     time_finish: job.timeFinish,
+    time_cancelled: job.timeCancelled,
     job_arguments:
       job.jobArguments === null ? null : json.stringify(job.jobArguments),
     job_result: job.jobResult === null ? null : json.stringify(job.jobResult),

@@ -34,6 +34,7 @@ export function defineAsyncJobType<AsyncJobArgumentType = void>(
         timePreprocess: null,
         timeStart: null,
         timeFinish: null,
+        timeCancelled: null,
         jobResult: null,
         jobArguments: validatedJobArgument,
 

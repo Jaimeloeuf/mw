@@ -83,6 +83,14 @@ export type AsyncJob = Pick<AsyncJobTypeConfig, "machineType" | "priority"> & {
   timeFinish: null | string;
 
   /**
+   * If the Job is cancelled as per the job status, when did this cancellation
+   * happen (in ISO time)?
+   *
+   * This is null unless the job is cancelled.
+   */
+  timeCancelled: null | string;
+
+  /**
    * JSON serializable data stored in DB either as JSON string or object.
    *
    * This can be null if the job function has no arguments.
