@@ -12,9 +12,11 @@ export const getStackTrace = {
     return (
       Error()
         .stack?.split("\n")
-        // Always drop at least 1 line, since this isnt part of the stack
-        // frames, but rather the word 'Error'.
-        .slice(1 + numberOfStackFramesToDrop)
+        // Always drop 2 lines
+        // The first line is the word 'Error' and isnt part of the stack frames.
+        // The second line is the stack frame for this getStackTrace method,
+        // which should not be part of the returned stack trace to users.
+        .slice(2 + numberOfStackFramesToDrop)
         .map((s) =>
           s
             // Remove the tab indentation
@@ -28,7 +30,13 @@ export const getStackTrace = {
   /**
    * Get stack trace as prettified JSON string using `getStackTrace.asArray`.
    */
-  asJsonString(...args: Parameters<typeof this.asArray>) {
-    return json.stringifyPretty(this.asArray(...args));
+  asJsonString(numberOfStackFramesToDrop: number = 0) {
+    return json.stringifyPretty(
+      this.asArray(
+        // Always drop at least 1 more stack frame, which is this `asJsonString`
+        // method itself.
+        numberOfStackFramesToDrop + 1,
+      ),
+    );
   },
 };
