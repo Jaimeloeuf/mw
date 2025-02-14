@@ -18,10 +18,6 @@ export function defineAsyncJobType<AsyncJobArgumentType = void>(
   return {
     ...asyncJobConfig,
 
-    /**
-     * ## DO NOT OVERRIDE!
-     * Use this to schedule a new Job of this Job Type.
-     */
     async scheduleJob(runOptions) {
       const validatedJobArgument = validateJobArgumentOnSave(
         asyncJobConfig,
@@ -67,10 +63,6 @@ export function defineAsyncJobType<AsyncJobArgumentType = void>(
       return asyncJobID;
     },
 
-    /**
-     * ## DO NOT OVERRIDE!
-     * Use this to cancel a Job of this Job Type.
-     */
     async cancelJob(jobID) {
       const job = await df.asyncCancelJob.runAndThrowOnError(jobID);
       return {

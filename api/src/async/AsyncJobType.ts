@@ -8,6 +8,9 @@ import type { AsyncJobTypeConfig } from "./AsyncJobTypeConfig.js";
  */
 export type AsyncJobType<AsyncJobArgumentType = void> =
   AsyncJobTypeConfig<AsyncJobArgumentType> & {
+    /**
+     * Schedule a new Job of this Job Type.
+     */
     scheduleJob: (runOptions?: {
       /**
        * A simple string name to identify the caller that scheduled this job. If
@@ -44,6 +47,12 @@ export type AsyncJobType<AsyncJobArgumentType = void> =
       machineTypeOverride?: AsyncJobMachineType;
     }) => Promise<string>;
 
+    /**
+     * Try to cancel a Job of this Job Type using the `asyncJobID` returned from
+     * `scheduleJob` method. A job can only be cancelled if its status is still
+     * `AsyncJobStatus.queued`, once the job has began pre-processing, it can
+     * not be cancelled anymore.
+     */
     cancelJob: (jobID: string) => Promise<{
       cancelled: boolean;
       job: AsyncJob;
