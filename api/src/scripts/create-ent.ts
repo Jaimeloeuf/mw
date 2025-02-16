@@ -3,6 +3,7 @@ import fs from "fs/promises";
 import path from "path";
 import readline from "readline/promises";
 
+import { entMapping } from "../__generated/index.js";
 import { logger } from "../logging/index.js";
 
 async function createEnt() {
@@ -32,17 +33,27 @@ async function createEnt() {
   // Will throw if folder already exists
   await fs.mkdir(entFolderPath);
 
+  /**
+   * Generate unique EntTypeID by generating a unique ID and checking against all
+   * EntTypeIDs to see if it already exists, and using the first unique ID
+   * generated that doesnt already exists.
+   */
+  let uniqueEntTypeID: null | string;
+  do {
+    uniqueEntTypeID = crypto
+      .randomBytes(4)
+      .toString("hex")
+      .slice(0, 4)
+      .toLowerCase();
+  } while (entMapping[uniqueEntTypeID] !== undefined);
+
   const entFileTemplate = await fs.readFile(
     path.join(entFolderPath, `../_EntTemplate_/EntTemplate.ts`),
     { encoding: "utf8" },
   );
   const entFile = entFileTemplate
     .replaceAll("EntTemplate", fullEntName)
-    .replace(
-      "__generated_ent_type_id__",
-      // @todo Verify that this is indeed unique amongst the Ent types
-      crypto.randomBytes(4).toString("hex").slice(0, 4).toLowerCase(),
-    );
+    .replace("__generated_ent_type_id__", uniqueEntTypeID);
   await fs.writeFile(path.join(entFolderPath, `${fullEntName}.ts`), entFile);
 
   const entOperatorsFileTemplate = await fs.readFile(
