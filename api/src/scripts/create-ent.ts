@@ -15,7 +15,7 @@ async function createEnt() {
     `Ent name in PascalCase (e.g. BlogSubscriber): `,
   );
   if (!new RegExp(/^[A-Z][A-Za-z0-9]*$/g).test(entName)) {
-    logger.error(createEnt.name, `Controller name must be PascalCase.`);
+    logger.error(createEnt.name, `Ent name must be PascalCase.`);
     rl.close();
     return;
   }
