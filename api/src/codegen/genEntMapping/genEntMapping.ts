@@ -10,12 +10,17 @@ import { getEntFolders } from "../utils/index.js";
 export async function genEntMapping() {
   const ents = await getEntFolders();
 
-  const generatedCode = `import { ents } from "./entsBarrelFile${generatedCodeFileExtensionForJsImport}"
+  const generatedCode = `import type { BaseEnt } from "../ent/BaseEnt.js";
+
+import { ents } from "./entsBarrelFile${generatedCodeFileExtensionForJsImport}"
 
 /**
  * Mapping of \`EntTypeID\` to \`Ent\`.
  */
-export const entMapping = {
+export const entMapping: Record<
+  string,
+  new (..._constructorArgs: any) => BaseEnt<any>
+> = {
   ${ents.map((ent) => `"${ent.entTypeID}": ents.${ent.name}`).join()}
 };
 `;
