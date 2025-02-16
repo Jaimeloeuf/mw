@@ -1,10 +1,10 @@
-import crypto from "crypto";
 import fs from "fs/promises";
 import path from "path";
 import readline from "readline/promises";
 
 import { entMapping } from "../__generated/index.js";
 import { logger } from "../logging/index.js";
+import { pseudoRandomAlphanumericString } from "../utils/index.js";
 
 async function createEnt() {
   const rl = readline.createInterface({
@@ -40,11 +40,7 @@ async function createEnt() {
    */
   let uniqueEntTypeID: null | string;
   do {
-    uniqueEntTypeID = crypto
-      .randomBytes(4)
-      .toString("hex")
-      .slice(0, 4)
-      .toLowerCase();
+    uniqueEntTypeID = pseudoRandomAlphanumericString(4);
   } while (entMapping[uniqueEntTypeID] !== undefined);
 
   const entFileTemplate = await fs.readFile(
