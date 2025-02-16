@@ -1,6 +1,6 @@
-import { EntJohariOperators } from "../../ents/EntJohari/index.js";
+import { ents } from "../../__generated/index.js";
 
 export default async function (johariID: string) {
-  const entJohari = await EntJohariOperators.get(johariID);
+  const entJohari = await ents.EntJohariOperators.get(johariID);
   return entJohari.data;
 }

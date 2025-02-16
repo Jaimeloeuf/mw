@@ -1,7 +1,7 @@
-import { EntJohariAnswerOperators } from "../../ents/EntJohariAnswer/index.js";
+import { ents } from "../../__generated/index.js";
 
 export default async function (johariID: string) {
   const entJohariAnwers =
-    await EntJohariAnswerOperators.getAllAnswersForJohari(johariID);
+    await ents.EntJohariAnswerOperators.getAllAnswersForJohari(johariID);
   return entJohariAnwers;
 }
