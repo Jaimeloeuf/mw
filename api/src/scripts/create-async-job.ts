@@ -1,10 +1,10 @@
-import crypto from "crypto";
 import fs from "fs/promises";
 import path from "path";
 import readline from "readline/promises";
 
 import { asyncJobTypeMapping } from "../__generated/index.js";
 import { logger } from "../logging/index.js";
+import { pseudoRandomAlphanumericString } from "../utils/index.js";
 
 async function createAsyncJob() {
   const rl = readline.createInterface({
@@ -37,11 +37,7 @@ async function createAsyncJob() {
    */
   let uniqueAsyncJobTypeID: null | string;
   do {
-    uniqueAsyncJobTypeID = crypto
-      .randomBytes(4)
-      .toString("hex")
-      .slice(0, 4)
-      .toLowerCase();
+    uniqueAsyncJobTypeID = pseudoRandomAlphanumericString(4);
   } while (asyncJobTypeMapping[uniqueAsyncJobTypeID] !== undefined);
 
   const generatedAsyncJobFile = asyncJobTemplate
