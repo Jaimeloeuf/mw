@@ -3,6 +3,7 @@ import fs from "fs/promises";
 import path from "path";
 import readline from "readline/promises";
 
+import { asyncJobTypeMapping } from "../__generated/index.js";
 import { logger } from "../logging/index.js";
 
 async function createAsyncJob() {
@@ -29,12 +30,23 @@ async function createAsyncJob() {
     { encoding: "utf8" },
   );
 
+  /**
+   * Generate unique AsyncJobTypeID by generating a unique ID and checking
+   * against all AsyncJobTypeIDs to see if it already exists, and using the
+   * first unique ID generated that doesnt already exists.
+   */
+  let uniqueAsyncJobTypeID: null | string;
+  do {
+    uniqueAsyncJobTypeID = crypto
+      .randomBytes(4)
+      .toString("hex")
+      .slice(0, 4)
+      .toLowerCase();
+  } while (asyncJobTypeMapping[uniqueAsyncJobTypeID] !== undefined);
+
   const generatedAsyncJobFile = asyncJobTemplate
     .replaceAll("AsyncJobTemplate", asyncJobName)
-    .replace(
-      "__generated_async_job_type_id__",
-      crypto.randomBytes(4).toString("hex").slice(0, 4).toLowerCase(),
-    );
+    .replace("__generated_async_job_type_id__", uniqueAsyncJobTypeID);
 
   const asyncJobFilePath = path.join(
     asyncJobsFolderPath,
