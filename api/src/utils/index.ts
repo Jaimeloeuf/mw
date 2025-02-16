@@ -13,6 +13,7 @@ export * from "./logBeforeRun.js";
 export * from "./noOp.js";
 export * from "./noThrowFunction.js";
 export * from "./noThrowPromise.js";
+export * from "./pseudoRandomAlphanumericString.js";
 export * from "./sha256hash.js";
 export * from "./unixSecondsToIsoString.js";
 export * from "./unknownCatchToError.js";
