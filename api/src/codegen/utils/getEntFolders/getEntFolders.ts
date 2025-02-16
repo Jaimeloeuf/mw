@@ -1,6 +1,10 @@
 import fs from "fs/promises";
 import path from "path";
 
+import type { EntFile } from "./EntFile.js";
+
+import { dataOrThrow } from "../../../utils/dataOrThrow.js";
+
 /**
  * Generate an array of Ent folder paths string sorted by their file path.
  */
@@ -11,28 +15,46 @@ async function generateEntFolders() {
     withFileTypes: true,
   });
 
-  const entFolders = filesDirent
+  const awaitableFiles = filesDirent
     // Only look for folders whose name starts with 'Ent'
     .filter((file) => file.isDirectory() && file.name.startsWith("Ent"))
 
     // Get the folder name only
-    .map((folder): string => folder.name)
+    .map(async (file): Promise<EntFile> => {
+      const entFullFilePath = path.resolve(
+        file.parentPath,
+        file.name,
+        `${file.name}.ts`,
+      );
+      const fileContent = await fs.readFile(entFullFilePath, {
+        encoding: "utf8",
+      });
 
-    // Sort the folders in a stable manner using their name
-    .sort((a, b) => {
-      if (a > b) {
-        return 1;
-      }
-      if (b > a) {
-        return -1;
-      }
-      return 0;
+      return {
+        name: file.name,
+        entTypeID: dataOrThrow(
+          fileContent.match(/static override EntTypeID = "(.*)";/)?.[1],
+        ),
+      };
     });
 
-  return entFolders;
+  const files = await Promise.all(awaitableFiles);
+
+  // Sort the folders in a stable manner using their name
+  const sortedFiles = files.sort((a, b) => {
+    if (a > b) {
+      return 1;
+    }
+    if (b > a) {
+      return -1;
+    }
+    return 0;
+  });
+
+  return sortedFiles;
 }
 
-let cachedFiles: Readonly<Promise<ReadonlyArray<string>>> | null = null;
+let cachedFiles: Readonly<Promise<ReadonlyArray<EntFile>>> | null = null;
 
 /**
  * Always return the single cachedFiles promise and let the callers resolve

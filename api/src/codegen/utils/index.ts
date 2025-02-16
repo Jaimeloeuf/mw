@@ -8,6 +8,7 @@ export * from "./getAsyncJobTypeFiles/AsyncJobTypeFile.js";
 export * from "./getAsyncJobTypeFiles/getAsyncJobTypeFiles.js";
 export * from "./getDataFunctionFiles/DataFunctionFile.js";
 export * from "./getDataFunctionFiles/getDataFunctionFiles.js";
+export * from "./getEntFolders/EntFile.js";
 export * from "./getEntFolders/getEntFolders.js";
 export * from "./getHttpControllerFiles/getHttpControllerFiles.js";
 export * from "./getHttpControllerFiles/HttpControllerFile.js";
