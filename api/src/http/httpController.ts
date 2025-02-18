@@ -3,7 +3,6 @@ import type { ZodType, infer as zodInfer } from "zod";
 
 import { ZodError } from "zod";
 
-import type { NonEmptyArray } from "../types/index.js";
 import type {
   ValidJsendDatatype,
   JSendSuccess,
@@ -48,7 +47,7 @@ export const httpController = <
     | "all",
   const PathStringLiteralType extends string,
   const Guards extends Readonly<
-    NonEmptyArray<ReturnType<typeof useHttpRequestGuard>>
+    $NonEmptyArray<ReturnType<typeof useHttpRequestGuard>>
   > | null,
   /**
    * Infer return type of all the Guards combined into a single object under
