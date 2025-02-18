@@ -30,7 +30,7 @@ class WhatchBot extends TelegramBot {
   ];
 }
 
-let cachedBot: WhatchBot | null = null;
+let cachedBot: $Nullable<WhatchBot> = null;
 
 export default function () {
   if (cachedBot === null) {

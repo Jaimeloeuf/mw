@@ -8,11 +8,11 @@ import { config } from "../../../config/index.js";
 import { createDB } from "../createDB.js";
 import { dbConnectionCheck } from "../dbConnectionCheck.js";
 
-let cached: null | {
+let cached: $Nullable<{
   db: Kysely<any>;
   migrator: Migrator;
   migrationFolder: string;
-} = null;
+}> = null;
 
 export async function createDbAndMigrator() {
   if (cached !== null) {

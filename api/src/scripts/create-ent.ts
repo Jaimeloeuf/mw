@@ -38,7 +38,7 @@ async function createEnt() {
    * EntTypeIDs to see if it already exists, and using the first unique ID
    * generated that doesnt already exists.
    */
-  let uniqueEntTypeID: null | string;
+  let uniqueEntTypeID: $Nullable<string>;
   do {
     uniqueEntTypeID = pseudoRandomAlphanumericString(4);
   } while (entMapping[uniqueEntTypeID] !== undefined);

@@ -7,7 +7,7 @@ class MuwnoBot extends TelegramBot {
   }
 }
 
-let cachedBot: MuwnoBot | null = null;
+let cachedBot: $Nullable<MuwnoBot> = null;
 
 export default function () {
   if (cachedBot === null) {

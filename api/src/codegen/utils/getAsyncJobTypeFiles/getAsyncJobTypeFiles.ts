@@ -53,7 +53,8 @@ async function generateAsyncJobTypeFiles() {
   return sortedFiles;
 }
 
-let cachedFiles: Readonly<Promise<readonly AsyncJobTypeFile[]>> | null = null;
+let cachedFiles: $Nullable<Readonly<Promise<readonly AsyncJobTypeFile[]>>> =
+  null;
 
 export async function getAsyncJobTypeFiles() {
   if (cachedFiles === null) {

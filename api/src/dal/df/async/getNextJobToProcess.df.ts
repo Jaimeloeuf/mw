@@ -17,7 +17,7 @@ export default dataFn(async function asyncGetNextJobToProcess({
 }: {
   machineType: AsyncJobMachineType;
   priority?: AsyncJobPriority;
-}): Promise<null | AsyncJob> {
+}): Promise<$Nullable<AsyncJob>> {
   const now = new Date();
 
   const asyncJob = await apiDB.transaction().execute(async (db) => {

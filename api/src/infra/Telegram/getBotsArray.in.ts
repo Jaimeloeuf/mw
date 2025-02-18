@@ -2,7 +2,7 @@ import type { TelegramBot } from "./TelegramBot.js";
 
 import getAllBots from "./getBots.in.js";
 
-let cachedBotsAsAnArray: Array<TelegramBot> | null = null;
+let cachedBotsAsAnArray: $Nullable<Array<TelegramBot>> = null;
 
 /**
  * Get all the available telegram bots (bots whose token is available via their

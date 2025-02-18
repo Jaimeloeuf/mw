@@ -49,7 +49,8 @@ async function generateDataFunctionFiles() {
   return files;
 }
 
-let cachedFiles: Readonly<Promise<readonly DataFunctionFile[]>> | null = null;
+let cachedFiles: $Nullable<Readonly<Promise<readonly DataFunctionFile[]>>> =
+  null;
 
 /**
  * Always return the single cachedFiles promise and let the callers resolve

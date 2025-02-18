@@ -16,7 +16,7 @@ export function getCommand(
    * Command to find and parse when found
    */
   command: string,
-): null | CommandData {
+): $Nullable<CommandData> {
   // Explicitly end and return undefined if the update does not contain a
   // message or if the message have not entities.
   if (

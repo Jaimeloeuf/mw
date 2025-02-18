@@ -24,7 +24,7 @@ export interface MuwnoProductTable {
   /**
    * Optional link to the customer's product page
    */
-  link: null | string;
+  link: $Nullable<string>;
 
   /**
    * Product's description

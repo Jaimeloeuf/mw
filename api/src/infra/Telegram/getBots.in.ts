@@ -8,7 +8,7 @@ import { allBotLoaders } from "./Bots/allBotLoaders.js";
 /**
  * Cached telegramBotToken->TelegramBot mapping
  */
-let cachedBots: Record<string, TelegramBot> | null = null;
+let cachedBots: $Nullable<Record<string, TelegramBot>> = null;
 
 /**
  * Returns a object of `TelegramBotToken->Bot`, for all available telegram bots

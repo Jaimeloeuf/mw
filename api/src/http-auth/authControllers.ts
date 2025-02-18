@@ -16,8 +16,8 @@ import { luciaAuthForGithub, lucia } from "./luciaAuth.js";
 declare global {
   namespace Express {
     interface Locals {
-      user: User | null;
-      session: Session | null;
+      user: $Nullable<User>;
+      session: $Nullable<Session>;
     }
   }
 }

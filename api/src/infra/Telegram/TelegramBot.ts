@@ -176,9 +176,9 @@ export abstract class TelegramBot {
     onCommand: (data: CommandData, update: TelegramWebhookData) => any;
   }> = [];
 
-  #cachedCommandsAsObject: {
+  #cachedCommandsAsObject: $Nullable<{
     [command: string]: (typeof TelegramBot)["prototype"]["commands"][number];
-  } | null = null;
+  }> = null;
 
   /**
    * Get an object mapping of `command`->`CommandDefinition`

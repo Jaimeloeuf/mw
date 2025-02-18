@@ -44,7 +44,7 @@ export type AsyncJob = Pick<AsyncJobTypeConfig, "machineType" | "priority"> & {
    * If this is explicitly set to `null`, it means the job will never timeout,
    * use carefully as this could run into an infinite loop and hog the server.
    */
-  timeout: number | null;
+  timeout: $Nullable<number>;
 
   /**
    * When is this Job scheduled in ISO time?
@@ -58,21 +58,21 @@ export type AsyncJob = Pick<AsyncJobTypeConfig, "machineType" | "priority"> & {
    *
    * This is null if the job function should start running as soon as possible.
    */
-  timeStartAfter: null | string;
+  timeStartAfter: $Nullable<string>;
 
   /**
    * When did the Job start getting pre-processed in ISO time?
    *
    * This is null until the job starts pre-processing.
    */
-  timePreprocess: null | string;
+  timePreprocess: $Nullable<string>;
 
   /**
    * When did the Job's `run` method start running in ISO time?
    *
    * This is null until the job function starts running.
    */
-  timeStart: null | string;
+  timeStart: $Nullable<string>;
 
   /**
    * When did the Job's `run` method finish (regardless of whether it succeded
@@ -80,7 +80,7 @@ export type AsyncJob = Pick<AsyncJobTypeConfig, "machineType" | "priority"> & {
    *
    * This is null until the job function finishes.
    */
-  timeFinish: null | string;
+  timeFinish: $Nullable<string>;
 
   /**
    * If the Job is cancelled as per the job status, when did this cancellation
@@ -88,21 +88,21 @@ export type AsyncJob = Pick<AsyncJobTypeConfig, "machineType" | "priority"> & {
    *
    * This is null unless the job is cancelled.
    */
-  timeCancelled: null | string;
+  timeCancelled: $Nullable<string>;
 
   /**
    * JSON serializable data stored in DB either as JSON string or object.
    *
    * This can be null if the job function has no arguments.
    */
-  jobArguments: null | unknown;
+  jobArguments: $Nullable<unknown>;
 
   /**
    * JSON serializable data stored in DB either as JSON string or object.
    *
    * This is null until the job function finishes.
    */
-  jobResult: null | AsyncJobResult;
+  jobResult: $Nullable<AsyncJobResult>;
 
   /**
    * JSON serializable data stored in DB either as JSON string or object.
@@ -126,7 +126,7 @@ export type AsyncJob = Pick<AsyncJobTypeConfig, "machineType" | "priority"> & {
    * this is a single JSON stringifiable object instead of different fields
    * because this is only used for debugging.
    */
-  cancellationData: null | {
+  cancellationData: $Nullable<{
     stackTrace: string;
 
     /**
@@ -138,5 +138,5 @@ export type AsyncJob = Pick<AsyncJobTypeConfig, "machineType" | "priority"> & {
       | string
       | Record<string, string | number | boolean>
       | Array<string | number | boolean>;
-  };
+  }>;
 };

@@ -29,12 +29,12 @@ export interface MuwnoOrgTable {
   /**
    * Arbitrary string for address
    */
-  address: null | string;
+  address: $Nullable<string>;
 
   /**
    * Arbitrary string for Org size
    */
-  size: null | string;
+  size: $Nullable<string>;
 
   /**
    * Did the Org pass manual human verification by the muwno team?
@@ -50,7 +50,7 @@ export interface MuwnoOrgTable {
    * The Org's subscription plan.
    * This is optional as Orgs are created before they pay for a plan.
    */
-  subscription_plan: null | "Standard";
+  subscription_plan: $Nullable<"Standard">;
 }
 
 export type MuwnoOrg = Selectable<MuwnoOrgTable>;

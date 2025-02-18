@@ -54,7 +54,7 @@ async function generateEntFolders() {
   return sortedFiles;
 }
 
-let cachedFiles: Readonly<Promise<ReadonlyArray<EntFile>>> | null = null;
+let cachedFiles: $Nullable<Readonly<Promise<ReadonlyArray<EntFile>>>> = null;
 
 /**
  * Always return the single cachedFiles promise and let the callers resolve

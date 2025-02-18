@@ -30,17 +30,17 @@ export interface MuwnoCustomerTable {
   /**
    * Customer's name
    */
-  name: null | string;
+  name: $Nullable<string>;
 
   /**
    * Customer's email
    */
-  email: null | string;
+  email: $Nullable<string>;
 
   /**
    * Customer's phone
    */
-  phone: null | string;
+  phone: $Nullable<string>;
 }
 
 export type MuwnoCustomer = Selectable<MuwnoCustomerTable>;

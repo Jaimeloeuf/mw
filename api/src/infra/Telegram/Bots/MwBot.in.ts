@@ -21,7 +21,7 @@ class MwBot extends TelegramBot {
   }
 }
 
-let cachedBot: MwBot | null = null;
+let cachedBot: $Nullable<MwBot> = null;
 
 export default function () {
   if (cachedBot === null) {

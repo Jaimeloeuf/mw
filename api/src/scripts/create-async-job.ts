@@ -35,7 +35,7 @@ async function createAsyncJob() {
    * against all AsyncJobTypeIDs to see if it already exists, and using the
    * first unique ID generated that doesnt already exists.
    */
-  let uniqueAsyncJobTypeID: null | string;
+  let uniqueAsyncJobTypeID: $Nullable<string>;
   do {
     uniqueAsyncJobTypeID = pseudoRandomAlphanumericString(4);
   } while (asyncJobTypeMapping[uniqueAsyncJobTypeID] !== undefined);

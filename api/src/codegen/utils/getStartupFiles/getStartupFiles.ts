@@ -44,7 +44,7 @@ async function generateStartupFiles() {
   return files;
 }
 
-let cachedFiles: Readonly<Promise<readonly StartupFile[]>> | null = null;
+let cachedFiles: $Nullable<Readonly<Promise<readonly StartupFile[]>>> = null;
 
 /**
  * Always return the single cachedFiles promise and let the callers resolve

@@ -27,7 +27,7 @@ export function getValueFF<
   configMapping: ConfigMapping,
 ): ConfigLoader<ConfigValueType> {
   /* For async config loaders */
-  let value: ConfigValueType | null = null;
+  let value: $Nullable<ConfigValueType> = null;
 
   const getValue = (forceReload?: true): ConfigValueType => {
     if (forceReload || value === null) {

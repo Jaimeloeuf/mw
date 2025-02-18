@@ -35,7 +35,7 @@ export interface MuwnoApiKeyTable {
   /**
    * Optional description for the API key.
    */
-  description: null | string;
+  description: $Nullable<string>;
 }
 
 export type MuwnoApiKey = Selectable<MuwnoApiKeyTable>;

@@ -51,7 +51,7 @@ export type AsyncJobTypeConfig<
    * Set this to `null` if you explicitly do not want it to ever timeout, use
    * carefully as this could run into an infinite loop and hog the server.
    */
-  timeout?: number | null;
+  timeout?: $Nullable<number>;
 
   /**
    * Optional `Zod` Validator to validate job arguments.

@@ -26,13 +26,13 @@ export interface MuwnoUserTable {
    * The user's Org ID.
    * This is optional because a user does not have an org when first created.
    */
-  org_id: null | string;
+  org_id: $Nullable<string>;
 
   /**
    * User's RBAC role.
    * This is optional until user joins an org and gets assigned a role.
    */
-  role: null | "OrgUser" | "OrgAdmin" | "OrgOwner";
+  role: $Nullable<"OrgUser" | "OrgAdmin" | "OrgOwner">;
 
   /**
    * User's name

@@ -6,7 +6,9 @@ import { logBeforeRun } from "../utils/index.js";
 
 async function getSessionAndUser(
   sessionId: string,
-): Promise<[session: DatabaseSession | null, user: DatabaseUser | null]> {
+): Promise<
+  [session: $Nullable<DatabaseSession>, user: $Nullable<DatabaseUser>]
+> {
   const [err, sessionAndUser] = await df.authGetSessionAndUser.run(sessionId);
 
   if (err !== null) {
