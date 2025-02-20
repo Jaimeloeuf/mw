@@ -3,7 +3,6 @@ import type { ColumnType, Insertable, Selectable, Updateable } from "kysely";
 import type { AsyncJobMachineType } from "../../../async/AsyncJobMachineType.js";
 import type { AsyncJobPriority } from "../../../async/AsyncJobPriority.js";
 import type { AsyncJobStatus } from "../../../async/AsyncJobStatus.js";
-import type { NullableAndVoidable } from "../../../types/index.js";
 
 /**
  * Refer to `AsyncJob` type definition.
@@ -21,50 +20,50 @@ export interface AsyncJobTable {
   caller: ColumnType<string, string, never>;
   stack_trace: ColumnType<string, string, never>;
   timeout: ColumnType<
-    NullableAndVoidable<number>,
-    NullableAndVoidable<number>,
+    $NullableAndOptional<number>,
+    $NullableAndOptional<number>,
     never
   >;
   time_scheduled: ColumnType<Date, string, never>;
   time_start_after: ColumnType<
-    NullableAndVoidable<Date>,
-    NullableAndVoidable<string>,
-    NullableAndVoidable<string>
+    $NullableAndOptional<Date>,
+    $NullableAndOptional<string>,
+    $NullableAndOptional<string>
   >;
   time_preprocess: ColumnType<
-    NullableAndVoidable<Date>,
-    NullableAndVoidable<string>,
-    NullableAndVoidable<string>
+    $NullableAndOptional<Date>,
+    $NullableAndOptional<string>,
+    $NullableAndOptional<string>
   >;
   time_start: ColumnType<
-    NullableAndVoidable<Date>,
-    NullableAndVoidable<string>,
-    NullableAndVoidable<string>
+    $NullableAndOptional<Date>,
+    $NullableAndOptional<string>,
+    $NullableAndOptional<string>
   >;
   time_finish: ColumnType<
-    NullableAndVoidable<Date>,
-    NullableAndVoidable<string>,
-    NullableAndVoidable<string>
+    $NullableAndOptional<Date>,
+    $NullableAndOptional<string>,
+    $NullableAndOptional<string>
   >;
   time_cancelled: ColumnType<
-    NullableAndVoidable<Date>,
-    NullableAndVoidable<string>,
-    NullableAndVoidable<string>
+    $NullableAndOptional<Date>,
+    $NullableAndOptional<string>,
+    $NullableAndOptional<string>
   >;
   job_arguments: ColumnType<
-    NullableAndVoidable<string>,
-    NullableAndVoidable<string>,
-    NullableAndVoidable<string>
+    $NullableAndOptional<string>,
+    $NullableAndOptional<string>,
+    $NullableAndOptional<string>
   >;
   job_result: ColumnType<
-    NullableAndVoidable<string>,
-    NullableAndVoidable<string>,
-    NullableAndVoidable<string>
+    $NullableAndOptional<string>,
+    $NullableAndOptional<string>,
+    $NullableAndOptional<string>
   >;
   cancellation_data: ColumnType<
-    NullableAndVoidable<string>,
-    NullableAndVoidable<string>,
-    NullableAndVoidable<string>
+    $NullableAndOptional<string>,
+    $NullableAndOptional<string>,
+    $NullableAndOptional<string>
   >;
 }
 

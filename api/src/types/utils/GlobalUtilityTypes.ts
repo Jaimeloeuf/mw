@@ -20,6 +20,13 @@ declare global {
   type $Optional<T> = T | void | undefined;
 
   /**
+   * Unions a given generic type with `null` and `void` and `undefined`.
+   *
+   * I.e. a `$NullableAndOptional<T>` will become `T | null | void | undefined`.
+   */
+  type $NullableAndOptional<T> = T | null | void | undefined;
+
+  /**
    * Constrain Type to ensure that statically defined Array values are non-empty
    * containing at least one value.
    *
