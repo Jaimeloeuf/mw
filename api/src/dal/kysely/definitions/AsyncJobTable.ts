@@ -19,49 +19,45 @@ export interface AsyncJobTable {
   >;
   caller: ColumnType<string, string, never>;
   stack_trace: ColumnType<string, string, never>;
-  timeout: ColumnType<
-    $NullableAndOptional<number>,
-    $NullableAndOptional<number>,
-    never
-  >;
+  timeout: ColumnType<$Nullable<number>, $NullableAndOptional<number>, never>;
   time_scheduled: ColumnType<Date, string, never>;
   time_start_after: ColumnType<
-    $NullableAndOptional<Date>,
+    $Nullable<Date>,
     $NullableAndOptional<string>,
     $NullableAndOptional<string>
   >;
   time_preprocess: ColumnType<
-    $NullableAndOptional<Date>,
+    $Nullable<Date>,
     $NullableAndOptional<string>,
     $NullableAndOptional<string>
   >;
   time_start: ColumnType<
-    $NullableAndOptional<Date>,
+    $Nullable<Date>,
     $NullableAndOptional<string>,
     $NullableAndOptional<string>
   >;
   time_finish: ColumnType<
-    $NullableAndOptional<Date>,
+    $Nullable<Date>,
     $NullableAndOptional<string>,
     $NullableAndOptional<string>
   >;
   time_cancelled: ColumnType<
-    $NullableAndOptional<Date>,
+    $Nullable<Date>,
     $NullableAndOptional<string>,
     $NullableAndOptional<string>
   >;
   job_arguments: ColumnType<
-    $NullableAndOptional<string>,
+    $Nullable<string>,
     $NullableAndOptional<string>,
     $NullableAndOptional<string>
   >;
   job_result: ColumnType<
-    $NullableAndOptional<string>,
+    $Nullable<string>,
     $NullableAndOptional<string>,
     $NullableAndOptional<string>
   >;
   cancellation_data: ColumnType<
-    $NullableAndOptional<string>,
+    $Nullable<string>,
     $NullableAndOptional<string>,
     $NullableAndOptional<string>
   >;
