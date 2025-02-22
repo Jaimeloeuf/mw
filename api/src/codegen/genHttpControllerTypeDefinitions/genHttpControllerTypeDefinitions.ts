@@ -15,13 +15,13 @@ export async function genHttpControllerTypeDefinitions() {
   const typeDefinitions = controllerFiles
     .map(
       (file) => `export type ${file.name}Controller_UrlParams = z.infer<
-  Exclude<(typeof c.${file.name})["urlParamsValidator"], null>
+  NonNullable<(typeof c.${file.name})["urlParamsValidator"]>
 >;
 export type ${file.name}Controller_QueryParams = z.infer<
-  Exclude<(typeof c.${file.name})["urlQueryParamsValidator"], null>
+  NonNullable<(typeof c.${file.name})["urlQueryParamsValidator"]>
 >;
 export type ${file.name}Controller_InputDTO = z.infer<
-  Exclude<(typeof c.${file.name})["requestBodyValidator"], null>
+  NonNullable<(typeof c.${file.name})["requestBodyValidator"]>
 >;
 export type ${file.name}Controller_OutputDTO = Awaited<
   ReturnType<(typeof c.${file.name})["httpRequestHandler"]>

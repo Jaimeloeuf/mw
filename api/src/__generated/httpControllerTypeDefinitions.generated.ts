@@ -6,7 +6,7 @@
  * genHttpControllerTypeDefinitions
  *
  * Generated hash in hex for code after this section is:
- * sha256(ca34c125a36a5e79532d37ff15334c24cc9d9d5445543b897e43490c7ba108d5)
+ * sha256(a89cc72596b789be995ffb6640421a690a2eddd8e38a6548cfe18433efb75e8e)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -15,13 +15,13 @@ import type { JSendSuccess } from "../http/JSend.js";
 import * as c from "./httpControllerBarrelFile.generated.do_not_include_in_barrel_file.js";
 
 export type healthCheckController_UrlParams = z.infer<
-  Exclude<(typeof c.healthCheck)["urlParamsValidator"], null>
+  NonNullable<(typeof c.healthCheck)["urlParamsValidator"]>
 >;
 export type healthCheckController_QueryParams = z.infer<
-  Exclude<(typeof c.healthCheck)["urlQueryParamsValidator"], null>
+  NonNullable<(typeof c.healthCheck)["urlQueryParamsValidator"]>
 >;
 export type healthCheckController_InputDTO = z.infer<
-  Exclude<(typeof c.healthCheck)["requestBodyValidator"], null>
+  NonNullable<(typeof c.healthCheck)["requestBodyValidator"]>
 >;
 export type healthCheckController_OutputDTO = Awaited<
   ReturnType<(typeof c.healthCheck)["httpRequestHandler"]>
@@ -29,13 +29,13 @@ export type healthCheckController_OutputDTO = Awaited<
 export type healthCheckController_OutputFullDTO =
   JSendSuccess<healthCheckController_OutputDTO>;
 export type blogNewSubscriberController_UrlParams = z.infer<
-  Exclude<(typeof c.blogNewSubscriber)["urlParamsValidator"], null>
+  NonNullable<(typeof c.blogNewSubscriber)["urlParamsValidator"]>
 >;
 export type blogNewSubscriberController_QueryParams = z.infer<
-  Exclude<(typeof c.blogNewSubscriber)["urlQueryParamsValidator"], null>
+  NonNullable<(typeof c.blogNewSubscriber)["urlQueryParamsValidator"]>
 >;
 export type blogNewSubscriberController_InputDTO = z.infer<
-  Exclude<(typeof c.blogNewSubscriber)["requestBodyValidator"], null>
+  NonNullable<(typeof c.blogNewSubscriber)["requestBodyValidator"]>
 >;
 export type blogNewSubscriberController_OutputDTO = Awaited<
   ReturnType<(typeof c.blogNewSubscriber)["httpRequestHandler"]>
@@ -43,13 +43,13 @@ export type blogNewSubscriberController_OutputDTO = Awaited<
 export type blogNewSubscriberController_OutputFullDTO =
   JSendSuccess<blogNewSubscriberController_OutputDTO>;
 export type bucketlistCreateOneController_UrlParams = z.infer<
-  Exclude<(typeof c.bucketlistCreateOne)["urlParamsValidator"], null>
+  NonNullable<(typeof c.bucketlistCreateOne)["urlParamsValidator"]>
 >;
 export type bucketlistCreateOneController_QueryParams = z.infer<
-  Exclude<(typeof c.bucketlistCreateOne)["urlQueryParamsValidator"], null>
+  NonNullable<(typeof c.bucketlistCreateOne)["urlQueryParamsValidator"]>
 >;
 export type bucketlistCreateOneController_InputDTO = z.infer<
-  Exclude<(typeof c.bucketlistCreateOne)["requestBodyValidator"], null>
+  NonNullable<(typeof c.bucketlistCreateOne)["requestBodyValidator"]>
 >;
 export type bucketlistCreateOneController_OutputDTO = Awaited<
   ReturnType<(typeof c.bucketlistCreateOne)["httpRequestHandler"]>
@@ -57,13 +57,13 @@ export type bucketlistCreateOneController_OutputDTO = Awaited<
 export type bucketlistCreateOneController_OutputFullDTO =
   JSendSuccess<bucketlistCreateOneController_OutputDTO>;
 export type bucketlistGetOneController_UrlParams = z.infer<
-  Exclude<(typeof c.bucketlistGetOne)["urlParamsValidator"], null>
+  NonNullable<(typeof c.bucketlistGetOne)["urlParamsValidator"]>
 >;
 export type bucketlistGetOneController_QueryParams = z.infer<
-  Exclude<(typeof c.bucketlistGetOne)["urlQueryParamsValidator"], null>
+  NonNullable<(typeof c.bucketlistGetOne)["urlQueryParamsValidator"]>
 >;
 export type bucketlistGetOneController_InputDTO = z.infer<
-  Exclude<(typeof c.bucketlistGetOne)["requestBodyValidator"], null>
+  NonNullable<(typeof c.bucketlistGetOne)["requestBodyValidator"]>
 >;
 export type bucketlistGetOneController_OutputDTO = Awaited<
   ReturnType<(typeof c.bucketlistGetOne)["httpRequestHandler"]>
@@ -71,13 +71,13 @@ export type bucketlistGetOneController_OutputDTO = Awaited<
 export type bucketlistGetOneController_OutputFullDTO =
   JSendSuccess<bucketlistGetOneController_OutputDTO>;
 export type checkGetChecklistController_UrlParams = z.infer<
-  Exclude<(typeof c.checkGetChecklist)["urlParamsValidator"], null>
+  NonNullable<(typeof c.checkGetChecklist)["urlParamsValidator"]>
 >;
 export type checkGetChecklistController_QueryParams = z.infer<
-  Exclude<(typeof c.checkGetChecklist)["urlQueryParamsValidator"], null>
+  NonNullable<(typeof c.checkGetChecklist)["urlQueryParamsValidator"]>
 >;
 export type checkGetChecklistController_InputDTO = z.infer<
-  Exclude<(typeof c.checkGetChecklist)["requestBodyValidator"], null>
+  NonNullable<(typeof c.checkGetChecklist)["requestBodyValidator"]>
 >;
 export type checkGetChecklistController_OutputDTO = Awaited<
   ReturnType<(typeof c.checkGetChecklist)["httpRequestHandler"]>
@@ -85,13 +85,13 @@ export type checkGetChecklistController_OutputDTO = Awaited<
 export type checkGetChecklistController_OutputFullDTO =
   JSendSuccess<checkGetChecklistController_OutputDTO>;
 export type johariGetJohariController_UrlParams = z.infer<
-  Exclude<(typeof c.johariGetJohari)["urlParamsValidator"], null>
+  NonNullable<(typeof c.johariGetJohari)["urlParamsValidator"]>
 >;
 export type johariGetJohariController_QueryParams = z.infer<
-  Exclude<(typeof c.johariGetJohari)["urlQueryParamsValidator"], null>
+  NonNullable<(typeof c.johariGetJohari)["urlQueryParamsValidator"]>
 >;
 export type johariGetJohariController_InputDTO = z.infer<
-  Exclude<(typeof c.johariGetJohari)["requestBodyValidator"], null>
+  NonNullable<(typeof c.johariGetJohari)["requestBodyValidator"]>
 >;
 export type johariGetJohariController_OutputDTO = Awaited<
   ReturnType<(typeof c.johariGetJohari)["httpRequestHandler"]>
@@ -99,13 +99,13 @@ export type johariGetJohariController_OutputDTO = Awaited<
 export type johariGetJohariController_OutputFullDTO =
   JSendSuccess<johariGetJohariController_OutputDTO>;
 export type johariCreateJohariAnswerController_UrlParams = z.infer<
-  Exclude<(typeof c.johariCreateJohariAnswer)["urlParamsValidator"], null>
+  NonNullable<(typeof c.johariCreateJohariAnswer)["urlParamsValidator"]>
 >;
 export type johariCreateJohariAnswerController_QueryParams = z.infer<
-  Exclude<(typeof c.johariCreateJohariAnswer)["urlQueryParamsValidator"], null>
+  NonNullable<(typeof c.johariCreateJohariAnswer)["urlQueryParamsValidator"]>
 >;
 export type johariCreateJohariAnswerController_InputDTO = z.infer<
-  Exclude<(typeof c.johariCreateJohariAnswer)["requestBodyValidator"], null>
+  NonNullable<(typeof c.johariCreateJohariAnswer)["requestBodyValidator"]>
 >;
 export type johariCreateJohariAnswerController_OutputDTO = Awaited<
   ReturnType<(typeof c.johariCreateJohariAnswer)["httpRequestHandler"]>
@@ -113,13 +113,13 @@ export type johariCreateJohariAnswerController_OutputDTO = Awaited<
 export type johariCreateJohariAnswerController_OutputFullDTO =
   JSendSuccess<johariCreateJohariAnswerController_OutputDTO>;
 export type johariGetJohariAnswersController_UrlParams = z.infer<
-  Exclude<(typeof c.johariGetJohariAnswers)["urlParamsValidator"], null>
+  NonNullable<(typeof c.johariGetJohariAnswers)["urlParamsValidator"]>
 >;
 export type johariGetJohariAnswersController_QueryParams = z.infer<
-  Exclude<(typeof c.johariGetJohariAnswers)["urlQueryParamsValidator"], null>
+  NonNullable<(typeof c.johariGetJohariAnswers)["urlQueryParamsValidator"]>
 >;
 export type johariGetJohariAnswersController_InputDTO = z.infer<
-  Exclude<(typeof c.johariGetJohariAnswers)["requestBodyValidator"], null>
+  NonNullable<(typeof c.johariGetJohariAnswers)["requestBodyValidator"]>
 >;
 export type johariGetJohariAnswersController_OutputDTO = Awaited<
   ReturnType<(typeof c.johariGetJohariAnswers)["httpRequestHandler"]>
@@ -127,13 +127,13 @@ export type johariGetJohariAnswersController_OutputDTO = Awaited<
 export type johariGetJohariAnswersController_OutputFullDTO =
   JSendSuccess<johariGetJohariAnswersController_OutputDTO>;
 export type johariCreateJohariController_UrlParams = z.infer<
-  Exclude<(typeof c.johariCreateJohari)["urlParamsValidator"], null>
+  NonNullable<(typeof c.johariCreateJohari)["urlParamsValidator"]>
 >;
 export type johariCreateJohariController_QueryParams = z.infer<
-  Exclude<(typeof c.johariCreateJohari)["urlQueryParamsValidator"], null>
+  NonNullable<(typeof c.johariCreateJohari)["urlQueryParamsValidator"]>
 >;
 export type johariCreateJohariController_InputDTO = z.infer<
-  Exclude<(typeof c.johariCreateJohari)["requestBodyValidator"], null>
+  NonNullable<(typeof c.johariCreateJohari)["requestBodyValidator"]>
 >;
 export type johariCreateJohariController_OutputDTO = Awaited<
   ReturnType<(typeof c.johariCreateJohari)["httpRequestHandler"]>
@@ -141,16 +141,13 @@ export type johariCreateJohariController_OutputDTO = Awaited<
 export type johariCreateJohariController_OutputFullDTO =
   JSendSuccess<johariCreateJohariController_OutputDTO>;
 export type leetcodeCreateLeetcodeQuesController_UrlParams = z.infer<
-  Exclude<(typeof c.leetcodeCreateLeetcodeQues)["urlParamsValidator"], null>
+  NonNullable<(typeof c.leetcodeCreateLeetcodeQues)["urlParamsValidator"]>
 >;
 export type leetcodeCreateLeetcodeQuesController_QueryParams = z.infer<
-  Exclude<
-    (typeof c.leetcodeCreateLeetcodeQues)["urlQueryParamsValidator"],
-    null
-  >
+  NonNullable<(typeof c.leetcodeCreateLeetcodeQues)["urlQueryParamsValidator"]>
 >;
 export type leetcodeCreateLeetcodeQuesController_InputDTO = z.infer<
-  Exclude<(typeof c.leetcodeCreateLeetcodeQues)["requestBodyValidator"], null>
+  NonNullable<(typeof c.leetcodeCreateLeetcodeQues)["requestBodyValidator"]>
 >;
 export type leetcodeCreateLeetcodeQuesController_OutputDTO = Awaited<
   ReturnType<(typeof c.leetcodeCreateLeetcodeQues)["httpRequestHandler"]>
@@ -158,13 +155,13 @@ export type leetcodeCreateLeetcodeQuesController_OutputDTO = Awaited<
 export type leetcodeCreateLeetcodeQuesController_OutputFullDTO =
   JSendSuccess<leetcodeCreateLeetcodeQuesController_OutputDTO>;
 export type leetcodeGetLeetcodeQuesController_UrlParams = z.infer<
-  Exclude<(typeof c.leetcodeGetLeetcodeQues)["urlParamsValidator"], null>
+  NonNullable<(typeof c.leetcodeGetLeetcodeQues)["urlParamsValidator"]>
 >;
 export type leetcodeGetLeetcodeQuesController_QueryParams = z.infer<
-  Exclude<(typeof c.leetcodeGetLeetcodeQues)["urlQueryParamsValidator"], null>
+  NonNullable<(typeof c.leetcodeGetLeetcodeQues)["urlQueryParamsValidator"]>
 >;
 export type leetcodeGetLeetcodeQuesController_InputDTO = z.infer<
-  Exclude<(typeof c.leetcodeGetLeetcodeQues)["requestBodyValidator"], null>
+  NonNullable<(typeof c.leetcodeGetLeetcodeQues)["requestBodyValidator"]>
 >;
 export type leetcodeGetLeetcodeQuesController_OutputDTO = Awaited<
   ReturnType<(typeof c.leetcodeGetLeetcodeQues)["httpRequestHandler"]>
@@ -172,13 +169,13 @@ export type leetcodeGetLeetcodeQuesController_OutputDTO = Awaited<
 export type leetcodeGetLeetcodeQuesController_OutputFullDTO =
   JSendSuccess<leetcodeGetLeetcodeQuesController_OutputDTO>;
 export type versionController_UrlParams = z.infer<
-  Exclude<(typeof c.version)["urlParamsValidator"], null>
+  NonNullable<(typeof c.version)["urlParamsValidator"]>
 >;
 export type versionController_QueryParams = z.infer<
-  Exclude<(typeof c.version)["urlQueryParamsValidator"], null>
+  NonNullable<(typeof c.version)["urlQueryParamsValidator"]>
 >;
 export type versionController_InputDTO = z.infer<
-  Exclude<(typeof c.version)["requestBodyValidator"], null>
+  NonNullable<(typeof c.version)["requestBodyValidator"]>
 >;
 export type versionController_OutputDTO = Awaited<
   ReturnType<(typeof c.version)["httpRequestHandler"]>
@@ -186,13 +183,13 @@ export type versionController_OutputDTO = Awaited<
 export type versionController_OutputFullDTO =
   JSendSuccess<versionController_OutputDTO>;
 export type webhookTelegramController_UrlParams = z.infer<
-  Exclude<(typeof c.webhookTelegram)["urlParamsValidator"], null>
+  NonNullable<(typeof c.webhookTelegram)["urlParamsValidator"]>
 >;
 export type webhookTelegramController_QueryParams = z.infer<
-  Exclude<(typeof c.webhookTelegram)["urlQueryParamsValidator"], null>
+  NonNullable<(typeof c.webhookTelegram)["urlQueryParamsValidator"]>
 >;
 export type webhookTelegramController_InputDTO = z.infer<
-  Exclude<(typeof c.webhookTelegram)["requestBodyValidator"], null>
+  NonNullable<(typeof c.webhookTelegram)["requestBodyValidator"]>
 >;
 export type webhookTelegramController_OutputDTO = Awaited<
   ReturnType<(typeof c.webhookTelegram)["httpRequestHandler"]>
