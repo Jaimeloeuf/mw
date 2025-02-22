@@ -3,7 +3,7 @@
  * undefined, this will throw an Error.
  */
 export function dataOrThrow<T>(
-  data: T | null | undefined,
+  data: $NullableAndOptional<T>,
   optionalErrorMessage?: string,
 ): T {
   if (data === null || data === undefined) {

@@ -14,7 +14,7 @@ export const ProdEmailServiceFF = (
      * Notification message. This supports HTML formatting
      */
     message: string,
-  ): Promise<void | Error> {
+  ): Promise<$Optional<Error>> {
     emailAddressForSendFrom;
     emailAddressForReplyTo;
     recipientEmail;
