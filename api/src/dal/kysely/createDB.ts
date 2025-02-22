@@ -1,4 +1,4 @@
-import type { Logger, LogConfig } from "kysely";
+import type { LogLevel } from "kysely";
 
 import { Kysely, PostgresDialect } from "kysely";
 import pg from "pg";
@@ -25,7 +25,7 @@ export function createDB(config: {
   kysely_log_query?: boolean;
   kysely_log_error?: boolean;
 }) {
-  const log: Array<Exclude<LogConfig, Logger>[number]> = [];
+  const log: Array<LogLevel> = [];
   if (config.kysely_log_query) {
     log.push("query");
   }
