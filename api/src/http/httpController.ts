@@ -46,9 +46,9 @@ export const httpController = <
     | "delete"
     | "all",
   const PathStringLiteralType extends string,
-  const Guards extends Readonly<
-    $NonEmptyArray<ReturnType<typeof useHttpRequestGuard>>
-  > | null,
+  const Guards extends $Nullable<
+    Readonly<$NonEmptyArray<ReturnType<typeof useHttpRequestGuard>>>
+  >,
   /**
    * Infer return type of all the Guards combined into a single object under
    * their specified string literal `guardNamespace`, which will then be passed
@@ -61,16 +61,16 @@ export const httpController = <
           ReturnType<NonNullable<Guards>[number]["guard"]>
         >;
       },
-  const NullableUrlParamsZodParserType extends ZodType | null,
+  const NullableUrlParamsZodParserType extends $Nullable<ZodType>,
   const UrlParamsType extends NullableUrlParamsZodParserType extends null
     ? null
     : zodInfer<NonNullable<NullableUrlParamsZodParserType>>,
-  const NullableUrlQueryParamsZodParserType extends ZodType | null,
+  const NullableUrlQueryParamsZodParserType extends $Nullable<ZodType>,
   const UrlQueryParamsType extends
     NullableUrlQueryParamsZodParserType extends null
       ? null
       : zodInfer<NonNullable<NullableUrlQueryParamsZodParserType>>,
-  const NullableRequestBodyZodParserType extends ZodType | null,
+  const NullableRequestBodyZodParserType extends $Nullable<ZodType>,
   const RequestBodyType extends NullableRequestBodyZodParserType extends null
     ? null
     : zodInfer<NonNullable<NullableRequestBodyZodParserType>>,
