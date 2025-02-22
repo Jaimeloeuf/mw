@@ -27,7 +27,7 @@ type UrlBuilderOptions<T> = VoidIfAllPropertiesInObjectIsVoid<
 >;
 
 function createUrlQueryParamsString(
-  urlQueryParams: undefined | null | Record<string, any>,
+  urlQueryParams: $NullableAndOptional<Record<string, any>>,
 ) {
   if (urlQueryParams == null) {
     return "";

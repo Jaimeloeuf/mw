@@ -6,7 +6,7 @@
  * genHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(f34d2d83e479dc5275221e82a40dd9c08dcb9f66a4a09498893c225ebe268a63)
+ * sha256(3ddbec15250b2d5ab880c444adf159eca87b2df2ecc6174bc39c7768f49ef5a7)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -22,7 +22,7 @@ type UrlBuilderOptions<T> = VoidIfAllPropertiesInObjectIsVoid<
 >;
 
 function createUrlQueryParamsString(
-  urlQueryParams: undefined | null | Record<string, any>,
+  urlQueryParams: $NullableAndOptional<Record<string, any>>,
 ) {
   if (urlQueryParams == null) {
     return "";
