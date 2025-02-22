@@ -57,23 +57,23 @@ export const httpController = <
   const GuardsDataType extends Guards extends null
     ? null
     : {
-        [T in Exclude<Guards, null>[number]["guardDataNamespace"]]: Awaited<
-          ReturnType<Exclude<Guards, null>[number]["guard"]>
+        [T in NonNullable<Guards>[number]["guardDataNamespace"]]: Awaited<
+          ReturnType<NonNullable<Guards>[number]["guard"]>
         >;
       },
   const NullableUrlParamsZodParserType extends ZodType | null,
   const UrlParamsType extends NullableUrlParamsZodParserType extends null
     ? null
-    : zodInfer<Exclude<NullableUrlParamsZodParserType, null>>,
+    : zodInfer<NonNullable<NullableUrlParamsZodParserType>>,
   const NullableUrlQueryParamsZodParserType extends ZodType | null,
   const UrlQueryParamsType extends
     NullableUrlQueryParamsZodParserType extends null
       ? null
-      : zodInfer<Exclude<NullableUrlQueryParamsZodParserType, null>>,
+      : zodInfer<NonNullable<NullableUrlQueryParamsZodParserType>>,
   const NullableRequestBodyZodParserType extends ZodType | null,
   const RequestBodyType extends NullableRequestBodyZodParserType extends null
     ? null
-    : zodInfer<Exclude<NullableRequestBodyZodParserType, null>>,
+    : zodInfer<NonNullable<NullableRequestBodyZodParserType>>,
   const HttpRequestHandlerReturnType extends
     | ValidJsendDatatype
     | Promise<ValidJsendDatatype>,
@@ -175,10 +175,8 @@ export const httpController = <
       // Run Guard functions sequentialy if any, and before the expensive data
       // validation step. If a guard throws, all subsequent guards are skipped.
       if (guards !== null) {
-        const partialGuardData: GuardsDataType = {} as Exclude<
-          GuardsDataType,
-          null
-        >;
+        const partialGuardData: GuardsDataType =
+          {} as NonNullable<GuardsDataType>;
 
         for (const { guardDataNamespace, guard } of guards) {
           partialGuardData[guardDataNamespace] = await guard(req);
