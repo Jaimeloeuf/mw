@@ -1,4 +1,4 @@
-import { HttpStatus, type HttpStatusCode } from "../types/index.js";
+import { HttpStatus, type HttpStatusCode } from "../http/HttpStatus.js";
 import { HttpTransformerableException } from "./HttpTransformerableException.js";
 
 /**

@@ -1,5 +1,4 @@
-import type { ValidJsendDatatype } from "../http/index.js";
-import type { HttpStatusCode } from "../types/HttpStatusCode.js";
+import type { HttpStatusCode, ValidJsendDatatype } from "../http/index.js";
 
 import { Exception } from "./Exception.js";
 

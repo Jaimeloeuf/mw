@@ -16,7 +16,7 @@ import {
   Exception,
 } from "../exceptions/index.js";
 import { logger } from "../logging/index.js";
-import { HttpStatus, type HttpStatusCode } from "../types/index.js";
+import { HttpStatus, type HttpStatusCode } from "./HttpStatus.js";
 
 /**
  * Use this function to wrap httpRequestHandlers/controllers to interface with
