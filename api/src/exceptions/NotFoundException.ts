@@ -1,4 +1,4 @@
-import { HttpStatusCode } from "../types/HttpStatusCode.js";
+import { HttpStatus } from "../types/HttpStatusCode.js";
 import { HttpTransformerableException } from "./HttpTransformerableException.js";
 
 /**
@@ -15,7 +15,7 @@ export class NotFoundException extends HttpTransformerableException {
 
   transformToHttpResponseData() {
     return {
-      httpStatusCode: HttpStatusCode.NotFound_404,
+      httpStatusCode: HttpStatus.NotFound_404,
       jsendData: [
         NotFoundException.name,
         this.message,

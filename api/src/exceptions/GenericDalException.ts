@@ -1,4 +1,4 @@
-import { HttpStatusCode } from "../types/index.js";
+import { HttpStatus, type HttpStatusCode } from "../types/index.js";
 import { HttpTransformerableException } from "./HttpTransformerableException.js";
 
 /**
@@ -18,8 +18,7 @@ export class GenericDalException extends HttpTransformerableException {
     super(msg);
   }
 
-  private httpStatusCode: HttpStatusCode =
-    HttpStatusCode.InternalServerError_500;
+  private httpStatusCode: HttpStatusCode = HttpStatus.InternalServerError_500;
 
   /**
    * Optionally override the default 500 HTTP status code.

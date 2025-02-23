@@ -1,4 +1,4 @@
-import { HttpStatusCode } from "../types/HttpStatusCode.js";
+import { HttpStatus } from "../types/HttpStatusCode.js";
 import { HttpTransformerableException } from "./HttpTransformerableException.js";
 
 /**
@@ -15,7 +15,7 @@ export class InvalidInputException extends HttpTransformerableException {
 
   transformToHttpResponseData() {
     return {
-      httpStatusCode: HttpStatusCode.BadRequest_400,
+      httpStatusCode: HttpStatus.BadRequest_400,
       jsendData: [
         InvalidInputException.name,
         this.message,

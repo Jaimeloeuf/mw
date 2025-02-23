@@ -16,7 +16,7 @@ import {
   Exception,
 } from "../exceptions/index.js";
 import { logger } from "../logging/index.js";
-import { HttpStatusCode } from "../types/index.js";
+import { HttpStatus, type HttpStatusCode } from "../types/index.js";
 
 /**
  * Use this function to wrap httpRequestHandlers/controllers to interface with
@@ -88,7 +88,7 @@ export const httpController = <
      */
     setHttpStatusCode: (
       /**
-       * Use the `HttpStatusCode` enum for more self documenting code.
+       * Use the `HttpStatus` for more self documenting code.
        */
       statusCode: HttpStatusCode,
     ) => void;
@@ -190,7 +190,7 @@ export const httpController = <
       }
 
       // Defaults to 200 ok if no exceptions thrown
-      let statusCode = HttpStatusCode.Ok_200;
+      let statusCode: HttpStatusCode = HttpStatus.Ok_200;
 
       const data = await httpRequestHandler({
         req,
@@ -266,7 +266,7 @@ export const httpController = <
           // @todo Should not be 400, Instead of i should have a generic Service Exception, one that throws 400 and one that throws 500...!
           // @todo then if really dont have, then throw a 500 to indicate that unclear exception happened
           // Then this should be a JSendError since we dont not what the issue is
-          .status(HttpStatusCode.BadRequest_400)
+          .status(HttpStatus.BadRequest_400)
           .json({
             status: "fail",
             data: [
@@ -281,7 +281,7 @@ export const httpController = <
 
       // Treat Zod input validation/parsing errors as exceptions
       if (error instanceof ZodError) {
-        res.status(HttpStatusCode.BadRequest_400).json({
+        res.status(HttpStatus.BadRequest_400).json({
           status: "fail",
           data: [`ID: ${logID}`, "Invalid input data", ...error.issues],
         } satisfies JSendFail);
@@ -291,7 +291,7 @@ export const httpController = <
 
       // If instance thrown is none of the above exception types, then it is an
       // error of unknown nature, respond with the appropriate JSend error type.
-      res.status(HttpStatusCode.InternalServerError_500).json({
+      res.status(HttpStatus.InternalServerError_500).json({
         status: "error",
         message: "Internal Server Error!",
         data: [

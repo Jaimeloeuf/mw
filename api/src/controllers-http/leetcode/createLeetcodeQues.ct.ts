@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { sv } from "../../__generated/index.js";
 import { httpController } from "../../http/index.js";
-import { HttpStatusCode } from "../../types/index.js";
+import { HttpStatus } from "../../types/index.js";
 
 export default httpController({
   version: 1,
@@ -16,7 +16,7 @@ export default httpController({
     tags: z.array(z.string()),
   }),
   async httpRequestHandler({ requestBody, setHttpStatusCode }) {
-    setHttpStatusCode(HttpStatusCode.Created_201);
+    setHttpStatusCode(HttpStatus.Created_201);
     return sv.leetcodeCreateLeetcodeQues(requestBody);
   },
 });

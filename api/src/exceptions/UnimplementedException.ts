@@ -1,4 +1,4 @@
-import { HttpStatusCode } from "../types/HttpStatusCode.js";
+import { HttpStatus } from "../types/HttpStatusCode.js";
 import { HttpTransformerableException } from "./HttpTransformerableException.js";
 
 /**
@@ -14,7 +14,7 @@ export class UnimplementedException extends HttpTransformerableException {
 
   transformToHttpResponseData() {
     return {
-      httpStatusCode: HttpStatusCode.InternalServerError_500,
+      httpStatusCode: HttpStatus.InternalServerError_500,
       jsendData: [
         UnimplementedException.name,
         this.message,

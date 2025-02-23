@@ -1,11 +1,16 @@
 /**
+ * Type of all allowed HTTP status code as a union of number literals.
+ */
+export type HttpStatusCode = (typeof HttpStatus)[keyof typeof HttpStatus];
+
+/**
  * HTTP response status codes.
  *
  * References:
  * 1. https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
  * 1. https://datatracker.ietf.org/doc/html/rfc7231#section-6
  */
-export enum HttpStatusCode {
+export const HttpStatus = {
   /**
    * The server has received the request headers and the client should proceed
    * to send the request body (in the case of a request for which a body needs
@@ -16,13 +21,13 @@ export enum HttpStatusCode {
    * 100 Continue status code in response before sending the body. The response
    * 417 Expectation Failed indicates the request should not be continued.
    */
-  Continue_100 = 100,
+  Continue_100: 100,
 
   /**
    * The requester has asked the server to switch protocols and the server has
    * agreed to do so.
    */
-  SwitchingProtocols_101 = 101,
+  SwitchingProtocols_101: 101,
 
   /**
    * A WebDAV request may contain many sub-requests involving file operations,
@@ -31,7 +36,7 @@ export enum HttpStatusCode {
    * available yet. This prevents the client from timing out and assuming the
    * request was lost.
    */
-  Processing_102 = 102,
+  Processing_102: 102,
 
   /**
    * Standard response for successful HTTP requests. The actual response will
@@ -40,38 +45,38 @@ export enum HttpStatusCode {
    * request, the response will contain an entity describing or containing the
    * result of the action.
    */
-  Ok_200 = 200,
+  Ok_200: 200,
 
   /**
    * The request is fulfilled, resulting in the creation of a new resource.
    */
-  Created_201 = 201,
+  Created_201: 201,
 
   /**
    * The request has been accepted for processing, but the processing has not
    * been completed. The request might or might not be eventually acted upon,
    * and may be disallowed when processing occurs.
    */
-  Accepted_202 = 202,
+  Accepted_202: 202,
 
   /**
    * The server is a transforming proxy that received a 200 OK from its origin,
    * but is returning a modified version of the origin's response.
    */
-  NonAuthoritativeInformation_203 = 203,
+  NonAuthoritativeInformation_203: 203,
 
   /**
    * The server successfully processed the request and is not returning any
    * content.
    */
-  NoContent_204 = 204,
+  NoContent_204: 204,
 
   /**
    * The server successfully processed the request, but is not returning any
    * content. Unlike a 204 response, this response requires that the requester
    * reset the document view.
    */
-  ResetContent_205 = 205,
+  ResetContent_205: 205,
 
   /**
    * The server is delivering only part of the resource (byte serving) due to a
@@ -79,27 +84,27 @@ export enum HttpStatusCode {
    * to enable resuming of interrupted downloads, or split a download into
    * multiple simultaneous streams.
    */
-  PartialContent_206 = 206,
+  PartialContent_206: 206,
 
   /**
    * The message body that follows is an XML message and can contain a number of
    * separate response codes, depending on how many sub-requests were made.
    */
-  MultiStatus_207 = 207,
+  MultiStatus_207: 207,
 
   /**
    * The members of a DAV binding have already been enumerated in a preceding
    * part of the (multistatus) response,
    * and are not being included again.
    */
-  AlreadyReported_208 = 208,
+  AlreadyReported_208: 208,
 
   /**
    * The server has fulfilled a request for the resource, and the response is a
    * representation of the result of one or more instance-manipulations applied
    * to the current instance.
    */
-  ImUsed_226 = 226,
+  ImUsed_226: 226,
 
   /**
    * Indicates multiple options for the resource from which the client may
@@ -107,12 +112,12 @@ export enum HttpStatusCode {
    * be used to present multiple video format options, to list files with
    * different filename extensions, or to suggest word-sense disambiguation.
    */
-  MultipleChoices_300 = 300,
+  MultipleChoices_300: 300,
 
   /**
    * This and all future requests should be directed to the given URI.
    */
-  MovedPermanently_301 = 301,
+  MovedPermanently_301: 301,
 
   /**
    * This is an example of industry practice contradicting the standard.
@@ -123,7 +128,7 @@ export enum HttpStatusCode {
    * the two behaviours. However, some Web applications and frameworks use the
    * 302 status code as if it were the 303.
    */
-  Found_302 = 302,
+  Found_302: 302,
 
   /**
    * SINCE HTTP/1.1 The response to the request can be found under another URI
@@ -131,7 +136,7 @@ export enum HttpStatusCode {
    * the client should presume that the server has received the data and should
    * issue a redirect with a separate GET message.
    */
-  SeeOther_303 = 303,
+  SeeOther_303: 303,
 
   /**
    * Indicates that the resource has not been modified since the version
@@ -139,7 +144,7 @@ export enum HttpStatusCode {
    * such case, there is no need to retransmit the resource since the client
    * still has a previously-downloaded copy.
    */
-  NotModified_304 = 304,
+  NotModified_304: 304,
 
   /**
    * SINCE HTTP/1.1 The requested resource is available only through a proxy,
@@ -147,13 +152,13 @@ export enum HttpStatusCode {
    * as Mozilla and Internet Explorer) do not correctly handle responses with
    * this status code, primarily for security reasons.
    */
-  UseProxy_305 = 305,
+  UseProxy_305: 305,
 
   /**
    * No longer used. Originally meant "Subsequent requests should use the
    * specified proxy."
    */
-  SwitchProxy_306 = 306,
+  SwitchProxy_306: 306,
 
   /**
    * SINCE HTTP/1.1 In this case, the request should be repeated with another
@@ -162,7 +167,7 @@ export enum HttpStatusCode {
    * allowed to be changed when reissuing the original request. For example, a
    * POST request should be repeated using another POST request.
    */
-  TemporaryRedirect_307 = 307,
+  TemporaryRedirect_307: 307,
 
   /**
    * The request and all future requests should be repeated using another URI.
@@ -170,14 +175,14 @@ export enum HttpStatusCode {
    * HTTP method to change. So, for example, submitting a form to a permanently
    * redirected resource may continue smoothly.
    */
-  PermanentRedirect_308 = 308,
+  PermanentRedirect_308: 308,
 
   /**
    * The server cannot or will not process the request due to an apparent client
    * error (e.g., malformed request syntax, too large size, invalid request
    * message framing, or deceptive request routing).
    */
-  BadRequest_400 = 400,
+  BadRequest_400: 400,
 
   /**
    * Similar to 403 Forbidden, but specifically for use when authentication is
@@ -187,7 +192,7 @@ export enum HttpStatusCode {
    * access authentication. 401 semantically means "unauthenticated",i.e. the
    * user does not have the necessary credentials.
    */
-  Unauthorized_401 = 401,
+  Unauthorized_401: 401,
 
   /**
    * Reserved for future use. The original intention was that this code might be
@@ -196,37 +201,37 @@ export enum HttpStatusCode {
    * API uses this status if a particular developer has exceeded the daily limit
    * on requests.
    */
-  PaymentRequired_402 = 402,
+  PaymentRequired_402: 402,
 
   /**
    * The request was valid, but the server is refusing action. The user might
    * not have the necessary permissions for a resource.
    */
-  Forbidden_403 = 403,
+  Forbidden_403: 403,
 
   /**
    * The requested resource could not be found but may be available in the
    * future. Subsequent requests by the client are permissible.
    */
-  NotFound_404 = 404,
+  NotFound_404: 404,
 
   /**
    * A request method is not supported for the requested resource. For example,
    * a GET request on a form that requires data to be presented via POST, or a
    * PUT request on a read-only resource.
    */
-  MethodNotAllowed_405 = 405,
+  MethodNotAllowed_405: 405,
 
   /**
    * The requested resource is capable of generating only content not acceptable
    * according to the Accept headers sent in the request.
    */
-  NotAcceptable_406 = 406,
+  NotAcceptable_406: 406,
 
   /**
    * The client must first authenticate itself with the proxy.
    */
-  ProxyAuthenticationRequired_407 = 407,
+  ProxyAuthenticationRequired_407: 407,
 
   /**
    * The server timed out waiting for the request. According to HTTP
@@ -234,13 +239,13 @@ export enum HttpStatusCode {
    * the server was prepared to wait. The client MAY repeat the request without
    * modifications at any later time."
    */
-  RequestTimeout_408 = 408,
+  RequestTimeout_408: 408,
 
   /**
    * Indicates that the request could not be processed because of a conflict,
    * such as an edit conflict between multiple simultaneous updates.
    */
-  Conflict_409 = 409,
+  Conflict_409: 409,
 
   /**
    * Indicates that the resource requested is no longer available and will not
@@ -251,25 +256,25 @@ export enum HttpStatusCode {
    * indices. Most use cases do not require clients and search engines to purge
    * the resource, and a "404 Not Found" may be used instead.
    */
-  Gone_410 = 410,
+  Gone_410: 410,
 
   /**
    * The request did not specify the length of its content, which is required by
    * the requested resource.
    */
-  LengthRequired_411 = 411,
+  LengthRequired_411: 411,
 
   /**
    * The server does not meet one of the preconditions that the requester put on
    * the request.
    */
-  PreconditionFailed_412 = 412,
+  PreconditionFailed_412: 412,
 
   /**
    * The request is larger than the server is willing or able to process.
    * Previously called "Request Entity Too Large".
    */
-  PayloadTooLarge_413 = 413,
+  PayloadTooLarge_413: 413,
 
   /**
    * The URI provided was too long for the server to process. Often the result
@@ -277,14 +282,14 @@ export enum HttpStatusCode {
    * case it should be converted to a POST request. Previously called
    * "Request-URI Too Long".
    */
-  UriTooLong_414 = 414,
+  UriTooLong_414: 414,
 
   /**
    * The request entity has a media type which the server or resource does not
    * support. For example, the client uploads an image as image/svg+xml, but the
    * server requires that images use a different format.
    */
-  UnsupportedMediaType_415 = 415,
+  UnsupportedMediaType_415: 415,
 
   /**
    * The client has asked for a portion of the file (byte serving), but the
@@ -292,12 +297,12 @@ export enum HttpStatusCode {
    * part of the file that lies beyond the end of the file. Called "Requested
    * Range Not Satisfiable" previously.
    */
-  RangeNotSatisfiable_416 = 416,
+  RangeNotSatisfiable_416: 416,
 
   /**
    * The server cannot meet the requirements of the Expect request-header field.
    */
-  ExpectationFailed_417 = 417,
+  ExpectationFailed_417: 417,
 
   /**
    * This code was defined in 1998 as one of the traditional IETF April Fools'
@@ -306,35 +311,35 @@ export enum HttpStatusCode {
    * code should be returned by teapots requested to brew coffee. This HTTP
    * status is used as an Easter egg in some websites, including Google.com.
    */
-  IAmATeapot_418 = 418,
+  IAmATeapot_418: 418,
 
   /**
    * The request was directed at a server that is not able to produce a response
    * (for example because a connection reuse).
    */
-  MisdirectedRequest_421 = 421,
+  MisdirectedRequest_421: 421,
 
   /**
    * The request was well-formed but was unable to be followed due to semantic
    * errors.
    */
-  UnprocessableEntity_422 = 422,
+  UnprocessableEntity_422: 422,
 
   /**
    * The resource that is being accessed is locked.
    */
-  Locked_423 = 423,
+  Locked_423: 423,
 
   /**
    * The request failed due to failure of a previous request (e.g. a PROPPATCH).
    */
-  FailedDependency_424 = 424,
+  FailedDependency_424: 424,
 
   /**
    * The client should switch to a different protocol such as TLS/1.0, given in
    * the Upgrade header field.
    */
-  UpgradeRequired_426 = 426,
+  UpgradeRequired_426: 426,
 
   /**
    * The origin server requires the request to be conditional. Intended to
@@ -342,85 +347,85 @@ export enum HttpStatusCode {
    * modifies it, and PUTs it back to the server, when meanwhile a third party
    * has modified the state on the server, leading to a conflict."
    */
-  PreconditionRequired_428 = 428,
+  PreconditionRequired_428: 428,
 
   /**
    * The user has sent too many requests in a given amount of time. Intended for
    * use with rate-limiting schemes.
    */
-  TooManyRequests_429 = 429,
+  TooManyRequests_429: 429,
 
   /**
    * The server is unwilling to process the request because either an individual
    * header field, or all the header fields collectively, are too large.
    */
-  RequestHeaderFieldsTooLarge_431 = 431,
+  RequestHeaderFieldsTooLarge_431: 431,
 
   /**
    * A server operator has received a legal demand to deny access to a resource
    * or to a set of resources that includes the requested resource. The code 451
    * was chosen as a reference to the novel Fahrenheit 451.
    */
-  UnavailableForLegalReasons_451 = 451,
+  UnavailableForLegalReasons_451: 451,
 
   /**
    * A generic error message, given when an unexpected condition was encountered
    * and no more specific message is suitable.
    */
-  InternalServerError_500 = 500,
+  InternalServerError_500: 500,
 
   /**
    * The server either does not recognize the request method, or it lacks the
    * ability to fulfill the request. Usually this implies future availability
    * (e.g. a new feature of a web-service API).
    */
-  NotImplemented_501 = 501,
+  NotImplemented_501: 501,
 
   /**
    * The server was acting as a gateway or proxy and received an invalid
    * response from the upstream server.
    */
-  BadGateway_502 = 502,
+  BadGateway_502: 502,
 
   /**
    * The server is currently unavailable (because it is overloaded or down for
    * maintenance). Generally, this is a temporary state.
    */
-  ServiceUnavailable_503 = 503,
+  ServiceUnavailable_503: 503,
 
   /**
    * The server was acting as a gateway or proxy and did not receive a timely
    * response from the upstream server.
    */
-  GatewayTimeout_504 = 504,
+  GatewayTimeout_504: 504,
 
   /**
    * The server does not support the HTTP protocol version used in the request.
    */
-  HttpVersionNotSupported_505 = 505,
+  HttpVersionNotSupported_505: 505,
 
   /**
    * Transparent content negotiation for the request results in a circular
    * reference.
    */
-  VariantAlsoNegotiates_506 = 506,
+  VariantAlsoNegotiates_506: 506,
 
   /**
    * The server is unable to store the representation needed to complete the
    * request.
    */
-  InsufficientStorage_507 = 507,
+  InsufficientStorage_507: 507,
 
   /**
    * The server detected an infinite loop while processing the request.
    */
-  LoopDetected_508 = 508,
+  LoopDetected_508: 508,
 
   /**
    * Further extensions to the request are required for the server to fulfill
    * it.
    */
-  NotExtended_510 = 510,
+  NotExtended_510: 510,
 
   /**
    * The client needs to authenticate to gain network access. Intended for use
@@ -428,5 +433,5 @@ export enum HttpStatusCode {
    * "captive portals" used to require agreement to Terms of Service before
    * granting full Internet access via a Wi-Fi hotspot).
    */
-  NetworkAuthenticationRequired_511 = 511,
-}
+  NetworkAuthenticationRequired_511: 511,
+} as const;
