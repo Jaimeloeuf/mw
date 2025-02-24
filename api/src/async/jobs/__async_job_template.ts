@@ -9,9 +9,7 @@ import { defineAsyncJobType } from "../defineAsyncJobType.js";
  * Write a easy to understand description for what your Async Job does.
  */
 export default defineAsyncJobType({
-  /**
-   * Unique ID for this job type, this should **NEVER CHANGE** once it is used.
-   */
+  // Unique ID for this job type, this should **NEVER CHANGE** once it is used.
   id: "__generated_async_job_type_id__",
   name: "AsyncJobTemplate",
   machineType: AsyncJobMachine.web,
