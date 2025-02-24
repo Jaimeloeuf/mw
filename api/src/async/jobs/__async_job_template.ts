@@ -6,6 +6,7 @@ import { defineAsyncJobType } from "../defineAsyncJobType.js";
 
 /**
  * @todo
+ * Write a easy to understand description for what your Async Job does.
  */
 export default defineAsyncJobType({
   /**
@@ -20,7 +21,7 @@ export default defineAsyncJobType({
   }),
   async run(args) {
     // @todo Write your AsyncJob here
-    args;
+    args.yourArgumentValue;
 
     return {
       success: true,
