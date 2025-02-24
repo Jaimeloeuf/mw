@@ -1,7 +1,7 @@
 import type { ZodType } from "zod";
 
 import type { AsyncJobMachineType } from "./AsyncJobMachineType.js";
-import type { AsyncJobPriority } from "./AsyncJobPriority.js";
+import type { AsyncJobPriorityType } from "./AsyncJobPriority.js";
 import type { AsyncJobResult } from "./AsyncJobResult.js";
 
 /**
@@ -35,7 +35,7 @@ export type AsyncJobTypeConfig<
   /**
    * Default Priority level for Jobs of this Job Type.
    */
-  priority: AsyncJobPriority;
+  priority: AsyncJobPriorityType;
 
   /**
    * An optional timeout in seconds for every Job of this Job Type. Once time is

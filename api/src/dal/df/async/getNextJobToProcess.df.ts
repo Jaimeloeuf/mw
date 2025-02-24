@@ -1,6 +1,6 @@
 import type { AsyncJob } from "../../../async/AsyncJob.js";
 import type { AsyncJobMachineType } from "../../../async/AsyncJobMachineType.js";
-import type { AsyncJobPriority } from "../../../async/AsyncJobPriority.js";
+import type { AsyncJobPriorityType } from "../../../async/AsyncJobPriority.js";
 
 import { AsyncJobStatus } from "../../../async/AsyncJobStatus.js";
 import { apiDB } from "../../kysely/index.js";
@@ -16,7 +16,7 @@ export default dataFn(async function asyncGetNextJobToProcess({
   priority,
 }: {
   machineType: AsyncJobMachineType;
-  priority?: AsyncJobPriority;
+  priority?: AsyncJobPriorityType;
 }): Promise<$Nullable<AsyncJob>> {
   const now = new Date();
 
