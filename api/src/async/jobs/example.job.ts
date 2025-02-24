@@ -10,7 +10,10 @@ import { defineAsyncJobType } from "../defineAsyncJobType.js";
  * Example Job for reference and demo.
  */
 export default defineAsyncJobType({
-  id: "186e39bb-0bd5-451c-8a90-557ae9a54ca8",
+  /**
+   * Unique ID for this job type, this should **NEVER CHANGE** once it is used.
+   */
+  id: "3h1s",
   name: "ExampleJob",
   machineType: AsyncJobMachine.web,
   priority: AsyncJobPriority.p1,
