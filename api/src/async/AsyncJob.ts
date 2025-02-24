@@ -1,5 +1,5 @@
 import type { AsyncJobResult } from "./AsyncJobResult.js";
-import type { AsyncJobStatus } from "./AsyncJobStatus.js";
+import type { AsyncJobStatusType } from "./AsyncJobStatus.js";
 import type { AsyncJobTypeConfig } from "./AsyncJobTypeConfig.js";
 
 /**
@@ -19,7 +19,7 @@ export type AsyncJob = Pick<AsyncJobTypeConfig, "machineType" | "priority"> & {
   /**
    * Current status of the Job
    */
-  status: AsyncJobStatus;
+  status: AsyncJobStatusType;
 
   /**
    * Who scheduled this async job? Arbitrary string mainly used for simple

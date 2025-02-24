@@ -2,7 +2,7 @@ import type { ColumnType, Insertable, Selectable, Updateable } from "kysely";
 
 import type { AsyncJobMachineType } from "../../../async/AsyncJobMachine.js";
 import type { AsyncJobPriorityType } from "../../../async/AsyncJobPriority.js";
-import type { AsyncJobStatus } from "../../../async/AsyncJobStatus.js";
+import type { AsyncJobStatusType } from "../../../async/AsyncJobStatus.js";
 
 /**
  * Refer to `AsyncJob` type definition.
@@ -10,7 +10,11 @@ import type { AsyncJobStatus } from "../../../async/AsyncJobStatus.js";
 export interface AsyncJobTable {
   id: ColumnType<string, string, never>;
   job_type_id: ColumnType<string, string, never>;
-  status: ColumnType<AsyncJobStatus, AsyncJobStatus, AsyncJobStatus>;
+  status: ColumnType<
+    AsyncJobStatusType,
+    AsyncJobStatusType,
+    AsyncJobStatusType
+  >;
   priority: ColumnType<
     AsyncJobPriorityType,
     AsyncJobPriorityType,
