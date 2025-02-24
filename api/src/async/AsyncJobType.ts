@@ -1,5 +1,5 @@
 import type { AsyncJob } from "./AsyncJob.js";
-import type { AsyncJobMachineType } from "./AsyncJobMachineType.js";
+import type { AsyncJobMachineType } from "./AsyncJobMachine.js";
 import type { AsyncJobTypeConfig } from "./AsyncJobTypeConfig.js";
 
 /**

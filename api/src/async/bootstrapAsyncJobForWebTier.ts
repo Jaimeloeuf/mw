@@ -1,6 +1,6 @@
 import { df } from "../__generated/index.js";
 import { config } from "../config/index.js";
-import { AsyncJobMachineType } from "./AsyncJobMachineType.js";
+import { AsyncJobMachine } from "./AsyncJobMachine.js";
 import { asyncTierJobLoaderAndRunner } from "./asyncTierJobLoaderAndRunner.js";
 
 /**
@@ -28,7 +28,7 @@ async function runAsyncJobRecurringly() {
   await asyncTierJobLoaderAndRunner();
 
   const [err, numberOfJobsQueued] = await df.asyncGetNumberOfJobsQueued.run(
-    AsyncJobMachineType.web,
+    AsyncJobMachine.web,
   );
 
   // If there is an error trying to get Job Queue count or if there is no job in

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { AsyncJobMachineType } from "../AsyncJobMachineType.js";
+import { AsyncJobMachine } from "../AsyncJobMachine.js";
 import { AsyncJobPriority } from "../AsyncJobPriority.js";
 import { defineAsyncJobType } from "../defineAsyncJobType.js";
 
@@ -13,7 +13,7 @@ export default defineAsyncJobType({
    */
   id: "__generated_async_job_type_id__",
   name: "AsyncJobTemplate",
-  machineType: AsyncJobMachineType.web,
+  machineType: AsyncJobMachine.web,
   priority: AsyncJobPriority.p1,
   argumentValidator: z.object({
     yourArgumentValue: z.string(),

@@ -1,4 +1,4 @@
-import type { AsyncJobMachineType } from "../../../async/AsyncJobMachineType.js";
+import type { AsyncJobMachineType } from "../../../async/AsyncJobMachine.js";
 
 import { AsyncJobStatus } from "../../../async/AsyncJobStatus.js";
 import { InvalidInternalStateException } from "../../../exceptions/index.js";

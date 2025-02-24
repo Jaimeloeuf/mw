@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { logger } from "../../logging/index.js";
 import { json } from "../../utils/index.js";
-import { AsyncJobMachineType } from "../AsyncJobMachineType.js";
+import { AsyncJobMachine } from "../AsyncJobMachine.js";
 import { AsyncJobPriority } from "../AsyncJobPriority.js";
 import { defineAsyncJobType } from "../defineAsyncJobType.js";
 
@@ -12,7 +12,7 @@ import { defineAsyncJobType } from "../defineAsyncJobType.js";
 export default defineAsyncJobType({
   id: "186e39bb-0bd5-451c-8a90-557ae9a54ca8",
   name: "ExampleJob",
-  machineType: AsyncJobMachineType.web,
+  machineType: AsyncJobMachine.web,
   priority: AsyncJobPriority.p1,
   argumentValidator: z.object({
     test: z.string(),

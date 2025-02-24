@@ -1,6 +1,6 @@
 import type { ZodType } from "zod";
 
-import type { AsyncJobMachineType } from "./AsyncJobMachineType.js";
+import type { AsyncJobMachineType } from "./AsyncJobMachine.js";
 import type { AsyncJobPriorityType } from "./AsyncJobPriority.js";
 import type { AsyncJobResult } from "./AsyncJobResult.js";
 

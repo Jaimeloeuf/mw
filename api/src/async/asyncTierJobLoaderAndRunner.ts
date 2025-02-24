@@ -1,7 +1,7 @@
 import { df, asyncJobTypeMapping } from "../__generated/index.js";
 import { logger } from "../logging/index.js";
 import { noThrowFunction } from "../utils/index.js";
-import { AsyncJobMachineType } from "./AsyncJobMachineType.js";
+import { AsyncJobMachine } from "./AsyncJobMachine.js";
 import { AsyncJobStatus } from "./AsyncJobStatus.js";
 import { validateJobArgumentOnRead } from "./validateJobArgumentOnRead.js";
 
@@ -15,7 +15,7 @@ export async function asyncTierJobLoaderAndRunner() {
   );
 
   const asyncJob = await df.asyncGetNextJobToProcess.runAndThrowOnError({
-    machineType: AsyncJobMachineType.web,
+    machineType: AsyncJobMachine.web,
   });
 
   if (asyncJob === null) {
