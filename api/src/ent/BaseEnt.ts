@@ -15,7 +15,7 @@ export abstract class BaseEnt<
 > {
   /**
    * ID to uniquely identify every Ent Type, and will be used as all the Ent
-   * instance's ID prefix.
+   * instance's ID postfix.
    *
    * 4 character alphanumeric [a-z, 0-9] string for ~1.5 million unique IDs.
    *
