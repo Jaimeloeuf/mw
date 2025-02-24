@@ -14,11 +14,16 @@ export type AsyncJobTypeConfig<
   AsyncJobArgumentType = void,
 > = {
   /**
-   * Unique ID for this Job Type.
+   * Unique ID for this Async Job Type, and will be used as all the Async Job's
+   * ID postfix.
+   *
+   * 4 character alphanumeric [a-z, 0-9] string for ~1.5 million unique IDs.
    *
    * ## Why do we need an ID?
    * Because a Job Type name can change over time but all previous async Jobs
    * should still point back to the same Job Type.
+   * This will also allow us to quickly identify what is the Async Job Type by
+   * looking at the Async Job ID.
    */
   id: string;
 
