@@ -3,6 +3,7 @@ import type { AsyncJobType } from "./AsyncJobType.js";
 import type { AsyncJobTypeConfig } from "./AsyncJobTypeConfig.js";
 
 import { df } from "../__generated/index.js";
+import { NotFoundException } from "../exceptions/index.js";
 import { logger } from "../logging/index.js";
 import { getStackTrace, json } from "../utils/index.js";
 import { AsyncJobStatus } from "./AsyncJobStatus.js";
@@ -24,7 +25,7 @@ export function defineAsyncJobType<AsyncJobArgumentType = void>(
         runOptions?.jobArguments,
       );
 
-      const asyncJobID = crypto.randomUUID();
+      const asyncJobID = `${crypto.randomUUID()}_${asyncJobConfig.id}`;
 
       const asyncJob: AsyncJob = {
         id: asyncJobID,
@@ -65,6 +66,12 @@ export function defineAsyncJobType<AsyncJobArgumentType = void>(
     },
 
     async cancelJob(jobID, cancellationContext) {
+      if (!jobID.endsWith(`_${asyncJobConfig.id}`, 41)) {
+        throw new NotFoundException(
+          `Invalid ID '${jobID}' used for '${asyncJobConfig.name}'`,
+        );
+      }
+
       const job = await df.asyncCancelJob.runAndThrowOnError(
         jobID,
         json.stringifyPretty({
