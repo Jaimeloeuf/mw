@@ -24,11 +24,13 @@ ENV NODE_ENV production
 
 # Copy package.json files and install dependencies so that source code in later
 # docker layers will not invalidate this layer.
-# "clean-install" only installs dependencies and skip devDependencies as
-# NODE_ENV is set to 'production'.
+# "clean-install" by default will only install dependencies and skip
+# devDependencies as NODE_ENV is set to 'production', however since
+# devDependencies are still needed later on like for build/linting/etc..., the
+# --include flag is used to include all dependencies for installation.
 # Using --force flag because of eslint peer dependency issues.
 COPY ./package*.json ./
-RUN npm clean-install --force
+RUN npm clean-install --include=dev --include=optional --include=peer --force
 
 # Copy over in order of which is most likely to change at the bottom
 COPY ./tsconfig.json ./tsconfig.json
