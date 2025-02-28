@@ -19,6 +19,8 @@ export default [
     },
     rules: {
       "prefer-const": "error",
+      "no-nested-ternary": "error",
+      "no-unneeded-ternary": "error",
       "no-console": "warn",
       // Potentially helpful when doing codegen with manual sections for users
       // to fill in before committing.
