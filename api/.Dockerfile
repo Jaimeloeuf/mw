@@ -22,9 +22,13 @@ WORKDIR /server
 # this will be done so automatically.
 ENV NODE_ENV production
 
+# Copy package.json files and install dependencies so that source code in later
+# docker layers will not invalidate this layer.
+# "clean-install" only installs dependencies and skip devDependencies as
+# NODE_ENV is set to 'production'.
 # Using --force flag because of eslint peer dependency issues.
 COPY ./package*.json ./
-RUN npm i --force
+RUN npm clean-install --force
 
 # Copy over in order of which is most likely to change at the bottom
 COPY ./tsconfig.json ./tsconfig.json
