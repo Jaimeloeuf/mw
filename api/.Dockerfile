@@ -14,7 +14,7 @@
 # optimize the build process for caching.
 
 # Use alpine image to reduce image size
-FROM node:20-alpine
+FROM node:22-alpine
 
 WORKDIR /server
 
