@@ -31,7 +31,7 @@
     "codegen": "npx tsx ./src/codegen/cli/codegenCli.ts"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
   },
   "dependencies": {
     "@types/react": "^19.0.2",
