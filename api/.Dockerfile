@@ -18,6 +18,10 @@ FROM node:22-alpine
 
 WORKDIR /server
 
+# Set NODE_ENV to production so that any libraries that will be optimized with
+# this will be done so automatically.
+ENV NODE_ENV production
+
 # Using --force flag because of eslint peer dependency issues.
 COPY ./package*.json ./
 RUN npm i --force
