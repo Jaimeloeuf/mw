@@ -49,6 +49,12 @@ RUN npm run build
 # map the ports with -p option.
 EXPOSE 3000
 
+# Run as "node" user instead of "root"
+# https://docs.docker.com/reference/dockerfile/#user
+# https://www.docker.com/blog/understanding-the-docker-user-instruction/
+# https://youtu.be/WLsFF4mtqXQ?t=684
+USER node
+
 # ENTRYPOINT Command ensures this command runs when the container is spun up
 # and cannot be overwritten with shell arguements like CMD.
 # Use exec form instead of shell form to run it as the main process.
