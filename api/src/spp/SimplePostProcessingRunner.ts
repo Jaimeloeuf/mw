@@ -105,7 +105,7 @@ export class SimplePostProcessingRunner {
   /**
    * Complete setting of Jobs and run them in the next event loop.
    */
-  async run() {
+  run() {
     setImmediate(async () => {
       const functionNames = this.#fns.map((fn) => fn.name).join(", ");
 
