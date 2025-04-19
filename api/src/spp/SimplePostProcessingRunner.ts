@@ -1,6 +1,7 @@
 import type { WrappedFunction } from "./WrappedFunction.js";
 
 import { logger } from "../logging/index.js";
+import { unknownCatchToError } from "../utils/index.js";
 import { runInParallel } from "./runInParallel.js";
 import { runSequentially } from "./runSequentially.js";
 
@@ -57,7 +58,9 @@ export class SimplePostProcessingRunner {
         );
 
         return true;
-      } catch (error) {
+      } catch (e) {
+        const error = unknownCatchToError(e);
+
         logger.verbose(
           `${this.callerName}:${SimplePostProcessingRunner.name}`,
           `Failed while executing: ${fn.name}`,
@@ -67,7 +70,7 @@ export class SimplePostProcessingRunner {
         // @todo Notify devs about this error
         logger.error(
           `${this.callerName}:${SimplePostProcessingRunner.name}:${fn.name}`,
-          error instanceof Error ? error.stack : error,
+          error,
         );
 
         return false;
