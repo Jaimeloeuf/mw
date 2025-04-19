@@ -34,7 +34,7 @@ export class SimplePostProcessingRunner {
    * ## Functions should be NAMED
    * Used for logging, especially if there are any errors.
    */
-  addJob(fn: Function) {
+  addJob(fn: Function, onError?: (error: Error) => unknown) {
     // Extra runtime check alongside compile time check with ESLint rule
     // 'mwEslintPlugin/require-function-name-for-addJob'
     if (fn.name === "") {
@@ -66,12 +66,29 @@ export class SimplePostProcessingRunner {
           `Failed while executing: ${fn.name}`,
         );
 
+        // @todo Store errors in DLQ (Dead Letter Queue)
         // @todo Create and log an error ID
         // @todo Notify devs about this error
         logger.error(
           `${this.callerName}:${SimplePostProcessingRunner.name}:${fn.name}`,
           error,
         );
+
+        if (onError !== undefined) {
+          logger.info(
+            `${this.callerName}:${SimplePostProcessingRunner.name}:${fn.name}`,
+            `Executing provided onError function: ${onError.name}`,
+          );
+
+          try {
+            await onError(error);
+          } catch (errorFromOnErrorCallback) {
+            logger.error(
+              `${this.callerName}:${SimplePostProcessingRunner.name}:${fn.name}`,
+              `onError function failed with: ${errorFromOnErrorCallback}`,
+            );
+          }
+        }
 
         return false;
       }
