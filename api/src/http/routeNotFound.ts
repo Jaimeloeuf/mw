@@ -24,7 +24,6 @@ export const routeNotFound = httpController({
     // trace is printed out, which clutters the logs and makes it hard to find
     // things we actually care about. So this just let things stay the same
     // except now with a 1 line stack trace.
-    delete err.stack;
     err.stack = errMsg;
 
     throw err;
