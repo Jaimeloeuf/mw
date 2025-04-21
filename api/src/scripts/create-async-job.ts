@@ -3,6 +3,10 @@ import path from "path";
 import readline from "readline/promises";
 
 import { asyncJobTypeMapping } from "../__generated/index.js";
+import {
+  codegenRunAllModules,
+  showGitStatusOfGeneratedFolder,
+} from "../codegen/codegenTool/index.js";
 import { logger } from "../logging/index.js";
 import { pseudoRandomAlphanumericString } from "../utils/index.js";
 
@@ -53,6 +57,10 @@ async function createAsyncJob() {
 
   logger.info(createAsyncJob.name, `Created AsyncJob: ${asyncJobFilePath}`);
   logger.info(createAsyncJob.name, `Please update the AsyncJob file details.`);
+
+  // Trigger codegen for the new AsyncJob
+  await codegenRunAllModules();
+  await showGitStatusOfGeneratedFolder();
 }
 
 createAsyncJob();
