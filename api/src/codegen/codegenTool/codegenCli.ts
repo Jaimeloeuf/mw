@@ -1,10 +1,10 @@
 import { logger } from "../../logging/index.js";
-import { codegenRunAllModules } from "../codegenTool/codegenRunAllModules.js";
-import { codegenRunSingleModule } from "../codegenTool/codegenRunSingleModule.js";
-import { printAllCodegenModules } from "../codegenTool/printAllCodegenModules.js";
-import { printCodegenCliHelp } from "../codegenTool/printCodegenCliHelp.js";
-import { showGitStatusOfGeneratedFolder } from "../codegenTool/showGitStatusOfGeneratedFolder.js";
 import { validateGeneratedFiles } from "../validateGeneratedFiles/validateGeneratedFiles.js";
+import { codegenRunAllModules } from "./codegenRunAllModules.js";
+import { codegenRunSingleModule } from "./codegenRunSingleModule.js";
+import { printAllCodegenModules } from "./printAllCodegenModules.js";
+import { printCodegenCliHelp } from "./printCodegenCliHelp.js";
+import { showGitStatusOfGeneratedFolder } from "./showGitStatusOfGeneratedFolder.js";
 
 async function codegenCli() {
   // No extra arguments, show help menu
