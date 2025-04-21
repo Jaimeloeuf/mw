@@ -6,7 +6,7 @@
  * genEntMapping
  *
  * Generated hash in hex for code after this section is:
- * sha256(f30503b05639d57d5106c9b67811cb3722f66d51ec1df8e3f4f076c5df213d0e)
+ * sha256(0447b9ee534ee8fbd2f1c49911bef29d311ddf7fb7c9e010b49528a968c86e84)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -25,4 +25,5 @@ export const entMapping: Record<
   "0dda": ents.EntBlogSubscriber,
   "4f51": ents.EntJohari,
   "90f3": ents.EntJohariAnswer,
+  "48fi": ents.EntUser,
 };
