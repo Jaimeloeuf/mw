@@ -22,3 +22,4 @@ export * from "./MuwnoStripeWebhookEventTable.js";
 export * from "./MuwnoTaskTable.js";
 export * from "./MuwnoTeamMemberInvitationTable.js";
 export * from "./MuwnoUserTable.js";
+export * from "./UserTable.js";

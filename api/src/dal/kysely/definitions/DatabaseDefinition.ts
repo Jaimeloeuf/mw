@@ -20,6 +20,7 @@ import type { MuwnoStripeWebhookEventTable } from "./MuwnoStripeWebhookEventTabl
 import type { MuwnoTaskTable } from "./MuwnoTaskTable.js";
 import type { MuwnoTeamMemberInvitationTable } from "./MuwnoTeamMemberInvitationTable.js";
 import type { MuwnoUserTable } from "./MuwnoUserTable.js";
+import type { UserTable } from "./UserTable.js";
 
 export interface Database {
   assoc: AssocTable;
@@ -44,4 +45,5 @@ export interface Database {
   muwno_stripe_customer: MuwnoStripeCustomerTable;
   muwno_stripe_setup_next: MuwnoStripeSetupNextTable;
   muwno_api_key: MuwnoApiKeyTable;
+  user: UserTable;
 }
