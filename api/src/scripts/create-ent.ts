@@ -3,6 +3,10 @@ import path from "path";
 import readline from "readline/promises";
 
 import { entMapping } from "../__generated/index.js";
+import {
+  codegenRunAllModules,
+  showGitStatusOfGeneratedFolder,
+} from "../codegen/codegenTool/index.js";
 import { logger } from "../logging/index.js";
 import { pseudoRandomAlphanumericString } from "../utils/index.js";
 
@@ -73,6 +77,10 @@ async function createEnt() {
 
   logger.info(createEnt.name, `Created Ent Folder: ${entFolderPath}`);
   logger.info(createEnt.name, `Please update the Ent file details.`);
+
+  // Trigger codegen for the new Ent
+  await codegenRunAllModules();
+  await showGitStatusOfGeneratedFolder();
 }
 
 createEnt();
