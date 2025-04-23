@@ -11,6 +11,7 @@ import type {
 } from "./JSend.js";
 import type { useHttpRequestGuard } from "./useHttpRequestGuard.js";
 
+import { Actor } from "../actor/index.js";
 import {
   HttpTransformerableException,
   Exception,
@@ -78,6 +79,7 @@ export const httpController = <
     | ValidJsendDatatype
     | Promise<ValidJsendDatatype>,
   const HttpRequestHandlerType extends (context: {
+    actor: Actor;
     req: Request;
     guardData: GuardsDataType;
     urlParams: UrlParamsType;
@@ -170,6 +172,9 @@ export const httpController = <
   httpRequestHandler,
   routeHandler: async (req: Request, res: Response) => {
     try {
+      const cookie = req.headers.cookie ?? "";
+      const actor = await Actor.genFromSessionCookie(cookie);
+
       let guardData = null as GuardsDataType;
 
       // Run Guard functions sequentialy if any, and before the expensive data
@@ -193,6 +198,7 @@ export const httpController = <
       let statusCode: HttpStatusCode = HttpStatus.Ok_200;
 
       const data = await httpRequestHandler({
+        actor,
         req,
         guardData,
 
