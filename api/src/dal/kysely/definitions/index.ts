@@ -2,6 +2,7 @@
  * Barrel file
  */
 
+export * from "./AssocTable.js";
 export * from "./AsyncJobTable.js";
 export * from "./BlogSubscriberTable.js";
 export * from "./BlogTable.js";
