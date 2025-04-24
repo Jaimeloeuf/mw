@@ -27,13 +27,21 @@ export class AssocQuery {
       .orderBy("created_at", "desc");
   }
 
-  whereFromIdIs(id: string) {
-    this.query = this.query.where("from", "=", id);
+  whereFromIdIs(...ids: $NonEmptyArray<string>) {
+    this.query =
+      ids.length === 1
+        ? this.query.where("from", "=", ids[0])
+        : this.query.where("from", "in", ids);
+
     return this;
   }
 
-  whereToIdIs(id: string) {
-    this.query = this.query.where("to", "=", id);
+  whereToIdIs(...ids: $NonEmptyArray<string>) {
+    this.query =
+      ids.length === 1
+        ? this.query.where("to", "=", ids[0])
+        : this.query.where("to", "in", ids);
+
     return this;
   }
 
