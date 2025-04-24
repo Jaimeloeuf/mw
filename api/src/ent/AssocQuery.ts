@@ -46,10 +46,10 @@ export class AssocQuery {
   }
 
   gen() {
-    this.query.execute();
+    return this.query.execute();
   }
 
   genFirst() {
-    this.query.executeTakeFirstOrThrow();
+    return this.query.executeTakeFirstOrThrow();
   }
 }
