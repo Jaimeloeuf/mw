@@ -34,6 +34,25 @@ export const EntBlogOperators = defineEntOperators(EntBlog, {
       });
     },
 
+    async getMany(ids) {
+      const data = await apiDB
+        .selectFrom("blog")
+        .selectAll()
+        .where("id", "in", ids)
+        .execute();
+
+      return data.map(
+        (data) =>
+          new EntBlog({
+            id: data.id,
+            createdAt: data.created_at,
+            updatedAt: data.updated_at,
+            name: data.name,
+            ownerEmail: data.owner_email,
+          }),
+      );
+    },
+
     async update(ent) {
       await apiDB
         .updateTable("blog")

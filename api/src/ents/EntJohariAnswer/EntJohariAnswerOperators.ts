@@ -36,6 +36,26 @@ export const EntJohariAnswerOperators = defineEntOperators(EntJohariAnswer, {
       });
     },
 
+    async getMany(ids) {
+      const data = await apiDB
+        .selectFrom("johari_answer")
+        .selectAll()
+        .where("id", "in", ids)
+        .execute();
+
+      return data.map(
+        (data) =>
+          new EntJohariAnswer({
+            id: data.id,
+            createdAt: data.created_at,
+            updatedAt: data.updated_at,
+            johariID: data.johari_id,
+            name: data.name,
+            words: data.words,
+          }),
+      );
+    },
+
     async update(ent) {
       await apiDB
         .updateTable("johari_answer")

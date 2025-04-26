@@ -36,6 +36,26 @@ export const EntUserOperators = defineEntOperators(EntUser, {
       });
     },
 
+    async getMany(ids) {
+      const data = await apiDB
+        .selectFrom("user")
+        .selectAll()
+        .where("id", "in", ids)
+        .execute();
+
+      return data.map(
+        (data) =>
+          new EntUser({
+            id: data.id,
+            createdAt: data.created_at,
+            updatedAt: data.updated_at,
+            name: data.name,
+            email: data.email,
+            deactivated: data.deactivated,
+          }),
+      );
+    },
+
     async update(ent) {
       await apiDB
         .updateTable("user")

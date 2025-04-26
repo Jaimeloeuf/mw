@@ -16,6 +16,19 @@ export const EntTemplateOperators = defineEntOperators(EntTemplate, {
       // });
     },
 
+    async getMany(ids) {
+      // Implement getMany method using your preferred storage layer.
+      // return data.map(
+      //   (data) =>
+      //     new EntTemplate({
+      //       id: data.id,
+      //       createdAt: data.created_at,
+      //       updatedAt: data.updated_at,
+      //       ...
+      //     }),
+      // );
+    },
+
     async update(ent) {
       // Implement update method using your preferred storage layer.
     },
