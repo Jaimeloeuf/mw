@@ -6,11 +6,12 @@
  * genEntMapping
  *
  * Generated hash in hex for code after this section is:
- * sha256(0447b9ee534ee8fbd2f1c49911bef29d311ddf7fb7c9e010b49528a968c86e84)
+ * sha256(c1ad675e27bbd2ef43c2476868368d75d49af8fa22ad0bdf9e49929fcc287d78)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
 import type { BaseEnt } from "../ent/BaseEnt.js";
+import type { EntCrudOperator } from "../ent/EntCrudOperator.js";
 
 import { ents } from "./entsBarrelFile.generated.js";
 
@@ -26,4 +27,15 @@ export const entMapping: Record<
   "4f51": ents.EntJohari,
   "90f3": ents.EntJohariAnswer,
   "48fi": ents.EntUser,
+};
+
+/**
+ * Mapping of `EntTypeID` to `EntOperators`.
+ */
+export const entOperatorsMapping: Record<string, EntCrudOperator<BaseEnt>> = {
+  "40ba": ents.EntBlogOperators,
+  "0dda": ents.EntBlogSubscriberOperators,
+  "4f51": ents.EntJohariOperators,
+  "90f3": ents.EntJohariAnswerOperators,
+  "48fi": ents.EntUserOperators,
 };
