@@ -20,6 +20,11 @@ export interface EntCrudOperator<Ent extends BaseEnt> {
   get(id: string): Promise<Ent>;
 
   /**
+   * Get many Ents from storage layer using the given IDs.
+   */
+  getMany(ids: $NonEmptyArray<string>): Promise<Array<Ent>>;
+
+  /**
    * Update a single Ent in storage layer.
    *
    * Expected workflow is where users mutate the data on the Ent, before calling

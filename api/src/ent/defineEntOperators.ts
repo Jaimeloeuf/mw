@@ -38,6 +38,23 @@ export function defineEntOperators<
     },
 
     /**
+     * Verify IDs before loading Ents.
+     *
+     * This will throw if even a single ID is invalid!
+     */
+    getMany(ids: $NonEmptyArray<string>) {
+      for (const id of ids) {
+        const isEntIdValid = entIdVerify(entClass, id);
+        if (!isEntIdValid) {
+          throw new NotFoundException(
+            `Invalid ID '${id}' used for '${entClass.name}'`,
+          );
+        }
+      }
+      return operators.CRUD.getMany(ids);
+    },
+
+    /**
      * Create a new Ent instance using the given Ent data and auto generated
      * ID and timestamps, which is written to storage layer before returned.
      */
