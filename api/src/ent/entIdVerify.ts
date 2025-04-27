@@ -5,7 +5,7 @@ import type { EntClass } from "./EntClass.js";
  * Verify if the Ent ID is valid for a given Ent Type / Class.
  */
 export function entIdVerify(
-  entClass: EntClass<BaseEnt>,
+  entClass: typeof BaseEnt | EntClass<BaseEnt>,
   entID: string,
 ): boolean {
   const entTypeID = (entClass as unknown as typeof BaseEnt).EntTypeID;
