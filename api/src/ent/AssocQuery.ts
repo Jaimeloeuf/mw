@@ -38,7 +38,9 @@ export class AssocQuery {
   }
 
   /**
-   * Any invalid id will cause the method to throw.
+   * ## Notes
+   * 1. Any invalid id will cause the method to throw.
+   * 1. Duplicate IDs will be treated as a single ID and only return 1 result.
    */
   whereFromIdIs(...ids: $NonEmptyArray<string>) {
     for (const id of ids) {
@@ -59,7 +61,9 @@ export class AssocQuery {
   }
 
   /**
-   * Any invalid id will cause the method to throw.
+   * ## Notes
+   * 1. Any invalid id will cause the method to throw.
+   * 1. Duplicate IDs will be treated as a single ID and only return 1 result.
    */
   whereToIdIs(...ids: $NonEmptyArray<string>) {
     for (const id of ids) {
