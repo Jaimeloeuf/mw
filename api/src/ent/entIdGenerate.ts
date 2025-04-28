@@ -8,7 +8,9 @@ import type { EntClass } from "./EntClass.js";
  * EntTypeID is added to the end of the ID to ensure it does not cause indexing
  * issues with storage layers.
  */
-export function entIdGenerate(entClass: EntClass<BaseEnt>): string {
+export function entIdGenerate(
+  entClass: typeof BaseEnt | EntClass<BaseEnt>,
+): string {
   // Casting to get the value of the non-abstract class
   const entTypeID = (entClass as unknown as typeof BaseEnt).EntTypeID;
   const uuid = crypto.randomUUID();
