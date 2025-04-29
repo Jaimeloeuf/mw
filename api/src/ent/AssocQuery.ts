@@ -8,18 +8,34 @@ import { NotFoundException } from "../exceptions/NotFoundException.js";
 import { BaseEnt } from "./BaseEnt.js";
 import { entIdVerify } from "./entIdVerify.js";
 
-export class AssocQuery {
+export class AssocQuery<
+  FromEnt extends EntClass,
+  FromEntInstance extends FromEnt extends EntClass<infer EntType>
+    ? EntType & typeof BaseEnt
+    : never,
+  ToEnt extends EntClass,
+  ToEntInstance extends ToEnt extends EntClass<infer EntType>
+    ? EntType & typeof BaseEnt
+    : never,
+> {
   static queryWithEntType<
-    Ent1 extends EntClass,
-    EntInstance1 extends Ent1 extends EntClass<infer EntType> ? EntType : never,
-    Ent2 extends EntClass,
-    EntInstance2 extends Ent2 extends EntClass<infer EntType> ? EntType : never,
-  >(entTypes: { from: EntClass<EntInstance1>; to: EntClass<EntInstance2> }) {
+    FromEnt extends EntClass,
+    FromEntInstance extends FromEnt extends EntClass<infer EntType>
+      ? EntType & typeof BaseEnt
+      : never,
+    ToEnt extends EntClass,
+    ToEntInstance extends ToEnt extends EntClass<infer EntType>
+      ? EntType & typeof BaseEnt
+      : never,
+  >(entTypes: {
+    from: EntClass<FromEntInstance>;
+    to: EntClass<ToEntInstance>;
+  }) {
     const assocType = `${(entTypes.from as unknown as typeof BaseEnt).EntTypeID}-${(entTypes.to as unknown as typeof BaseEnt).EntTypeID}`;
-    return new AssocQuery(
+    return new AssocQuery<FromEnt, FromEntInstance, ToEnt, ToEntInstance>(
       assocType,
-      entTypes.from as unknown as typeof BaseEnt,
-      entTypes.to as unknown as typeof BaseEnt,
+      entTypes.from as unknown as FromEntInstance,
+      entTypes.to as unknown as ToEntInstance,
     );
   }
 
@@ -27,8 +43,8 @@ export class AssocQuery {
 
   constructor(
     assocType: string,
-    private readonly fromEntType: typeof BaseEnt,
-    private readonly toEntType: typeof BaseEnt,
+    private readonly fromEntType: FromEntInstance,
+    private readonly toEntType: ToEntInstance,
   ) {
     this.query = apiDB
       .selectFrom("assoc")
