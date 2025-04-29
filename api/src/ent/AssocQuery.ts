@@ -83,11 +83,19 @@ export class AssocQuery {
     return this;
   }
 
-  gen() {
+  /**
+   * Generate raw Assoc edge. Generally unused unless you want to get the raw
+   * Assoc edge back yourself to do further processing or just need the raw IDs
+   */
+  genRawAssoc() {
     return this.query.execute();
   }
 
-  genFirst() {
+  /**
+   * Generate raw Assoc edge. Generally unused unless you want to get the raw
+   * Assoc edge back yourself to do further processing or just need the raw IDs
+   */
+  genFirstRawAssoc() {
     return this.query.executeTakeFirstOrThrow();
   }
 }
