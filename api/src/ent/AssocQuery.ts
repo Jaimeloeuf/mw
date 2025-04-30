@@ -98,56 +98,54 @@ export class AssocQuery<
   }
 
   /**
-   * Generate the actual Ent nodes instead of raw Assoc values.
+   * Generate actual Ent nodes from raw Assoc values using the dynamically
+   * loaded EntOperator's `getMany` method.
    */
-  async genNodes() {
+  async #genNodes<NodeType extends "to" | "from">(
+    entTypeID: string,
+    nodeType: NodeType,
+  ) {
     const assocs = await this.genRawAssoc();
 
     if (assocs.length === 0) {
       return [];
     }
 
-    const entOperator =
-      entOperatorsMapping[
-        (this.toEntType as unknown as typeof BaseEnt).EntTypeID
-      ];
+    const entOperator = entOperatorsMapping[entTypeID];
 
     if (entOperator === undefined) {
       throw new InvalidInternalStateException(
-        `Cannot find EntOperator for EntTypeID: ${(this.toEntType as unknown as typeof BaseEnt).EntTypeID}`,
+        `Cannot find EntOperator for EntTypeID: ${entTypeID}`,
       );
     }
 
     // Casting allowed as already verified that there is at least one Assoc
-    const toIds = assocs.map((assoc) => assoc.to) as $NonEmptyArray<string>;
+    const ids = assocs.map(
+      (assoc) => assoc[nodeType],
+    ) as $NonEmptyArray<string>;
 
-    return (await entOperator.getMany(toIds)) as Array<ToEntInstance>;
+    return (await entOperator.getMany(ids)) as Array<
+      NodeType extends "to" ? ToEntInstance : FromEntInstance
+    >;
+  }
+
+  /**
+   * Generate the actual Ent nodes instead of raw Assoc values.
+   */
+  async genNodes() {
+    return this.#genNodes(
+      (this.toEntType as unknown as typeof BaseEnt).EntTypeID,
+      "to",
+    );
   }
 
   /**
    * Generate the actual Ent nodes instead of raw Assoc values.
    */
   async genInverseNodes() {
-    const assocs = await this.genRawAssoc();
-
-    if (assocs.length === 0) {
-      return [];
-    }
-
-    const entOperator =
-      entOperatorsMapping[
-        (this.fromEntType as unknown as typeof BaseEnt).EntTypeID
-      ];
-
-    if (entOperator === undefined) {
-      throw new InvalidInternalStateException(
-        `Cannot find EntOperator for EntTypeID: ${(this.fromEntType as unknown as typeof BaseEnt).EntTypeID}`,
-      );
-    }
-
-    // Casting allowed as already verified that there is at least one Assoc
-    const fromIds = assocs.map((assoc) => assoc.from) as $NonEmptyArray<string>;
-
-    return (await entOperator.getMany(fromIds)) as Array<FromEntInstance>;
+    return this.#genNodes(
+      (this.fromEntType as unknown as typeof BaseEnt).EntTypeID,
+      "from",
+    );
   }
 }
