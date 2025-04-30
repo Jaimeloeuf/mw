@@ -2,9 +2,13 @@ import { SelectQueryBuilder } from "kysely";
 
 import type { EntClass } from "./EntClass.js";
 
+import { entOperatorsMapping } from "../__generated/index.js";
 import { Database, Assoc } from "../dal/index.js";
 import { apiDB } from "../dal/kysely/apiDB.js";
-import { NotFoundException } from "../exceptions/NotFoundException.js";
+import {
+  InvalidInternalStateException,
+  NotFoundException,
+} from "../exceptions/index.js";
 import { BaseEnt } from "./BaseEnt.js";
 import { entIdVerify } from "./entIdVerify.js";
 
@@ -91,5 +95,32 @@ export class AssocQuery<
    */
   genFirstRawAssoc() {
     return this.query.executeTakeFirstOrThrow();
+  }
+
+  /**
+   * Generate the actual Ent nodes instead of raw Assoc values.
+   */
+  async genNodes() {
+    const assocs = await this.genRawAssoc();
+
+    if (assocs.length === 0) {
+      return [];
+    }
+
+    const entOperator =
+      entOperatorsMapping[
+        (this.toEntType as unknown as typeof BaseEnt).EntTypeID
+      ];
+
+    if (entOperator === undefined) {
+      throw new InvalidInternalStateException(
+        `Cannot find EntOperator for EntTypeID: ${(this.toEntType as unknown as typeof BaseEnt).EntTypeID}`,
+      );
+    }
+
+    // Casting allowed as already verified that there is at least one Assoc
+    const toIds = assocs.map((assoc) => assoc.to) as $NonEmptyArray<string>;
+
+    return (await entOperator.getMany(toIds)) as Array<ToEntInstance>;
   }
 }
