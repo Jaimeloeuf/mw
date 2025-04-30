@@ -11,18 +11,16 @@ import { entIdVerify } from "./entIdVerify.js";
 export class AssocQuery<
   FromEnt extends EntClass,
   FromEntInstance extends FromEnt extends EntClass<infer EntType>
-    ? EntType & typeof BaseEnt
+    ? EntType
     : never,
   ToEnt extends EntClass,
-  ToEntInstance extends ToEnt extends EntClass<infer EntType>
-    ? EntType & typeof BaseEnt
-    : never,
+  ToEntInstance extends ToEnt extends EntClass<infer EntType> ? EntType : never,
 > {
   private query: SelectQueryBuilder<Database, "assoc", Assoc>;
 
   constructor(
-    private readonly fromEntType: FromEntInstance,
-    private readonly toEntType: ToEntInstance,
+    private readonly fromEntType: FromEnt,
+    private readonly toEntType: ToEnt,
   ) {
     const assocType = `${(fromEntType as unknown as typeof BaseEnt).EntTypeID}-${(toEntType as unknown as typeof BaseEnt).EntTypeID}`;
 
