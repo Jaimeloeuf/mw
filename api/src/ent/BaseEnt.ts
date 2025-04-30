@@ -36,6 +36,9 @@ export abstract class BaseEnt<
     return (this.constructor as typeof BaseEnt).EntTypeID;
   }
 
+  /**
+   * Getter alias to get the `data['id']` field
+   */
   get id(): string {
     return this.data.id;
   }
