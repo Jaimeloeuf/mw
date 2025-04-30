@@ -29,6 +29,13 @@ export abstract class BaseEnt<
    */
   abstract readonly data: EntManagedData & DataType;
 
+  /**
+   * Get the static Ent Type ID.
+   */
+  get entTypeID(): string {
+    return (this.constructor as typeof BaseEnt).EntTypeID;
+  }
+
   get id(): string {
     return this.data.id;
   }
