@@ -123,4 +123,31 @@ export class AssocQuery<
 
     return (await entOperator.getMany(toIds)) as Array<ToEntInstance>;
   }
+
+  /**
+   * Generate the actual Ent nodes instead of raw Assoc values.
+   */
+  async genInverseNodes() {
+    const assocs = await this.genRawAssoc();
+
+    if (assocs.length === 0) {
+      return [];
+    }
+
+    const entOperator =
+      entOperatorsMapping[
+        (this.fromEntType as unknown as typeof BaseEnt).EntTypeID
+      ];
+
+    if (entOperator === undefined) {
+      throw new InvalidInternalStateException(
+        `Cannot find EntOperator for EntTypeID: ${(this.fromEntType as unknown as typeof BaseEnt).EntTypeID}`,
+      );
+    }
+
+    // Casting allowed as already verified that there is at least one Assoc
+    const fromIds = assocs.map((assoc) => assoc.from) as $NonEmptyArray<string>;
+
+    return (await entOperator.getMany(fromIds)) as Array<FromEntInstance>;
+  }
 }
