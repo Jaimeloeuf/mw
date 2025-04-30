@@ -18,34 +18,14 @@ export class AssocQuery<
     ? EntType & typeof BaseEnt
     : never,
 > {
-  static queryWithEntType<
-    FromEnt extends EntClass,
-    FromEntInstance extends FromEnt extends EntClass<infer EntType>
-      ? EntType & typeof BaseEnt
-      : never,
-    ToEnt extends EntClass,
-    ToEntInstance extends ToEnt extends EntClass<infer EntType>
-      ? EntType & typeof BaseEnt
-      : never,
-  >(entTypes: {
-    from: EntClass<FromEntInstance>;
-    to: EntClass<ToEntInstance>;
-  }) {
-    const assocType = `${(entTypes.from as unknown as typeof BaseEnt).EntTypeID}-${(entTypes.to as unknown as typeof BaseEnt).EntTypeID}`;
-    return new AssocQuery<FromEnt, FromEntInstance, ToEnt, ToEntInstance>(
-      assocType,
-      entTypes.from as unknown as FromEntInstance,
-      entTypes.to as unknown as ToEntInstance,
-    );
-  }
-
   private query: SelectQueryBuilder<Database, "assoc", Assoc>;
 
   constructor(
-    assocType: string,
     private readonly fromEntType: FromEntInstance,
     private readonly toEntType: ToEntInstance,
   ) {
+    const assocType = `${(fromEntType as unknown as typeof BaseEnt).EntTypeID}-${(toEntType as unknown as typeof BaseEnt).EntTypeID}`;
+
     this.query = apiDB
       .selectFrom("assoc")
       .selectAll()
