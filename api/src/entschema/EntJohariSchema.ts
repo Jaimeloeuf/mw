@@ -29,6 +29,7 @@ export class EntJohariSchema implements EntSchema {
       {
         name: "creator",
         type: "field-edge",
+        idField: "creatorID",
       },
     ];
   }
