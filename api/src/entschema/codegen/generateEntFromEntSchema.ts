@@ -44,6 +44,7 @@ export function generateEntFromEntSchema(
           ts.factory.createStringLiteral(entTypeID),
         ),
       ),
+      getNewline<ts.ClassElement>(),
       ts.factory.createConstructorDeclaration(
         undefined,
         [
