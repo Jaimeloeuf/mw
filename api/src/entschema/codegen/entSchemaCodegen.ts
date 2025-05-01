@@ -32,7 +32,7 @@ async function entSchemaCodegen(entSchema: EntSchemaConstructor<EntSchema>) {
     removeComments: false,
   });
 
-  const result = printer.printNode(
+  const generatedCode = printer.printNode(
     ts.EmitHint.Unspecified,
     generatedEntNode,
     ts.createSourceFile(
@@ -44,7 +44,13 @@ async function entSchemaCodegen(entSchema: EntSchemaConstructor<EntSchema>) {
     ),
   );
 
-  const formattedFile = await prettier.format(result, { filepath: ".ts" });
+  const imports = `import { BaseEnt } from "../../ent/BaseEnt.js";\n\n`;
+
+  const generatedCodeWithImports = imports + generatedCode;
+
+  const formattedFile = await prettier.format(generatedCodeWithImports, {
+    filepath: ".ts",
+  });
 
   await fs.writeFile(
     path.join(import.meta.dirname, `../__generated/${entClassName}.ts`),

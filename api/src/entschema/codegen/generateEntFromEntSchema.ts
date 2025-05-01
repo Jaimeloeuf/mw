@@ -24,7 +24,14 @@ export function generateEntFromEntSchema(
     [ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
     ts.factory.createIdentifier(config.entClassName),
     undefined,
-    undefined,
+    [
+      ts.factory.createHeritageClause(ts.SyntaxKind.ExtendsKeyword, [
+        ts.factory.createExpressionWithTypeArguments(
+          ts.factory.createIdentifier("BaseEnt"),
+          undefined,
+        ),
+      ]),
+    ],
     [
       prefixJsdocComment(
         [
