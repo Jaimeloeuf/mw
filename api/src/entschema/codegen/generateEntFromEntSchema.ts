@@ -2,6 +2,7 @@ import ts from "typescript";
 
 import { EntSchema } from "../lib/EntSchema.js";
 import { EntSchemaCodegenError } from "./EntSchemaCodegenError.js";
+import { getNewline } from "./utils/getNewline.js";
 import { prefixJsdocComment } from "./utils/prefixJsdocComment.js";
 
 /**
@@ -116,9 +117,7 @@ export function generateEntFromEntSchema(
 
                   return [
                     // Add a new line for every single field
-                    ts.factory.createIdentifier(
-                      "\n",
-                    ) as unknown as ts.TypeElement,
+                    getNewline<ts.TypeElement>(),
 
                     field.description === undefined
                       ? dataField
