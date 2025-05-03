@@ -8,7 +8,7 @@ import mwEslintPlugin from "./eslint-rules/eslint-plugin-mw.cjs";
 export default [
   {
     files: ["src/**/*.ts"],
-    ignores: ["dist/**"],
+    ignores: ["dist/**", "src/next/.next/**"],
     languageOptions: {
       globals: globals.node,
     },
