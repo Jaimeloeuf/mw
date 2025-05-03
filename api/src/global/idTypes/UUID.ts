@@ -43,6 +43,7 @@ declare global {
  */
 globalThis.$UUID = {
   generate() {
+    // eslint-disable-next-line no-restricted-properties
     return crypto.randomUUID() as $UUID.Strong;
   },
   makeStrongAndThrowOnError(maybeID) {

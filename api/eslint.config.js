@@ -22,6 +22,14 @@ export default [
       "no-nested-ternary": "error",
       "no-unneeded-ternary": "error",
       "no-console": "warn",
+      "no-restricted-properties": [
+        "error",
+        {
+          object: "crypto",
+          property: "randomUUID",
+          message: "Please use the globally available $UUID.generate()",
+        },
+      ],
       // Potentially helpful when doing codegen with manual sections for users
       // to fill in before committing.
       // "no-warning-comments": [
