@@ -6,7 +6,8 @@ import "../global/bootstrapGlobalDefinitions.js";
 import { config } from "../config/index.js";
 
 /**
- * `npm run scratchpad`
+ * - `npm run scratchpad`
+ * - `npm run scratchpad-watch`
  *
  * Use this to quickly test out ideas like a personal scratch pad, but do not
  * commit any changes to this into source control.
