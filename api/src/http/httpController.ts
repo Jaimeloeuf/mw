@@ -239,7 +239,7 @@ export const httpController = <
 
       // Create a err/err-log ID, to log it together with the error and send it
       // back to the client to improve debugging.
-      const logID = crypto.randomUUID();
+      const logID = $UUID.generate();
 
       // Simple error logging
       // @todo Might log to an error logging service

@@ -1,6 +1,6 @@
 declare global {
   /**
-   * For UUID strings, generally created using `crypto.randomUUID()`
+   * For UUID strings, generally created using `$UUID.generate()`
    */
   namespace $UUID {
     /**
@@ -16,6 +16,11 @@ declare global {
      * `makeStrongAndThrowOnError`.
      */
     type Strong = $StrongStringID<"UUID">;
+
+    /**
+     * Utility to generate a new Strong variant UUID.
+     */
+    function generate(): $UUID.Strong;
 
     /**
      * Utility to convert a Weak ID variant to Strong ID variant after
@@ -37,6 +42,9 @@ declare global {
  * namespace definitions.
  */
 globalThis.$UUID = {
+  generate() {
+    return crypto.randomUUID() as $UUID.Strong;
+  },
   makeStrongAndThrowOnError(id) {
     if (id === "") {
       throw new Error("empty UUID");

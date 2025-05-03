@@ -19,6 +19,6 @@ export function injectID<T extends { id: any }>(
   if (objectWithoutID["id"] != null) {
     return objectWithoutID as T;
   }
-  objectWithoutID["id"] = crypto.randomUUID();
+  objectWithoutID["id"] = $UUID.generate();
   return objectWithoutID as T;
 }

@@ -25,7 +25,7 @@ export function defineAsyncJobType<AsyncJobArgumentType = void>(
         runOptions?.jobArguments,
       );
 
-      const asyncJobID = `${crypto.randomUUID()}_${asyncJobConfig.id}`;
+      const asyncJobID = `${$UUID.generate()}_${asyncJobConfig.id}`;
 
       const asyncJob: AsyncJob = {
         id: asyncJobID,

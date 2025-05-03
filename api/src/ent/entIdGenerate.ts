@@ -13,6 +13,6 @@ export function entIdGenerate(
 ): string {
   // Casting to get the value of the non-abstract class
   const entTypeID = (entClass as unknown as typeof BaseEnt).EntTypeID;
-  const uuid = crypto.randomUUID();
+  const uuid = $UUID.generate();
   return `${uuid}_${entTypeID}`;
 }
