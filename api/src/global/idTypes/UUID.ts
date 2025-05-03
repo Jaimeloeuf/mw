@@ -26,14 +26,14 @@ declare global {
      * Utility to convert a Weak ID variant to Strong ID variant after
      * validation and type casting. This will throw on validation error.
      */
-    function makeStrongAndThrowOnError(id: $UUID.Weak): $UUID.Strong;
+    function makeStrongAndThrowOnError(maybeID: $UUID.Weak): $UUID.Strong;
 
     /**
      * Utility to convert a Weak ID variant to Strong ID variant after
      * validation and type casting. This will not throw on validation error and
      * instead return a `$ResultTuple`.
      */
-    function makeStrongSafely(id: $UUID.Weak): $ResultTuple<$UUID.Strong>;
+    function makeStrongSafely(maybeID: $UUID.Weak): $ResultTuple<$UUID.Strong>;
   }
 }
 
@@ -45,13 +45,13 @@ globalThis.$UUID = {
   generate() {
     return crypto.randomUUID() as $UUID.Strong;
   },
-  makeStrongAndThrowOnError(id) {
-    if (id === "") {
+  makeStrongAndThrowOnError(maybeID) {
+    if (maybeID === "") {
       throw new Error("empty UUID");
     }
-    return id as $UUID.Strong;
+    return maybeID as $UUID.Strong;
   },
-  makeStrongSafely(id) {
-    return [null, this.makeStrongAndThrowOnError(id)];
+  makeStrongSafely(maybeID) {
+    return [null, this.makeStrongAndThrowOnError(maybeID)];
   },
 };
