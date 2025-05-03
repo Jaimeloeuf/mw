@@ -1,4 +1,4 @@
-import { registerGlobalUncaughtIssueHandlers } from "./global/index.js";
+import "./global/bootstrapGlobalDefinitions.js";
 
 // Import these after global import which runs global side effects
 import { startupModuleRunner } from "./__generated/index.js";
@@ -8,6 +8,7 @@ import {
   config,
 } from "./config/index.js";
 import { bootstrapDal } from "./dal/index.js";
+import { registerGlobalUncaughtIssueHandlers } from "./global/index.js";
 import { bootstrapHttpServer } from "./http/index.js";
 import { logger } from "./logging/index.js";
 

@@ -12,16 +12,6 @@
  */
 declare global {
   /**
-   * For UUID strings, generally created using `crypto.randomUUID()`
-   */
-  type $WeakUUID = $WeakStringID<"UUID">;
-
-  /**
-   * For UUID strings, generally created using `crypto.randomUUID()`
-   */
-  type $StrongUUID = $StrongStringID<"UUID">;
-
-  /**
    * EntID strings
    */
   type $WeakEntID = $WeakStringID<"EntID">;
