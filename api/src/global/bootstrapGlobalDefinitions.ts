@@ -4,3 +4,4 @@
 
 // Import ID type modules to run their side effects
 import "./idTypes/UUID.js";
+import "./idTypes/EntID.js";

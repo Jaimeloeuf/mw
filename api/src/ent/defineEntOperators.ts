@@ -4,7 +4,6 @@ import type { EntCrudOperatorStorageAdapter } from "./EntCrudOperatorStorageAdap
 import type { EntManagedData } from "./EntManagedData.js";
 
 import { NotFoundException } from "../exceptions/NotFoundException.js";
-import { entIdGenerate } from "./entIdGenerate.js";
 import { entIdVerify } from "./entIdVerify.js";
 
 /**
@@ -61,7 +60,7 @@ export function defineEntOperators<
     async create(data: Omit<EntInstance["data"], keyof EntManagedData>) {
       const now = new Date();
       const ent = new entClass({
-        id: entIdGenerate(entClass),
+        id: $EntID.generate(entClass),
         createdAt: now,
         updatedAt: now,
         ...data,
