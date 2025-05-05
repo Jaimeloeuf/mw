@@ -19,6 +19,14 @@ export function defineEntOperators<
     custom: EntCustomOperators;
   },
 ): EntCrudOperator<EntInstance> & EntCustomOperators {
+  function throwIfEntIdIsNotValid(id: string) {
+    if (!$EntID.isValid(entClass, id)) {
+      throw new NotFoundException(
+        `Invalid ID '${id}' used for '${entClass.name}'`,
+      );
+    }
+  }
+
   return {
     ...operators.custom,
 
@@ -26,12 +34,7 @@ export function defineEntOperators<
      * Verify ID before loading Ent.
      */
     get(id: string) {
-      const isEntIdValid = $EntID.isValid(entClass, id);
-      if (!isEntIdValid) {
-        throw new NotFoundException(
-          `Invalid ID '${id}' used for '${entClass.name}'`,
-        );
-      }
+      throwIfEntIdIsNotValid(id);
       return operators.CRUD.get(id);
     },
 
@@ -42,12 +45,7 @@ export function defineEntOperators<
      */
     getMany(ids: $NonEmptyArray<string>) {
       for (const id of ids) {
-        const isEntIdValid = $EntID.isValid(entClass, id);
-        if (!isEntIdValid) {
-          throw new NotFoundException(
-            `Invalid ID '${id}' used for '${entClass.name}'`,
-          );
-        }
+        throwIfEntIdIsNotValid(id);
       }
       return operators.CRUD.getMany(ids);
     },
@@ -80,12 +78,7 @@ export function defineEntOperators<
      * Verify ID before deleting Ent.
      */
     async delete(id: string) {
-      const isEntIdValid = $EntID.isValid(entClass, id);
-      if (!isEntIdValid) {
-        throw new NotFoundException(
-          `Invalid ID '${id}' used for '${entClass.name}'`,
-        );
-      }
+      throwIfEntIdIsNotValid(id);
       await operators.CRUD.delete(id);
     },
   };
