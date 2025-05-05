@@ -27,6 +27,12 @@ declare global {
     /**
      * Utility to convert a Weak ID variant to Strong ID variant after
      * validation and type casting. This will throw on validation error.
+     *
+     * ## Important
+     * For performance reason, this only validate if the maybeID string is 36
+     * characters long, and does not actually check if it is a valid UUID since
+     * doing the validation with regex is too slow for the amount of calls to
+     * this function.
      */
     function makeStrongAndThrowOnError(maybeID: $UUID.Weak): $UUID.Strong;
 
@@ -49,7 +55,7 @@ globalThis.$UUID = {
     return crypto.randomUUID() as $UUID.Strong;
   },
   makeStrongAndThrowOnError(maybeID) {
-    if (maybeID === "") {
+    if (maybeID.length !== 36) {
       throw new ValidationFailedException(`Invalid UUID: ${maybeID}`);
     }
     return maybeID as $UUID.Strong;
