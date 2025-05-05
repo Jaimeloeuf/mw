@@ -10,7 +10,6 @@ import {
   NotFoundException,
 } from "../exceptions/index.js";
 import { BaseEnt } from "./BaseEnt.js";
-import { entIdVerify } from "./entIdVerify.js";
 
 export class AssocQuery<
   FromEnt extends EntClass,
@@ -42,7 +41,7 @@ export class AssocQuery<
    */
   whereFromIdIs(...ids: $NonEmptyArray<string>) {
     for (const id of ids) {
-      const isEntIdValid = entIdVerify(this.fromEntType, id);
+      const isEntIdValid = $EntID.isValid(this.fromEntType, id);
       if (!isEntIdValid) {
         throw new NotFoundException(
           `Invalid ID '${id}' used for '${this.fromEntType.name}'`,
@@ -65,7 +64,7 @@ export class AssocQuery<
    */
   whereToIdIs(...ids: $NonEmptyArray<string>) {
     for (const id of ids) {
-      const isEntIdValid = entIdVerify(this.toEntType, id);
+      const isEntIdValid = $EntID.isValid(this.toEntType, id);
       if (!isEntIdValid) {
         throw new NotFoundException(
           `Invalid ID '${id}' used for '${this.toEntType.name}'`,

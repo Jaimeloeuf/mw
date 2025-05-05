@@ -4,7 +4,6 @@ import type { EntCrudOperatorStorageAdapter } from "./EntCrudOperatorStorageAdap
 import type { EntManagedData } from "./EntManagedData.js";
 
 import { NotFoundException } from "../exceptions/NotFoundException.js";
-import { entIdVerify } from "./entIdVerify.js";
 
 /**
  * Define Ent operators for product code to interface with an Ent type.
@@ -27,7 +26,7 @@ export function defineEntOperators<
      * Verify ID before loading Ent.
      */
     get(id: string) {
-      const isEntIdValid = entIdVerify(entClass, id);
+      const isEntIdValid = $EntID.isValid(entClass, id);
       if (!isEntIdValid) {
         throw new NotFoundException(
           `Invalid ID '${id}' used for '${entClass.name}'`,
@@ -43,7 +42,7 @@ export function defineEntOperators<
      */
     getMany(ids: $NonEmptyArray<string>) {
       for (const id of ids) {
-        const isEntIdValid = entIdVerify(entClass, id);
+        const isEntIdValid = $EntID.isValid(entClass, id);
         if (!isEntIdValid) {
           throw new NotFoundException(
             `Invalid ID '${id}' used for '${entClass.name}'`,
@@ -81,7 +80,7 @@ export function defineEntOperators<
      * Verify ID before deleting Ent.
      */
     async delete(id: string) {
-      const isEntIdValid = entIdVerify(entClass, id);
+      const isEntIdValid = $EntID.isValid(entClass, id);
       if (!isEntIdValid) {
         throw new NotFoundException(
           `Invalid ID '${id}' used for '${entClass.name}'`,

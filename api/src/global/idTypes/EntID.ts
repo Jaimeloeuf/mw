@@ -34,6 +34,18 @@ declare global {
     ): $EntID.Strong;
 
     /**
+     * Checks if the Ent ID is valid for a given Ent Type / Class.
+     *
+     * Checks:
+     * 1. If the entID is exactly 41 characters long, length of UUID + postfix
+     * 1. If the entID ends with the correct postfix of "_" and the entTypeID
+     */
+    function isValid(
+      entClass: typeof BaseEnt | EntClass<BaseEnt>,
+      maybeID: string,
+    ): boolean;
+
+    /**
      * Utility to convert a Weak ID variant to Strong ID variant after
      * validation and type casting. This will throw on validation error.
      */
@@ -58,6 +70,12 @@ globalThis.$EntID = {
   generate(entClass) {
     // Casting entClass to get the value of the non-abstract class
     return `${$UUID.generate()}_${(entClass as typeof BaseEnt).EntTypeID}` as $EntID.Strong;
+  },
+  isValid(entClass, maybeID) {
+    return (
+      maybeID.length === 41 &&
+      maybeID.endsWith(`_${(entClass as typeof BaseEnt).EntTypeID}`)
+    );
   },
   makeStrongAndThrowOnError(maybeID) {
     if (maybeID === "") {
