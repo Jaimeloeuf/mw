@@ -16,3 +16,4 @@ export * from "./ServiceException.js";
 export * from "./TimeoutException.js";
 export * from "./UnauthorizedException.js";
 export * from "./UnimplementedException.js";
+export * from "./ValidationFailedException.js";

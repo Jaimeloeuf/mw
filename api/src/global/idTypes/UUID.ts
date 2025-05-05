@@ -1,3 +1,5 @@
+import { ValidationFailedException } from "../../exceptions/ValidationFailedException.js";
+
 declare global {
   /**
    * For UUID strings, generally created using `$UUID.generate()`
@@ -48,7 +50,7 @@ globalThis.$UUID = {
   },
   makeStrongAndThrowOnError(maybeID) {
     if (maybeID === "") {
-      throw new Error("empty UUID");
+      throw new ValidationFailedException(`Invalid UUID: ${maybeID}`);
     }
     return maybeID as $UUID.Strong;
   },
