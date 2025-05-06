@@ -1,3 +1,5 @@
+import { BrandAndFlavorTypeTagUniqueSymbol } from "./BrandAndFlavorTypeTagUniqueSymbol.js";
+
 /**
  * Branding is a Type level concept to create "nominal types".
  *
@@ -19,7 +21,7 @@
  * 1. <https://stackoverflow.com/questions/71486513/how-to-accomplish-stongly-typed-ids-in-typescript>
  */
 interface Branding<Brand extends string> {
-  _type: Brand;
+  [BrandAndFlavorTypeTagUniqueSymbol]: Brand;
 }
 
 /**
