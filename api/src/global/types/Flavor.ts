@@ -21,7 +21,7 @@ import { BrandAndFlavorTypeTagUniqueSymbol } from "./BrandAndFlavorTypeTagUnique
  * 1. <https://stackoverflow.com/questions/71486513/how-to-accomplish-stongly-typed-ids-in-typescript>
  */
 interface Flavoring<Flavor extends string> {
-  [BrandAndFlavorTypeTagUniqueSymbol]?: Flavor;
+  readonly [BrandAndFlavorTypeTagUniqueSymbol]?: Flavor;
 }
 
 /**
