@@ -30,6 +30,7 @@ export default [
           message: "Please use the globally available $UUID.generate()",
         },
       ],
+      curly: ["error", "all"],
       // Potentially helpful when doing codegen with manual sections for users
       // to fill in before committing.
       // "no-warning-comments": [
