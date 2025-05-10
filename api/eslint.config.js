@@ -30,6 +30,15 @@ export default [
           message: "Please use the globally available $UUID.generate()",
         },
       ],
+      "no-fallthrough": [
+        "error",
+        {
+          // Allow a one or more empty cases to be stacked on top of a case that
+          // actually implements some logic, to share the logic between these
+          // stacked cases.
+          allowEmptyCase: true,
+        },
+      ],
       curly: ["error", "all"],
       // Potentially helpful when doing codegen with manual sections for users
       // to fill in before committing.
