@@ -52,5 +52,48 @@ declare global {
        */
       type DateStrong = $MakeBrandedString<"ISO_Date">;
     }
+
+    /**
+     * Utility for unix timestamps
+     */
+    namespace unix {
+      /**
+       * Number of seconds since unix epoch.
+       *
+       * Weak variant, allows implicit number to Seconds conversion, i.e. can
+       * treat numbers as a `$DateTime.unix.SecondsWeak` without any validation
+       * and/or type casting.
+       */
+      type SecondsWeak = $MakeFlavoredNumber<"unix_Seconds">;
+
+      /**
+       * Number of seconds since unix epoch.
+       *
+       * Strong variant, does not allow implicit number to Seconds conversion,
+       * i.e. cannot treat numbers as a `$DateTime.unix.SecondsStrong` until it
+       * is validated and/or type casted, preferably with the utility functions
+       * in this same namespace.
+       */
+      type SecondsStrong = $MakeBrandedNumber<"unix_Seconds">;
+
+      /**
+       * Number of milliseconds since unix epoch.
+       *
+       * Weak variant, allows implicit number to Milliseconds conversion, i.e.
+       * can treat numbers as a `$DateTime.unix.MillisecondsWeak` without any
+       * validation and/or type casting.
+       */
+      type MillisecondsWeak = $MakeFlavoredNumber<"unix_Milliseconds">;
+
+      /**
+       * Number of milliseconds since unix epoch.
+       *
+       * Strong variant, does not allow implicit number to Milliseconds
+       * conversion, i.e. cannot treat numbers as a
+       * `$DateTime.unix.MillisecondsStrong` until it is validated and/or type
+       * casted, preferably with the utility functions in this same namespace.
+       */
+      type MillisecondsStrong = $MakeBrandedNumber<"unix_Milliseconds">;
+    }
   }
 }
