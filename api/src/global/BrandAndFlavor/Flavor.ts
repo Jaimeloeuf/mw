@@ -43,4 +43,13 @@ declare global {
     string,
     Flavor
   >;
+
+  /**
+   * Create weak 'flavored' number, i.e. implicit number to flavored type
+   * conversion allowed.
+   */
+  type $MakeFlavoredNumber<Flavor extends string> = $MakeFlavored<
+    number,
+    Flavor
+  >;
 }

@@ -40,4 +40,10 @@ declare global {
    * conversion not allowed.
    */
   type $MakeBrandedString<Brand extends string> = $MakeBranded<string, Brand>;
+
+  /**
+   * Create strong 'branded' number, i.e. implicit number to branded type
+   * conversion not allowed.
+   */
+  type $MakeBrandedNumber<Brand extends string> = $MakeBranded<number, Brand>;
 }
