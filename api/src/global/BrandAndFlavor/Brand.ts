@@ -34,4 +34,10 @@ declare global {
    */
   type $MakeBranded<TypeToBrand, Brand extends string> = TypeToBrand &
     Branding<Brand>;
+
+  /**
+   * Create strong 'branded' string, i.e. implicit string to branded type
+   * conversion not allowed.
+   */
+  type $MakeBrandedString<Brand extends string> = $MakeBranded<string, Brand>;
 }

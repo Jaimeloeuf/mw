@@ -34,4 +34,13 @@ declare global {
    */
   type $MakeFlavored<TypeToFlavor, Flavor extends string> = TypeToFlavor &
     Flavoring<Flavor>;
+
+  /**
+   * Create weak 'flavored' string, i.e. implicit string to flavored type
+   * conversion allowed.
+   */
+  type $MakeFlavoredString<Flavor extends string> = $MakeFlavored<
+    string,
+    Flavor
+  >;
 }

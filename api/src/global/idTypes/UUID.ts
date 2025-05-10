@@ -9,7 +9,7 @@ declare global {
      * Weak variant, allows implicit string to ID conversion, i.e. can treat
      * strings as a `$UUID.Weak` without any validation and/or type casting.
      */
-    type Weak = $WeakStringID<"UUID">;
+    type Weak = $MakeFlavoredString<"UUID">;
 
     /**
      * Strong variant, does not allow implicit string to ID conversion, i.e.
@@ -17,7 +17,7 @@ declare global {
      * type casted, preferably with the utility functions `makeStrongSafely` or
      * `makeStrongAndThrowOnError`.
      */
-    type Strong = $StrongStringID<"UUID">;
+    type Strong = $MakeBrandedString<"UUID">;
 
     /**
      * Utility to generate a new Strong variant UUID.

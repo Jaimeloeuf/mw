@@ -10,7 +10,7 @@ declare global {
      * Weak variant, allows implicit string to ID conversion, i.e. can treat
      * strings as a `$EntID.Weak` without any validation and/or type casting.
      */
-    type Weak = $WeakStringID<"EntID">;
+    type Weak = $MakeFlavoredString<"EntID">;
 
     /**
      * Strong variant, does not allow implicit string to ID conversion, i.e.
@@ -18,7 +18,7 @@ declare global {
      * type casted, preferably with the utility functions `makeStrongSafely` or
      * `makeStrongAndThrowOnError`.
      */
-    type Strong = $StrongStringID<"EntID">;
+    type Strong = $MakeBrandedString<"EntID">;
 
     /**
      * Utility to generate a new Strong variant EntID.
