@@ -39,6 +39,7 @@ export default [
           allowEmptyCase: true,
         },
       ],
+      "default-case": "error",
       curly: ["error", "all"],
       // Potentially helpful when doing codegen with manual sections for users
       // to fill in before committing.
