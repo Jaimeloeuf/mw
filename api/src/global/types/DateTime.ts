@@ -11,89 +11,99 @@ declare global {
       /**
        * DateTime refers to the full ISO DateTime string and always stored /
        * represented internally in UTC.
-       *
-       * Weak variant, allows implicit string to DateTime conversion, i.e. can
-       * treat strings as a `$DateTime.ISO.DateTimeWeak` without any validation
-       * and/or type casting.
        */
-      type DateTimeWeak = $MakeFlavoredString<"ISO_DateTime">;
+      namespace DateTime {
+        /**
+         * Weak variant, allows implicit string to DateTime conversion, i.e. can
+         * treat strings as a `$DateTime.ISO.DateTime.Weak` without any
+         * validation and/or type casting.
+         */
+        type Weak = $MakeFlavoredString<"ISO_DateTime">;
 
-      /**
-       * DateTime refers to the full ISO DateTime string and always stored /
-       * represented internally in UTC.
-       *
-       * Strong variant, does not allow implicit string to DateTime conversion,
-       * i.e. cannot treat strings as a `$DateTime.ISO.DateTimeStrong` until it
-       * is validated and/or type casted, preferably with the utility functions
-       * in this same namespace.
-       */
-      type DateTimeStrong = $MakeBrandedString<"ISO_DateTime">;
-
-      /**
-       * Date refers to only the YYYY-MM-DD portion of ISO DateTime strings and
-       * these are always always treated / stored / represented internally as
-       * UTC 00:00.
-       *
-       * Weak variant, allows implicit string to Date conversion, i.e. can treat
-       * strings as a `$DateTime.ISO.DateWeak` without any validation and/or
-       * type casting.
-       */
-      type DateWeak = $MakeFlavoredString<"ISO_Date">;
+        /**
+         * Strong variant, does not allow implicit string to DateTime
+         * conversion, i.e. cannot treat strings as a
+         * `$DateTime.ISO.DateTime.Strong` until it is validated and/or type
+         * casted, preferably with the utility functions in this same namespace.
+         */
+        type Strong = $MakeBrandedString<"ISO_DateTime">;
+      }
 
       /**
        * Date refers to only the YYYY-MM-DD portion of ISO DateTime strings and
        * these are always always treated / stored / represented internally as
        * UTC 00:00.
-       *
-       * Strong variant, does not allow implicit string to Date conversion, i.e.
-       * cannot treat strings as a `$DateTime.ISO.DateStrong` until it is
-       * validated and/or type casted, preferably with the utility functions in
-       * this same namespace.
        */
-      type DateStrong = $MakeBrandedString<"ISO_Date">;
+      namespace Date {
+        /**
+         * Date refers to only the YYYY-MM-DD portion of ISO DateTime strings
+         * and these are always always treated / stored / represented internally
+         * as UTC 00:00.
+         *
+         * Weak variant, allows implicit string to Date conversion, i.e. can
+         * treat strings as a `$DateTime.ISO.Date.Weak` without any validation
+         * and/or type casting.
+         */
+        type Weak = $MakeFlavoredString<"ISO_Date">;
+
+        /**
+         * Date refers to only the YYYY-MM-DD portion of ISO DateTime strings
+         * and these are always always treated / stored / represented internally
+         * as UTC 00:00.
+         *
+         * Strong variant, does not allow implicit string to Date conversion,
+         * i.e. cannot treat strings as a `$DateTime.ISO.Date.Strong` until it
+         * is validated and/or type casted, preferably with the utility
+         * functions in this same namespace.
+         */
+        type Strong = $MakeBrandedString<"ISO_Date">;
+      }
     }
 
     /**
      * Utility for unix timestamps
      */
-    namespace unix {
+    namespace Unix {
       /**
        * Number of seconds since unix epoch.
-       *
-       * Weak variant, allows implicit number to Seconds conversion, i.e. can
-       * treat numbers as a `$DateTime.unix.SecondsWeak` without any validation
-       * and/or type casting.
        */
-      type SecondsWeak = $MakeFlavoredNumber<"unix_Seconds">;
+      namespace Seconds {
+        /**
+         * Weak variant, allows implicit number to Seconds conversion, i.e. can
+         * treat numbers as a `$DateTime.Unix.Seconds.Weak` without any
+         * validation and/or type casting.
+         */
+        type Weak = $MakeFlavoredNumber<"unix_Seconds">;
 
-      /**
-       * Number of seconds since unix epoch.
-       *
-       * Strong variant, does not allow implicit number to Seconds conversion,
-       * i.e. cannot treat numbers as a `$DateTime.unix.SecondsStrong` until it
-       * is validated and/or type casted, preferably with the utility functions
-       * in this same namespace.
-       */
-      type SecondsStrong = $MakeBrandedNumber<"unix_Seconds">;
+        /**
+         * Strong variant, does not allow implicit number to Seconds conversion,
+         * i.e. cannot treat numbers as a `$DateTime.Unix.Seconds.Strong` until
+         * it is validated and/or type casted, preferably with the utility
+         * functions in this same namespace.
+         */
+        type Strong = $MakeBrandedNumber<"unix_Seconds">;
+      }
 
       /**
        * Number of milliseconds since unix epoch.
-       *
-       * Weak variant, allows implicit number to Milliseconds conversion, i.e.
-       * can treat numbers as a `$DateTime.unix.MillisecondsWeak` without any
-       * validation and/or type casting.
        */
-      type MillisecondsWeak = $MakeFlavoredNumber<"unix_Milliseconds">;
+      namespace Milliseconds {
+        /**
+         * Weak variant, allows implicit number to Milliseconds conversion, i.e.
+         * can treat numbers as a `$DateTime.Unix.Milliseconds.Weak` without any
+         * validation and/or type casting.
+         */
+        type Weak = $MakeFlavoredNumber<"unix_Milliseconds">;
 
-      /**
-       * Number of milliseconds since unix epoch.
-       *
-       * Strong variant, does not allow implicit number to Milliseconds
-       * conversion, i.e. cannot treat numbers as a
-       * `$DateTime.unix.MillisecondsStrong` until it is validated and/or type
-       * casted, preferably with the utility functions in this same namespace.
-       */
-      type MillisecondsStrong = $MakeBrandedNumber<"unix_Milliseconds">;
+        /**
+         * Strong variant, does not allow implicit number to Milliseconds
+         * conversion, i.e. cannot treat numbers as a
+         * `$DateTime.Unix.Milliseconds.Strong` until it is validated and/or
+         * type casted, preferably with the utility functions in this same
+         * namespace.
+         */
+        type Strong = $MakeBrandedNumber<"unix_Milliseconds">;
+      }
     }
   }
 }
