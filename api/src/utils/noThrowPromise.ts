@@ -3,7 +3,7 @@ import { unknownCatchToError } from "./unknownCatchToError.js";
 /**
  * Utility wrapper function to wrap a promise to prevent it from throwing.
  *
- * **If you need to wrap function instead, use `noThrowFunction` which supports
+ * **If you need to wrap function instead, use `runAsyncFnSafely` which supports
  * both sync and async functions**
  *
  * ## Important Note
@@ -34,7 +34,7 @@ import { unknownCatchToError } from "./unknownCatchToError.js";
  * result; // This will type narrow to ResultType
  * ```
  *
- * ## Slightly less safe than `noThrowFunction`
+ * ## Slightly less safe than `runAsyncFnSafely`
  * since this execution starts at caller site, then only when the first await is
  * found, then the whole thing becomes a Promise and get passed into this
  * `noThrowPromise` wrapper as its argument, and execution gets yielded here to

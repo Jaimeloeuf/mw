@@ -15,8 +15,8 @@ import { json, noThrowPromise } from "../../utils/index.js";
  * function is used, it will not yield control flow back to `noThrowPromise`
  * until it runs to completion, and if it throws, it cannot be caught, which
  * defeats the whole point of using `noThrowPromise`. An alternative to this
- * would be to use `noThrowFunction` safety wrapper instead with an anonymous
- * function like `const noThrowResult = await noThrowFunction(() => fn(...args))`.
+ * would be to use `runAsyncFnSafely` safety wrapper instead with an anonymous
+ * function like `const noThrowResult = await runAsyncFnSafely(() => fn(...args))`.
  * But since most if not all data functions are expected to be asynchronous,
  * it is not worth it to add a layer of function call / indirection just to
  * support synchronous data functions. Therefore data functions must be either

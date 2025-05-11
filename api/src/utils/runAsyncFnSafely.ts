@@ -16,7 +16,7 @@ import { unknownCatchToError } from "./index.js";
  * You can then use TS type narrowing to determine if the function threw an
  * error or not. For example
  * ```typescript
- * const [err, result] = await noThrowFunction(() => ...);
+ * export const [err, result] = await runAsyncFnSafely(() => ...);
  * if (err !== null){
  *     console.error('Operation failed with', err);
  *     return;
@@ -24,7 +24,7 @@ import { unknownCatchToError } from "./index.js";
  * result; // This will type narrow to ResultType
  * ```
  */
-export async function noThrowFunction<
+export async function runAsyncFnSafely<
   T extends (...args: any) => any,
   FnArgs extends Parameters<T>,
   SuccessfulReturnType extends Awaited<ReturnType<T>> = Awaited<ReturnType<T>>,

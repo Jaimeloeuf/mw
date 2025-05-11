@@ -2,7 +2,7 @@ import type { TelegramBot } from "./TelegramBot.js";
 
 import { config } from "../../config/index.js";
 import { logger } from "../../logging/index.js";
-import { noThrowFunction } from "../../utils/index.js";
+import { runAsyncFnSafely } from "../../utils/index.js";
 import { allBotLoaders } from "./Bots/allBotLoaders.js";
 
 /**
@@ -24,7 +24,7 @@ export default async function getAllBots() {
 
       // Try to load the bot token, assume that if the bot token is loaded, it
       // means that the bot is available and vice versa.
-      const [error, botToken] = await noThrowFunction(bot.getToken.bind(bot));
+      const [error, botToken] = await runAsyncFnSafely(bot.getToken.bind(bot));
 
       if (error !== null && config.env() === "production") {
         logger.error(
