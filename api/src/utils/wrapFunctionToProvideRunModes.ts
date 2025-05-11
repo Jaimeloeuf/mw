@@ -1,4 +1,4 @@
-import { noThrowPromise } from "./noThrowPromise.js";
+import { awaitPromiseSafely } from "./awaitPromiseSafely.js";
 
 /**
  * Function wrapper to wrap functions to give function callers a choice to
@@ -8,10 +8,10 @@ import { noThrowPromise } from "./noThrowPromise.js";
  * ## Generic function types `T`
  * All input functions are expected to either be `async`, or return a `Promise`.
  * This is because the safety mechanism used by both methods below is
- * `noThrowPromise`, which requires a Promise as input. If a synchronous
- * function is used, it will not yield control flow back to `noThrowPromise`
+ * `awaitPromiseSafely`, which requires a Promise as input. If a synchronous
+ * function is used, it will not yield control flow back to `awaitPromiseSafely`
  * until it runs to completion, and if it throws, it cannot be caught, which
- * defeats the whole point of using `noThrowPromise`. An alternative to this
+ * defeats the whole point of using `awaitPromiseSafely`. An alternative to this
  * would be to use `runAsyncFnSafely` safety wrapper instead with an anonymous
  * function like `const noThrowResult = await runAsyncFnSafely(() => fn(...args))`.
  * But since most if not all input functions are expected to be asynchronous,
@@ -39,7 +39,7 @@ export const wrapFunctionToProvideRunModes = <
   run: (
     ...args: Parameters<T>
   ): Promise<[null, Awaited<ReturnType<T>>] | [Error, null]> =>
-    noThrowPromise(fn(args)),
+    awaitPromiseSafely(fn(args)),
 
   /**
    * Run input function directly and throws on any error / exceptions

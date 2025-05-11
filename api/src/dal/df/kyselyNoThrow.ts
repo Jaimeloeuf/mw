@@ -3,12 +3,13 @@ import {
   GenericDalException,
 } from "../../exceptions/index.js";
 import { logger } from "../../logging/index.js";
-import { noThrowPromise } from "../../utils/index.js";
+import { awaitPromiseSafely } from "../../utils/index.js";
 
 /**
- * Utility wrapper around the `noThrowPromise` utility function, to transform
- * the error if it exists into one of the valid exceptions using the mapping of
- * kysely error code to exception class defined in `kyselyErrorToException`.
+ * Utility wrapper around the `awaitPromiseSafely` utility function, to
+ * transform the error if it exists into one of the valid exceptions using the
+ * mapping of kysely error code to exception class defined in
+ * `kyselyErrorToException`.
  *
  * ### When should I use this?
  * For example when splitting up an object for insertion into multiple tables,
@@ -18,7 +19,7 @@ import { noThrowPromise } from "../../utils/index.js";
  * they delete the previous insertions or continue or throw the error to let the
  * service layer handle it?
  *
- * ### Why should I use this instead of `noThrowPromise`?
+ * ### Why should I use this instead of `awaitPromiseSafely`?
  * This is a wrapper on top of it, to map the value thrown into an Exception,
  * as determined by the `kyselyErrorToException` mapping.
  */
@@ -26,7 +27,7 @@ export async function kyselyNoThrow<
   T extends Promise<any>,
   SuccessfulReturnType extends Awaited<T> = Awaited<T>,
 >(promise: T): Promise<[null, SuccessfulReturnType] | [Error, null]> {
-  const noThrowResult = await noThrowPromise(promise);
+  const noThrowResult = await awaitPromiseSafely(promise);
 
   if (noThrowResult[0] !== null) {
     noThrowResult[0] = kyselyErrorToException(noThrowResult[0]);

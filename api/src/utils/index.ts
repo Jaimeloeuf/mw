@@ -2,6 +2,7 @@
  * Barrel file
  */
 
+export * from "./awaitPromiseSafely.js";
 export * from "./capitalizeFirstLetter.js";
 export * from "./concurrent.js";
 export * from "./dataOrThrow.js";
@@ -11,7 +12,6 @@ export * from "./isPromise.js";
 export * from "./json.js";
 export * from "./logBeforeRun.js";
 export * from "./noOp.js";
-export * from "./noThrowPromise.js";
 export * from "./pseudoRandomAlphanumericString.js";
 export * from "./runAsyncFnSafely.js";
 export * from "./runFnSafely.js";

@@ -1,6 +1,6 @@
 import { config } from "../../config/index.js";
 import { logger } from "../../logging/index.js";
-import { json, noThrowPromise } from "../../utils/index.js";
+import { json, awaitPromiseSafely } from "../../utils/index.js";
 
 /**
  * Data Function wrapper to wrap them and provide common utility features such
@@ -11,10 +11,10 @@ import { json, noThrowPromise } from "../../utils/index.js";
  * ## Generic Data Function types `T`
  * All data functions are expected to either be `async`, or return a `Promise`.
  * This is because the safety mechanism used by both methods below is
- * `noThrowPromise`, which requires a Promise as input. If a synchronous
- * function is used, it will not yield control flow back to `noThrowPromise`
+ * `awaitPromiseSafely`, which requires a Promise as input. If a synchronous
+ * function is used, it will not yield control flow back to `awaitPromiseSafely`
  * until it runs to completion, and if it throws, it cannot be caught, which
- * defeats the whole point of using `noThrowPromise`. An alternative to this
+ * defeats the whole point of using `awaitPromiseSafely`. An alternative to this
  * would be to use `runAsyncFnSafely` safety wrapper instead with an anonymous
  * function like `const noThrowResult = await runAsyncFnSafely(() => fn(...args))`.
  * But since most if not all data functions are expected to be asynchronous,
@@ -38,9 +38,9 @@ export function dataFn<
 
   /**
    * Run data function and catches any error/exceptions encountered using
-   * `noThrow`. Which means the return type will always be a tuple of an error
-   * and the original data function's return type, which you can use to type
-   * narrow down to either a failure or success case.
+   * `awaitPromiseSafely`. Which means the return type will always be a tuple
+   * of an error and the original data function's return type, which you can use
+   * to type narrow down to either a failure or success case.
    *
    * If you need to do some action like say, send user an email notification
    * about the failed service function call, use this to get the error
@@ -64,7 +64,7 @@ export function dataFn<
       );
     }
 
-    const noThrowResult = await noThrowPromise(fn(...args));
+    const noThrowResult = await awaitPromiseSafely(fn(...args));
 
     if (noThrowResult[0] !== null) {
       logDataFnError(fn.name, noThrowResult[0]);
@@ -97,7 +97,7 @@ export function dataFn<
       );
     }
 
-    const noThrowResult = await noThrowPromise(fn(...args));
+    const noThrowResult = await awaitPromiseSafely(fn(...args));
 
     if (noThrowResult[0] !== null) {
       logDataFnError(fn.name, noThrowResult[0]);

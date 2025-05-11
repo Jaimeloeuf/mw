@@ -12,10 +12,10 @@ import { unknownCatchToError } from "./unknownCatchToError.js";
  * function test() {
  *     throw new Error('testing');
  * }
- * noThrowPromise(test());
+ * awaitPromiseSafely(test());
  * ```
  * This will not work, as it will throw before control flow even passes to
- * `noThrowPromise`, effectively making this wrapping useless.
+ * `awaitPromiseSafely`, effectively making this wrapping useless.
  *
  * ## Return Type
  * This will always return a 2 element tuple, whose type is
@@ -26,7 +26,7 @@ import { unknownCatchToError } from "./unknownCatchToError.js";
  * You can then use TS type narrowing to determine if the function threw an
  * error or not. For example
  * ```typescript
- * const [err, result] = await noThrowPromise(yourPromise);
+ * const [err, result] = await awaitPromiseSafely(yourPromise);
  * if (err !== null){
  *     console.error('Operation failed with', err);
  *     return;
@@ -37,12 +37,12 @@ import { unknownCatchToError } from "./unknownCatchToError.js";
  * ## Slightly less safe than `runAsyncFnSafely`
  * since this execution starts at caller site, then only when the first await is
  * found, then the whole thing becomes a Promise and get passed into this
- * `noThrowPromise` wrapper as its argument, and execution gets yielded here to
- * await instead. So potentially, during the time between calling
- * `noThrowPromise` and creating the promise, it might have already thrown in a
- * synchronous manner.
+ * `awaitPromiseSafely` wrapper as its argument, and execution gets yielded here
+ * to await instead. So potentially, during the time between calling
+ * `awaitPromiseSafely` and creating the promise, it might have already thrown
+ * in a synchronous manner.
  */
-export async function noThrowPromise<
+export async function awaitPromiseSafely<
   T extends Promise<any>,
   SuccessfulReturnType extends Awaited<T> = Awaited<T>,
 >(promise: T): Promise<[null, SuccessfulReturnType] | [Error, null]> {
