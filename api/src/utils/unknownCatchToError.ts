@@ -1,6 +1,3 @@
-import { logger } from "../logging/index.js";
-import { json } from "./json.js";
-
 /**
  * Since 'useUnknownInCatchVariables' is enabled in TSConfig, this utility
  * function helps to ensure that the value gets turned into an Error.
@@ -18,9 +15,17 @@ export function unknownCatchToError(e: unknown) {
     return new Error(e.toString());
   }
 
-  logger.error(
-    unknownCatchToError.name,
-    `Found invalid error type thrown: ${json.stringifyPretty(e)}`,
+  // Dynamically load the logger and json utility module instead of importing
+  // them at top level to make this function more portable to use.
+  // Only downside to this is if the process is killed say by `process.exit(1)`
+  // right after the error is returned, and this doesnt get to run at all.
+  import("../logging/index.js").then(({ logger }) =>
+    import("../utils/index.js").then(({ json }) =>
+      logger.error(
+        unknownCatchToError.name,
+        `Found invalid error type thrown: ${json.stringifyPretty(e)}`,
+      ),
+    ),
   );
 
   return new Error(e?.toString?.() ?? "Unknown value caught");
