@@ -29,9 +29,7 @@ declare global {
      * EntTypeID is added to the end of the ID to ensure it does not cause indexing
      * issues with storage layers.
      */
-    function generate(
-      entClass: typeof BaseEnt | EntClass<BaseEnt>,
-    ): $EntID.Strong;
+    function generate(entClass: typeof BaseEnt | EntClass<BaseEnt>): Strong;
 
     /**
      * Checks if the Ent ID is valid for a given Ent Type / Class.
@@ -49,16 +47,14 @@ declare global {
      * Utility to convert a Weak ID variant to Strong ID variant after
      * validation and type casting. This will throw on validation error.
      */
-    function makeStrongAndThrowOnError(maybeID: $EntID.Weak): $EntID.Strong;
+    function makeStrongAndThrowOnError(maybeID: Weak): Strong;
 
     /**
      * Utility to convert a Weak ID variant to Strong ID variant after
      * validation and type casting. This will not throw on validation error and
      * instead return a `$ResultTuple`.
      */
-    function makeStrongSafely(
-      maybeID: $EntID.Weak,
-    ): $ResultTuple<$EntID.Strong>;
+    function makeStrongSafely(maybeID: Weak): $ResultTuple<Strong>;
   }
 }
 
