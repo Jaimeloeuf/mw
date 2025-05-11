@@ -22,7 +22,7 @@ declare global {
     /**
      * Utility to generate a new Strong variant UUID.
      */
-    function generate(): $UUID.Strong;
+    function generate(): Strong;
 
     /**
      * Utility to convert a Weak ID variant to Strong ID variant after
@@ -34,14 +34,14 @@ declare global {
      * doing the validation with regex is too slow for the amount of calls to
      * this function.
      */
-    function makeStrongAndThrowOnError(maybeID: $UUID.Weak): $UUID.Strong;
+    function makeStrongAndThrowOnError(maybeID: Weak): Strong;
 
     /**
      * Utility to convert a Weak ID variant to Strong ID variant after
      * validation and type casting. This will not throw on validation error and
      * instead return a `$ResultTuple`.
      */
-    function makeStrongSafely(maybeID: $UUID.Weak): $ResultTuple<$UUID.Strong>;
+    function makeStrongSafely(maybeID: Weak): $ResultTuple<Strong>;
   }
 }
 
