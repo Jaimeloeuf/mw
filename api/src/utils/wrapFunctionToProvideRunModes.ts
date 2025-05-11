@@ -13,7 +13,7 @@ import { awaitPromiseSafely } from "./awaitPromiseSafely.js";
  * until it runs to completion, and if it throws, it cannot be caught, which
  * defeats the whole point of using `awaitPromiseSafely`. An alternative to this
  * would be to use `runAsyncFnSafely` safety wrapper instead with an anonymous
- * function like `const noThrowResult = await runAsyncFnSafely(() => fn(...args))`.
+ * function like `const result = await runAsyncFnSafely(() => fn(...args))`.
  * But since most if not all input functions are expected to be asynchronous,
  * it is not worth it to add a layer of function call / indirection just to
  * support synchronous input functions. Therefore input functions must be either
@@ -26,9 +26,9 @@ export const wrapFunctionToProvideRunModes = <
 ) => ({
   /**
    * Run wrapped function and catches any error / exceptions encountered using
-   * `noThrow`. Which means the return type will always be a tuple of an error
-   * and the original function's return type, which you can use to type narrow
-   * down to either a failure or success case.
+   * `awaitPromiseSafely`. Which means the return type will always be a tuple of
+   * an error and the original function's return type, which you can use to type
+   * narrow down to either a failure or success case.
    *
    * If you want your caller to stop executing on errors / exceptions and do not
    * need to do any extra action in your caller function after the error /

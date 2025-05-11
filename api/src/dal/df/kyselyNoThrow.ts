@@ -27,13 +27,13 @@ export async function kyselyNoThrow<
   T extends Promise<any>,
   SuccessfulReturnType extends Awaited<T> = Awaited<T>,
 >(promise: T): Promise<[null, SuccessfulReturnType] | [Error, null]> {
-  const noThrowResult = await awaitPromiseSafely(promise);
+  const result = await awaitPromiseSafely(promise);
 
-  if (noThrowResult[0] !== null) {
-    noThrowResult[0] = kyselyErrorToException(noThrowResult[0]);
+  if (result[0] !== null) {
+    result[0] = kyselyErrorToException(result[0]);
   }
 
-  return noThrowResult;
+  return result;
 }
 
 /**

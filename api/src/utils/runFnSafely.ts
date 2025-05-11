@@ -4,7 +4,7 @@ import { unknownCatchToError } from "./index.js";
  * Utility wrapper function to wrap a function sync to prevent it from throwing.
  *
  * **If you need to wrap an async function, use `runAsyncFnSafely`**
- * **If you need to wrap a Promise, use `noThrowPromise`**
+ * **If you need to wrap a Promise, use `awaitPromiseSafely`**
  *
  * ## Return Type
  * This will always return a 2 element tuple, whose type is
