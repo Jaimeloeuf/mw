@@ -1,5 +1,3 @@
-import { unknownCatchToError } from "./unknownCatchToError.js";
-
 /**
  * Utility wrapper function to wrap a promise to prevent it from throwing.
  *
@@ -49,7 +47,6 @@ export async function awaitPromiseSafely<
   try {
     return [null, await promise];
   } catch (e) {
-    // Convert unknown `e` type to a definite `Error` type before returning it
-    return [unknownCatchToError(e), null];
+    return [$convertUnknownCatchToError(e), null];
   }
 }

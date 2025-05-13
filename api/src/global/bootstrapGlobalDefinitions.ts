@@ -2,6 +2,7 @@
  * Bootstrap all global scope code definitions in this file
  */
 
-// Import ID type modules to run their side effects
+// Import modules to run their side effects of setting values on `globalThis`
+import "./utils/convertUnknownCatchToError.js";
 import "./idTypes/UUID.js";
 import "./idTypes/EntID.js";

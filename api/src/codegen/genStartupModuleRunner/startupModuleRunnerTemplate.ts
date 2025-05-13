@@ -4,7 +4,6 @@ import { StartupFile } from "../utils/index.js";
 export const startupModuleRunnerTemplate = (
   files: Readonly<Array<StartupFile>>,
 ) => `import { logger } from "../logging/index.js";
-import { unknownCatchToError } from "../utils/index.js";
 import { st } from "./startupModulesBarrelFile${generatedCodeFileExtensionForJsImport}";
 
 /**
@@ -19,7 +18,7 @@ export async function startupModuleRunner() {
       ${files.map((file) => `logBeforeRun(st.${file.name})()`)}
     ]);
   } catch (e) {
-    const error = unknownCatchToError(e);
+    const error = $convertUnknownCatchToError(e);
 
     logger.error(
       startupModuleRunner.name,

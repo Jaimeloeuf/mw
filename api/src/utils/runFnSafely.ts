@@ -1,5 +1,3 @@
-import { unknownCatchToError } from "./index.js";
-
 /**
  * Utility wrapper function to wrap a function sync to prevent it from throwing.
  *
@@ -34,7 +32,6 @@ export async function runFnSafely<
   try {
     return [null, fn(...args)];
   } catch (e) {
-    // Convert unknown `e` type to a definite `Error` type before returning it
-    return [unknownCatchToError(e), null];
+    return [$convertUnknownCatchToError(e), null];
   }
 }

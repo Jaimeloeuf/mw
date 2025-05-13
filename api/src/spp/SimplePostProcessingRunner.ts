@@ -1,7 +1,6 @@
 import type { WrappedFunction } from "./WrappedFunction.js";
 
 import { logger } from "../logging/index.js";
-import { unknownCatchToError } from "../utils/index.js";
 import { runInParallel } from "./runInParallel.js";
 import { runSequentially } from "./runSequentially.js";
 
@@ -59,7 +58,7 @@ export class SimplePostProcessingRunner {
 
         return true;
       } catch (e) {
-        const error = unknownCatchToError(e);
+        const error = $convertUnknownCatchToError(e);
 
         logger.verbose(
           `${this.callerName}:${SimplePostProcessingRunner.name}`,

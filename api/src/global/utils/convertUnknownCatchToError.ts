@@ -1,8 +1,16 @@
-/**
- * Since 'useUnknownInCatchVariables' is enabled in TSConfig, this utility
- * function helps to ensure that the value gets turned into an Error.
- */
-export function unknownCatchToError(e: unknown) {
+declare global {
+  /**
+   * Converts unknown `e` type to a definite `Error` type before returning it.
+   *
+   * Since '$convertUnknownCatchToError' is enabled in TSConfig, this utility
+   * function helps to ensure that the value gets turned into an Error.
+   */
+  function $convertUnknownCatchToError(e: unknown): Error;
+}
+
+globalThis.$convertUnknownCatchToError = function $convertUnknownCatchToError(
+  e: unknown,
+) {
   if (e instanceof Error) {
     return e;
   }
@@ -19,14 +27,14 @@ export function unknownCatchToError(e: unknown) {
   // them at top level to make this function more portable to use.
   // Only downside to this is if the process is killed say by `process.exit(1)`
   // right after the error is returned, and this doesnt get to run at all.
-  import("../logging/index.js").then(({ logger }) =>
-    import("../utils/index.js").then(({ json }) =>
+  import("../../logging/index.js").then(({ logger }) =>
+    import("../../utils/index.js").then(({ json }) =>
       logger.error(
-        unknownCatchToError.name,
+        $convertUnknownCatchToError.name,
         `Found invalid error type thrown: ${json.stringifyPretty(e)}`,
       ),
     ),
   );
 
   return new Error(e?.toString?.() ?? "Unknown value caught");
-}
+};

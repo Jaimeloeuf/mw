@@ -6,12 +6,11 @@
  * genStartupModuleRunner
  *
  * Generated hash in hex for code after this section is:
- * sha256(acdbc9baf6f98b2b96637d3ea3d4400a3a29ffb593bccaec875372b3ee8a3511)
+ * sha256(7ed5eb59be14770abcb16756b9328a5b64f3ce106c0f75ac89f99e93fa5d7f1b)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
 import { logger } from "../logging/index.js";
-import { unknownCatchToError } from "../utils/index.js";
 import { st } from "./startupModulesBarrelFile.generated.js";
 
 /**
@@ -24,7 +23,7 @@ export async function startupModuleRunner() {
 
     await Promise.all([logBeforeRun(st.telegramSetupTelegramBots)()]);
   } catch (e) {
-    const error = unknownCatchToError(e);
+    const error = $convertUnknownCatchToError(e);
 
     logger.error(
       startupModuleRunner.name,
