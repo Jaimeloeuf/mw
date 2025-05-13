@@ -234,8 +234,8 @@ export const httpController = <
                 data,
               } satisfies JSendSuccess),
         );
-    } catch (error) {
-      // @todo Use the unknownCatchToError utils?
+    } catch (e) {
+      const error = $convertUnknownCatchToError(e);
 
       // Create a err/err-log ID, to log it together with the error and send it
       // back to the client to improve debugging.
