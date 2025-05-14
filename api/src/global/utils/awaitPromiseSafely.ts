@@ -1,11 +1,13 @@
 declare global {
   /**
-   * Utility wrapper function to wrap a promise to prevent it from throwing.
+   * Utility function await a Promise safely to prevent it from throwing and
+   * returns a `$ResultTuple`.
    *
-   * **If you need to wrap function instead, use `$runAsyncFnSafely` which supports
-   * both sync and async functions**
+   * ### Alternatively
+   * 1. Run a synchronous function with global util `$runFnSafely`.
+   * 1. Run an async function with global util `$runAsyncFnSafely`.
    *
-   * ## Important Note
+   * ### Important Note
    * Make sure you do not pass in a synchronous function call like
    * ```typescript
    * function test() {
@@ -14,43 +16,30 @@ declare global {
    * $awaitPromiseSafely(test());
    * ```
    * This will not work, as it will throw before control flow even passes to
-   * `$awaitPromiseSafely`, effectively making this wrapping useless.
+   * `$awaitPromiseSafely`, effectively making this function call useless.
    *
-   * ## Return Type
-   * This will always return a 2 element tuple, whose type is
-   * `[err, null] | [null, result]`. Similar to Go error handling, where if there
-   * is an error the first element will be set to it and the second element will
-   * be null, and vice versa if no errors thrown.
-   *
-   * You can then use TS type narrowing to determine if the function threw an
-   * error or not. For example
-   * ```typescript
-   * const [err, result] = await $awaitPromiseSafely(yourPromise);
-   * if (err !== null){
-   *     console.error('Operation failed with', err);
-   *     return;
-   * }
-   * result; // This will type narrow to ResultType
-   * ```
-   *
-   * ## Slightly less safe than `$runAsyncFnSafely`
-   * since this execution starts at caller site, then only when the first await is
-   * found, then the whole thing becomes a Promise and get passed into this
-   * `$awaitPromiseSafely` wrapper as its argument, and execution gets yielded here
-   * to await instead. So potentially, during the time between calling
-   * `$awaitPromiseSafely` and creating the promise, it might have already thrown
-   * in a synchronous manner.
+   * ## Prefer `$runAsyncFnSafely`
+   * The execution starts at the promise creator function's call site, and only
+   * when the first await is found, then the whole thing becomes a Promise and
+   * get passed into this `$awaitPromiseSafely` wrapper as its argument, and
+   * execution gets yielded to the await in this function. So potentially,
+   * during the time between calling `$awaitPromiseSafely` and creating the
+   * promise, it might have already thrown in a synchronous manner, see the
+   * important note above on how it could happen. Which is why
+   * `$runAsyncFnSafely` is a safer alternative since the initial call is
+   * already protected by a try/catch inside `$runAsyncFnSafely`, but the
+   * downside being an additional function call stack.
    */
   function $awaitPromiseSafely<
     T extends Promise<any>,
     SuccessfulReturnType extends Awaited<T> = Awaited<T>,
-  >(promise: T): Promise<[null, SuccessfulReturnType] | [Error, null]>;
+  >(promise: T): Promise<$ResultTuple<SuccessfulReturnType, Error>>;
 }
 
 globalThis.$awaitPromiseSafely = async function $awaitPromiseSafely<
   T extends Promise<any>,
   SuccessfulReturnType extends Awaited<T> = Awaited<T>,
->(promise: T): Promise<[null, SuccessfulReturnType] | [Error, null]> {
+>(promise: T): Promise<$ResultTuple<SuccessfulReturnType, Error>> {
   try {
     return [null, await promise];
   } catch (e) {
