@@ -5,10 +5,10 @@
  * Even if a synchronous function is passed in, this will still await it, which
  * is equivalent to `Promise.resolve(value)` which means this supports dynamic
  * functions without knowing its return type ahead of time. However if you do
- * know that the function will be synchronous, prefer `runFnSafely` for a non
+ * know that the function will be synchronous, prefer `$runFnSafely` for a non
  * `Promise<T>` wrapped return type.
  *
- * **If you need to wrap a sync function, use `runFnSafely`**
+ * **If you need to wrap a sync function, use `$runFnSafely`**
  * **If you need to wrap a Promise, use `$awaitPromiseSafely`**
  *
  * ## Return Type

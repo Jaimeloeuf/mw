@@ -5,5 +5,6 @@
 // Import modules to run their side effects of setting values on `globalThis`
 import "./utils/convertUnknownCatchToError.js";
 import "./utils/awaitPromiseSafely.js";
+import "./utils/runFnSafely.js";
 import "./idTypes/UUID.js";
 import "./idTypes/EntID.js";
