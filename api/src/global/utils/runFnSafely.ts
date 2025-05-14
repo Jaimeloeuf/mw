@@ -26,20 +26,14 @@ declare global {
     T extends (...args: any) => any,
     FnArgs extends Parameters<T>,
     SuccessfulReturnType extends ReturnType<T> = ReturnType<T>,
-  >(
-    fn: T,
-    ...args: FnArgs
-  ): Promise<[null, SuccessfulReturnType] | [Error, null]>;
+  >(fn: T, ...args: FnArgs): [null, SuccessfulReturnType] | [Error, null];
 }
 
-globalThis.$runFnSafely = async function $runFnSafely<
+globalThis.$runFnSafely = function $runFnSafely<
   T extends (...args: any) => any,
   FnArgs extends Parameters<T>,
   SuccessfulReturnType extends ReturnType<T> = ReturnType<T>,
->(
-  fn: T,
-  ...args: FnArgs
-): Promise<[null, SuccessfulReturnType] | [Error, null]> {
+>(fn: T, ...args: FnArgs): [null, SuccessfulReturnType] | [Error, null] {
   try {
     return [null, fn(...args)];
   } catch (e) {
