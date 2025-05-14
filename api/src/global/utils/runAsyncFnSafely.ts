@@ -1,33 +1,20 @@
 declare global {
   /**
-   * Utility wrapper function to wrap a function (both sync/async) to prevent it
-   * from throwing.
+   * Utility function run an async function safely to prevent it from
+   * throwing and returns a `$ResultTuple`.
    *
-   * Even if a synchronous function is passed in, this will still await it, which
-   * is equivalent to `Promise.resolve(value)` which means this supports dynamic
-   * functions without knowing its return type ahead of time. However if you do
-   * know that the function will be synchronous, prefer `$runFnSafely` for a non
-   * `Promise<T>` wrapped return type.
+   * ### Alternatively
+   * 1. Run a synchronous function with global util `$runFnSafely`.
+   * 1. Await a Promise with global util `$awaitPromiseSafely`.
    *
-   * **If you need to wrap a sync function, use `$runFnSafely`**
-   * **If you need to wrap a Promise, use `$awaitPromiseSafely`**
-   *
-   * ## Return Type
-   * This will always return a 2 element tuple, whose type is
-   * `[err, null] | [null, result]`. Similar to Go error handling, where if there
-   * is an error the first element will be set to it and the second element will
-   * be null, and vice versa if no errors thrown.
-   *
-   * You can then use TS type narrowing to determine if the function threw an
-   * error or not. For example
-   * ```typescript
-   * export const [err, result] = await $runAsyncFnSafely(() => ...);
-   * if (err !== null){
-   *     console.error('Operation failed with', err);
-   *     return;
-   * }
-   * result; // This will type narrow to ResultType
-   * ```
+   * ### Unknown original function return type
+   * Sometimes you want to deal with functions that can be synchronous or async,
+   * i.e. the function return type is not known at compile time. In such cases
+   * choose `$runAsyncFnSafely` instead of `$runFnSafely` for compatibility.
+   * Because even if a synchronous function is passed in, this will still await
+   * it, which is equivalent to `Promise.resolve(value)`.
+   * However if you do know that the function will be synchronous, prefer
+   * `$runFnSafely` for a non `Promise<T>` wrapped return type.
    */
   function $runAsyncFnSafely<
     T extends (...args: any) => any,
@@ -35,20 +22,14 @@ declare global {
     SuccessfulReturnType extends Awaited<ReturnType<T>> = Awaited<
       ReturnType<T>
     >,
-  >(
-    fn: T,
-    ...args: FnArgs
-  ): Promise<[null, SuccessfulReturnType] | [Error, null]>;
+  >(fn: T, ...args: FnArgs): Promise<$ResultTuple<SuccessfulReturnType, Error>>;
 }
 
 globalThis.$runAsyncFnSafely = async function $runAsyncFnSafely<
   T extends (...args: any) => any,
   FnArgs extends Parameters<T>,
   SuccessfulReturnType extends Awaited<ReturnType<T>> = Awaited<ReturnType<T>>,
->(
-  fn: T,
-  ...args: FnArgs
-): Promise<[null, SuccessfulReturnType] | [Error, null]> {
+>(fn: T, ...args: FnArgs): Promise<$ResultTuple<SuccessfulReturnType, Error>> {
   try {
     return [null, await fn(...args)];
   } catch (e) {
