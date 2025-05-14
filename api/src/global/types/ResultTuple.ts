@@ -18,5 +18,5 @@ declare global {
    */
   type $ResultTuple<TResult, TException extends Exception = Exception> =
     | [null, TResult]
-    | [TException | null];
+    | [TException, null];
 }
