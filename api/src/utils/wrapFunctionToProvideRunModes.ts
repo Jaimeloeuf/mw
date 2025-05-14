@@ -1,5 +1,3 @@
-import { awaitPromiseSafely } from "./awaitPromiseSafely.js";
-
 /**
  * Function wrapper to wrap functions to give function callers a choice to
  * either call the function and let errors / exceptions bubble through or catch
@@ -8,10 +6,10 @@ import { awaitPromiseSafely } from "./awaitPromiseSafely.js";
  * ## Generic function types `T`
  * All input functions are expected to either be `async`, or return a `Promise`.
  * This is because the safety mechanism used by both methods below is
- * `awaitPromiseSafely`, which requires a Promise as input. If a synchronous
- * function is used, it will not yield control flow back to `awaitPromiseSafely`
+ * `$awaitPromiseSafely`, which requires a Promise as input. If a synchronous
+ * function is used, it will not yield control flow back to `$awaitPromiseSafely`
  * until it runs to completion, and if it throws, it cannot be caught, which
- * defeats the whole point of using `awaitPromiseSafely`. An alternative to this
+ * defeats the whole point of using `$awaitPromiseSafely`. An alternative to this
  * would be to use `runAsyncFnSafely` safety wrapper instead with an anonymous
  * function like `const result = await runAsyncFnSafely(() => fn(...args))`.
  * But since most if not all input functions are expected to be asynchronous,
@@ -26,7 +24,7 @@ export const wrapFunctionToProvideRunModes = <
 ) => ({
   /**
    * Run wrapped function and catches any error / exceptions encountered using
-   * `awaitPromiseSafely`. Which means the return type will always be a tuple of
+   * `$awaitPromiseSafely`. Which means the return type will always be a tuple of
    * an error and the original function's return type, which you can use to type
    * narrow down to either a failure or success case.
    *
@@ -39,7 +37,7 @@ export const wrapFunctionToProvideRunModes = <
   run: (
     ...args: Parameters<T>
   ): Promise<[null, Awaited<ReturnType<T>>] | [Error, null]> =>
-    awaitPromiseSafely(fn(args)),
+    $awaitPromiseSafely(fn(args)),
 
   /**
    * Run input function directly and throws on any error / exceptions

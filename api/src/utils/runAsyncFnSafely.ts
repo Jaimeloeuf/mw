@@ -9,7 +9,7 @@
  * `Promise<T>` wrapped return type.
  *
  * **If you need to wrap a sync function, use `runFnSafely`**
- * **If you need to wrap a Promise, use `awaitPromiseSafely`**
+ * **If you need to wrap a Promise, use `$awaitPromiseSafely`**
  *
  * ## Return Type
  * This will always return a 2 element tuple, whose type is

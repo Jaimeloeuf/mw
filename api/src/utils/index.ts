@@ -2,7 +2,6 @@
  * Barrel file
  */
 
-export * from "./awaitPromiseSafely.js";
 export * from "./capitalizeFirstLetter.js";
 export * from "./concurrent.js";
 export * from "./dataOrThrow.js";
