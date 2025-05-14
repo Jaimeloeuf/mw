@@ -1,6 +1,5 @@
 import { df, asyncJobTypeMapping } from "../__generated/index.js";
 import { logger } from "../logging/index.js";
-import { runAsyncFnSafely } from "../utils/index.js";
 import { AsyncJobMachine } from "./AsyncJobMachine.js";
 import { AsyncJobStatus } from "./AsyncJobStatus.js";
 import { validateJobArgumentOnRead } from "./validateJobArgumentOnRead.js";
@@ -90,7 +89,7 @@ export async function asyncTierJobLoaderAndRunner() {
   // timeouts (asyncJob.timeout) by killing child process at point of timeout,
   // since there is no primitives for doing this well in the same JS process.
 
-  const [runError, runResults] = await runAsyncFnSafely(
+  const [runError, runResults] = await $runAsyncFnSafely(
     asyncJobType.run.bind(asyncJobType, jobArguments),
   );
 

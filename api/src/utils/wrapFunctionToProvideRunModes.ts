@@ -10,8 +10,8 @@
  * function is used, it will not yield control flow back to `$awaitPromiseSafely`
  * until it runs to completion, and if it throws, it cannot be caught, which
  * defeats the whole point of using `$awaitPromiseSafely`. An alternative to this
- * would be to use `runAsyncFnSafely` safety wrapper instead with an anonymous
- * function like `const result = await runAsyncFnSafely(() => fn(...args))`.
+ * would be to use `$runAsyncFnSafely` safety wrapper instead with an anonymous
+ * function like `const result = await $runAsyncFnSafely(() => fn(...args))`.
  * But since most if not all input functions are expected to be asynchronous,
  * it is not worth it to add a layer of function call / indirection just to
  * support synchronous input functions. Therefore input functions must be either

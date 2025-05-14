@@ -1,8 +1,15 @@
 declare global {
   /**
-   * Utility wrapper function to wrap a function sync to prevent it from throwing.
+   * Utility wrapper function to wrap a function (both sync/async) to prevent it
+   * from throwing.
    *
-   * **If you need to wrap an async function, use `$runAsyncFnSafely`**
+   * Even if a synchronous function is passed in, this will still await it, which
+   * is equivalent to `Promise.resolve(value)` which means this supports dynamic
+   * functions without knowing its return type ahead of time. However if you do
+   * know that the function will be synchronous, prefer `$runFnSafely` for a non
+   * `Promise<T>` wrapped return type.
+   *
+   * **If you need to wrap a sync function, use `$runFnSafely`**
    * **If you need to wrap a Promise, use `$awaitPromiseSafely`**
    *
    * ## Return Type
@@ -14,7 +21,7 @@ declare global {
    * You can then use TS type narrowing to determine if the function threw an
    * error or not. For example
    * ```typescript
-   * export const [err, result] = $runFnSafely(() => ...);
+   * export const [err, result] = await $runAsyncFnSafely(() => ...);
    * if (err !== null){
    *     console.error('Operation failed with', err);
    *     return;
@@ -22,26 +29,28 @@ declare global {
    * result; // This will type narrow to ResultType
    * ```
    */
-  function $runFnSafely<
+  function $runAsyncFnSafely<
     T extends (...args: any) => any,
     FnArgs extends Parameters<T>,
-    SuccessfulReturnType extends ReturnType<T> = ReturnType<T>,
+    SuccessfulReturnType extends Awaited<ReturnType<T>> = Awaited<
+      ReturnType<T>
+    >,
   >(
     fn: T,
     ...args: FnArgs
   ): Promise<[null, SuccessfulReturnType] | [Error, null]>;
 }
 
-globalThis.$runFnSafely = async function $runFnSafely<
+globalThis.$runAsyncFnSafely = async function $runAsyncFnSafely<
   T extends (...args: any) => any,
   FnArgs extends Parameters<T>,
-  SuccessfulReturnType extends ReturnType<T> = ReturnType<T>,
+  SuccessfulReturnType extends Awaited<ReturnType<T>> = Awaited<ReturnType<T>>,
 >(
   fn: T,
   ...args: FnArgs
 ): Promise<[null, SuccessfulReturnType] | [Error, null]> {
   try {
-    return [null, fn(...args)];
+    return [null, await fn(...args)];
   } catch (e) {
     return [$convertUnknownCatchToError(e), null];
   }
