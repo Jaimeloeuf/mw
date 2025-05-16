@@ -32,13 +32,13 @@ declare global {
    */
   function $awaitPromiseSafely<
     T extends Promise<any>,
-    SuccessfulReturnType extends Awaited<T> = Awaited<T>,
+    SuccessfulReturnType extends Awaited<T>,
   >(promise: T): Promise<$ResultTuple<SuccessfulReturnType, Error>>;
 }
 
 globalThis.$awaitPromiseSafely = async function $awaitPromiseSafely<
   T extends Promise<any>,
-  SuccessfulReturnType extends Awaited<T> = Awaited<T>,
+  SuccessfulReturnType extends Awaited<T>,
 >(promise: T): Promise<$ResultTuple<SuccessfulReturnType, Error>> {
   try {
     return [null, await promise];

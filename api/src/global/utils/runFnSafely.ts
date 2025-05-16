@@ -10,14 +10,14 @@ declare global {
   function $runFnSafely<
     T extends (...args: any) => any,
     FnArgs extends Parameters<T>,
-    SuccessfulReturnType extends ReturnType<T> = ReturnType<T>,
+    SuccessfulReturnType extends ReturnType<T>,
   >(fn: T, ...args: FnArgs): $ResultTuple<SuccessfulReturnType, Error>;
 }
 
 globalThis.$runFnSafely = function $runFnSafely<
   T extends (...args: any) => any,
   FnArgs extends Parameters<T>,
-  SuccessfulReturnType extends ReturnType<T> = ReturnType<T>,
+  SuccessfulReturnType extends ReturnType<T>,
 >(fn: T, ...args: FnArgs): $ResultTuple<SuccessfulReturnType, Error> {
   try {
     return [null, fn(...args)];

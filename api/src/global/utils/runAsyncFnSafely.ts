@@ -19,16 +19,14 @@ declare global {
   function $runAsyncFnSafely<
     T extends (...args: any) => any,
     FnArgs extends Parameters<T>,
-    SuccessfulReturnType extends Awaited<ReturnType<T>> = Awaited<
-      ReturnType<T>
-    >,
+    SuccessfulReturnType extends Awaited<ReturnType<T>>,
   >(fn: T, ...args: FnArgs): Promise<$ResultTuple<SuccessfulReturnType, Error>>;
 }
 
 globalThis.$runAsyncFnSafely = async function $runAsyncFnSafely<
   T extends (...args: any) => any,
   FnArgs extends Parameters<T>,
-  SuccessfulReturnType extends Awaited<ReturnType<T>> = Awaited<ReturnType<T>>,
+  SuccessfulReturnType extends Awaited<ReturnType<T>>,
 >(fn: T, ...args: FnArgs): Promise<$ResultTuple<SuccessfulReturnType, Error>> {
   try {
     return [null, await fn(...args)];
