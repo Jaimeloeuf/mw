@@ -110,6 +110,19 @@ declare global {
          * functions in this same namespace.
          */
         type Strong = $MakeBrandedNumber<"unix_Seconds">;
+
+        /**
+         * Utility to convert a Weak variant to Strong variant after validation
+         * and type casting. This will throw on validation error.
+         */
+        function makeStrongAndThrowOnError(value: Weak): Strong;
+
+        /**
+         * Utility to convert a Weak variant to Strong variant after validation
+         * and type casting. This will not throw on validation error and instead
+         * return a `$ResultTuple`.
+         */
+        function makeStrongSafely(value: Weak): $ResultTuple<Strong>;
       }
 
       /**
@@ -131,6 +144,19 @@ declare global {
          * namespace.
          */
         type Strong = $MakeBrandedNumber<"unix_Milliseconds">;
+
+        /**
+         * Utility to convert a Weak variant to Strong variant after validation
+         * and type casting. This will throw on validation error.
+         */
+        function makeStrongAndThrowOnError(value: Weak): Strong;
+
+        /**
+         * Utility to convert a Weak variant to Strong variant after validation
+         * and type casting. This will not throw on validation error and instead
+         * return a `$ResultTuple`.
+         */
+        function makeStrongSafely(value: Weak): $ResultTuple<Strong>;
       }
     }
   }
@@ -179,6 +205,34 @@ globalThis.$DateTime = {
         }
 
         return value as $DateTime.ISO.Date.Strong;
+      },
+      makeStrongSafely(value) {
+        return $runFnSafely(this.makeStrongAndThrowOnError, value);
+      },
+    },
+  },
+  Unix: {
+    Seconds: {
+      makeStrongAndThrowOnError(value) {
+        if (value > +8.64e12 || value < -8.64e12) {
+          throw new ValidationFailedException(
+            `Invalid unix timestamp in seconds: ${value}`,
+          );
+        }
+        return value as $DateTime.Unix.Seconds.Strong;
+      },
+      makeStrongSafely(value) {
+        return $runFnSafely(this.makeStrongAndThrowOnError, value);
+      },
+    },
+    Milliseconds: {
+      makeStrongAndThrowOnError(value) {
+        if (value > +8.64e15 || value < -8.64e15) {
+          throw new ValidationFailedException(
+            `Invalid unix timestamp in milliseconds: ${value}`,
+          );
+        }
+        return value as $DateTime.Unix.Milliseconds.Strong;
       },
       makeStrongSafely(value) {
         return $runFnSafely(this.makeStrongAndThrowOnError, value);
