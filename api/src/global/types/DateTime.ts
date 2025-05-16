@@ -1,3 +1,5 @@
+import { ValidationFailedException } from "../../exceptions/ValidationFailedException.js";
+
 declare global {
   /**
    * Global utility for working with date and time, and works with different
@@ -27,6 +29,19 @@ declare global {
          * casted, preferably with the utility functions in this same namespace.
          */
         type Strong = $MakeBrandedString<"ISO_DateTime">;
+
+        /**
+         * Utility to convert a Weak variant to Strong variant after validation
+         * and type casting. This will throw on validation error.
+         */
+        function makeStrongAndThrowOnError(value: Weak): Strong;
+
+        /**
+         * Utility to convert a Weak variant to Strong variant after validation
+         * and type casting. This will not throw on validation error and instead
+         * return a `$ResultTuple`.
+         */
+        function makeStrongSafely(value: Weak): $ResultTuple<Strong>;
       }
 
       /**
@@ -57,6 +72,19 @@ declare global {
          * functions in this same namespace.
          */
         type Strong = $MakeBrandedString<"ISO_Date">;
+
+        /**
+         * Utility to convert a Weak variant to Strong variant after validation
+         * and type casting. This will throw on validation error.
+         */
+        function makeStrongAndThrowOnError(value: Weak): Strong;
+
+        /**
+         * Utility to convert a Weak variant to Strong variant after validation
+         * and type casting. This will not throw on validation error and instead
+         * return a `$ResultTuple`.
+         */
+        function makeStrongSafely(value: Weak): $ResultTuple<Strong>;
       }
     }
 
@@ -107,3 +135,54 @@ declare global {
     }
   }
 }
+
+/**
+ * Define utilities for the $DateTime type in global scope after the ambient
+ * namespace definitions.
+ */
+globalThis.$DateTime = {
+  ISO: {
+    DateTime: {
+      makeStrongAndThrowOnError(value) {
+        const date = new Date(value);
+        if (
+          isNaN(date.valueOf()) ||
+          date.toISOString() !== value ||
+          date.toString() === "Invalid Date"
+        ) {
+          throw new ValidationFailedException(
+            `Invalid ISO DateTime (full) string: ${value}`,
+          );
+        }
+        return value as $DateTime.ISO.DateTime.Strong;
+      },
+      makeStrongSafely(value) {
+        return $runFnSafely(this.makeStrongAndThrowOnError, value);
+      },
+    },
+    Date: {
+      makeStrongAndThrowOnError(value) {
+        /** Checks if a string is an integer. */
+        function isInvalidInt(s?: string) {
+          if (s === undefined || s === "") {
+            return true;
+          }
+          const num = Number(s);
+          return isNaN(num) || !Number.isInteger(num);
+        }
+
+        const [year, month, day] = value.split("-");
+        if (isInvalidInt(year) || isInvalidInt(month) || isInvalidInt(day)) {
+          throw new ValidationFailedException(
+            `Invalid YYYY-MM-DD string: ${value}`,
+          );
+        }
+
+        return value as $DateTime.ISO.Date.Strong;
+      },
+      makeStrongSafely(value) {
+        return $runFnSafely(this.makeStrongAndThrowOnError, value);
+      },
+    },
+  },
+};
