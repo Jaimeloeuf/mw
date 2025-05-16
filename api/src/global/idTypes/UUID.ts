@@ -61,6 +61,6 @@ globalThis.$UUID = {
     return maybeID as $UUID.Strong;
   },
   makeStrongSafely(maybeID) {
-    return [null, this.makeStrongAndThrowOnError(maybeID)];
+    return $runFnSafely(this.makeStrongAndThrowOnError, maybeID);
   },
 };
