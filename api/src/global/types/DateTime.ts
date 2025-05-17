@@ -85,6 +85,19 @@ declare global {
          * return a `$ResultTuple`.
          */
         function makeStrongSafely(value: Weak): $ResultTuple<Strong>;
+
+        /**
+         * Utility to convert a Strong value to Strong variant of self without
+         * validation and type casting, as it assumes that this is only called
+         * the given value is Strong, i.e. is validated and type casted. If it
+         * isnt already, use `makeStrongSafely` or `makeStrongAndThrowOnError`
+         * methods to convert to Strong variant first before using this method,
+         * as this conversion might fail and throw internally if the value is
+         * not a Strong variant at runtime.
+         *
+         * Converts by stripping away "THH:mm:ssZ" from the ISO DateTime string.
+         */
+        function fromDateTime(value: ISO.DateTime.Strong): Strong;
       }
     }
 
@@ -208,6 +221,13 @@ globalThis.$DateTime = {
       },
       makeStrongSafely(value) {
         return $runFnSafely(this.makeStrongAndThrowOnError, value);
+      },
+      fromDateTime(value) {
+        const [dateOnlyComponent] = value.split("T");
+        if (dateOnlyComponent === undefined) {
+          throw new Error(`Failed to convert ISO DateTime to Date: ${value}`);
+        }
+        return dateOnlyComponent as $DateTime.ISO.Date.Strong;
       },
     },
   },
