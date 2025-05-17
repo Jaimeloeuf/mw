@@ -42,6 +42,39 @@ declare global {
          * return a `$ResultTuple`.
          */
         function makeStrongSafely(value: Weak): $ResultTuple<Strong>;
+
+        /**
+         * Utility to convert a Strong value to Strong variant of self without
+         * validation and type casting, as it assumes that this is only called
+         * the given value is Strong, i.e. is validated and type casted. If it
+         * isnt already, use `makeStrongSafely` or `makeStrongAndThrowOnError`
+         * methods to convert to Strong variant first before using this method,
+         * as this conversion might fail and throw internally if the value is
+         * not a Strong variant at runtime.
+         *
+         * Converts by adding "T00:00:00Z" to the "YYYY-MM-DD" Date string.
+         *
+         * This always converts it to UTC 00:00, i.e. midnight in UTC timezone.
+         *
+         * When creating a new Date instance, JS will always treat the input as
+         * the server's local timezone value if no timezone is specified. So for
+         * example, if the server is in Singapore, then "2025-05-18" will be
+         * treated as "2025-04-17 00:00 GMT +8" instead of "2025-05-18 00:00 GMT
+         * +0".
+         *
+         * Because of this, if timezone not explicitly set, then the converted
+         * dates will always be different depending on the server's timezone. To
+         * ensure consistency of this conversion regardless of server's timezone
+         * /locale, all input needs to be treated as UTC 00:00, i.e. midnight in
+         * UTC.
+         *
+         * The simplest way to set the timezone and time to be UTC midnight for
+         * a given input string like YYYY-MM-DD is to add the later half of a
+         * full ISO date time string, which is the "THH:mm:ssZ" part, which is
+         * "T00:00:00Z", where the time is specified to be midnight with the 0s
+         * and the timezone is specified to be UTC with the Z.
+         */
+        function fromDate(value: ISO.Date.Strong): Strong;
       }
 
       /**
@@ -197,6 +230,27 @@ globalThis.$DateTime = {
       },
       makeStrongSafely(value) {
         return $runFnSafely(this.makeStrongAndThrowOnError, value);
+      },
+      fromDate(value) {
+        return (value + "T00:00:00Z") as $DateTime.ISO.DateTime.Strong;
+
+        // Alternatively, Date constructor can be used to validate the results
+        // to be extra safe but technically not needed if the given value is a
+        // validated Strong "YYYY-MM-DD".
+        // return new Date(value + "T00:00:00Z").toISOString() as $DateTime.ISO.DateTime.Strong;
+
+        // Alternatively, this can be used although it is more complicated and
+        // is only better if Date string has some components of time in it, but
+        // should not happen in our case as the value passed in is a Strong
+        // variant which assumes it is properly validated before type casting.
+        // const [year, month, day] = value.split('-');
+        // return new Date(
+        //   Date.UTC(
+        //     parseInt(year, 10),
+        //     parseInt(month, 10) - 1, // Minus 1 as month value is 0 indexed
+        //     parseInt(day, 10),
+        //   ),
+        // ).toISOString();
       },
     },
     Date: {
