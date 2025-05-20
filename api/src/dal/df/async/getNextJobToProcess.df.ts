@@ -18,8 +18,6 @@ export default dataFn(async function asyncGetNextJobToProcess({
   machineType: AsyncJobMachineType;
   priority?: AsyncJobPriorityType;
 }): Promise<$Nullable<AsyncJob>> {
-  const now = new Date();
-
   const asyncJob = await apiDB.transaction().execute(async (db) => {
     let asyncJobQuery = db
       .selectFrom("async_job")
@@ -27,8 +25,8 @@ export default dataFn(async function asyncGetNextJobToProcess({
       .where("status", "=", AsyncJobStatus.queued)
       .where("machine_type", "=", machineType)
       // @todo Passing 'Date' object doesnt work, and only string works...??
-      // .where("time_start_after", "<=", now)
-      .where("time_start_after", "<=", now.toISOString() as any)
+      // .where("time_start_after", "<=", new Date())
+      .where("time_start_after", "<=", $DateTime.now.asIsoDateTime() as any)
       .limit(1);
 
     // If `priority` is specified, filter for that specific priority, else grab
@@ -50,7 +48,7 @@ export default dataFn(async function asyncGetNextJobToProcess({
       .where("id", "=", asyncJob.id)
       .set({
         status: AsyncJobStatus.preProcessing,
-        time_preprocess: new Date().toISOString(),
+        time_preprocess: $DateTime.now.asIsoDateTime(),
       })
       .returningAll()
       .executeTakeFirstOrThrow();

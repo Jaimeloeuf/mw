@@ -14,7 +14,7 @@ export default dataFn(async function asyncCancelJob(
     .where("status", "=", AsyncJobStatus.queued)
     .set({
       status: AsyncJobStatus.cancelled,
-      time_cancelled: new Date().toISOString(),
+      time_cancelled: $DateTime.now.asIsoDateTime(),
       cancellation_data: cancellationData,
     })
     .returningAll()

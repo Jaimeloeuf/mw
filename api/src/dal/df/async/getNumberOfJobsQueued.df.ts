@@ -12,16 +12,14 @@ import { dataFn } from "../dataFn.js";
 export default dataFn(async function asyncGetNumberOfJobsQueued(
   machineType: AsyncJobMachineType,
 ): Promise<number> {
-  const now = new Date();
-
   const asyncJob = await apiDB
     .selectFrom("async_job")
     .select((eb) => eb.fn.count<string>("id").as("jobs"))
     .where("status", "=", AsyncJobStatus.queued)
     .where("machine_type", "=", machineType)
     // @todo Passing 'Date' object doesnt work, and only string works...??
-    // .where("time_start_after", "<=", now)
-    .where("time_start_after", "<=", now.toISOString() as any)
+    // .where("time_start_after", "<=", new Date())
+    .where("time_start_after", "<=", $DateTime.now.asIsoDateTime() as any)
     .executeTakeFirst();
 
   if (asyncJob?.jobs === undefined) {

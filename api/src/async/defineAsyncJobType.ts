@@ -31,7 +31,7 @@ export function defineAsyncJobType<AsyncJobArgumentType = void>(
         id: asyncJobID,
         jobTypeID: asyncJobConfig.id,
         status: AsyncJobStatus.queued,
-        timeScheduled: new Date().toISOString(),
+        timeScheduled: $DateTime.now.asIsoDateTime(),
         timePreprocess: null,
         timeStart: null,
         timeFinish: null,

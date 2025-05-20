@@ -21,7 +21,7 @@ export default async function (requestorID: string) {
   const prefix = key.slice(0, 6);
 
   const apiKey = await df.muwnoCreateApiKey.runAndThrowOnError({
-    created_at: new Date().toISOString(),
+    created_at: $DateTime.now.asIsoDateTime(),
     org_id: user.org_id,
     created_by: `${user.name} <${user.email}>`,
     hash,

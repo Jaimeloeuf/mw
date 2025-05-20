@@ -18,8 +18,8 @@ export default async function BlogNewSubscriber(email: string) {
     await df.blogSubscriberCreateBlogSubscriber.runAndThrowOnError({
       blog_id: "JJ's blog",
       email: email.toLowerCase(),
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
+      created_at: $DateTime.now.asIsoDateTime(),
+      updated_at: $DateTime.now.asIsoDateTime(),
     });
 
   SimplePostProcessing(BlogNewSubscriber.name)

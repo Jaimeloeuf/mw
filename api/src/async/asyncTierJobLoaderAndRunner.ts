@@ -81,7 +81,7 @@ export async function asyncTierJobLoaderAndRunner() {
   }
 
   asyncJob.status = AsyncJobStatus.started;
-  asyncJob.timeStart = new Date().toISOString();
+  asyncJob.timeStart = $DateTime.now.asIsoDateTime();
   await df.asyncUpdateJob.runAndThrowOnError(asyncJob);
 
   // @todo
@@ -94,7 +94,7 @@ export async function asyncTierJobLoaderAndRunner() {
   );
 
   if (runError !== null) {
-    asyncJob.timeFinish = new Date().toISOString();
+    asyncJob.timeFinish = $DateTime.now.asIsoDateTime();
     asyncJob.status = AsyncJobStatus.finishFail;
     asyncJob.jobResult = {
       success: false,
@@ -108,7 +108,7 @@ export async function asyncTierJobLoaderAndRunner() {
     return;
   }
 
-  asyncJob.timeFinish = new Date().toISOString();
+  asyncJob.timeFinish = $DateTime.now.asIsoDateTime();
   asyncJob.jobResult = runResults;
   asyncJob.status = runResults.success
     ? AsyncJobStatus.finishSuccess
