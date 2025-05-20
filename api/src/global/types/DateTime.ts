@@ -421,7 +421,14 @@ globalThis.$DateTime = {
           return isNaN(num) || !Number.isInteger(num);
         }
 
-        const [year, month, day] = value.split("-");
+        const dateOnlyComponents = value.split("-");
+        if (dateOnlyComponents.length !== 3) {
+          throw new ValidationFailedException(
+            `Invalid YYYY-MM-DD string: ${value}`,
+          );
+        }
+
+        const [year, month, day] = dateOnlyComponents;
         if (isInvalidInt(year) || isInvalidInt(month) || isInvalidInt(day)) {
           throw new ValidationFailedException(
             `Invalid YYYY-MM-DD string: ${value}`,
