@@ -224,6 +224,28 @@ declare global {
          * not a Strong variant at runtime.
          */
         function fromMilliseconds(value: Milliseconds.Strong): Strong;
+
+        /**
+         * Utility to convert a Strong value to Strong variant of self without
+         * validation and type casting, as it assumes that this is only called
+         * the given value is Strong, i.e. is validated and type casted. If it
+         * isnt already, use `makeStrongSafely` or `makeStrongAndThrowOnError`
+         * methods to convert to Strong variant first before using this method,
+         * as this conversion might fail and throw internally if the value is
+         * not a Strong variant at runtime.
+         */
+        function fromDateTime(value: ISO.DateTime.Strong): Strong;
+
+        /**
+         * Utility to convert a Strong value to Strong variant of self without
+         * validation and type casting, as it assumes that this is only called
+         * the given value is Strong, i.e. is validated and type casted. If it
+         * isnt already, use `makeStrongSafely` or `makeStrongAndThrowOnError`
+         * methods to convert to Strong variant first before using this method,
+         * as this conversion might fail and throw internally if the value is
+         * not a Strong variant at runtime.
+         */
+        function fromDate(value: ISO.Date.Strong): Strong;
       }
 
       /**
@@ -434,6 +456,16 @@ globalThis.$DateTime = {
         // shift implementation but this is faster.
         // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Right_shift
         return ((value / 1000) >>> 0) as $DateTime.Unix.Seconds.Strong;
+      },
+      fromDateTime(value) {
+        return this.fromMilliseconds(
+          $DateTime.Unix.Milliseconds.fromDateTime(value),
+        );
+      },
+      fromDate(value) {
+        return this.fromMilliseconds(
+          $DateTime.Unix.Milliseconds.fromDate(value),
+        );
       },
     },
     Milliseconds: {
