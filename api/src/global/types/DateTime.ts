@@ -269,6 +269,28 @@ declare global {
          * not a Strong variant at runtime.
          */
         function fromSeconds(value: Seconds.Strong): Strong;
+
+        /**
+         * Utility to convert a Strong value to Strong variant of self without
+         * validation and type casting, as it assumes that this is only called
+         * the given value is Strong, i.e. is validated and type casted. If it
+         * isnt already, use `makeStrongSafely` or `makeStrongAndThrowOnError`
+         * methods to convert to Strong variant first before using this method,
+         * as this conversion might fail and throw internally if the value is
+         * not a Strong variant at runtime.
+         */
+        function fromDateTime(value: ISO.DateTime.Strong): Strong;
+
+        /**
+         * Utility to convert a Strong value to Strong variant of self without
+         * validation and type casting, as it assumes that this is only called
+         * the given value is Strong, i.e. is validated and type casted. If it
+         * isnt already, use `makeStrongSafely` or `makeStrongAndThrowOnError`
+         * methods to convert to Strong variant first before using this method,
+         * as this conversion might fail and throw internally if the value is
+         * not a Strong variant at runtime.
+         */
+        function fromDate(value: ISO.Date.Strong): Strong;
       }
     }
 
@@ -428,6 +450,20 @@ globalThis.$DateTime = {
       },
       fromSeconds(value) {
         return (value * 1000) as $DateTime.Unix.Milliseconds.Strong;
+      },
+      fromDateTime(value) {
+        // "When the time zone offset is absent, date-only forms are interpreted
+        // as a UTC time and date-time forms are interpreted as a local time"
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#date_time_string_format
+        // Since Strong ISO.DateTime strings are validated to use UTC time, the
+        // local time interpretation is ignored to use UTC timezone.
+        return new Date(value).getTime() as $DateTime.Unix.Milliseconds.Strong;
+      },
+      fromDate(value) {
+        // "When the time zone offset is absent, date-only forms are interpreted
+        // as a UTC time"
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#date_time_string_format
+        return new Date(value).getTime() as $DateTime.Unix.Milliseconds.Strong;
       },
     },
   },
