@@ -227,6 +227,32 @@ declare global {
         function fromSeconds(value: Seconds.Strong): Strong;
       }
     }
+
+    /**
+     * Utility for generating $DateTime types from current time
+     */
+    namespace now {
+      /**
+       * Get date time of 'now' as `DateTime` (full ISO DateTime string in UTC).
+       */
+      function asIsoDateTime(): ISO.DateTime.Strong;
+
+      /**
+       * Get date time of 'now' as `Date` (an ISO YYYY-MM-DD string representing
+       * UTC 00:00).
+       */
+      function asIsoDate(): ISO.Date.Strong;
+
+      /**
+       * Get date time of 'now' in seconds.
+       */
+      function asUnixSeconds(): Unix.Seconds.Strong;
+
+      /**
+       * Get date time of 'now' in milliseconds.
+       */
+      function asUnixMilliseconds(): Unix.Milliseconds.Strong;
+    }
   }
 }
 
@@ -343,6 +369,20 @@ globalThis.$DateTime = {
       fromSeconds(value) {
         return (value * 1000) as $DateTime.Unix.Milliseconds.Strong;
       },
+    },
+  },
+  now: {
+    asIsoDateTime() {
+      return new Date().toISOString() as $DateTime.ISO.DateTime.Strong;
+    },
+    asIsoDate() {
+      return $DateTime.ISO.Date.fromDateTime(this.asIsoDateTime());
+    },
+    asUnixSeconds() {
+      return $DateTime.Unix.Seconds.fromMilliseconds(this.asUnixMilliseconds());
+    },
+    asUnixMilliseconds() {
+      return Date.now() as $DateTime.Unix.Milliseconds.Strong;
     },
   },
 };
