@@ -7,7 +7,8 @@ declare global {
    */
   namespace $DateTime {
     /**
-     * Utility for ISO8601 strings
+     * Utility for ISO8601 strings, where all are stored / represented
+     * internally in UTC timezone.
      */
     namespace ISO {
       /**
@@ -33,6 +34,13 @@ declare global {
         /**
          * Utility to convert a Weak variant to Strong variant after validation
          * and type casting. This will throw on validation error.
+         *
+         * ## Silently converts strings to UTC timezone
+         * Note that this is a special case where if the given value is not in
+         * UTC timezone, instead of throwing an error, this will silently
+         * convert and return the equivalent string in UTC timezone. Which means
+         * that the input value and output value may be different even though
+         * they represent the same exact time.
          */
         function makeStrongAndThrowOnError(value: Weak): Strong;
 
@@ -40,6 +48,9 @@ declare global {
          * Utility to convert a Weak variant to Strong variant after validation
          * and type casting. This will not throw on validation error and instead
          * return a `$ResultTuple`.
+         *
+         * ## Silently converts strings to UTC timezone
+         * See explaination in `makeStrongAndThrowOnError`
          */
         function makeStrongSafely(value: Weak): $ResultTuple<Strong>;
 
@@ -179,7 +190,8 @@ declare global {
     }
 
     /**
-     * Utility for unix timestamps
+     * Utility for unix timestamps, where it is always time since unix epoch in
+     * UTC and never ever any other timezone.
      */
     namespace Unix {
       /**
@@ -353,16 +365,17 @@ globalThis.$DateTime = {
     DateTime: {
       makeStrongAndThrowOnError(value) {
         const date = new Date(value);
-        if (
-          isNaN(date.valueOf()) ||
-          date.toISOString() !== value ||
-          date.toString() === "Invalid Date"
-        ) {
+        if (isNaN(date.valueOf()) || date.toString() === "Invalid Date") {
           throw new ValidationFailedException(
             `Invalid ISO DateTime (full) string: ${value}`,
           );
         }
-        return value as $DateTime.ISO.DateTime.Strong;
+
+        // Return .toISOString() output instead of value, since this always
+        // return a value in UTC timezone. And since the input value may be
+        // another timezone, this ensures that all Strong variants are in UTC
+        // timezone through this silent conversion.
+        return date.toISOString() as $DateTime.ISO.DateTime.Strong;
       },
       makeStrongSafely(value) {
         return $runFnSafely(this.makeStrongAndThrowOnError, value);
