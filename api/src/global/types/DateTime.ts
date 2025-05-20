@@ -75,6 +75,28 @@ declare global {
          * and the timezone is specified to be UTC with the Z.
          */
         function fromDate(value: ISO.Date.Strong): Strong;
+
+        /**
+         * Utility to convert a Strong value to Strong variant of self without
+         * validation and type casting, as it assumes that this is only called
+         * the given value is Strong, i.e. is validated and type casted. If it
+         * isnt already, use `makeStrongSafely` or `makeStrongAndThrowOnError`
+         * methods to convert to Strong variant first before using this method,
+         * as this conversion might fail and throw internally if the value is
+         * not a Strong variant at runtime.
+         */
+        function fromSeconds(value: Unix.Seconds.Strong): Strong;
+
+        /**
+         * Utility to convert a Strong value to Strong variant of self without
+         * validation and type casting, as it assumes that this is only called
+         * the given value is Strong, i.e. is validated and type casted. If it
+         * isnt already, use `makeStrongSafely` or `makeStrongAndThrowOnError`
+         * methods to convert to Strong variant first before using this method,
+         * as this conversion might fail and throw internally if the value is
+         * not a Strong variant at runtime.
+         */
+        function fromMilliseconds(value: Unix.Milliseconds.Strong): Strong;
       }
 
       /**
@@ -299,6 +321,14 @@ globalThis.$DateTime = {
         //     parseInt(day, 10),
         //   ),
         // ).toISOString();
+      },
+      fromSeconds(value) {
+        return new Date(
+          value * 1000,
+        ).toISOString() as $DateTime.ISO.DateTime.Strong;
+      },
+      fromMilliseconds(value) {
+        return new Date(value).toISOString() as $DateTime.ISO.DateTime.Strong;
       },
     },
     Date: {
