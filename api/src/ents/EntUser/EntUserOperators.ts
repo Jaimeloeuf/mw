@@ -9,8 +9,8 @@ export const EntUserOperators = defineEntOperators(EntUser, {
         .insertInto("user")
         .values({
           id: ent.data.id,
-          created_at: ent.data.createdAt.toISOString(),
-          updated_at: ent.data.updatedAt.toISOString(),
+          created_at: ent.data.createdAt,
+          updated_at: ent.data.updatedAt,
           name: ent.data.name,
           email: ent.data.email,
           deactivated: ent.data.deactivated,
@@ -61,7 +61,7 @@ export const EntUserOperators = defineEntOperators(EntUser, {
         .updateTable("user")
         .where("id", "=", ent.data.id)
         .set({
-          updated_at: ent.data.updatedAt.toISOString(),
+          updated_at: ent.data.updatedAt,
           name: ent.data.name,
           email: ent.data.email,
           deactivated: ent.data.deactivated,

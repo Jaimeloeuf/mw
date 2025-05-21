@@ -11,10 +11,10 @@ export type EntManagedData = {
   /**
    * Timestamp managed by the framework.
    */
-  readonly createdAt: Date;
+  readonly createdAt: $DateTime.ISO.DateTime.Strong;
 
   /**
    * Timestamp managed by the framework.
    */
-  updatedAt: Date;
+  updatedAt: $DateTime.ISO.DateTime.Strong;
 };

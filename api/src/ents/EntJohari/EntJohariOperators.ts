@@ -9,8 +9,8 @@ export const EntJohariOperators = defineEntOperators(EntJohari, {
         .insertInto("johari")
         .values({
           id: ent.data.id,
-          created_at: ent.data.createdAt.toISOString(),
-          updated_at: ent.data.updatedAt.toISOString(),
+          created_at: ent.data.createdAt,
+          updated_at: ent.data.updatedAt,
           name: ent.data.name,
           words: ent.data.words,
         })
@@ -58,7 +58,7 @@ export const EntJohariOperators = defineEntOperators(EntJohari, {
         .updateTable("johari")
         .where("id", "=", ent.data.id)
         .set({
-          updated_at: ent.data.updatedAt.toISOString(),
+          updated_at: ent.data.updatedAt,
           name: ent.data.name,
           words: ent.data.words,
         })

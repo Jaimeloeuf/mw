@@ -11,8 +11,8 @@ export const EntBlogSubscriberOperators = defineEntOperators(
           .insertInto("blog_subscriber")
           .values({
             id: ent.data.id,
-            created_at: ent.data.createdAt.toISOString(),
-            updated_at: ent.data.updatedAt.toISOString(),
+            created_at: ent.data.createdAt,
+            updated_at: ent.data.updatedAt,
             blog_id: ent.data.blogID,
             email: ent.data.email,
           })
@@ -60,7 +60,7 @@ export const EntBlogSubscriberOperators = defineEntOperators(
           .updateTable("blog_subscriber")
           .where("id", "=", ent.data.id)
           .set({
-            updated_at: ent.data.updatedAt.toISOString(),
+            updated_at: ent.data.updatedAt,
             email: ent.data.email,
           })
           .execute();

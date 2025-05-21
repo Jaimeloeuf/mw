@@ -55,7 +55,7 @@ export function defineEntOperators<
      * ID and timestamps, which is written to storage layer before returned.
      */
     async create(data: Omit<EntInstance["data"], keyof EntManagedData>) {
-      const now = new Date();
+      const now = $DateTime.now.asIsoDateTime();
       const ent = new entClass({
         id: $EntID.generate(entClass),
         createdAt: now,
@@ -70,7 +70,7 @@ export function defineEntOperators<
      * Update `updatedAt` timestamp before updating storage layer with operator.
      */
     async update(ent: EntInstance) {
-      ent.data.updatedAt = new Date();
+      ent.data.updatedAt = $DateTime.now.asIsoDateTime();
       await operators.CRUD.update(ent);
     },
 
