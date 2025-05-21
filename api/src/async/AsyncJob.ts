@@ -47,48 +47,48 @@ export type AsyncJob = Pick<AsyncJobTypeConfig, "machineType" | "priority"> & {
   timeout: $Nullable<number>;
 
   /**
-   * When is this Job scheduled in ISO time?
+   * When is this Job scheduled?
    */
-  timeScheduled: string;
+  timeScheduled: $DateTime.ISO.DateTime.Strong;
 
   /**
-   * ISO time for when to start the job after. The job is guaranteed to start
-   * after this time, but not immediately at this time since it will only run
-   * when there is an available machine after this start time.
+   * When to start the job after. The job is guaranteed to start after this
+   * time, but not immediately at this time since it will only run when there is
+   * an available machine after this start time.
    *
    * This is null if the job function should start running as soon as possible.
    */
-  timeStartAfter: $Nullable<string>;
+  timeStartAfter: $Nullable<$DateTime.ISO.DateTime.Strong>;
 
   /**
-   * When did the Job start getting pre-processed in ISO time?
+   * When did the Job start getting pre-processed?
    *
    * This is null until the job starts pre-processing.
    */
-  timePreprocess: $Nullable<string>;
+  timePreprocess: $Nullable<$DateTime.ISO.DateTime.Strong>;
 
   /**
-   * When did the Job's `run` method start running in ISO time?
+   * When did the Job's `run` method start running?
    *
    * This is null until the job function starts running.
    */
-  timeStart: $Nullable<string>;
+  timeStart: $Nullable<$DateTime.ISO.DateTime.Strong>;
 
   /**
    * When did the Job's `run` method finish (regardless of whether it succeded
-   * or failed) in ISO time?
+   * or failed)?
    *
    * This is null until the job function finishes.
    */
-  timeFinish: $Nullable<string>;
+  timeFinish: $Nullable<$DateTime.ISO.DateTime.Strong>;
 
   /**
    * If the Job is cancelled as per the job status, when did this cancellation
-   * happen (in ISO time)?
+   * happen?
    *
    * This is null unless the job is cancelled.
    */
-  timeCancelled: $Nullable<string>;
+  timeCancelled: $Nullable<$DateTime.ISO.DateTime.Strong>;
 
   /**
    * JSON serializable data stored in DB either as JSON string or object.

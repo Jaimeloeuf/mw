@@ -55,6 +55,18 @@ declare global {
         function makeStrongSafely(value: Weak): $ResultTuple<Strong>;
 
         /**
+         * Utility to convert a nullable native JS Date Object to a Strong
+         * variant of self using `makeStrongAndThrowOnError` internally.
+         * The generics ensure that if the input type is known at compile time,
+         * it will return the right type back at compile time allowing proper
+         * type propagation.
+         */
+        function fromNullableDateObject<
+          InputT extends Date | null | void,
+          OutputT extends InputT extends Date ? Strong : null,
+        >(value: InputT): OutputT;
+
+        /**
          * Utility to convert a Strong value to Strong variant of self without
          * validation and type casting, as it assumes that this is only called
          * the given value is Strong, i.e. is validated and type casted. If it
@@ -379,6 +391,18 @@ globalThis.$DateTime = {
       },
       makeStrongSafely(value) {
         return $runFnSafely(this.makeStrongAndThrowOnError, value);
+      },
+      fromNullableDateObject<
+        InputT extends Date | null | void,
+        OutputT extends InputT extends Date
+          ? $DateTime.ISO.DateTime.Strong
+          : null,
+      >(value: InputT): OutputT {
+        return (
+          value == null
+            ? null
+            : this.makeStrongAndThrowOnError(value.toISOString())
+        ) as OutputT;
       },
       fromDate(value) {
         return (value + "T00:00:00Z") as $DateTime.ISO.DateTime.Strong;

@@ -13,12 +13,20 @@ export function mapDbAsyncJobToAsyncJob(job: DBAsyncJob): AsyncJob {
     caller: job.caller,
     stackTrace: job.stack_trace,
     timeout: job.timeout,
-    timeScheduled: job.time_scheduled.toISOString(),
-    timeStartAfter: job.time_start_after?.toISOString() ?? null,
-    timePreprocess: job.time_preprocess?.toISOString() ?? null,
-    timeStart: job.time_start?.toISOString() ?? null,
-    timeFinish: job.time_finish?.toISOString() ?? null,
-    timeCancelled: job.time_cancelled?.toISOString() ?? null,
+    timeScheduled: $DateTime.ISO.DateTime.fromNullableDateObject(
+      job.time_scheduled,
+    ),
+    timeStartAfter: $DateTime.ISO.DateTime.fromNullableDateObject(
+      job.time_start_after,
+    ),
+    timePreprocess: $DateTime.ISO.DateTime.fromNullableDateObject(
+      job.time_preprocess,
+    ),
+    timeStart: $DateTime.ISO.DateTime.fromNullableDateObject(job.time_start),
+    timeFinish: $DateTime.ISO.DateTime.fromNullableDateObject(job.time_finish),
+    timeCancelled: $DateTime.ISO.DateTime.fromNullableDateObject(
+      job.time_cancelled,
+    ),
     jobArguments:
       job.job_arguments === null ? null : json.parse(job.job_arguments),
     jobResult: job.job_result === null ? null : json.parse(job.job_result),

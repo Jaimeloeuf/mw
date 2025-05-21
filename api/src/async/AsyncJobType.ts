@@ -26,8 +26,7 @@ export type AsyncJobType<AsyncJobArgumentType = void> =
         : AsyncJobArgumentType;
 
       /**
-       * Set a ISO DateTime string, so that the async job will only run AFTER this
-       * date and never before it.
+       * Async job will only run AFTER this and never before it.
        */
       startAfter?: AsyncJob["timeStartAfter"];
 
