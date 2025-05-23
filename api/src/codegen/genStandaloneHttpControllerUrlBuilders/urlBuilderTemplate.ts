@@ -15,7 +15,7 @@ export function urlBuilderTemplate(
   // Generate the path string using URL params passed into the URL builder
   let pathString = "";
   for (const pathPart of pathParts) {
-    // If it is a non URL param path part, just add it back into the path string
+    // If it is a non URL param path part, just add it back into the path string
     // as it is without any modifications.
     if (!pathPart.startsWith(":")) {
       pathString += `/${pathPart}`;

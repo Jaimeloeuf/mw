@@ -1,5 +1,4 @@
 import globals from "globals";
-// import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 
 import perfectionist from "eslint-plugin-perfectionist";
@@ -13,15 +12,19 @@ export default [
       globals: globals.node,
     },
     linterOptions: {
-      // Disabling this for now so that we can add arbitrary eslint-disable lines
-      // to codegen generated files without issue.
+      // Disabling this for now so that we can add arbitrary eslint-disable
+      // lines to codegen generated files without issue.
       reportUnusedDisableDirectives: "off",
     },
     rules: {
+      "use-isnan": "error",
       "prefer-const": "error",
+      "no-console": "warn",
+      "no-throw-literal": "error",
       "no-nested-ternary": "error",
       "no-unneeded-ternary": "error",
-      "no-console": "warn",
+      "no-irregular-whitespace": "error",
+      "no-unused-private-class-members": "error",
       "no-restricted-properties": [
         "error",
         {
@@ -40,7 +43,7 @@ export default [
         },
       ],
       "default-case": "error",
-      curly: ["error", "all"],
+      curly: "error",
       // Potentially helpful when doing codegen with manual sections for users
       // to fill in before committing.
       // "no-warning-comments": [
@@ -63,7 +66,5 @@ export default [
       mwEslintPlugin,
     },
   },
-  // pluginJs.configs.recommended,
-  // ...tseslint.configs.recommended,
   tseslint.configs.base,
 ];
