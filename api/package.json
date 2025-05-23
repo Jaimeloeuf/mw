@@ -18,6 +18,8 @@
     "next:copy-build": "cp -r ./src/next/.next ./dist/next/.next",
     "serve-old": "npm run build:watch-server & npm run start:watch",
     "serve": "npx tsx watch ./src/index.ts",
+    "typecheck": "npx tsc --noEmit",
+    "typecheck:watch": "npx tsc -w --noEmit",
     "lint": "npx eslint",
     "lint:fix": "npx eslint --fix",
     "format": "npx prettier --write 'src/**/*.ts'",
