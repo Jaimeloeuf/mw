@@ -7,5 +7,6 @@ import "./utils/convertUnknownCatchToError.js";
 import "./utils/awaitPromiseSafely.js";
 import "./utils/runAsyncFnSafely.js";
 import "./utils/runFnSafely.js";
+import "./types/DateTime.js";
 import "./idTypes/UUID.js";
 import "./idTypes/EntID.js";
