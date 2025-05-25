@@ -1,12 +1,15 @@
 import type { ColumnType, Insertable, Selectable, Updateable } from "kysely";
 
-import type { CreatedAtColumnType } from "./types/index.js";
+import type {
+  NonUpdatableIdColumnType,
+  CreatedAtColumnType,
+} from "./types/index.js";
 
 export interface BucketlistItemTable {
   /**
    * Unique opaque ID that cannot be updated
    */
-  id: ColumnType<string, string, never>;
+  id: NonUpdatableIdColumnType;
 
   /**
    * Track when bucketlist is created

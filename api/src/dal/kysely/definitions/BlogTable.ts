@@ -1,6 +1,7 @@
 import type { ColumnType, Insertable, Selectable, Updateable } from "kysely";
 
 import type {
+  NonUpdatableIdColumnType,
   CreatedAtColumnType,
   UpdatedAtColumnType,
 } from "./types/index.js";
@@ -9,7 +10,7 @@ export interface BlogTable {
   /**
    * Unique opaque ID that cannot be updated
    */
-  id: ColumnType<string, string, never>;
+  id: NonUpdatableIdColumnType;
   created_at: CreatedAtColumnType;
   updated_at: UpdatedAtColumnType;
 

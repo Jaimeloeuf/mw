@@ -4,6 +4,7 @@ import type { AsyncJobMachineType } from "../../../async/AsyncJobMachine.js";
 import type { AsyncJobPriorityType } from "../../../async/AsyncJobPriority.js";
 import type { AsyncJobStatusType } from "../../../async/AsyncJobStatus.js";
 import type {
+  NonUpdatableIdColumnType,
   CreatedAtColumnType,
   NullableDateTimeColumnType,
 } from "./types/index.js";
@@ -12,8 +13,8 @@ import type {
  * Refer to `AsyncJob` type definition.
  */
 export interface AsyncJobTable {
-  id: ColumnType<string, string, never>;
-  job_type_id: ColumnType<string, string, never>;
+  id: NonUpdatableIdColumnType;
+  job_type_id: NonUpdatableIdColumnType;
   status: ColumnType<
     AsyncJobStatusType,
     AsyncJobStatusType,

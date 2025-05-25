@@ -1,6 +1,9 @@
-import type { ColumnType, Insertable, Selectable, Updateable } from "kysely";
+import type { Insertable, Selectable, Updateable } from "kysely";
 
-import type { CreatedAtColumnType } from "./types/index.js";
+import type {
+  NonUpdatableIdColumnType,
+  CreatedAtColumnType,
+} from "./types/index.js";
 
 /**
  * Table to store the mapping of Question --(1 to many)--> Tags
@@ -9,7 +12,7 @@ export interface LeetcodeQuesTagTable {
   /**
    * Unique opaque ID that cannot be updated
    */
-  id: ColumnType<string, string, never>;
+  id: NonUpdatableIdColumnType;
 
   /**
    * Track when was this created

@@ -1,12 +1,15 @@
-import type { ColumnType, Insertable, Selectable, Updateable } from "kysely";
+import type { Insertable, Selectable, Updateable } from "kysely";
 
-import type { CreatedAtColumnType } from "./types/index.js";
+import type {
+  NonUpdatableIdColumnType,
+  CreatedAtColumnType,
+} from "./types/index.js";
 
 export interface MuwnoTaskTable {
   /**
    * Unique opaque ID that cannot be updated
    */
-  id: ColumnType<string, string, never>;
+  id: NonUpdatableIdColumnType;
 
   /**
    * Track when was the Task created

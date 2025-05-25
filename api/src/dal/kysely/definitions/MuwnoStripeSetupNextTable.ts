@@ -1,12 +1,14 @@
 import type {
-  ColumnType,
   JSONColumnType,
   Insertable,
   Selectable,
   Updateable,
 } from "kysely";
 
-import type { CreatedAtColumnType } from "./types/index.js";
+import type {
+  NonUpdatableIdColumnType,
+  CreatedAtColumnType,
+} from "./types/index.js";
 
 /**
  * Table for next actions to execute on Stripe SetupIntent completing
@@ -17,7 +19,7 @@ export interface MuwnoStripeSetupNextTable {
    * Unique opaque ID that cannot be updated.
    * This is Stripe's unique setup intent ID.
    */
-  stripe_setup_intent_id: ColumnType<string, string, never>;
+  stripe_setup_intent_id: NonUpdatableIdColumnType;
 
   /**
    * Track when was the Stripe setup intent next action created

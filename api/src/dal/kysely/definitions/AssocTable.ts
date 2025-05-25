@@ -1,6 +1,9 @@
-import type { ColumnType, Insertable, Selectable } from "kysely";
+import type { Insertable, Selectable } from "kysely";
 
-import type { CreatedAtColumnType } from "./types/index.js";
+import type {
+  NonUpdatableIdColumnType,
+  CreatedAtColumnType,
+} from "./types/index.js";
 
 /**
  * The rows in this table is never updated, rows will only be added or deleted.
@@ -9,7 +12,7 @@ export interface AssocTable {
   /**
    * Unique opaque ID that cannot be updated
    */
-  id: ColumnType<string, string, never>;
+  id: NonUpdatableIdColumnType;
 
   /**
    * Track when was the Assoc created

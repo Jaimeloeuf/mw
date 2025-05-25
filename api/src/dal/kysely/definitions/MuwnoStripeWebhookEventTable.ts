@@ -1,13 +1,16 @@
-import type { ColumnType, Insertable, Selectable, Updateable } from "kysely";
+import type { Insertable, Selectable, Updateable } from "kysely";
 
-import type { CreatedAtColumnType } from "./types/index.js";
+import type {
+  NonUpdatableIdColumnType,
+  CreatedAtColumnType,
+} from "./types/index.js";
 
 export interface MuwnoStripeWebhookEventTable {
   /**
    * Unique opaque ID that cannot be updated. This is Stripe's unique event ID,
    * which is also used as the indempotency key.
    */
-  stripe_event_id: ColumnType<string, string, never>;
+  stripe_event_id: NonUpdatableIdColumnType;
 
   /**
    * Track the time of DB insertion, not time where Stripe created the event.

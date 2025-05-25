@@ -1,13 +1,16 @@
-import type { ColumnType, Insertable, Selectable, Updateable } from "kysely";
+import type { Insertable, Selectable, Updateable } from "kysely";
 
-import type { CreatedAtColumnType } from "./types/index.js";
+import type {
+  NonUpdatableIdColumnType,
+  CreatedAtColumnType,
+} from "./types/index.js";
 
 export interface MuwnoStripeCustomerTable {
   /**
    * Unique opaque ID that cannot be updated.
    * This is Stripe's unique Customer ID.
    */
-  stripe_customer_id: ColumnType<string, string, never>;
+  stripe_customer_id: NonUpdatableIdColumnType;
 
   /**
    * Track when was the Stripe Customer created
