@@ -1,5 +1,7 @@
 import type { ColumnType, Insertable, Selectable, Updateable } from "kysely";
 
+import type { CreatedAtColumnType } from "./types/index.js";
+
 export interface MuwnoStripeCustomerTable {
   /**
    * Unique opaque ID that cannot be updated.
@@ -10,7 +12,7 @@ export interface MuwnoStripeCustomerTable {
   /**
    * Track when was the Stripe Customer created
    */
-  created_at: ColumnType<Date, string, never>;
+  created_at: CreatedAtColumnType;
 
   /**
    * The corresponding Org ID of this Stripe Customer

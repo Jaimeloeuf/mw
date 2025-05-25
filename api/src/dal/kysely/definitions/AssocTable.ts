@@ -1,5 +1,7 @@
 import type { ColumnType, Insertable, Selectable } from "kysely";
 
+import type { CreatedAtColumnType } from "./types/index.js";
+
 /**
  * The rows in this table is never updated, rows will only be added or deleted.
  */
@@ -12,7 +14,7 @@ export interface AssocTable {
   /**
    * Track when was the Assoc created
    */
-  created_at: ColumnType<Date, string, never>;
+  created_at: CreatedAtColumnType;
 
   /**
    * The Assoc type

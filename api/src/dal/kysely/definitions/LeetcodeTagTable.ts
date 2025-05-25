@@ -1,5 +1,7 @@
 import type { ColumnType, Insertable, Selectable, Updateable } from "kysely";
 
+import type { CreatedAtColumnType } from "./types/index.js";
+
 export interface LeetcodeTagTable {
   /**
    * Unique opaque ID that cannot be updated
@@ -9,7 +11,7 @@ export interface LeetcodeTagTable {
   /**
    * Track when was this created
    */
-  created_at: ColumnType<Date, string, never>;
+  created_at: CreatedAtColumnType;
 
   /**
    * The unique Tag name

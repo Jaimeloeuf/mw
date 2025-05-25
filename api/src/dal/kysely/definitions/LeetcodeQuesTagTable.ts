@@ -1,5 +1,7 @@
 import type { ColumnType, Insertable, Selectable, Updateable } from "kysely";
 
+import type { CreatedAtColumnType } from "./types/index.js";
+
 /**
  * Table to store the mapping of Question --(1 to many)--> Tags
  */
@@ -12,7 +14,7 @@ export interface LeetcodeQuesTagTable {
   /**
    * Track when was this created
    */
-  created_at: ColumnType<Date, string, never>;
+  created_at: CreatedAtColumnType;
 
   /**
    * The LeetcodeQues ID

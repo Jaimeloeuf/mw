@@ -6,6 +6,8 @@ import type {
   Updateable,
 } from "kysely";
 
+import type { CreatedAtColumnType } from "./types/index.js";
+
 export interface MuwnoUserTable {
   /**
    * Auto incrementing int ID to allow for stable sorting.
@@ -20,7 +22,7 @@ export interface MuwnoUserTable {
   /**
    * Track when was the User created
    */
-  created_at: ColumnType<Date, string, never>;
+  created_at: CreatedAtColumnType;
 
   /**
    * The user's Org ID.

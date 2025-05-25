@@ -5,6 +5,15 @@ import pg from "pg";
 
 import type { Database } from "./definitions/index.js";
 
+// Use custom parser for timestamp (oid 1114) so that the returned data type is
+// always a validated/Strong ISO DateTime string instead of the JS Date object.
+// Note that this does not have to handle the `null` value input case since pg
+// doesnt call parser function for null values.
+// https://kysely.dev/docs/recipes/data-types#configuring-runtime-javascript-types
+// https://github.com/brianc/node-pg-types
+// https://github.com/brianc/node-pg-types/blob/master/lib/builtins.js
+pg.types.setTypeParser(1114, $DateTime.ISO.DateTime.makeStrongAndThrowOnError);
+
 /**
  * Creates a new kysely db instance. You should only create one instance per
  * use case, so e.g. for API services, all API services should only share a

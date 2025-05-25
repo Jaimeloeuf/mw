@@ -80,7 +80,9 @@ export function generateEntFromEntSchema(
                   ts.factory.createIdentifier("createdAt"),
                   undefined,
                   ts.factory.createTypeReferenceNode(
-                    ts.factory.createIdentifier("Date"),
+                    ts.factory.createIdentifier(
+                      "$DateTime.ISO.DateTime.Strong",
+                    ),
                     undefined,
                   ),
                 ),
@@ -92,7 +94,9 @@ export function generateEntFromEntSchema(
                   ts.factory.createIdentifier("updatedAt"),
                   undefined,
                   ts.factory.createTypeReferenceNode(
-                    ts.factory.createIdentifier("Date"),
+                    ts.factory.createIdentifier(
+                      "$DateTime.ISO.DateTime.Strong",
+                    ),
                     undefined,
                   ),
                 ),

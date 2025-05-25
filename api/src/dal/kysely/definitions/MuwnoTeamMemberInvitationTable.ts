@@ -1,5 +1,7 @@
 import type { ColumnType, Insertable, Selectable, Updateable } from "kysely";
 
+import type { CreatedAtColumnType } from "./types/index.js";
+
 export interface MuwnoTeamMemberInvitationTable {
   /**
    * Unique opaque ID that cannot be updated
@@ -9,7 +11,7 @@ export interface MuwnoTeamMemberInvitationTable {
   /**
    * Track when was the invitation created
    */
-  created_at: ColumnType<Date, string, never>;
+  created_at: CreatedAtColumnType;
 
   /**
    * Org ID that the user is being invited to join

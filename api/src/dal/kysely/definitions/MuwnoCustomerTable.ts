@@ -1,5 +1,7 @@
 import type { ColumnType, Insertable, Selectable, Updateable } from "kysely";
 
+import type { CreatedAtColumnType } from "./types/index.js";
+
 export interface MuwnoCustomerTable {
   /**
    * Unique opaque ID that cannot be updated
@@ -9,12 +11,12 @@ export interface MuwnoCustomerTable {
   /**
    * Track when was the Customer created
    */
-  created_at: ColumnType<Date, string, never>;
+  created_at: CreatedAtColumnType;
 
   /**
    * Track when was the Customer imported into muwno
    */
-  imported_at: ColumnType<Date, string, never>;
+  imported_at: CreatedAtColumnType;
 
   /**
    * What Org does this customer belong to?

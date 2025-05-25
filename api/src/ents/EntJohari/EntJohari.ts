@@ -6,8 +6,8 @@ export class EntJohari extends BaseEnt {
   constructor(
     public readonly data: {
       readonly id: string;
-      readonly createdAt: Date;
-      updatedAt: Date;
+      readonly createdAt: $DateTime.ISO.DateTime.Strong;
+      updatedAt: $DateTime.ISO.DateTime.Strong;
 
       /**
        * Name of the user this Johari belongs to

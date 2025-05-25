@@ -1,12 +1,17 @@
 import type { ColumnType, Insertable, Selectable, Updateable } from "kysely";
 
+import type {
+  CreatedAtColumnType,
+  UpdatedAtColumnType,
+} from "./types/index.js";
+
 export interface UserTable {
   /**
    * Unique opaque ID that cannot be updated
    */
   id: ColumnType<string, string, never>;
-  created_at: ColumnType<Date, string, never>;
-  updated_at: ColumnType<Date, string, string>;
+  created_at: CreatedAtColumnType;
+  updated_at: UpdatedAtColumnType;
 
   /**
    * User's name

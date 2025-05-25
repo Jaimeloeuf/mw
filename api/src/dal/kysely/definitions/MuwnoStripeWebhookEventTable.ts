@@ -1,5 +1,7 @@
 import type { ColumnType, Insertable, Selectable, Updateable } from "kysely";
 
+import type { CreatedAtColumnType } from "./types/index.js";
+
 export interface MuwnoStripeWebhookEventTable {
   /**
    * Unique opaque ID that cannot be updated. This is Stripe's unique event ID,
@@ -10,7 +12,7 @@ export interface MuwnoStripeWebhookEventTable {
   /**
    * Track the time of DB insertion, not time where Stripe created the event.
    */
-  created_at: ColumnType<Date, string, never>;
+  created_at: CreatedAtColumnType;
 
   /**
    * Event type

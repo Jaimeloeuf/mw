@@ -6,6 +6,8 @@ import type {
   Updateable,
 } from "kysely";
 
+import type { CreatedAtColumnType } from "./types/index.js";
+
 /**
  * Table for next actions to execute on Stripe SetupIntent completing
  * successfully.
@@ -20,7 +22,7 @@ export interface MuwnoStripeSetupNextTable {
   /**
    * Track when was the Stripe setup intent next action created
    */
-  created_at: ColumnType<Date, string, never>;
+  created_at: CreatedAtColumnType;
 
   /**
    * Next action is stored as a JSON object since different next actions can
