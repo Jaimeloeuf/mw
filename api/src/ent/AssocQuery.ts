@@ -11,14 +11,7 @@ import {
 } from "../exceptions/index.js";
 import { BaseEnt } from "./BaseEnt.js";
 
-export class AssocQuery<
-  FromEnt extends EntClass,
-  FromEntInstance extends FromEnt extends EntClass<infer EntType>
-    ? EntType
-    : never,
-  ToEnt extends EntClass,
-  ToEntInstance extends ToEnt extends EntClass<infer EntType> ? EntType : never,
-> {
+export class AssocQuery<FromEnt extends EntClass, ToEnt extends EntClass> {
   private query: SelectQueryBuilder<Database, "assoc", Assoc>;
 
   constructor(
@@ -100,10 +93,16 @@ export class AssocQuery<
    * Generate actual Ent nodes from raw Assoc values using the dynamically
    * loaded EntOperator's `getMany` method.
    */
-  async #genNodes<NodeType extends "to" | "from">(
-    entTypeID: string,
-    nodeType: NodeType,
-  ) {
+  async #genNodes<
+    NodeType extends "to" | "from",
+    FromEntInstance extends FromEnt extends EntClass<infer EntType>
+      ? EntType
+      : never,
+    ToEntInstance extends ToEnt extends EntClass<infer EntType>
+      ? EntType
+      : never,
+    ReturnType extends NodeType extends "to" ? ToEntInstance : FromEntInstance,
+  >(entTypeID: string, nodeType: NodeType) {
     const assocs = await this.genRawAssoc();
 
     if (assocs.length === 0) {
@@ -123,9 +122,7 @@ export class AssocQuery<
       (assoc) => assoc[nodeType],
     ) as $NonEmptyArray<string>;
 
-    return (await entOperator.getMany(ids)) as Array<
-      NodeType extends "to" ? ToEntInstance : FromEntInstance
-    >;
+    return (await entOperator.getMany(ids)) as Array<ReturnType>;
   }
 
   /**
