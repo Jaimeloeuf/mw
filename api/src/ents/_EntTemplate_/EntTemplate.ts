@@ -6,8 +6,8 @@ export class EntTemplate extends BaseEnt {
   constructor(
     public readonly data: {
       readonly id: string;
-      readonly createdAt: Date;
-      updatedAt: Date;
+      readonly createdAt: $DateTime.ISO.DateTime.Strong;
+      updatedAt: $DateTime.ISO.DateTime.Strong;
 
       // @todo
       // Define your Ent's data fields after this line. You can use JSDocs on
