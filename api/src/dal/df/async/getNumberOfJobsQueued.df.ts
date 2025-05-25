@@ -17,9 +17,7 @@ export default dataFn(async function asyncGetNumberOfJobsQueued(
     .select((eb) => eb.fn.count<string>("id").as("jobs"))
     .where("status", "=", AsyncJobStatus.queued)
     .where("machine_type", "=", machineType)
-    // @todo Passing 'Date' object doesnt work, and only string works...??
-    // .where("time_start_after", "<=", new Date())
-    .where("time_start_after", "<=", $DateTime.now.asIsoDateTime() as any)
+    .where("time_start_after", "<=", $DateTime.now.asIsoDateTime())
     .executeTakeFirst();
 
   if (asyncJob?.jobs === undefined) {

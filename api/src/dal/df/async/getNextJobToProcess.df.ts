@@ -24,9 +24,7 @@ export default dataFn(async function asyncGetNextJobToProcess({
       .selectAll()
       .where("status", "=", AsyncJobStatus.queued)
       .where("machine_type", "=", machineType)
-      // @todo Passing 'Date' object doesnt work, and only string works...??
-      // .where("time_start_after", "<=", new Date())
-      .where("time_start_after", "<=", $DateTime.now.asIsoDateTime() as any)
+      .where("time_start_after", "<=", $DateTime.now.asIsoDateTime())
       .limit(1);
 
     // If `priority` is specified, filter for that specific priority, else grab
