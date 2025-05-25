@@ -14,7 +14,7 @@ class Logger {
     ...args: Parameters<typeof console.log>
   ) {
     const formattedLogOutput =
-      `${new Date().toISOString()} ${level}: [${label}] ` +
+      `${$DateTime.now.asIsoDateTime()} ${level}: [${label}] ` +
       args.flat().join(" ");
 
     // Ignore eslint rule since this is used to implement logger itself
