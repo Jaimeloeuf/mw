@@ -3,6 +3,8 @@ spp (Simple Post Processing)
 
 `SimplePostProcessing` allows service functions to define jobs (functions) to run asynchronously after things like responding to a client request, so as to not block the Request/Response flow on non business critical work, and also to ensure that if the non business critical work fails, it does not fail the overall service execution.
 
+In other words, you can defer function execution until after we have finished the operation requested by the user (such as a data load) to make the request faster and feel more responsive. The deferred functions can be things like server-side logging and other logic that isn't directly required to fulfill the user's request.
+
 An example of this is when a user signs up for a new account, we want the user creation part to run as fast as possible so that the client experience is smooth. However we also want to send a welcome email in the same service function that handles the signup logic.
 
 Instead of blocking the signup flow in the service function to await for the welcome email send to complete, this welcome email send can be wrapped in a job function and passed to `SimplePostProcessing` to run later in the background, so that the service function can complete quicker and let the controller reply to the client asap.
