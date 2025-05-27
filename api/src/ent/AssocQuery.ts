@@ -27,12 +27,20 @@ export class AssocQuery<FromEnt extends EntClass, ToEnt extends EntClass> {
       .orderBy("created_at", "desc");
   }
 
+  #whereFromIdIsCalled: boolean = false;
+
   /**
    * ## Notes
    * 1. Any invalid id will cause the method to throw.
    * 1. Duplicate IDs will be treated as a single ID and only return 1 result.
    */
   whereFromIdIs(...ids: $NonEmptyArray<string>) {
+    if (this.#whereFromIdIsCalled) {
+      throw new Error(
+        `${AssocQuery}.${this.whereFromIdIs.name}: Can only be called once`,
+      );
+    }
+
     for (const id of ids) {
       const isEntIdValid = $EntID.isValid(this.fromEntType, id);
       if (!isEntIdValid) {
@@ -50,12 +58,20 @@ export class AssocQuery<FromEnt extends EntClass, ToEnt extends EntClass> {
     return this;
   }
 
+  #whereToIdIsCalled: boolean = false;
+
   /**
    * ## Notes
    * 1. Any invalid id will cause the method to throw.
    * 1. Duplicate IDs will be treated as a single ID and only return 1 result.
    */
   whereToIdIs(...ids: $NonEmptyArray<string>) {
+    if (this.#whereToIdIsCalled) {
+      throw new Error(
+        `${AssocQuery}.${this.whereToIdIs.name}: Can only be called once`,
+      );
+    }
+
     for (const id of ids) {
       const isEntIdValid = $EntID.isValid(this.toEntType, id);
       if (!isEntIdValid) {
