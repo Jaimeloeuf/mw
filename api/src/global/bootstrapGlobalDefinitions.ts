@@ -3,10 +3,10 @@
  */
 
 // Import modules to run their side effects of setting values on `globalThis`
-import "./utils/convertUnknownCatchToError.js";
-import "./utils/awaitPromiseSafely.js";
-import "./utils/runAsyncFnSafely.js";
-import "./utils/runFnSafely.js";
-import "./types/DateTime.js";
+import "nice-types/global";
+import "convert-unknown-catch-to-error/global";
+import "safety-number-one/global";
+import "datetime-ts";
+
 import "./idTypes/UUID.js";
 import "./idTypes/EntID.js";
