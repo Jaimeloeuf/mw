@@ -15,6 +15,9 @@ import { urlBuilderTemplate } from "./urlBuilderTemplate.js";
  * next production build step.
  */
 export async function genStandaloneHttpControllerUrlBuilders() {
+  // Temporarily disable for now as next is removed, and will migrate away from it.
+  return;
+
   const controllerFiles = await getHttpControllerFiles();
 
   await genAndSaveGeneratedCode(
