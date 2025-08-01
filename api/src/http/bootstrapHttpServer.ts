@@ -2,14 +2,12 @@ import type { Socket } from "net";
 
 import cors from "cors";
 import express from "express";
-import { parse } from "url";
 
 import { registerRoutesAndControllers } from "../__generated/index.js";
 import { config } from "../config/index.js";
 import { httpRouteHandlerForGraphQL } from "../graphql/index.js";
 import { authControllers } from "../http-auth/index.js";
 import { logger } from "../logging/index.js";
-import { nextJsApp, nextJsRequestHandler } from "../next/next.js";
 import { entrypoints } from "./entrypoints.js";
 import { loggingMiddleware } from "./loggingMiddleware.js";
 import { routeNotFound } from "./routeNotFound.js";
@@ -19,8 +17,6 @@ import { routeNotFound } from "./routeNotFound.js";
  * HTTP controllers.
  */
 export async function bootstrapHttpServer() {
-  await nextJsApp.prepare();
-
   express()
     /* Register all the middlewares */
     .use(cors())
@@ -47,12 +43,6 @@ export async function bootstrapHttpServer() {
 
     // Register all vue page entrypoints
     .use("/vue", entrypoints())
-
-    // NextJS App
-    .use((req, res) => {
-      const parsedUrl = parse(req.url!, true);
-      nextJsRequestHandler(req, res, parsedUrl);
-    })
 
     // Since this is the last non-error-handling route handler used, assume 404
     // as no other route handler responded.
