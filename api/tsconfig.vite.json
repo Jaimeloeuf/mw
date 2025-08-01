@@ -1,0 +1,27 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    ".react-router/types/**/*",
+    "src/react/**/*",
+    "src/react/**/.server/**/*",
+    "src/react/**/.client/**/*",
+    "src/react-server/**/*"
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "strict": true,
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "types": ["vite/client"],
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "rootDirs": [".", ".src/", "./.react-router/types"],
+    "paths": {
+      "~/*": ["src/react/*"]
+    },
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  }
+}
