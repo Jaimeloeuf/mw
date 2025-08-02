@@ -1,4 +1,5 @@
 import express from "express";
+import path from "path";
 
 import { config } from "../config/index.js";
 import { logger } from "../logging/index.js";
@@ -23,11 +24,11 @@ export async function reactRouterService() {
     router.use(viteDevServer.middlewares);
     router.use(async (req, res, next) => {
       try {
-        const ssrModule = await viteDevServer.ssrLoadModule(
-          // @todo
-          // Use path to resolve this instead
-          "./src/http/reactRouterApp.ts",
+        const reactRouterAppPath = path.resolve(
+          import.meta.dirname,
+          "reactRouterApp.ts",
         );
+        const ssrModule = await viteDevServer.ssrLoadModule(reactRouterAppPath);
         return await ssrModule["router"](req, res, next);
       } catch (error) {
         if (typeof error === "object" && error instanceof Error) {
