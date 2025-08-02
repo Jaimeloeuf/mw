@@ -10,6 +10,7 @@ import { authControllers } from "../http-auth/index.js";
 import { logger } from "../logging/index.js";
 import { entrypoints } from "./entrypoints.js";
 import { loggingMiddleware } from "./loggingMiddleware.js";
+import { reactRouterService } from "./reactRouterService.js";
 import { routeNotFound } from "./routeNotFound.js";
 
 /**
@@ -43,6 +44,9 @@ export async function bootstrapHttpServer() {
 
     // Register all vue page entrypoints
     .use("/vue", entrypoints())
+
+    // Register "react-router" framework SSR app
+    .use("/", await reactRouterService())
 
     // Since this is the last non-error-handling route handler used, assume 404
     // as no other route handler responded.

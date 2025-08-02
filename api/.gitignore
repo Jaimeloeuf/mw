@@ -1,2 +1,5 @@
 # Sqlite mock DBs should be only used for local development/testing purposes.
 sqlite-mock-dbs/*.db
+
+# React Router generated
+.react-router/

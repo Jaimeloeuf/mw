@@ -15,7 +15,7 @@ export default defineConfig(({ isSsrBuild }) => {
   if (isSsrBuild) {
     config.build = {
       rollupOptions: {
-        input: "./src/react-server/app.ts",
+        input: "./src/http/reactRouterApp.ts",
       },
     };
   }

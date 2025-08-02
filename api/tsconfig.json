@@ -1,7 +1,15 @@
 {
   "exclude": [
     // Has its own tsconfig.
+    "./react-router.config.ts",
     "./vite.config.ts"
+  ],
+
+  "include": [
+    "src/**/*",
+
+    // Including this for react-router codegen
+    ".react-router/**/*"
   ],
 
   "compilerOptions": {
@@ -25,7 +33,8 @@
 
     /* Modules */
     "baseUrl": "./",
-    "rootDir": "./src",
+    "rootDir": ".",
+    // "rootDirs": [".src/", "./.react-router/types"],
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
