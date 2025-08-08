@@ -1,3 +1,4 @@
+import "../../../global/bootstrapGlobalDefinitions.js";
 import { logger } from "../../../logging/index.js";
 import { createKyselyMigration } from "./createKyselyMigrationFile/createKyselyMigration.js";
 import { kyselyMigration } from "./kyselyMigration.js";

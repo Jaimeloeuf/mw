@@ -3,7 +3,6 @@ import path from "path";
 import readline from "readline/promises";
 
 import { logger } from "../../../../logging/index.js";
-import { getDateString } from "../../../../utils/index.js";
 import { getMigrationIndex } from "./getMigrationIndex.js";
 import { migrationFileTemplate } from "./migrationFileTemplate.js";
 
@@ -45,7 +44,7 @@ export async function createKyselyMigration() {
     return;
   }
 
-  const dateString = getDateString();
+  const dateString = $DateTime.now.asIsoDate();
 
   const migrationIndex = getMigrationIndex(migrationFolderPath, dateString);
 
