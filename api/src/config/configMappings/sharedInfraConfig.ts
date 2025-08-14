@@ -128,6 +128,28 @@ export const sharedInfraConfig = {
   ),
 
   /**
+   * Redis service URL
+   */
+  redis_url: createConfig(
+    z.string().url(),
+    function () {
+      return process.env["REDIS_URL"];
+    },
+    true,
+  ),
+
+  /**
+   * Redis auth token
+   */
+  redis_token: createConfig(
+    z.string(),
+    function () {
+      return process.env["REDIS_TOKEN"];
+    },
+    true,
+  ),
+
+  /**
    * A string used as part of the URL to form a secret webhook path to prevent
    * the path from getting called maliciously.
    */
