@@ -1,6 +1,7 @@
 import type { BaseEnt } from "../../ent/BaseEnt.js";
 import type { EntClass } from "../../ent/EntClass.js";
 
+import { entMapping } from "../../__generated/index.js";
 import { ValidationFailedException } from "../../exceptions/ValidationFailedException.js";
 
 declare global {
@@ -127,6 +128,25 @@ globalThis.$EntID = {
           [`Invalid EntTypeID: ${maybeEntTypeID}`],
         );
       }
+    }
+
+    // If entClass is not specified, verify that the EntTypeID is any one of the
+    // possible EntTypeIDs
+    else {
+      if (!Object.hasOwn(entMapping, maybeEntTypeID)) {
+        throw new ValidationFailedException(
+          getValidationExceptionMessage(maybeID, entClass),
+          [`Invalid EntTypeID: ${maybeEntTypeID}`],
+        );
+      }
+
+      // Alternatively
+      // const [entTypeIdException] = $EntTypeID.makeStrongSafely(maybeEntTypeID);
+      // if (entTypeIdException !== null) {
+      //   throw new ValidationFailedException(getValidationExceptionMessage(maybeID, entClass), [
+      //     entTypeIdException.message,
+      //   ]);
+      // }
     }
 
     return maybeID as $EntID.Strong;
