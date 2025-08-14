@@ -36,6 +36,7 @@
     "@react-router/node": "^7.7.1",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
+    "@upstash/redis": "^1.35.3",
     "better-auth": "^1.1.15",
     "convert-unknown-catch-to-error": "^1.0.3",
     "cors": "^2.8.5",
