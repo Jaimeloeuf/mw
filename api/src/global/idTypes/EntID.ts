@@ -59,6 +59,17 @@ declare global {
 }
 
 /**
+ * Utility function to get validation exception message that is customised
+ * depending on whether `entClass` is provided.
+ */
+const getValidationExceptionMessage = (
+  maybeID: string,
+  entClass?: typeof BaseEnt | EntClass<BaseEnt>,
+) =>
+  `Invalid ID '${maybeID}'` +
+  (entClass === undefined ? "" : ` used for '${entClass.name}'`);
+
+/**
  * Define utilities for the $EntID type in global scope after the ambient
  * namespace definitions.
  */
