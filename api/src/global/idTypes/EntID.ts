@@ -1,6 +1,8 @@
 import type { BaseEnt } from "../../ent/BaseEnt.js";
 import type { EntClass } from "../../ent/EntClass.js";
 
+import { ValidationFailedException } from "../../exceptions/ValidationFailedException.js";
+
 declare global {
   /**
    * For EntID strings, generally created using `$EntID.generate()`
@@ -46,8 +48,19 @@ declare global {
     /**
      * Utility to convert a Weak ID variant to Strong ID variant after
      * validation and type casting. This will throw on validation error.
+     *
+     * If `entClass` is passed in, this will also validate if the given ID is an
+     * EntID of that EntClass.
+     *
+     * Note that this validation only cares about whether the "shape" of the ID
+     * is correct, and doesnt actually check whether the ID points to an object
+     * that exists, since a newly generated ID is also a valid EntID.
      */
     function makeStrongAndThrowOnError(maybeID: Weak): Strong;
+    function makeStrongAndThrowOnError(
+      maybeID: Weak,
+      entClass: typeof BaseEnt | EntClass<BaseEnt>,
+    ): Strong;
 
     /**
      * Utility to convert a Weak ID variant to Strong ID variant after
@@ -84,10 +97,38 @@ globalThis.$EntID = {
       maybeID.endsWith(`_${(entClass as typeof BaseEnt).EntTypeID}`)
     );
   },
-  makeStrongAndThrowOnError(maybeID) {
-    if (maybeID === "") {
-      throw new Error("Empty EntID");
+  makeStrongAndThrowOnError(
+    maybeID,
+    entClass?: typeof BaseEnt | EntClass<BaseEnt>,
+  ) {
+    const maybeIdComponents = maybeID.split("_");
+    if (maybeIdComponents.length !== 2) {
+      throw new ValidationFailedException(
+        getValidationExceptionMessage(maybeID, entClass),
+      );
     }
+
+    const [maybeUUID, maybeEntTypeID] = maybeIdComponents as [string, string];
+
+    const [uuidException] = $UUID.makeStrongSafely(maybeUUID);
+    if (uuidException !== null) {
+      throw new ValidationFailedException(
+        getValidationExceptionMessage(maybeID, entClass),
+        [uuidException.message],
+      );
+    }
+
+    // If entClass is specified, verify that the given ID matches the given
+    // entClass's EntTypeID.
+    if (entClass !== undefined) {
+      if (maybeEntTypeID !== (entClass as typeof BaseEnt).EntTypeID) {
+        throw new ValidationFailedException(
+          getValidationExceptionMessage(maybeID, entClass),
+          [`Invalid EntTypeID: ${maybeEntTypeID}`],
+        );
+      }
+    }
+
     return maybeID as $EntID.Strong;
   },
   makeStrongSafely(maybeID) {
