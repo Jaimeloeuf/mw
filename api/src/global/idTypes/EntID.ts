@@ -60,7 +60,7 @@ declare global {
     function makeStrongAndThrowOnError(maybeID: Weak): Strong;
     function makeStrongAndThrowOnError(
       maybeID: Weak,
-      entClass: typeof BaseEnt | EntClass<BaseEnt>,
+      entClass: typeof BaseEnt | EntClass<BaseEnt> | undefined,
     ): Strong;
 
     /**
@@ -100,7 +100,7 @@ globalThis.$EntID = {
   },
   makeStrongAndThrowOnError(
     maybeID,
-    entClass?: typeof BaseEnt | EntClass<BaseEnt>,
+    entClass?: typeof BaseEnt | EntClass<BaseEnt> | undefined,
   ) {
     const maybeIdComponents = maybeID.split("_");
     if (maybeIdComponents.length !== 2) {
