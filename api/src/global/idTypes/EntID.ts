@@ -67,8 +67,14 @@ declare global {
      * Utility to convert a Weak ID variant to Strong ID variant after
      * validation and type casting. This will not throw on validation error and
      * instead return a `$ResultTuple`.
+     *
+     * See `makeStrongAndThrowOnError` method for more detail.
      */
     function makeStrongSafely(maybeID: Weak): $ResultTuple<Strong>;
+    function makeStrongSafely(
+      maybeID: Weak,
+      entClass: typeof BaseEnt | EntClass<BaseEnt> | undefined,
+    ): $ResultTuple<Strong>;
   }
 }
 
@@ -151,7 +157,7 @@ globalThis.$EntID = {
 
     return maybeID as $EntID.Strong;
   },
-  makeStrongSafely(maybeID) {
-    return [null, this.makeStrongAndThrowOnError(maybeID)];
+  makeStrongSafely(maybeID, entClass?: typeof BaseEnt | EntClass<BaseEnt>) {
+    return $runFnSafely(this.makeStrongAndThrowOnError, maybeID, entClass);
   },
 };
