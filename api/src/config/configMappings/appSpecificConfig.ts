@@ -188,4 +188,11 @@ export const appSpecificConfig = {
   whatch_tele_bot_token: createConfig(z.string(), function () {
     return process.env["WHATCH_TELE_BOT_TOKEN"];
   }),
+
+  /**
+   * habits Telegram bot's token.
+   */
+  habits_tele_bot_token: createConfig(z.string(), function () {
+    return process.env["HABITS_TELE_BOT_TOKEN"];
+  }),
 } as const;
