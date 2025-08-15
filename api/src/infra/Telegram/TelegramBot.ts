@@ -82,6 +82,20 @@ export abstract class TelegramBot {
   }) {
     const botToken = await this.getToken();
 
+    // Simple command string validation
+    for (const { command } of this.commands) {
+      if (command !== command.toLowerCase()) {
+        throw new Error(
+          `Invalid command found (Must be lower case english characters only): ${command}`,
+        );
+      }
+      if (command.includes(" ") || command.includes("-")) {
+        throw new Error(
+          `Invalid command found (Must be a single word without spaces or dashes in the command): ${command}`,
+        );
+      }
+    }
+
     // Merge existing commands and new commands into new array before setting
     // commands if user did not leave commands empty
     if (this.commands.length !== 0 && options?.merge) {
