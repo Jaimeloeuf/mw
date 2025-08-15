@@ -10,5 +10,6 @@ export const allBotLoaders: Array<() => TelegramBot> = [
   infra.TelegramBotsMwBot,
   infra.TelegramBotsMuwnoBot,
   infra.TelegramBotsWhatchBot,
+  infra.TelegramBotsHabitsBot,
   // Add new bots right above this line following the same format
 ];
