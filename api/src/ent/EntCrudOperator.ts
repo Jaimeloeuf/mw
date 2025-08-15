@@ -2,8 +2,11 @@ import type { BaseEnt } from "./BaseEnt.js";
 import type { EntManagedData } from "./EntManagedData.js";
 
 /**
- * This are Operators for Ent users to do basic CRUD + Upsert actions for a
- * given Ent type.
+ * These Operators are used for basic CRUD actions for a given Ent type.
+ *
+ * Note that `Upsert` is not supported, since new EntIDs are created in the
+ * Ent framework logic and never on the client/product code, there is no way an
+ * Ent can exist for upsert operation.
  */
 export interface EntCrudOperator<Ent extends BaseEnt> {
   /**
