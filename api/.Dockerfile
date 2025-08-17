@@ -14,7 +14,7 @@
 # optimize the build process for caching.
 
 # Use alpine image to reduce image size
-FROM node:20-alpine
+FROM node:22-alpine
 
 # @todo Use this once the python3 not found error when installing sqlite3 is resolved
 # FROM node:lts-alpine
