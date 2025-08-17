@@ -75,4 +75,7 @@ export async function validateGeneratedFiles() {
       `${i + 1}: ${modifiedFiles[i]!.name}`,
     );
   }
+
+  // non-zero exit code to chain with external systems
+  process.exit(1);
 }
