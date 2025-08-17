@@ -45,6 +45,9 @@ COPY ./src/ ./src/
 RUN npm run lint
 RUN npm run build
 
+# Validate that all codegen files are not manually modified
+RUN npm run codegen validate
+
 # Define exposed ports, acting only as documentation. Docker run STILL need to
 # map the ports with -p option.
 EXPOSE 3000
