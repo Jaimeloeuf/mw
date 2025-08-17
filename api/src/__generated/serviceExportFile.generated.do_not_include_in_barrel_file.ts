@@ -6,7 +6,7 @@
  * genServiceBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(c8e9940491570ec9e3ed8a544338cddec80a627b0a95d2f48616f3e87167752e)
+ * sha256(60187b9f891dfa70cff25bcf68beade99334ab2f20da477a5eb9a6b499eee3f0)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -22,6 +22,7 @@ export { default as leetcodeGetLeetcodeQues } from "../services/leetcode/getLeet
 export { default as muwnoCanUserAccessOrg } from "../services/muwno/canUserAccessOrg.sv.js";
 export { default as muwnoCanUserAccessProduct } from "../services/muwno/canUserAccessProduct.sv.js";
 export { default as muwnoCreateApiKey } from "../services/muwno/createApiKey.sv.js";
+export { default as muwnoCreateOrg } from "../services/muwno/createOrg.sv.js";
 export { default as muwnoDeleteApiKey } from "../services/muwno/deleteApiKey.sv.js";
 export { default as muwnoGetApiKeysOfUserOrg } from "../services/muwno/getApiKeysOfUserOrg.sv.js";
 export { default as muwnoValidateIfUserHaveValidRole } from "../services/muwno/validateIfUserHaveValidRole.sv.js";
