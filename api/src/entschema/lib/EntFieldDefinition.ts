@@ -1,5 +1,5 @@
 export type EntFieldDefinition = {
-  name: string;
+  field: string;
   type: "string" | "number" | "boolean";
   description?: string;
 };

@@ -8,17 +8,17 @@ export class EntJohariSchema implements EntSchema {
   getFields(): Array<EntFieldDefinition> {
     return [
       {
-        name: "name",
+        field: "name",
         type: "string",
         description: "Name of the user this Johari belongs to",
       },
       {
-        name: "words",
+        field: "words",
         type: "string",
         description: "Words that the user selected for themselves",
       },
       {
-        name: "creatorID",
+        field: "creatorID",
         type: "string",
       },
     ];

@@ -122,7 +122,7 @@ export function generateEntFromEntSchema(
 
                   const dataField = ts.factory.createPropertySignature(
                     undefined,
-                    ts.factory.createIdentifier(field.name),
+                    ts.factory.createIdentifier(field.field),
                     undefined,
                     ts.factory.createKeywordTypeNode(fieldType),
                   );
