@@ -9,16 +9,19 @@ export class EntJohariSchema implements EntSchema {
     return [
       {
         field: "name",
+        storageKey: "name",
         type: "string",
         description: "Name of the user this Johari belongs to",
       },
       {
         field: "words",
+        storageKey: "words",
         type: "string",
         description: "Words that the user selected for themselves",
       },
       {
         field: "creatorID",
+        storageKey: "creatorID",
         type: "string",
       },
     ];
