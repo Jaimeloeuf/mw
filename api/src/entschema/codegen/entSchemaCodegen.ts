@@ -3,6 +3,7 @@ import path from "path";
 import * as prettier from "prettier";
 import ts from "typescript";
 
+import "../../global/bootstrapGlobalDefinitions.js";
 import { logger } from "../../logging/index.js";
 import { EntJohariSchema } from "../EntJohariSchema.js";
 import { EntSchema } from "../lib/index.js";
