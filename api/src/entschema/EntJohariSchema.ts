@@ -29,7 +29,7 @@ export class EntJohariSchema implements EntSchema {
     ];
   }
 
-  getEdges(): Array<EntEdgeDefinition> {
+  getEdgeConfigs(): Array<EntEdgeDefinition> {
     return [
       {
         name: "creator",

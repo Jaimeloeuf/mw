@@ -12,5 +12,5 @@ export abstract class EntSchema {
 
   abstract getFieldConfigs(): Array<EntFieldDefinition>;
 
-  abstract getEdges(): Array<EntEdgeDefinition>;
+  abstract getEdgeConfigs(): Array<EntEdgeDefinition>;
 }
