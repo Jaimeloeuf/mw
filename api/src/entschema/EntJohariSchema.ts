@@ -5,6 +5,8 @@ import { EntSchema } from "./lib/EntSchema.js";
 export class EntJohariSchema implements EntSchema {
   EntTypeID = "4f51";
 
+  EntDbTable = "johari";
+
   getFields(): Array<EntFieldDefinition> {
     return [
       {
