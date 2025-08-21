@@ -7,7 +7,7 @@ export class EntJohariSchema implements EntSchema {
 
   EntDbTable = "johari";
 
-  getFields(): Array<EntFieldDefinition> {
+  getFieldConfigs(): Array<EntFieldDefinition> {
     return [
       {
         field: "name",

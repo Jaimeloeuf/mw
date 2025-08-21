@@ -10,7 +10,7 @@ export abstract class EntSchema {
   // abstract EntDbTable: keyof Database;
   abstract EntDbTable: string;
 
-  abstract getFields(): Array<EntFieldDefinition>;
+  abstract getFieldConfigs(): Array<EntFieldDefinition>;
 
   abstract getEdges(): Array<EntEdgeDefinition>;
 }

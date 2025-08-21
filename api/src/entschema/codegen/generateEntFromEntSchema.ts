@@ -104,25 +104,25 @@ export function generateEntFromEntSchema(
 
               /* Generate the custom data fields */
               ...entSchema
-                .getFields()
-                .map((field) => {
+                .getFieldConfigs()
+                .map((fieldConfig) => {
                   const mapping: Record<string, ts.KeywordTypeSyntaxKind> = {
                     string: ts.SyntaxKind.StringKeyword,
                     number: ts.SyntaxKind.NumberKeyword,
                     boolean: ts.SyntaxKind.BooleanKeyword,
                   };
 
-                  const fieldType = mapping[field.type];
+                  const fieldType = mapping[fieldConfig.type];
 
                   if (fieldType === undefined) {
                     throw new EntSchemaCodegenError(
-                      `Invalid field type found: ${field.type}`,
+                      `Invalid field type found: ${fieldConfig.type}`,
                     );
                   }
 
                   const dataField = ts.factory.createPropertySignature(
                     undefined,
-                    ts.factory.createIdentifier(field.field),
+                    ts.factory.createIdentifier(fieldConfig.field),
                     undefined,
                     ts.factory.createKeywordTypeNode(fieldType),
                   );
@@ -131,9 +131,12 @@ export function generateEntFromEntSchema(
                     // Add a new line for every single field
                     getNewline<ts.TypeElement>(),
 
-                    field.description === undefined
+                    fieldConfig.description === undefined
                       ? dataField
-                      : prefixJsdocComment([field.description], dataField),
+                      : prefixJsdocComment(
+                          [fieldConfig.description],
+                          dataField,
+                        ),
                   ];
                 })
                 .flat(),
