@@ -5,7 +5,7 @@ import ts from "typescript";
 
 import "../../global/bootstrapGlobalDefinitions.js";
 
-import type { EntSchemaCodegenInput } from "./EntSchemaCodegenInput.js";
+import type { EntSchemaValidatedData } from "../lib/index.js";
 
 import { logger } from "../../logging/index.js";
 import { codegenSetup } from "./codegenSetup.js";
@@ -15,7 +15,7 @@ async function entSchemaCodegen({
   entSchema,
   entClassName,
   entSchemaInstance,
-}: EntSchemaCodegenInput) {
+}: EntSchemaValidatedData) {
   const generatedEntNode = generateEntFromEntSchema(entSchemaInstance, {
     entClassName,
   });
