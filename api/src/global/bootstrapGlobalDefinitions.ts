@@ -10,3 +10,13 @@ import "datetime-ts";
 
 import "./idTypes/UUID.js";
 import "./idTypes/EntID.js";
+
+// Ensure only included/ran once
+// *not needed for most cases, only specific edge cases might call this twice
+{
+  let isBootstrapped = false;
+  if (isBootstrapped) {
+    throw new Error(`Global definitions bootstrap ran more than once!`);
+  }
+  isBootstrapped = true;
+}
