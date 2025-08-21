@@ -5,35 +5,11 @@ import ts from "typescript";
 
 import "../../global/bootstrapGlobalDefinitions.js";
 
-import type { EntSchema, EntSchemaConstructor } from "../lib/index.js";
 import type { EntSchemaCodegenInput } from "./EntSchemaCodegenInput.js";
 
 import { logger } from "../../logging/index.js";
-import { EntSchemaCodegenError } from "./EntSchemaCodegenError.js";
+import { codegenSetup } from "./codegenSetup.js";
 import { generateEntFromEntSchema } from "./generateEntFromEntSchema.js";
-
-function codegenSetup(
-  entSchema: EntSchemaConstructor<EntSchema>,
-): EntSchemaCodegenInput {
-  if (!entSchema.name.startsWith("Ent") || !entSchema.name.endsWith("Schema")) {
-    throw new EntSchemaCodegenError(
-      "EntSchema name must be Ent...Schema where your ent name is filled in the ...",
-    );
-  }
-
-  const entClassName = entSchema.name.slice(
-    0,
-    entSchema.name.length - "Schema".length,
-  );
-
-  const entSchemaInstance = new entSchema();
-
-  return {
-    entSchema,
-    entClassName,
-    entSchemaInstance,
-  };
-}
 
 async function entSchemaCodegen({
   entSchema,
