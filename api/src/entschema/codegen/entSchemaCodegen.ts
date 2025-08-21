@@ -6,16 +6,11 @@ import ts from "typescript";
 import "../../global/bootstrapGlobalDefinitions.js";
 
 import type { EntSchema, EntSchemaConstructor } from "../lib/index.js";
+import type { EntSchemaCodegenInput } from "./EntSchemaCodegenInput.js";
 
 import { logger } from "../../logging/index.js";
 import { EntSchemaCodegenError } from "./EntSchemaCodegenError.js";
 import { generateEntFromEntSchema } from "./generateEntFromEntSchema.js";
-
-type EntSchemaCodegenInput = {
-  entSchema: EntSchemaConstructor<EntSchema>;
-  entClassName: string;
-  entSchemaInstance: EntSchema;
-};
 
 function codegenSetup(
   entSchema: EntSchemaConstructor<EntSchema>,
