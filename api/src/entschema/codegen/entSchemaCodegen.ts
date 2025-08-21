@@ -5,7 +5,6 @@ import ts from "typescript";
 
 import "../../global/bootstrapGlobalDefinitions.js";
 import { logger } from "../../logging/index.js";
-import { EntJohariSchema } from "../EntJohariSchema.js";
 import { EntSchema } from "../lib/index.js";
 import { EntSchemaCodegenError } from "./EntSchemaCodegenError.js";
 import { generateEntFromEntSchema } from "./generateEntFromEntSchema.js";
@@ -64,4 +63,8 @@ async function entSchemaCodegen(entSchema: EntSchemaConstructor<EntSchema>) {
   );
 }
 
-entSchemaCodegen(EntJohariSchema);
+async function test() {
+  const { EntJohariSchema } = await import("../EntJohariSchema.js");
+  entSchemaCodegen(EntJohariSchema);
+}
+test();
