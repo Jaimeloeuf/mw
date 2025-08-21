@@ -8,7 +8,7 @@ import "../../global/bootstrapGlobalDefinitions.js";
 import type { EntSchemaValidatedData } from "../lib/index.js";
 
 import { logger } from "../../logging/index.js";
-import { codegenSetup } from "./codegenSetup.js";
+import { EntSchemaValidateAndSetup } from "../lib/EntSchemaValidateAndSetup.js";
 import { generateEntFromEntSchema } from "./generateEntFromEntSchema.js";
 
 async function entSchemaCodegen({
@@ -58,7 +58,7 @@ async function entSchemaCodegen({
 
 async function test() {
   const { EntJohariSchema } = await import("../EntJohariSchema.js");
-  const entSchemaCodegenInput = codegenSetup(EntJohariSchema);
-  await entSchemaCodegen(entSchemaCodegenInput);
+  const entSchemaValidatedData = EntSchemaValidateAndSetup(EntJohariSchema);
+  await entSchemaCodegen(entSchemaValidatedData);
 }
 test();
