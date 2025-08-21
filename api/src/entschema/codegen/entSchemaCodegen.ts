@@ -4,12 +4,12 @@ import * as prettier from "prettier";
 import ts from "typescript";
 
 import "../../global/bootstrapGlobalDefinitions.js";
+
+import type { EntSchema, EntSchemaConstructor } from "../lib/index.js";
+
 import { logger } from "../../logging/index.js";
-import { EntSchema } from "../lib/index.js";
 import { EntSchemaCodegenError } from "./EntSchemaCodegenError.js";
 import { generateEntFromEntSchema } from "./generateEntFromEntSchema.js";
-
-type EntSchemaConstructor<T extends EntSchema> = new (...args: any[]) => T;
 
 type EntSchemaCodegenInput = {
   entSchema: EntSchemaConstructor<EntSchema>;
