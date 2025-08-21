@@ -11,7 +11,15 @@ import { generateEntFromEntSchema } from "./generateEntFromEntSchema.js";
 
 type EntSchemaConstructor<T extends EntSchema> = new (...args: any[]) => T;
 
-async function entSchemaCodegen(entSchema: EntSchemaConstructor<EntSchema>) {
+type EntSchemaCodegenInput = {
+  entSchema: EntSchemaConstructor<EntSchema>;
+  entClassName: string;
+  entSchemaInstance: EntSchema;
+};
+
+function codegenSetup(
+  entSchema: EntSchemaConstructor<EntSchema>,
+): EntSchemaCodegenInput {
   if (!entSchema.name.startsWith("Ent") || !entSchema.name.endsWith("Schema")) {
     throw new EntSchemaCodegenError(
       "EntSchema name must be Ent...Schema where your ent name is filled in the ...",
@@ -23,7 +31,21 @@ async function entSchemaCodegen(entSchema: EntSchemaConstructor<EntSchema>) {
     entSchema.name.length - "Schema".length,
   );
 
-  const generatedEntNode = generateEntFromEntSchema(new entSchema(), {
+  const entSchemaInstance = new entSchema();
+
+  return {
+    entSchema,
+    entClassName,
+    entSchemaInstance,
+  };
+}
+
+async function entSchemaCodegen({
+  entSchema,
+  entClassName,
+  entSchemaInstance,
+}: EntSchemaCodegenInput) {
+  const generatedEntNode = generateEntFromEntSchema(entSchemaInstance, {
     entClassName,
   });
 
@@ -65,6 +87,7 @@ async function entSchemaCodegen(entSchema: EntSchemaConstructor<EntSchema>) {
 
 async function test() {
   const { EntJohariSchema } = await import("../EntJohariSchema.js");
-  entSchemaCodegen(EntJohariSchema);
+  const entSchemaCodegenInput = codegenSetup(EntJohariSchema);
+  await entSchemaCodegen(entSchemaCodegenInput);
 }
 test();
