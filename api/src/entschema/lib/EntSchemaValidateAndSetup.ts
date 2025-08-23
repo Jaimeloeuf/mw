@@ -1,5 +1,4 @@
-import type { EntSchema } from "./EntSchema.js";
-import type { EntSchemaConstructor } from "./EntSchemaConstructor.js";
+import type { EntSchemaClass } from "./EntSchemaClass.js";
 import type { EntSchemaValidatedData } from "./EntSchemaValidatedData.js";
 
 import { EntSchemaSetupAndValidationError } from "./EntSchemaSetupAndValidationError.js";
@@ -8,7 +7,7 @@ import { EntSchemaSetupAndValidationError } from "./EntSchemaSetupAndValidationE
  * Validate a given EntSchema and set it up for use by other modules
  */
 export function EntSchemaValidateAndSetup(
-  entSchema: EntSchemaConstructor<EntSchema>,
+  entSchema: EntSchemaClass,
 ): EntSchemaValidatedData {
   if (!entSchema.name.startsWith("Ent") || !entSchema.name.endsWith("Schema")) {
     throw new EntSchemaSetupAndValidationError(
