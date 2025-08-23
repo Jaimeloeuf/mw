@@ -1,7 +1,7 @@
 // import type { Database } from "../../dal/index.js";
 
-import { EntEdgeDefinition } from "../lib/EntEdgeDefinition.js";
-import { EntFieldDefinition } from "../lib/EntFieldDefinition.js";
+import type { EntEdgeDefinition } from "./EntEdgeDefinition.js";
+import type { EntFieldDefinition } from "./EntFieldDefinition.js";
 
 export abstract class EntSchema {
   abstract EntTypeID: string;
