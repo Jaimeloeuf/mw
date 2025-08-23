@@ -8,7 +8,6 @@ import "../../global/bootstrapGlobalDefinitions.js";
 import type { EntSchemaValidatedData } from "../lib/index.js";
 
 import { logger } from "../../logging/index.js";
-import { EntSchemaValidateAndSetup } from "../lib/EntSchemaValidateAndSetup.js";
 import { generateEntFromEntSchema } from "./generateEntFromEntSchema.js";
 
 async function entSchemaCodegen({
@@ -58,7 +57,7 @@ async function entSchemaCodegen({
 
 async function test() {
   const { EntJohariSchema } = await import("../EntJohariSchema.js");
-  const entSchemaValidatedData = EntSchemaValidateAndSetup(EntJohariSchema);
+  const entSchemaValidatedData = EntJohariSchema.validateAndSetup();
   await entSchemaCodegen(entSchemaValidatedData);
 }
 test();

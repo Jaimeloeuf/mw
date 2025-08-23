@@ -2,7 +2,7 @@ import { EntEdgeDefinition } from "./lib/EntEdgeDefinition.js";
 import { EntFieldDefinition } from "./lib/EntFieldDefinition.js";
 import { EntSchema } from "./lib/EntSchema.js";
 
-export class EntJohariSchema implements EntSchema {
+export class EntJohariSchema extends EntSchema {
   EntTypeID = "4f51";
 
   EntDbTable = "johari";
