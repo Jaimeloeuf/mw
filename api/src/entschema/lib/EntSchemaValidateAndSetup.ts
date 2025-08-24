@@ -28,9 +28,14 @@ export function EntSchemaValidateAndSetup(
 
   const entSchemaInstance = new entSchema();
 
+  // @todo Use a proper generic type instead of using any here
+  // @todo Validate that it is a valid table name in DB definitions
+  const entSchemaDbTable = entSchemaInstance.EntDbTable as any;
+
   return {
     entSchema,
     entClassName,
     entSchemaInstance,
+    entSchemaDbTable,
   };
 }
