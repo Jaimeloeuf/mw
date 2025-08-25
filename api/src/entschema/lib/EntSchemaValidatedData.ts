@@ -1,4 +1,5 @@
 import type { Database } from "../../dal/index.js";
+import type { BaseEnt } from "../../ent/BaseEnt.js";
 import type { EntSchema } from "./EntSchema.js";
 import type { EntSchemaConstructor } from "./EntSchemaConstructor.js";
 
@@ -11,4 +12,8 @@ export type EntSchemaValidatedData = {
   entClassName: string;
   entSchemaInstance: EntSchema;
   entSchemaDbTable: keyof Database;
+  // @todo Remove any
+  mapObjectToEntWithStorageKeys(data: Record<string, any>): any;
+  // @todo Remove any
+  mapEntToObjectWithStorageKeys(ent: BaseEnt): any;
 };
