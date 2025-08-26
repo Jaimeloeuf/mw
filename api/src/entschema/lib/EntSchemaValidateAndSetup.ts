@@ -43,8 +43,22 @@ export function EntSchemaValidateAndSetup(
   const entSchemaDbTable = entSchemaInstance.EntDbTable as any;
 
   const entSchemaFieldConfigs = entSchemaInstance.getFieldConfigs();
-  const entSchemaFieldToStorageKeyMap: Record<string, string> = {};
-  const entSchemaStorageKeyToFieldMap: Record<string, string> = {};
+
+  // @todo Hardcoding in `EntManagedData` fields
+  // @todo Need to default to something if storageKey is not specified
+  const entSchemaFieldToStorageKeyMap: Record<string, string> = {
+    id: "id",
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+  };
+  // @todo Hardcoding in `EntManagedData` fields
+  // @todo Need to default to something if storageKey is not specified
+  const entSchemaStorageKeyToFieldMap: Record<string, string> = {
+    id: "id",
+    created_at: "createdAt",
+    updated_at: "updatedAt",
+  };
+
   for (const fieldConfig of entSchemaFieldConfigs) {
     entSchemaFieldToStorageKeyMap[fieldConfig.field] = fieldConfig.storageKey;
     entSchemaStorageKeyToFieldMap[fieldConfig.storageKey] = fieldConfig.field;
