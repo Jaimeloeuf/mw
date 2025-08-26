@@ -6,13 +6,14 @@
  * genCodegenBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(d7ee3585e73a530bc726bf5883968fb2896e0cfbab4b83187b58c19211182873)
+ * sha256(3f89037aaed68154a3b8d7739af9ff8fc19e962da5a26af3b3c6949ef4f83dfe)
  */
 // Barrel file
 export * from "./asyncJobTypeBarrelFile.generated.js";
 export * from "./asyncJobTypeMapping.generated.js";
 export * from "./dataFunctionsBarrelFile.generated.js";
 export * from "./entMapping.generated.js";
+export * from "./entOperatorMapping.generated.js";
 export * from "./entOperatorsBarrelFile.generated.js";
 export * from "./entsBarrelFile.generated.js";
 export * from "./httpControllerTypeDefinitions.generated.js";
