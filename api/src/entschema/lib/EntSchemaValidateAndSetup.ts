@@ -2,6 +2,7 @@ import type { BaseEnt } from "../../ent/BaseEnt.js";
 import type { EntSchemaClass } from "./EntSchemaClass.js";
 import type { EntSchemaValidatedData } from "./EntSchemaValidatedData.js";
 
+import { entMapping } from "../../__generated/index.js";
 import { logger } from "../../logging/index.js";
 import { EntRuntimeError } from "./EntRuntimeError.js";
 import { EntSchemaSetupAndValidationError } from "./EntSchemaSetupAndValidationError.js";
@@ -29,6 +30,13 @@ export function EntSchemaValidateAndSetup(
   );
 
   const entSchemaInstance = new entSchema();
+
+  const entClass = entMapping[entSchemaInstance.EntTypeID];
+  if (entClass === undefined) {
+    throw new EntSchemaSetupAndValidationError(
+      `Cannot find '${entClassName}' in EntTypeID to Ent mapping`,
+    );
+  }
 
   // @todo Use a proper generic type instead of using any here
   // @todo Validate that it is a valid table name in DB definitions
@@ -70,6 +78,7 @@ export function EntSchemaValidateAndSetup(
   }
 
   return {
+    entClass,
     entSchema,
     entClassName,
     entSchemaInstance,

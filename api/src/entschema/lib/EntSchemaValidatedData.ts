@@ -1,5 +1,6 @@
 import type { Database } from "../../dal/index.js";
 import type { BaseEnt } from "../../ent/BaseEnt.js";
+import type { EntClass } from "../../ent/EntClass.js";
 import type { EntSchema } from "./EntSchema.js";
 import type { EntSchemaConstructor } from "./EntSchemaConstructor.js";
 
@@ -8,6 +9,7 @@ import type { EntSchemaConstructor } from "./EntSchemaConstructor.js";
  * generated after EntSchema validation and setup.
  */
 export type EntSchemaValidatedData = {
+  entClass: EntClass;
   entSchema: EntSchemaConstructor<EntSchema>;
   entClassName: string;
   entSchemaInstance: EntSchema;
