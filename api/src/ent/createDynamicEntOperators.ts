@@ -4,16 +4,13 @@ import type { EntCrudOperator } from "./EntCrudOperator.js";
 import type { EntManagedData } from "./EntManagedData.js";
 
 import { apiDB } from "../dal/kysely/index.js";
-import { EntBlog } from "../ents/EntBlog/EntBlog.js";
 
 export function createDynamicEntOperators<
   Ent extends EntClass,
   EntInstance extends Ent extends EntClass<infer EntType> ? EntType : never,
->(
-  EntSchemaClass: typeof EntSchema,
-  entClass: EntClass<EntInstance>,
-): EntCrudOperator<EntInstance> {
+>(EntSchemaClass: typeof EntSchema): EntCrudOperator<EntInstance> {
   const {
+    entClass,
     entSchemaDbTable,
     mapObjectToEntWithStorageKeys,
     mapEntToObjectWithStorageKeys,
@@ -32,7 +29,8 @@ export function createDynamicEntOperators<
         .where("id", "=", id)
         .executeTakeFirstOrThrow();
 
-      return new entClass(mapObjectToEntWithStorageKeys(data));
+      // @todo Remove casting
+      return new entClass(mapObjectToEntWithStorageKeys(data)) as EntInstance;
     },
 
     /**
@@ -79,7 +77,8 @@ export function createDynamicEntOperators<
         .returningAll()
         .executeTakeFirstOrThrow();
 
-      return ent;
+      // @todo Remove casting
+      return ent as EntInstance;
     },
 
     /**
