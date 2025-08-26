@@ -1,21 +1,38 @@
+import type { EntSchema } from "../entschema/lib/index.js";
 import type { EntClass } from "./EntClass.js";
 import type { EntCrudOperator } from "./EntCrudOperator.js";
 import type { EntManagedData } from "./EntManagedData.js";
 
+import { apiDB } from "../dal/kysely/index.js";
 import { EntBlog } from "../ents/EntBlog/EntBlog.js";
 
 export function createDynamicEntOperators<
   Ent extends EntClass,
   EntInstance extends Ent extends EntClass<infer EntType> ? EntType : never,
 >(
+  EntSchemaClass: typeof EntSchema,
   entClass: EntClass<EntInstance>,
 ): EntCrudOperator<EntInstance> {
-  return <any>{
+  const {
+    entSchemaDbTable,
+    mapObjectToEntWithStorageKeys,
+    mapEntToObjectWithStorageKeys,
+  } = EntSchemaClass.validateAndSetup();
+
+  return {
     /**
      * Verify ID before loading Ent.
      */
     async get(id: string) {
       $EntID.makeStrongAndThrowOnError(id, entClass);
+
+      const data = await apiDB
+        .selectFrom(entSchemaDbTable)
+        .selectAll()
+        .where("id", "=", id)
+        .executeTakeFirstOrThrow();
+
+      return new entClass(mapObjectToEntWithStorageKeys(data));
     },
 
     /**
@@ -27,6 +44,19 @@ export function createDynamicEntOperators<
       for (const id of ids) {
         $EntID.makeStrongAndThrowOnError(id, entClass);
       }
+
+      const dbRows = await apiDB
+        .selectFrom(entSchemaDbTable)
+        .selectAll()
+        .where("id", "in", ids)
+        .execute();
+
+      const ents = new Array(dbRows.length);
+      for (let i = 0; i < dbRows.length; i++) {
+        ents[i] = new entClass(mapObjectToEntWithStorageKeys(dbRows[i]!));
+      }
+
+      return ents;
     },
 
     /**
@@ -43,6 +73,12 @@ export function createDynamicEntOperators<
         ...data,
       });
 
+      await apiDB
+        .insertInto(entSchemaDbTable)
+        .values(mapEntToObjectWithStorageKeys(ent))
+        .returningAll()
+        .executeTakeFirstOrThrow();
+
       return ent;
     },
 
@@ -51,6 +87,13 @@ export function createDynamicEntOperators<
      */
     async update(ent: EntInstance) {
       ent.data.updatedAt = $DateTime.now.asIsoDateTime();
+
+      await apiDB
+        .updateTable(entSchemaDbTable)
+        .where("id", "=", ent.data.id)
+        // @todo Not very efficient as we are writing the whole object here
+        .set(mapEntToObjectWithStorageKeys(ent))
+        .execute();
     },
 
     /**
@@ -58,6 +101,12 @@ export function createDynamicEntOperators<
      */
     async delete(id: string) {
       $EntID.makeStrongAndThrowOnError(id, entClass);
+
+      await apiDB
+        .deleteFrom(entSchemaDbTable)
+        .where("id", "=", id)
+        .returningAll()
+        .executeTakeFirst();
     },
   };
 }
