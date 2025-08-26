@@ -6,12 +6,12 @@
  * genEntBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(d82d85b3a8f2f103415c2cd559ed188834c27f0c11a46700d8ff4d374cf66a55)
+ * sha256(6606176811442252787d5ccccf3ed33f4fb05ec7ec5f76902530fab65421d97e)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
-export * from "../ents/EntBlog/index.js";
-export * from "../ents/EntBlogSubscriber/index.js";
-export * from "../ents/EntJohari/index.js";
-export * from "../ents/EntJohariAnswer/index.js";
-export * from "../ents/EntUser/index.js";
+export * from "../ents/EntBlog/EntBlog.js";
+export * from "../ents/EntBlogSubscriber/EntBlogSubscriber.js";
+export * from "../ents/EntJohari/EntJohari.js";
+export * from "../ents/EntJohariAnswer/EntJohariAnswer.js";
+export * from "../ents/EntUser/EntUser.js";

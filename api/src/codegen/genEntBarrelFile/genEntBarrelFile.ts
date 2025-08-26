@@ -17,7 +17,7 @@ export async function genEntBarrelFile() {
 
   const generatedCode = entFolders
     .map(
-      (folder) => `export * from "../ents/${folder.name}/index.js";
+      (folder) => `export * from "../ents/${folder.name}/${folder.name}.js";
 `,
     )
     .join("");
