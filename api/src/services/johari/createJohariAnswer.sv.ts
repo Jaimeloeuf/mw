@@ -1,11 +1,11 @@
-import { ents } from "../../__generated/index.js";
+import { entOperators } from "../../__generated/index.js";
 
 export default async function (johari: {
   johariID: string;
   name: string;
   words: Array<string>;
 }) {
-  const entJohariAnswer = await ents.EntJohariAnswerOperators.create({
+  const entJohariAnswer = await entOperators.EntJohariAnswerOperators.create({
     johariID: johari.johariID,
     name: johari.name,
     words: johari.words.join(","),

@@ -1,7 +1,7 @@
-import { ents } from "../../__generated/index.js";
+import { entOperators } from "../../__generated/index.js";
 
 export default async function (johari: { name: string; words: Array<string> }) {
-  const entJohari = await ents.EntJohariOperators.create({
+  const entJohari = await entOperators.EntJohariOperators.create({
     name: johari.name,
     words: johari.words.join(","),
   });
