@@ -109,7 +109,3 @@ export function createDynamicEntOperators<
     },
   };
 }
-
-async function test() {
-}
-test();
