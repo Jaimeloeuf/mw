@@ -21,7 +21,7 @@
     "db:migrate": "npx tsx ./src/dal/kysely/migration-cli/kyselyMigrationCli.ts",
     "scratchpad": "npx tsx ./src/scripts/scratchpad.ts",
     "scratchpad-watch": "npx tsx watch ./src/scripts/scratchpad.ts",
-    "scripts:entschema-codegen": "npx tsx ./src/entschema/codegen/entSchemaCodegen.ts",
+    "scripts:entschema-codegen": "npx tsx ./src/entschema/codegen/entSchemaCodegenCli.ts",
     "scripts:create-ent": "npx tsx ./src/scripts/create-ent.ts",
     "scripts:create-async-job": "npx tsx ./src/scripts/create-async-job.ts",
     "scripts:create-http-controller": "npx tsx ./src/scripts/create-http-controller.ts",
