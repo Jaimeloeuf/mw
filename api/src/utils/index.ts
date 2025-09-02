@@ -10,6 +10,7 @@ export * from "./isPromise.js";
 export * from "./json.js";
 export * from "./logBeforeRun.js";
 export * from "./noOp.js";
+export * from "./printGitStatus.js";
 export * from "./pseudoRandomAlphanumericString.js";
 export * from "./sha256hash.js";
 export * from "./wrapFunctionToProvideRunModes.js";
