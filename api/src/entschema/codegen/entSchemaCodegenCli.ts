@@ -1,6 +1,7 @@
 import "../../global/bootstrapGlobalDefinitions.js";
 import { logger } from "../../logging/index.js";
 import { entSchemaCodegenCliHelp } from "./entSchemaCodegenCliHelp.js";
+import { printGitStatusOfGeneratedFolder } from "./printGitStatusOfGeneratedFolder.js";
 
 async function entSchemaCodegenCli() {
   // No extra arguments, show help menu
@@ -14,6 +15,12 @@ async function entSchemaCodegenCli() {
   // Help menu
   if (arg === "help") {
     entSchemaCodegenCliHelp();
+    return;
+  }
+
+  // Codegen a single EntSchema
+  if (arg.startsWith("Ent") && arg.endsWith("Schema")) {
+    await printGitStatusOfGeneratedFolder();
     return;
   }
 
