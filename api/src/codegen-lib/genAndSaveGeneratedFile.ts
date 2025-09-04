@@ -3,7 +3,7 @@ import fs from "fs/promises";
 import path from "path";
 import * as prettier from "prettier";
 
-import { logger } from "../../logging/index.js";
+import { logger } from "../logging/index.js";
 
 /**
  * Generate the full text file (formatted + notice + hash) and save the file to

@@ -2,7 +2,7 @@ import {
   genAndSaveGeneratedCode,
   generatedCodeFileExtensionForJsImport,
   generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport,
-} from "../codegenForTs/index.js";
+} from "../../codegen-lib/codegenForTs/index.js";
 import { getHttpControllerFiles } from "../utils/index.js";
 import { urlBuilderTemplate } from "./urlBuilderTemplate.js";
 

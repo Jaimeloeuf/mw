@@ -1,4 +1,4 @@
-import { generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport } from "../codegenForTs/index.js";
+import { generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport } from "../../codegen-lib/codegenForTs/index.js";
 
 export const routeTableTemplate = (
   routeDefinitions: string,

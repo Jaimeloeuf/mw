@@ -1,5 +1,5 @@
+import { genAndSaveGeneratedCode } from "../../codegen-lib/codegenForTs/index.js";
 import { capitalizeFirstLetter } from "../../utils/index.js";
-import { genAndSaveGeneratedCode } from "../codegenForTs/index.js";
 import { getHttpControllerFiles } from "../utils/index.js";
 import { urlBuilderTemplate } from "./urlBuilderTemplate.js";
 

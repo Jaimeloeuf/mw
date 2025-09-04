@@ -1,7 +1,7 @@
 import {
   genAndSaveGeneratedCode,
   generatedCodeFileExtensionForJsImport,
-} from "../codegenForTs/index.js";
+} from "../../codegen-lib/codegenForTs/index.js";
 import { getEntFolders } from "../utils/index.js";
 
 /**

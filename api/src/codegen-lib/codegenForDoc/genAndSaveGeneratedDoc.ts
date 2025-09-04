@@ -1,4 +1,4 @@
-import { genAndSaveGeneratedFile } from "../utils/index.js";
+import { genAndSaveGeneratedFile } from "../genAndSaveGeneratedFile.js";
 import { generatedDocDirPath } from "./generatedDocDirPath.js";
 import { genGeneratedNotice } from "./genGeneratedNotice.js";
 

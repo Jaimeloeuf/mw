@@ -3,7 +3,7 @@ import path from "path";
 import {
   genAndSaveGeneratedCode,
   generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport,
-} from "../codegenForTs/index.js";
+} from "../../codegen-lib/codegenForTs/index.js";
 import { getServiceFiles } from "../utils/index.js";
 import { serviceExportTemplate } from "./serviceExportTemplate.js";
 

@@ -1,6 +1,6 @@
+import { generatedDocDirPathString } from "../../codegen-lib/codegenForDoc/index.js";
+import { generatedSrcDirPathString } from "../../codegen-lib/codegenForTs/index.js";
 import { printGitStatus } from "../../utils/printGitStatus.js";
-import { generatedDocDirPathString } from "../codegenForDoc/index.js";
-import { generatedSrcDirPathString } from "../codegenForTs/index.js";
 
 export async function showGitStatusOfGeneratedFolder() {
   await printGitStatus(generatedSrcDirPathString);

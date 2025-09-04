@@ -2,7 +2,6 @@
  * Barrel file.
  */
 
-export * from "./genAndSaveGeneratedFile.js";
 export * from "./generateFullFileNameFromRelativePath.js";
 export * from "./getAsyncJobTypeFiles/AsyncJobTypeFile.js";
 export * from "./getAsyncJobTypeFiles/getAsyncJobTypeFiles.js";

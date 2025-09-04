@@ -1,6 +1,6 @@
 import path from "path";
 
-import { genAndSaveGeneratedCode } from "../codegenForTs/index.js";
+import { genAndSaveGeneratedCode } from "../../codegen-lib/codegenForTs/index.js";
 import { getAsyncJobTypeFiles } from "../utils/index.js";
 
 /**

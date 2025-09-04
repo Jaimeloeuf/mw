@@ -1,4 +1,4 @@
-import { genAndSaveGeneratedDoc } from "../codegenForDoc/index.js";
+import { genAndSaveGeneratedDoc } from "../../codegen-lib/codegenForDoc/index.js";
 import { scriptTemplate } from "./scriptTemplate.js";
 
 /**

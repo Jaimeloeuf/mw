@@ -1,4 +1,4 @@
-import { genAndSaveGeneratedCode } from "../codegenForTs/index.js";
+import { genAndSaveGeneratedCode } from "../../codegen-lib/codegenForTs/index.js";
 import { getStartupFiles } from "../utils/index.js";
 import { startupModuleRunnerTemplate } from "./startupModuleRunnerTemplate.js";
 

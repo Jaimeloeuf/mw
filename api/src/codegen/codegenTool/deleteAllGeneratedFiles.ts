@@ -1,12 +1,12 @@
 import fs from "fs/promises";
 import path from "path";
 
-import { logger } from "../../logging/index.js";
 import {
   generatedSrcDirPath,
   generatedCodeFileExtension,
   generatedCodeFileExtensionWithNoBarrelFileInclusion,
-} from "../codegenForTs/index.js";
+} from "../../codegen-lib/codegenForTs/index.js";
+import { logger } from "../../logging/index.js";
 
 /**
  * Delete all generated files in __generated/ so that codegen can start afresh.

@@ -1,4 +1,4 @@
-import { generatedCodeFileExtensionForJsImport } from "../codegenForTs/index.js";
+import { generatedCodeFileExtensionForJsImport } from "../../codegen-lib/codegenForTs/index.js";
 import { StartupFile } from "../utils/index.js";
 
 export const startupModuleRunnerTemplate = (

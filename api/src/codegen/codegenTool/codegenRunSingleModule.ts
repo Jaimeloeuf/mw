@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
 
+import { genCodegenBarrelFile } from "../../codegen-lib/codegenForTs/index.js";
 import { logger } from "../../logging/index.js";
-import { genCodegenBarrelFile } from "../codegenForTs/index.js";
 import { loadCodegenFunction } from "./loadCodegenFunction.js";
 import { runCodegenModules } from "./runCodegenModules.js";
 

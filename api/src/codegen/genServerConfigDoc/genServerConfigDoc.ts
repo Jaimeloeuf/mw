@@ -1,7 +1,7 @@
 import path from "path";
 
+import { genAndSaveGeneratedDoc } from "../../codegen-lib/codegenForDoc/index.js";
 import { logger } from "../../logging/index.js";
-import { genAndSaveGeneratedDoc } from "../codegenForDoc/index.js";
 import { getTypeofTypeAlias } from "./getTypeofTypeAlias.js";
 import { serverConfigTemplate } from "./serverConfigTemplate.js";
 
