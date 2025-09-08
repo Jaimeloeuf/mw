@@ -6,8 +6,8 @@ import { loadCodegenFunction } from "./loadCodegenFunction.js";
 /**
  * Dynamically load and return all the codegen functions.
  *
- * Codegen modules are located in folders under 'codegen/' that start with the
- * `gen` prefix. For example, `genHttpRoutesTable` starts with `gen` and is
+ * Codegen modules are located in folders under 'codegen/steps' that start with
+ * the `gen` prefix. For example, `genHttpRoutesTable` starts with `gen` and is
  * therefore assumed to be a codegen module folder.
  *
  * Codegen modules need to have the same name as their folder name, and the
@@ -16,9 +16,9 @@ import { loadCodegenFunction } from "./loadCodegenFunction.js";
  * module itself, and name of the exported codegen function.
  */
 export async function loadAllCodegenFunctions() {
-  // Codegen module should be in this codegen/ folder, and should be in a folder
-  // with the same name as itself
-  const codegenModulePath = path.resolve(import.meta.dirname, "../");
+  // Codegen module should be in the codegen/steps folder, and should be in a
+  // folder with the same name as itself
+  const codegenModulePath = path.resolve(import.meta.dirname, "../steps");
 
   const allFoldersInCodegenFolder = await fs.readdir(codegenModulePath, {
     withFileTypes: true,

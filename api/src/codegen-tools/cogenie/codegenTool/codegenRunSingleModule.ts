@@ -7,11 +7,11 @@ import { loadCodegenFunction } from "./loadCodegenFunction.js";
 import { runCodegenModules } from "./runCodegenModules.js";
 
 export async function codegenRunSingleModule(codegenModuleName: string) {
-  // Codegen module should be in this codegen/ folder, and should be in a folder
-  // with the same name as itself
+  // Codegen module should be in this codegen/steps folder, and should be in a
+  // folder with the same name as itself
   const codegenModulePath = path.resolve(
     import.meta.dirname,
-    "../",
+    "../steps",
     codegenModuleName,
     `${codegenModuleName}.ts`,
   );
