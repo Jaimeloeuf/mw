@@ -55,7 +55,7 @@ module.exports = {
 
 function isCodegenStepModule(filePath) {
   const relativePath = path.relative(
-    path.join(__dirname, `../src/codegen`),
+    path.join(__dirname, `../src/codegen-tools/cogenie/steps`),
     filePath,
   );
 
