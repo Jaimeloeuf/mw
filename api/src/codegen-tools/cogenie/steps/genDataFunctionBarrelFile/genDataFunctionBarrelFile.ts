@@ -1,9 +1,6 @@
 import path from "path";
 
-import {
-  genAndSaveGeneratedCode,
-  generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport,
-} from "../../../../codegen-lib/codegenForTs/index.js";
+import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getDataFunctionFiles } from "../../utils/index.js";
 import { dataFunctionExportTemplate } from "./dataFunctionExportTemplate.js";
 
@@ -29,7 +26,7 @@ export async function genDataFunctionBarrelFile() {
 
   const dataFunctionsExportFileName = "dataFunctionsExportFile";
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genDataFunctionBarrelFile,
     generatedCode,
     dataFunctionsExportFileName,
@@ -39,9 +36,9 @@ export async function genDataFunctionBarrelFile() {
     { doNotIncludeInGeneratedFolderBarrelFile: true },
   );
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genDataFunctionBarrelFile,
-    `export * as df from "./${dataFunctionsExportFileName}${generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
+    `export * as df from "./${dataFunctionsExportFileName}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
     "dataFunctionsBarrelFile",
   );
 }

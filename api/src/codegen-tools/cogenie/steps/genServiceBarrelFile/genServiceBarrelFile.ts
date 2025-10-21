@@ -1,9 +1,6 @@
 import path from "path";
 
-import {
-  genAndSaveGeneratedCode,
-  generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport,
-} from "../../../../codegen-lib/codegenForTs/index.js";
+import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getServiceFiles } from "../../utils/index.js";
 import { serviceExportTemplate } from "./serviceExportTemplate.js";
 
@@ -26,7 +23,7 @@ export async function genServiceBarrelFile() {
 
   const serviceExportFileName = "serviceExportFile";
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genServiceBarrelFile,
     generatedCode,
     serviceExportFileName,
@@ -36,9 +33,9 @@ export async function genServiceBarrelFile() {
     { doNotIncludeInGeneratedFolderBarrelFile: true },
   );
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genServiceBarrelFile,
-    `export * as sv from "./${serviceExportFileName}${generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
+    `export * as sv from "./${serviceExportFileName}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
     "serviceBarrelFile",
   );
 }

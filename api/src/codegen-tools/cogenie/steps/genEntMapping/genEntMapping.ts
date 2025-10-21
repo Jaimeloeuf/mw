@@ -1,7 +1,4 @@
-import {
-  genAndSaveGeneratedCode,
-  generatedCodeFileExtensionForJsImport,
-} from "../../../../codegen-lib/codegenForTs/index.js";
+import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getEntFolders } from "../../utils/index.js";
 
 /**
@@ -12,7 +9,7 @@ export async function genEntMapping() {
 
   const generatedCode = `import type { BaseEnt } from "../ent/BaseEnt.js";
 
-import { ents } from "./entsBarrelFile${generatedCodeFileExtensionForJsImport}"
+import { ents } from "./entsBarrelFile${codegenForTs.generatedCodeFileExtensionForJsImport}"
 
 /**
  * Mapping of \`EntTypeID\` to \`Ent\`.
@@ -27,7 +24,7 @@ export const entMapping: Record<
 
   const entMappingExportFileName = "entMapping";
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genEntMapping,
     generatedCode,
     entMappingExportFileName,

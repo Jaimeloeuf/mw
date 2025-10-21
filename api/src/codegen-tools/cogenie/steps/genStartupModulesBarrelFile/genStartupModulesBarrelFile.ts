@@ -1,9 +1,6 @@
 import path from "path";
 
-import {
-  genAndSaveGeneratedCode,
-  generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport,
-} from "../../../../codegen-lib/codegenForTs/index.js";
+import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getStartupFiles } from "../../utils/index.js";
 import { startupModuleExportTemplate } from "./startupModuleExportTemplate.js";
 
@@ -26,7 +23,7 @@ export async function genStartupModulesBarrelFile() {
 
   const startupModulesExportFileName = "startupModulesExportFile";
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genStartupModulesBarrelFile,
     generatedCode,
     startupModulesExportFileName,
@@ -36,9 +33,9 @@ export async function genStartupModulesBarrelFile() {
     { doNotIncludeInGeneratedFolderBarrelFile: true },
   );
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genStartupModulesBarrelFile,
-    `export * as st from "./${startupModulesExportFileName}${generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
+    `export * as st from "./${startupModulesExportFileName}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
     "startupModulesBarrelFile",
   );
 }

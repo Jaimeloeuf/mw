@@ -1,4 +1,4 @@
-import { genAndSaveGeneratedCode } from "../../../../codegen-lib/codegenForTs/index.js";
+import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getHttpControllerFiles } from "../../utils/index.js";
 import { routeDefinitionTemplate } from "./routeDefinitionTemplate.js";
 import { routeTableTemplate } from "./routeTableTemplate.js";
@@ -17,7 +17,7 @@ export async function genHttpRoutesTable() {
 
   const generatedCode = routeTableTemplate(routeDefinitions);
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genHttpRoutesTable,
     generatedCode,
     "registerRoutesAndControllers",

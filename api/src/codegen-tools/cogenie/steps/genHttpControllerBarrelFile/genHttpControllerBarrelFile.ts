@@ -1,6 +1,6 @@
 import path from "path";
 
-import { genAndSaveGeneratedCode } from "../../../../codegen-lib/codegenForTs/index.js";
+import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getHttpControllerFiles } from "../../utils/index.js";
 import { controllerExportTemplate } from "./controllerExportTemplate.js";
 
@@ -23,7 +23,7 @@ export async function genHttpControllerBarrelFile() {
     .map((file) => controllerExportTemplate(file, controllerFolderPath))
     .join("");
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genHttpControllerBarrelFile,
     generatedCode,
     "httpControllerBarrelFile",

@@ -1,9 +1,6 @@
 import path from "path";
 
-import {
-  genAndSaveGeneratedCode,
-  generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport,
-} from "../../../../codegen-lib/codegenForTs/index.js";
+import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getInfraFiles } from "../../utils/index.js";
 import { infraExportTemplate } from "./infraExportTemplate.js";
 
@@ -27,7 +24,7 @@ export async function genInfraBarrelFile() {
 
   const infraExportFileName = "infraExportFile";
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genInfraBarrelFile,
     generatedCode,
     infraExportFileName,
@@ -37,9 +34,9 @@ export async function genInfraBarrelFile() {
     { doNotIncludeInGeneratedFolderBarrelFile: true },
   );
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genInfraBarrelFile,
-    `export * as infra from "./${infraExportFileName}${generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
+    `export * as infra from "./${infraExportFileName}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
     "infraBarrelFile",
   );
 }

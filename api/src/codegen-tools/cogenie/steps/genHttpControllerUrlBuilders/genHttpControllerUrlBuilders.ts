@@ -1,8 +1,4 @@
-import {
-  genAndSaveGeneratedCode,
-  generatedCodeFileExtensionForJsImport,
-  generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport,
-} from "../../../../codegen-lib/codegenForTs/index.js";
+import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getHttpControllerFiles } from "../../utils/index.js";
 import { urlBuilderTemplate } from "./urlBuilderTemplate.js";
 
@@ -20,7 +16,7 @@ export async function genHttpControllerUrlBuilders() {
   VoidIfAllPropertiesInObjectIsVoid,
 } from "../types/index.js";
 import { config } from "../config/index.js";
-import type * as t from "./httpControllerTypeDefinitions${generatedCodeFileExtensionForJsImport}";
+import type * as t from "./httpControllerTypeDefinitions${codegenForTs.generatedCodeFileExtensionForJsImport}";
 
 type UrlBuilderOptions<T> = VoidIfAllPropertiesInObjectIsVoid<
   RemoveMapKeyIfNever<T>
@@ -47,7 +43,7 @@ ${urlBuilders}
 
   const httpControllerUrlBuildersFileName = "httpControllerUrlBuilders";
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genHttpControllerUrlBuilders,
     generatedCode,
     httpControllerUrlBuildersFileName,
@@ -57,9 +53,9 @@ ${urlBuilders}
     { doNotIncludeInGeneratedFolderBarrelFile: true },
   );
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genHttpControllerUrlBuilders,
-    `export * as urlBuilder from "./${httpControllerUrlBuildersFileName}${generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
+    `export * as urlBuilder from "./${httpControllerUrlBuildersFileName}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
     "urlBuilderBarrelFile",
   );
 }

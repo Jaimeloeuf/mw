@@ -1,6 +1,6 @@
 import path from "path";
 
-import { genAndSaveGeneratedDoc } from "../../../../codegen-lib/codegenForDoc/index.js";
+import { codegenForDoc } from "../../../../codegen-lib/index.js";
 import { logger } from "../../../../logging/index.js";
 import { getTypeofTypeAlias } from "./getTypeofTypeAlias.js";
 import { serverConfigTemplate } from "./serverConfigTemplate.js";
@@ -31,7 +31,7 @@ export async function genServerConfigDoc() {
 
   const generatedCode = serverConfigTemplate(generatedConfigRows);
 
-  await genAndSaveGeneratedDoc(
+  await codegenForDoc.genAndSaveGeneratedDoc(
     genServerConfigDoc,
     generatedCode,
     "Server Configs",

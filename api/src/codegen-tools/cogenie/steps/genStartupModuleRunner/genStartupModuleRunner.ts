@@ -1,4 +1,4 @@
-import { genAndSaveGeneratedCode } from "../../../../codegen-lib/codegenForTs/index.js";
+import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getStartupFiles } from "../../utils/index.js";
 import { startupModuleRunnerTemplate } from "./startupModuleRunnerTemplate.js";
 
@@ -10,7 +10,7 @@ export async function genStartupModuleRunner() {
 
   const generatedCode = startupModuleRunnerTemplate(files);
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genStartupModuleRunner,
     generatedCode,
     "startupModulesRunner",

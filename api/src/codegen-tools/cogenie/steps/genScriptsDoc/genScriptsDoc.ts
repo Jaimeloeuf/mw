@@ -1,4 +1,4 @@
-import { genAndSaveGeneratedDoc } from "../../../../codegen-lib/codegenForDoc/index.js";
+import { codegenForDoc } from "../../../../codegen-lib/index.js";
 import { scriptTemplate } from "./scriptTemplate.js";
 
 /**
@@ -29,5 +29,9 @@ export async function genScriptsDoc() {
 
   const generatedDoc = scriptTemplate(scripts);
 
-  await genAndSaveGeneratedDoc(genScriptsDoc, generatedDoc, "Scripts");
+  await codegenForDoc.genAndSaveGeneratedDoc(
+    genScriptsDoc,
+    generatedDoc,
+    "Scripts",
+  );
 }

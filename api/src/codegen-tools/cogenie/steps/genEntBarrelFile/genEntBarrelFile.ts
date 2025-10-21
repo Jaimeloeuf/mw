@@ -1,7 +1,4 @@
-import {
-  genAndSaveGeneratedCode,
-  generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport,
-} from "../../../../codegen-lib/codegenForTs/index.js";
+import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getEntFolders } from "../../utils/index.js";
 
 /**
@@ -24,7 +21,7 @@ export async function genEntBarrelFile() {
 
   const entsExportFileName = "entsExportFile";
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genEntBarrelFile,
     generatedCode,
     entsExportFileName,
@@ -34,9 +31,9 @@ export async function genEntBarrelFile() {
     { doNotIncludeInGeneratedFolderBarrelFile: true },
   );
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genEntBarrelFile,
-    `export * as ents from "./${entsExportFileName}${generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
+    `export * as ents from "./${entsExportFileName}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
     "entsBarrelFile",
   );
 }

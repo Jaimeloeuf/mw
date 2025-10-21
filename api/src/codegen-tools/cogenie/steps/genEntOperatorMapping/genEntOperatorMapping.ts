@@ -1,7 +1,4 @@
-import {
-  genAndSaveGeneratedCode,
-  generatedCodeFileExtensionForJsImport,
-} from "../../../../codegen-lib/codegenForTs/index.js";
+import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getEntFolders } from "../../utils/index.js";
 
 /**
@@ -13,7 +10,7 @@ export async function genEntOperatorMapping() {
   const generatedCode = `import type { BaseEnt } from "../ent/BaseEnt.js";
 import type { EntCrudOperator } from "../ent/EntCrudOperator.js";
 
-import { entOperators } from "./entOperatorsBarrelFile${generatedCodeFileExtensionForJsImport}"
+import { entOperators } from "./entOperatorsBarrelFile${codegenForTs.generatedCodeFileExtensionForJsImport}"
 
 /**
  * Mapping of \`EntTypeID\` to \`EntOperators\`.
@@ -28,7 +25,7 @@ export const entOperatorsMapping: Record<
 
   const entOperatorMappingExportFileName = "entOperatorMapping";
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genEntOperatorMapping,
     generatedCode,
     entOperatorMappingExportFileName,

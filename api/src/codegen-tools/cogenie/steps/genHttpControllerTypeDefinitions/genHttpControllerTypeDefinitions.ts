@@ -1,7 +1,4 @@
-import {
-  genAndSaveGeneratedCode,
-  generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport,
-} from "../../../../codegen-lib/codegenForTs/index.js";
+import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getHttpControllerFiles } from "../../utils/index.js";
 
 /**
@@ -34,12 +31,12 @@ export type ${file.name}Controller_OutputFullDTO = JSendSuccess<${file.name}Cont
 
   const generatedCode = `import type { z } from "zod";
 import type { JSendSuccess } from "../http/JSend.js";
-import * as c from "./httpControllerBarrelFile${generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";
+import * as c from "./httpControllerBarrelFile${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";
 
 ${typeDefinitions}
 `;
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genHttpControllerTypeDefinitions,
     generatedCode,
     "httpControllerTypeDefinitions",

@@ -1,6 +1,6 @@
 import path from "path";
 
-import { genAndSaveGeneratedCode } from "../../../../codegen-lib/codegenForTs/index.js";
+import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getAsyncJobTypeFiles } from "../../utils/index.js";
 
 /**
@@ -38,7 +38,7 @@ export const asyncJobTypeMapping: Record<
 
   const asyncJobTypeExportFileName = "asyncJobTypeMapping";
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genAsyncJobTypeMapping,
     generatedCode,
     asyncJobTypeExportFileName,

@@ -1,9 +1,6 @@
 import path from "path";
 
-import {
-  genAndSaveGeneratedCode,
-  generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport,
-} from "../../../../codegen-lib/codegenForTs/index.js";
+import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getAsyncJobTypeFiles } from "../../utils/index.js";
 import { asyncJobTypeExportTemplate } from "./asyncJobTypeExportTemplate.js";
 
@@ -26,7 +23,7 @@ export async function genAsyncJobTypeBarrelFile() {
 
   const asyncJobTypeExportFileName = "asyncJobTypeExportFile";
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genAsyncJobTypeBarrelFile,
     generatedCode,
     asyncJobTypeExportFileName,
@@ -36,9 +33,9 @@ export async function genAsyncJobTypeBarrelFile() {
     { doNotIncludeInGeneratedFolderBarrelFile: true },
   );
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genAsyncJobTypeBarrelFile,
-    `export * as asyncJob from "./${asyncJobTypeExportFileName}${generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
+    `export * as asyncJob from "./${asyncJobTypeExportFileName}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
     "asyncJobTypeBarrelFile",
   );
 }

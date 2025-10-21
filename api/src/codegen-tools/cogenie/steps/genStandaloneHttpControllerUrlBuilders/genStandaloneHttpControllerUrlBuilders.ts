@@ -1,4 +1,4 @@
-import { genAndSaveGeneratedCode } from "../../../../codegen-lib/codegenForTs/index.js";
+import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { capitalizeFirstLetter } from "../../../../utils/index.js";
 import { getHttpControllerFiles } from "../../utils/index.js";
 import { urlBuilderTemplate } from "./urlBuilderTemplate.js";
@@ -20,7 +20,7 @@ export async function genStandaloneHttpControllerUrlBuilders() {
 
   const controllerFiles = await getHttpControllerFiles();
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genStandaloneHttpControllerUrlBuilders,
     `import type {
   RemoveMapKeyIfNever,
@@ -33,7 +33,7 @@ export type UrlBuilderOptions<T> = VoidIfAllPropertiesInObjectIsVoid<
     "../next/app/__generated_urlBuilders/UrlBuilderOptions",
   );
 
-  await genAndSaveGeneratedCode(
+  await codegenForTs.genAndSaveGeneratedCode(
     genStandaloneHttpControllerUrlBuilders,
     `export function createUrlQueryParamsString(
   urlQueryParams: undefined | null | Record<string, any>,
@@ -56,7 +56,7 @@ export type UrlBuilderOptions<T> = VoidIfAllPropertiesInObjectIsVoid<
   const urlBuilderWrites = controllerFiles.map(async (controllerFile) => {
     const urlBuilderName = `urlBuilderFor${capitalizeFirstLetter(controllerFile.name)}`;
 
-    await genAndSaveGeneratedCode(
+    await codegenForTs.genAndSaveGeneratedCode(
       genStandaloneHttpControllerUrlBuilders,
 
       urlBuilderTemplate(controllerFile, urlBuilderName),

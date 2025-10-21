@@ -1,4 +1,4 @@
-import { generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport } from "../../../../codegen-lib/codegenForTs/index.js";
+import { codegenForTs } from "../../../../codegen-lib/index.js";
 
 export const routeTableTemplate = (
   routeDefinitions: string,
@@ -6,7 +6,7 @@ export const routeTableTemplate = (
 
 import { config } from "../config/index.js";
 import { logger } from "../logging/index.js";
-import * as c from "./httpControllerBarrelFile${generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";
+import * as c from "./httpControllerBarrelFile${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";
 
 /**
  * Utility function to only register a HTTP route if it is not disabled via the
