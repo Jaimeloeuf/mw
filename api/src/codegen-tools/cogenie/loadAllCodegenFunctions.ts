@@ -18,7 +18,7 @@ import { loadCodegenFunction } from "./loadCodegenFunction.js";
 export async function loadAllCodegenFunctions() {
   // Codegen module should be in the codegen/steps folder, and should be in a
   // folder with the same name as itself
-  const codegenModulePath = path.resolve(import.meta.dirname, "../steps");
+  const codegenModulePath = path.resolve(import.meta.dirname, "./steps");
 
   const allFoldersInCodegenFolder = await fs.readdir(codegenModulePath, {
     withFileTypes: true,
