@@ -1,8 +1,14 @@
-import { tsImport } from "tsx/esm/api";
-
 import type { CodegenFunction } from "./CodegenFunction.js";
 
 import { logger } from "../../logging/index.js";
+
+// Register a namespaced tsx API, so that imports have module caching, which is
+// needed so that when different cogenie steps load the same files/folders, the
+// result is cached instead of being re-ran for every single step that uses it.
+import { register } from "tsx/esm/api";
+const tsxApi = register({
+  namespace: "cogenie",
+});
 
 /**
  * Dynamically load and return the given codegen function.
@@ -13,7 +19,12 @@ export async function loadCodegenFunction(
 ) {
   // @todo Migrate to using node import directly with strip types flag in future
   // Cannot use `import` directly since it does not support loading .ts files
-  const importedModule = await tsImport(codegenModulePath, import.meta.url);
+  // See tsxApi comment above on when this is needed instead of using tsImport
+  // directly from the tsx lib.
+  const importedModule = await tsxApi.import(
+    codegenModulePath,
+    import.meta.url,
+  );
 
   // Extract out the named export and make sure it is a function
   const importedCodegenFunction: CodegenFunction =
