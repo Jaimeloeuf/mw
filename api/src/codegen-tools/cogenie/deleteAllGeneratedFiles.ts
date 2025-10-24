@@ -1,11 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 
-import {
-  generatedSrcDirPath,
-  generatedCodeFileExtension,
-  generatedCodeFileExtensionWithNoBarrelFileInclusion,
-} from "../../codegen-lib/codegenForTs/index.js";
+import { codegenForTs } from "../../codegen-lib/index.js";
 import { logger } from "../../logging/index.js";
 
 /**
@@ -22,10 +18,13 @@ import { logger } from "../../logging/index.js";
  */
 export async function deleteAllGeneratedFiles() {
   // @todo Delete generated docs too!
-  const generatedFilesDirent = await fs.readdir(generatedSrcDirPath, {
-    recursive: true,
-    withFileTypes: true,
-  });
+  const generatedFilesDirent = await fs.readdir(
+    codegenForTs.generatedSrcDirPath,
+    {
+      recursive: true,
+      withFileTypes: true,
+    },
+  );
 
   // Wait for all files to be deleted
   const { length: numberOfFilesDeleted } = await Promise.all(
@@ -35,9 +34,9 @@ export async function deleteAllGeneratedFiles() {
       .filter(
         (file) =>
           file.isFile() &&
-          (file.name.endsWith(generatedCodeFileExtension) ||
+          (file.name.endsWith(codegenForTs.generatedCodeFileExtension) ||
             file.name.endsWith(
-              generatedCodeFileExtensionWithNoBarrelFileInclusion,
+              codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
             )),
       )
 

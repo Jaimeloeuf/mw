@@ -2,8 +2,7 @@ import { createHash } from "crypto";
 import fs from "fs/promises";
 import path from "path";
 
-import { generatedDocDirPath } from "../../codegen-lib/codegenForDoc/index.js";
-import { generatedSrcDirPath } from "../../codegen-lib/codegenForTs/index.js";
+import { codegenForDoc, codegenForTs } from "../../codegen-lib/index.js";
 import { logger } from "../../logging/Logger.js";
 
 /**
@@ -12,14 +11,14 @@ import { logger } from "../../logging/Logger.js";
  */
 export async function validateGeneratedFiles() {
   const generatedSrcDirFilesDirent = await fs
-    .readdir(generatedSrcDirPath, {
+    .readdir(codegenForTs.generatedSrcDirPath, {
       recursive: true,
       withFileTypes: true,
     })
     .then((files) => files.filter((file) => file.name.endsWith(".ts")));
 
   const generatedDocDirFilesDirent = await fs
-    .readdir(generatedDocDirPath, {
+    .readdir(codegenForDoc.generatedDocDirPath, {
       recursive: true,
       withFileTypes: true,
     })

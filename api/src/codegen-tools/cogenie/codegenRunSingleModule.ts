@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-import { genCodegenBarrelFile } from "../../codegen-lib/codegenForTs/index.js";
+import { codegenForTs } from "../../codegen-lib/index.js";
 import { logger } from "../../logging/index.js";
 import { loadCodegenFunction } from "./loadCodegenFunction.js";
 import { runCodegenModules } from "./runCodegenModules.js";
@@ -44,5 +44,5 @@ export async function codegenRunSingleModule(codegenModuleName: string) {
 
   await runCodegenModules(importedCodegenFunction);
 
-  await genCodegenBarrelFile();
+  await codegenForTs.genCodegenBarrelFile();
 }
