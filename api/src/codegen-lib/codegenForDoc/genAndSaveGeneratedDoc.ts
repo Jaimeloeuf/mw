@@ -14,12 +14,12 @@ import { genGeneratedNotice } from "./genGeneratedNotice.js";
  * 1. Save the full generated doc to the provided file path
  * 1. Log file name once it is saved
  */
-export async function genAndSaveGeneratedDoc(
+export function genAndSaveGeneratedDoc(
   generator: Function,
   generatedDoc: string,
   generatedDocFileName: string,
 ) {
-  await genAndSaveGeneratedFile({
+  return genAndSaveGeneratedFile({
     generator,
     genGeneratedNotice,
     generatedText: generatedDoc,

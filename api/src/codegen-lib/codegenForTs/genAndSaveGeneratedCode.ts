@@ -15,7 +15,7 @@ import { getAllEslintRulesToDisable } from "./getAllEslintRulesToDisable.js";
  * 1. Save the full generated code to the provided file path
  * 1. Log file name once it is saved
  */
-export async function genAndSaveGeneratedCode(
+export function genAndSaveGeneratedCode(
   generator: Function,
   generatedCode: string,
   generatedCodeFileName: string,
@@ -36,7 +36,7 @@ export async function genAndSaveGeneratedCode(
       ? generatedCodeFileExtensionWithNoBarrelFileInclusion
       : generatedCodeFileExtension;
 
-  await genAndSaveGeneratedFile({
+  return genAndSaveGeneratedFile({
     generator,
     genGeneratedNotice,
     generatedText: generatedCodeWithEslintRuleDisableStringPrefix,
