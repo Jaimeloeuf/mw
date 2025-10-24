@@ -13,11 +13,13 @@ import { logger } from "../logging/index.js";
  * 1. Format the given text with prettier
  * 1. Create the generated text warning/notice without hash
  * 1. Combine given text and notice into a single string
- * 1. Create a sha256 hash in hexcode for the generated string without hash.
+ * 1. Create a sha256 hash in hexcode for the combined string.
  * 1. Create the generated text warning/notice with the new hash
  * 1. Combine given text and notice with hash into a single string
  * 1. Save the full generated text to the provided file path
  * 1. Log file name once it is saved
+ *
+ * Return details of the generated file.
  */
 export async function genAndSaveGeneratedFile({
   generator,
@@ -37,7 +39,7 @@ export async function genAndSaveGeneratedFile({
   generatedTextFileNameExtension: string;
 }) {
   const generatedTextAfterFormatting = await prettier.format(generatedText, {
-    // Use this to trick prettier to use an appropriate parser automatically
+    // Use this to make prettier automatically use the right parser/formatter
     filepath: generatedTextFileType,
   });
 
@@ -56,12 +58,17 @@ export async function genAndSaveGeneratedFile({
 
   const fullyGeneratedText = notice + generatedTextAfterFormatting;
 
-  const filePath = path.join(
-    generatedFileRootDirPath,
-    `${generatedTextFileName}${generatedTextFileNameExtension}`,
-  );
+  const fileNameWithExtension = `${generatedTextFileName}${generatedTextFileNameExtension}`;
+
+  const filePath = path.join(generatedFileRootDirPath, fileNameWithExtension);
 
   await fs.writeFile(filePath, fullyGeneratedText);
 
   logger.info(generator.name, `Generated file: ${filePath}`);
+
+  return {
+    filePath,
+    fileName: generatedTextFileName,
+    fileNameWithExtension,
+  };
 }
