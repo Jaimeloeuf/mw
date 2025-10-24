@@ -5,8 +5,8 @@ import {
   generatedSrcDirPath,
   generatedCodeFileExtension,
   generatedCodeFileExtensionWithNoBarrelFileInclusion,
-} from "../../../codegen-lib/codegenForTs/index.js";
-import { logger } from "../../../logging/index.js";
+} from "../../codegen-lib/codegenForTs/index.js";
+import { logger } from "../../logging/index.js";
 
 /**
  * Delete all generated files in __generated/ so that codegen can start afresh.

@@ -1,4 +1,4 @@
-import { genCodegenBarrelFile } from "../../../codegen-lib/codegenForTs/index.js";
+import { genCodegenBarrelFile } from "../../codegen-lib/codegenForTs/index.js";
 import { deleteAllGeneratedFiles } from "./deleteAllGeneratedFiles.js";
 import { loadAllCodegenFunctions } from "./loadAllCodegenFunctions.js";
 import { runCodegenModules } from "./runCodegenModules.js";

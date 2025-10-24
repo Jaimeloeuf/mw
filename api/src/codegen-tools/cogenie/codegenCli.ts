@@ -1,5 +1,5 @@
-import "../../../global/bootstrapGlobalDefinitions.js";
-import { logger } from "../../../logging/index.js";
+import "../../global/bootstrapGlobalDefinitions.js";
+import { logger } from "../../logging/index.js";
 import { codegenRunAllModules } from "./codegenRunAllModules.js";
 import { codegenRunSingleModule } from "./codegenRunSingleModule.js";
 import { printAllCodegenModules } from "./printAllCodegenModules.js";

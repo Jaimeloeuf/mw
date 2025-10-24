@@ -2,9 +2,9 @@ import { createHash } from "crypto";
 import fs from "fs/promises";
 import path from "path";
 
-import { generatedDocDirPath } from "../../../codegen-lib/codegenForDoc/index.js";
-import { generatedSrcDirPath } from "../../../codegen-lib/codegenForTs/index.js";
-import { logger } from "../../../logging/Logger.js";
+import { generatedDocDirPath } from "../../codegen-lib/codegenForDoc/index.js";
+import { generatedSrcDirPath } from "../../codegen-lib/codegenForTs/index.js";
+import { logger } from "../../logging/Logger.js";
 
 /**
  * Look for all generated files and check if they are valid by checking if they

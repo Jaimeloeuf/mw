@@ -2,7 +2,7 @@ import { tsImport } from "tsx/esm/api";
 
 import type { CodegenFunction } from "./CodegenFunction.js";
 
-import { logger } from "../../../logging/index.js";
+import { logger } from "../../logging/index.js";
 
 /**
  * Dynamically load and return the given codegen function.

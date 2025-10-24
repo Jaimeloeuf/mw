@@ -2,7 +2,7 @@ import { performance } from "perf_hooks";
 
 import type { CodegenFunction } from "./CodegenFunction.js";
 
-import { logger } from "../../../logging/index.js";
+import { logger } from "../../logging/index.js";
 
 export async function runCodegenModules(
   ...codegenFunctions: Array<CodegenFunction>
