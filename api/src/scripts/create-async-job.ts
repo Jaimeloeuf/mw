@@ -6,7 +6,7 @@ import { asyncJobTypeMapping } from "../__generated/index.js";
 import {
   codegenRunAllModules,
   showGitStatusOfGeneratedFolder,
-} from "../codegen-tools/cogenie/codegenTool/index.js";
+} from "../codegen-tools/cogenie/index.js";
 import { logger } from "../logging/index.js";
 import { pseudoRandomAlphanumericString } from "../utils/index.js";
 
