@@ -18,3 +18,5 @@ export abstract class CogenieStep {
    */
   abstract generate(): void | Promise<void>;
 }
+
+export type ConcreteCogenieStep = new () => CogenieStep;
