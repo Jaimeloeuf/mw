@@ -11,7 +11,7 @@ export async function codegenRunSingleModule(codegenModuleName: string) {
   // folder with the same name as itself
   const codegenModulePath = path.resolve(
     import.meta.dirname,
-    "../steps",
+    "./steps",
     codegenModuleName,
     `${codegenModuleName}.ts`,
   );
