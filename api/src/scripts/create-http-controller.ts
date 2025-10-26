@@ -27,7 +27,7 @@ export default httpController({
 });
 
 // TODO:
-// Remember to run "npm run codegen all" to generate routes->controller mapping
+// Remember to run "npm run codegen:cogenie all" to generate routes->controller mapping
 // once you have updated everything in the controller definition to use this.
 `;
 
@@ -83,7 +83,7 @@ async function createHttpController() {
   );
   logger.info(
     createHttpController.name,
-    `Please update the controller file details and run "npm run codegen all" to update the generated files`,
+    `Please update the controller file details and run "npm run codegen:cogenie all" to update the generated files`,
   );
   logger.info(createHttpController.name, `You can also copy the printed code.`);
 

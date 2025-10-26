@@ -25,6 +25,6 @@ infra.emailSharedSendEmail(...)
 
 
 ## Infra module addition/deletion
-Once a new infra module is added or a infra module is deleted, re-run codegen with `npm run codegen all` to update the generated `infra` export namespace.
+Once a new infra module is added or a infra module is deleted, re-run codegen with `npm run codegen:cogenie all` to update the generated `infra` export namespace.
 
 The codegen step responsible for this is `genInfraBarrelFile`.

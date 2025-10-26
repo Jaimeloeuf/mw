@@ -24,7 +24,7 @@ export async function codegenRunSingleModule(codegenModuleName: string) {
     );
     logger.error(
       codegenRunSingleModule.name,
-      `Use 'npm run codegen list' to see all codegen modules`,
+      `Use 'npm run codegen:cogenie list' to see all codegen modules`,
     );
     return;
   }

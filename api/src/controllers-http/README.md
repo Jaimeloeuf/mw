@@ -6,7 +6,7 @@ HTTP API Route Controllers defined here are automatically registered during code
 1. To create a new controller file, use `npm run scripts:create-http-controller`.
     1. This will create a new httpController file, which you can then fill in the blanks and move it around as needed.
 1. HTTP Controllers shouldnt be used manually, the `genHttpRoutesTable` codegen step will automatically create the `ExpressJS` backed router for all the controllers.
-1. Once a new controller is added or a controller is deleted, re-run codegen with `npm run codegen all` to update the router.
+1. Once a new controller is added or a controller is deleted, re-run codegen with `npm run codegen:cogenie all` to update the router.
 
 
 ## Additional notes

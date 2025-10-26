@@ -14,6 +14,6 @@ df.leetcodeGetLeetcodeQues.runAndThrowOnError(...)
 
 
 ## Data function addition/deletion
-Once a new data function is added or a data function is deleted, re-run codegen with `npm run codegen all` to update the generated `df` export namespace.
+Once a new data function is added or a data function is deleted, re-run codegen with `npm run codegen:cogenie all` to update the generated `df` export namespace.
 
 The codegen step responsible for this is `genDataFunctionBarrelFile`.

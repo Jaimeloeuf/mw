@@ -45,8 +45,8 @@ COPY ./src/ ./src/
 RUN npm run lint
 RUN npm run build
 
-# Validate that all codegen files are not manually modified
-RUN npm run codegen validate
+# Validate that all codegened cogenie files are not manually modified
+RUN npm run codegen:cogenie validate
 
 # Define exposed ports, acting only as documentation. Docker run STILL need to
 # map the ports with -p option.

@@ -7,7 +7,7 @@ Remember to name all bot classes with `.in.ts` so that it will be part of the in
 
 
 ## Bot addition/deletion
-1. Once a new Bot is added or a Bot is deleted, re-run codegen with `npm run codegen all` to update the generated `infra` export namespace. The codegen step responsible for this is `genInfraBarrelFile`.
+1. Once a new Bot is added or a Bot is deleted, re-run codegen with `npm run codegen:cogenie all` to update the generated `infra` export namespace. The codegen step responsible for this is `genInfraBarrelFile`.
 1. Register the bot in [`allBotLoaders.ts`](./allBotLoaders.ts).
 
 
