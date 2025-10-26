@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 export function printAllCodegenModules() {
-  const dirents = fs.readdirSync(path.resolve(import.meta.dirname, "../"), {
+  const dirents = fs.readdirSync(path.resolve(import.meta.dirname, "./steps"), {
     withFileTypes: true,
   });
 
