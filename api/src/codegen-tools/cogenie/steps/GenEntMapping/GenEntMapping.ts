@@ -2,6 +2,7 @@ import type { CogenieStep } from "../../CogenieStep.js";
 
 import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getEntFolders } from "../../utils/index.js";
+import { GenEntBarrelFile } from "../GenEntBarrelFile/GenEntBarrelFile.js";
 
 /**
  * Generate a mapping of `EntTypeID` to `Ent`
@@ -21,7 +22,7 @@ export class GenEntMapping implements CogenieStep {
 
     const generatedCode = `import type { BaseEnt } from "../ent/BaseEnt.js";
 
-import { ents } from "./entsBarrelFile${codegenForTs.generatedCodeFileExtensionForJsImport}"
+import { ents } from "./${new GenEntBarrelFile().getFiles().entsBarrelFile.name}${codegenForTs.generatedCodeFileExtensionForJsImport}"
 
 /**
  * Mapping of \`EntTypeID\` to \`Ent\`.
