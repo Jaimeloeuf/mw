@@ -19,6 +19,10 @@ export class GenEntOperatorBarrelFile implements CogenieStep {
         name: "entOperatorsExportFile",
         extension: ".ts",
       },
+      entOperatorsBarrelFile: {
+        name: "entOperatorsBarrelFile",
+        extension: ".ts",
+      },
     } as const;
   }
 
@@ -47,7 +51,7 @@ export class GenEntOperatorBarrelFile implements CogenieStep {
     await codegenForTs.genAndSaveGeneratedCode(
       GenEntOperatorBarrelFile,
       `export * as entOperators from "./${this.getFiles().entOperatorsExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
-      "entOperatorsBarrelFile",
+      this.getFiles().entOperatorsBarrelFile.name,
     );
   }
 }
