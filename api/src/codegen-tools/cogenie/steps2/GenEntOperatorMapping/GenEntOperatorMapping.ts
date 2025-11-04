@@ -1,13 +1,25 @@
+import type { CogenieStep } from "../../CogenieStep.js";
+
 import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getEntFolders } from "../../utils/index.js";
 
 /**
  * Generate a mapping of `EntTypeID` to `EntOperator`
  */
-export async function genEntOperatorMapping() {
-  const ents = await getEntFolders();
+export class GenEntOperatorMapping implements CogenieStep {
+  getFiles() {
+    return {
+      entOperatorMappingExportFile: {
+        name: "entOperatorMapping",
+        extension: ".ts",
+      },
+    } as const;
+  }
 
-  const generatedCode = `import type { BaseEnt } from "../ent/BaseEnt.js";
+  async generate() {
+    const ents = await getEntFolders();
+
+    const generatedCode = `import type { BaseEnt } from "../ent/BaseEnt.js";
 import type { EntCrudOperator } from "../ent/EntCrudOperator.js";
 
 import { entOperators } from "./entOperatorsBarrelFile${codegenForTs.generatedCodeFileExtensionForJsImport}"
@@ -23,11 +35,10 @@ export const entOperatorsMapping: Record<
 };
 `;
 
-  const entOperatorMappingExportFileName = "entOperatorMapping";
-
-  await codegenForTs.genAndSaveGeneratedCode(
-    genEntOperatorMapping,
-    generatedCode,
-    entOperatorMappingExportFileName,
-  );
+    await codegenForTs.genAndSaveGeneratedCode(
+      GenEntOperatorMapping,
+      generatedCode,
+      this.getFiles().entOperatorMappingExportFile.name,
+    );
+  }
 }
