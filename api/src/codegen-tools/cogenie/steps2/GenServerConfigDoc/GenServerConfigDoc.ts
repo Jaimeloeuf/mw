@@ -4,7 +4,7 @@ import type { CogenieStep } from "../../CogenieStep.js";
 
 import { codegenForDoc } from "../../../../codegen-lib/index.js";
 import { logger } from "../../../../logging/index.js";
-import { getTypeofTypeAlias } from "./getTypeofTypeAlias.js";
+import { getTypeofTypeAlias } from "../../../../utils/getTypeofTypeAlias.js";
 
 /**
  * Generated documentation for all the available config values in API server.
