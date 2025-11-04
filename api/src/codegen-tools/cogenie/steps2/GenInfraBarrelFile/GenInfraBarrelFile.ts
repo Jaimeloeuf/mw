@@ -1,0 +1,61 @@
+import path from "path";
+
+import type { CogenieStep } from "../../CogenieStep.js";
+
+import { codegenForTs } from "../../../../codegen-lib/index.js";
+import { getInfraFiles } from "../../utils/index.js";
+import { InfraFile } from "../../utils/index.js";
+
+/**
+ * Generate a single barrel file to re-export all the infra modules in the
+ * infra/ folder under the `infra` namespace, so that other files that uses
+ * infra modules outside of infra/ folder can easily access them without
+ * having to import them manually/individually.
+ *
+ * This allows users to do something like
+ * `import { infra } from "../__generated/index.js";`
+ */
+export class GenInfraBarrelFile implements CogenieStep {
+  getFiles() {
+    return {
+      infraExportFile: {
+        name: "infraExportFile",
+        extension: ".ts",
+      },
+      infraBarrelFile: {
+        name: "infraBarrelFile",
+        extension: ".ts",
+      },
+    } as const;
+  }
+
+  async generate() {
+    const folderPath = path.join(import.meta.dirname, `../../../../infra`);
+
+    const files = await getInfraFiles();
+
+    const generatedCode = files
+      .map((file) => this.infraExportTemplate(file, folderPath))
+      .join("");
+
+    await codegenForTs.genAndSaveGeneratedCode(
+      GenInfraBarrelFile,
+      generatedCode,
+      this.getFiles().infraExportFile.name,
+
+      // Do not re-export this in the barrel file, as we want users to access all
+      // the infra modules via the `infra` symbol as defined below.
+      { doNotIncludeInGeneratedFolderBarrelFile: true },
+    );
+
+    await codegenForTs.genAndSaveGeneratedCode(
+      GenInfraBarrelFile,
+      `export * as infra from "./${this.getFiles().infraExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
+      this.getFiles().infraBarrelFile.name,
+    );
+  }
+
+  infraExportTemplate = (file: InfraFile, folderPath: string): string =>
+    `export { default as ${file.name} } from "../infra/${path.relative(folderPath, file.path.replace(".ts", ".js"))}";
+`;
+}
