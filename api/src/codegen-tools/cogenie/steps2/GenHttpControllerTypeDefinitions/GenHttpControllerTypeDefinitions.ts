@@ -1,3 +1,5 @@
+import type { CogenieStep } from "../../CogenieStep.js";
+
 import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getHttpControllerFiles } from "../../utils/index.js";
 
@@ -5,13 +7,23 @@ import { getHttpControllerFiles } from "../../utils/index.js";
  * Generate type definitions from all the HTTP controllers in the controllers/
  * folder, and export it to file kind of like a big GraphQL schema file.
  */
-export async function genHttpControllerTypeDefinitions() {
-  const controllerFiles = await getHttpControllerFiles();
+export class GenHttpControllerTypeDefinitions implements CogenieStep {
+  getFiles() {
+    return {
+      httpControllerTypeDefinitions: {
+        name: "httpControllerTypeDefinitions",
+        extension: ".ts",
+      },
+    } as const;
+  }
 
-  // @todo An advanced version would be to skip export if type resolves to `never`.
-  const typeDefinitions = controllerFiles
-    .map(
-      (file) => `export type ${file.name}Controller_UrlParams = z.infer<
+  async generate() {
+    const controllerFiles = await getHttpControllerFiles();
+
+    // @todo An advanced version would be to skip export if type resolves to `never`.
+    const typeDefinitions = controllerFiles
+      .map(
+        (file) => `export type ${file.name}Controller_UrlParams = z.infer<
   NonNullable<(typeof c.${file.name})["urlParamsValidator"]>
 >;
 export type ${file.name}Controller_QueryParams = z.infer<
@@ -25,20 +37,20 @@ export type ${file.name}Controller_OutputDTO = Awaited<
 >;
 export type ${file.name}Controller_OutputFullDTO = JSendSuccess<${file.name}Controller_OutputDTO>;
 `,
-    )
+      )
+      .join("");
 
-    .join("");
-
-  const generatedCode = `import type { z } from "zod";
+    const generatedCode = `import type { z } from "zod";
 import type { JSendSuccess } from "../http/JSend.js";
 import * as c from "./httpControllerBarrelFile${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";
 
 ${typeDefinitions}
 `;
 
-  await codegenForTs.genAndSaveGeneratedCode(
-    genHttpControllerTypeDefinitions,
-    generatedCode,
-    "httpControllerTypeDefinitions",
-  );
+    await codegenForTs.genAndSaveGeneratedCode(
+      GenHttpControllerTypeDefinitions,
+      generatedCode,
+      this.getFiles().httpControllerTypeDefinitions.name,
+    );
+  }
 }
