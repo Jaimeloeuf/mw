@@ -2,15 +2,15 @@ import "../../global/bootstrapGlobalDefinitions.js";
 import { logger } from "../../logging/index.js";
 import { codegenRunAllModules } from "./codegenRunAllModules.js";
 import { codegenRunSingleModule } from "./codegenRunSingleModule.js";
-import { printAllCodegenModules } from "./printAllCodegenModules.js";
-import { printCodegenCliHelp } from "./printCodegenCliHelp.js";
+import { printAllCogenieSteps } from "./printAllCogenieSteps.js";
+import { printCogenieCliHelp } from "./printCogenieCliHelp.js";
 import { showGitStatusOfGeneratedFolder } from "./showGitStatusOfGeneratedFolder.js";
 import { validateGeneratedFiles } from "./validateGeneratedFiles.js";
 
 async function codegenCli() {
   // No extra arguments, show help menu
   if (process.argv.length === 2) {
-    printCodegenCliHelp();
+    printCogenieCliHelp();
     return;
   }
 
@@ -18,30 +18,30 @@ async function codegenCli() {
 
   // Help menu
   if (arg === "help") {
-    printCodegenCliHelp();
+    printCogenieCliHelp();
     return;
   }
 
-  // List out all codegen modules
+  // List out all cogenie steps
   if (arg === "list") {
-    printAllCodegenModules();
+    printAllCogenieSteps();
     return;
   }
 
-  // Validate all existing generated files
+  // Validate all existing cogenie generated files
   if (arg === "validate") {
     await validateGeneratedFiles();
     return;
   }
 
-  // Run all codegen modules
+  // Run all cogenie steps
   if (arg === "all") {
     await codegenRunAllModules();
     await showGitStatusOfGeneratedFolder();
     return;
   }
 
-  // Run a single codegen module
+  // Run a single cogenie step
   // @todo Remove one after class migration
   if (arg.startsWith("gen") || arg.startsWith("Gen")) {
     await codegenRunSingleModule(arg);
@@ -50,7 +50,7 @@ async function codegenCli() {
   }
 
   logger.error(codegenCli.name, `Invalid codegen argument: ${arg}\n`);
-  printCodegenCliHelp();
+  printCogenieCliHelp();
 }
 
 codegenCli();

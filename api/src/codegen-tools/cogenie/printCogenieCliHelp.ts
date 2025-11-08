@@ -1,6 +1,6 @@
 import pc from "picocolors";
 
-export function printCodegenCliHelp() {
+export function printCogenieCliHelp() {
   /* eslint-disable no-console */
   console.log("See help menu");
   console.log(pc.green("npm run codegen:cogenie"));
@@ -16,7 +16,7 @@ export function printCodegenCliHelp() {
   console.log(pc.green("npm run codegen:cogenie all"));
   console.log();
   console.log(
-    "Run a single codegen module, e.g. run the module genHttpRoutesTable",
+    "Run a single cogenie step, e.g. run the step GenHttpRoutesTable",
   );
   console.log(pc.green("npm run codegen:cogenie genHttpRoutesTable"));
   console.log();
