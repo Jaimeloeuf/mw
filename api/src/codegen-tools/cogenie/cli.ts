@@ -7,7 +7,7 @@ import { printCogenieCliHelp } from "./printCogenieCliHelp.js";
 import { showGitStatusOfGeneratedFolder } from "./showGitStatusOfGeneratedFolder.js";
 import { validateGeneratedFiles } from "./validateGeneratedFiles.js";
 
-async function codegenCli() {
+async function cogenieCli() {
   // No extra arguments, show help menu
   if (process.argv.length === 2) {
     printCogenieCliHelp();
@@ -48,8 +48,8 @@ async function codegenCli() {
     return;
   }
 
-  logger.error(codegenCli.name, `Invalid codegen argument: ${arg}\n`);
+  logger.error(cogenieCli.name, `Invalid cogenie argument: ${arg}\n`);
   printCogenieCliHelp();
 }
 
-codegenCli();
+cogenieCli();
