@@ -42,8 +42,7 @@ async function codegenCli() {
   }
 
   // Run a single cogenie step
-  // @todo Remove one after class migration
-  if (arg.startsWith("gen") || arg.startsWith("Gen")) {
+  if (arg.startsWith("Gen")) {
     await codegenRunSingleModule(arg);
     await showGitStatusOfGeneratedFolder();
     return;

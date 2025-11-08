@@ -7,7 +7,7 @@ export function printAllCogenieSteps() {
   });
 
   const cogenieStepFolders = dirents
-    .filter((dirent) => dirent.isDirectory() && dirent.name.startsWith("gen"))
+    .filter((dirent) => dirent.isDirectory() && dirent.name.startsWith("Gen"))
     .map((dirent) => dirent.name);
 
   /* eslint-disable no-console */
