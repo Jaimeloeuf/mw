@@ -1,7 +1,7 @@
 import "../../global/bootstrapGlobalDefinitions.js";
 import { logger } from "../../logging/index.js";
-import { codegenRunAllModules } from "./codegenRunAllModules.js";
-import { codegenRunSingleModule } from "./codegenRunSingleModule.js";
+import { cogenieRunAllSteps } from "./cogenieRunAllSteps.js";
+import { cogenieRunOneStep } from "./cogenieRunOneStep.js";
 import { printAllCogenieSteps } from "./printAllCogenieSteps.js";
 import { printCogenieCliHelp } from "./printCogenieCliHelp.js";
 import { showGitStatusOfGeneratedFolder } from "./showGitStatusOfGeneratedFolder.js";
@@ -36,14 +36,14 @@ async function codegenCli() {
 
   // Run all cogenie steps
   if (arg === "all") {
-    await codegenRunAllModules();
+    await cogenieRunAllSteps();
     await showGitStatusOfGeneratedFolder();
     return;
   }
 
   // Run a single cogenie step
   if (arg.startsWith("Gen")) {
-    await codegenRunSingleModule(arg);
+    await cogenieRunOneStep(arg);
     await showGitStatusOfGeneratedFolder();
     return;
   }

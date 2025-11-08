@@ -4,7 +4,7 @@ import readline from "readline/promises";
 
 import { entMapping } from "../__generated/index.js";
 import {
-  codegenRunAllModules,
+  cogenieRunAllSteps,
   showGitStatusOfGeneratedFolder,
 } from "../codegen-tools/cogenie/index.js";
 import { logger } from "../logging/index.js";
@@ -79,7 +79,7 @@ async function createEnt() {
   logger.info(createEnt.name, `Please update the Ent file details.`);
 
   // Trigger codegen for the new Ent
-  await codegenRunAllModules();
+  await cogenieRunAllSteps();
   await showGitStatusOfGeneratedFolder();
 }
 
