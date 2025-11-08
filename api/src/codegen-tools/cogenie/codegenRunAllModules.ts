@@ -1,14 +1,14 @@
 import { codegenForTs } from "../../codegen-lib/index.js";
 import { deleteAllGeneratedFiles } from "./deleteAllGeneratedFiles.js";
-import { loadAllCodegenFunctions } from "./loadAllCodegenFunctions.js";
-import { runCodegenModules } from "./runCodegenModules.js";
+import { loadAllCogenieSteps } from "./loadAllCogenieSteps.js";
+import { runCogenieSteps } from "./runCogenieSteps.js";
 
 export async function codegenRunAllModules() {
   await deleteAllGeneratedFiles();
 
-  const allCodegenFunctions = await loadAllCodegenFunctions();
+  const allCogenieSteps = await loadAllCogenieSteps();
 
-  await runCodegenModules(...allCodegenFunctions);
+  await runCogenieSteps(...allCogenieSteps);
 
   await codegenForTs.genCodegenBarrelFile();
 }
