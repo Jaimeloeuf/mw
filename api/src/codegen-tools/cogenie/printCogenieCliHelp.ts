@@ -18,7 +18,7 @@ export function printCogenieCliHelp() {
   console.log(
     "Run a single cogenie step, e.g. run the step GenHttpRoutesTable",
   );
-  console.log(pc.green("npm run codegen:cogenie genHttpRoutesTable"));
+  console.log(pc.green("npm run codegen:cogenie GenHttpRoutesTable"));
   console.log();
   console.log(`For more details, see implementation: ${import.meta.dirname}`);
   /* eslint-enable no-console */
