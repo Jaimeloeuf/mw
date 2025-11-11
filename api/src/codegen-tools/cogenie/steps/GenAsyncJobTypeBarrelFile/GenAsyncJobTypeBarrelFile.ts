@@ -1,7 +1,6 @@
 import path from "path";
 
 import type { CogenieStep } from "../../CogenieStep.js";
-import type { AsyncJobTypeFile } from "../../utils/index.js";
 
 import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getAsyncJobTypeFiles } from "../../utils/index.js";
@@ -34,7 +33,10 @@ export class GenAsyncJobTypeBarrelFile implements CogenieStep {
     const files = await getAsyncJobTypeFiles();
 
     const generatedCode = files
-      .map((file) => this.asyncJobTypeExportTemplate(file, folderPath))
+      .map(
+        (file) =>
+          `export { default as ${file.name} } from "../async/jobs/${path.relative(folderPath, file.path.replace(".ts", ".js"))}";\n`,
+      )
       .join("");
 
     await codegenForTs.genAndSaveGeneratedCode(
@@ -49,15 +51,8 @@ export class GenAsyncJobTypeBarrelFile implements CogenieStep {
 
     await codegenForTs.genAndSaveGeneratedCode(
       GenAsyncJobTypeBarrelFile,
-      `export * as asyncJob from "./${this.getFiles().asyncJobTypeExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
+      `export * as asyncJob from "./${this.getFiles().asyncJobTypeExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
       this.getFiles().asyncJobTypeBarrelFile.name,
     );
   }
-
-  asyncJobTypeExportTemplate = (
-    file: AsyncJobTypeFile,
-    folderPath: string,
-  ): string =>
-    `export { default as ${file.name} } from "../async/jobs/${path.relative(folderPath, file.path.replace(".ts", ".js"))}";
-`;
 }
