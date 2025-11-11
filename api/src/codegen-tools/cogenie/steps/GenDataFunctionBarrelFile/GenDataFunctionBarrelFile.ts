@@ -1,7 +1,6 @@
 import path from "path";
 
 import type { CogenieStep } from "../../CogenieStep.js";
-import type { DataFunctionFile } from "../../utils/index.js";
 
 import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getDataFunctionFiles } from "../../utils/index.js";
@@ -37,8 +36,9 @@ export class GenDataFunctionBarrelFile implements CogenieStep {
     const files = await getDataFunctionFiles();
 
     const generatedCode = files
-      .map((file) =>
-        this.dataFunctionExportTemplate(file, dataFunctionsFolderPath),
+      .map(
+        (file) =>
+          `export { default as ${file.name} } from "../dal/df/${path.relative(dataFunctionsFolderPath, file.path.replace(".ts", ".js"))}";\n`,
       )
       .join("");
 
@@ -54,15 +54,8 @@ export class GenDataFunctionBarrelFile implements CogenieStep {
 
     await codegenForTs.genAndSaveGeneratedCode(
       GenDataFunctionBarrelFile,
-      `export * as df from "./${this.getFiles().dataFunctionsExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
+      `export * as df from "./${this.getFiles().dataFunctionsExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
       this.getFiles().dataFunctionsBarrelFile.name,
     );
   }
-
-  dataFunctionExportTemplate = (
-    file: DataFunctionFile,
-    dalFolderPath: string,
-  ): string =>
-    `export { default as ${file.name} } from "../dal/df/${path.relative(dalFolderPath, file.path.replace(".ts", ".js"))}";
-`;
 }
