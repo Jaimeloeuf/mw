@@ -22,7 +22,7 @@ export class GenEntMapping implements CogenieStep {
 
     const generatedCode = `import type { BaseEnt } from "../ent/BaseEnt.js";
 
-import { ents } from "./${new GenEntBarrelFile().getFiles().entsBarrelFile.name}${codegenForTs.generatedCodeFileExtensionForJsImport}"
+import { ents } from "./${new GenEntBarrelFile().getFiles().entsBarrelFile.name}${codegenForTs.generatedCodeFileExtensionForJsImport}";
 
 /**
  * Mapping of \`EntTypeID\` to \`Ent\`.
@@ -31,7 +31,7 @@ export const entMapping: Record<
   string,
   new (..._constructorArgs: any) => BaseEnt<any>
 > = {
-  ${ents.map((ent) => `"${ent.entTypeID}": ents.${ent.name}`).join()}
+  ${ents.map((ent) => `"${ent.entTypeID}": ents.${ent.name}`).join(",\n  ")}
 };
 `;
 
