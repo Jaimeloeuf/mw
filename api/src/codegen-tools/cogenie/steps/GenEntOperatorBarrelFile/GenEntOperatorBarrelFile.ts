@@ -31,10 +31,8 @@ export class GenEntOperatorBarrelFile implements CogenieStep {
 
     const generatedCode = entFolders
       .map(
-        (
-          folder,
-        ) => `export * from "../ents/${folder.name}/${folder.name}Operators.js";
-`,
+        (folder) =>
+          `export * from "../ents/${folder.name}/${folder.name}Operators.js";\n`,
       )
       .join("");
 
@@ -50,7 +48,7 @@ export class GenEntOperatorBarrelFile implements CogenieStep {
 
     await codegenForTs.genAndSaveGeneratedCode(
       GenEntOperatorBarrelFile,
-      `export * as entOperators from "./${this.getFiles().entOperatorsExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
+      `export * as entOperators from "./${this.getFiles().entOperatorsExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
       this.getFiles().entOperatorsBarrelFile.name,
     );
   }
