@@ -41,7 +41,7 @@ export const asyncJobTypeMapping: Record<
       (file) =>
         `"${file.id}": () => import("../async/jobs/${path.relative(folderPath, file.path.replace(".ts", ".js"))}")`,
     )
-    .join()}
+    .join(",\n  ")}
 };
 `;
 
