@@ -22,16 +22,13 @@ export class GenEntOperatorMapping implements CogenieStep {
     const generatedCode = `import type { BaseEnt } from "../ent/BaseEnt.js";
 import type { EntCrudOperator } from "../ent/EntCrudOperator.js";
 
-import { entOperators } from "./entOperatorsBarrelFile${codegenForTs.generatedCodeFileExtensionForJsImport}"
+import { entOperators } from "./entOperatorsBarrelFile${codegenForTs.generatedCodeFileExtensionForJsImport}";
 
 /**
  * Mapping of \`EntTypeID\` to \`EntOperators\`.
  */
-export const entOperatorsMapping: Record<
-  string,
-  EntCrudOperator<BaseEnt>
-> = {
-  ${ents.map((ent) => `"${ent.entTypeID}": entOperators.${ent.name}Operators`).join()}
+export const entOperatorsMapping: Record<string, EntCrudOperator<BaseEnt>> = {
+  ${ents.map((ent) => `"${ent.entTypeID}": entOperators.${ent.name}Operators`).join(",\n  ")}
 };
 `;
 
