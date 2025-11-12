@@ -1,4 +1,4 @@
-import { HttpControllerFile } from "../../utils/index.js";
+import type { HttpControllerFile } from "../../utils/index.js";
 
 const getVersionPrefix = (file: HttpControllerFile) =>
   file.version === '"neutral"' ? "" : "/v" + file.version;
