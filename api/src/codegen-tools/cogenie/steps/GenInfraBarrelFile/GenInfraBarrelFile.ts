@@ -4,7 +4,6 @@ import type { CogenieStep } from "../../CogenieStep.js";
 
 import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getInfraFiles } from "../../utils/index.js";
-import { InfraFile } from "../../utils/index.js";
 
 /**
  * Generate a single barrel file to re-export all the infra modules in the
@@ -35,7 +34,10 @@ export class GenInfraBarrelFile implements CogenieStep {
     const files = await getInfraFiles();
 
     const generatedCode = files
-      .map((file) => this.infraExportTemplate(file, folderPath))
+      .map(
+        (file) =>
+          `export { default as ${file.name} } from "../infra/${path.relative(folderPath, file.path.replace(".ts", ".js"))}";\n`,
+      )
       .join("");
 
     await codegenForTs.genAndSaveGeneratedCode(
@@ -50,12 +52,8 @@ export class GenInfraBarrelFile implements CogenieStep {
 
     await codegenForTs.genAndSaveGeneratedCode(
       GenInfraBarrelFile,
-      `export * as infra from "./${this.getFiles().infraExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
+      `export * as infra from "./${this.getFiles().infraExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
       this.getFiles().infraBarrelFile.name,
     );
   }
-
-  infraExportTemplate = (file: InfraFile, folderPath: string): string =>
-    `export { default as ${file.name} } from "../infra/${path.relative(folderPath, file.path.replace(".ts", ".js"))}";
-`;
 }
