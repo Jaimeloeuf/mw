@@ -4,7 +4,6 @@ import type { CogenieStep } from "../../CogenieStep.js";
 
 import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getServiceFiles } from "../../utils/index.js";
-import { ServiceFile } from "../../utils/index.js";
 
 /**
  * Generate a single barrel file to re-export all the service functions in the
@@ -30,7 +29,10 @@ export class GenServiceBarrelFile implements CogenieStep {
     const files = await getServiceFiles();
 
     const generatedCode = files
-      .map((file) => this.serviceExportTemplate(file, folderPath))
+      .map(
+        (file) =>
+          `export { default as ${file.name} } from "../services/${path.relative(folderPath, file.path.replace(".ts", ".js"))}";\n`,
+      )
       .join("");
 
     await codegenForTs.genAndSaveGeneratedCode(
@@ -45,12 +47,8 @@ export class GenServiceBarrelFile implements CogenieStep {
 
     await codegenForTs.genAndSaveGeneratedCode(
       GenServiceBarrelFile,
-      `export * as sv from "./${this.getFiles().serviceExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
+      `export * as sv from "./${this.getFiles().serviceExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
       "serviceBarrelFile",
     );
   }
-
-  serviceExportTemplate = (file: ServiceFile, folderPath: string): string =>
-    `export { default as ${file.name} } from "../services/${path.relative(folderPath, file.path.replace(".ts", ".js"))}";
-`;
 }
