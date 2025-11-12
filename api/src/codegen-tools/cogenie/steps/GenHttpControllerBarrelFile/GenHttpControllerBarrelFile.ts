@@ -1,7 +1,6 @@
 import path from "path";
 
 import type { CogenieStep } from "../../CogenieStep.js";
-import type { HttpControllerFile } from "../../utils/index.js";
 
 import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getHttpControllerFiles } from "../../utils/index.js";
@@ -32,7 +31,10 @@ export class GenHttpControllerBarrelFile implements CogenieStep {
     const controllerFiles = await getHttpControllerFiles();
 
     const generatedCode = controllerFiles
-      .map((file) => this.controllerExportTemplate(file, controllerFolderPath))
+      .map(
+        (file) =>
+          `export { default as ${file.name} } from "../controllers-http/${path.relative(controllerFolderPath, file.path.replace(".ts", ".js"))}";\n`,
+      )
       .join("");
 
     await codegenForTs.genAndSaveGeneratedCode(
@@ -45,11 +47,4 @@ export class GenHttpControllerBarrelFile implements CogenieStep {
       { doNotIncludeInGeneratedFolderBarrelFile: true },
     );
   }
-
-  controllerExportTemplate = (
-    file: HttpControllerFile,
-    controllerFolderPath: string,
-  ): string =>
-    `export { default as ${file.name} } from "../controllers-http/${path.relative(controllerFolderPath, file.path.replace(".ts", ".js"))}";
-`;
 }
