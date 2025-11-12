@@ -25,7 +25,7 @@ export class GenHttpControllerUrlBuilders implements CogenieStep {
   async generate() {
     const controllerFiles = await getHttpControllerFiles();
 
-    const urlBuilders = controllerFiles.map(urlBuilderTemplate).join("");
+    const urlBuilders = controllerFiles.map(urlBuilderTemplate).join("\n");
 
     const generatedCode = `import type {
   RemoveMapKeyIfNever,
@@ -69,7 +69,7 @@ ${urlBuilders}
 
     await codegenForTs.genAndSaveGeneratedCode(
       GenHttpControllerUrlBuilders,
-      `export * as urlBuilder from "./${this.getFiles().httpControllerUrlBuilders.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
+      `export * as urlBuilder from "./${this.getFiles().httpControllerUrlBuilders.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
       this.getFiles().urlBuilderBarrelFile.name,
     );
   }

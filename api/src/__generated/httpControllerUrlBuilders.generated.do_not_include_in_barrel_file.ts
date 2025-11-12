@@ -6,7 +6,7 @@
  * GenHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(1a496e72813e3dd23faae77311443163c61dbf057933b98869575ebe78a032ee)
+ * sha256(9fcf799700fe56054b5b2594b4f018023faf1e8192a7de81adba8d9e5bb47424)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -44,7 +44,6 @@ export const forHealthCheck = (
   }>,
 ) =>
   `${config.base_url_to_self()}/api${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
-
 export const forBlogNewSubscriber = (
   options: UrlBuilderOptions<{
     urlParams: t.blogNewSubscriberController_UrlParams;
@@ -52,7 +51,6 @@ export const forBlogNewSubscriber = (
   }>,
 ) =>
   `${config.base_url_to_self()}/api/v1/blog/subscribe${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
-
 export const forBucketlistCreateOne = (
   options: UrlBuilderOptions<{
     urlParams: t.bucketlistCreateOneController_UrlParams;
@@ -60,7 +58,6 @@ export const forBucketlistCreateOne = (
   }>,
 ) =>
   `${config.base_url_to_self()}/api/v1/bucketlist${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
-
 export const forBucketlistGetOne = (
   options: UrlBuilderOptions<{
     urlParams: t.bucketlistGetOneController_UrlParams;
@@ -68,7 +65,6 @@ export const forBucketlistGetOne = (
   }>,
 ) =>
   `${config.base_url_to_self()}/api/v1/bucketlist/${options.urlParams.bucketlistID}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
-
 export const forCheckGetChecklist = (
   options: UrlBuilderOptions<{
     urlParams: t.checkGetChecklistController_UrlParams;
@@ -76,7 +72,6 @@ export const forCheckGetChecklist = (
   }>,
 ) =>
   `${config.base_url_to_self()}/api/v1/check/checklist/${options.urlParams.checklistID}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
-
 export const forJohariGetJohari = (
   options: UrlBuilderOptions<{
     urlParams: t.johariGetJohariController_UrlParams;
@@ -84,7 +79,6 @@ export const forJohariGetJohari = (
   }>,
 ) =>
   `${config.base_url_to_self()}/api/v1/johari/${options.urlParams.johariID}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
-
 export const forJohariCreateJohariAnswer = (
   options: UrlBuilderOptions<{
     urlParams: t.johariCreateJohariAnswerController_UrlParams;
@@ -92,7 +86,6 @@ export const forJohariCreateJohariAnswer = (
   }>,
 ) =>
   `${config.base_url_to_self()}/api/v1/johari/answer${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
-
 export const forJohariGetJohariAnswers = (
   options: UrlBuilderOptions<{
     urlParams: t.johariGetJohariAnswersController_UrlParams;
@@ -100,7 +93,6 @@ export const forJohariGetJohariAnswers = (
   }>,
 ) =>
   `${config.base_url_to_self()}/api/v1/johari/answers/${options.urlParams.johariID}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
-
 export const forJohariCreateJohari = (
   options: UrlBuilderOptions<{
     urlParams: t.johariCreateJohariController_UrlParams;
@@ -108,7 +100,6 @@ export const forJohariCreateJohari = (
   }>,
 ) =>
   `${config.base_url_to_self()}/api/v1/johari/create${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
-
 export const forLeetcodeCreateLeetcodeQues = (
   options: UrlBuilderOptions<{
     urlParams: t.leetcodeCreateLeetcodeQuesController_UrlParams;
@@ -116,7 +107,6 @@ export const forLeetcodeCreateLeetcodeQues = (
   }>,
 ) =>
   `${config.base_url_to_self()}/api/v1/leetcode/ques${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
-
 export const forLeetcodeGetLeetcodeQues = (
   options: UrlBuilderOptions<{
     urlParams: t.leetcodeGetLeetcodeQuesController_UrlParams;
@@ -124,7 +114,6 @@ export const forLeetcodeGetLeetcodeQues = (
   }>,
 ) =>
   `${config.base_url_to_self()}/api/v1/leetcode/ques/${options.urlParams.leetcodeQuesID}${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
-
 export const forVersion = (
   options: UrlBuilderOptions<{
     urlParams: t.versionController_UrlParams;
@@ -132,7 +121,6 @@ export const forVersion = (
   }>,
 ) =>
   `${config.base_url_to_self()}/api/version${createUrlQueryParamsString((options as any)?.urlQueryParams)}`;
-
 export const forWebhookTelegram = (
   options: UrlBuilderOptions<{
     urlParams: t.webhookTelegramController_UrlParams;
