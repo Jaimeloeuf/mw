@@ -35,10 +35,10 @@ export type ${file.name}Controller_InputDTO = z.infer<
 export type ${file.name}Controller_OutputDTO = Awaited<
   ReturnType<(typeof c.${file.name})["httpRequestHandler"]>
 >;
-export type ${file.name}Controller_OutputFullDTO = JSendSuccess<${file.name}Controller_OutputDTO>;
-`,
+export type ${file.name}Controller_OutputFullDTO =
+  JSendSuccess<${file.name}Controller_OutputDTO>;`,
       )
-      .join("");
+      .join("\n");
 
     const generatedCode = `import type { z } from "zod";
 import type { JSendSuccess } from "../http/JSend.js";
