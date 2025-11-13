@@ -24,7 +24,7 @@ export async function loadAllCogenieSteps() {
     withFileTypes: true,
   });
 
-  const cogenieStepModulePaths = allFoldersInCogenieStepsRoot
+  const cogenieSteps = allFoldersInCogenieStepsRoot
     .filter((folder) => folder.name.startsWith("Gen"))
     .map((file) =>
       loadCogenieStep(
@@ -34,5 +34,5 @@ export async function loadAllCogenieSteps() {
     );
 
   // Await for all the module load operations at the same time
-  return Promise.all(cogenieStepModulePaths);
+  return Promise.all(cogenieSteps);
 }
