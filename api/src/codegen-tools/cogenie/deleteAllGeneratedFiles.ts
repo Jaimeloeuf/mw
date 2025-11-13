@@ -3,20 +3,30 @@ import path from "path";
 
 import { codegenForTs } from "../../codegen-lib/index.js";
 import { logger } from "../../logging/index.js";
+import { loadAllCogenieSteps } from "./loadAllCogenieSteps.js";
 
 /**
- * Delete all generated files in __generated/ so that codegen can start afresh.
+ * Delete generated files in __generated/ that are out of date.
  *
- * Reason is because if the output file of a codegen step changed, during the
- * next run, the originally generated file will still be there and the new will
- * also appear. But since the old file is no longer used and not deleted, it is
- * a stale file in our version control.
- *
- * Since we are not able to determine which files have changed and which hasnt,
- * the only safe way to do this is to delete all generated files and generate
- * all of them again.
+ * Context is because if the output file of a cogenie step changed, during the
+ * next run, the originally generated file will still be there and the new one
+ * will also appear. But since the old file is no longer used and not deleted,
+ * it is a stale file in our version control.
  */
 export async function deleteAllGeneratedFiles() {
+  const cogenieSteps = await loadAllCogenieSteps().then((CogenieSteps) =>
+    CogenieSteps.map((CogenieStep) => new CogenieStep()),
+  );
+
+  const cogenieStepsGeneratedFileTargets = cogenieSteps
+    .map((cogenieStep) => Object.values(cogenieStep.getFiles()))
+    .flat()
+    .map((fileTarget) => fileTarget.name + fileTarget.extension);
+
+  const cogenieStepsGeneratedFileTargetsSet = new Set(
+    cogenieStepsGeneratedFileTargets,
+  );
+
   // @todo Delete generated docs too!
   const generatedFilesDirent = await fs.readdir(
     codegenForTs.generatedSrcDirPath,
@@ -27,7 +37,7 @@ export async function deleteAllGeneratedFiles() {
   );
 
   // Wait for all files to be deleted
-  const { length: numberOfFilesDeleted } = await Promise.all(
+  const deletedFiles = await Promise.all(
     generatedFilesDirent
 
       // Only keep valid generated files
@@ -40,12 +50,52 @@ export async function deleteAllGeneratedFiles() {
             )),
       )
 
+      // Map generated files to include a "shortName" used as the key in the
+      // generated file targets set
+      .map((file) => {
+        let fileShortName: string;
+
+        if (file.name.endsWith(codegenForTs.generatedCodeFileExtension)) {
+          fileShortName = file.name.replace(
+            codegenForTs.generatedCodeFileExtension,
+            ".ts",
+          );
+        } else if (
+          file.name.endsWith(
+            codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
+          )
+        ) {
+          fileShortName = file.name.replace(
+            codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
+            ".ts",
+          );
+        } else {
+          throw new Error("Not possible since files filtered above");
+        }
+
+        return {
+          parentPath: file.parentPath,
+          name: file.name,
+          shortName: fileShortName,
+        };
+      })
+
+      // Only keep the files (for deletion) that are generated, and is no longer
+      // part of the generated file targets set
+      .filter(
+        (file) => !cogenieStepsGeneratedFileTargetsSet.has(file.shortName),
+      )
+
       // Delete the file and map back the promise to await together
-      .map((file) => fs.rm(path.resolve(file.parentPath, file.name))),
+      .map(async (file) => {
+        const fullFilePath = path.resolve(file.parentPath, file.name);
+        await fs.rm(fullFilePath);
+        return fullFilePath;
+      }),
   );
 
   logger.info(
     deleteAllGeneratedFiles.name,
-    `Deleted all ${numberOfFilesDeleted} generated files`,
+    `Deleted all ${deletedFiles.length} generated files`,
   );
 }
