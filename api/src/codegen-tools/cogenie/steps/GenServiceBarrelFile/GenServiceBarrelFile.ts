@@ -20,6 +20,10 @@ export class GenServiceBarrelFile implements CogenieStep {
         name: "serviceExportFile",
         extension: ".ts",
       },
+      serviceBarrelFile: {
+        name: "serviceBarrelFile",
+        extension: ".ts",
+      },
     } as const;
   }
 
@@ -48,7 +52,7 @@ export class GenServiceBarrelFile implements CogenieStep {
     await codegenForTs.genAndSaveGeneratedCode(
       GenServiceBarrelFile,
       `export * as sv from "./${this.getFiles().serviceExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
-      "serviceBarrelFile",
+      this.getFiles().serviceBarrelFile.name,
     );
   }
 }
