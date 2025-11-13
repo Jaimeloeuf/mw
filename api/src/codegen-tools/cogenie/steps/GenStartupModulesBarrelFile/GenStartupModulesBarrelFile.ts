@@ -1,7 +1,6 @@
 import path from "path";
 
 import type { CogenieStep } from "../../CogenieStep.js";
-import type { StartupFile } from "../../utils/index.js";
 
 import { codegenForTs } from "../../../../codegen-lib/index.js";
 import { getStartupFiles } from "../../utils/index.js";
@@ -34,7 +33,10 @@ export class GenStartupModulesBarrelFile implements CogenieStep {
     const files = await getStartupFiles();
 
     const generatedCode = files
-      .map((file) => this.startupModuleExportTemplate(file, folderPath))
+      .map(
+        (file) =>
+          `export { default as ${file.name} } from "../startup/${path.relative(folderPath, file.path.replace(".ts", ".js"))}";\n`,
+      )
       .join("");
 
     await codegenForTs.genAndSaveGeneratedCode(
@@ -49,15 +51,8 @@ export class GenStartupModulesBarrelFile implements CogenieStep {
 
     await codegenForTs.genAndSaveGeneratedCode(
       GenStartupModulesBarrelFile,
-      `export * as st from "./${this.getFiles().startupModulesExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}"`,
+      `export * as st from "./${this.getFiles().startupModulesExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
       this.getFiles().startupModulesBarrelFile.name,
     );
   }
-
-  startupModuleExportTemplate = (
-    file: StartupFile,
-    folderPath: string,
-  ): string =>
-    `export { default as ${file.name} } from "../startup/${path.relative(folderPath, file.path.replace(".ts", ".js"))}";
-`;
 }
