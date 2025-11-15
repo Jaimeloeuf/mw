@@ -1,4 +1,8 @@
 import { genAndSaveGeneratedFile } from "../genAndSaveGeneratedFile.js";
+import {
+  generatedCodeFileExtension,
+  generatedCodeFileExtensionWithNoBarrelFileInclusion,
+} from "./generatedCodeFileExtension.js";
 import { generatedSrcDirPath } from "./generatedSrcDirPath.js";
 import { genGeneratedNotice } from "./genGeneratedNotice.js";
 import { getAllEslintRulesToDisable } from "./getAllEslintRulesToDisable.js";
@@ -46,14 +50,3 @@ export function genAndSaveGeneratedCode(
     generatedTextFileNameExtension,
   });
 }
-
-export const generatedCodeFileExtensionWithNoBarrelFileInclusion =
-  ".generated.do_not_include_in_barrel_file.ts";
-
-export const generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport =
-  generatedCodeFileExtensionWithNoBarrelFileInclusion.replace(".ts", ".js");
-
-export const generatedCodeFileExtension = ".generated.ts";
-
-export const generatedCodeFileExtensionForJsImport =
-  generatedCodeFileExtension.replace(".ts", ".js");
