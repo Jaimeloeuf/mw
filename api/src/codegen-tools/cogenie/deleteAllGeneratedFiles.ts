@@ -113,8 +113,18 @@ export async function deleteAllGeneratedFiles() {
       }),
   );
 
-  logger.info(
-    deleteAllGeneratedFiles.name,
-    `Deleted all ${deletedFiles.length} generated files`,
-  );
+  if (deletedFiles.length > 0) {
+    logger.info(
+      deleteAllGeneratedFiles.name,
+      `Deleted ${deletedFiles.length} generated files:`,
+    );
+    for (const file of deletedFiles) {
+      logger.info(deleteAllGeneratedFiles.name, file);
+    }
+  } else {
+    logger.info(
+      deleteAllGeneratedFiles.name,
+      "No generated files deleted but some may still be overwritten",
+    );
+  }
 }
