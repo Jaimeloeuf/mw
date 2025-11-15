@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 
-import { codegenForTs } from "../../codegen-lib/index.js";
+import { codegenForTs, codegenForDoc } from "../../codegen-lib/index.js";
 import { logger } from "../../logging/index.js";
 import { loadAllCogenieSteps } from "./loadAllCogenieSteps.js";
 
@@ -27,13 +27,24 @@ export async function deleteAllGeneratedFiles() {
     cogenieStepsGeneratedFileTargets,
   );
 
-  // @todo Delete generated docs too!
-  const generatedFilesDirent = await fs.readdir(
+  const generatedCodeFilesDirent = await fs.readdir(
     codegenForTs.generatedSrcDirPath,
     {
       recursive: true,
       withFileTypes: true,
     },
+  );
+
+  const generatedDocFilesDirent = await fs.readdir(
+    codegenForDoc.generatedDocDirPath,
+    {
+      recursive: true,
+      withFileTypes: true,
+    },
+  );
+
+  const generatedFilesDirent = generatedCodeFilesDirent.concat(
+    generatedDocFilesDirent,
   );
 
   // Wait for all files to be deleted
@@ -47,7 +58,8 @@ export async function deleteAllGeneratedFiles() {
           (file.name.endsWith(codegenForTs.generatedCodeFileExtension) ||
             file.name.endsWith(
               codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
-            )),
+            ) ||
+            file.name.endsWith(codegenForDoc.generatedDocFileExtension)),
       )
 
       // Map generated files to include a "shortName" used as the key in the
@@ -68,6 +80,13 @@ export async function deleteAllGeneratedFiles() {
           fileShortName = file.name.replace(
             codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
             ".ts",
+          );
+        } else if (
+          file.name.endsWith(codegenForDoc.generatedDocFileExtension)
+        ) {
+          fileShortName = file.name.replace(
+            codegenForDoc.generatedDocFileExtension,
+            ".md",
           );
         } else {
           throw new Error("Not possible since files filtered above");
