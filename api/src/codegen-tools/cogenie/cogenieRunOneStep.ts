@@ -34,15 +34,6 @@ export async function cogenieRunOneStep(cogenieStepName: string) {
     cogenieStepModulePath,
   );
 
-  // @todo Remove this
-  // For single module codegen, since we are unable to know if the output file
-  // path has changed, we must rely on users to manually delete it as we cannot
-  // delete all generated files since we do not regenerate all files.
-  logger.info(
-    cogenieRunOneStep.name,
-    "If your codegen module's output file has changed, please manually delete it first",
-  );
-
   await runCogenieSteps(importedCogenieStep);
 
   await codegenForTs.genCodegenBarrelFile();
