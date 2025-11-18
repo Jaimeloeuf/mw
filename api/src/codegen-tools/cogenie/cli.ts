@@ -24,7 +24,7 @@ async function cogenieCli() {
 
   // List out all cogenie steps
   if (arg === "list") {
-    printAllCogenieSteps();
+    await printAllCogenieSteps();
     return;
   }
 

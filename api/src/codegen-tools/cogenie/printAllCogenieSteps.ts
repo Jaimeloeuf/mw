@@ -1,9 +1,9 @@
-import fs from "fs";
+import fs from "fs/promises";
 
 import { cogenieStepsRootDirPath } from "./cogenieStepsRootDirPath.js";
 
-export function printAllCogenieSteps() {
-  const dirents = fs.readdirSync(cogenieStepsRootDirPath, {
+export async function printAllCogenieSteps() {
+  const dirents = await fs.readdir(cogenieStepsRootDirPath, {
     withFileTypes: true,
   });
 
