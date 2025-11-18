@@ -1,8 +1,9 @@
 import fs from "fs";
-import path from "path";
+
+import { cogenieStepsRootDirPath } from "./cogenieStepsRootDirPath.js";
 
 export function printAllCogenieSteps() {
-  const dirents = fs.readdirSync(path.resolve(import.meta.dirname, "./steps"), {
+  const dirents = fs.readdirSync(cogenieStepsRootDirPath, {
     withFileTypes: true,
   });
 
