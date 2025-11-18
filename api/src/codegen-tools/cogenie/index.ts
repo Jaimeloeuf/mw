@@ -4,4 +4,4 @@
 
 export * from "./cogenieRunAllSteps.js";
 export * from "./cogenieRunOneStep.js";
-export * from "./showGitStatusOfGeneratedFolder.js";
+export * from "./showGitStatusOfGeneratedFiles.js";

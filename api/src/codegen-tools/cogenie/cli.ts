@@ -4,7 +4,7 @@ import { cogenieRunAllSteps } from "./cogenieRunAllSteps.js";
 import { cogenieRunOneStep } from "./cogenieRunOneStep.js";
 import { printAllCogenieSteps } from "./printAllCogenieSteps.js";
 import { printCogenieCliHelp } from "./printCogenieCliHelp.js";
-import { showGitStatusOfGeneratedFolder } from "./showGitStatusOfGeneratedFolder.js";
+import { showGitStatusOfGeneratedFiles } from "./showGitStatusOfGeneratedFiles.js";
 import { validateGeneratedFiles } from "./validateGeneratedFiles.js";
 
 async function cogenieCli() {
@@ -37,14 +37,14 @@ async function cogenieCli() {
   // Run all cogenie steps
   if (arg === "all") {
     await cogenieRunAllSteps();
-    await showGitStatusOfGeneratedFolder();
+    await showGitStatusOfGeneratedFiles();
     return;
   }
 
   // Run a single cogenie step
   if (arg.startsWith("Gen")) {
     await cogenieRunOneStep(arg);
-    await showGitStatusOfGeneratedFolder();
+    await showGitStatusOfGeneratedFiles();
     return;
   }
 
