@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 
+import { cogenieStepsRootDirPath } from "./cogenieStepsRootDirPath.js";
 import { loadCogenieStep } from "./loadCogenieStep.js";
 
 /**
@@ -16,13 +17,12 @@ import { loadCogenieStep } from "./loadCogenieStep.js";
  * module itself, and name of the exported cogenie step class.
  */
 export async function loadAllCogenieSteps() {
-  // Cogenie steps should be in the cogenie/steps folder, and should be in a
-  // folder with the same name as itself
-  const cogenieStepsRootPath = path.resolve(import.meta.dirname, "./steps");
-
-  const allFoldersInCogenieStepsRoot = await fs.readdir(cogenieStepsRootPath, {
-    withFileTypes: true,
-  });
+  const allFoldersInCogenieStepsRoot = await fs.readdir(
+    cogenieStepsRootDirPath,
+    {
+      withFileTypes: true,
+    },
+  );
 
   const cogenieSteps = allFoldersInCogenieStepsRoot
     .filter((folder) => folder.name.startsWith("Gen"))
