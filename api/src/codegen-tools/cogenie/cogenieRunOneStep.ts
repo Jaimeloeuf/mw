@@ -3,16 +3,15 @@ import path from "path";
 
 import { codegenForTs } from "../../codegen-lib/index.js";
 import { logger } from "../../logging/index.js";
+import { cogenieStepsRootDirPath } from "./cogenieStepsRootDirPath.js";
 import { deleteStaleGeneratedFiles } from "./deleteStaleGeneratedFiles.js";
 import { loadCogenieStep } from "./loadCogenieStep.js";
 import { runCogenieSteps } from "./runCogenieSteps.js";
 
 export async function cogenieRunOneStep(cogenieStepName: string) {
-  // Cogenie step should be in this cogenie/steps folder, and should be in a
-  // folder with the same name as itself
+  // Cogenie step should be defined in a folder with the same name as itself
   const cogenieStepModulePath = path.resolve(
-    import.meta.dirname,
-    "./steps",
+    cogenieStepsRootDirPath,
     cogenieStepName,
     `${cogenieStepName}.ts`,
   );
