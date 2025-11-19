@@ -5,7 +5,7 @@ import { codegenForTs } from "../../codegen-lib/index.js";
 import { logger } from "../../logging/index.js";
 import { cogenieStepsRootDirPath } from "./cogenieStepsRootDirPath.js";
 import { deleteStaleGeneratedFiles } from "./deleteStaleGeneratedFiles.js";
-import { loadCogenieStep } from "./loadCogenieStep.js";
+import { getOneCogenieStep } from "./getOneCogenieStep.js";
 import { runCogenieSteps } from "./runCogenieSteps.js";
 
 export async function cogenieRunOneStep(cogenieStepName: string) {
@@ -31,7 +31,7 @@ export async function cogenieRunOneStep(cogenieStepName: string) {
 
   await deleteStaleGeneratedFiles();
 
-  const importedCogenieStep = await loadCogenieStep(
+  const importedCogenieStep = await getOneCogenieStep(
     cogenieStepName,
     cogenieStepModulePath,
   );

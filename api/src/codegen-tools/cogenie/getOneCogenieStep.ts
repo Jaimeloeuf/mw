@@ -13,7 +13,7 @@ const tsxApi = register({
 /**
  * Dynamically load and return the given cogenie step.
  */
-export async function loadCogenieStep(
+export async function getOneCogenieStep(
   cogenieStepModuleName: string,
   cogenieStepModulePath: string,
 ): Promise<ConcreteCogenieStep> {
@@ -33,10 +33,10 @@ export async function loadCogenieStep(
   // Check if it is a class by checking for the constructor function
   if (typeof importedCogenieClass !== "function") {
     logger.error(
-      loadCogenieStep.name,
+      getOneCogenieStep.name,
       `Cogenie step module is malformed and does not export a valid cogenie step class\nMake sure they are of the same name`,
     );
-    logger.error(loadCogenieStep.name, `Module found: ${importedModule}`);
+    logger.error(getOneCogenieStep.name, `Module found: ${importedModule}`);
     process.exit(1);
   }
 

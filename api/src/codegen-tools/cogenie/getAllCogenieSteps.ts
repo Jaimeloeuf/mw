@@ -1,7 +1,7 @@
 import path from "path";
 
 import { getCogenieStepFolders } from "./getCogenieStepFolders.js";
-import { loadCogenieStep } from "./loadCogenieStep.js";
+import { getOneCogenieStep } from "./getOneCogenieStep.js";
 
 /**
  * Dynamically load and return all cogenie steps.
@@ -10,7 +10,7 @@ export async function getAllCogenieSteps() {
   const cogenieStepFolders = await getCogenieStepFolders();
 
   const cogenieSteps = cogenieStepFolders.map((file) =>
-    loadCogenieStep(
+    getOneCogenieStep(
       file.name,
       path.resolve(file.parentPath, file.name, file.name + ".ts"),
     ),
