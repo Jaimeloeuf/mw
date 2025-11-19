@@ -6,7 +6,7 @@ import { loadCogenieStep } from "./loadCogenieStep.js";
 /**
  * Dynamically load and return all cogenie steps.
  */
-export async function loadAllCogenieSteps() {
+export async function getAllCogenieSteps() {
   const cogenieStepFolders = await getCogenieStepFolders();
 
   const cogenieSteps = cogenieStepFolders.map((file) =>
