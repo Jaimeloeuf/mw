@@ -2,32 +2,15 @@ import { createHash } from "crypto";
 import fs from "fs/promises";
 import path from "path";
 
-import { codegenForDoc, codegenForTs } from "../../codegen-lib/index.js";
 import { logger } from "../../logging/Logger.js";
+import { getGeneratedFilesDirent } from "./getGeneratedFilesDirent.js";
 
 /**
  * Look for all generated files and check if they are valid by checking if they
  * have been manually modified.
  */
 export async function validateGeneratedFiles() {
-  const generatedSrcDirFilesDirent = await fs
-    .readdir(codegenForTs.generatedSrcDirPath, {
-      recursive: true,
-      withFileTypes: true,
-    })
-    .then((files) => files.filter((file) => file.name.endsWith(".ts")));
-
-  const generatedDocDirFilesDirent = await fs
-    .readdir(codegenForDoc.generatedDocDirPath, {
-      recursive: true,
-      withFileTypes: true,
-    })
-    .then((files) => files.filter((file) => file.name.endsWith(".md")));
-
-  const generatedFilesDirent = [
-    ...generatedSrcDirFilesDirent,
-    ...generatedDocDirFilesDirent,
-  ];
+  const generatedFilesDirent = await getGeneratedFilesDirent();
 
   const generatedFiles = await Promise.all(
     generatedFilesDirent.map(async function (file) {
