@@ -5,6 +5,20 @@ import path from "path";
 import { logger } from "../../logging/Logger.js";
 import { getGeneratedFilesDirent } from "./getGeneratedFilesDirent.js";
 
+type GeneratedFilesWithHash = {
+  name: string;
+  fileContent: string;
+  extractedFileHash: string;
+};
+type GeneratedFilesWithoutHash = {
+  name: string;
+  fileContent: string;
+  extractedFileHash: undefined;
+};
+type GeneratedFilesWithMaybeHash =
+  | GeneratedFilesWithHash
+  | GeneratedFilesWithoutHash;
+
 /**
  * Look for all generated files and check if they are valid by checking if they
  * have been manually modified.
@@ -12,54 +26,104 @@ import { getGeneratedFilesDirent } from "./getGeneratedFilesDirent.js";
 export async function validateGeneratedFiles() {
   const generatedFilesDirent = await getGeneratedFilesDirent();
 
-  const generatedFilesStatus = generatedFilesDirent.map(async function (file) {
-    const filePath = path.resolve(file.parentPath, file.name);
-    const fileContent = await fs.readFile(filePath, { encoding: "utf8" });
+  const generatedFiles: Array<GeneratedFilesWithMaybeHash> = await Promise.all(
+    generatedFilesDirent.map(async function (file) {
+      const filePath = path.resolve(file.parentPath, file.name);
+      const fileContent = await fs.readFile(filePath, { encoding: "utf8" });
+      const extractedFileHash = fileContent.match(/sha256\((.*)\)/)?.[1];
+      return {
+        name: file.name,
+        fileContent,
+        extractedFileHash,
+      };
+    }),
+  );
 
-    const extractedFileHash = fileContent.match(/sha256\((.*)\)/)?.[1];
-
-    // Assume that no file hash means that this is not a generated file
-    if (extractedFileHash === undefined) {
-      return null;
+  const generatedFilesWithHash: Array<GeneratedFilesWithHash> = [];
+  const generatedFilesWithoutHash: Array<GeneratedFilesWithoutHash> = [];
+  for (const file of generatedFiles) {
+    if (file.extractedFileHash !== undefined) {
+      generatedFilesWithHash.push(file);
+    } else {
+      generatedFilesWithoutHash.push(file);
     }
+  }
 
-    const fileWithoutHash = fileContent.replace(/sha256\([^)]*\)/, "");
+  const generatedFilesHaveHash = validateGeneratedFilesHaveHash(
+    generatedFiles,
+    generatedFilesWithoutHash,
+  );
+
+  const generatedFilesHaveValidHash = validateGeneratedFilesHaveValidHash(
+    generatedFiles,
+    generatedFilesWithHash,
+  );
+
+  if (generatedFilesHaveHash && generatedFilesHaveValidHash) {
+    logger.info(
+      validateGeneratedFiles.name,
+      `All ${generatedFiles.length} Cogenie generated files are valid`,
+    );
+    return;
+  }
+
+  // non-zero exit code to chain with external systems
+  process.exit(1);
+}
+
+function validateGeneratedFilesHaveHash(
+  generatedFiles: Array<GeneratedFilesWithMaybeHash>,
+  generatedFilesWithoutHash: Array<GeneratedFilesWithoutHash>,
+) {
+  if (generatedFilesWithoutHash.length === 0) {
+    return true;
+  }
+
+  logger.error(
+    validateGeneratedFiles.name,
+    `${generatedFilesWithoutHash.length}/${generatedFiles.length} generated files are invalid as they are missing their hash:`,
+  );
+
+  for (let i = 0; i < generatedFilesWithoutHash.length; i++) {
+    logger.error(
+      validateGeneratedFiles.name,
+      `Error ${i + 1}: ${generatedFilesWithoutHash[i]!.name}`,
+    );
+  }
+
+  return false;
+}
+
+function validateGeneratedFilesHaveValidHash(
+  generatedFiles: Array<GeneratedFilesWithMaybeHash>,
+  generatedFilesWithHash: Array<GeneratedFilesWithHash>,
+) {
+  const modifiedFiles = generatedFilesWithHash.filter(function (file) {
+    const fileWithoutHash = file.fileContent.replace(/sha256\([^)]*\)/, "");
 
     const hash = createHash("sha256")
       .update(fileWithoutHash)
       .digest()
       .toString("hex");
 
-    return {
-      name: file.name,
-      hash: extractedFileHash,
-      fileModified: hash !== extractedFileHash,
-    };
+    return hash !== file.extractedFileHash;
   });
 
-  const generatedFiles = await Promise.all(generatedFilesStatus).then((files) =>
-    files.filter((file) => file !== null),
-  );
-
-  const modifiedFiles = generatedFiles.filter((file) => file.fileModified);
-
   if (modifiedFiles.length === 0) {
-    logger.info(validateGeneratedFiles.name, `Generated files are all valid`);
-    return;
+    return true;
   }
 
   logger.error(
     validateGeneratedFiles.name,
-    `${modifiedFiles.length}/${generatedFiles.length} generated files is invalid as it is manually modified:`,
+    `${modifiedFiles.length}/${generatedFiles.length} generated files are invalid as they are manually modified:`,
   );
 
   for (let i = 0; i < modifiedFiles.length; i++) {
     logger.error(
       validateGeneratedFiles.name,
-      `${i + 1}: ${modifiedFiles[i]!.name}`,
+      `Error ${i + 1}: ${modifiedFiles[i]!.name}`,
     );
   }
 
-  // non-zero exit code to chain with external systems
-  process.exit(1);
+  return false;
 }
