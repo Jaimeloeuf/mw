@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 
 import { genAndSaveGeneratedFile } from "../genAndSaveGeneratedFile.js";
+import { genAndSaveGeneratedCode } from "./genAndSaveGeneratedCode.js";
 import { generatedSrcDirPath } from "./generatedSrcDirPath.js";
 import { genGeneratedNotice } from "./genGeneratedNotice.js";
 
@@ -25,10 +26,16 @@ export async function genCodegenBarrelFile() {
       .join("\n") +
     "\n";
 
+  await genAndSaveGeneratedCode(genCodegenBarrelFile, generatedCode, "index");
   await genAndSaveGeneratedFile({
     generator: genCodegenBarrelFile,
     genGeneratedNotice,
-    generatedText: generatedCode,
+    generatedText: `// This index.ts should NEVER CHANGE
+// Because this index.ts is a special case file without the ".generated" file
+// extension it does not work with cogenie handling well so this is only
+// generated once and left alone, and the actual barrel file is in the
+// ".generated" version of this index.ts file.
+export * from "./index.generated.js";`,
     generatedFileRootDirPath: generatedSrcDirPath,
     generatedTextFileName: "index",
     generatedTextFileType: ".ts",

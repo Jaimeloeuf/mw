@@ -6,20 +6,11 @@
  * genCodegenBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(3f89037aaed68154a3b8d7739af9ff8fc19e962da5a26af3b3c6949ef4f83dfe)
+ * sha256(74dd64cf790e985632e3e2865593adf3f6ef13ccdab6e921d52d818db259a488)
  */
-// Barrel file
-export * from "./asyncJobTypeBarrelFile.generated.js";
-export * from "./asyncJobTypeMapping.generated.js";
-export * from "./dataFunctionsBarrelFile.generated.js";
-export * from "./entMapping.generated.js";
-export * from "./entOperatorMapping.generated.js";
-export * from "./entOperatorsBarrelFile.generated.js";
-export * from "./entsBarrelFile.generated.js";
-export * from "./httpControllerTypeDefinitions.generated.js";
-export * from "./infraBarrelFile.generated.js";
-export * from "./registerRoutesAndControllers.generated.js";
-export * from "./serviceBarrelFile.generated.js";
-export * from "./startupModulesBarrelFile.generated.js";
-export * from "./startupModulesRunner.generated.js";
-export * from "./urlBuilderBarrelFile.generated.js";
+// This index.ts should NEVER CHANGE
+// Because this index.ts is a special case file without the ".generated" file
+// extension it does not work with cogenie handling well so this is only
+// generated once and left alone, and the actual barrel file is in the
+// ".generated" version of this index.ts file.
+export * from "./index.generated.js";
