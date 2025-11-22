@@ -32,7 +32,9 @@ export async function deleteStaleGeneratedFiles() {
 
   const cogenieStepsGeneratedFileTargetsSet = new Set(
     cogenieStepsGeneratedFileTargets,
-  );
+  )
+    // Add in the special case generated barrel file
+    .add("index.ts");
 
   const generatedFilesDirent = await getGeneratedFilesDirent();
 
@@ -60,6 +62,12 @@ export async function deleteStaleGeneratedFiles() {
         codegenForDoc.generatedDocFileExtension,
         ".md",
       );
+    }
+    // In the special case where there is no ".generated" extension in the file
+    // extension, yet still returned by "getGeneratedFilesDirent", treat the
+    // name itself as the short name without any other modification
+    else if (file.name.endsWith(".ts") || file.name.endsWith(".md")) {
+      fileShortName = file.name;
     } else {
       throw new Error("Not possible since files filtered above");
     }
