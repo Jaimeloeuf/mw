@@ -5,7 +5,7 @@ import readline from "readline/promises";
 import { asyncJobTypeMapping } from "../__generated/index.js";
 import {
   cogenieRunAllSteps,
-  showGitStatusOfGeneratedFolder,
+  showGitStatusOfGeneratedFiles,
 } from "../codegen-tools/cogenie/index.js";
 import { logger } from "../logging/index.js";
 import { pseudoRandomAlphanumericString } from "../utils/index.js";
@@ -60,7 +60,7 @@ async function createAsyncJob() {
 
   // Trigger codegen for the new AsyncJob
   await cogenieRunAllSteps();
-  await showGitStatusOfGeneratedFolder();
+  await showGitStatusOfGeneratedFiles();
 }
 
 createAsyncJob();
