@@ -12,32 +12,34 @@ import { getGeneratedFilesDirent } from "./getGeneratedFilesDirent.js";
 export async function validateGeneratedFiles() {
   const generatedFilesDirent = await getGeneratedFilesDirent();
 
-  const generatedFiles = await Promise.all(
-    generatedFilesDirent.map(async function (file) {
-      const filePath = path.resolve(file.parentPath, file.name);
-      const fileContent = await fs.readFile(filePath, { encoding: "utf8" });
+  const generatedFilesStatus = generatedFilesDirent.map(async function (file) {
+    const filePath = path.resolve(file.parentPath, file.name);
+    const fileContent = await fs.readFile(filePath, { encoding: "utf8" });
 
-      const extractedFileHash = fileContent.match(/sha256\((.*)\)/)?.[1];
+    const extractedFileHash = fileContent.match(/sha256\((.*)\)/)?.[1];
 
-      // Assume that no file hash means that this is not a generated file
-      if (extractedFileHash === undefined) {
-        return null;
-      }
+    // Assume that no file hash means that this is not a generated file
+    if (extractedFileHash === undefined) {
+      return null;
+    }
 
-      const fileWithoutHash = fileContent.replace(/sha256\([^)]*\)/, "");
+    const fileWithoutHash = fileContent.replace(/sha256\([^)]*\)/, "");
 
-      const hash = createHash("sha256")
-        .update(fileWithoutHash)
-        .digest()
-        .toString("hex");
+    const hash = createHash("sha256")
+      .update(fileWithoutHash)
+      .digest()
+      .toString("hex");
 
-      return {
-        name: file.name,
-        hash: extractedFileHash,
-        fileModified: hash !== extractedFileHash,
-      };
-    }),
-  ).then((files) => files.filter((file) => file !== null));
+    return {
+      name: file.name,
+      hash: extractedFileHash,
+      fileModified: hash !== extractedFileHash,
+    };
+  });
+
+  const generatedFiles = await Promise.all(generatedFilesStatus).then((files) =>
+    files.filter((file) => file !== null),
+  );
 
   const modifiedFiles = generatedFiles.filter((file) => file.fileModified);
 
