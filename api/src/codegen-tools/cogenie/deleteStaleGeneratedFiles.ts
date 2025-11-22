@@ -36,60 +36,58 @@ export async function deleteStaleGeneratedFiles() {
 
   const generatedFilesDirent = await getGeneratedFilesDirent();
 
-  // Wait for all files to be deleted
-  const deletedFiles = await Promise.all(
-    generatedFilesDirent
+  // Map generated files to include a "shortName", the same that is used as the
+  // key in the generated file targets set
+  const generatedFilesWithShortName = generatedFilesDirent.map((file) => {
+    let fileShortName: string;
 
-      // Map generated files to include a "shortName" used as the key in the
-      // generated file targets set
-      .map((file) => {
-        let fileShortName: string;
-
-        if (file.name.endsWith(codegenForTs.generatedCodeFileExtension)) {
-          fileShortName = file.name.replace(
-            codegenForTs.generatedCodeFileExtension,
-            ".ts",
-          );
-        } else if (
-          file.name.endsWith(
-            codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
-          )
-        ) {
-          fileShortName = file.name.replace(
-            codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
-            ".ts",
-          );
-        } else if (
-          file.name.endsWith(codegenForDoc.generatedDocFileExtension)
-        ) {
-          fileShortName = file.name.replace(
-            codegenForDoc.generatedDocFileExtension,
-            ".md",
-          );
-        } else {
-          throw new Error("Not possible since files filtered above");
-        }
-
-        return {
-          parentPath: file.parentPath,
-          name: file.name,
-          shortName: fileShortName,
-        };
-      })
-
-      // Only keep the files (for deletion) that are generated, and is no longer
-      // part of the generated file targets set
-      .filter(
-        (file) => !cogenieStepsGeneratedFileTargetsSet.has(file.shortName),
+    if (file.name.endsWith(codegenForTs.generatedCodeFileExtension)) {
+      fileShortName = file.name.replace(
+        codegenForTs.generatedCodeFileExtension,
+        ".ts",
+      );
+    } else if (
+      file.name.endsWith(
+        codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
       )
+    ) {
+      fileShortName = file.name.replace(
+        codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
+        ".ts",
+      );
+    } else if (file.name.endsWith(codegenForDoc.generatedDocFileExtension)) {
+      fileShortName = file.name.replace(
+        codegenForDoc.generatedDocFileExtension,
+        ".md",
+      );
+    } else {
+      throw new Error("Not possible since files filtered above");
+    }
 
-      // Delete the file and map back the promise to await together
-      .map(async (file) => {
-        const fullFilePath = path.resolve(file.parentPath, file.name);
-        await fs.rm(fullFilePath);
-        return fullFilePath;
-      }),
+    return {
+      parentPath: file.parentPath,
+      name: file.name,
+      shortName: fileShortName,
+    };
+  });
+
+  // Get list of files that are no longer a part of the generated file targets
+  // set for deletion
+  const generatedFilesToDelete = generatedFilesWithShortName.filter(
+    (file) => !cogenieStepsGeneratedFileTargetsSet.has(file.shortName),
   );
+
+  // Delete the file and map back the promise to await together later
+  const generatedFilesDeletionPromises = generatedFilesToDelete.map(
+    async (file) => {
+      const fullFilePath = path.resolve(file.parentPath, file.name);
+      await fs.rm(fullFilePath);
+      return fullFilePath;
+    },
+  );
+
+  // Wait for all files to be deleted
+  const deletedFiles = await Promise.all(generatedFilesDeletionPromises);
 
   if (deletedFiles.length > 0) {
     logger.info(
