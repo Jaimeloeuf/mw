@@ -16,8 +16,7 @@ export async function getGeneratedFilesDirent() {
           (file.name.endsWith(codegenForTs.generatedCodeFileExtension) ||
             file.name.endsWith(
               codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
-            ) ||
-            file.name === "index.ts"),
+            )),
       ),
     );
 

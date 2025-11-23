@@ -6,7 +6,7 @@
  * genCodegenBarrelFile
  *
  * Generated hash in hex for code after this section is:
- * sha256(aa41dc3d7274451e24faa3dae7070219a1f5b11c70dd31071d008f3c720e37a9)
+ * sha256(026b147b5e79eef36496b297cdc4b10c2baa4d6f5d30f16ede87bea3c716556f)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -19,7 +19,6 @@ export * from "./entOperatorMapping.generated.js";
 export * from "./entOperatorsBarrelFile.generated.js";
 export * from "./entsBarrelFile.generated.js";
 export * from "./httpControllerTypeDefinitions.generated.js";
-export * from "./index.generated.js";
 export * from "./infraBarrelFile.generated.js";
 export * from "./registerRoutesAndControllers.generated.js";
 export * from "./serviceBarrelFile.generated.js";
