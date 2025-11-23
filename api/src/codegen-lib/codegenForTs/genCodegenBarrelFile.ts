@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 
 import { genAndSaveGeneratedCode } from "./genAndSaveGeneratedCode.js";
+import { generatedCodeFileExtension } from "./generatedCodeFileExtension.js";
 import { generatedSrcDirPath } from "./generatedSrcDirPath.js";
 
 /**
@@ -16,7 +17,7 @@ export async function genCodegenBarrelFile() {
     filesInGeneratedFolder
       .filter(
         (dirent) =>
-          dirent.name.endsWith(".generated.ts") &&
+          dirent.name.endsWith(generatedCodeFileExtension) &&
           // Exclude itself from the barrel file
           dirent.name !== "index.generated.ts",
       )
