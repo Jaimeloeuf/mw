@@ -92,10 +92,14 @@ export async function deleteStaleGeneratedFiles() {
   if (deletedFiles.length > 0) {
     logger.info(
       deleteStaleGeneratedFiles.name,
-      `Deleted ${deletedFiles.length} generated files:`,
+      `Deleted ${deletedFiles.length}/${generatedFilesDirent.length} generated files:`,
     );
-    for (const file of deletedFiles) {
-      logger.info(deleteStaleGeneratedFiles.name, file);
+
+    for (let i = 0; i < deletedFiles.length; i++) {
+      logger.info(
+        deleteStaleGeneratedFiles.name,
+        `Deleted file ${i + 1}: ${deletedFiles[i]}`,
+      );
     }
   } else {
     logger.info(
