@@ -14,7 +14,12 @@ export async function genCodegenBarrelFile() {
   const generatedCode =
     `// Barrel file\n` +
     filesInGeneratedFolder
-      .filter((dirent) => dirent.name.endsWith(".generated.ts"))
+      .filter(
+        (dirent) =>
+          dirent.name.endsWith(".generated.ts") &&
+          // Exclude itself from the barrel file
+          dirent.name !== "index.generated.ts",
+      )
       // Sort by name alphabetically to always have them in a stable position
       // eslint-disable-next-line no-nested-ternary
       .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
