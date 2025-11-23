@@ -2,6 +2,7 @@ import "../../global/bootstrapGlobalDefinitions.js";
 import { logger } from "../../logging/index.js";
 import { cogenieRunAllSteps } from "./cogenieRunAllSteps.js";
 import { cogenieRunOneStep } from "./cogenieRunOneStep.js";
+import { deleteStaleGeneratedFiles } from "./deleteStaleGeneratedFiles.js";
 import { printAllCogenieSteps } from "./printAllCogenieSteps.js";
 import { printCogenieCliHelp } from "./printCogenieCliHelp.js";
 import { showGitStatusOfGeneratedFiles } from "./showGitStatusOfGeneratedFiles.js";
@@ -25,6 +26,12 @@ async function cogenieCli() {
   // List out all cogenie steps
   if (arg === "list") {
     await printAllCogenieSteps();
+    return;
+  }
+
+  // Clean up generated files to remove any stale files
+  if (arg === "clean-stale") {
+    await deleteStaleGeneratedFiles();
     return;
   }
 

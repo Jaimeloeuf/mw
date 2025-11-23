@@ -9,6 +9,9 @@ export function printCogenieCliHelp() {
   console.log("See all available codegen modules");
   console.log(pc.green("npm run codegen:cogenie list"));
   console.log();
+  console.log("Clean up generated files to remove any stale files");
+  console.log(pc.green("npm run codegen:cogenie clean-stale"));
+  console.log();
   console.log("Validate that generated code is not manually modified");
   console.log(pc.green("npm run codegen:cogenie validate"));
   console.log();
