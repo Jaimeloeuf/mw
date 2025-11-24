@@ -1,7 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
 
-import { codegenForTs, codegenForDoc } from "../../codegen-lib/index.js";
 import { logger } from "../../logging/index.js";
 import { getAllCogenieSteps } from "./getAllCogenieSteps.js";
 import { getGeneratedFilesDirent } from "./getGeneratedFilesDirent.js";
@@ -36,45 +35,10 @@ export async function deleteStaleGeneratedFiles() {
 
   const generatedFilesDirent = await getGeneratedFilesDirent();
 
-  // Map generated files to include a "shortName", the same that is used as the
-  // key in the generated file targets set
-  const generatedFilesWithShortName = generatedFilesDirent.map((file) => {
-    let fileShortName: string;
-
-    if (file.name.endsWith(codegenForTs.generatedCodeFileExtension)) {
-      fileShortName = file.name.replace(
-        codegenForTs.generatedCodeFileExtension,
-        ".ts",
-      );
-    } else if (
-      file.name.endsWith(
-        codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
-      )
-    ) {
-      fileShortName = file.name.replace(
-        codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
-        ".ts",
-      );
-    } else if (file.name.endsWith(codegenForDoc.generatedDocFileExtension)) {
-      fileShortName = file.name.replace(
-        codegenForDoc.generatedDocFileExtension,
-        ".md",
-      );
-    } else {
-      throw new Error("Not possible since files filtered above");
-    }
-
-    return {
-      parentPath: file.parentPath,
-      name: file.name,
-      shortName: fileShortName,
-    };
-  });
-
   // Get list of files that are no longer a part of the generated file targets
   // set for deletion
-  const generatedFilesToDelete = generatedFilesWithShortName.filter(
-    (file) => !cogenieStepsGeneratedFileTargetsSet.has(file.shortName),
+  const generatedFilesToDelete = generatedFilesDirent.filter(
+    (file) => !cogenieStepsGeneratedFileTargetsSet.has(file.name),
   );
 
   // Delete the file and map back the promise to await together later
