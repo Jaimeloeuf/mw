@@ -1,4 +1,4 @@
-import { GeneratedFileTarget } from "./GeneratedFileTarget.js";
+import type { GeneratedFileTarget } from "./GeneratedFileTarget.js";
 
 /**
  * Cogenie Step as a class
