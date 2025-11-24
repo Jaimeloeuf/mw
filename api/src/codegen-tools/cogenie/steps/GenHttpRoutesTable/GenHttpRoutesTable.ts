@@ -14,7 +14,7 @@ export class GenHttpRoutesTable implements CogenieStep {
     return {
       registerRoutesAndControllers: {
         name: "registerRoutesAndControllers",
-        extension: ".ts",
+        extension: codegenForTs.generatedCodeFileExtension,
       },
     } as const;
   }

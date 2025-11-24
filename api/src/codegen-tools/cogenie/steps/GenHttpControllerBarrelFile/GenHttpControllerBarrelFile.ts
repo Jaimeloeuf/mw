@@ -17,7 +17,7 @@ export class GenHttpControllerBarrelFile implements CogenieStep {
     return {
       httpControllerBarrelFile: {
         name: "httpControllerBarrelFile",
-        extension: ".ts",
+        extension: codegenForTs.generatedCodeFileExtension,
       },
     } as const;
   }

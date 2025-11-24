@@ -18,11 +18,12 @@ export class GenServiceBarrelFile implements CogenieStep {
     return {
       serviceExportFile: {
         name: "serviceExportFile",
-        extension: ".ts",
+        extension:
+          codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
       },
       serviceBarrelFile: {
         name: "serviceBarrelFile",
-        extension: ".ts",
+        extension: codegenForTs.generatedCodeFileExtension,
       },
     } as const;
   }

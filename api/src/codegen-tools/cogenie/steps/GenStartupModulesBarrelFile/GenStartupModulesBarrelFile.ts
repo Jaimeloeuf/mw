@@ -18,11 +18,12 @@ export class GenStartupModulesBarrelFile implements CogenieStep {
     return {
       startupModulesExportFile: {
         name: "startupModulesExportFile",
-        extension: ".ts",
+        extension:
+          codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
       },
       startupModulesBarrelFile: {
         name: "startupModulesBarrelFile",
-        extension: ".ts",
+        extension: codegenForTs.generatedCodeFileExtension,
       },
     } as const;
   }

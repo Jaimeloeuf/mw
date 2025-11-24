@@ -12,7 +12,7 @@ export class GenEntMapping implements CogenieStep {
     return {
       entMappingExportFile: {
         name: "entMapping",
-        extension: ".ts",
+        extension: codegenForTs.generatedCodeFileExtension,
       },
     } as const;
   }

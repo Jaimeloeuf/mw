@@ -17,11 +17,12 @@ export class GenEntOperatorBarrelFile implements CogenieStep {
     return {
       entOperatorsExportFile: {
         name: "entOperatorsExportFile",
-        extension: ".ts",
+        extension:
+          codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
       },
       entOperatorsBarrelFile: {
         name: "entOperatorsBarrelFile",
-        extension: ".ts",
+        extension: codegenForTs.generatedCodeFileExtension,
       },
     } as const;
   }

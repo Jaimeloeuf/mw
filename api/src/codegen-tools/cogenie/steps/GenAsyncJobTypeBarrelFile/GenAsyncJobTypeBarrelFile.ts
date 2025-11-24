@@ -18,11 +18,12 @@ export class GenAsyncJobTypeBarrelFile implements CogenieStep {
     return {
       asyncJobTypeExportFile: {
         name: "asyncJobTypeExportFile",
-        extension: ".ts",
+        extension:
+          codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
       },
       asyncJobTypeBarrelFile: {
         name: "asyncJobTypeBarrelFile",
-        extension: ".ts",
+        extension: codegenForTs.generatedCodeFileExtension,
       },
     } as const;
   }

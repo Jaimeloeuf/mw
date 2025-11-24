@@ -12,7 +12,7 @@ export class GenHttpControllerTypeDefinitions implements CogenieStep {
     return {
       httpControllerTypeDefinitions: {
         name: "httpControllerTypeDefinitions",
-        extension: ".ts",
+        extension: codegenForTs.generatedCodeFileExtension,
       },
     } as const;
   }

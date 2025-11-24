@@ -10,7 +10,7 @@ export class GenScriptsDoc implements CogenieStep {
     return {
       scripts: {
         name: "Scripts",
-        extension: ".md",
+        extension: codegenForDoc.generatedDocFileExtension,
       },
     } as const;
   }

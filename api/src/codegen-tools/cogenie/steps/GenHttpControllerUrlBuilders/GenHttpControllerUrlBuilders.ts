@@ -13,11 +13,12 @@ export class GenHttpControllerUrlBuilders implements CogenieStep {
     return {
       httpControllerUrlBuilders: {
         name: "httpControllerUrlBuilders",
-        extension: ".ts",
+        extension:
+          codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
       },
       urlBuilderBarrelFile: {
         name: "urlBuilderBarrelFile",
-        extension: ".ts",
+        extension: codegenForTs.generatedCodeFileExtension,
       },
     } as const;
   }

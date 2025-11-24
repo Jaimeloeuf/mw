@@ -12,7 +12,7 @@ export class GenStartupModuleRunner implements CogenieStep {
     return {
       startupModulesRunner: {
         name: "startupModulesRunner",
-        extension: ".ts",
+        extension: codegenForTs.generatedCodeFileExtension,
       },
     } as const;
   }

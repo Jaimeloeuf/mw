@@ -11,7 +11,7 @@ export class GenEntOperatorMapping implements CogenieStep {
     return {
       entOperatorMappingExportFile: {
         name: "entOperatorMapping",
-        extension: ".ts",
+        extension: codegenForTs.generatedCodeFileExtension,
       },
     } as const;
   }

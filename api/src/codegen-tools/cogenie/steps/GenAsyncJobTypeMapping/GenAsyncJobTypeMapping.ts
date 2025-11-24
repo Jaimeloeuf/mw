@@ -13,7 +13,7 @@ export class GenAsyncJobTypeMapping implements CogenieStep {
     return {
       asyncJobTypeMapping: {
         name: "asyncJobTypeMapping",
-        extension: ".ts",
+        extension: codegenForTs.generatedCodeFileExtension,
       },
     } as const;
   }

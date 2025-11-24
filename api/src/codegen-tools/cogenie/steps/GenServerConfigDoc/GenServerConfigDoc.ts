@@ -14,7 +14,7 @@ export class GenServerConfigDoc implements CogenieStep {
     return {
       serverConfigs: {
         name: "Server Configs",
-        extension: ".md",
+        extension: codegenForDoc.generatedDocFileExtension,
       },
     } as const;
   }

@@ -1,5 +1,7 @@
 import type { CogenieStep } from "../../CogenieStep.js";
 
+import { codegenForTs } from "../../../../codegen-lib/index.js";
+
 /**
  * THIS IS NOT A NORMAL COGENIE STEP!!!
  *
@@ -15,7 +17,7 @@ export class GenCodegenBarrelFile implements CogenieStep {
     return {
       codegenBarrelFile: {
         name: "index",
-        extension: ".ts",
+        extension: codegenForTs.generatedCodeFileExtension,
       },
     } as const;
   }

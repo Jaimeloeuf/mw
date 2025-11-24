@@ -19,11 +19,12 @@ export class GenInfraBarrelFile implements CogenieStep {
     return {
       infraExportFile: {
         name: "infraExportFile",
-        extension: ".ts",
+        extension:
+          codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
       },
       infraBarrelFile: {
         name: "infraBarrelFile",
-        extension: ".ts",
+        extension: codegenForTs.generatedCodeFileExtension,
       },
     } as const;
   }

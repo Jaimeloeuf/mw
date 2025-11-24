@@ -18,11 +18,12 @@ export class GenDataFunctionBarrelFile implements CogenieStep {
     return {
       dataFunctionsExportFile: {
         name: "dataFunctionsExportFile",
-        extension: ".ts",
+        extension:
+          codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
       },
       dataFunctionsBarrelFile: {
         name: "dataFunctionsBarrelFile",
-        extension: ".ts",
+        extension: codegenForTs.generatedCodeFileExtension,
       },
     } as const;
   }
