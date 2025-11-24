@@ -10,11 +10,17 @@ import { getHttpControllerFiles } from "../../utils/index.js";
  * controllers/ folder, so that other files that uses the controllers can easily
  * access it without having to import them manually.
  *
- * This allows users to do something like `import * as c from "./httpControllerBarrelFile.generated.js";`
+ * This allows users to do something like
+ * `import { httpControllers } from "../__generated/index.js";`
  */
 export class GenHttpControllerBarrelFile implements CogenieStep {
   getFiles() {
     return {
+      httpControllerExportFile: {
+        name: "httpControllerExportFile",
+        extension:
+          codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
+      },
       httpControllerBarrelFile: {
         name: "httpControllerBarrelFile",
         extension: codegenForTs.generatedCodeFileExtension,
@@ -40,11 +46,17 @@ export class GenHttpControllerBarrelFile implements CogenieStep {
     await codegenForTs.genAndSaveGeneratedCode(
       GenHttpControllerBarrelFile,
       generatedCode,
-      this.getFiles().httpControllerBarrelFile.name,
+      this.getFiles().httpControllerExportFile.name,
 
       // Do not re-export this in the barrel file, as this file will only be used
       // by other generated files.
       { doNotIncludeInGeneratedFolderBarrelFile: true },
+    );
+
+    await codegenForTs.genAndSaveGeneratedCode(
+      GenHttpControllerBarrelFile,
+      `export * as httpControllers from "./${this.getFiles().httpControllerExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
+      this.getFiles().httpControllerBarrelFile.name,
     );
   }
 }

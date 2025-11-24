@@ -6,7 +6,7 @@
  * GenHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256(bc99d6a5d1e43ab0fe228ecb3d458b4fdba0ba7f81d55cc2a7ebb536505af488)
+ * sha256(e35dac631d37a4e3cddcacd47a52a6bc6ac7f0cd741b5343cd96f7b14c2c43fe)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -14,7 +14,7 @@ import { Router } from "express";
 
 import { config } from "../config/index.js";
 import { logger } from "../logging/index.js";
-import * as c from "./httpControllerBarrelFile.generated.do_not_include_in_barrel_file.js";
+import { httpControllers as c } from "./httpControllerBarrelFile.generated.js";
 
 /**
  * Utility function to only register a HTTP route if it is not disabled via the

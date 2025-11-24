@@ -6,7 +6,7 @@ export const routeTableTemplate = (
 
 import { config } from "../config/index.js";
 import { logger } from "../logging/index.js";
-import * as c from "./httpControllerBarrelFile${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";
+import { httpControllers as c } from "./httpControllerBarrelFile${codegenForTs.generatedCodeFileExtensionForJsImport}";
 
 /**
  * Utility function to only register a HTTP route if it is not disabled via the
