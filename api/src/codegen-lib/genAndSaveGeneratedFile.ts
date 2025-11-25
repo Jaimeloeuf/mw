@@ -1,7 +1,7 @@
 import { createHash } from "crypto";
 import fs from "fs/promises";
 import path from "path";
-import * as prettier from "prettier";
+import { format as prettierFormatter } from "prettier";
 
 import type { GeneratedFileTarget } from "./GeneratedFileTarget.js";
 
@@ -36,7 +36,7 @@ export async function genAndSaveGeneratedFile({
   generatedFileTarget: GeneratedFileTarget;
   generatedFileRootDirPath: string;
 }) {
-  const generatedTextAfterFormatting = await prettier.format(generatedText, {
+  const generatedTextAfterFormatting = await prettierFormatter(generatedText, {
     // Use this to make prettier automatically use the right parser/formatter
     filepath: generatedFileTarget.extension,
   });

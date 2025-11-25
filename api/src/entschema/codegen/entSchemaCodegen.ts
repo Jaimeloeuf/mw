@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import * as prettier from "prettier";
+import { format as prettierFormatter } from "prettier";
 import ts from "typescript";
 
 import "../../global/bootstrapGlobalDefinitions.js";
@@ -41,7 +41,7 @@ async function entSchemaCodegen({
 
   const generatedCodeWithImports = imports + generatedCode;
 
-  const formattedFile = await prettier.format(generatedCodeWithImports, {
+  const formattedFile = await prettierFormatter(generatedCodeWithImports, {
     filepath: ".ts",
   });
 
