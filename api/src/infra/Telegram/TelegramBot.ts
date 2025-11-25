@@ -1,7 +1,7 @@
 import type { CommandData } from "./CommandData.js";
 import type { TelegramWebhookData } from "./telegramWebhookDataSchema.js";
 
-import { urlBuilder } from "../../__generated/index.js";
+import { httpControllerUrlBuilders } from "../../__generated/index.js";
 import { config } from "../../config/index.js";
 import { ServiceException } from "../../exceptions/index.js";
 import { logger } from "../../logging/index.js";
@@ -40,7 +40,7 @@ export abstract class TelegramBot {
 
     // Following telegram's recommendations to use bot token as path
     const urlObject = new URL(
-      urlBuilder.forWebhookTelegram({
+      httpControllerUrlBuilders.forWebhookTelegram({
         urlParams: {
           telegramWebhookSecretPath: config.tele_webhook_secret_path(),
           telegramBotToken,

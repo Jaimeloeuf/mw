@@ -6,8 +6,8 @@
  * GenHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(e60acbf354bde1c32141c6bcf6346aa90a0a30793547e88ba2f3def3ba339421)
+ * sha256(99e76c305256a6f8b4361ffaec948ead6218ebad9c9ca84a3fa9ed480d2da5fa)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
-export * as urlBuilder from "./httpControllerUrlBuilders.generated.do_not_include_in_barrel_file.js";
+export * as httpControllerUrlBuilders from "./httpControllerUrlBuilders.generated.do_not_include_in_barrel_file.js";

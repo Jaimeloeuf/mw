@@ -17,7 +17,7 @@ export class GenHttpControllerUrlBuilders implements CogenieStep {
           codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
       },
       urlBuilderBarrelFile: {
-        name: "urlBuilderBarrelFile",
+        name: "httpControllerUrlBuilderBarrelFile",
         extension: codegenForTs.generatedCodeFileExtension,
       },
     } as const;
@@ -70,7 +70,7 @@ ${urlBuilders}
 
     await codegenForTs.genAndSaveGeneratedCode(
       GenHttpControllerUrlBuilders,
-      `export * as urlBuilder from "./${this.getFiles().httpControllerUrlBuilders.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
+      `export * as httpControllerUrlBuilders from "./${this.getFiles().httpControllerUrlBuilders.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
       this.getFiles().urlBuilderBarrelFile.name,
     );
   }
