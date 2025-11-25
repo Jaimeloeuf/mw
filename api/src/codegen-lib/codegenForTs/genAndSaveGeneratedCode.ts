@@ -1,8 +1,6 @@
+import type { GeneratedFileTarget } from "../GeneratedFileTarget.js";
+
 import { genAndSaveGeneratedFile } from "../genAndSaveGeneratedFile.js";
-import {
-  generatedCodeFileExtension,
-  generatedCodeFileExtensionWithNoBarrelFileInclusion,
-} from "./generatedCodeFileExtension.js";
 import { generatedSrcDirPath } from "./generatedSrcDirPath.js";
 import { genGeneratedNotice } from "./genGeneratedNotice.js";
 import { getAllEslintRulesToDisable } from "./getAllEslintRulesToDisable.js";
@@ -22,10 +20,9 @@ import { getAllEslintRulesToDisable } from "./getAllEslintRulesToDisable.js";
 export function genAndSaveGeneratedCode(
   generator: Function,
   generatedCode: string,
-  generatedCodeFileName: string,
+  generatedFileTarget: GeneratedFileTarget,
   options?: {
     eslintRulesToDisable?: Array<string>;
-    doNotIncludeInGeneratedFolderBarrelFile?: true;
   },
 ) {
   const eslintRuleDisableString = getAllEslintRulesToDisable(
@@ -35,18 +32,11 @@ export function genAndSaveGeneratedCode(
   const generatedCodeWithEslintRuleDisableStringPrefix =
     eslintRuleDisableString + generatedCode;
 
-  const generatedTextFileNameExtension =
-    options?.doNotIncludeInGeneratedFolderBarrelFile
-      ? generatedCodeFileExtensionWithNoBarrelFileInclusion
-      : generatedCodeFileExtension;
-
   return genAndSaveGeneratedFile({
     generator,
     genGeneratedNotice,
     generatedText: generatedCodeWithEslintRuleDisableStringPrefix,
-    generatedTextFileType: ".ts",
+    generatedFileTarget,
     generatedFileRootDirPath: generatedSrcDirPath,
-    generatedTextFileName: generatedCodeFileName,
-    generatedTextFileNameExtension,
   });
 }

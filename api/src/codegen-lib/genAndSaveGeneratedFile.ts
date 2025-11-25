@@ -3,6 +3,8 @@ import fs from "fs/promises";
 import path from "path";
 import * as prettier from "prettier";
 
+import type { GeneratedFileTarget } from "./GeneratedFileTarget.js";
+
 import { logger } from "../logging/index.js";
 
 /**
@@ -25,22 +27,18 @@ export async function genAndSaveGeneratedFile({
   generator,
   genGeneratedNotice,
   generatedText,
-  generatedTextFileType,
+  generatedFileTarget,
   generatedFileRootDirPath,
-  generatedTextFileName,
-  generatedTextFileNameExtension,
 }: {
   generator: Function;
   genGeneratedNotice: (generator: Function, hash: string) => string;
   generatedText: string;
-  generatedTextFileType: ".ts" | ".md";
+  generatedFileTarget: GeneratedFileTarget;
   generatedFileRootDirPath: string;
-  generatedTextFileName: string;
-  generatedTextFileNameExtension: string;
 }) {
   const generatedTextAfterFormatting = await prettier.format(generatedText, {
     // Use this to make prettier automatically use the right parser/formatter
-    filepath: generatedTextFileType,
+    filepath: generatedFileTarget.extension,
   });
 
   const noticeWithoutHash = genGeneratedNotice(generator, "");
@@ -58,7 +56,7 @@ export async function genAndSaveGeneratedFile({
 
   const fullyGeneratedText = notice + generatedTextAfterFormatting;
 
-  const fileNameWithExtension = `${generatedTextFileName}${generatedTextFileNameExtension}`;
+  const fileNameWithExtension = `${generatedFileTarget.name}${generatedFileTarget.extension}`;
 
   const filePath = path.join(generatedFileRootDirPath, fileNameWithExtension);
 
@@ -68,7 +66,5 @@ export async function genAndSaveGeneratedFile({
 
   return {
     filePath,
-    fileName: generatedTextFileName,
-    fileNameWithExtension,
   };
 }

@@ -43,17 +43,13 @@ export class GenAsyncJobTypeBarrelFile implements CogenieStep {
     await codegenForTs.genAndSaveGeneratedCode(
       GenAsyncJobTypeBarrelFile,
       generatedCode,
-      this.getFiles().asyncJobTypeExportFile.name,
-
-      // Do not re-export this in the barrel file, as we want users to access all
-      // the infra modules via the `infra` symbol as defined below.
-      { doNotIncludeInGeneratedFolderBarrelFile: true },
+      this.getFiles().asyncJobTypeExportFile,
     );
 
     await codegenForTs.genAndSaveGeneratedCode(
       GenAsyncJobTypeBarrelFile,
       `export * as asyncJob from "./${this.getFiles().asyncJobTypeExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
-      this.getFiles().asyncJobTypeBarrelFile.name,
+      this.getFiles().asyncJobTypeBarrelFile,
     );
   }
 }

@@ -46,17 +46,13 @@ export class GenHttpControllerBarrelFile implements CogenieStep {
     await codegenForTs.genAndSaveGeneratedCode(
       GenHttpControllerBarrelFile,
       generatedCode,
-      this.getFiles().httpControllerExportFile.name,
-
-      // Do not re-export this in the barrel file, as this file will only be used
-      // by other generated files.
-      { doNotIncludeInGeneratedFolderBarrelFile: true },
+      this.getFiles().httpControllerExportFile,
     );
 
     await codegenForTs.genAndSaveGeneratedCode(
       GenHttpControllerBarrelFile,
       `export * as httpControllers from "./${this.getFiles().httpControllerExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
-      this.getFiles().httpControllerBarrelFile.name,
+      this.getFiles().httpControllerBarrelFile,
     );
   }
 }

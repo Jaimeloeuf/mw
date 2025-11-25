@@ -35,7 +35,7 @@ export const entOperatorsMapping: Record<string, EntCrudOperator<BaseEnt>> = {
     await codegenForTs.genAndSaveGeneratedCode(
       GenEntOperatorMapping,
       generatedCode,
-      this.getFiles().entOperatorMappingExportFile.name,
+      this.getFiles().entOperatorMappingExportFile,
     );
   }
 }

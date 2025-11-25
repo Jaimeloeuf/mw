@@ -53,7 +53,7 @@ ${scripts}`;
     await codegenForDoc.genAndSaveGeneratedDoc(
       GenScriptsDoc,
       generatedDoc,
-      this.getFiles().scripts.name,
+      this.getFiles().scripts,
     );
   }
 }

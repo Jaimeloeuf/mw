@@ -1,6 +1,7 @@
+import type { GeneratedFileTarget } from "../GeneratedFileTarget.js";
+
 import { genAndSaveGeneratedFile } from "../genAndSaveGeneratedFile.js";
 import { generatedDocDirPath } from "./generatedDocDirPath.js";
-import { generatedDocFileExtension } from "./generatedDocFileExtension.js";
 import { genGeneratedNotice } from "./genGeneratedNotice.js";
 
 /**
@@ -18,15 +19,13 @@ import { genGeneratedNotice } from "./genGeneratedNotice.js";
 export function genAndSaveGeneratedDoc(
   generator: Function,
   generatedDoc: string,
-  generatedDocFileName: string,
+  generatedFileTarget: GeneratedFileTarget,
 ) {
   return genAndSaveGeneratedFile({
     generator,
     genGeneratedNotice,
     generatedText: generatedDoc,
-    generatedTextFileType: ".md",
+    generatedFileTarget,
     generatedFileRootDirPath: generatedDocDirPath,
-    generatedTextFileName: generatedDocFileName,
-    generatedTextFileNameExtension: generatedDocFileExtension,
   });
 }

@@ -46,17 +46,13 @@ export class GenDataFunctionBarrelFile implements CogenieStep {
     await codegenForTs.genAndSaveGeneratedCode(
       GenDataFunctionBarrelFile,
       generatedCode,
-      this.getFiles().dataFunctionsExportFile.name,
-
-      // Do not re-export this in the barrel file, as we want users to access all
-      // the data functions via the `df` symbol as defined below.
-      { doNotIncludeInGeneratedFolderBarrelFile: true },
+      this.getFiles().dataFunctionsExportFile,
     );
 
     await codegenForTs.genAndSaveGeneratedCode(
       GenDataFunctionBarrelFile,
       `export * as df from "./${this.getFiles().dataFunctionsExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
-      this.getFiles().dataFunctionsBarrelFile.name,
+      this.getFiles().dataFunctionsBarrelFile,
     );
   }
 }

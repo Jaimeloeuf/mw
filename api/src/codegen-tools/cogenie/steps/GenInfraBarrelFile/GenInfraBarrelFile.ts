@@ -44,17 +44,13 @@ export class GenInfraBarrelFile implements CogenieStep {
     await codegenForTs.genAndSaveGeneratedCode(
       GenInfraBarrelFile,
       generatedCode,
-      this.getFiles().infraExportFile.name,
-
-      // Do not re-export this in the barrel file, as we want users to access all
-      // the infra modules via the `infra` symbol as defined below.
-      { doNotIncludeInGeneratedFolderBarrelFile: true },
+      this.getFiles().infraExportFile,
     );
 
     await codegenForTs.genAndSaveGeneratedCode(
       GenInfraBarrelFile,
       `export * as infra from "./${this.getFiles().infraExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
-      this.getFiles().infraBarrelFile.name,
+      this.getFiles().infraBarrelFile,
     );
   }
 }

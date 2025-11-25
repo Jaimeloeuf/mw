@@ -39,17 +39,13 @@ export class GenEntBarrelFile implements CogenieStep {
     await codegenForTs.genAndSaveGeneratedCode(
       GenEntBarrelFile,
       generatedCode,
-      this.getFiles().entsExportFile.name,
-
-      // Do not re-export this in the barrel file, as we want users to access
-      // all the Ents via the `ents` symbol as defined below.
-      { doNotIncludeInGeneratedFolderBarrelFile: true },
+      this.getFiles().entsExportFile,
     );
 
     await codegenForTs.genAndSaveGeneratedCode(
       GenEntBarrelFile,
       `export * as ents from "./${this.getFiles().entsExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
-      this.getFiles().entsBarrelFile.name,
+      this.getFiles().entsBarrelFile,
     );
   }
 }

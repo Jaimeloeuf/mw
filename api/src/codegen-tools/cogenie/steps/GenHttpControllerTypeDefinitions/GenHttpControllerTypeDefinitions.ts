@@ -55,17 +55,13 @@ ${typeDefinitions}
     await codegenForTs.genAndSaveGeneratedCode(
       GenHttpControllerTypeDefinitions,
       generatedCode,
-      this.getFiles().httpControllerTypeDefinitions.name,
-
-      // Do not re-export this in the barrel file, as we want users to access all
-      // the URL Builder functions via the `urlBuilder` symbol as defined below.
-      { doNotIncludeInGeneratedFolderBarrelFile: true },
+      this.getFiles().httpControllerTypeDefinitions,
     );
 
     await codegenForTs.genAndSaveGeneratedCode(
       GenHttpControllerTypeDefinitions,
       `export * as httpControllerTypeDefinitions from "./${this.getFiles().httpControllerTypeDefinitions.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
-      this.getFiles().httpControllerTypeDefinitionBarrelFile.name,
+      this.getFiles().httpControllerTypeDefinitionBarrelFile,
     );
   }
 }

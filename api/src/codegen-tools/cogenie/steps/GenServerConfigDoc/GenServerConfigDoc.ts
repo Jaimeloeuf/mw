@@ -52,7 +52,7 @@ ${generatedConfigRows}`;
     await codegenForDoc.genAndSaveGeneratedDoc(
       GenServerConfigDoc,
       generatedCode,
-      this.getFiles().serverConfigs.name,
+      this.getFiles().serverConfigs,
     );
   }
 }

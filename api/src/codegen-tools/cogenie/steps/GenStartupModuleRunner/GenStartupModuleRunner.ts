@@ -25,7 +25,7 @@ export class GenStartupModuleRunner implements CogenieStep {
     await codegenForTs.genAndSaveGeneratedCode(
       GenStartupModuleRunner,
       generatedCode,
-      this.getFiles().startupModulesRunner.name,
+      this.getFiles().startupModulesRunner,
     );
   }
 

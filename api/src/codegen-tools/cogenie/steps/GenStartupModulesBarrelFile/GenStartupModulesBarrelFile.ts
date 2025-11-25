@@ -43,17 +43,13 @@ export class GenStartupModulesBarrelFile implements CogenieStep {
     await codegenForTs.genAndSaveGeneratedCode(
       GenStartupModulesBarrelFile,
       generatedCode,
-      this.getFiles().startupModulesExportFile.name,
-
-      // Do not re-export this in the barrel file, as we want users to access all
-      // the service functions via the `st` symbol as defined below.
-      { doNotIncludeInGeneratedFolderBarrelFile: true },
+      this.getFiles().startupModulesExportFile,
     );
 
     await codegenForTs.genAndSaveGeneratedCode(
       GenStartupModulesBarrelFile,
       `export * as st from "./${this.getFiles().startupModulesExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
-      this.getFiles().startupModulesBarrelFile.name,
+      this.getFiles().startupModulesBarrelFile,
     );
   }
 }

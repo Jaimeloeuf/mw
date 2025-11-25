@@ -43,17 +43,13 @@ export class GenServiceBarrelFile implements CogenieStep {
     await codegenForTs.genAndSaveGeneratedCode(
       GenServiceBarrelFile,
       generatedCode,
-      this.getFiles().serviceExportFile.name,
-
-      // Do not re-export this in the barrel file, as we want users to access all
-      // the service functions via the `sv` symbol as defined below.
-      { doNotIncludeInGeneratedFolderBarrelFile: true },
+      this.getFiles().serviceExportFile,
     );
 
     await codegenForTs.genAndSaveGeneratedCode(
       GenServiceBarrelFile,
       `export * as sv from "./${this.getFiles().serviceExportFile.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
-      this.getFiles().serviceBarrelFile.name,
+      this.getFiles().serviceBarrelFile,
     );
   }
 }

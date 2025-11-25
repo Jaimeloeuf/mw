@@ -30,5 +30,13 @@ export async function genCodegenBarrelFile() {
       .join("\n") +
     "\n";
 
-  await genAndSaveGeneratedCode(genCodegenBarrelFile, generatedCode, "index");
+  await genAndSaveGeneratedCode(
+    genCodegenBarrelFile,
+    generatedCode,
+    // @todo Should reuse the GeneratedFileTarget object in GenCodegenBarrelFile cogenie step
+    {
+      name: "index",
+      extension: ".generated.ts",
+    },
+  );
 }

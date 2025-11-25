@@ -39,7 +39,10 @@ export class GenStandaloneHttpControllerUrlBuilders implements CogenieStep {
 export type UrlBuilderOptions<T> = VoidIfAllPropertiesInObjectIsVoid<
   RemoveMapKeyIfNever<T>
 >;`,
-      "../next/app/__generated_urlBuilders/UrlBuilderOptions",
+      {
+        name: "../next/app/__generated_urlBuilders/UrlBuilderOptions",
+        extension: ".generated.ts",
+      },
     );
 
     await codegenForTs.genAndSaveGeneratedCode(
@@ -59,7 +62,10 @@ export type UrlBuilderOptions<T> = VoidIfAllPropertiesInObjectIsVoid<
 
   return "?" + queryParams.toString();
 }`,
-      "../next/app/__generated_urlBuilders/createUrlQueryParamsString",
+      {
+        name: "../next/app/__generated_urlBuilders/createUrlQueryParamsString",
+        extension: ".generated.ts",
+      },
     );
 
     const urlBuilderWrites = controllerFiles.map(async (controllerFile) => {
@@ -71,7 +77,10 @@ export type UrlBuilderOptions<T> = VoidIfAllPropertiesInObjectIsVoid<
         urlBuilderTemplate(controllerFile, urlBuilderName),
 
         // Unlike other generated files, this is generated in the "next" folder
-        `../../next/app/__generated_urlBuilders/${urlBuilderName}`,
+        {
+          name: `../../next/app/__generated_urlBuilders/${urlBuilderName}`,
+          extension: ".generated.ts",
+        },
       );
     });
 

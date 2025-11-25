@@ -32,7 +32,7 @@ export class GenHttpRoutesTable implements CogenieStep {
     await codegenForTs.genAndSaveGeneratedCode(
       GenHttpRoutesTable,
       generatedCode,
-      this.getFiles().registerRoutesAndControllers.name,
+      this.getFiles().registerRoutesAndControllers,
     );
   }
 }

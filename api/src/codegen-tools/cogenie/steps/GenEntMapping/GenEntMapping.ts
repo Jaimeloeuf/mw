@@ -38,7 +38,7 @@ export const entMapping: Record<
     await codegenForTs.genAndSaveGeneratedCode(
       GenEntMapping,
       generatedCode,
-      this.getFiles().entMappingExportFile.name,
+      this.getFiles().entMappingExportFile,
     );
   }
 }

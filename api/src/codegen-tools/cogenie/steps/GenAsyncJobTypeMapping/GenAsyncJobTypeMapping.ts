@@ -48,7 +48,7 @@ export const asyncJobTypeMapping: Record<
     await codegenForTs.genAndSaveGeneratedCode(
       GenAsyncJobTypeMapping,
       generatedCode,
-      this.getFiles().asyncJobTypeMapping.name,
+      this.getFiles().asyncJobTypeMapping,
     );
   }
 }
