@@ -12,6 +12,11 @@ export class GenHttpControllerTypeDefinitions implements CogenieStep {
     return {
       httpControllerTypeDefinitions: {
         name: "httpControllerTypeDefinitions",
+        extension:
+          codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusion,
+      },
+      httpControllerTypeDefinitionBarrelFile: {
+        name: "httpControllerTypeDefinitionBarrelFile",
         extension: codegenForTs.generatedCodeFileExtension,
       },
     } as const;
@@ -51,6 +56,16 @@ ${typeDefinitions}
       GenHttpControllerTypeDefinitions,
       generatedCode,
       this.getFiles().httpControllerTypeDefinitions.name,
+
+      // Do not re-export this in the barrel file, as we want users to access all
+      // the URL Builder functions via the `urlBuilder` symbol as defined below.
+      { doNotIncludeInGeneratedFolderBarrelFile: true },
+    );
+
+    await codegenForTs.genAndSaveGeneratedCode(
+      GenHttpControllerTypeDefinitions,
+      `export * as httpControllerTypeDefinitions from "./${this.getFiles().httpControllerTypeDefinitions.name}${codegenForTs.generatedCodeFileExtensionWithNoBarrelFileInclusionForJsImport}";\n`,
+      this.getFiles().httpControllerTypeDefinitionBarrelFile.name,
     );
   }
 }

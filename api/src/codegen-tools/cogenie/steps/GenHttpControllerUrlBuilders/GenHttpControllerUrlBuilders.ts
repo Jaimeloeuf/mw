@@ -33,7 +33,7 @@ export class GenHttpControllerUrlBuilders implements CogenieStep {
   VoidIfAllPropertiesInObjectIsVoid,
 } from "../types/index.js";
 import { config } from "../config/index.js";
-import type * as t from "./httpControllerTypeDefinitions${codegenForTs.generatedCodeFileExtensionForJsImport}";
+import type { httpControllerTypeDefinitions as t } from "./httpControllerTypeDefinitionBarrelFile${codegenForTs.generatedCodeFileExtensionForJsImport}";
 
 type UrlBuilderOptions<T> = VoidIfAllPropertiesInObjectIsVoid<
   RemoveMapKeyIfNever<T>
