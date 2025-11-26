@@ -1,3 +1,5 @@
+import type { Dirent } from "fs";
+
 import fs from "fs/promises";
 
 import { codegenForTs, codegenForDoc } from "../../codegen-lib/index.js";
@@ -40,4 +42,23 @@ export async function getGeneratedFilesDirent() {
   ];
 
   return generatedFilesDirent;
+}
+
+let cachedValue: $Nullable<Readonly<Promise<ReadonlyArray<Dirent<string>>>>> =
+  null;
+
+/**
+ * Cached version of `getGeneratedFilesDirent`.
+ *
+ * Always return the single cachedValue promise and let the callers resolve
+ * themselves but only ever call `getGeneratedFilesDirent` once.
+ *
+ * This is usually cacheable because we do not expect generated files to change
+ * during a single run of codegen tools.
+ */
+export async function getCachedGeneratedFilesDirent() {
+  if (cachedValue === null) {
+    cachedValue = getGeneratedFilesDirent();
+  }
+  return cachedValue;
 }
