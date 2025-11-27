@@ -4,6 +4,9 @@ import fs from "fs/promises";
 
 import { codegenForTs, codegenForDoc } from "../../codegen-lib/index.js";
 
+/**
+ * Get all cogenie steps generated files.
+ */
 export async function getGeneratedFilesDirent() {
   const generatedCodeFilesDirent = await fs
     .readdir(codegenForTs.generatedSrcDirPath, {
