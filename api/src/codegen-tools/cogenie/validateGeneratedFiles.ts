@@ -3,7 +3,7 @@ import fs from "fs/promises";
 import path from "path";
 
 import { logger } from "../../logging/Logger.js";
-import { getGeneratedFilesDirent } from "./getGeneratedFilesDirent.js";
+import { getCachedGeneratedFilesDirent } from "./getGeneratedFilesDirent.js";
 import { getStaleGeneratedFiles } from "./getStaleGeneratedFiles.js";
 
 type GeneratedFilesWithHash = {
@@ -25,7 +25,7 @@ type GeneratedFilesWithMaybeHash =
  * have been manually modified.
  */
 export async function validateGeneratedFiles() {
-  const generatedFilesDirent = await getGeneratedFilesDirent();
+  const generatedFilesDirent = await getCachedGeneratedFilesDirent();
 
   const generatedFiles: Array<GeneratedFilesWithMaybeHash> = await Promise.all(
     generatedFilesDirent.map(async function (file) {
