@@ -4,6 +4,7 @@ import path from "path";
 
 import { logger } from "../../logging/Logger.js";
 import { getGeneratedFilesDirent } from "./getGeneratedFilesDirent.js";
+import { getStaleGeneratedFiles } from "./getStaleGeneratedFiles.js";
 
 type GeneratedFilesWithHash = {
   name: string;
@@ -59,7 +60,14 @@ export async function validateGeneratedFiles() {
     generatedFilesWithHash,
   );
 
-  if (generatedFilesHaveHash && generatedFilesHaveValidHash) {
+  const generatedFilesAreNotStale =
+    await validateGeneratedFilesAreNotStale(generatedFiles);
+
+  if (
+    generatedFilesHaveHash &&
+    generatedFilesHaveValidHash &&
+    generatedFilesAreNotStale
+  ) {
     logger.info(
       validateGeneratedFiles.name,
       `All ${generatedFiles.length} Cogenie generated files are valid`,
@@ -122,6 +130,30 @@ function validateGeneratedFilesHaveValidHash(
     logger.error(
       validateGeneratedFiles.name,
       `Error ${i + 1}: ${modifiedFiles[i]!.name}`,
+    );
+  }
+
+  return false;
+}
+
+async function validateGeneratedFilesAreNotStale(
+  generatedFiles: Array<GeneratedFilesWithMaybeHash>,
+) {
+  const staleGeneratedFiles = await getStaleGeneratedFiles();
+
+  if (staleGeneratedFiles.length === 0) {
+    return true;
+  }
+
+  logger.error(
+    validateGeneratedFiles.name,
+    `${staleGeneratedFiles.length}/${generatedFiles.length} generated files are stale:`,
+  );
+
+  for (let i = 0; i < staleGeneratedFiles.length; i++) {
+    logger.error(
+      validateGeneratedFiles.name,
+      `Stale file ${i + 1}: ${staleGeneratedFiles[i]!.name}`,
     );
   }
 
