@@ -21,8 +21,7 @@ type GeneratedFilesWithMaybeHash =
   | GeneratedFilesWithoutHash;
 
 /**
- * Look for all generated files and check if they are valid by checking if they
- * have been manually modified.
+ * Validate generated files across a few criterias.
  */
 export async function validateGeneratedFiles() {
   const generatedFilesDirent = await getCachedGeneratedFilesDirent();
