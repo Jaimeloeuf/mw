@@ -59,7 +59,7 @@ export default [
       "mwEslintPlugin/httpController": "error",
       "mwEslintPlugin/cogenie-step-class-and-module-same-name": "error",
       "mwEslintPlugin/startup-function-and-module-same-name": "error",
-      "mwEslintPlugin/generated-file-is-valid": "error",
+      "mwEslintPlugin/cogenie-step-generated-file-is-valid": "error",
     },
     plugins: {
       perfectionist,

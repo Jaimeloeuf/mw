@@ -6,7 +6,7 @@ module.exports = {
     type: "problem",
     docs: {
       description:
-        "Ensure that all generated (codegened) files are valid, by checking if the hash is correct.",
+        "Ensure that all cogenie steps generated files are valid by checking if the hash is correct.",
     },
     fixable: "code",
     schema: [],
@@ -50,13 +50,17 @@ module.exports = {
   },
 };
 
-const generatedFilesFolderPath = path.join(__dirname, `../src/__generated`);
+const generatedCodeFolderPath = path.join(__dirname, `../src/__generated`);
 
 function isGeneratedFile(filePath) {
-  const relativePath = path.relative(generatedFilesFolderPath, filePath);
-  return (
+  const relativePath = path.relative(generatedCodeFolderPath, filePath);
+
+  const isGeneratedCodeFile =
     relativePath &&
     !relativePath.startsWith("..") &&
-    !path.isAbsolute(relativePath)
-  );
+    !path.isAbsolute(relativePath) &&
+    (filePath.endsWith(".generated.ts") ||
+      filePath.endsWith(".generated.do_not_include_in_barrel_file.ts"));
+
+  return isGeneratedCodeFile;
 }

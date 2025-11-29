@@ -8,6 +8,6 @@ module.exports = {
     httpController: require("./httpController.cjs"),
     "cogenie-step-class-and-module-same-name": require("./cogenie-step-class-and-module-same-name.cjs"),
     "startup-function-and-module-same-name": require("./startup-function-and-module-same-name.cjs"),
-    "generated-file-is-valid": require("./generated-file-is-valid.cjs"),
+    "cogenie-step-generated-file-is-valid": require("./cogenie-step-generated-file-is-valid.cjs"),
   },
 };
