@@ -57,7 +57,7 @@ export default [
       "mwEslintPlugin/require-function-name-for-addJob": "error",
       "mwEslintPlugin/dataFn": "error",
       "mwEslintPlugin/httpController": "error",
-      "mwEslintPlugin/codegen-function-and-module-same-name": "error",
+      "mwEslintPlugin/cogenie-step-class-and-module-same-name": "error",
       "mwEslintPlugin/startup-function-and-module-same-name": "error",
       "mwEslintPlugin/generated-file-is-valid": "error",
     },
