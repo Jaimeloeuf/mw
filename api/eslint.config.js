@@ -57,9 +57,10 @@ export default [
       "mwEslintPlugin/require-function-name-for-addJob": "error",
       "mwEslintPlugin/dataFn": "error",
       "mwEslintPlugin/httpController": "error",
-      "mwEslintPlugin/cogenie-step-class-and-module-same-name": "error",
       "mwEslintPlugin/startup-function-and-module-same-name": "error",
+      "mwEslintPlugin/cogenie-step-class-and-module-same-name": "error",
       "mwEslintPlugin/cogenie-step-generated-file-is-valid": "error",
+      "mwEslintPlugin/codegen-code-not-imported-outside": "error",
     },
     plugins: {
       perfectionist,

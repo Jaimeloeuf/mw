@@ -9,5 +9,6 @@ module.exports = {
     "cogenie-step-class-and-module-same-name": require("./cogenie-step-class-and-module-same-name.cjs"),
     "startup-function-and-module-same-name": require("./startup-function-and-module-same-name.cjs"),
     "cogenie-step-generated-file-is-valid": require("./cogenie-step-generated-file-is-valid.cjs"),
+    "codegen-code-not-imported-outside": require("./codegen-code-not-imported-outside.cjs"),
   },
 };
