@@ -1,3 +1,5 @@
+import "../global/bootstrapGlobalDefinitions.js";
+
 import fs from "fs";
 import path from "path";
 import pc from "picocolors";

@@ -22,11 +22,11 @@
     "scratchpad": "npx tsx ./src/scripts/scratchpad.ts",
     "scratchpad-watch": "npx tsx watch ./src/scripts/scratchpad.ts",
     "scripts:entschema-codegen": "npx tsx ./src/entschema/codegen/entSchemaCodegenCli.ts",
-    "scripts:create-http-controller": "npx tsx ./src/scripts/create-http-controller.ts",
     "ngrok": "ngrok http http://localhost:3000",
     "codegen:cogenie": "npx tsx ./src/codegen-tools/cogenie/cli.ts",
     "codegen:create-ent": "npx tsx ./src/codegen-tools/create-ent.ts",
-    "codegen:create-async-job": "npx tsx ./src/codegen-tools/create-async-job.ts"
+    "codegen:create-async-job": "npx tsx ./src/codegen-tools/create-async-job.ts",
+    "codegen:create-http-controller": "npx tsx ./src/codegen-tools/create-http-controller.ts"
   },
   "engines": {
     "node": ">=22.0.0"
