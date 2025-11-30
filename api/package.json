@@ -24,6 +24,7 @@
     "scripts:entschema-codegen": "npx tsx ./src/entschema/codegen/entSchemaCodegenCli.ts",
     "ngrok": "ngrok http http://localhost:3000",
     "codegen:cogenie": "npx tsx ./src/codegen-tools/cogenie/cli.ts",
+    "codegen:scaffoldr": "npx tsx ./src/codegen-tools/scaffoldr/cli.ts",
     "codegen:create-ent": "npx tsx ./src/codegen-tools/create-ent.ts",
     "codegen:create-async-job": "npx tsx ./src/codegen-tools/create-async-job.ts",
     "codegen:create-http-controller": "npx tsx ./src/codegen-tools/create-http-controller.ts"
