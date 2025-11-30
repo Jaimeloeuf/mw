@@ -1,14 +1,16 @@
+import "../global/bootstrapGlobalDefinitions.js";
+
 import fs from "fs/promises";
 import path from "path";
 import readline from "readline/promises";
 
 import { entMapping } from "../__generated/index.js";
+import { logger } from "../logging/index.js";
+import { pseudoRandomAlphanumericString } from "../utils/index.js";
 import {
   cogenieRunAllSteps,
   showGitStatusOfGeneratedFiles,
-} from "../codegen-tools/cogenie/index.js";
-import { logger } from "../logging/index.js";
-import { pseudoRandomAlphanumericString } from "../utils/index.js";
+} from "./cogenie/index.js";
 
 async function createEnt() {
   const rl = readline.createInterface({
