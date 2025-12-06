@@ -1,8 +1,7 @@
 import "../../global/bootstrapGlobalDefinitions.js";
-import { logger } from "../../logging/index.js";
-// import { runScaffoldrModule } from "./runScaffoldrModule.js";
 import { printAllScaffoldrModules } from "./printAllScaffoldrModules.js";
 import { printScaffoldrCliHelp } from "./printScaffoldrCliHelp.js";
+import { runScaffoldrModule } from "./runScaffoldrModule.js";
 
 async function scaffoldrCli() {
   // No extra arguments, show help menu
@@ -19,16 +18,13 @@ async function scaffoldrCli() {
     return;
   }
 
-  // List out all cogenie steps
+  // List out all scaffoldr modules
   if (arg === "list") {
     await printAllScaffoldrModules();
     return;
   }
 
-  // await runScaffoldrModule(arg);
-
-  logger.error(scaffoldrCli.name, `Invalid cogenie argument: ${arg}\n`);
-  printScaffoldrCliHelp();
+  await runScaffoldrModule(arg);
 }
 
 scaffoldrCli();
