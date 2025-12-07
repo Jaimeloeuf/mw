@@ -47,7 +47,7 @@ export type ${file.name}Controller_OutputFullDTO =
 
     const generatedCode = `import type { z } from "zod";
 import type { JSendSuccess } from "../http/JSend.js";
-import { httpControllers as c } from "./httpControllerBarrelFile${codegenForTs.generatedCodeFileExtensionForJsImport}";
+import type { httpControllers as c } from "./httpControllerBarrelFile${codegenForTs.generatedCodeFileExtensionForJsImport}";
 
 ${typeDefinitions}
 `;

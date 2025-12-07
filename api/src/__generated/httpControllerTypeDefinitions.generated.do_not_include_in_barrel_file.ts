@@ -6,13 +6,13 @@
  * GenHttpControllerTypeDefinitions
  *
  * Generated hash in hex for code after this section is:
- * sha256(c6ac5ff4318b934a87c331df47ff11aabab3c4c025aff58d4ff03c561e87390e)
+ * sha256(0ccc5125dce4d2432f91db951a0b46cb6c9d339738f3bbf09dc266949738a580)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
 import type { z } from "zod";
 import type { JSendSuccess } from "../http/JSend.js";
-import { httpControllers as c } from "./httpControllerBarrelFile.generated.js";
+import type { httpControllers as c } from "./httpControllerBarrelFile.generated.js";
 
 export type healthCheckController_UrlParams = z.infer<
   NonNullable<(typeof c.healthCheck)["urlParamsValidator"]>
