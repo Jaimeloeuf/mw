@@ -51,6 +51,18 @@ export default [
           default: "generic",
         },
       ],
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          args: "all",
+          argsIgnorePattern: "^_",
+          caughtErrors: "all",
+          caughtErrorsIgnorePattern: "^_",
+          destructuredArrayIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          ignoreRestSiblings: true,
+        },
+      ],
       // Potentially helpful when doing codegen with manual sections for users
       // to fill in before committing.
       // "no-warning-comments": [
