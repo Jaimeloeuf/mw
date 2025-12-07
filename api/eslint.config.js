@@ -44,6 +44,13 @@ export default [
       ],
       "default-case": "error",
       curly: "error",
+      "@typescript-eslint/array-type": [
+        "error",
+        {
+          // Prefer Array<T> over T[]
+          default: "generic",
+        },
+      ],
       // Potentially helpful when doing codegen with manual sections for users
       // to fill in before committing.
       // "no-warning-comments": [

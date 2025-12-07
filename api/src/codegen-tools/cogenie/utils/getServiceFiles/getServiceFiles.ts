@@ -46,7 +46,8 @@ async function generateServiceFiles() {
   return files;
 }
 
-let cachedFiles: $Nullable<Readonly<Promise<readonly ServiceFile[]>>> = null;
+let cachedFiles: $Nullable<Readonly<Promise<ReadonlyArray<ServiceFile>>>> =
+  null;
 
 /**
  * Always return the single cachedFiles promise and let the callers resolve

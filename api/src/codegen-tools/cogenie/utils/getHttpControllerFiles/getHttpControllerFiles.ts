@@ -74,8 +74,9 @@ async function generateHttpControllerFiles() {
   return sortedFiles;
 }
 
-let cachedFiles: $Nullable<Readonly<Promise<readonly HttpControllerFile[]>>> =
-  null;
+let cachedFiles: $Nullable<
+  Readonly<Promise<ReadonlyArray<HttpControllerFile>>>
+> = null;
 
 /**
  * Always return the single cachedFiles promise and let the callers resolve

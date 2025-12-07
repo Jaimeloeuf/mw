@@ -49,7 +49,7 @@ async function generateDataFunctionFiles() {
   return files;
 }
 
-let cachedFiles: $Nullable<Readonly<Promise<readonly DataFunctionFile[]>>> =
+let cachedFiles: $Nullable<Readonly<Promise<ReadonlyArray<DataFunctionFile>>>> =
   null;
 
 /**

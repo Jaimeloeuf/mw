@@ -46,7 +46,7 @@ async function generateInfraFiles() {
   return files;
 }
 
-let cachedFiles: $Nullable<Readonly<Promise<readonly InfraFile[]>>> = null;
+let cachedFiles: $Nullable<Readonly<Promise<ReadonlyArray<InfraFile>>>> = null;
 
 /**
  * Always return the single cachedFiles promise and let the callers resolve
