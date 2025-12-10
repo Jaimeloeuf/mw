@@ -58,7 +58,9 @@ export default Scaffoldr({
 
     logger.info(Scaffoldr.name, `Created AsyncJob: ${asyncJobFilePath}`);
     logger.info(Scaffoldr.name, `Please update the AsyncJob file details.`);
+  },
 
+  async onSave() {
     // Trigger codegen for the new AsyncJob
     // @todo Should only run 1 step
     await cogenieRunAllSteps();

@@ -54,9 +54,12 @@ export default Scaffoldr({
       Scaffoldr.name,
       `Created controller file: ${controllerFilePath}`,
     );
+  },
+
+  async onSave() {
+    // Not running codegen for them since they need to update the contents first
     logger.info(
       Scaffoldr.name,
-      // @todo Maybe an onSave method to help run this???
       `Please update the controller file details and run "npm run codegen:cogenie all" to update the generated files`,
     );
   },

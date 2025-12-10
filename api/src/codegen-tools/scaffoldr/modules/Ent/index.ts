@@ -76,7 +76,9 @@ export default Scaffoldr({
 
     logger.info(Scaffoldr.name, `Created Ent Folder: ${entFolderPath}`);
     logger.info(Scaffoldr.name, `Please update the Ent file details.`);
+  },
 
+  async onSave() {
     // Trigger codegen for the new Ent
     // @todo Should only run 1 step
     await cogenieRunAllSteps();
