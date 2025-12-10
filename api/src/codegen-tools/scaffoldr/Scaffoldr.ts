@@ -1,3 +1,4 @@
+import fs from "fs";
 import readline from "readline/promises";
 
 import { logger } from "../../logging/Logger.js";
@@ -22,6 +23,11 @@ type InputConfig<T> = {
   validateAndTransformInput(input: string): T;
 };
 
+type FileToGenerate = {
+  path: string;
+  generatedCode: string;
+};
+
 export function Scaffoldr<
   const InputConfigs extends Readonly<$NonEmptyArray<InputConfig<any>>>,
   const InputNames extends InputConfigs[number]["name"],
@@ -38,9 +44,12 @@ export function Scaffoldr<
 
   /**
    * Your main codegen method that will be called with the inputs object with
-   * validated and transformed values if reading user inputs is successful
+   * validated and transformed values if reading user inputs is successful.
+   * This expects your generated function to return the files to generate.
    */
-  generate(inputs: Inputs): void | Promise<void>;
+  generate(
+    inputs: Inputs,
+  ): void | Array<FileToGenerate> | Promise<void | Array<FileToGenerate>>;
 
   /**
    * Callback function that is ran after all the generated files are saved.
@@ -73,9 +82,21 @@ export function Scaffoldr<
 
       const inputs = partialInputs as Inputs;
 
-      await config.generate(inputs);
+      const filesToGenerate = await config.generate(inputs);
+
+      if (filesToGenerate !== undefined) {
+        for (const file of filesToGenerate) {
+          fs.writeFileSync(file.path, file.generatedCode);
+          logger.info(Scaffoldr.name, `Created file: ${file.path}`);
+        }
+      }
 
       await config?.onSave?.(inputs);
+
+      logger.info(
+        Scaffoldr.name,
+        `Scaffolding complete, please update generated code files as needed.`,
+      );
     },
   };
 }
