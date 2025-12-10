@@ -41,6 +41,11 @@ export function Scaffoldr<
    * validated and transformed values if reading user inputs is successful
    */
   generate(inputs: Inputs): void | Promise<void>;
+
+  /**
+   * Callback function that is ran after all the generated files are saved.
+   */
+  onSave?: (inputs: Inputs) => void | Promise<void>;
 }) {
   return {
     async run() {
@@ -69,6 +74,8 @@ export function Scaffoldr<
       const inputs = partialInputs as Inputs;
 
       await config.generate(inputs);
+
+      await config?.onSave?.(inputs);
     },
   };
 }
