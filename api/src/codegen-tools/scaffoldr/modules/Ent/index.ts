@@ -32,6 +32,7 @@ export default Scaffoldr({
 
     // Will throw if folder already exists
     fs.mkdirSync(entFolderPath);
+    logger.info(Scaffoldr.name, `Created Ent Folder: ${entFolderPath}`);
 
     /**
      * Generate unique EntTypeID by generating a unique ID and checking against all
@@ -74,7 +75,6 @@ export default Scaffoldr({
       entBarrelFileTemplate,
     );
 
-    logger.info(Scaffoldr.name, `Created Ent Folder: ${entFolderPath}`);
     logger.info(Scaffoldr.name, `Please update the Ent file details.`);
   },
 
