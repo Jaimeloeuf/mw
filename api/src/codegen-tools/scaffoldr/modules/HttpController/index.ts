@@ -1,4 +1,3 @@
-import fs from "fs";
 import path from "path";
 
 import { logger } from "../../../../logging/index.js";
@@ -47,13 +46,13 @@ export default Scaffoldr({
     );
 
     const generatedCode = codeTemplate(inputs.httpMethod, inputs.apiPath);
-    fs.writeFileSync(controllerFilePath, generatedCode);
-    // @todo Should return objects of file path and code for the framework to handle the writes
 
-    logger.info(
-      Scaffoldr.name,
-      `Created controller file: ${controllerFilePath}`,
-    );
+    return [
+      {
+        path: controllerFilePath,
+        generatedCode: generatedCode,
+      },
+    ];
   },
 
   async onSave() {

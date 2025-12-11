@@ -2,7 +2,6 @@ import fs from "fs";
 import path from "path";
 
 import { asyncJobTypeMapping } from "../../../../__generated/index.js";
-import { logger } from "../../../../logging/index.js";
 import { pseudoRandomAlphanumericString } from "../../../../utils/index.js";
 import {
   cogenieRunAllSteps,
@@ -54,10 +53,12 @@ export default Scaffoldr({
       `${inputs.asyncJobName}.job.ts`,
     );
 
-    fs.writeFileSync(asyncJobFilePath, generatedAsyncJobFile);
-
-    logger.info(Scaffoldr.name, `Created AsyncJob: ${asyncJobFilePath}`);
-    logger.info(Scaffoldr.name, `Please update the AsyncJob file details.`);
+    return [
+      {
+        path: asyncJobFilePath,
+        generatedCode: generatedAsyncJobFile,
+      },
+    ];
   },
 
   async onSave() {
