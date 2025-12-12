@@ -10,6 +10,9 @@ import {
 } from "../../../cogenie/index.js";
 import { Scaffoldr } from "../../Scaffoldr.js";
 
+const getEntFolderPath = (entName: string) =>
+  path.join(import.meta.dirname, `../../../../ents/${entName}`);
+
 export default Scaffoldr({
   inputs: [
     {
@@ -19,18 +22,23 @@ export default Scaffoldr({
         if (!new RegExp(/^[A-Z][A-Za-z0-9]*$/g).test(input)) {
           throw new Error("Ent name must be PascalCase.");
         }
-        return `Ent${input}`;
+
+        const entName = `Ent${input}`;
+
+        if (fs.existsSync(getEntFolderPath(entName))) {
+          throw new Error("Ent and Ent name is already in use.");
+        }
+
+        return entName;
       },
     },
   ],
 
   async generate(inputs) {
-    const entFolderPath = path.join(
-      import.meta.dirname,
-      `../../../../ents/${inputs.entName}`,
-    );
+    const entFolderPath = getEntFolderPath(inputs.entName);
 
-    // Will throw if folder already exists
+    // Will throw if folder already exists, but should not happen since folder
+    // existence is already checked in input validation stage
     fs.mkdirSync(entFolderPath);
     logger.info(Scaffoldr.name, `Created Ent Folder: ${entFolderPath}`);
 
