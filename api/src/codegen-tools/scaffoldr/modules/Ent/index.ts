@@ -59,7 +59,6 @@ export default Scaffoldr({
     const entFile = entFileTemplate
       .replaceAll("EntTemplate", inputs.entName)
       .replace("__generated_ent_type_id__", uniqueEntTypeID);
-    fs.writeFileSync(path.join(entFolderPath, `${inputs.entName}.ts`), entFile);
 
     const entOperatorsFileTemplate = fs.readFileSync(
       path.join(entFolderPath, `../_EntTemplate_/EntTemplateOperators.ts`),
@@ -68,22 +67,27 @@ export default Scaffoldr({
     const entOperatorsFile = entOperatorsFileTemplate
       .replaceAll("EntTemplate", inputs.entName)
       .replace("// @ts-nocheck", "");
-    fs.writeFileSync(
-      path.join(entFolderPath, `${inputs.entName}Operators.ts`),
-      entOperatorsFile,
-    );
 
     const entBarrelFileTemplate = fs
       .readFileSync(path.join(entFolderPath, `../_EntTemplate_/index.ts`), {
         encoding: "utf8",
       })
       .replaceAll("EntTemplate", inputs.entName);
-    fs.writeFileSync(
-      path.join(entFolderPath, `index.ts`),
-      entBarrelFileTemplate,
-    );
 
-    logger.info(Scaffoldr.name, `Please update the Ent file details.`);
+    return [
+      {
+        path: path.join(entFolderPath, `${inputs.entName}.ts`),
+        generatedCode: entFile,
+      },
+      {
+        path: path.join(entFolderPath, `${inputs.entName}Operators.ts`),
+        generatedCode: entOperatorsFile,
+      },
+      {
+        path: path.join(entFolderPath, `index.ts`),
+        generatedCode: entBarrelFileTemplate,
+      },
+    ];
   },
 
   async onSave() {
