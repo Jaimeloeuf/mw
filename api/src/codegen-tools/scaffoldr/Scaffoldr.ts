@@ -49,7 +49,7 @@ export function Scaffoldr<
    */
   generate(
     inputs: Inputs,
-  ): void | Array<FileToGenerate> | Promise<void | Array<FileToGenerate>>;
+  ): Array<FileToGenerate> | Promise<Array<FileToGenerate>>;
 
   /**
    * Callback function that is ran after all the generated files are saved.
@@ -84,11 +84,9 @@ export function Scaffoldr<
 
       const filesToGenerate = await config.generate(inputs);
 
-      if (filesToGenerate !== undefined) {
-        for (const file of filesToGenerate) {
-          fs.writeFileSync(file.path, file.generatedCode);
-          logger.info(Scaffoldr.name, `Created file: ${file.path}`);
-        }
+      for (const file of filesToGenerate) {
+        fs.writeFileSync(file.path, file.generatedCode);
+        logger.info(Scaffoldr.name, `Created file: ${file.path}`);
       }
 
       await config?.onSave?.(inputs);
