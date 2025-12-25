@@ -84,6 +84,16 @@ export function Scaffoldr<
 
       const filesToGenerate = await config.generate(inputs);
 
+      // Scaffoldr is for new file scaffolding with a template, and should never
+      // allow any overwrites.
+      for (const file of filesToGenerate) {
+        if (fs.existsSync(file.path)) {
+          throw new Error(
+            `Scaffoldr cannot overwrite existing files and file already exists (case insensitive): ${file.path}`,
+          );
+        }
+      }
+
       for (const file of filesToGenerate) {
         fs.writeFileSync(file.path, file.generatedCode);
         logger.info(Scaffoldr.name, `Created file: ${file.path}`);
