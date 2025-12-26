@@ -115,6 +115,8 @@ import { EntBlog } from "./EntBlog.js";
 async function test() {
   const { EntJohariSchema } = await import("../EntJohariSchema.js");
   const entSchemaValidatedData = EntJohariSchema.validateAndSetup();
+  // @todo Run codegen in parallel after schema verification
   await entSchemaCodegen(entSchemaValidatedData);
+  await codegenCrudOperators(entSchemaValidatedData);
 }
 test();
