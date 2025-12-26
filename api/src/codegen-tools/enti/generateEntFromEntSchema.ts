@@ -1,6 +1,6 @@
 import ts from "typescript";
 
-import { EntSchema } from "../lib/EntSchema.js";
+import { EntSchema } from "../../entschema/lib/EntSchema.js";
 import { EntSchemaCodegenError } from "./EntSchemaCodegenError.js";
 import { getNewline } from "./utils/getNewline.js";
 import { prefixJsdocComment } from "./utils/prefixJsdocComment.js";

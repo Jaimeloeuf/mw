@@ -5,7 +5,7 @@ import ts from "typescript";
 
 import "../../global/bootstrapGlobalDefinitions.js";
 
-import type { EntSchemaValidatedData } from "../lib/index.js";
+import type { EntSchemaValidatedData } from "../../entschema/lib/index.js";
 
 import { logger } from "../../logging/index.js";
 import { generateEntFromEntSchema } from "./generateEntFromEntSchema.js";
@@ -113,7 +113,9 @@ import { EntBlog } from "./EntBlog.js";
 }
 
 async function test() {
-  const { EntJohariSchema } = await import("../EntJohariSchema.js");
+  const { EntJohariSchema } = await import(
+    "../../entschema/EntJohariSchema.js"
+  );
   const entSchemaValidatedData = EntJohariSchema.validateAndSetup();
   // @todo Run codegen in parallel after schema verification
   await entSchemaCodegen(entSchemaValidatedData);
