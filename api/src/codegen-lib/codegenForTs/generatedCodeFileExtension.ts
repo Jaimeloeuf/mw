@@ -1,3 +1,4 @@
+// Any changes to this will require updates to eslint rules
 export const generatedCodeFileExtension = ".generated.ts";
 
 export const generatedCodeFileExtensionWithNoBarrelFileInclusion =
