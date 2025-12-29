@@ -1,10 +1,23 @@
 import "../../global/bootstrapGlobalDefinitions.js";
 import { printGitStatus } from "../../codegen-lib/index.js";
 import { logger } from "../../logging/index.js";
+import { entSchemaCodegen, codegenCrudOperators } from "./entSchemaCodegen.js";
 import { entSchemaCodegenCliHelp } from "./entSchemaCodegenCliHelp.js";
 import { generatedSrcDirPathString } from "./generatedSrcDirPath.js";
 
 async function entSchemaCodegenCli() {
+  // @todo WIP TESTING ONLY
+  if (true == true) {
+    const { EntJohariSchema } = await import(
+      "../../entschema/EntJohariSchema.js"
+    );
+    const entSchemaValidatedData = EntJohariSchema.validateAndSetup();
+    // @todo Run codegen in parallel after schema verification
+    await entSchemaCodegen(entSchemaValidatedData);
+    await codegenCrudOperators(entSchemaValidatedData);
+    return;
+  }
+
   // No extra arguments, show help menu
   if (process.argv.length === 2) {
     entSchemaCodegenCliHelp();

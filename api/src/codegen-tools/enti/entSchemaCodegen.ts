@@ -11,7 +11,7 @@ import { logger } from "../../logging/index.js";
 import { generateEntFromEntSchema } from "./generateEntFromEntSchema.js";
 import { generateEntOperatorsFromEntSchema } from "./generateEntOperatorsFromEntSchema.js";
 
-async function entSchemaCodegen({
+export async function entSchemaCodegen({
   entSchema,
   entClassName,
   entSchemaInstance,
@@ -46,7 +46,7 @@ async function entSchemaCodegen({
   });
 
   await fs.writeFile(
-    path.join(import.meta.dirname, `../__generated/${entClassName}.ts`),
+    path.join(import.meta.dirname, `../../__generated/ent/${entClassName}.ts`),
     formattedFile,
   );
 
@@ -56,7 +56,7 @@ async function entSchemaCodegen({
   );
 }
 
-async function codegenCrudOperators({
+export async function codegenCrudOperators({
   entSchema,
   entClassName,
   entSchemaInstance,
@@ -101,7 +101,7 @@ import { EntBlog } from "./EntBlog.js";
   await fs.writeFile(
     path.join(
       import.meta.dirname,
-      `../__generated/${entClassName}Operators.ts`,
+      `../../__generated/ent/${entClassName}Operators.ts`,
     ),
     formattedFile,
   );
@@ -111,14 +111,3 @@ import { EntBlog } from "./EntBlog.js";
     `Generated '${entClassName}Operators' from '${entSchema.name}'`,
   );
 }
-
-async function test() {
-  const { EntJohariSchema } = await import(
-    "../../entschema/EntJohariSchema.js"
-  );
-  const entSchemaValidatedData = EntJohariSchema.validateAndSetup();
-  // @todo Run codegen in parallel after schema verification
-  await entSchemaCodegen(entSchemaValidatedData);
-  await codegenCrudOperators(entSchemaValidatedData);
-}
-test();
