@@ -1,6 +1,6 @@
 import "../../global/bootstrapGlobalDefinitions.js";
+import { printGitStatus } from "../../codegen-lib/index.js";
 import { logger } from "../../logging/index.js";
-import { printGitStatus } from "../../utils/printGitStatus.js";
 import { entSchemaCodegenCliHelp } from "./entSchemaCodegenCliHelp.js";
 import { generatedSrcDirPathString } from "./generatedSrcDirPath.js";
 

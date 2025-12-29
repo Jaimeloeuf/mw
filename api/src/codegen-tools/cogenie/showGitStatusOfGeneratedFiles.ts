@@ -1,5 +1,8 @@
-import { codegenForDoc, codegenForTs } from "../../codegen-lib/index.js";
-import { printGitStatus } from "../../utils/printGitStatus.js";
+import {
+  printGitStatus,
+  codegenForDoc,
+  codegenForTs,
+} from "../../codegen-lib/index.js";
 
 /**
  * Show git status of generated files in generated file folders.
