@@ -6,12 +6,12 @@
  * GenEntOperatorMapping
  *
  * Generated hash in hex for code after this section is:
- * sha256(532bab09ecf8282b37b1155a6763ff37a8bc5e732f314bc8c033117015c57463)
+ * sha256(b291d2fcb337e9fa88984449c8e350cf72be9ed5621db18b33853a5126345676)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
-import type { BaseEnt } from "../ent/BaseEnt.js";
-import type { EntCrudOperator } from "../ent/EntCrudOperator.js";
+import type { BaseEnt } from "../../ent/BaseEnt.js";
+import type { EntCrudOperator } from "../../ent/EntCrudOperator.js";
 
 import { entOperators } from "./entOperatorsBarrelFile.generated.js";
 

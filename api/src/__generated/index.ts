@@ -13,4 +13,5 @@
 // extension it does not work with cogenie handling well so this is only
 // generated once and left alone, and the actual barrel file is in the
 // ".generated" version of this index.ts file.
-export * from "./index.generated.js";
+// @todo
+export * from "./cogenie/index.generated.js";

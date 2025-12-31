@@ -36,7 +36,7 @@ export class GenAsyncJobTypeBarrelFile implements CogenieStep {
     const generatedCode = files
       .map(
         (file) =>
-          `export { default as ${file.name} } from "../async/jobs/${path.relative(folderPath, file.path.replace(".ts", ".js"))}";\n`,
+          `export { default as ${file.name} } from "../../async/jobs/${path.relative(folderPath, file.path.replace(".ts", ".js"))}";\n`,
       )
       .join("");
 

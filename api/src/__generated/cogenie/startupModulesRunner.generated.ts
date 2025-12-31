@@ -6,11 +6,11 @@
  * GenStartupModuleRunner
  *
  * Generated hash in hex for code after this section is:
- * sha256(aa5f15eefa5bb8884e2f5d560617a6f3fc57aae3c0752ed53f99735f9a2fd6c9)
+ * sha256(ed5cd9a3deebacc1e505c8349e8a348b15dcce7723fcc2994eb9120e1d85354b)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
-import { logger } from "../logging/index.js";
+import { logger } from "../../logging/index.js";
 import { st } from "./startupModulesBarrelFile.generated.js";
 
 /**

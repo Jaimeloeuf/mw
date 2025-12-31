@@ -39,7 +39,7 @@ export class GenDataFunctionBarrelFile implements CogenieStep {
     const generatedCode = files
       .map(
         (file) =>
-          `export { default as ${file.name} } from "../dal/df/${path.relative(dataFunctionsFolderPath, file.path.replace(".ts", ".js"))}";\n`,
+          `export { default as ${file.name} } from "../../dal/df/${path.relative(dataFunctionsFolderPath, file.path.replace(".ts", ".js"))}";\n`,
       )
       .join("");
 

@@ -36,7 +36,7 @@ export class GenStartupModulesBarrelFile implements CogenieStep {
     const generatedCode = files
       .map(
         (file) =>
-          `export { default as ${file.name} } from "../startup/${path.relative(folderPath, file.path.replace(".ts", ".js"))}";\n`,
+          `export { default as ${file.name} } from "../../startup/${path.relative(folderPath, file.path.replace(".ts", ".js"))}";\n`,
       )
       .join("");
 

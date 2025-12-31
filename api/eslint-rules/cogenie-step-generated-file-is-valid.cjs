@@ -50,7 +50,10 @@ module.exports = {
   },
 };
 
-const generatedCodeFolderPath = path.join(__dirname, `../src/__generated`);
+const generatedCodeFolderPath = path.join(
+  __dirname,
+  `../src/__generated/cogenie`,
+);
 
 function isGeneratedFile(filePath) {
   const relativePath = path.relative(generatedCodeFolderPath, filePath);

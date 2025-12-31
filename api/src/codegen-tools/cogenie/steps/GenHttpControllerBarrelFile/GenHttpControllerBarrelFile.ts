@@ -39,7 +39,7 @@ export class GenHttpControllerBarrelFile implements CogenieStep {
     const generatedCode = controllerFiles
       .map(
         (file) =>
-          `export { default as ${file.name} } from "../controllers-http/${path.relative(controllerFolderPath, file.path.replace(".ts", ".js"))}";\n`,
+          `export { default as ${file.name} } from "../../controllers-http/${path.relative(controllerFolderPath, file.path.replace(".ts", ".js"))}";\n`,
       )
       .join("");
 

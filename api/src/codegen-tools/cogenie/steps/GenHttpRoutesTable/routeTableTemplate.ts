@@ -4,8 +4,8 @@ export const routeTableTemplate = (
   routeDefinitions: string,
 ) => `import { Router } from "express";
 
-import { config } from "../config/index.js";
-import { logger } from "../logging/index.js";
+import { config } from "../../config/index.js";
+import { logger } from "../../logging/index.js";
 import { httpControllers as c } from "./httpControllerBarrelFile${codegenForTs.generatedCodeFileExtensionForJsImport}";
 
 /**

@@ -23,7 +23,7 @@ export class GenAsyncJobTypeMapping implements CogenieStep {
 
     const files = await getAsyncJobTypeFiles();
 
-    const generatedCode = `import type { AsyncJobType } from "../async/AsyncJobType.js";
+    const generatedCode = `import type { AsyncJobType } from "../../async/AsyncJobType.js";
 
 /**
  * Mapping of \`AsyncJobType['ID']\` to \`AsyncJobType\`.
@@ -39,7 +39,7 @@ export const asyncJobTypeMapping: Record<
   ${files
     .map(
       (file) =>
-        `"${file.id}": () => import("../async/jobs/${path.relative(folderPath, file.path.replace(".ts", ".js"))}")`,
+        `"${file.id}": () => import("../../async/jobs/${path.relative(folderPath, file.path.replace(".ts", ".js"))}")`,
     )
     .join(",\n  ")}
 };

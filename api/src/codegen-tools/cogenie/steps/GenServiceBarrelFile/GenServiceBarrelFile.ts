@@ -36,7 +36,7 @@ export class GenServiceBarrelFile implements CogenieStep {
     const generatedCode = files
       .map(
         (file) =>
-          `export { default as ${file.name} } from "../services/${path.relative(folderPath, file.path.replace(".ts", ".js"))}";\n`,
+          `export { default as ${file.name} } from "../../services/${path.relative(folderPath, file.path.replace(".ts", ".js"))}";\n`,
       )
       .join("");
 

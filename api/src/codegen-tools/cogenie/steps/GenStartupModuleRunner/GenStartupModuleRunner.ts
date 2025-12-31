@@ -31,7 +31,7 @@ export class GenStartupModuleRunner implements CogenieStep {
 
   startupModuleRunnerTemplate = (
     files: Readonly<Array<StartupFile>>,
-  ) => `import { logger } from "../logging/index.js";
+  ) => `import { logger } from "../../logging/index.js";
 import { st } from "./startupModulesBarrelFile${codegenForTs.generatedCodeFileExtensionForJsImport}";
 
 /**

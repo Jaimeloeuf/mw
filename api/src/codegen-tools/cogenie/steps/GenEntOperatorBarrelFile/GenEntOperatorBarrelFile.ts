@@ -33,7 +33,7 @@ export class GenEntOperatorBarrelFile implements CogenieStep {
     const generatedCode = entFolders
       .map(
         (folder) =>
-          `export * from "../ents/${folder.name}/${folder.name}Operators.js";\n`,
+          `export * from "../../ents/${folder.name}/${folder.name}Operators.js";\n`,
       )
       .join("");
 

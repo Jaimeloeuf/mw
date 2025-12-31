@@ -20,7 +20,7 @@ export class GenEntMapping implements CogenieStep {
   async generate() {
     const ents = await getEntFolders();
 
-    const generatedCode = `import type { BaseEnt } from "../ent/BaseEnt.js";
+    const generatedCode = `import type { BaseEnt } from "../../ent/BaseEnt.js";
 
 import { ents } from "./${new GenEntBarrelFile().getFiles().entsBarrelFile.name}${codegenForTs.generatedCodeFileExtensionForJsImport}";
 

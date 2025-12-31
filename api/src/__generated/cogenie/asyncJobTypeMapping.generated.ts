@@ -6,11 +6,11 @@
  * GenAsyncJobTypeMapping
  *
  * Generated hash in hex for code after this section is:
- * sha256(6ba958c0d931d76eab1849f037e502807f13962d45035a32ebccb42a21ea4af5)
+ * sha256(981374efacaf06ac7b78d84f928f54801230efaec5903ef6d4df3202e1c5a49a)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
-import type { AsyncJobType } from "../async/AsyncJobType.js";
+import type { AsyncJobType } from "../../async/AsyncJobType.js";
 
 /**
  * Mapping of `AsyncJobType['ID']` to `AsyncJobType`.
@@ -23,5 +23,5 @@ export const asyncJobTypeMapping: Record<
   string,
   () => Promise<{ default: AsyncJobType<any> }>
 > = {
-  "3h1s": () => import("../async/jobs/example.job.js"),
+  "3h1s": () => import("../../async/jobs/example.job.js"),
 };

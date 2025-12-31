@@ -32,7 +32,7 @@ export class GenEntBarrelFile implements CogenieStep {
     const generatedCode = entFolders
       .map(
         (folder) =>
-          `export * from "../ents/${folder.name}/${folder.name}.js";\n`,
+          `export * from "../../ents/${folder.name}/${folder.name}.js";\n`,
       )
       .join("");
 

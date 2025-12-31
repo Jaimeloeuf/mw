@@ -37,7 +37,7 @@ export class GenInfraBarrelFile implements CogenieStep {
     const generatedCode = files
       .map(
         (file) =>
-          `export { default as ${file.name} } from "../infra/${path.relative(folderPath, file.path.replace(".ts", ".js"))}";\n`,
+          `export { default as ${file.name} } from "../../infra/${path.relative(folderPath, file.path.replace(".ts", ".js"))}";\n`,
       )
       .join("");
 

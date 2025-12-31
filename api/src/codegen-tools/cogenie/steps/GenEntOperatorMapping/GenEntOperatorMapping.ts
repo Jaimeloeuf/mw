@@ -19,8 +19,8 @@ export class GenEntOperatorMapping implements CogenieStep {
   async generate() {
     const ents = await getEntFolders();
 
-    const generatedCode = `import type { BaseEnt } from "../ent/BaseEnt.js";
-import type { EntCrudOperator } from "../ent/EntCrudOperator.js";
+    const generatedCode = `import type { BaseEnt } from "../../ent/BaseEnt.js";
+import type { EntCrudOperator } from "../../ent/EntCrudOperator.js";
 
 import { entOperators } from "./entOperatorsBarrelFile${codegenForTs.generatedCodeFileExtensionForJsImport}";
 

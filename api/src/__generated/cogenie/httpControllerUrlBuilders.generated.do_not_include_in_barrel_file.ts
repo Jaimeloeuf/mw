@@ -6,15 +6,15 @@
  * GenHttpControllerUrlBuilders
  *
  * Generated hash in hex for code after this section is:
- * sha256(4b21a9d28420d405146ecd797c4245b894ada988138562b47f0fec6c35ecb517)
+ * sha256(2b138a0f8d9990a3dc2b9b68289eb0d10caa26e2ee219d860092c6cff74cc8fc)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
 import type {
   RemoveMapKeyIfNever,
   VoidIfAllPropertiesInObjectIsVoid,
-} from "../types/index.js";
-import { config } from "../config/index.js";
+} from "../../types/index.js";
+import { config } from "../../config/index.js";
 import type { httpControllerTypeDefinitions as t } from "./httpControllerTypeDefinitionBarrelFile.generated.js";
 
 type UrlBuilderOptions<T> = VoidIfAllPropertiesInObjectIsVoid<

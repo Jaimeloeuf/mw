@@ -6,11 +6,11 @@
  * GenEntMapping
  *
  * Generated hash in hex for code after this section is:
- * sha256(afe854299f738103c83d6ff1d059727ee29b55198e993a01cf7a3fde3a347198)
+ * sha256(484c36f7e371724b6880555b26b2ef767119692afb7059ab71bd84d6d14e8aa9)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
-import type { BaseEnt } from "../ent/BaseEnt.js";
+import type { BaseEnt } from "../../ent/BaseEnt.js";
 
 import { ents } from "./entsBarrelFile.generated.js";
 
