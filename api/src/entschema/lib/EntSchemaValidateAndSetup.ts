@@ -13,16 +13,16 @@ import { EntSchemaSetupAndValidationError } from "./EntSchemaSetupAndValidationE
 export function EntSchemaValidateAndSetup(
   entSchema: EntSchemaClass,
 ): EntSchemaValidatedData {
-  logger.info(
-    EntSchemaValidateAndSetup.name,
-    `Validating and Setting up ${entSchema.name}`,
-  );
-
   if (!entSchema.name.startsWith("Ent") || !entSchema.name.endsWith("Schema")) {
     throw new EntSchemaSetupAndValidationError(
       "EntSchema name must be 'Ent...Schema' where your ent name is filled in the '...'",
     );
   }
+
+  logger.info(
+    EntSchemaValidateAndSetup.name,
+    `Validating and Setting up ${entSchema.name}`,
+  );
 
   const entClassName = entSchema.name.slice(
     0,
