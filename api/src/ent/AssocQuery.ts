@@ -1,5 +1,6 @@
 import { SelectQueryBuilder } from "kysely";
 
+import type { BaseEnt } from "./BaseEnt.js";
 import type { EntClass } from "./EntClass.js";
 
 import { entOperatorsMapping } from "../__generated/index.js";
@@ -9,7 +10,6 @@ import {
   InvalidInternalStateException,
   NotFoundException,
 } from "../exceptions/index.js";
-import { BaseEnt } from "./BaseEnt.js";
 
 export class AssocQuery<FromEnt extends EntClass, ToEnt extends EntClass> {
   private query: SelectQueryBuilder<Database, "assoc", Assoc>;
