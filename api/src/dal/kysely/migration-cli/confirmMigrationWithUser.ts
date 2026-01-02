@@ -1,9 +1,8 @@
 import type { MigrationInfo } from "kysely";
 
-import readline from "node:readline";
-
 import { logger } from "../../../logging/index.js";
 import { createDbAndMigrator } from "./createDbAndMigrator.js";
+import { getCliConfirmationYesNoInput } from "./getCliConfirmationYesNoInput.js";
 
 export async function confirmMigrationWithUser(
   migrateConfirmationFunction: (
@@ -29,18 +28,8 @@ export async function confirmMigrationWithUser(
     return true;
   }
 
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-
-  const answer = await new Promise((resolve: (answer: string) => void) =>
-    rl.question("Confirm migration? [y/n]: ", resolve),
-  );
-
-  rl.close();
-
-  if (answer === "y") {
+  const confirmed = await getCliConfirmationYesNoInput("Confirm migration?");
+  if (confirmed) {
     logger.info(confirmMigrationWithUser.name, "Thank you for confirming...");
     return true;
   }
