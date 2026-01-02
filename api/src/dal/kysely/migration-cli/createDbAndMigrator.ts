@@ -1,12 +1,11 @@
 import type { Kysely } from "kysely";
 
-import fs from "fs/promises";
-import { Migrator, FileMigrationProvider } from "kysely";
-import path from "path";
+import { Migrator } from "kysely";
 
 import { config } from "../../../config/index.js";
 import { createDB } from "../createDB.js";
 import { dbConnectionCheck } from "../dbConnectionCheck.js";
+import { createFileMigrationProvider } from "./createFileMigrationProvider.js";
 
 let cached: $Nullable<{
   db: Kysely<any>;
@@ -30,12 +29,12 @@ export async function createDbAndMigrator() {
     process.exit(1);
   }
 
-  /** This needs to be an absolute path */
-  const migrationFolder = path.join(import.meta.dirname, "../migrations");
+  const { fileMigrationProvider, migrationFolder } =
+    createFileMigrationProvider();
 
   const migrator = new Migrator({
     db,
-    provider: new FileMigrationProvider({ fs, path, migrationFolder }),
+    provider: fileMigrationProvider,
   });
 
   cached = {
