@@ -15,7 +15,7 @@ async function kyselyMigrationCli() {
     return;
   }
 
-  const [command, dbConnectionString, ciFlag] = process.argv.slice(2);
+  const [command, dbConnectionString] = process.argv.slice(2);
 
   if (command === "create") {
     await createKyselyMigration();
