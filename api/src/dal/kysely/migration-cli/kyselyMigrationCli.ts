@@ -17,6 +17,11 @@ async function kyselyMigrationCli() {
 
   const [command, dbConnectionString, ciFlag] = process.argv.slice(2);
 
+  if (command === "create") {
+    await createKyselyMigration();
+    return;
+  }
+
   if (command === "list") {
     await printAllMigrations();
     return;
@@ -43,11 +48,6 @@ async function kyselyMigrationCli() {
       migrateConfirmationFunction: migrateConfirmationForDown,
       migrateFunction: (migrator) => migrator.migrateDown(),
     });
-    return;
-  }
-
-  if (command === "create") {
-    await createKyselyMigration();
     return;
   }
 
