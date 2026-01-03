@@ -15,40 +15,40 @@ async function kyselyMigrationCli() {
     return;
   }
 
-  const arg = process.argv.at(-1) ?? "";
+  const [command, dbConnectionString, ciFlag] = process.argv.slice(2);
 
-  if (arg === "list") {
+  if (command === "list") {
     await printAllMigrations();
     return;
   }
 
-  if (arg === "all") {
+  if (command === "all") {
     await kyselyMigration(migrateConfirmationForAll, (migrator) =>
       migrator.migrateToLatest(),
     );
     return;
   }
 
-  if (arg === "up") {
+  if (command === "up") {
     await kyselyMigration(migrateConfirmationForUp, (migrator) =>
       migrator.migrateUp(),
     );
     return;
   }
 
-  if (arg === "down") {
+  if (command === "down") {
     await kyselyMigration(migrateConfirmationForDown, (migrator) =>
       migrator.migrateDown(),
     );
     return;
   }
 
-  if (arg === "create") {
+  if (command === "create") {
     await createKyselyMigration();
     return;
   }
 
-  logger.error(kyselyMigrationCli.name, `Invalid migration type: ${arg}\n`);
+  logger.error(kyselyMigrationCli.name, `Invalid migration type: ${command}\n`);
   printMigrationCliHelp();
 }
 
