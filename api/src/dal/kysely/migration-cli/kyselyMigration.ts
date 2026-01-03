@@ -11,13 +11,15 @@ import { createDbAndMigrator } from "./createDbAndMigrator.js";
  * Use kysely migrator to migrate DB to latest migration change as defined by
  * migration files.
  */
-export async function kyselyMigration(
+export async function kyselyMigration(options: {
   migrateConfirmationFunction: (
     migrations: ReadonlyArray<MigrationInfo>,
-  ) => boolean | Promise<boolean>,
-  migrateFunction: (migrator: Migrator) => Promise<MigrationResultSet>,
-) {
-  const confirm = await confirmMigrationWithUser(migrateConfirmationFunction);
+  ) => boolean | Promise<boolean>;
+  migrateFunction: (migrator: Migrator) => Promise<MigrationResultSet>;
+}) {
+  const confirm = await confirmMigrationWithUser(
+    options.migrateConfirmationFunction,
+  );
   if (!confirm) {
     return;
   }
@@ -31,7 +33,7 @@ export async function kyselyMigration(
     `Using migration files in: ${migrationFolder}`,
   );
 
-  const { error, results } = await migrateFunction(migrator);
+  const { error, results } = await options.migrateFunction(migrator);
 
   if (error) {
     logger.error(kyselyMigration.name, `Migration failed: ${error}`);

@@ -23,23 +23,26 @@ async function kyselyMigrationCli() {
   }
 
   if (command === "all") {
-    await kyselyMigration(migrateConfirmationForAll, (migrator) =>
-      migrator.migrateToLatest(),
-    );
+    await kyselyMigration({
+      migrateConfirmationFunction: migrateConfirmationForAll,
+      migrateFunction: (migrator) => migrator.migrateToLatest(),
+    });
     return;
   }
 
   if (command === "up") {
-    await kyselyMigration(migrateConfirmationForUp, (migrator) =>
-      migrator.migrateUp(),
-    );
+    await kyselyMigration({
+      migrateConfirmationFunction: migrateConfirmationForUp,
+      migrateFunction: (migrator) => migrator.migrateUp(),
+    });
     return;
   }
 
   if (command === "down") {
-    await kyselyMigration(migrateConfirmationForDown, (migrator) =>
-      migrator.migrateDown(),
-    );
+    await kyselyMigration({
+      migrateConfirmationFunction: migrateConfirmationForDown,
+      migrateFunction: (migrator) => migrator.migrateDown(),
+    });
     return;
   }
 
