@@ -5,11 +5,14 @@ import { createDbAndMigrator } from "./createDbAndMigrator.js";
 import { getCliConfirmationYesNoInput } from "./getCliConfirmationYesNoInput.js";
 
 export async function confirmMigrationWithUser(options: {
+  dbConnectionString?: string | undefined;
   migrateConfirmationFunction: (
     migrations: ReadonlyArray<MigrationInfo>,
   ) => boolean | Promise<boolean>;
 }) {
-  const { db, migrator } = await createDbAndMigrator();
+  const { db, migrator } = await createDbAndMigrator(
+    options.dbConnectionString,
+  );
   const migrations = await migrator.getMigrations();
 
   const shouldContinue = await options.migrateConfirmationFunction(migrations);
