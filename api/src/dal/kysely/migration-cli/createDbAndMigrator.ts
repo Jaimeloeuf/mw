@@ -24,7 +24,7 @@ export async function createDbAndMigrator() {
   });
 
   // Stop running migration immediately if unable to connect to DB
-  const dbConnectionOk = await dbConnectionCheck(db, false);
+  const dbConnectionOk = await dbConnectionCheck(db);
   if (!dbConnectionOk) {
     process.exit(1);
   }
