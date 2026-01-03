@@ -18,9 +18,7 @@ export async function kyselyMigration(options: {
   ) => boolean | Promise<boolean>;
   migrateFunction: (migrator: Migrator) => Promise<MigrationResultSet>;
 }) {
-  const confirm = await confirmMigrationWithUser(
-    options.migrateConfirmationFunction,
-  );
+  const confirm = await confirmMigrationWithUser(options);
   if (!confirm) {
     return;
   }

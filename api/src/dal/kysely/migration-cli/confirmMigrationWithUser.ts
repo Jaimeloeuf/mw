@@ -4,15 +4,15 @@ import { logger } from "../../../logging/index.js";
 import { createDbAndMigrator } from "./createDbAndMigrator.js";
 import { getCliConfirmationYesNoInput } from "./getCliConfirmationYesNoInput.js";
 
-export async function confirmMigrationWithUser(
+export async function confirmMigrationWithUser(options: {
   migrateConfirmationFunction: (
     migrations: ReadonlyArray<MigrationInfo>,
-  ) => boolean | Promise<boolean>,
-) {
+  ) => boolean | Promise<boolean>;
+}) {
   const { db, migrator } = await createDbAndMigrator();
   const migrations = await migrator.getMigrations();
 
-  const shouldContinue = await migrateConfirmationFunction(migrations);
+  const shouldContinue = await options.migrateConfirmationFunction(migrations);
   if (!shouldContinue) {
     // Destroy DB connection so that the CLI program can exit.
     await db.destroy();
