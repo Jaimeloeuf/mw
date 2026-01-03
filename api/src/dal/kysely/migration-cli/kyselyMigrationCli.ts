@@ -23,12 +23,13 @@ async function kyselyMigrationCli() {
   }
 
   if (command === "list") {
-    await printAllMigrations();
+    await printAllMigrations(dbConnectionString);
     return;
   }
 
   if (command === "all") {
     await kyselyMigration({
+      dbConnectionString,
       migrateConfirmationFunction: migrateConfirmationForAll,
       migrateFunction: (migrator) => migrator.migrateToLatest(),
     });
@@ -37,6 +38,7 @@ async function kyselyMigrationCli() {
 
   if (command === "up") {
     await kyselyMigration({
+      dbConnectionString,
       migrateConfirmationFunction: migrateConfirmationForUp,
       migrateFunction: (migrator) => migrator.migrateUp(),
     });
@@ -45,6 +47,7 @@ async function kyselyMigrationCli() {
 
   if (command === "down") {
     await kyselyMigration({
+      dbConnectionString,
       migrateConfirmationFunction: migrateConfirmationForDown,
       migrateFunction: (migrator) => migrator.migrateDown(),
     });

@@ -2,7 +2,6 @@ import type { Kysely } from "kysely";
 
 import { Migrator } from "kysely";
 
-import { config } from "../../../config/index.js";
 import { createDB } from "../createDB.js";
 import { dbConnectionCheck } from "../dbConnectionCheck.js";
 import { createFileMigrationProvider } from "./createFileMigrationProvider.js";
@@ -13,13 +12,17 @@ let cached: $Nullable<{
   migrationFolder: string;
 }> = null;
 
-export async function createDbAndMigrator() {
+export async function createDbAndMigrator(dbConnectionString?: string) {
+  if (dbConnectionString === undefined) {
+    throw new Error("Missing DB connection string");
+  }
+
   if (cached !== null) {
     return cached;
   }
 
   const db = createDB({
-    connectionString: config.db_conn_string(),
+    connectionString: dbConnectionString,
     kysely_log_error: true,
   });
 

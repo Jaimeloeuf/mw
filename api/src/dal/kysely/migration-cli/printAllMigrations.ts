@@ -2,8 +2,8 @@ import pc from "picocolors";
 
 import { createDbAndMigrator } from "./createDbAndMigrator.js";
 
-export async function printAllMigrations() {
-  const { db, migrator } = await createDbAndMigrator();
+export async function printAllMigrations(dbConnectionString?: string) {
+  const { db, migrator } = await createDbAndMigrator(dbConnectionString);
 
   const migrations = await migrator.getMigrations();
 

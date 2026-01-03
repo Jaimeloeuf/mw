@@ -12,6 +12,7 @@ import { createDbAndMigrator } from "./createDbAndMigrator.js";
  * migration files.
  */
 export async function kyselyMigration(options: {
+  dbConnectionString?: string | undefined;
   migrateConfirmationFunction: (
     migrations: ReadonlyArray<MigrationInfo>,
   ) => boolean | Promise<boolean>;
@@ -26,7 +27,9 @@ export async function kyselyMigration(options: {
 
   const startTime = performance.now();
 
-  const { db, migrator, migrationFolder } = await createDbAndMigrator();
+  const { db, migrator, migrationFolder } = await createDbAndMigrator(
+    options.dbConnectionString,
+  );
 
   logger.info(
     kyselyMigration.name,
