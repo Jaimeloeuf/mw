@@ -1,4 +1,5 @@
 import "../../../global/bootstrapGlobalDefinitions.js";
+import { config } from "../../../config/index.js";
 import { logger } from "../../../logging/index.js";
 import { createKyselyMigration } from "./createKyselyMigrationFile/createKyselyMigration.js";
 import { kyselyMigration } from "./kyselyMigration.js";
@@ -15,7 +16,13 @@ async function kyselyMigrationCli() {
     return;
   }
 
-  const [command, dbConnectionString] = process.argv.slice(2);
+  let [command, dbConnectionString] = process.argv.slice(2);
+
+  // If --ci flag is present, assume that dbConnectionString is not passed in,
+  // and instead get it using config which gets from env var.
+  if (process.argv.includes("--ci")) {
+    dbConnectionString = config.db_conn_string();
+  }
 
   if (command === "create") {
     await createKyselyMigration();
