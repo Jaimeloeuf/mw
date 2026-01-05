@@ -86,6 +86,7 @@ export default [
       "mwEslintPlugin/cogenie-step-class-and-module-same-name": "error",
       "mwEslintPlugin/cogenie-step-generated-file-is-valid": "error",
       "mwEslintPlugin/codegen-code-not-imported-outside": "error",
+      "mwEslintPlugin/migrations-code-not-imported-outside": "error",
     },
     plugins: {
       perfectionist,
