@@ -227,7 +227,7 @@ export const httpController = <
         // and an error status code needs to be set.
         .status(statusCode)
         .json(
-          doNotModifyResponseData
+          doNotModifyResponseData === true
             ? data
             : ({
                 status: "success",
