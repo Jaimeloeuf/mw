@@ -15,7 +15,7 @@ export default defineAsyncJobType({
   name: "ExampleJob",
   machineType: AsyncJobMachine.web,
   priority: AsyncJobPriority.p1,
-  argumentValidator: z.object({
+  argumentValidator: z.strictObject({
     test: z.string(),
   }),
   async run(args) {

@@ -83,7 +83,7 @@ export default httpController({
   ],
   urlParamsValidator: null,
   urlQueryParamsValidator: null,
-  requestBodyValidator: z.object({
+  requestBodyValidator: z.strictObject({
     data: z.string(),
   }),
   async httpRequestHandler({ requestBody }) {
