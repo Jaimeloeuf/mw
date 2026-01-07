@@ -8,7 +8,7 @@ export default httpController({
   method: "get",
   path: "/bucketlist/:bucketlistID",
   guards: null,
-  urlParamsValidator: z.object({
+  urlParamsValidator: z.strictObject({
     bucketlistID: z.string(),
   }),
   urlQueryParamsValidator: null,

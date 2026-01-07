@@ -15,7 +15,7 @@ export default httpController({
   guards: [useHttpRequestGuard("recaptcha", blogRecaptchaGuard)],
   urlParamsValidator: null,
   urlQueryParamsValidator: null,
-  requestBodyValidator: z.object({
+  requestBodyValidator: z.strictObject({
     email: z.string().email(),
   }),
   async httpRequestHandler({ requestBody, setHttpStatusCode }) {

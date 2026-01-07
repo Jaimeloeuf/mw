@@ -7,7 +7,7 @@ export default httpController({
   method: "get",
   path: "/check/checklist/:checklistID",
   guards: null,
-  urlParamsValidator: z.object({
+  urlParamsValidator: z.strictObject({
     checklistID: z.string(),
   }),
   urlQueryParamsValidator: null,

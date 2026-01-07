@@ -10,7 +10,7 @@ export default httpController({
   guards: null,
   urlParamsValidator: null,
   urlQueryParamsValidator: null,
-  requestBodyValidator: z.object({
+  requestBodyValidator: z.strictObject({
     johariID: z.string(),
     name: z.string(),
     words: z.array(z.string()),

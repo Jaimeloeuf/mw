@@ -8,7 +8,7 @@ export default httpController({
   method: "get",
   path: "/johari/:johariID",
   guards: null,
-  urlParamsValidator: z.object({
+  urlParamsValidator: z.strictObject({
     johariID: z.string(),
   }),
   urlQueryParamsValidator: null,

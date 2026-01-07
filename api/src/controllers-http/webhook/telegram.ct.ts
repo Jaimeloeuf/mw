@@ -11,7 +11,7 @@ export default httpController({
   method: "post",
   path: "/webhook/telegram/:telegramWebhookSecretPath/:telegramBotToken",
   guards: null,
-  urlParamsValidator: z.object({
+  urlParamsValidator: z.strictObject({
     telegramWebhookSecretPath: z.string(),
     telegramBotToken: z.string(),
   }),

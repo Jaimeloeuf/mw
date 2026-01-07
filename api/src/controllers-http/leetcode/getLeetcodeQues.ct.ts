@@ -8,7 +8,7 @@ export default httpController({
   method: "get",
   path: "/leetcode/ques/:leetcodeQuesID",
   guards: null,
-  urlParamsValidator: z.object({
+  urlParamsValidator: z.strictObject({
     leetcodeQuesID: z.string(),
   }),
   urlQueryParamsValidator: null,
