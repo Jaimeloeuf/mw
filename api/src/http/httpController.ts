@@ -125,17 +125,17 @@ export const httpController = <
    */
   guards: Guards;
   /**
-   * Optional URL params validator, this ZodType will be used to parse and
+   * Optional URL params validator, this Zod schema will be used to parse and
    * validate the URL params before using it in the context object.
    */
   urlParamsValidator: NullableUrlParamsZodParserType;
   /**
-   * Optional URL query params validator, this ZodType will be used to parse and
-   * validate the URL query params before using it in the context object.
+   * Optional URL query params validator, this Zod schema will be used to parse
+   * and validate the URL query params before using it in the context object.
    */
   urlQueryParamsValidator: NullableUrlQueryParamsZodParserType;
   /**
-   * Optional request body data validator, this ZodType will be used to parse
+   * Optional request body data validator, this Zod schema will be used to parse
    * and validate the request body data before using it in the context object.
    */
   requestBodyValidator: NullableRequestBodyZodParserType;
