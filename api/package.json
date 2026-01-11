@@ -31,6 +31,8 @@
     "node": ">=22.0.0"
   },
   "dependencies": {
+    "@loglayer/plugin-redaction": "^3.0.2",
+    "@loglayer/transport-pino": "^3.0.2",
     "@react-router/express": "^7.7.1",
     "@react-router/node": "^7.7.1",
     "@types/react": "^19.0.2",
@@ -46,6 +48,7 @@
     "graphql-http": "^1.22.1",
     "isbot": "^5",
     "kysely": "^0.27.4",
+    "loglayer": "^9.1.0",
     "nice-types": "^1.0.1",
     "openai": "^4.58.1",
     "pg": "^8.12.0",
