@@ -6,7 +6,11 @@ import { noOp } from "../utils/index.js";
 type LogLevel = "Error" | "Info" | "Verbose";
 
 /**
- * Super simple custom logger, might change to use pino/winston in the future.
+ * Simple custom logger wrapper around `console` with support for log levels,
+ * timestamp, color, conditional logging.
+ *
+ * Use for everything that do not require full JSON structured logging, e.g.
+ * CLI tools, one off scripts, startup logs...
  */
 class SimpleLogger {
   static #colorizeByLogLevel(level: LogLevel, text: string) {
@@ -78,4 +82,5 @@ class SimpleLogger {
           SimpleLogger.#log("Verbose", label, args);
 }
 
+// @todo Rename to simpleLogger later
 export const logger = new SimpleLogger();
