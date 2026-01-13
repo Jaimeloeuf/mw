@@ -1,9 +1,9 @@
 import pc from "picocolors";
 
-import type { LogLevel } from "./LogLevel.js";
-
 import { config } from "../config/index.js";
 import { noOp } from "../utils/index.js";
+
+type LogLevel = "Error" | "Info" | "Verbose";
 
 /**
  * Super simple custom logger, might change to use pino/winston in the future.
