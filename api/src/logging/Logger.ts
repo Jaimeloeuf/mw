@@ -1,13 +1,27 @@
+import pc from "picocolors";
+
 import type { LogLevel } from "./LogLevel.js";
 
 import { config } from "../config/index.js";
 import { noOp } from "../utils/index.js";
-import { colorizeByLogLevel } from "./colorizeByLogLevel.js";
 
 /**
  * Super simple custom logger, might change to use pino/winston in the future.
  */
 class SimpleLogger {
+  static #colorizeByLogLevel(level: LogLevel, text: string) {
+    switch (level) {
+      case "Error":
+        return pc.red(text);
+      case "Info":
+        return pc.green(text);
+      case "Verbose":
+        return pc.gray(text);
+      default:
+        throw new Error("Invalid log level");
+    }
+  }
+
   private log(
     level: LogLevel,
     label: string,
@@ -19,7 +33,7 @@ class SimpleLogger {
 
     // Ignore eslint rule since this is used to implement logger itself
     // eslint-disable-next-line no-console
-    console.log(colorizeByLogLevel(level, formattedLogOutput));
+    console.log(SimpleLogger.#colorizeByLogLevel(level, formattedLogOutput));
   }
 
   /**
