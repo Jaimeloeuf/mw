@@ -22,7 +22,7 @@ class SimpleLogger {
     }
   }
 
-  private log(
+  static #log(
     level: LogLevel,
     label: string,
     ...args: Parameters<typeof console.log>
@@ -40,14 +40,14 @@ class SimpleLogger {
    * Standard error log level, think of this like `console.error`
    */
   error(label: string, ...args: Parameters<typeof console.error>) {
-    this.log("Error", label, args);
+    SimpleLogger.#log("Error", label, args);
   }
 
   /**
    * Standard log level, think of this like `console.log`
    */
   info(label: string, ...args: Parameters<typeof console.log>) {
-    this.log("Info", label, args);
+    SimpleLogger.#log("Info", label, args);
   }
 
   /**
@@ -55,7 +55,7 @@ class SimpleLogger {
    * environment, but can be easily filtered away / turned off in logs viewer.
    */
   verbose(label: string, ...args: Parameters<typeof console.log>) {
-    this.log("Verbose", label, args);
+    SimpleLogger.#log("Verbose", label, args);
   }
 
   /**
@@ -75,7 +75,7 @@ class SimpleLogger {
     (config?.env() ?? process.env["NODE_ENV"]) === "production"
       ? noOp<[label: string, ...args: Parameters<typeof console.log>]>
       : (label: string, ...args: Parameters<typeof console.log>) =>
-          this.log("Verbose", label, args);
+          SimpleLogger.#log("Verbose", label, args);
 }
 
 export const logger = new SimpleLogger();
