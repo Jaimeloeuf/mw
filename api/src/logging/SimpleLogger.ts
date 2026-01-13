@@ -62,6 +62,11 @@ class SimpleLogger {
     SimpleLogger.#log("Verbose", label, args);
   }
 
+  // @todo Replace nonProdVerbose implementation in the future
+  // nonProdVerbose(..._args: any) {
+  //   //
+  // }
+
   /**
    * Verbose log level for none critical info, that is similiar to `verbose` log
    * level, but unlike `verbose`, this only logs in none production environment.
