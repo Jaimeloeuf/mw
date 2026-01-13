@@ -7,7 +7,7 @@ import { colorizeByLogLevel } from "./colorizeByLogLevel.js";
 /**
  * Super simple custom logger, might change to use pino/winston in the future.
  */
-class Logger {
+class SimpleLogger {
   private log(
     level: LogLevel,
     label: string,
@@ -64,4 +64,4 @@ class Logger {
           this.log("Verbose", label, args);
 }
 
-export const logger = new Logger();
+export const logger = new SimpleLogger();
