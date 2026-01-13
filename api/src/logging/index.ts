@@ -2,4 +2,4 @@
  * Barrel file
  */
 
-export * from "./Logger.js";
+export * from "./SimpleLogger.js";
