@@ -1,6 +1,6 @@
 import type { Request, NextFunction } from "express";
 
-import { logger } from "../logging/index.js";
+import { simpleLogger } from "../logging/index.js";
 
 /**
  * Simple middleware to log all incoming requests at verbose/http log level
@@ -12,6 +12,6 @@ export function loggingMiddleware(
   _: unknown,
   next: NextFunction,
 ) {
-  logger.verbose("HTTP Request", `${req.method} ${req.path}`);
+  simpleLogger.verbose("HTTP Request", `${req.method} ${req.path}`);
   next();
 }

@@ -2,7 +2,7 @@ import { type Kysely, sql } from "kysely";
 
 import type { Database } from "./definitions/index.js";
 
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/index.js";
 
 /**
  * Connection check function that runs a no-op query against the DB to check if
@@ -18,13 +18,17 @@ export async function dbConnectionCheck(
     await sql`SELECT 1;`.execute(db);
 
     if (logConnectionCheckResults) {
-      logger.info(dbConnectionCheck.name, `DB connection check PASSED`);
+      simpleLogger.info(dbConnectionCheck.name, `DB connection check PASSED`);
     }
 
     return true;
   } catch (error) {
     if (logConnectionCheckResults) {
-      logger.error(dbConnectionCheck.name, `DB connection check FAILED`, error);
+      simpleLogger.error(
+        dbConnectionCheck.name,
+        `DB connection check FAILED`,
+        error,
+      );
     }
 
     return false;

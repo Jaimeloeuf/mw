@@ -1,7 +1,7 @@
 import type { TelegramBot } from "./TelegramBot.js";
 
 import { config } from "../../config/index.js";
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/index.js";
 import { allBotLoaders } from "./Bots/allBotLoaders.js";
 
 /**
@@ -26,7 +26,7 @@ export default async function getAllBots() {
       const [error, botToken] = await $runAsyncFnSafely(bot.getToken.bind(bot));
 
       if (error !== null && config.env() === "production") {
-        logger.error(
+        simpleLogger.error(
           getAllBots.name,
           `In 'production' env, all telegram bot tokens should be available.`,
           `Skipping Telegram Bot '${bot.constructor.name}' because of`,
@@ -42,7 +42,7 @@ export default async function getAllBots() {
     // Log out all the bots that are successfully registered on first load in
     // non production environments, since in non production environments we
     // expect only some bots for development/testing use case to be available.
-    logger.nonProdVerbose(
+    simpleLogger.nonProdVerbose(
       getAllBots.name,
       "All the available bots:",
       Object.values(cachedBots).map((bot) => bot.constructor.name),

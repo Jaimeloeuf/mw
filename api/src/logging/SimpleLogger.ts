@@ -101,5 +101,4 @@ class SimpleLogger {
   }
 }
 
-// @todo Rename to simpleLogger later
-export const logger = new SimpleLogger();
+export const simpleLogger = new SimpleLogger();

@@ -10,7 +10,7 @@ import {
 import { bootstrapDal } from "./dal/index.js";
 import { registerGlobalUncaughtIssueHandlers } from "./global/index.js";
 import { bootstrapHttpServer } from "./http/index.js";
-import { logger } from "./logging/index.js";
+import { simpleLogger } from "./logging/index.js";
 
 /**
  * All bootstrapping calls wrapped in async main function to ensure they run
@@ -21,7 +21,7 @@ async function main() {
 
   await loadAndValidateRequiredConfigsOnStartup();
 
-  logger.info(main.name, `Env: ${config.env()}`);
+  simpleLogger.info(main.name, `Env: ${config.env()}`);
 
   await bootstrapDal();
 

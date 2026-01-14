@@ -1,6 +1,6 @@
 import type { MigrationInfo } from "kysely";
 
-import { logger } from "../../../../logging/Logger.js";
+import { simpleLogger } from "../../../../logging/SimpleLogger.js";
 
 export function migrateConfirmationForAll(
   migrations: ReadonlyArray<MigrationInfo>,
@@ -10,20 +10,20 @@ export function migrateConfirmationForAll(
   );
 
   if (unexecutedMigrations.length === 0) {
-    logger.info(
+    simpleLogger.info(
       migrateConfirmationForAll.name,
       "There is no more Migrations left to migrate up.",
     );
     return false;
   }
 
-  logger.info(
+  simpleLogger.info(
     migrateConfirmationForAll.name,
     `There is ${unexecutedMigrations.length} migration(s) left to migrate up`,
   );
 
   for (const [index, migration] of unexecutedMigrations.entries()) {
-    logger.info(
+    simpleLogger.info(
       migrateConfirmationForAll.name,
       `Migration ${index + 1} to migrate up: ${migration.name}`,
     );

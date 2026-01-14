@@ -1,6 +1,6 @@
 import "../../global/bootstrapGlobalDefinitions.js";
 import { printGitStatus } from "../../codegen-lib/index.js";
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/index.js";
 import { entSchemaCodegen, codegenCrudOperators } from "./entSchemaCodegen.js";
 import { entSchemaCodegenCliHelp } from "./entSchemaCodegenCliHelp.js";
 import { generatedSrcDirPathString } from "./generatedSrcDirPath.js";
@@ -33,7 +33,10 @@ async function entSchemaCodegenCli() {
     return;
   }
 
-  logger.error(entSchemaCodegenCli.name, `Invalid codegen argument: ${arg}\n`);
+  simpleLogger.error(
+    entSchemaCodegenCli.name,
+    `Invalid codegen argument: ${arg}\n`,
+  );
   entSchemaCodegenCliHelp();
 }
 

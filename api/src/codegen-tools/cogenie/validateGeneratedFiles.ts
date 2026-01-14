@@ -2,7 +2,7 @@ import { createHash } from "crypto";
 import fs from "fs/promises";
 import path from "path";
 
-import { logger } from "../../logging/Logger.js";
+import { simpleLogger } from "../../logging/SimpleLogger.js";
 import { getCachedGeneratedFilesDirent } from "./getGeneratedFilesDirent.js";
 import { getStaleGeneratedFiles } from "./getStaleGeneratedFiles.js";
 
@@ -67,7 +67,7 @@ export async function validateGeneratedFiles() {
     generatedFilesHaveValidHash &&
     generatedFilesAreNotStale
   ) {
-    logger.info(
+    simpleLogger.info(
       validateGeneratedFiles.name,
       `All ${generatedFiles.length} Cogenie generated files are valid`,
     );
@@ -86,13 +86,13 @@ function validateGeneratedFilesHaveHash(
     return true;
   }
 
-  logger.error(
+  simpleLogger.error(
     validateGeneratedFiles.name,
     `${generatedFilesWithoutHash.length}/${generatedFiles.length} generated files are invalid as they are missing their hash:`,
   );
 
   for (let i = 0; i < generatedFilesWithoutHash.length; i++) {
-    logger.error(
+    simpleLogger.error(
       validateGeneratedFiles.name,
       `Error ${i + 1}: ${generatedFilesWithoutHash[i]!.name}`,
     );
@@ -120,13 +120,13 @@ function validateGeneratedFilesHaveValidHash(
     return true;
   }
 
-  logger.error(
+  simpleLogger.error(
     validateGeneratedFiles.name,
     `${modifiedFiles.length}/${generatedFiles.length} generated files are invalid as they are manually modified:`,
   );
 
   for (let i = 0; i < modifiedFiles.length; i++) {
-    logger.error(
+    simpleLogger.error(
       validateGeneratedFiles.name,
       `Error ${i + 1}: ${modifiedFiles[i]!.name}`,
     );
@@ -144,13 +144,13 @@ async function validateGeneratedFilesAreNotStale(
     return true;
   }
 
-  logger.error(
+  simpleLogger.error(
     validateGeneratedFiles.name,
     `${staleGeneratedFiles.length}/${generatedFiles.length} generated files are stale:`,
   );
 
   for (let i = 0; i < staleGeneratedFiles.length; i++) {
-    logger.error(
+    simpleLogger.error(
       validateGeneratedFiles.name,
       `Stale file ${i + 1}: ${staleGeneratedFiles[i]!.name}`,
     );

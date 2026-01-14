@@ -1,5 +1,5 @@
 import { df, asyncJobTypeMapping } from "../__generated/index.js";
-import { logger } from "../logging/index.js";
+import { simpleLogger } from "../logging/index.js";
 import { AsyncJobMachine } from "./AsyncJobMachine.js";
 import { AsyncJobStatus } from "./AsyncJobStatus.js";
 import { validateJobArgumentOnRead } from "./validateJobArgumentOnRead.js";
@@ -8,7 +8,7 @@ import { validateJobArgumentOnRead } from "./validateJobArgumentOnRead.js";
  * Finds and load jobs from DB to run one by one.
  */
 export async function asyncTierJobLoaderAndRunner() {
-  logger.info(
+  simpleLogger.info(
     asyncTierJobLoaderAndRunner.name,
     "Looking for Async Job to run...",
   );
@@ -18,14 +18,14 @@ export async function asyncTierJobLoaderAndRunner() {
   });
 
   if (asyncJob === null) {
-    logger.nonProdVerbose(
+    simpleLogger.nonProdVerbose(
       asyncTierJobLoaderAndRunner.name,
       "No Async Job found",
     );
     return;
   }
 
-  logger.info(
+  simpleLogger.info(
     asyncTierJobLoaderAndRunner.name,
     `Found Async Job to run: ${asyncJob.id}`,
   );
@@ -43,7 +43,7 @@ export async function asyncTierJobLoaderAndRunner() {
 
     await df.asyncUpdateJob.runAndThrowOnError(asyncJob);
 
-    logger.error(asyncTierJobLoaderAndRunner.name, errMsg);
+    simpleLogger.error(asyncTierJobLoaderAndRunner.name, errMsg);
 
     return;
   }
@@ -72,7 +72,7 @@ export async function asyncTierJobLoaderAndRunner() {
 
       await df.asyncUpdateJob.runAndThrowOnError(asyncJob);
 
-      logger.error(asyncTierJobLoaderAndRunner.name, errMsg);
+      simpleLogger.error(asyncTierJobLoaderAndRunner.name, errMsg);
 
       return;
     }
@@ -103,7 +103,7 @@ export async function asyncTierJobLoaderAndRunner() {
 
     await df.asyncUpdateJob.runAndThrowOnError(asyncJob);
 
-    logger.error(asyncTierJobLoaderAndRunner.name, runError.message);
+    simpleLogger.error(asyncTierJobLoaderAndRunner.name, runError.message);
 
     return;
   }
@@ -116,7 +116,7 @@ export async function asyncTierJobLoaderAndRunner() {
 
   await df.asyncUpdateJob.runAndThrowOnError(asyncJob);
 
-  logger.info(
+  simpleLogger.info(
     asyncTierJobLoaderAndRunner.name,
     `Succesfully completed AsyncJob ${asyncJobType.name}:${asyncJob.id}`,
   );

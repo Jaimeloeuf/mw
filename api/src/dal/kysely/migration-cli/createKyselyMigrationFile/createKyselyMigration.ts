@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import readline from "readline/promises";
 
-import { logger } from "../../../../logging/index.js";
+import { simpleLogger } from "../../../../logging/index.js";
 import { getMigrationIndex } from "./getMigrationIndex.js";
 import { migrationFileTemplate } from "./migrationFileTemplate.js";
 
@@ -21,7 +21,7 @@ export async function createKyselyMigration() {
   rl.close();
 
   if (migrationName.replaceAll(/^[_a-z0-9]+$/g, "") !== "") {
-    logger.error(
+    simpleLogger.error(
       createKyselyMigration.name,
       `Migration name can only contain alphanumeric characters and _`,
     );
@@ -29,7 +29,7 @@ export async function createKyselyMigration() {
   }
 
   if (migrationName !== migrationName.replaceAll(/\s/g, "")) {
-    logger.error(
+    simpleLogger.error(
       createKyselyMigration.name,
       `Migration name cannot have space, use _ instead`,
     );
@@ -37,7 +37,7 @@ export async function createKyselyMigration() {
   }
 
   if (migrationName !== migrationName.toLowerCase()) {
-    logger.error(
+    simpleLogger.error(
       createKyselyMigration.name,
       `Migration name must be all lowercase`,
     );
@@ -54,7 +54,7 @@ export async function createKyselyMigration() {
 
   fs.writeFileSync(migrationFilePath, migrationFileTemplate);
 
-  logger.info(
+  simpleLogger.info(
     createKyselyMigration.name,
     `Created migration file at: ${migrationFilePath}`,
   );

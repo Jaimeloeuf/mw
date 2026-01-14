@@ -5,7 +5,7 @@ import { format as prettierFormatter } from "prettier";
 
 import type { GeneratedFileTarget } from "./GeneratedFileTarget.js";
 
-import { logger } from "../logging/index.js";
+import { simpleLogger } from "../logging/index.js";
 
 /**
  * Generate the full text file (formatted + notice + hash) and save the file to
@@ -62,7 +62,7 @@ export async function genAndSaveGeneratedFile({
 
   await fs.writeFile(filePath, fullyGeneratedText);
 
-  logger.info(generator.name, `Generated file: ${filePath}`);
+  simpleLogger.info(generator.name, `Generated file: ${filePath}`);
 
   return {
     filePath,

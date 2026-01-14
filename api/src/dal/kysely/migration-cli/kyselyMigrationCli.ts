@@ -1,6 +1,6 @@
 import "../../../global/bootstrapGlobalDefinitions.js";
 import { config } from "../../../config/index.js";
-import { logger } from "../../../logging/index.js";
+import { simpleLogger } from "../../../logging/index.js";
 import { createKyselyMigration } from "./createKyselyMigrationFile/createKyselyMigration.js";
 import { kyselyMigration } from "./kyselyMigration.js";
 import { migrateConfirmationForAll } from "./migrateConfirmation/migrateConfirmationForAll.js";
@@ -61,7 +61,10 @@ async function kyselyMigrationCli() {
     return;
   }
 
-  logger.error(kyselyMigrationCli.name, `Invalid migration type: ${command}\n`);
+  simpleLogger.error(
+    kyselyMigrationCli.name,
+    `Invalid migration type: ${command}\n`,
+  );
   printMigrationCliHelp();
 }
 

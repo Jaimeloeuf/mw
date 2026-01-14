@@ -1,6 +1,6 @@
 import type { ConcreteCogenieStep } from "./CogenieStep.js";
 
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/index.js";
 
 // Register a namespaced tsx API, so that imports have module caching, which is
 // needed so that when different cogenie steps load the same files/folders, the
@@ -32,11 +32,14 @@ export async function getOneCogenieStep(
 
   // Check if it is a class by checking for the constructor function
   if (typeof importedCogenieClass !== "function") {
-    logger.error(
+    simpleLogger.error(
       getOneCogenieStep.name,
       `Cogenie step module is malformed and does not export a valid cogenie step class\nMake sure they are of the same name`,
     );
-    logger.error(getOneCogenieStep.name, `Module found: ${importedModule}`);
+    simpleLogger.error(
+      getOneCogenieStep.name,
+      `Module found: ${importedModule}`,
+    );
     process.exit(1);
   }
 

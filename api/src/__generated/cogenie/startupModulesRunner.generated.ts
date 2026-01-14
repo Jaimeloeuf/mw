@@ -6,11 +6,11 @@
  * GenStartupModuleRunner
  *
  * Generated hash in hex for code after this section is:
- * sha256(ed5cd9a3deebacc1e505c8349e8a348b15dcce7723fcc2994eb9120e1d85354b)
+ * sha256(e22a4539b90f0f238720f24c342166403f1eb99c9531cb88dd349ad70a62cc2b)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/SimpleLogger.js";
 import { st } from "./startupModulesBarrelFile.generated.js";
 
 /**
@@ -19,13 +19,13 @@ import { st } from "./startupModulesBarrelFile.generated.js";
  */
 export async function startupModuleRunner() {
   try {
-    logger.info(startupModuleRunner.name, "Running (1) Startup Modules");
+    simpleLogger.info(startupModuleRunner.name, "Running (1) Startup Modules");
 
     await Promise.all([logBeforeRun(st.telegramSetupTelegramBots)()]);
   } catch (e) {
     const error = $convertUnknownCatchToError(e);
 
-    logger.error(
+    simpleLogger.error(
       startupModuleRunner.name,
       "Failed while running Startup Module",
       error,
@@ -39,7 +39,7 @@ export async function startupModuleRunner() {
 
 const logBeforeRun = (fn: () => any) =>
   async function () {
-    logger.verbose(`${startupModuleRunner.name}:${fn.name}`, "Start");
+    simpleLogger.verbose(`${startupModuleRunner.name}:${fn.name}`, "Start");
     await fn();
-    logger.verbose(`${startupModuleRunner.name}:${fn.name}`, "Completed");
+    simpleLogger.verbose(`${startupModuleRunner.name}:${fn.name}`, "Completed");
   };

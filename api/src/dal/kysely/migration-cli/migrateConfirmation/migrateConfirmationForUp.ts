@@ -1,6 +1,6 @@
 import type { MigrationInfo } from "kysely";
 
-import { logger } from "../../../../logging/Logger.js";
+import { simpleLogger } from "../../../../logging/SimpleLogger.js";
 
 export function migrateConfirmationForUp(
   migrations: ReadonlyArray<MigrationInfo>,
@@ -10,14 +10,14 @@ export function migrateConfirmationForUp(
     .at(0);
 
   if (nextUnexecutedMigration === undefined) {
-    logger.info(
+    simpleLogger.info(
       migrateConfirmationForUp.name,
       "There is no unexecuted Migration left to migrate up.",
     );
     return false;
   }
 
-  logger.info(
+  simpleLogger.info(
     migrateConfirmationForUp.name,
     `Migration to migrate up: ${nextUnexecutedMigration.name}`,
   );

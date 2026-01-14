@@ -2,7 +2,7 @@ import {
   ConflictException,
   GenericDalException,
 } from "../../exceptions/index.js";
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/index.js";
 
 /**
  * Utility wrapper around the `$awaitPromiseSafely` utility function, to
@@ -49,7 +49,7 @@ function kyselyErrorToException(e: Error) {
       ]);
 
     default:
-      logger.info(
+      simpleLogger.info(
         kyselyErrorToException.name,
         `Unable to map exception to Kysely Error Code '${kyselyErrorCode}', falling back to ${GenericDalException.name}`,
       );

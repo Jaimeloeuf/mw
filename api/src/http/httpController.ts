@@ -16,7 +16,7 @@ import {
   HttpTransformerableException,
   Exception,
 } from "../exceptions/index.js";
-import { logger } from "../logging/index.js";
+import { simpleLogger } from "../logging/index.js";
 import { HttpStatus, type HttpStatusCode } from "./HttpStatus.js";
 
 /**
@@ -185,7 +185,7 @@ export const httpController = <
 
         for (const { guardDataNamespace, guard } of guards) {
           partialGuardData[guardDataNamespace] = await guard(req);
-          logger.nonProdVerbose(
+          simpleLogger.nonProdVerbose(
             `${httpController.name}:${guard.name}`,
             `Passed guard check`,
           );
@@ -244,7 +244,10 @@ export const httpController = <
       // Simple error logging
       // @todo Might log to an error logging service
       // @todo Might log the e.cause property too
-      logger.error(`${httpController.name}:${logID}`, (error as Error)?.stack);
+      simpleLogger.error(
+        `${httpController.name}:${logID}`,
+        (error as Error)?.stack,
+      );
 
       // If it is an exception that can be transformed into a HTTP response
       // transform it and use that as the response.

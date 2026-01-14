@@ -1,5 +1,5 @@
 import "../../global/bootstrapGlobalDefinitions.js";
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/SimpleLogger.js";
 import { cogenieRunAllSteps } from "./cogenieRunAllSteps.js";
 import { cogenieRunOneStep } from "./cogenieRunOneStep.js";
 import { deleteStaleGeneratedFiles } from "./deleteStaleGeneratedFiles.js";
@@ -55,7 +55,7 @@ async function cogenieCli() {
     return;
   }
 
-  logger.error(cogenieCli.name, `Invalid cogenie argument: ${arg}\n`);
+  simpleLogger.error(cogenieCli.name, `Invalid cogenie argument: ${arg}\n`);
   printCogenieCliHelp();
 }
 

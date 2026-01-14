@@ -1,5 +1,5 @@
 import { config } from "../../config/index.js";
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/index.js";
 import { json } from "../../utils/index.js";
 
 /**
@@ -90,7 +90,7 @@ export function dataFn<
    */
   async function runAndThrowOnError(...args: Parameters<T>): Promise<Result> {
     if (config.df_verbose_log_calls()) {
-      logger.verbose(
+      simpleLogger.verbose(
         dataFn.name,
         `Running '${fn.name}' with:`,
         json.stringifyPretty(args),
@@ -118,6 +118,6 @@ export function dataFn<
  * choose to use `run` or `runAndThrowOnError`.
  */
 function logDataFnError(fnName: string, error: Error) {
-  logger.error(dataFn.name, `Error thrown in data function: ${fnName}`);
-  logger.error(`${dataFn.name}:${fnName}`, error?.stack ?? error);
+  simpleLogger.error(dataFn.name, `Error thrown in data function: ${fnName}`);
+  simpleLogger.error(`${dataFn.name}:${fnName}`, error?.stack ?? error);
 }

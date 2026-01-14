@@ -1,4 +1,4 @@
-import { logger } from "../logging/Logger.js";
+import { simpleLogger } from "../logging/SimpleLogger.js";
 import { json } from "./json.js";
 
 /**
@@ -7,7 +7,7 @@ import { json } from "./json.js";
  */
 export function logBeforeRun<T extends (...args: any) => any>(fn: T) {
   return function (...args: Parameters<T>): ReturnType<T> {
-    logger.verbose(
+    simpleLogger.verbose(
       `${logBeforeRun.name}:${fn.name}`,
       `Called with:`,
       json.stringifyPretty(args),

@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 import { entMapping } from "../../../../__generated/index.js";
-import { logger } from "../../../../logging/index.js";
+import { simpleLogger } from "../../../../logging/index.js";
 import { pseudoRandomAlphanumericString } from "../../../../utils/index.js";
 import {
   cogenieRunAllSteps,
@@ -40,7 +40,7 @@ export default Scaffoldr({
     // Will throw if folder already exists, but should not happen since folder
     // existence is already checked in input validation stage
     fs.mkdirSync(entFolderPath);
-    logger.info(Scaffoldr.name, `Created Ent Folder: ${entFolderPath}`);
+    simpleLogger.info(Scaffoldr.name, `Created Ent Folder: ${entFolderPath}`);
 
     /**
      * Generate unique EntTypeID by generating a unique ID and checking against all

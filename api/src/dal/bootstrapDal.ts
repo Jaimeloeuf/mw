@@ -1,5 +1,5 @@
 import { config } from "../config/index.js";
-import { logger } from "../logging/index.js";
+import { simpleLogger } from "../logging/index.js";
 import { apiDB } from "./kysely/apiDB.js";
 import { dbConnectionCheck } from "./kysely/index.js";
 
@@ -12,7 +12,7 @@ import { dbConnectionCheck } from "./kysely/index.js";
  */
 export async function bootstrapDal() {
   if (config.env() !== "production") {
-    logger.nonProdVerbose(
+    simpleLogger.nonProdVerbose(
       bootstrapDal.name,
       `DB connection check SKIPPED in ${config.env()} (non production) environment`,
     );

@@ -1,5 +1,5 @@
 import { InvalidInternalStateException } from "../exceptions/index.js";
-import { logger } from "../logging/index.js";
+import { simpleLogger } from "../logging/index.js";
 
 /**
  * Utility wrappers over `JSON`.
@@ -29,7 +29,7 @@ export const json = {
     try {
       return json.stringify(maybeJsonStringifiable);
     } catch (error) {
-      logger.nonProdVerbose("json.stringifySafely", error);
+      simpleLogger.nonProdVerbose("json.stringifySafely", error);
 
       return "";
     }
@@ -45,11 +45,14 @@ export const json = {
     try {
       return JSON.stringify(obj, null, 2);
     } catch (e) {
-      logger.verbose(
+      simpleLogger.verbose(
         "json.stringifyPretty",
         `JSON.stringify threw while trying to stringify: ${obj}`,
       );
-      logger.verbose("json.stringifyPretty", `JSON.stringify threw: ${e}`);
+      simpleLogger.verbose(
+        "json.stringifyPretty",
+        `JSON.stringify threw: ${e}`,
+      );
 
       return "";
     }
@@ -81,7 +84,7 @@ export const json = {
     try {
       return [null, json.parse<ParsedType>(maybeJsonString)];
     } catch (error) {
-      logger.nonProdVerbose("json.parseSafely", error);
+      simpleLogger.nonProdVerbose("json.parseSafely", error);
       // Safe to cast as Error as it is definitely an error after `json.parse`
       // try/catch re-throw for Error type conversion.
       return [error as Error, null];

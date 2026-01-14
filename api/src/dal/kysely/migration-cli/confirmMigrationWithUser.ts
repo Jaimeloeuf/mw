@@ -1,6 +1,6 @@
 import type { MigrationInfo } from "kysely";
 
-import { logger } from "../../../logging/index.js";
+import { simpleLogger } from "../../../logging/index.js";
 import { createDbAndMigrator } from "./createDbAndMigrator.js";
 import { getCliConfirmationYesNoInput } from "./getCliConfirmationYesNoInput.js";
 
@@ -24,7 +24,7 @@ export async function confirmMigrationWithUser(options: {
 
   const isKyeselyMigrationRanInCI = process.argv.includes("--ci");
   if (isKyeselyMigrationRanInCI) {
-    logger.info(
+    simpleLogger.info(
       confirmMigrationWithUser.name,
       "Skipping confirmation validation in CI environment...",
     );
@@ -33,11 +33,14 @@ export async function confirmMigrationWithUser(options: {
 
   const confirmed = await getCliConfirmationYesNoInput("Confirm migration?");
   if (confirmed) {
-    logger.info(confirmMigrationWithUser.name, "Thank you for confirming...");
+    simpleLogger.info(
+      confirmMigrationWithUser.name,
+      "Thank you for confirming...",
+    );
     return true;
   }
 
-  logger.info(confirmMigrationWithUser.name, "Aborting...");
+  simpleLogger.info(confirmMigrationWithUser.name, "Aborting...");
 
   // Destroy DB connection so that the CLI program can exit.
   await db.destroy();

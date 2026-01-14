@@ -1,6 +1,6 @@
 import type { WrappedFunction } from "./WrappedFunction.js";
 
-import { logger } from "../logging/index.js";
+import { simpleLogger } from "../logging/index.js";
 
 /**
  * Run SimplePostProcessing wrapped functions in parallel and awaiting for all
@@ -18,7 +18,7 @@ export async function runInParallel(
 
   const failedExecutions = executionResults.length - successfulExecutions;
 
-  logger.info(
+  simpleLogger.info(
     logHeader,
     `Processed ${executionResults.length} jobs in parallel. ${successfulExecutions} succeeded and ${failedExecutions} failed.`,
   );

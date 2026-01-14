@@ -1,6 +1,6 @@
 import type { ProdEmailServiceFF } from "./ProdEmailServiceFF.js";
 
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/index.js";
 import { json } from "../../utils/index.js";
 
 export const MockEmailServiceFF = ((
@@ -20,7 +20,7 @@ export const MockEmailServiceFF = ((
      */
     message: string,
   ) {
-    logger.info(
+    simpleLogger.info(
       MockEmailService.name,
       json.stringifyPretty({
         emailAddressForSendFrom,

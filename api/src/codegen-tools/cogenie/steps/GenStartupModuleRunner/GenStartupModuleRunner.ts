@@ -31,7 +31,7 @@ export class GenStartupModuleRunner implements CogenieStep {
 
   startupModuleRunnerTemplate = (
     files: Readonly<Array<StartupFile>>,
-  ) => `import { logger } from "../../logging/index.js";
+  ) => `import { simpleLogger } from "../../logging/SimpleLogger.js";
 import { st } from "./startupModulesBarrelFile${codegenForTs.generatedCodeFileExtensionForJsImport}";
 
 /**
@@ -40,7 +40,7 @@ import { st } from "./startupModulesBarrelFile${codegenForTs.generatedCodeFileEx
  */
 export async function startupModuleRunner() {
   try {
-    logger.info(startupModuleRunner.name, "Running (${files.length}) Startup Modules");
+    simpleLogger.info(startupModuleRunner.name, "Running (${files.length}) Startup Modules");
 
     await Promise.all([
       ${files.map((file) => `logBeforeRun(st.${file.name})()`)}
@@ -48,7 +48,7 @@ export async function startupModuleRunner() {
   } catch (e) {
     const error = $convertUnknownCatchToError(e);
 
-    logger.error(
+    simpleLogger.error(
       startupModuleRunner.name,
       "Failed while running Startup Module",
       error,
@@ -62,9 +62,9 @@ export async function startupModuleRunner() {
 
 const logBeforeRun = (fn: () => any) =>
   async function () {
-    logger.verbose(\`\${startupModuleRunner.name}:\${fn.name}\`, "Start");
+    simpleLogger.verbose(\`\${startupModuleRunner.name}:\${fn.name}\`, "Start");
     await fn();
-    logger.verbose(\`\${startupModuleRunner.name}:\${fn.name}\`, "Completed");
+    simpleLogger.verbose(\`\${startupModuleRunner.name}:\${fn.name}\`, "Completed");
   };
 `;
 }

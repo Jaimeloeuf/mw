@@ -1,6 +1,6 @@
 import path from "path";
 
-import { logger } from "../../../../logging/index.js";
+import { simpleLogger } from "../../../../logging/index.js";
 import { Scaffoldr } from "../../Scaffoldr.js";
 
 const allowedHttpMethods = ["get", "post", "put", "patch", "delete", "all"];
@@ -57,7 +57,7 @@ export default Scaffoldr({
 
   async onSave() {
     // Not running codegen for them since they need to update the contents first
-    logger.info(
+    simpleLogger.info(
       Scaffoldr.name,
       `Please update the controller file details and run "npm run codegen:cogenie all" to update the generated files`,
     );

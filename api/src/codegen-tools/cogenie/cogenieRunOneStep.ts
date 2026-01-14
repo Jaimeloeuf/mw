@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 import { codegenForTs } from "../../codegen-lib/index.js";
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/index.js";
 import { cogenieStepsRootDirPath } from "./cogenieStepsRootDirPath.js";
 import { deleteStaleGeneratedFiles } from "./deleteStaleGeneratedFiles.js";
 import { getOneCogenieStep } from "./getOneCogenieStep.js";
@@ -18,11 +18,11 @@ export async function cogenieRunOneStep(cogenieStepName: string) {
 
   const moduleExists = fs.existsSync(cogenieStepModulePath);
   if (!moduleExists) {
-    logger.error(
+    simpleLogger.error(
       cogenieRunOneStep.name,
       `Cogenie step does not exist: ${cogenieStepName}`,
     );
-    logger.error(
+    simpleLogger.error(
       cogenieRunOneStep.name,
       `Use 'npm run codegen:cogenie list' to see all cogenie steps`,
     );

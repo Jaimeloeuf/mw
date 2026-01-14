@@ -6,14 +6,14 @@
  * GenHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256(70ecaf3cf9ff2446a03f471014a090746e17e0ba427ce411861b6d045a90ed0e)
+ * sha256(7a62ce319a4bff231e1f90443e9d69bec057b70a3663ffc49d8b89dfcb7ca379)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
 import { Router } from "express";
 
 import { config } from "../../config/index.js";
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/SimpleLogger.js";
 import { httpControllers as c } from "./httpControllerBarrelFile.generated.js";
 
 /**
@@ -28,7 +28,7 @@ function registerRouteIfNotDisabled({
   registerRoute: () => void;
 }) {
   if (config.http_disabled_paths().has(route)) {
-    logger.verbose(
+    simpleLogger.verbose(
       `HTTP Route disabled (with config.${config.http_disabled_paths.name})`,
       `${route}`,
     );
@@ -36,7 +36,7 @@ function registerRouteIfNotDisabled({
   }
   registerRoute();
   if (config.http_verbose_log_route_registration()) {
-    logger.nonProdVerbose("HTTP Route registered", route);
+    simpleLogger.nonProdVerbose("HTTP Route registered", route);
   }
 }
 

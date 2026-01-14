@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/index.js";
 import { json } from "../../utils/index.js";
 import { AsyncJobMachine } from "../AsyncJobMachine.js";
 import { AsyncJobPriority } from "../AsyncJobPriority.js";
@@ -19,7 +19,7 @@ export default defineAsyncJobType({
     test: z.string(),
   }),
   async run(args) {
-    logger.verbose(
+    simpleLogger.verbose(
       this.name,
       `Doing some compute in async tier, received args: ${json.stringifySafely(args)}`,
     );

@@ -3,7 +3,7 @@ import path from "path";
 import type { CogenieStep } from "../../CogenieStep.js";
 
 import { codegenForDoc } from "../../../../codegen-lib/index.js";
-import { logger } from "../../../../logging/index.js";
+import { simpleLogger } from "../../../../logging/index.js";
 import { getTypeofTypeAlias } from "../../../../utils/getTypeofTypeAlias.js";
 
 /**
@@ -26,7 +26,7 @@ export class GenServerConfigDoc implements CogenieStep {
     );
 
     if (configType instanceof Error) {
-      logger.error(
+      simpleLogger.error(
         `${GenServerConfigDoc.name}:${getTypeofTypeAlias.name}`,
         configType,
       );

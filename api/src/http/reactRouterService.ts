@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 
 import { config } from "../config/index.js";
-import { logger } from "../logging/index.js";
+import { simpleLogger } from "../logging/index.js";
 
 // @todo
 // Short-circuit the type-checking of the built output.
@@ -16,7 +16,7 @@ export async function reactRouterService() {
   const router = express.Router();
 
   if (config.env() === "development") {
-    logger.info(reactRouterService.name, `Using vite development server`);
+    simpleLogger.info(reactRouterService.name, `Using vite development server`);
     const vite = await import("vite");
     const viteDevServer = await vite.createServer({
       server: { middlewareMode: true },
@@ -38,7 +38,7 @@ export async function reactRouterService() {
       }
     });
   } else {
-    logger.info(
+    simpleLogger.info(
       reactRouterService.name,
       `Using production server + pre-built assets`,
     );

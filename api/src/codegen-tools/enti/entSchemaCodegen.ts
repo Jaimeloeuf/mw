@@ -7,7 +7,7 @@ import "../../global/bootstrapGlobalDefinitions.js";
 
 import type { EntSchemaValidatedData } from "../../entschema/lib/index.js";
 
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/index.js";
 import { generateEntFromEntSchema } from "./generateEntFromEntSchema.js";
 import { generateEntOperatorsFromEntSchema } from "./generateEntOperatorsFromEntSchema.js";
 
@@ -50,7 +50,7 @@ export async function entSchemaCodegen({
     formattedFile,
   );
 
-  logger.info(
+  simpleLogger.info(
     entSchemaCodegen.name,
     `Generated '${entClassName}' from '${entSchema.name}'`,
   );
@@ -106,7 +106,7 @@ import { EntBlog } from "./EntBlog.js";
     formattedFile,
   );
 
-  logger.info(
+  simpleLogger.info(
     entSchemaCodegen.name,
     `Generated '${entClassName}Operators' from '${entSchema.name}'`,
   );

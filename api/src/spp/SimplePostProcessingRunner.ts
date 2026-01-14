@@ -1,6 +1,6 @@
 import type { WrappedFunction } from "./WrappedFunction.js";
 
-import { logger } from "../logging/index.js";
+import { simpleLogger } from "../logging/index.js";
 import { runInParallel } from "./runInParallel.js";
 import { runSequentially } from "./runSequentially.js";
 
@@ -44,14 +44,14 @@ export class SimplePostProcessingRunner {
 
     const wrappedFunction = async () => {
       try {
-        logger.verbose(
+        simpleLogger.verbose(
           `${this.callerName}:${SimplePostProcessingRunner.name}`,
           `Executing: ${fn.name}`,
         );
 
         await fn();
 
-        logger.verbose(
+        simpleLogger.verbose(
           `${this.callerName}:${SimplePostProcessingRunner.name}`,
           `Successfully executed: ${fn.name}`,
         );
@@ -60,7 +60,7 @@ export class SimplePostProcessingRunner {
       } catch (e) {
         const error = $convertUnknownCatchToError(e);
 
-        logger.verbose(
+        simpleLogger.verbose(
           `${this.callerName}:${SimplePostProcessingRunner.name}`,
           `Failed while executing: ${fn.name}`,
         );
@@ -68,13 +68,13 @@ export class SimplePostProcessingRunner {
         // @todo Store errors in DLQ (Dead Letter Queue)
         // @todo Create and log an error ID
         // @todo Notify devs about this error
-        logger.error(
+        simpleLogger.error(
           `${this.callerName}:${SimplePostProcessingRunner.name}:${fn.name}`,
           error,
         );
 
         if (onError !== undefined) {
-          logger.info(
+          simpleLogger.info(
             `${this.callerName}:${SimplePostProcessingRunner.name}:${fn.name}`,
             `Executing provided onError function: ${onError.name}`,
           );
@@ -82,7 +82,7 @@ export class SimplePostProcessingRunner {
           try {
             await onError(error);
           } catch (errorFromOnErrorCallback) {
-            logger.error(
+            simpleLogger.error(
               `${this.callerName}:${SimplePostProcessingRunner.name}:${fn.name}`,
               `onError function failed with: ${errorFromOnErrorCallback}`,
             );
@@ -108,7 +108,7 @@ export class SimplePostProcessingRunner {
     setImmediate(() => {
       const functionNames = this.#fns.map((fn) => fn.name).join(", ");
 
-      logger.info(
+      simpleLogger.info(
         `${this.callerName}:${SimplePostProcessingRunner.name}`,
         `Executing these functions ${this.runType}: ${functionNames}`,
       );

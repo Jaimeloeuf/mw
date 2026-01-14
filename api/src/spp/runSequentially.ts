@@ -1,6 +1,6 @@
 import type { WrappedFunction } from "./WrappedFunction.js";
 
-import { logger } from "../logging/index.js";
+import { simpleLogger } from "../logging/index.js";
 
 /**
  * Run SimplePostProcessing wrapped functions sequentially by awaiting for each
@@ -21,14 +21,14 @@ export async function runSequentially(
 
     if (!ranSuccessfully) {
       if (continueOnFailure) {
-        logger.info(
+        simpleLogger.info(
           logHeader,
           `Sequential execution continuing because it is configured to continue on failure`,
         );
 
         continue;
       } else {
-        logger.info(
+        simpleLogger.info(
           logHeader,
           `Sequential execution stopped because it is configured to stop on failure`,
         );
@@ -38,7 +38,7 @@ export async function runSequentially(
     }
   }
 
-  logger.info(
+  simpleLogger.info(
     logHeader,
     `Processed ${fns.length} jobs sequentially. ${successfulExecutions} succeeded and ${failedExecutions} failed.`,
   );

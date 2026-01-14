@@ -1,6 +1,6 @@
 import type { EntSchemaClass } from "../../entschema/lib/index.js";
 
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/index.js";
 
 /**
  * Will not throw on import error, it will return `null` instead.
@@ -13,7 +13,7 @@ async function safeDynamicModuleImport<T>(
     return await import(`../../entschema/${entSchemaName}.js`);
   } catch (error) {
     if (logOnError) {
-      logger.error(safeDynamicModuleImport.name, error);
+      simpleLogger.error(safeDynamicModuleImport.name, error);
     }
     return null;
   }
@@ -28,7 +28,7 @@ export async function importEntSchema(entSchemaName: string) {
   }>(entSchemaName);
 
   if (entSchemaModule === null) {
-    logger.error(importEntSchema.name, `EntSchema does not exist`);
+    simpleLogger.error(importEntSchema.name, `EntSchema does not exist`);
     process.exit(1);
   }
 
@@ -36,11 +36,14 @@ export async function importEntSchema(entSchemaName: string) {
 
   // Check if it is a class by checking for the constructor function
   if (entSchema === undefined || typeof entSchema !== "function") {
-    logger.error(
+    simpleLogger.error(
       importEntSchema.name,
       `EntSchema module is malformed and does not export a valid EntSchema class. Make sure your EntSchema file and class use the same name`,
     );
-    logger.error(importEntSchema.name, `Module found: ${entSchemaModule}`);
+    simpleLogger.error(
+      importEntSchema.name,
+      `Module found: ${entSchemaModule}`,
+    );
     process.exit(1);
   }
 

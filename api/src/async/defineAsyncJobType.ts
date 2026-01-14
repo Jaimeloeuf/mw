@@ -4,7 +4,7 @@ import type { AsyncJobTypeConfig } from "./AsyncJobTypeConfig.js";
 
 import { df } from "../__generated/index.js";
 import { NotFoundException } from "../exceptions/index.js";
-import { logger } from "../logging/index.js";
+import { simpleLogger } from "../logging/index.js";
 import { getStackTrace, json } from "../utils/index.js";
 import { AsyncJobStatus } from "./AsyncJobStatus.js";
 import { validateJobArgumentOnSave } from "./validateJobArgumentOnSave.js";
@@ -57,7 +57,7 @@ export function defineAsyncJobType<AsyncJobArgumentType = void>(
 
       await df.asyncCreateJob.runAndThrowOnError(asyncJob);
 
-      logger.verbose(
+      simpleLogger.verbose(
         `${asyncJob.caller}:${this.scheduleJob.name}`,
         `Successfully scheduled async job '${asyncJobConfig.name}'`,
       );

@@ -3,7 +3,7 @@ import type { EntSchemaClass } from "./EntSchemaClass.js";
 import type { EntSchemaValidatedData } from "./EntSchemaValidatedData.js";
 
 import { entMapping } from "../../__generated/index.js";
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/index.js";
 import { EntRuntimeError } from "./EntRuntimeError.js";
 import { EntSchemaSetupAndValidationError } from "./EntSchemaSetupAndValidationError.js";
 
@@ -19,7 +19,7 @@ export function EntSchemaValidateAndSetup(
     );
   }
 
-  logger.info(
+  simpleLogger.info(
     EntSchemaValidateAndSetup.name,
     `Validating and Setting up ${entSchema.name}`,
   );

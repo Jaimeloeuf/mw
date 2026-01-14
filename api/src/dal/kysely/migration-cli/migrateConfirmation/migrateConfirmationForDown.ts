@@ -1,6 +1,6 @@
 import type { MigrationInfo } from "kysely";
 
-import { logger } from "../../../../logging/Logger.js";
+import { simpleLogger } from "../../../../logging/SimpleLogger.js";
 
 export function migrateConfirmationForDown(
   migrations: ReadonlyArray<MigrationInfo>,
@@ -10,14 +10,14 @@ export function migrateConfirmationForDown(
     .at(-1);
 
   if (lastExecutedMigration === undefined) {
-    logger.info(
+    simpleLogger.info(
       migrateConfirmationForDown.name,
       "There is no executed Migration left to migrate down.",
     );
     return false;
   }
 
-  logger.info(
+  simpleLogger.info(
     migrateConfirmationForDown.name,
     `Migration to migrate down: ${lastExecutedMigration.name}`,
   );

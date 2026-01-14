@@ -4,7 +4,7 @@ import path from "path";
 import { open } from "sqlite";
 import sqlite3 from "sqlite3";
 
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/index.js";
 
 /**
  * Creates a new file based SQLite DB in /api/sqlite-mock-dbs/*.db
@@ -20,11 +20,14 @@ export async function createSqliteDB(
     filename: dbPath,
     driver: sqlite3.Database,
   });
-  logger.verbose(createSqliteDB.name, `Created mock SQLite DB ${dbFileName}`);
+  simpleLogger.verbose(
+    createSqliteDB.name,
+    `Created mock SQLite DB ${dbFileName}`,
+  );
 
   if (initFunction !== undefined) {
     await initFunction(db);
-    logger.verbose(
+    simpleLogger.verbose(
       createSqliteDB.name,
       `Successfully ran SQLite DB init function`,
     );

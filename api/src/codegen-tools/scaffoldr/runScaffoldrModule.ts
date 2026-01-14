@@ -3,7 +3,7 @@ import path from "path";
 
 import type { Scaffoldr } from "./Scaffoldr.js";
 
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/index.js";
 import { printScaffoldrCliHelp } from "./printScaffoldrCliHelp.js";
 import { scaffoldrModulesRootDirPath } from "./scaffoldrModulesRootDirPath.js";
 
@@ -27,7 +27,7 @@ export async function runScaffoldrModule(scaffoldrModuleName: string) {
 
   const moduleExists = fs.existsSync(scaffoldrModulePath);
   if (!moduleExists) {
-    logger.error(
+    simpleLogger.error(
       runScaffoldrModule.name,
       `Scaffoldr Module does not exist: ${scaffoldrModuleName}\n`,
     );
@@ -52,11 +52,14 @@ export async function runScaffoldrModule(scaffoldrModuleName: string) {
     typeof importedScaffoldrModule !== "object" ||
     typeof importedScaffoldrModule.run !== "function"
   ) {
-    logger.error(
+    simpleLogger.error(
       runScaffoldrModule.name,
       `Scaffoldr Module is malformed as it does not have a valid export`,
     );
-    logger.error(runScaffoldrModule.name, `Module found: ${importedModule}`);
+    simpleLogger.error(
+      runScaffoldrModule.name,
+      `Module found: ${importedModule}`,
+    );
     process.exit(1);
   }
 

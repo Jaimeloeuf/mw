@@ -6,7 +6,7 @@ import express from "express";
 import { registerRoutesAndControllers } from "../__generated/index.js";
 import { config } from "../config/index.js";
 import { httpRouteHandlerForGraphQL } from "../graphql/index.js";
-import { logger } from "../logging/index.js";
+import { simpleLogger } from "../logging/index.js";
 import { entrypoints } from "./entrypoints.js";
 import { loggingMiddleware } from "./loggingMiddleware.js";
 import { reactRouterService } from "./reactRouterService.js";
@@ -50,12 +50,12 @@ export async function bootstrapHttpServer() {
 
     // Start listening to network port and returns the created server instance.
     .listen(config.port(), () => {
-      logger.info(
+      simpleLogger.info(
         bootstrapHttpServer.name,
         `Web Server now listening on port: ${config.port()}`,
       );
 
-      logger.info(
+      simpleLogger.info(
         bootstrapHttpServer.name,
         `Web Server global timeout set to: ${config.server_timeout()} ms`,
       );
@@ -74,7 +74,7 @@ export async function bootstrapHttpServer() {
       // This is an internal API that may or may not work.
       const originalRequestUrl = (socket as any)?.parser?.incoming?.originalUrl;
 
-      logger.error(
+      simpleLogger.error(
         bootstrapHttpServer.name,
         `Request to '${originalRequestUrl}' exceeded global timeout of ${config.server_timeout()} ms`,
       );

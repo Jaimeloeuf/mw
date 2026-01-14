@@ -1,7 +1,7 @@
 import fs from "fs";
 import readline from "readline/promises";
 
-import { logger } from "../../logging/Logger.js";
+import { simpleLogger } from "../../logging/SimpleLogger.js";
 
 type InputConfig<T> = {
   /**
@@ -74,7 +74,7 @@ export function Scaffoldr<
         }
       } catch (e) {
         const error = $convertUnknownCatchToError(e);
-        logger.error(Scaffoldr.name, error.message);
+        simpleLogger.error(Scaffoldr.name, error.message);
         process.exit(1);
       }
 
@@ -96,12 +96,12 @@ export function Scaffoldr<
 
       for (const file of filesToGenerate) {
         fs.writeFileSync(file.path, file.generatedCode);
-        logger.info(Scaffoldr.name, `Created file: ${file.path}`);
+        simpleLogger.info(Scaffoldr.name, `Created file: ${file.path}`);
       }
 
       await config?.onSave?.(inputs);
 
-      logger.info(
+      simpleLogger.info(
         Scaffoldr.name,
         `Scaffolding complete, please update generated code files as needed.`,
       );

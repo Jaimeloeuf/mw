@@ -5,7 +5,7 @@ export const routeTableTemplate = (
 ) => `import { Router } from "express";
 
 import { config } from "../../config/index.js";
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/SimpleLogger.js";
 import { httpControllers as c } from "./httpControllerBarrelFile${codegenForTs.generatedCodeFileExtensionForJsImport}";
 
 /**
@@ -20,12 +20,12 @@ function registerRouteIfNotDisabled({
   registerRoute: () => void;
 }) {
   if (config.http_disabled_paths().has(route)) {
-    logger.verbose(\`HTTP Route disabled (with config.\${config.http_disabled_paths.name})\`, \`\${route}\`);
+    simpleLogger.verbose(\`HTTP Route disabled (with config.\${config.http_disabled_paths.name})\`, \`\${route}\`);
     return;
   }
   registerRoute();
   if (config.http_verbose_log_route_registration()) {
-    logger.nonProdVerbose("HTTP Route registered", route);
+    simpleLogger.nonProdVerbose("HTTP Route registered", route);
   }
 }
 

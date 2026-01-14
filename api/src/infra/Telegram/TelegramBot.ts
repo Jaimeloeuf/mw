@@ -4,7 +4,7 @@ import type { TelegramWebhookData } from "./telegramWebhookDataSchema.js";
 import { httpControllerUrlBuilders } from "../../__generated/index.js";
 import { config } from "../../config/index.js";
 import { ServiceException } from "../../exceptions/index.js";
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/index.js";
 import { json, wrapFunctionToProvideRunModes } from "../../utils/index.js";
 import { getCommandIfAny } from "./getCommandIfAny.js";
 import { tApi } from "./tApi.js";
@@ -63,7 +63,7 @@ export abstract class TelegramBot {
       throw new ServiceException(setWebhookResponse?.description);
     }
 
-    logger.info(
+    simpleLogger.info(
       `${TelegramBot.name}:${this.registerTelegramWebhookUrl.name}`,
       `Successfully registered telegram webhook URL for ${this.constructor.name} to: ${urlObject.toString()}`,
     );

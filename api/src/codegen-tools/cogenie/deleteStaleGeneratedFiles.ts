@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 
-import { logger } from "../../logging/index.js";
+import { simpleLogger } from "../../logging/index.js";
 import { getCachedGeneratedFilesDirent } from "./getGeneratedFilesDirent.js";
 import { getStaleGeneratedFiles } from "./getStaleGeneratedFiles.js";
 
@@ -26,19 +26,19 @@ export async function deleteStaleGeneratedFiles() {
   if (deletedFiles.length > 0) {
     const generatedFilesDirent = await getCachedGeneratedFilesDirent();
 
-    logger.info(
+    simpleLogger.info(
       deleteStaleGeneratedFiles.name,
       `Deleted ${deletedFiles.length}/${generatedFilesDirent.length} generated files:`,
     );
 
     for (let i = 0; i < deletedFiles.length; i++) {
-      logger.info(
+      simpleLogger.info(
         deleteStaleGeneratedFiles.name,
         `Deleted file ${i + 1}: ${deletedFiles[i]}`,
       );
     }
   } else {
-    logger.info(
+    simpleLogger.info(
       deleteStaleGeneratedFiles.name,
       "No generated files deleted but some may still be overwritten",
     );
