@@ -1,9 +1,11 @@
 import pc from "picocolors";
 
-import { config } from "../config/index.js";
-import { noOp } from "../utils/index.js";
-
 type LogLevel = "Error" | "Info" | "Verbose";
+
+/**
+ * See `SimpleLogger.nonProdVerbose` method
+ */
+const isNotProduction = process.env["NODE_ENV"] !== "production";
 
 /**
  * Simple custom logger wrapper around `console` with support for log levels,
@@ -62,29 +64,41 @@ class SimpleLogger {
     SimpleLogger.#log("Verbose", label, args);
   }
 
-  // @todo Replace nonProdVerbose implementation in the future
-  // nonProdVerbose(..._args: any) {
-  //   //
-  // }
+  // @todo Old implementation for historical context
+  // /**
+  //  * Verbose log level for none critical info, that is similiar to `verbose` log
+  //  * level, but unlike `verbose`, this only logs in none production environment.
+  //  */
+  // nonProdVerbose_OLD =
+  //   // @todo There could be a better fix for this
+  //   // Instead of using the config directly like 'config.env() === "production"'
+  //   // there are cases where the config object is not bootstrapped correctly and
+  //   // ends up being undefined which causes whatever that is using it to crash.
+  //   // Since Logger is such an integral part of so many other 'entrypoints'
+  //   // there are many cases where this just crash because of how the entrypoint
+  //   // trigger things without bootstrapping everything properly. Therefore this
+  //   // simple fix is placed so that when that happens, we can fallback to using
+  //   // the env var directly.
+  //   (config?.env() ?? process.env["NODE_ENV"]) === "production"
+  //     ? noOp<[label: string, ...args: Parameters<typeof console.log>]>
+  //     : (label: string, ...args: Parameters<typeof console.log>) =>
+  //         SimpleLogger.#log("Verbose", label, args);
 
   /**
    * Verbose log level for none critical info, that is similiar to `verbose` log
    * level, but unlike `verbose`, this only logs in none production environment.
+   *
+   * Unlike the old implementation above, this uses a simple env var check on
+   * module load to ensure this SimpleLogger has no dependency on anything else
+   * outside of this file to prevent cyclic dependency problems.
+   *
+   * Env var check is done outside so that it is only evaluated once.
    */
-  nonProdVerbose =
-    // @todo There could be a better fix for this
-    // Instead of using the config directly like 'config.env() === "production"'
-    // there are cases where the config object is not bootstrapped correctly and
-    // ends up being undefined which causes whatever that is using it to crash.
-    // Since Logger is such an integral part of so many other 'entrypoints'
-    // there are many cases where this just crash because of how the entrypoint
-    // trigger things without bootstrapping everything properly. Therefore this
-    // simple fix is placed so that when that happens, we can fallback to using
-    // the env var directly.
-    (config?.env() ?? process.env["NODE_ENV"]) === "production"
-      ? noOp<[label: string, ...args: Parameters<typeof console.log>]>
-      : (label: string, ...args: Parameters<typeof console.log>) =>
-          SimpleLogger.#log("Verbose", label, args);
+  nonProdVerbose(label: string, ...args: Parameters<typeof console.log>) {
+    if (isNotProduction) {
+      SimpleLogger.#log("Verbose", label, args);
+    }
+  }
 }
 
 // @todo Rename to simpleLogger later
