@@ -57,7 +57,7 @@ export function dataFn<
     ...args: Parameters<T>
   ): Promise<[null, Result] | [Error, null]> {
     if (config.df_verbose_log_calls()) {
-      logger.verbose(
+      simpleLogger.verbose(
         dataFn.name,
         `Running '${fn.name}' with:`,
         json.stringifyPretty(args),
