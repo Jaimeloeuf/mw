@@ -42,7 +42,7 @@ export class AssocQuery<FromEnt extends EntClass, ToEnt extends EntClass> {
     }
 
     for (const id of ids) {
-      const isEntIdValid = $EntID.isValid(this.fromEntType, id);
+      const isEntIdValid = $EntID.isValid(id, this.fromEntType);
       if (!isEntIdValid) {
         throw new NotFoundException(
           `Invalid ID '${id}' used for '${this.fromEntType.name}'`,
@@ -73,7 +73,7 @@ export class AssocQuery<FromEnt extends EntClass, ToEnt extends EntClass> {
     }
 
     for (const id of ids) {
-      const isEntIdValid = $EntID.isValid(this.toEntType, id);
+      const isEntIdValid = $EntID.isValid(id, this.toEntType);
       if (!isEntIdValid) {
         throw new NotFoundException(
           `Invalid ID '${id}' used for '${this.toEntType.name}'`,

@@ -42,8 +42,8 @@ declare global {
      * 1. If the entID ends with the correct postfix of "_" and the entTypeID
      */
     function isValid(
-      entClass: typeof BaseEnt | EntClass<BaseEnt>,
       maybeID: string,
+      entClass: typeof BaseEnt | EntClass<BaseEnt>,
     ): boolean;
 
     /**
@@ -98,7 +98,7 @@ globalThis.$EntID = {
     // Casting entClass to get the value of the non-abstract class
     return `${$UUID.generate()}_${(entClass as typeof BaseEnt).EntTypeID}` as $EntID.Strong;
   },
-  isValid(entClass, maybeID) {
+  isValid(maybeID, entClass) {
     return (
       maybeID.length === 41 &&
       maybeID.endsWith(`_${(entClass as typeof BaseEnt).EntTypeID}`)
