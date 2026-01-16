@@ -25,11 +25,11 @@ export async function bootstrapHttpServer() {
     // Disable this for security
     .disable("x-powered-by")
 
-    // Using /gql instead of well known /graphql to avoid those scanning bots
-    .get("/gql", httpRouteHandlerForGraphQL)
-    .post("/gql", httpRouteHandlerForGraphQL)
+    // Using /api/gql instead of well known /graphql to avoid those scanning bots
+    .get("/api/gql", httpRouteHandlerForGraphQL)
+    .post("/api/gql", httpRouteHandlerForGraphQL)
 
-    // Only run the request data parser middlewares after /graphql route handler
+    // Only run the request data parser middlewares after graphql route handler
     // as it does its own parsing, so it will break if this is placed before
     // that, and this is placed right before the route handlers that needs it.
     .use(express.json())
