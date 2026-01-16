@@ -19,7 +19,7 @@ export class GenScriptsDoc implements CogenieStep {
     const { default: packageJson } = await import(
       "../../../../../package.json",
       {
-        assert: {
+        with: {
           type: "json",
         },
       }
