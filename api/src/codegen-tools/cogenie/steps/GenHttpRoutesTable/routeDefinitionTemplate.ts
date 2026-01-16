@@ -8,7 +8,7 @@ const getVersionPathPrefix = (file: HttpControllerFile) =>
 export const routeDefinitionTemplate = (file: HttpControllerFile): string =>
   `
 registerRouteIfNotDisabled({
-  route: "${file.httpMethod.toUpperCase()} /api${file.version === '"neutral"' ? "" : "/v" + file.version}${file.httpRoute}",
+  route: "${file.httpMethod.toUpperCase()} /api/rest${file.version === '"neutral"' ? "" : "/v" + file.version}${file.httpRoute}",
   registerRoute: () =>
     r["${file.httpMethod}" satisfies typeof c.${file.name}.method](
       ${getVersionPathPrefix(file)}

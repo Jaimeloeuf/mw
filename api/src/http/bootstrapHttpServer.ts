@@ -35,8 +35,8 @@ export async function bootstrapHttpServer() {
     .use(express.json())
     .use(express.urlencoded({ extended: true }))
 
-    // Register all the route->controller mappings with the /api prefix.
-    .use("/api", registerRoutesAndControllers())
+    // Register all the route->controller mappings with the /api/rest prefix.
+    .use("/api/rest", registerRoutesAndControllers())
 
     // Register all vue page entrypoints
     .use("/vue", entrypoints())

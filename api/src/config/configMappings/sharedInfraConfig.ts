@@ -10,7 +10,7 @@ export const sharedInfraConfig = {
   /**
    * Allow users to disable certain HTTP routes using env var like
    * ```.env
-   * HTTP_DISABLED_PATHS=["GET /api/","POST /api/v1/blog/subscribe"]
+   * HTTP_DISABLED_PATHS=["GET /api/rest/","POST /api/rest/v1/blog/subscribe"]
    * ```
    *
    * so that they can either use this during emergencies to shut routes down

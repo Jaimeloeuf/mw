@@ -6,7 +6,7 @@
  * GenHttpRoutesTable
  *
  * Generated hash in hex for code after this section is:
- * sha256(7a62ce319a4bff231e1f90443e9d69bec057b70a3663ffc49d8b89dfcb7ca379)
+ * sha256(7444e1a9221f6d2b6b719584be8253d4c66f11966e05fc0ab1cd6efcdaa64d1f)
  */
 /* eslint-disable perfectionist/sort-imports */
 /* eslint-disable perfectionist/sort-exports */
@@ -65,7 +65,7 @@ export function registerRoutesAndControllers() {
   const r = Router();
 
   registerRouteIfNotDisabled({
-    route: "GET /api/",
+    route: "GET /api/rest/",
     registerRoute: () =>
       r["get" satisfies typeof c.healthCheck.method](
         "/" satisfies typeof c.healthCheck.path,
@@ -74,7 +74,7 @@ export function registerRoutesAndControllers() {
   });
 
   registerRouteIfNotDisabled({
-    route: "POST /api/v1/blog/subscribe",
+    route: "POST /api/rest/v1/blog/subscribe",
     registerRoute: () =>
       r["post" satisfies typeof c.blogNewSubscriber.method](
         ("/v1" satisfies typeof c.blogNewSubscriber.version) +
@@ -84,7 +84,7 @@ export function registerRoutesAndControllers() {
   });
 
   registerRouteIfNotDisabled({
-    route: "POST /api/v1/bucketlist",
+    route: "POST /api/rest/v1/bucketlist",
     registerRoute: () =>
       r["post" satisfies typeof c.bucketlistCreateOne.method](
         ("/v1" satisfies typeof c.bucketlistCreateOne.version) +
@@ -94,7 +94,7 @@ export function registerRoutesAndControllers() {
   });
 
   registerRouteIfNotDisabled({
-    route: "GET /api/v1/bucketlist/:bucketlistID",
+    route: "GET /api/rest/v1/bucketlist/:bucketlistID",
     registerRoute: () =>
       r["get" satisfies typeof c.bucketlistGetOne.method](
         ("/v1" satisfies typeof c.bucketlistGetOne.version) +
@@ -104,7 +104,7 @@ export function registerRoutesAndControllers() {
   });
 
   registerRouteIfNotDisabled({
-    route: "GET /api/v1/check/checklist/:checklistID",
+    route: "GET /api/rest/v1/check/checklist/:checklistID",
     registerRoute: () =>
       r["get" satisfies typeof c.checkGetChecklist.method](
         ("/v1" satisfies typeof c.checkGetChecklist.version) +
@@ -114,7 +114,7 @@ export function registerRoutesAndControllers() {
   });
 
   registerRouteIfNotDisabled({
-    route: "GET /api/v1/johari/:johariID",
+    route: "GET /api/rest/v1/johari/:johariID",
     registerRoute: () =>
       r["get" satisfies typeof c.johariGetJohari.method](
         ("/v1" satisfies typeof c.johariGetJohari.version) +
@@ -124,7 +124,7 @@ export function registerRoutesAndControllers() {
   });
 
   registerRouteIfNotDisabled({
-    route: "POST /api/v1/johari/answer",
+    route: "POST /api/rest/v1/johari/answer",
     registerRoute: () =>
       r["post" satisfies typeof c.johariCreateJohariAnswer.method](
         ("/v1" satisfies typeof c.johariCreateJohariAnswer.version) +
@@ -134,7 +134,7 @@ export function registerRoutesAndControllers() {
   });
 
   registerRouteIfNotDisabled({
-    route: "GET /api/v1/johari/answers/:johariID",
+    route: "GET /api/rest/v1/johari/answers/:johariID",
     registerRoute: () =>
       r["get" satisfies typeof c.johariGetJohariAnswers.method](
         ("/v1" satisfies typeof c.johariGetJohariAnswers.version) +
@@ -144,7 +144,7 @@ export function registerRoutesAndControllers() {
   });
 
   registerRouteIfNotDisabled({
-    route: "POST /api/v1/johari/create",
+    route: "POST /api/rest/v1/johari/create",
     registerRoute: () =>
       r["post" satisfies typeof c.johariCreateJohari.method](
         ("/v1" satisfies typeof c.johariCreateJohari.version) +
@@ -154,7 +154,7 @@ export function registerRoutesAndControllers() {
   });
 
   registerRouteIfNotDisabled({
-    route: "POST /api/v1/leetcode/ques",
+    route: "POST /api/rest/v1/leetcode/ques",
     registerRoute: () =>
       r["post" satisfies typeof c.leetcodeCreateLeetcodeQues.method](
         ("/v1" satisfies typeof c.leetcodeCreateLeetcodeQues.version) +
@@ -164,7 +164,7 @@ export function registerRoutesAndControllers() {
   });
 
   registerRouteIfNotDisabled({
-    route: "GET /api/v1/leetcode/ques/:leetcodeQuesID",
+    route: "GET /api/rest/v1/leetcode/ques/:leetcodeQuesID",
     registerRoute: () =>
       r["get" satisfies typeof c.leetcodeGetLeetcodeQues.method](
         ("/v1" satisfies typeof c.leetcodeGetLeetcodeQues.version) +
@@ -174,7 +174,7 @@ export function registerRoutesAndControllers() {
   });
 
   registerRouteIfNotDisabled({
-    route: "GET /api/version",
+    route: "GET /api/rest/version",
     registerRoute: () =>
       r["get" satisfies typeof c.version.method](
         "/version" satisfies typeof c.version.path,
@@ -184,7 +184,7 @@ export function registerRoutesAndControllers() {
 
   registerRouteIfNotDisabled({
     route:
-      "POST /api/v1/webhook/telegram/:telegramWebhookSecretPath/:telegramBotToken",
+      "POST /api/rest/v1/webhook/telegram/:telegramWebhookSecretPath/:telegramBotToken",
     registerRoute: () =>
       r["post" satisfies typeof c.webhookTelegram.method](
         ("/v1" satisfies typeof c.webhookTelegram.version) +

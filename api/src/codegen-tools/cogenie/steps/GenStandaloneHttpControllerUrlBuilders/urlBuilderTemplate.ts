@@ -51,6 +51,6 @@ export const ${urlBuilderName} = (
     urlParams: ${urlParamTypeSymbol};
     urlQueryParams: ${queryParamTypeSymbol};
   }>,
-) => \`\${process.env["BASE_URL_TO_SELF"]}/api${getVersionPrefix(file)}${pathString}\${createUrlQueryParamsString((options as any)?.urlQueryParams)}\`;
+) => \`\${process.env["BASE_URL_TO_SELF"]}/api/rest/${getVersionPrefix(file)}${pathString}\${createUrlQueryParamsString((options as any)?.urlQueryParams)}\`;
 `;
 }
