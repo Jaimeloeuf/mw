@@ -35,15 +35,17 @@ declare global {
     function generate(entClass: typeof BaseEnt | EntClass<BaseEnt>): Strong;
 
     /**
-     * Checks if the Ent ID is valid for a given Ent Type / Class.
+     * Checks if the Ent ID is valid, and optionally check if it is valid for a
+     * optionally given Ent Type / Class.
      *
      * Checks:
      * 1. If the entID is exactly 41 characters long, length of UUID + postfix
      * 1. If the entID ends with the correct postfix of "_" and the entTypeID
      */
+    function isValid(maybeID: string): boolean;
     function isValid(
       maybeID: string,
-      entClass: typeof BaseEnt | EntClass<BaseEnt>,
+      entClass: typeof BaseEnt | EntClass<BaseEnt> | undefined,
     ): boolean;
 
     /**
@@ -98,11 +100,15 @@ globalThis.$EntID = {
     // Casting entClass to get the value of the non-abstract class
     return `${$UUID.generate()}_${(entClass as typeof BaseEnt).EntTypeID}` as $EntID.Strong;
   },
-  isValid(maybeID, entClass) {
-    return (
-      maybeID.length === 41 &&
-      maybeID.endsWith(`_${(entClass as typeof BaseEnt).EntTypeID}`)
-    );
+  isValid(maybeID, entClass?: typeof BaseEnt | EntClass<BaseEnt> | undefined) {
+    if (maybeID.length !== 41) {
+      return false;
+    }
+    if (entClass !== undefined) {
+      return maybeID.endsWith(`_${(entClass as typeof BaseEnt).EntTypeID}`);
+    }
+    // @todo Check against a set of all available EntTypeIDs to verify
+    return true;
   },
   makeStrongAndThrowOnError(
     maybeID,
