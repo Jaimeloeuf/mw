@@ -18,17 +18,17 @@ You can either run all cogenie steps, or run a single cogenie step directly. Eit
 
 ### See all Cogenie options
 ```bash
-npm run cogenie
+npm run codegen:cogenie
 ```
 
 ### Run all
 ```bash
-npm run cogenie all
+npm run codegen:cogenie all
 ```
 
 ### Running a single Cogenie step
 ```bash
-npm run cogenie GenYourStepName
+npm run codegen:cogenie GenYourStepName
 ```
 
 **Do not run Cogenie files directly** with something like `npx tsx ./path/to/your/GenCogenieStep.ts`, because this might cause issues and even fail, for e.g. since the path is relative to where the code is ran, it will not work.
