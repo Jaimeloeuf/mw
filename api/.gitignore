@@ -3,3 +3,6 @@ sqlite-mock-dbs/*.db
 
 # React Router generated
 .react-router/
+
+# Local only .http test files
+.http
