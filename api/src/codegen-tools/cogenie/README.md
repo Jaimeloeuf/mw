@@ -1,6 +1,8 @@
 # Cogenie
 "Cogenie the Code Generator" is the main generic codegen-tool focused simple reproducible code generation.
 
+Unlike other codegen tools, Cogenie steps are always reproducible for the same inputs, where the inputs are existing source code in other parts of the monorepo.
+
 
 ## Intro
 1. Cogenie let users define `steps` in the [cogenie/steps](./steps/) folder, where each step is a standalone code generator module.
@@ -26,10 +28,10 @@ npm run cogenie all
 
 ### Running a single Cogenie step
 ```bash
-npm run cogenie genYourStepName
+npm run cogenie GenYourStepName
 ```
 
-**Do not run Cogenie files directly** with something like `npx tsx ./path/to/your/genCogenieStep.ts`, because this might cause issues and even fail, for e.g. since the path is relative to where the code is ran, it will not work.
+**Do not run Cogenie files directly** with something like `npx tsx ./path/to/your/GenCogenieStep.ts`, because this might cause issues and even fail, for e.g. since the path is relative to where the code is ran, it will not work.
 
 
 ## Creating a new Cogenie step
