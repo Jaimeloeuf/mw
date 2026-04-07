@@ -24,7 +24,7 @@ export class EntJohariSchema extends EntSchema {
       {
         field: "creatorID",
         storageKey: "creatorID",
-        type: "string",
+        type: "ID",
       },
     ];
   }

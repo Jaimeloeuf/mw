@@ -1,6 +1,6 @@
 export type EntFieldDefinition = {
   field: string;
   storageKey: string;
-  type: "string" | "number" | "boolean";
+  type: "ID" | "string" | "number" | "boolean";
   description?: string;
 };
