@@ -14,6 +14,15 @@ export function defineEntOperators<
   entClass: EntClass<EntInstance>,
   operators: {
     CRUD: EntCrudOperatorStorageAdapter<EntInstance>;
+
+    /**
+     * to allow users to implement custom Query methods, better known as custom
+     * `df` (data functions)
+     *
+     * @todo
+     * Maybe this should all be in a different class/object....
+     * [customMethodName: string]: (...args: any) => any;
+     */
     custom: EntCustomOperators;
   },
 ): EntCrudOperator<EntInstance> & EntCustomOperators {
