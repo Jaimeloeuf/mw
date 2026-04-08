@@ -6,6 +6,10 @@ export type BaseEntEdgeDefinition = {
   type: string;
   name: string;
   description?: string;
+  /**
+   * Optional Ent class type that this links to
+   */
+  classs?: any;
 };
 
 export interface EntFieldEdgeDefinition extends BaseEntEdgeDefinition {
