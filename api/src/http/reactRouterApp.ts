@@ -14,6 +14,9 @@ router.use(
   // @todo This base path should be shared between this and routes.ts
   "/intern",
   createRequestHandler({
+    // This could be undefined, which breaks the type, so ignoring it for now
+    // until the type could be better inferred.
+    // @ts-ignore @todo
     build: () => import("virtual:react-router/server-build"),
     getLoadContext() {
       return {
