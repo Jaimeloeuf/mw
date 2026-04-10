@@ -31,6 +31,10 @@ export function defineEntOperators<
 
     /**
      * Verify ID before loading Ent.
+     *
+     * @todo
+     * This should be `getAndThrowOnError` and change `get` method to implement
+     * the 'safe' return type from EntID validation.
      */
     get(id: string) {
       $EntID.makeStrongAndThrowOnError(id, entClass);
