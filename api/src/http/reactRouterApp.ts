@@ -24,5 +24,5 @@ router.use(
 );
 
 router.use("/", (_, res) => {
-  res.end("No home page");
+  res.send("No home page");
 });
